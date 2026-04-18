@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  /* === CSS VIRÁ AQUI (Partes 2 e 3) === */
+  /* ── VARIÁVEIS E RESET ── */
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+  --blood: #8b0000;
+  --blood-bright: #cc0022;
+  --void: #030308;
+  --deep: #07070f;
+  --mid: #0d0d1a;
+  --surface: #13131f;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --divine: #6a4fcf;
+  --divine-light: #a07af0;
+  --cyan: #2af0e8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+#cosmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(to bottom, rgba(3,3,8,0.95), transparent);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--gold-light);
+  text-shadow: 0 0 20px rgba(201,168,76,0.6);
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.hero-emblem {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+  animation: emblem-pulse 4s ease-in-out infinite;
+}
+
+.hero-emblem svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 20px rgba(201,168,76,0.7))
+          drop-shadow(0 0 50px rgba(106,79,207,0.4));
+}
+
+@keyframes emblem-pulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50%       { transform: scale(1.06); filter: brightness(1.2); }
+}
+
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fade-up 1s 0.3s ease forwards;
+}
+
+h1.title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  background: linear-gradient(135deg,
+    #f0d080 0%, #c9a84c 40%, #fff5c0 60%, #7a6228 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(201,168,76,0.3));
+  opacity: 0;
+  animation: fade-up 1s 0.6s ease forwards;
+}
+
+h1.title span {
+  display: block;
+  font-size: 0.45em;
+  letter-spacing: 0.3em;
+  margin-bottom: 0.3em;
+  background: linear-gradient(90deg,
+    var(--divine-light), var(--gold-light), var(--divine-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  max-width: 540px;
+  margin: 1.8rem auto 0;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fade-up 1s 0.9s ease forwards;
+}
+
+.hero-divider {
+  width: 160px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 2.5rem auto;
+  opacity: 0;
+  animation: fade-up 1s 1.1s ease forwards;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+
+/* ── ANIMAÇÕES BASE ── */
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── REVEAL ON SCROLL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+}
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  text-shadow: 0 0 40px rgba(201,168,76,0.25);
+}
+
+.section-rule {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 1.5rem auto 0;
+}
+
+/* ── SINOPSE ── */
+#synopsis {
+  padding: 2rem 0 5rem;
+}
+
+.synopsis-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.synopsis-body p {
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.4rem;
+  font-size: 1.05rem;
+}
+
+.synopsis-body p:first-child::first-letter {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 4.5rem;
+  float: left;
+  line-height: 0.75;
+  margin: 0.1em 0.12em 0 0;
+  color: var(--gold);
+  filter: drop-shadow(0 0 16px rgba(201,168,76,0.5));
+}
+
+.highlight-box {
+  border-left: 2px solid var(--gold);
+  padding: 1.2rem 1.8rem;
+  margin: 2rem 0;
+  background: linear-gradient(90deg, rgba(201,168,76,0.06), transparent);
+  font-style: italic;
+  color: var(--gold-light);
+  font-size: 1.1rem;
+}
+
+/* ── TIMELINE ── */
+#historia {
+  padding-bottom: 5rem;
+}
+
+.timeline {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent, var(--gold-dim), var(--divine), var(--gold-dim), transparent);
+  transform: translateX(-50%);
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  align-items: start;
+}
+
+.tl-item.left  .tl-content { grid-column: 1; text-align: right; }
+.tl-item.left  .tl-dot     { grid-column: 2; }
+.tl-item.left  .tl-empty   { grid-column: 3; }
+
+.tl-item.right .tl-empty   { grid-column: 1; }
+.tl-item.right .tl-dot     { grid-column: 2; }
+.tl-item.right .tl-content { grid-column: 3; }
+
+.tl-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 16px rgba(201,168,76,0.7),
+              0 0 40px rgba(201,168,76,0.3);
+  margin-top: 0.3rem;
+  flex-shrink: 0;
+}
+
+.tl-dot.divine {
+  background: var(--divine-light);
+  box-shadow: 0 0 16px rgba(160,122,240,0.8),
+              0 0 40px rgba(106,79,207,0.4);
+}
+
+.tl-dot.blood {
+  background: var(--blood-bright);
+  box-shadow: 0 0 16px rgba(204,0,34,0.8),
+              0 0 40px rgba(139,0,0,0.4);
+}
+
+.tl-dot.cyan {
+  background: var(--cyan);
+  box-shadow: 0 0 16px rgba(42,240,232,0.8),
+              0 0 40px rgba(42,240,232,0.4);
+}
+
+.tl-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.tl-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 0.6rem;
+}
+
+.tl-text {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+/* ── PERSONAGENS ── */
+#personagens {
+  padding-bottom: 5rem;
+}
+
+.chars-intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+
+.char-group-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 3rem;
+}
+
+.char-group-label::before,
+.char-group-label::after {
+  content: '— ';
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.char-card {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 2px;
+  padding: 2rem 1.6rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.3s;
+  cursor: default;
+}
+
+.char-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(201,168,76,0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.char-card:hover {
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-4px);
+}
+
+.char-card:hover::before { opacity: 1; }
+
+.char-card.divine-card {
+  border-color: rgba(106,79,207,0.2);
+}
+
+.char-card.divine-card::before {
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(106,79,207,0.1) 0%, transparent 70%);
+}
+
+.char-card.divine-card:hover {
+  border-color: rgba(160,122,240,0.5);
+}
+
+.card-corner {
+  position: absolute;
+  top: 0; right: 0;
+  width: 40px; height: 40px;
+  border-top: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+  opacity: 0.4;
+}
+
+.card-corner.divine-c {
+  border-color: var(--divine-light);
+}
+
+.char-sigil {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(201,168,76,0.5));
+}
+
+.char-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--gold-light);
+  margin-bottom: 0.2rem;
+}
+
+.char-divine-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--divine-light);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.char-role {
+  font-size: 0.8rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.15em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+
+.char-desc {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+.char-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border-radius: 1px;
+}
+
+.tag.divine-tag {
+  border-color: rgba(160,122,240,0.3);
+  color: var(--divine-light);
+}
+
+.tag.blood-tag {
+  border-color: rgba(204,0,34,0.35);
+  color: #e06070;
+}
+
+.tag.cyan-tag {
+  border-color: rgba(42,240,232,0.35);
+  color: var(--cyan);
+}
+
+/* ── PODERES ── */
+#poderes {
+  padding-bottom: 5rem;
+}
+
+.powers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  padding: 0 2rem;
+}
+
+.power-block {
+  padding: 2rem;
+  border: 1px solid rgba(201,168,76,0.1);
+  background: var(--surface);
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.power-block:hover {
+  border-color: rgba(201,168,76,0.3);
+}
+
+.power-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.power-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.08em;
+}
+
+.power-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.power-bar-wrap {
+  margin-top: 1rem;
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.power-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+  border-radius: 2px;
+  transition: width 1.5s ease;
+  width: 0;
+}
+
+.power-bar.divine {
+  background: linear-gradient(90deg, var(--divine), var(--divine-light));
+}
+
+.power-bar.blood {
+  background: linear-gradient(90deg, var(--blood), var(--blood-bright));
+}
+
+.power-bar.cyan {
+  background: linear-gradient(90deg, #1a8f8b, var(--cyan));
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  color: var(--gold-dim);
+  margin-bottom: 0.6rem;
+}
+
+.footer-sub {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+}
+
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba(122,98,40,0.5);
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 640px) {
+  .timeline::before { left: 24px; }
+  .tl-item { grid-template-columns: auto 1fr; }
+  .tl-item.left .tl-content,
+  .tl-item.right .tl-content { grid-column: 2; text-align: left; }
+  .tl-item .tl-dot   { grid-column: 1; }
+  .tl-item .tl-empty { display: none; }
+  nav { gap: 1.2rem; flex-wrap: wrap; }
+  nav a { font-size: 0.68rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="cosmos-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero">Início</a>
+  <a href="#synopsis">Sinopse</a>
+  <a href="#historia">História</a>
+  <a href="#personagens">Personagens</a>
+  <a href="#poderes">Poderes</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-emblem">
+    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="55" stroke="#c9a84c" stroke-width="0.8" stroke-dasharray="4 6"/>
+      <polygon points="60,8 73,48 115,48 83,72 95,112 60,88 25,112 37,72 5,48 47,48" fill="none" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      <polygon points="60,22 96,82 24,82" fill="none" stroke="#6a4fcf" stroke-width="1" opacity="0.8"/>
+      <polygon points="60,98 24,38 96,38" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.6"/>
+      <ellipse cx="60" cy="60" rx="14" ry="9" fill="none" stroke="#f0d080" stroke-width="1"/>
+      <circle cx="60" cy="60" r="5" fill="#c9a84c" opacity="0.9"/>
+      <circle cx="60" cy="60" r="2" fill="#f0d080"/>
+      <line x1="60" y1="2" x2="60" y2="18" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <line x1="60" y1="102" x2="60" y2="118" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <line x1="2" y1="60" x2="18" y2="60" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <line x1="102" y1="60" x2="118" y2="60" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <p class="hero-eyebrow">A saga de Knull, Onull e Anull</p>
+  <h1 class="title">
+    <span>O Diário de um</span>
+    Deus
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">
+    Éramos humanos. Depois, Mestres. Por fim, algo que o mundo ainda não tinha nome para descrever.
+  </p>
+  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+</section>
+
+<!-- SINOPSE -->
+<section id="synopsis">
+  <div class="section-header reveal">
+    <span class="section-label">Sobre a obra</span>
+    <h2>Sinopse</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="synopsis-body">
+    <p class="reveal">
+      Este é o relato de quem esteve lá — não como observador, mas como protagonista. A história começa com seis jovens cujos nomes ainda eram humanos: Yuri, Lucas, Leonardo, Yasmin, Jéssica e Anna. Unidos por laços que nem eles mesmos compreendiam completamente, foram arremessados contra forças que deveriam tê-los destruído.
+    </p>
+    <div class="highlight-box reveal">
+      "Nós não escolhemos o caminho dos deuses. O caminho nos escolheu — e nós decidimos não recuar."
+    </div>
+    <p class="reveal">
+      Escrita na primeira pessoa por UchiHyuuga Yuri, a narrativa atravessa três grandes arcos: a ascensão à condição de Mestres após a derrota do Cavaleiro Negro, a segunda batalha e a evolução dos poderes, e por fim o confronto com A Besta — a primeira criatura forjada pelo Divino — que selou a transformação definitiva dos seis em entidades além da compreensão humana.
+    </p>
+    <p class="reveal">
+      O que você tem em mãos não é apenas um diário. É a memória viva de uma deificação.
+    </p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="historia">
+  <div class="section-header reveal">
+    <span class="section-label">Cronologia dos eventos</span>
+    <h2>A Jornada</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="tl-item left reveal">
+      <div class="tl-content">
+        <div class="tl-label">Arco I — Início</div>
+        <div class="tl-title">O Encontro dos Seis</div>
+        <div class="tl-text">Yuri, Lucas, Leonardo, Yasmin, Jéssica e Anna. Seis indivíduos com origens e poderes distintos, reunidos pelo destino antes de compreenderem o peso daquele encontro.</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item right reveal">
+      <div class="tl-empty"></div>
+      <div class="tl-dot blood"></div>
+      <div class="tl-content">
+        <div class="tl-label">Arco I — Clímax</div>
+        <div class="tl-title">Primeira Batalha: O Cavaleiro Negro</div>
+        <div class="tl-text">O primeiro grande antagonista surge. Numa luta que testou os limites de cada um dos seis, o Cavaleiro Negro foi derrotado — e o grupo provou ao mundo e a si mesmo do que era capaz.</div>
+      </div>
+    </div>
+
+    <div class="tl-item left reveal">
+      <div class="tl-content">
+        <div class="tl-label">Ascensão</div>
+        <div class="tl-title">Instituição como Mestres</div>
+        <div class="tl-text">Yuri torna-se <em>Mestre Elemental</em>. Lucas, <em>Mestre Humano</em>. Leonardo, <em>Mestre Espiritual</em>. As meninas também evoluem, afirmando seus papéis como guardiãs e feiticeiras.</div>
+      </div>
+      <div class="tl-dot divine"></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item right reveal">
+      <div class="tl-empty"></div>
+      <div class="tl-dot blood"></div>
+      <div class="tl-content">
+        <div class="tl-label">Arco II — Retorno</div>
+        <div class="tl-title">Segunda Batalha: O Cavaleiro Ressurge</div>
+        <div class="tl-text">O Cavaleiro Negro retorna mais poderoso. Desta vez, a vitória vem acompanhada de uma evolução extraordinária dos poderes — cada um dos seis ultrapassa os próprios limites anteriores.</div>
+      </div>
+    </div>
+
+    <div class="tl-item left reveal">
+      <div class="tl-content">
+        <div class="tl-label">Arco III — O Fim de uma Era</div>
+        <div class="tl-title">A Besta: Primeira Criatura do Divino</div>
+        <div class="tl-text">O maior dos confrontos. A Besta, criatura primordial gerada pelo próprio Divino, exigiu tudo. O preço da vitória foi a humanidade de cada um — e o começo de algo inteiramente novo.</div>
+      </div>
+      <div class="tl-dot blood"></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item right reveal">
+      <div class="tl-empty"></div>
+      <div class="tl-dot cyan"></div>
+      <div class="tl-content">
+        <div class="tl-label">Transcendência</div>
+        <div class="tl-title">A Deificação</div>
+        <div class="tl-text">Os nomes humanos cedem lugar aos divinos. Yuri torna-se <strong style="color:#f0d080">Knull</strong>, Lucas torna-se <strong style="color:#f0d080">Onull</strong>, Leonardo torna-se <strong style="color:#f0d080">Anull</strong>. Yasmin vira <strong style="color:#a07af0">Nimsay</strong>, Jéssica vira <strong style="color:#a07af0">Aicitel</strong>, Anna vira <strong style="color:#a07af0">Aliban</strong>.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PERSONAGENS -->
+<section id="personagens">
+  <div class="section-header reveal">
+    <span class="section-label">Elenco divino</span>
+    <h2>Personagens</h2>
+    <div class="section-rule"></div>
+  </div>
+  <p class="chars-intro reveal">
+    Antes, eram humanos com nomes comuns. Depois da deificação, os nomes antigos tornaram-se ecos — e os nomes divinos, eternidade.
+  </p>
+
+  <div class="char-group-label reveal">Os Três Mestres · Agora Deuses</div>
+  <div class="cards-grid">
+
+    <div class="char-card reveal">
+      <div class="card-corner"></div>
+      <span class="char-sigil">⚡</span>
+      <div class="char-name">Yuri · Knull</div>
+      <span class="char-divine-name">→ Deus Knull</span>
+      <div class="char-role">Mestre Elemental · Narrador</div>
+      <div class="char-desc">UchiHyuuga — portador do sangue Uchiha e Hyuuga. Possui sangue Sayadin, armadura de ouro dos Cavaleiros do Zodíaco, habilidades de Shinigami e domina Chakra, Ki e Cosmos. A voz que registra o diário.</div>
+      <div class="char-tags">
+        <span class="tag">Uchiha</span>
+        <span class="tag">Hyuuga</span>
+        <span class="tag">Sayadin</span>
+        <span class="tag divine-tag">Shinigami</span>
+        <span class="tag cyan-tag">Chakra · Ki · Cosmos</span>
+      </div>
+    </div>
+
+    <div class="char-card reveal">
+      <div class="card-corner"></div>
+      <span class="char-sigil">🔱</span>
+      <div class="char-name">Lucas · Onull</div>
+      <span class="char-divine-name">→ Deus Onull</span>
+      <div class="char-role">Mestre Humano</div>
+      <div class="char-desc">Representa a essência da humanidade em sua forma mais elevada, nascido na Cidadela das Sombras, Lucas possui sangue bruxo puro e possui uma habilidade incomum, fazer os ossos de seu corpo como arma— o que os mortais podem se tornar quando ultrapassam seus próprios limites. Após a deificação, transcende a própria definição de humano.</div>
+      <div class="char-tags">
+        <span class="tag">Mestre Humano</span>
+        <span class="tag divine-tag">Transcendência</span>
+      </div>
+    </div>
+
+    <div class="char-card reveal">
+      <div class="card-corner"></div>
+      <span class="char-sigil">👁️</span>
+      <div class="char-name">Leonardo · Anull</div>
+      <span class="char-divine-name">→ Deus Anull</span>
+      <div class="char-role">Mestre Espiritual</div>
+      <div class="char-desc">O elo entre o mundo material e os planos espirituais. Anull é a vontade feita além-corpo, o espírito que não se dissolve mesmo quando tudo ao redor colapsa.</div>
+      <div class="char-tags">
+        <span class="tag">Mestre Espiritual</span>
+        <span class="tag divine-tag">Plano Espiritual</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="char-group-label reveal">As Três Guardiãs · Ascendidas</div>
+  <div class="cards-grid">
+
+    <div class="char-card divine-card reveal">
+      <div class="card-corner divine-c"></div>
+      <span class="char-sigil">🌊</span>
+      <div class="char-name">Yasmin · Nimsay</div>
+      <span class="char-divine-name">→ Nimsay</span>
+      <div class="char-role">Companheira de Yuri · Feiticeira & Maga</div>
+      <div class="char-desc">Filha de Poseidon com Afrodite, descendente da deusa da lua. Aprendiz de feiticeira, bruxa e maga — carrega em si o poder dos mares e o encanto do amor divino.</div>
+      <div class="char-tags">
+        <span class="tag">Filha de Poseidon</span>
+        <span class="tag blood-tag">Filha de Afrodite</span>
+        <span class="tag divine-tag">Descendente da Lua</span>
+        <span class="tag cyan-tag">Feiticeira · Maga</span>
+      </div>
+    </div>
+
+    <div class="char-card divine-card reveal">
+      <div class="card-corner divine-c"></div>
+      <span class="char-sigil">🌿</span>
+      <div class="char-name">Jéssica · Aicitel</div>
+      <span class="char-divine-name">→ Aicitel</span>
+      <div class="char-role">Protetora da Natureza · Filha de Hera</div>
+      <div class="char-desc">Filha de Hera e descendente da deusa da lua. Guardiã da natureza em seu estado mais sagrado. Aprendiz de feiticeira, bruxa e maga — e deusa da própria lua.</div>
+      <div class="char-tags">
+        <span class="tag">Filha de Hera</span>
+        <span class="tag divine-tag">Deusa da Lua</span>
+        <span class="tag cyan-tag">Protetora da Natureza</span>
+      </div>
+    </div>
+
+    <div class="char-card divine-card reveal">
+      <div class="card-corner divine-c"></div>
+      <span class="char-sigil">🦉</span>
+      <div class="char-name">Anna · Aliban</div>
+      <span class="char-divine-name">→ Aliban</span>
+      <div class="char-role">Filha de Athena · Descendente da Lua</div>
+      <div class="char-desc">Filha de Athena e descendente da deusa da lua. Alia a sabedoria estratégica da mãe à magia lunar ancestral. Sua ascensão para Aliban marca o despertar de um poder há muito adormecido.</div>
+      <div class="char-tags">
+        <span class="tag">Filha de Athena</span>
+        <span class="tag divine-tag">Descendente da Lua</span>
+        <span class="tag blood-tag">Estrategista</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PODERES -->
+<section id="poderes">
+  <div class="section-header reveal">
+    <span class="section-label">Arsenal de Knull</span>
+    <h2>Poderes & Herança</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="powers-grid">
+
+    <div class="power-block reveal">
+      <div class="power-icon">👁️</div>
+      <div class="power-name">Sangue Uchiha — Sharingan / Mangekyō</div>
+      <div class="power-desc">Olhos que veem além do véu — copiando técnicas, prevendo movimentos e acessando o Mangekyō para desencadear Amaterasu, Tsukuyomi e Susanoo.</div>
+      <div class="power-bar-wrap"><div class="power-bar blood" data-width="95"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">🔮</div>
+      <div class="power-name">Sangue Hyuuga — Byakugan</div>
+      <div class="power-desc">Visão de 360° que penetra qualquer ilusão. Permite enxergar o sistema de chakra do oponente e destruí-lo ponto a ponto com o Jūken.</div>
+      <div class="power-bar-wrap"><div class="power-bar" data-width="88"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">⚔️</div>
+      <div class="power-name">Armadura de Ouro — Cavaleiros do Zodíaco</div>
+      <div class="power-desc">Uma das doze armaduras mais sagradas do cosmos. Forjada com metal divino, amplifica o Cosmos do portador e o protege de ataques de nível olímpico.</div>
+      <div class="power-bar-wrap"><div class="power-bar divine" data-width="92"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">💀</div>
+      <div class="power-name">Habilidades de Shinigami — Bleach</div>
+      <div class="power-desc">Zanpakutō com Shikai e Bankai. Domínio do Kidō, Sonído e Hierro — poderes que cruzam a fronteira entre o mundo dos vivos e o além.</div>
+      <div class="power-bar-wrap"><div class="power-bar blood" data-width="90"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">🌀</div>
+      <div class="power-name">Chakra — Naruto</div>
+      <div class="power-desc">Energia vital moldada pela mente e pelo corpo. Permite jutsu de todos os elementos, Modo Sábio e acesso ao chakra do mundo natural.</div>
+      <div class="power-bar-wrap"><div class="power-bar cyan" data-width="97"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">🔥</div>
+      <div class="power-name">Ki — Dragon Ball</div>
+      <div class="power-desc">A força vital em sua forma mais pura e explosiva. Permite voo, escudos de energia e ondas que podem varrer montanhas da face da Terra.</div>
+      <div class="power-bar-wrap"><div class="power-bar" data-width="93"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">✨</div>
+      <div class="power-name">Cosmos — Saint Seiya</div>
+      <div class="power-desc">A chama que arde no coração de todo cavaleiro. Quando levado ao limite absoluto, o Cosmos permite alcançar a velocidade da luz e tocar o divino.</div>
+      <div class="power-bar-wrap"><div class="power-bar divine" data-width="89"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">🧬</div>
+      <div class="power-name">Sangue Sayadin</div>
+      <div class="power-desc">Uma herança rara que potencializa cada poder existente. O sangue Sayadin atua como multiplicador, elevando o limite máximo de cada habilidade além do possível.</div>
+      <div class="power-bar-wrap"><div class="power-bar blood" data-width="100"></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-title">O Diário de um Deus</div>
+  <div class="footer-sub">"Antes éramos nomes. Agora somos eternidade."</div>
+  <div class="hero-divider" style="opacity:0.3; margin: 1.5rem auto;"></div>
+  <div class="footer-copy">Obra de UchiHyuuga Yuri · Todos os direitos reservados</div>
+</footer>
+
+<script>
+  /* === JAVASCRIPT VIRÁ AQUI (Parte 4) === */
+  (function() {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [], nebulas = [];
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 220; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.2,
+        a: Math.random(),
+        speed: Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+
+    nebulas = [];
+    const colors = [
+      'rgba(106,79,207,',
+      'rgba(201,168,76,',
+      'rgba(139,0,0,',
+      'rgba(42,240,232,'
+    ];
+    for (let i = 0; i < 5; i++) {
+      nebulas.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 300 + 150,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a: Math.random() * 0.06 + 0.02
+      });
+    }
+  }
+
+  let frame = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Gradiente de fundo */
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0,   '#030308');
+    bg.addColorStop(0.5, '#07070f');
+    bg.addColorStop(1,   '#0a0310');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Névoas coloridas */
+    nebulas.forEach(n => {
+      const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+      grad.addColorStop(0, n.color + n.a + ')');
+      grad.addColorStop(1, n.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Estrelas com cintilação */
+    frame += 0.008;
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const alpha = s.a * (0.6 + 0.4 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(230,215,180,${alpha})`;
+      ctx.fill();
+    });
+
+    /* Brilho dourado sutil no rodapé */
+    const horizon = ctx.createLinearGradient(0, H * 0.7, 0, H);
+    horizon.addColorStop(0, 'transparent');
+    horizon.addColorStop(1, 'rgba(201,168,76,0.04)');
+    ctx.fillStyle = horizon;
+    ctx.fillRect(0, H * 0.7, W, H * 0.3);
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); initStars(); });
+  resize();
+  initStars();
+  draw();
+})();
+
+/* ── SCROLL REVEAL ── */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── BARRAS DE PODER (animam ao entrar na tela) ── */
+(function() {
+  const bars = document.querySelectorAll('.power-bar');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const bar = e.target;
+        const target = bar.getAttribute('data-width');
+        setTimeout(() => { bar.style.width = target + '%'; }, 200);
+        io.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  bars.forEach(b => io.observe(b));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knull — O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ── VARIÁVEIS E RESET ── */
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+  --blood: #8b0000;
+  --blood-bright: #cc0022;
+  --void: #030308;
+  --deep: #07070f;
+  --mid: #0d0d1a;
+  --surface: #13131f;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --divine: #6a4fcf;
+  --divine-light: #a07af0;
+  --cyan: #2af0e8;
+
+  /* Cor de destaque exclusiva do Knull */
+  --char-accent: #cc0022;
+  --char-accent-dim: #8b0000;
+  --char-accent-glow: rgba(204,0,34,0.35);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+#cosmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(to bottom, rgba(3,3,8,0.95), transparent);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(204,0,34,0.15);
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--char-accent);
+  text-shadow: 0 0 20px var(--char-accent-glow);
+}
+
+/* ── BANNER HERO ── */
+#banner {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.banner-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+  /* Fallback se não houver imagem */
+  background-color: #0d0008;
+  background-image:
+    radial-gradient(ellipse at 60% 30%, rgba(139,0,0,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 70%, rgba(106,79,207,0.15) 0%, transparent 50%);
+}
+
+.banner-bg.loaded { transform: scale(1); }
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top,
+      rgba(3,3,8,1) 0%,
+      rgba(3,3,8,0.75) 35%,
+      rgba(3,3,8,0.3) 65%,
+      rgba(3,3,8,0.1) 100%),
+    linear-gradient(to right,
+      rgba(3,3,8,0.6) 0%,
+      transparent 60%);
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 5vw 5rem;
+  max-width: 780px;
+}
+
+.banner-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fade-up 1s 0.2s ease forwards;
+}
+
+.banner-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 900;
+  line-height: 0.95;
+  background: linear-gradient(135deg,
+    #fff0f0 0%, #f0d080 30%, #c9a84c 60%, #8b0000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(204,0,34,0.4));
+  opacity: 0;
+  animation: fade-up 1s 0.4s ease forwards;
+}
+
+.banner-human {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  margin-top: 0.6rem;
+  opacity: 0;
+  animation: fade-up 1s 0.6s ease forwards;
+}
+
+.banner-divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    var(--char-accent), var(--gold), transparent);
+  margin: 1.8rem 0;
+  opacity: 0;
+  animation: fade-up 1s 0.8s ease forwards;
+}
+
+.banner-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  max-width: 480px;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fade-up 1s 0.9s ease forwards;
+}
+
+/* ── STATS DO BANNER ── */
+.banner-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 1s 1.1s ease forwards;
+}
+
+.bstat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bstat-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.08em;
+}
+
+.bstat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.bstat-sep {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom,
+    transparent, rgba(201,168,76,0.4), transparent);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  right: 5vw;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+
+/* ── ANIMAÇÕES ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ── REVEAL ON SCROLL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+/* ── SEÇÕES COMPARTILHADAS ── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+}
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  text-shadow: 0 0 40px rgba(201,168,76,0.25);
+}
+
+.section-rule {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, var(--char-accent), var(--gold), transparent);
+  margin: 1.5rem auto 0;
+}
+
+/* ── SOBRE ── */
+#sobre {
+  padding-bottom: 5rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  align-items: start;
+}
+
+.about-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 6rem;
+}
+
+.about-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center;
+  background-color: #100008;
+  background-image:
+    radial-gradient(ellipse at 50% 30%,
+      rgba(139,0,0,0.3) 0%, transparent 70%);
+  position: relative;
+  border: 1px solid rgba(204,0,34,0.2);
+}
+
+.photo-frame-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.photo-frame-corner.tl {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+}
+
+.photo-frame-corner.tr {
+  top: -1px; right: -1px;
+  border-top: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+}
+
+.photo-frame-corner.bl {
+  bottom: -1px; left: -1px;
+  border-bottom: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+}
+
+.photo-frame-corner.br {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+}
+
+.about-photo-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-align: center;
+}
+
+.about-text p {
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.4rem;
+  font-size: 1.05rem;
+}
+
+.about-text p strong {
+  color: var(--gold-light);
+}
+
+.about-text p em {
+  color: var(--char-accent);
+  font-style: normal;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border-radius: 1px;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.tag:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+.tag.divine-tag {
+  border-color: rgba(160,122,240,0.3);
+  color: var(--divine-light);
+}
+
+.tag.blood-tag {
+  border-color: rgba(204,0,34,0.35);
+  color: #e06070;
+}
+
+.tag.cyan-tag {
+  border-color: rgba(42,240,232,0.35);
+  color: var(--cyan);
+}
+
+/* ── PODERES ── */
+#poderes {
+  padding-bottom: 5rem;
+  background: linear-gradient(to bottom,
+    transparent, rgba(139,0,0,0.04), transparent);
+}
+
+.powers-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.power-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(201,168,76,0.07);
+  align-items: start;
+  transition: background 0.3s;
+}
+
+.power-item:hover {
+  background: rgba(204,0,34,0.03);
+}
+
+.power-item:last-child {
+  border-bottom: none;
+}
+
+.power-icon-big {
+  font-size: 2.5rem;
+  text-align: center;
+  filter: drop-shadow(0 0 12px var(--char-accent-glow));
+  padding-top: 0.2rem;
+}
+
+.power-origin {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  margin-bottom: 0.4rem;
+}
+
+.power-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.power-body {
+  font-size: 0.97rem;
+  color: var(--text-dim);
+  line-height: 1.85;
+}
+
+.power-body em {
+  color: var(--gold-light);
+  font-style: normal;
+}
+
+.power-bar-wrap {
+  margin-top: 1.2rem;
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.power-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+  border-radius: 2px;
+  transition: width 1.5s ease;
+  width: 0;
+}
+
+.power-bar.blood {
+  background: linear-gradient(90deg, var(--blood), var(--blood-bright));
+}
+
+.power-bar.divine {
+  background: linear-gradient(90deg, var(--divine), var(--divine-light));
+}
+
+.power-bar.cyan {
+  background: linear-gradient(90deg, #1a8f8b, var(--cyan));
+}
+
+/* ── HISTÓRIA ── */
+#historia {
+  padding-bottom: 5rem;
+}
+
+.story-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.story-block {
+  padding: 2.5rem 0 2.5rem 2.5rem;
+  border-left: 1px solid rgba(204,0,34,0.2);
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.story-block:hover {
+  border-color: rgba(204,0,34,0.5);
+}
+
+.story-block::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 2.7rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--char-accent);
+  box-shadow: 0 0 12px var(--char-accent-glow);
+}
+
+.story-chapter {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  margin-bottom: 0.4rem;
+}
+
+.story-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 1rem;
+}
+
+.story-block p {
+  font-size: 1rem;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+
+.story-block p strong {
+  color: var(--gold-light);
+}
+
+/* ── GALERIA ── */
+#galeria {
+  padding-bottom: 5rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 260px 260px;
+  gap: 0.8rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.gallery-item {
+  background-size: cover;
+  background-position: center;
+  background-color: #100008;
+  background-image:
+    radial-gradient(ellipse at 50% 50%,
+      rgba(139,0,0,0.2) 0%, transparent 70%);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(204,0,34,0.1);
+  transition: border-color 0.3s;
+}
+
+.gallery-item:hover {
+  border-color: rgba(204,0,34,0.4);
+}
+
+.gallery-item.tall {
+  grid-row: span 2;
+}
+
+.gallery-item.wide {
+  grid-column: span 2;
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(3,3,8,0.9) 0%, transparent 50%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery-item:hover .gallery-overlay {
+  opacity: 1;
+}
+
+.gallery-overlay span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.gallery-hint {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  opacity: 0.6;
+}
+
+.gallery-hint code {
+  font-family: monospace;
+  color: var(--char-accent);
+  font-style: normal;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(204,0,34,0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover {
+  color: var(--gold-light);
+}
+
+.footer-sep {
+  color: var(--gold-dim);
+  opacity: 0.4;
+}
+
+.footer-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  color: var(--gold-dim);
+  margin-bottom: 0.6rem;
+}
+
+.footer-sub {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba(122,98,40,0.5);
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-photo-wrap {
+    position: static;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+
+  .gallery-item.tall  { grid-row: span 1; }
+  .gallery-item.wide  { grid-column: span 2; }
+
+  nav {
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  nav a { font-size: 0.68rem; }
+
+  .power-item {
+    grid-template-columns: 50px 1fr;
+    gap: 1.2rem;
+  }
+
+  .banner-content { padding: 4rem 1.5rem 4rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="cosmos-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html">← Voltar ao Início</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#poderes">Poderes</a>
+  <a href="#historia">História</a>
+  <a href="#galeria">Galeria</a>
+</nav>
+
+<!-- BANNER HERO -->
+<section id="banner">
+  <div class="banner-bg" style="background-image: url('knull-banner.jpg')"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <p class="banner-eyebrow">Mestre Elemental · Deus</p>
+    <h1 class="banner-name">Knull</h1>
+    <p class="banner-human">Antes conhecido como <em>UchiHyuuga Yuri</em></p>
+    <div class="banner-divider"></div>
+    <p class="banner-quote">"Eu não carrego o peso do mundo. Eu sou o peso do mundo."</p>
+    <div class="banner-stats">
+      <div class="bstat">
+        <span class="bstat-val">Elemental</span>
+        <span class="bstat-label">Domínio</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Uchiha · Hyuuga</span>
+        <span class="bstat-label">Linhagem</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Sayadin</span>
+        <span class="bstat-label">Sangue</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Deus</span>
+        <span class="bstat-label">Condição</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-header reveal">
+    <span class="section-label">Identidade</span>
+    <h2>Quem é Knull</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="about-grid reveal">
+    <div class="about-photo-wrap">
+      <div class="about-photo" style="background-image: url('knull-perfil.jpg')">
+        <div class="photo-frame-corner tl"></div>
+        <div class="photo-frame-corner tr"></div>
+        <div class="photo-frame-corner bl"></div>
+        <div class="photo-frame-corner br"></div>
+      </div>
+      <div class="about-photo-label">Knull · Deus do Elemento</div>
+    </div>
+    <div class="about-text">
+      <p>
+        Antes de ser Knull, era Yuri — mais precisamente, <strong>UchiHyuuga Yuri</strong>, portador de um dos sangues mais raros e poderosos já vistos. Filho de duas das linhagens mais lendárias do mundo ninja: os <em>Uchiha</em>, mestres do fogo e da ilusão, e os <em>Hyuuga</em>, guardiões da visão absoluta.
+      </p>
+      <p>
+        Mas a herança não parava aí. Em suas veias corria também o sangue <strong>Sayadin</strong> — um amplificador natural que elevava cada poder que tocava além dos limites conhecidos. Com ele, Chakra, Ki e Cosmos não eram apenas forças separadas, mas uma trindade unificada sob sua vontade.
+      </p>
+      <p>
+        Foi Yuri quem narrou tudo. Sua voz é o próprio diário — cada batalha, cada ascensão, cada transformação registrada em primeira pessoa. Ele foi o primeiro dos seis a compreender que não eram apenas guerreiros. Eram a próxima etapa da existência.
+      </p>
+      <p>
+        Após o confronto com A Besta, o nome humano cedeu. O que restou foi <strong>Knull</strong> — deus, narrador, e a prova viva de que os limites são apenas o começo.
+      </p>
+      <div class="about-tags">
+        <span class="tag">Narrador</span>
+        <span class="tag">Mestre Elemental</span>
+        <span class="tag blood-tag">Uchiha</span>
+        <span class="tag blood-tag">Hyuuga</span>
+        <span class="tag divine-tag">Sayadin</span>
+        <span class="tag cyan-tag">Chakra · Ki · Cosmos</span>
+        <span class="tag divine-tag">Shinigami</span>
+        <span class="tag">Cavaleiro de Ouro</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PODERES -->
+<section id="poderes">
+  <div class="section-header reveal">
+    <span class="section-label">Arsenal completo</span>
+    <h2>Poderes & Habilidades</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="powers-list">
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">👁️</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Naruto · Clã Uchiha</div>
+        <div class="power-title">Sharingan & Mangekyō Sharingan</div>
+        <div class="power-body">Os olhos vermelhos que definiram gerações. O Sharingan de Yuri evoluiu para o Mangekyō — despertando o <em>Amaterasu</em>, chamas negras que consomem tudo e não se apagam, o <em>Tsukuyomi</em>, genjutsu capaz de aprisionar a mente em séculos de ilusão em segundos, e o <em>Susanoo</em>, guerreiro colossal de chakra que serve de armadura e arma ao mesmo tempo.</div>
+        <div class="power-bar-wrap"><div class="power-bar blood" data-width="95"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🔮</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Naruto · Clã Hyuuga</div>
+        <div class="power-title">Byakugan & Jūken</div>
+        <div class="power-body">A visão branca que tudo enxerga. O Byakugan garante campo de visão de 360° sem pontos cegos, penetrando qualquer ilusão e enxergando o sistema de chakra do oponente. Combinado ao Jūken — o estilo de combate corpo a corpo Hyuuga — permite fechar os pontos de chakra do inimigo com precisão cirúrgica.</div>
+        <div class="power-bar-wrap"><div class="power-bar" data-width="88"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">⚔️</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Saint Seiya · Cavaleiros do Zodíaco</div>
+        <div class="power-title">Armadura de Ouro</div>
+        <div class="power-body">Uma das doze armaduras mais sagradas do cosmos — forjada com metal divino e imbuída com a energia dos astros. A armadura de Knull amplifica seu Cosmos ao limite máximo, protege contra ataques de nível olímpico e ressoa com a constelação que representa, liberando técnicas exclusivas de velocidade e poder cósmico devastador.</div>
+        <div class="power-bar-wrap"><div class="power-bar divine" data-width="92"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">💀</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Bleach · Shinigami</div>
+        <div class="power-title">Zanpakutō · Shikai & Bankai</div>
+        <div class="power-body">A espada da alma — uma extensão da própria essência de Knull. No <em>Shikai</em>, a Zanpakutō assume sua forma verdadeira e libera habilidades elementais únicas. No <em>Bankai</em>, o poder se multiplica exponencialmente, transformando o campo de batalha inteiro. Knull domina também o <em>Kidō</em>, feitiçaria dos Shinigami, além do <em>Sonído</em> para movimentação em velocidades além da percepção.</div>
+        <div class="power-bar-wrap"><div class="power-bar blood" data-width="90"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🌀</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Naruto · Energia Vital</div>
+        <div class="power-title">Chakra & Modo Sábio</div>
+        <div class="power-body">O Chakra de Knull é amplificado pelo sangue Sayadin, tornando sua reserva praticamente inesgotável. Domina jutsu de todos os elementos — fogo, vento, terra, água e raio — e alcançou o <em>Modo Sábio</em>, absorvendo a energia natural do mundo para potencializar ainda mais cada técnica. Seus selos são executados em frações de segundo.</div>
+        <div class="power-bar-wrap"><div class="power-bar cyan" data-width="97"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🔥</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Dragon Ball · Força Vital</div>
+        <div class="power-title">Ki</div>
+        <div class="power-body">O Ki de Knull é denso o suficiente para ser sentido a quilômetros de distância quando liberado. Permite voo irrestrito, criação de escudos e barreiras de energia, e disparo de ondas expansivas capazes de varrer continentes. O sangue Sayadin funciona como amplificador constante — não há teto para o Ki de Knull.</div>
+        <div class="power-bar-wrap"><div class="power-bar" data-width="93"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">✨</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Saint Seiya · Cavaleiros do Zodíaco</div>
+        <div class="power-title">Cosmos</div>
+        <div class="power-body">A chama interior que todo cavaleiro carrega — mas pouquíssimos levam ao limite absoluto. Knull é um deles. Seu Cosmos elevado à máxima potência permite movimento na velocidade da luz, ataques que ignoram defesas físicas convencionais e acesso a técnicas cósmicas que afetam a realidade ao redor.</div>
+        <div class="power-bar-wrap"><div class="power-bar divine" data-width="89"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🧬</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Herança Única</div>
+        <div class="power-title">Sangue Sayadin</div>
+        <div class="power-body">O multiplicador que torna Knull singular. O sangue Sayadin não é um poder em si — é um catalisador. Ele eleva o teto máximo de cada habilidade existente, permitindo que Chakra, Ki e Cosmos coexistam e se potencializem mutuamente em vez de se anularem. É a razão pela qual Knull não tem limite definido.</div>
+        <div class="power-bar-wrap"><div class="power-bar blood" data-width="100"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HISTÓRIA -->
+<section id="historia">
+  <div class="section-header reveal">
+    <span class="section-label">Trajetória</span>
+    <h2>A História de Yuri</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="story-body">
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo I</div>
+      <div class="story-title">O Começo</div>
+      <p>Yuri nunca foi comum — mesmo antes de saber disso. Portador de um sangue duplo raríssimo, cresceu compreendendo que cada técnica que aprendia era absorvida de forma diferente por seu corpo. O Sharingan acordou cedo. O Byakugan veio logo depois. E o sangue Sayadin garantiu que nenhum dos dois tivesse limite.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo II</div>
+      <div class="story-title">O Encontro dos Seis</div>
+      <p>Foi quando os seis se reuniram que tudo mudou. Lucas, Leonardo, Yasmin, Jéssica e Anna — cada um com sua própria herança impossível. Yuri não escolheu liderar. Mas foi ele quem começou a registrar. Cada batalha, cada vitória, cada perda quase certa. O diário nasceu ali.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo III</div>
+      <div class="story-title">O Cavaleiro Negro & A Ascensão</div>
+      <p>A primeira grande batalha contra o Cavaleiro Negro foi o batismo de fogo do grupo. Yuri levou a luta ao limite — combinando Susanoo, Bankai e Cosmos numa sequência que reescreveu o que se acreditava possível. A vitória custou caro. Mas o prêmio foi a ascensão: Yuri tornou-se <strong>Mestre Elemental</strong>.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo IV</div>
+      <div class="story-title">A Besta & A Deificação</div>
+      <p>O confronto com A Besta foi diferente de tudo que veio antes. A criatura primordial do Divino não lutava — ela consumia. Cada golpe era uma tentativa de apagar a existência dos seis. Foi no momento em que Yuri abriu mão do nome humano que o poder verdadeiro emergiu. O que restou não era mais Yuri. Era <strong>Knull</strong> — e o mundo nunca mais seria o mesmo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="section-header reveal">
+    <span class="section-label">Imagens</span>
+    <h2>Galeria de Knull</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="gallery-grid reveal">
+    <div class="gallery-item tall" style="background-image: url('knull-01.jpg')">
+      <div class="gallery-overlay"><span>Knull · Forma Divina</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('knull-02.jpg')">
+      <div class="gallery-overlay"><span>Sharingan Despertado</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('knull-03.jpg')">
+      <div class="gallery-overlay"><span>Armadura de Ouro</span></div>
+    </div>
+    <div class="gallery-item wide" style="background-image: url('knull-04.jpg')">
+      <div class="gallery-overlay"><span>Bankai · Liberação Total</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('knull-05.jpg')">
+      <div class="gallery-overlay"><span>Modo Sábio</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('knull-06.jpg')">
+      <div class="gallery-overlay"><span>Cosmos ao Limite</span></div>
+    </div>
+  </div>
+
+  <p class="gallery-hint reveal">
+    Substitua os arquivos <code>knull-01.jpg</code> até <code>knull-06.jpg</code> pelas imagens do personagem na mesma pasta do HTML.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-nav">
+    <a href="index.html">← Página Principal</a>
+    <span class="footer-sep">·</span>
+    <a href="onull.html">Onull →</a>
+  </div>
+  <div class="footer-title">Knull</div>
+  <div class="footer-sub">"Antes éramos nomes. Agora somos eternidade."</div>
+  <div class="footer-copy">O Diário de um Deus · UchiHyuuga Yuri · Todos os direitos reservados</div>
+</footer>
+
+<script>
+/* ── COSMOS CANVAS ── */
+(function () {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx = canvas.getContext('2d');
+  let W, H, stars = [], nebulas = [];
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 220; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.2,
+        a: Math.random(),
+        speed: Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+
+    nebulas = [];
+    /* Knull: névoas em vermelho sangue e roxo divino */
+    const colors = [
+      'rgba(139,0,0,',
+      'rgba(204,0,34,',
+      'rgba(106,79,207,',
+      'rgba(201,168,76,'
+    ];
+    for (let i = 0; i < 5; i++) {
+      nebulas.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 320 + 150,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a: Math.random() * 0.07 + 0.02
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Fundo escuro com leve toque vermelho */
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0,   '#030308');
+    bg.addColorStop(0.5, '#090008');
+    bg.addColorStop(1,   '#0a0005');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Névoas */
+    nebulas.forEach(n => {
+      const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+      grad.addColorStop(0, n.color + n.a + ')');
+      grad.addColorStop(1, n.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Estrelas com cintilação */
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const alpha = s.a * (0.6 + 0.4 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(230,210,210,${alpha})`;
+      ctx.fill();
+    });
+
+    /* Brilho vermelho sutil no rodapé */
+    const horizon = ctx.createLinearGradient(0, H * 0.75, 0, H);
+    horizon.addColorStop(0, 'transparent');
+    horizon.addColorStop(1, 'rgba(139,0,0,0.06)');
+    ctx.fillStyle = horizon;
+    ctx.fillRect(0, H * 0.75, W, H * 0.25);
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); initStars(); });
+  resize();
+  initStars();
+  draw();
+})();
+
+/* ── PARALLAX DO BANNER ── */
+(function () {
+  const bg = document.querySelector('.banner-bg');
+  if (!bg) return;
+
+  /* Marca imagem como carregada para suavizar escala */
+  const img = new Image();
+  img.onload = () => bg.classList.add('loaded');
+  const url = bg.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+  if (url && url !== 'none') img.src = url;
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const limit   = window.innerHeight;
+    if (scrollY <= limit) {
+      bg.style.transform = `scale(1.05) translateY(${scrollY * 0.25}px)`;
+    }
+  }, { passive: true });
+})();
+
+/* ── SCROLL REVEAL ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── BARRAS DE PODER ── */
+(function () {
+  const bars = document.querySelectorAll('.power-bar');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const bar    = e.target;
+        const target = bar.getAttribute('data-width');
+        setTimeout(() => { bar.style.width = target + '%'; }, 200);
+        io.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  bars.forEach(b => io.observe(b));
+})();
+
+/* ── LIGHTBOX DA GALERIA ── */
+(function () {
+  const items = document.querySelectorAll('.gallery-item');
+  if (!items.length) return;
+
+  /* Cria o lightbox */
+  const lb = document.createElement('div');
+  lb.id = 'lightbox';
+  lb.innerHTML = `
+    <div id="lb-backdrop"></div>
+    <div id="lb-box">
+      <button id="lb-prev">&#8592;</button>
+      <div id="lb-img-wrap">
+        <div id="lb-img"></div>
+        <div id="lb-caption"></div>
+      </div>
+      <button id="lb-next">&#8594;</button>
+      <button id="lb-close">&#x2715;</button>
+    </div>
+  `;
+  document.body.appendChild(lb);
+
+  /* Estilos inline do lightbox */
+  const style = document.createElement('style');
+  style.textContent = `
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.active { display: flex; }
+    #lb-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(3,3,8,0.95);
+      backdrop-filter: blur(8px);
+    }
+    #lb-box {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+    #lb-img-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    #lb-img {
+      width: min(700px, 80vw);
+      height: min(500px, 70vh);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #0d0008;
+      border: 1px solid rgba(204,0,34,0.25);
+    }
+    #lb-caption {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+    #lb-prev, #lb-next, #lb-close {
+      background: none;
+      border: 1px solid rgba(201,168,76,0.25);
+      color: #c9a84c;
+      font-size: 1.2rem;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s, color 0.3s;
+      flex-shrink: 0;
+    }
+    #lb-prev:hover, #lb-next:hover, #lb-close:hover {
+      border-color: #cc0022;
+      color: #f0d080;
+    }
+    #lb-close {
+      position: absolute;
+      top: -3rem;
+      right: 0;
+      border-color: rgba(204,0,34,0.3);
+    }
+  `;
+  document.head.appendChild(style);
+
+  /* Coleta dados de cada item */
+  const data = Array.from(items).map(el => ({
+    bg:      el.style.backgroundImage,
+    caption: el.querySelector('.gallery-overlay span')?.textContent || ''
+  }));
+
+  let current = 0;
+
+  function open(index) {
+    current = index;
+    show();
+    lb.classList.add('active');
+  }
+
+  function show() {
+    document.getElementById('lb-img').style.backgroundImage = data[current].bg;
+    document.getElementById('lb-caption').textContent = data[current].caption;
+  }
+
+  function close() { lb.classList.remove('active'); }
+
+  function prev() { current = (current - 1 + data.length) % data.length; show(); }
+  function next() { current = (current + 1) % data.length; show(); }
+
+  items.forEach((el, i) => el.addEventListener('click', () => open(i)));
+  document.getElementById('lb-close').addEventListener('click', close);
+  document.getElementById('lb-backdrop').addEventListener('click', close);
+  document.getElementById('lb-prev').addEventListener('click', prev);
+  document.getElementById('lb-next').addEventListener('click', next);
+
+  /* Navegação pelo teclado */
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft')  prev();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'Escape')     close();
+  });
+})();
+</script>
+</body>
+</html>
