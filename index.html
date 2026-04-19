@@ -534,6 +534,26 @@ h2 {
   color: var(--cyan);
 }
 
+/* ── LINKS DE PERSONAGENS ── */
+.char-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.char-card-link:hover .char-card {
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-4px);
+}
+
+.char-card-link:hover .char-card::before {
+  opacity: 1;
+}
+
+.char-card-link:hover.divine-link .char-card {
+  border-color: rgba(160,122,240,0.5);
+}
+
 /* ── PODERES ── */
 #poderes {
   padding-bottom: 5rem;
@@ -640,20 +660,95 @@ footer {
 }
 
 /* ── RESPONSIVO ── */
-@media (max-width: 640px) {
+/* Extra Small: Smartphones < 360px */
+@media (max-width: 360px) {
+  body { font-size: 16px; }
+  nav { gap: 0.6rem; padding: 0.8rem 1rem; }
+  nav a { font-size: 0.6rem; letter-spacing: 0.1em; }
+  h1.title { font-size: 1.8rem; }
+  .hero-eyebrow { font-size: 0.6rem; }
+  .hero-sub { font-size: 0.95rem; margin: 1.2rem auto 0; }
+  #hero { padding: 4rem 1rem 3rem; }
+  .section-header { padding: 3rem 1rem 2rem; }
+  h2 { font-size: 1.4rem; }
+  .cards-grid { grid-template-columns: 1fr; gap: 1rem; padding: 0 1rem; }
+  .char-card { padding: 1.5rem 1.2rem; }
+  .synopsis-body { padding: 0 1rem; }
+  .timeline { padding: 1rem 1rem; }
+  .powers-grid { grid-template-columns: 1fr; gap: 1rem; padding: 0 1rem; }
+}
+
+/* Small: Smartphones 360px - 480px */
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  nav { gap: 1rem; padding: 1rem 1.2rem; }
+  nav a { font-size: 0.65rem; }
+  #hero { padding: 5rem 1.5rem 3rem; }
+  h1.title { font-size: 2rem; }
+  .hero-eyebrow { font-size: 0.65rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-emblem { width: 80px; height: 80px; margin: 0 auto 2rem; }
+  .section-header { padding: 3.5rem 1.5rem 2.5rem; }
+  h2 { font-size: 1.6rem; }
+  .cards-grid { grid-template-columns: 1fr; gap: 1.2rem; padding: 0 1.5rem; }
+  .char-card { padding: 1.5rem; }
+  .char-sigil { font-size: 2rem; }
+  .char-name { font-size: 0.95rem; }
+  .synopsis-body { padding: 0 1.5rem; }
+  .synopsis-body p { font-size: 0.95rem; }
+  .timeline { padding: 1rem 1.5rem; }
   .timeline::before { left: 24px; }
   .tl-item { grid-template-columns: auto 1fr; }
   .tl-item.left .tl-content,
   .tl-item.right .tl-content { grid-column: 2; text-align: left; }
-  .tl-item .tl-dot   { grid-column: 1; }
+  .tl-item .tl-dot { grid-column: 1; }
   .tl-item .tl-empty { display: none; }
-  nav { gap: 1.2rem; flex-wrap: wrap; }
-  nav a { font-size: 0.68rem; }
+  .powers-grid { grid-template-columns: 1fr; gap: 1.2rem; padding: 0 1.5rem; }
+  .power-block { padding: 1.5rem; }
+  footer { padding: 3rem 1.5rem; }
+}
+
+/* Medium: Tablets 481px - 768px */
+@media (max-width: 768px) {
+  body { font-size: 17px; }
+  nav { gap: 1.2rem; padding: 1.2rem 1.5rem; }
+  nav a { font-size: 0.7rem; }
+  #hero { padding: 5rem 2rem 4rem; }
+  h1.title { font-size: 2.4rem; }
+  .hero-emblem { width: 100px; height: 100px; margin: 0 auto 2.2rem; }
+  .section-header { padding: 4rem 2rem 3rem; }
+  h2 { font-size: 1.8rem; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding: 0 2rem; }
+  .char-card { padding: 1.8rem; }
+  .synopsis-body { padding: 0 2rem; max-width: 100%; }
+  .timeline { padding: 1.5rem 2rem; }
+  .timeline::before { left: 50%; }
+  .tl-item { grid-template-columns: 1fr auto 1fr; }
+  .tl-item.left .tl-content { grid-column: 1; text-align: right; }
+  .tl-item.right .tl-content { grid-column: 3; text-align: left; }
+  .tl-item .tl-dot { grid-column: 2; }
+  .powers-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding: 0 2rem; }
+  footer { padding: 3.5rem 2rem; }
+}
+
+/* Large: Desktop 769px - 1024px */
+@media (max-width: 1024px) {
+  .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .powers-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+}
+
+/* Extra Large: Desktop > 1024px */
+@media (min-width: 1025px) {
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .powers-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  body { font-size: 18px; }
 }
 </style>
 </head>
 <body>
-
+  <audio autoplay loop hidden>
+    <source src="audio/inicial.mp3" type="audio/mpeg" />
+  </audio>
 <canvas id="cosmos-bg"></canvas>
 
 <!-- NAV -->
@@ -804,95 +899,107 @@ footer {
   <div class="char-group-label reveal">Os Três Mestres · Agora Deuses</div>
   <div class="cards-grid">
 
-    <div class="char-card reveal">
-      <div class="card-corner"></div>
-      <span class="char-sigil">⚡</span>
-      <div class="char-name">Yuri · Knull</div>
-      <span class="char-divine-name">→ Deus Knull</span>
-      <div class="char-role">Mestre Elemental · Narrador</div>
-      <div class="char-desc">UchiHyuuga — portador do sangue Uchiha e Hyuuga. Possui sangue Sayadin, armadura de ouro dos Cavaleiros do Zodíaco, habilidades de Shinigami e domina Chakra, Ki e Cosmos. A voz que registra o diário.</div>
-      <div class="char-tags">
-        <span class="tag">Uchiha</span>
-        <span class="tag">Hyuuga</span>
-        <span class="tag">Sayadin</span>
-        <span class="tag divine-tag">Shinigami</span>
-        <span class="tag cyan-tag">Chakra · Ki · Cosmos</span>
+    <a href="knull.html" class="char-card-link reveal">
+      <div class="char-card">
+        <div class="card-corner"></div>
+        <span class="char-sigil">⚡</span>
+        <div class="char-name">Yuri · Knull</div>
+        <span class="char-divine-name">→ Deus Knull</span>
+        <div class="char-role">Mestre Elemental · Narrador</div>
+        <div class="char-desc">UchiHyuuga — portador do sangue Uchiha e Hyuuga. Possui sangue Sayadin, armadura de ouro dos Cavaleiros do Zodíaco, habilidades de Shinigami e domina Chakra, Ki e Cosmos. A voz que registra o diário.</div>
+        <div class="char-tags">
+          <span class="tag">Uchiha</span>
+          <span class="tag">Hyuuga</span>
+          <span class="tag">Sayadin</span>
+          <span class="tag divine-tag">Shinigami</span>
+          <span class="tag cyan-tag">Chakra · Ki · Cosmos</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="char-card reveal">
-      <div class="card-corner"></div>
-      <span class="char-sigil">🔱</span>
-      <div class="char-name">Lucas · Onull</div>
-      <span class="char-divine-name">→ Deus Onull</span>
-      <div class="char-role">Mestre Humano</div>
-      <div class="char-desc">Representa a essência da humanidade em sua forma mais elevada, nascido na Cidadela das Sombras, Lucas possui sangue bruxo puro e possui uma habilidade incomum, fazer os ossos de seu corpo como arma— o que os mortais podem se tornar quando ultrapassam seus próprios limites. Após a deificação, transcende a própria definição de humano.</div>
-      <div class="char-tags">
-        <span class="tag">Mestre Humano</span>
-        <span class="tag divine-tag">Transcendência</span>
+    <a href="onull.html" class="char-card-link reveal">
+      <div class="char-card">
+        <div class="card-corner"></div>
+        <span class="char-sigil">🔱</span>
+        <div class="char-name">Lucas · Onull</div>
+        <span class="char-divine-name">→ Deus Onull</span>
+        <div class="char-role">Mestre Humano</div>
+        <div class="char-desc">Representa a essência da humanidade em sua forma mais elevada, nascido na Cidadela das Sombras, Lucas possui sangue bruxo puro e possui uma habilidade incomum, fazer os ossos de seu corpo como arma— o que os mortais podem se tornar quando ultrapassam seus próprios limites. Após a deificação, transcende a própria definição de humano.</div>
+        <div class="char-tags">
+          <span class="tag">Mestre Humano</span>
+          <span class="tag divine-tag">Transcendência</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="char-card reveal">
-      <div class="card-corner"></div>
-      <span class="char-sigil">👁️</span>
-      <div class="char-name">Leonardo · Anull</div>
-      <span class="char-divine-name">→ Deus Anull</span>
-      <div class="char-role">Mestre Espiritual</div>
-      <div class="char-desc">O elo entre o mundo material e os planos espirituais. Anull é a vontade feita além-corpo, o espírito que não se dissolve mesmo quando tudo ao redor colapsa.</div>
-      <div class="char-tags">
-        <span class="tag">Mestre Espiritual</span>
-        <span class="tag divine-tag">Plano Espiritual</span>
+    <a href="anull.html" class="char-card-link reveal">
+      <div class="char-card">
+        <div class="card-corner"></div>
+        <span class="char-sigil">👁️</span>
+        <div class="char-name">Leonardo · Anull</div>
+        <span class="char-divine-name">→ Deus Anull</span>
+        <div class="char-role">Mestre Espiritual</div>
+        <div class="char-desc">O elo entre o mundo material e os planos espirituais. Anull é a vontade feita além-corpo, o espírito que não se dissolve mesmo quando tudo ao redor colapsa.</div>
+        <div class="char-tags">
+          <span class="tag">Mestre Espiritual</span>
+          <span class="tag divine-tag">Plano Espiritual</span>
+        </div>
       </div>
-    </div>
+    </a>
 
   </div>
 
   <div class="char-group-label reveal">As Três Guardiãs · Ascendidas</div>
   <div class="cards-grid">
 
-    <div class="char-card divine-card reveal">
-      <div class="card-corner divine-c"></div>
-      <span class="char-sigil">🌊</span>
-      <div class="char-name">Yasmin · Nimsay</div>
-      <span class="char-divine-name">→ Nimsay</span>
-      <div class="char-role">Companheira de Yuri · Feiticeira & Maga</div>
-      <div class="char-desc">Filha de Poseidon com Afrodite, descendente da deusa da lua. Aprendiz de feiticeira, bruxa e maga — carrega em si o poder dos mares e o encanto do amor divino.</div>
-      <div class="char-tags">
-        <span class="tag">Filha de Poseidon</span>
-        <span class="tag blood-tag">Filha de Afrodite</span>
-        <span class="tag divine-tag">Descendente da Lua</span>
-        <span class="tag cyan-tag">Feiticeira · Maga</span>
+    <a href="nimsay.html" class="char-card-link divine-link reveal">
+      <div class="char-card divine-card">
+        <div class="card-corner divine-c"></div>
+        <span class="char-sigil">🌊</span>
+        <div class="char-name">Yasmin · Nimsay</div>
+        <span class="char-divine-name">→ Nimsay</span>
+        <div class="char-role">Companheira de Yuri · Feiticeira & Maga</div>
+        <div class="char-desc">Filha de Poseidon com Afrodite, descendente da deusa da lua. Aprendiz de feiticeira, bruxa e maga — carrega em si o poder dos mares e o encanto do amor divino.</div>
+        <div class="char-tags">
+          <span class="tag">Filha de Poseidon</span>
+          <span class="tag blood-tag">Filha de Afrodite</span>
+          <span class="tag divine-tag">Descendente da Lua</span>
+          <span class="tag cyan-tag">Feiticeira · Maga</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="char-card divine-card reveal">
-      <div class="card-corner divine-c"></div>
-      <span class="char-sigil">🌿</span>
-      <div class="char-name">Jéssica · Aicitel</div>
-      <span class="char-divine-name">→ Aicitel</span>
-      <div class="char-role">Protetora da Natureza · Filha de Hera</div>
-      <div class="char-desc">Filha de Hera e descendente da deusa da lua. Guardiã da natureza em seu estado mais sagrado. Aprendiz de feiticeira, bruxa e maga — e deusa da própria lua.</div>
-      <div class="char-tags">
-        <span class="tag">Filha de Hera</span>
-        <span class="tag divine-tag">Deusa da Lua</span>
-        <span class="tag cyan-tag">Protetora da Natureza</span>
+    <a href="aicitel.html" class="char-card-link divine-link reveal">
+      <div class="char-card divine-card">
+        <div class="card-corner divine-c"></div>
+        <span class="char-sigil">🌿</span>
+        <div class="char-name">Jéssica · Aicitel</div>
+        <span class="char-divine-name">→ Aicitel</span>
+        <div class="char-role">Protetora da Natureza · Filha de Hera</div>
+        <div class="char-desc">Filha de Hera e descendente da deusa da lua. Guardiã da natureza em seu estado mais sagrado. Aprendiz de feiticeira, bruxa e maga — e deusa da própria lua.</div>
+        <div class="char-tags">
+          <span class="tag">Filha de Hera</span>
+          <span class="tag divine-tag">Deusa da Lua</span>
+          <span class="tag cyan-tag">Protetora da Natureza</span>
+        </div>
       </div>
-    </div>
+    </a>
 
-    <div class="char-card divine-card reveal">
-      <div class="card-corner divine-c"></div>
-      <span class="char-sigil">🦉</span>
-      <div class="char-name">Anna · Aliban</div>
-      <span class="char-divine-name">→ Aliban</span>
-      <div class="char-role">Filha de Athena · Descendente da Lua</div>
-      <div class="char-desc">Filha de Athena e descendente da deusa da lua. Alia a sabedoria estratégica da mãe à magia lunar ancestral. Sua ascensão para Aliban marca o despertar de um poder há muito adormecido.</div>
-      <div class="char-tags">
-        <span class="tag">Filha de Athena</span>
-        <span class="tag divine-tag">Descendente da Lua</span>
-        <span class="tag blood-tag">Estrategista</span>
+    <a href="aliban.html" class="char-card-link divine-link reveal">
+      <div class="char-card divine-card">
+        <div class="card-corner divine-c"></div>
+        <span class="char-sigil">🦉</span>
+        <div class="char-name">Anna · Aliban</div>
+        <span class="char-divine-name">→ Aliban</span>
+        <div class="char-role">Filha de Athena · Descendente da Lua</div>
+        <div class="char-desc">Filha de Athena e descendente da deusa da lua. Alia a sabedoria estratégica da mãe à magia lunar ancestral. Sua ascensão para Aliban marca o despertar de um poder há muito adormecido.</div>
+        <div class="char-tags">
+          <span class="tag">Filha de Athena</span>
+          <span class="tag divine-tag">Descendente da Lua</span>
+          <span class="tag blood-tag">Estrategista</span>
+        </div>
       </div>
-    </div>
+    </a>
 
   </div>
 </section>
