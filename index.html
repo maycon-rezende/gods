@@ -52,11 +52,60 @@ nav {
   z-index: 100;
   display: flex;
   justify-content: center;
-  gap: 2.5rem;
-  padding: 1.2rem 2rem;
+  gap: clamp(0.5rem, 2vw, 2.5rem);
+  padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1rem, 3vw, 2rem);
   background: linear-gradient(to bottom, rgba(3,3,8,0.95), transparent);
   backdrop-filter: blur(4px);
   border-bottom: 1px solid rgba(201,168,76,0.12);
+  flex-wrap: wrap;
+}
+
+nav.mobile-open {
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: linear-gradient(to bottom, rgba(3,3,8,0.98), rgba(3,3,8,0.95));
+}
+
+#menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--gold-dim);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s;
+}
+
+#menu-toggle:hover {
+  color: var(--gold-light);
+}
+
+@media (max-width: 640px) {
+  #menu-toggle {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  nav {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  nav > a {
+    display: none;
+  }
+
+  nav.mobile-open > a {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    text-align: left;
+  }
 }
 
 nav a {
@@ -244,7 +293,7 @@ h2 {
 .synopsis-body {
   max-width: 780px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: clamp(1rem, 5vw, 2rem);
 }
 
 .synopsis-body p {
@@ -282,7 +331,7 @@ h2 {
 .timeline {
   max-width: 860px;
   margin: 0 auto;
-  padding: 1rem 2rem;
+  padding: clamp(1rem, 5vw, 2rem);
   position: relative;
 }
 
@@ -752,12 +801,13 @@ footer {
 <canvas id="cosmos-bg"></canvas>
 
 <!-- NAV -->
-<nav>
+<nav id="navbar">
   <a href="#hero">Início</a>
   <a href="#synopsis">Sinopse</a>
   <a href="#historia">História</a>
   <a href="#personagens">Personagens</a>
   <a href="#poderes">Poderes</a>
+  <button id="menu-toggle" aria-label="Menu">☰</button>
 </nav>
 
 <!-- HERO -->
@@ -1299,6 +1349,29 @@ footer {
   }, { threshold: 0.5 });
 
   bars.forEach(b => io.observe(b));
+})();
+
+/* ── MOBILE MENU TOGGLE ── */
+(function () {
+  const navbar = document.getElementById('navbar');
+  const toggle = document.getElementById('menu-toggle');
+  if (!toggle) return;
+
+  toggle.addEventListener('click', () => {
+    navbar.classList.toggle('mobile-open');
+  });
+
+  /* Fechar menu ao clicar em um link */
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      navbar.classList.remove('mobile-open');
+    });
+  });
+
+  /* Fechar menu ao fazer scroll */
+  window.addEventListener('scroll', () => {
+    navbar.classList.remove('mobile-open');
+  }, { passive: true });
 })();
 </script>
 </body>
