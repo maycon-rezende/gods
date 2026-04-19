@@ -79,6 +79,27 @@ nav a:hover {
   text-shadow: 0 0 20px var(--char-accent-glow);
 }
 
+/* ── LINK VOLTAR ── */
+nav a:first-child {
+  color: var(--char-accent);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(204,0,34,0.4);
+  border-radius: 2px;
+  background: linear-gradient(135deg, rgba(204,0,34,0.08), transparent);
+  transition: all 0.4s ease;
+}
+
+nav a:first-child:hover {
+  color: #ff4466;
+  text-shadow: 0 0 25px rgba(204,0,34,0.8);
+  border-color: rgba(204,0,34,0.8);
+  background: linear-gradient(135deg, rgba(204,0,34,0.18), rgba(204,0,34,0.08));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(204,0,34,0.25);
+}
+
 /* ── BANNER HERO ── */
 #banner {
   position: relative;
@@ -731,6 +752,7 @@ footer {
   body { font-size: 16px; }
   nav { gap: 0.6rem; padding: 0.8rem 1rem; }
   nav a { font-size: 0.6rem; letter-spacing: 0.1em; }
+  nav a:first-child { padding: 0.3rem 0.6rem; font-size: 0.55rem; border: 1px solid rgba(204,0,34,0.3); }
   #banner { min-height: 80vh; }
   .banner-content { padding: 2rem 1rem 2rem; font-size: 0.9rem; }
   .banner-name { font-size: 1.8rem; }
@@ -753,6 +775,7 @@ footer {
   body { font-size: 16px; }
   nav { gap: 1rem; padding: 1rem 1.2rem; }
   nav a { font-size: 0.65rem; }
+  nav a:first-child { padding: 0.4rem 0.8rem; font-size: 0.6rem; }
   #banner { min-height: 85vh; }
   .banner-content { padding: 3rem 1.5rem 3rem; }
   .banner-name { font-size: 2.2rem; }
@@ -814,7 +837,7 @@ footer {
 <body>
 
   <audio autoplay loop hidden>
-    <source src="audio/epic.mp3" type="audio/mpeg" />
+    <source src="audio/themepic2.mp3" type="audio/mpeg" />
   </audio>
 
 <canvas id="cosmos-bg"></canvas>
@@ -1061,19 +1084,19 @@ footer {
   </div>
 
   <div class="gallery-grid reveal">
-    <div class="gallery-item tall" style="background-image: url('knull-01.jpg')">
+    <div class="gallery-item tall" style="background-image: url('img-knull/yuri0.png')">
       <div class="gallery-overlay"><span>Knull · Forma Divina</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('knull-02.jpg')">
+    <div class="gallery-item" style="background-image: url('img-knull/yurinull.png')">
       <div class="gallery-overlay"><span>Sharingan Despertado</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('knull-03.jpg')">
+    <div class="gallery-item" style="background-image: url('img-knull/nullk.png')">
       <div class="gallery-overlay"><span>Armadura de Ouro</span></div>
     </div>
-    <div class="gallery-item wide" style="background-image: url('knull-04.jpg')">
+    <div class="gallery-item wide" style="background-image: url('img-knull/yuri.png')">
       <div class="gallery-overlay"><span>Bankai · Liberação Total</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('knull-05.jpg')">
+    <div class="gallery-item" style="background-image: url('img-knull/null.png')">
       <div class="gallery-overlay"><span>Modo Sábio</span></div>
     </div>
     <div class="gallery-item" style="background-image: url('knull-06.jpg')">
