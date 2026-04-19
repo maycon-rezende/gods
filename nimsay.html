@@ -669,66 +669,167 @@ h2 {
   line-height: 1.9;
 }
 
-.story-block p strong {
-  color: var(--gold-light);
-}
+.story-block p strong { color: var(--gold-light); }
 
 /* ── GALERIA ── */
 #galeria {
-  padding-bottom: 5rem;
+  padding: 0 2rem 5rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 260px 260px;
-  gap: 0.8rem;
-  max-width: 1100px;
+  grid-template-columns: 1fr;
+  gap: clamp(0.8rem, 2vw, 1rem);
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: clamp(1rem, 4vw, 2rem) 0;
+  position: relative;
+}
+
+@media (min-width: 600px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .gallery-item {
-  background-size: cover;
-  background-position: center;
-  background-color: #030812;
-  background-image:
-    radial-gradient(ellipse at 50% 50%,
-      rgba(74,158,187,0.15) 0%, transparent 70%);
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  border: 1px solid rgba(74,158,187,0.1);
-  transition: border-color 0.3s;
+  border: 1px solid rgba(74,158,187,0.15);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(to top,
+    rgba(3,3,8,0.95) 0%,
+    rgba(3,3,8,0.5) 40%,
+    transparent 100%);
+  min-height: clamp(220px, 40vw, 320px);
+  aspect-ratio: 1 / 1.2;
 }
 
 .gallery-item:hover {
-  border-color: rgba(200,184,232,0.4);
+  border-color: rgba(200,184,232,0.5);
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(74,158,187,0.25);
 }
 
-.gallery-item.tall { grid-row: span 2; }
-.gallery-item.wide { grid-column: span 2; }
-
-.gallery-overlay {
+.gallery-item img {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top,
-    rgba(3,3,8,0.9) 0%, transparent 50%);
-  display: flex;
-  align-items: flex-end;
-  padding: 1.2rem;
-  opacity: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  opacity: 0.95;
   transition: opacity 0.3s;
 }
 
-.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-item:hover img {
+  opacity: 1;
+}
+
+.gallery-item.tall {
+  grid-row: auto;
+  aspect-ratio: auto;
+  min-height: clamp(280px, 55vw, 380px);
+}
+
+@media (min-width: 900px) {
+  .gallery-item:first-child {
+    grid-row: span 2;
+    aspect-ratio: auto;
+    min-height: auto;
+  }
+}
+
+.gallery-overlay {
+  position: relative;
+  z-index: 2;
+  padding: clamp(0.8rem, 3vw, 1.2rem);
+  width: 100%;
+  text-align: left;
+  opacity: 1;
+}
 
 .gallery-overlay span {
   font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
+  font-size: clamp(0.65rem, 2vw, 0.85rem);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--moon);
+  text-shadow: 0 2px 8px rgba(3,3,8,0.8);
+}
+
+.gallery-carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  flex-wrap: wrap;
+}
+
+.carousel-btn {
+  background: linear-gradient(135deg, rgba(74,158,187,0.15), rgba(200,184,232,0.1));
+  border: 1px solid rgba(74,158,187,0.3);
+  color: var(--char-accent);
+  padding: 0.6rem 1.2rem;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.7rem, 2vw, 0.85rem);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.carousel-btn:hover {
+  border-color: rgba(200,184,232,0.6);
+  background: linear-gradient(135deg, rgba(74,158,187,0.25), rgba(200,184,232,0.2));
+  color: var(--moon);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(74,158,187,0.4);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.indicator.active {
+  background: var(--char-accent);
+  border-color: var(--char-accent);
+}
+
+.indicator:hover {
+  border-color: var(--moon);
 }
 
 .gallery-hint {
@@ -1222,174 +1323,6 @@ h2 {
   color: var(--text-dim);
   line-height: 1.9;
 }
-
-.story-block p strong {
-  color: var(--gold-light);
-}
-
-/* ── GALERIA ── */
-#galeria {
-  padding-bottom: 5rem;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 260px 260px;
-  gap: 0.8rem;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.gallery-item {
-  background-size: cover;
-  background-position: center;
-  background-color: #030812;
-  background-image:
-    radial-gradient(ellipse at 50% 50%,
-      rgba(74,158,187,0.15) 0%, transparent 70%);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  border: 1px solid rgba(74,158,187,0.1);
-  transition: border-color 0.3s;
-}
-
-.gallery-item:hover {
-  border-color: rgba(200,184,232,0.4);
-}
-
-.gallery-item.tall { grid-row: span 2; }
-.gallery-item.wide { grid-column: span 2; }
-
-.gallery-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top,
-    rgba(3,3,8,0.9) 0%, transparent 50%);
-  display: flex;
-  align-items: flex-end;
-  padding: 1.2rem;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.gallery-item:hover .gallery-overlay { opacity: 1; }
-
-.gallery-overlay span {
-  font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--moon);
-}
-
-.gallery-hint {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--text-dim);
-  opacity: 0.6;
-}
-
-.gallery-hint code {
-  font-family: monospace;
-  color: var(--char-accent);
-  font-style: normal;
-}
-
-/* ── FOOTER ── */
-footer {
-  text-align: center;
-  padding: 4rem 2rem;
-  border-top: 1px solid rgba(74,158,187,0.1);
-  position: relative;
-  z-index: 1;
-}
-
-.footer-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 2rem;
-}
-
-.footer-nav a {
-  font-family: 'Cinzel', serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold-dim);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer-nav a:hover { color: var(--char-accent); }
-
-.footer-sep {
-  color: var(--gold-dim);
-  opacity: 0.4;
-}
-
-.footer-title {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 1.4rem;
-  color: var(--char-accent);
-  margin-bottom: 0.6rem;
-}
-
-.footer-sub {
-  font-size: 0.85rem;
-  font-style: italic;
-  color: var(--text-dim);
-  margin-bottom: 1.5rem;
-}
-
-.footer-copy {
-  font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  color: rgba(122,98,40,0.5);
-  text-transform: uppercase;
-}
-
-/* ── RESPONSIVO ── */
-@media (max-width: 768px) {
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-photo-wrap {
-    position: static;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
-  }
-
-  .gallery-item.tall { grid-row: span 1; }
-  .gallery-item.wide { grid-column: span 2; }
-
-  nav {
-    gap: 1.2rem;
-    flex-wrap: wrap;
-  }
-
-  nav a { font-size: 0.68rem; }
-
-  .power-item {
-    grid-template-columns: 50px 1fr;
-    gap: 1.2rem;
-  }
-
-  .banner-content { padding: 4rem 1.5rem 4rem; }
-}
 </style>
 </head>
 <body>
@@ -1411,7 +1344,7 @@ footer {
 
 <!-- BANNER HERO -->
 <section id="banner">
-  <div class="banner-bg" style="background-image: url('img-nimsay/nimbanner.png')"></div>
+  <div class="banner-bg" style="background-image: url('img-nimsay/deusanim4.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
     <p class="banner-eyebrow">Companheira de Knull · Feiticeira & Maga · Ascendida</p>
@@ -1454,7 +1387,7 @@ footer {
 
   <div class="about-grid reveal">
     <div class="about-photo-wrap">
-      <div class="about-photo" style="background-image: url('img-nimsay/Nimsay.png')">
+      <div class="about-photo" style="background-image: url('img-nimsay/nimbanner.png')">
         <div class="photo-frame-corner tl"></div>
         <div class="photo-frame-corner tr"></div>
         <div class="photo-frame-corner bl"></div>
@@ -1615,29 +1548,18 @@ footer {
     <div class="section-rule"></div>
   </div>
 
-  <div class="gallery-grid reveal">
-    <div class="gallery-item tall" style="background-image: url('img-nimsay/deusanim5.png')">
-      <div class="gallery-overlay"><span>Nimsay · Forma Ascendida</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-nimsay/armescura2.png')">
-      <div class="gallery-overlay"><span>Magia Lunar</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-nimsay/deusanim4.png')">
-      <div class="gallery-overlay"><span>Domínio dos Mares</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-nimsay/armadurabranca.png')">
-      <div class="gallery-overlay"><span>Deusa</span></div>
-    </div>
-     <div class="gallery-item" style="background-image: url('img-nimsay/deusanim.png')">
-      <div class="gallery-overlay"><span>Deusa</span></div>
-    </div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-nimsay/armescura.png')">
-      <div class="gallery-overlay"><span>Herança de Afrodite</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img: nimsay/deusa2.png')">
-      <div class="gallery-overlay"><span>Nimsay & Knull</span></div>
-    </div>
+  <div class="gallery-grid reveal" id="galleryContainer">
+    <!-- As imagens serão inseridas aqui via JavaScript -->
+  </div>
+
+  <div class="gallery-carousel-controls">
+    <button class="carousel-btn" id="prevBtn">← Anterior</button>
+    <span id="imageCounter" style="font-size: 0.9rem; color: var(--char-accent);">1 / 6</span>
+    <button class="carousel-btn" id="nextBtn">Próximo →</button>
+  </div>
+
+  <div class="carousel-indicators" id="indicators">
+    <!-- Indicadores serão inseridos aqui -->
   </div>
 </section>
 
@@ -1864,9 +1786,6 @@ footer {
 
 /* ── LIGHTBOX DA GALERIA ── */
 (function () {
-  const items = document.querySelectorAll('.gallery-item');
-  if (!items.length) return;
-
   const lb = document.createElement('div');
   lb.id = 'lightbox';
   lb.innerHTML = `
@@ -1959,23 +1878,40 @@ footer {
   `;
   document.head.appendChild(style);
 
-  const data = Array.from(items).map(el => ({
-    bg:      el.style.backgroundImage,
-    caption: el.querySelector('.gallery-overlay span')?.textContent || ''
-  }));
-
   let current = 0;
+  let galleryData = [];
 
-  function open(index) { current = index; show(); lb.classList.add('active'); }
-  function show() {
-    document.getElementById('lb-img').style.backgroundImage = data[current].bg;
-    document.getElementById('lb-caption').textContent = data[current].caption;
+  function updateGalleryData() {
+    galleryData = Array.from(document.querySelectorAll('.gallery-item')).map(el => ({
+      src: el.querySelector('img')?.src || '',
+      caption: el.querySelector('.gallery-overlay span')?.textContent || ''
+    }));
   }
-  function close() { lb.classList.remove('active'); }
-  function prev() { current = (current - 1 + data.length) % data.length; show(); }
-  function next() { current = (current + 1) % data.length; show(); }
 
-  items.forEach((el, i) => el.addEventListener('click', () => open(i)));
+  function open(index) {
+    current = index;
+    show();
+    lb.classList.add('active');
+  }
+
+  function show() {
+    document.getElementById('lb-img').style.backgroundImage = `url('${galleryData[current].src}')`;
+    document.getElementById('lb-caption').textContent = galleryData[current].caption;
+  }
+
+  function close() { lb.classList.remove('active'); }
+  function prev() { current = (current - 1 + galleryData.length) % galleryData.length; show(); }
+  function next() { current = (current + 1) % galleryData.length; show(); }
+
+  document.body.addEventListener('click', (e) => {
+    const item = e.target.closest('.gallery-item');
+    if (!item) return;
+    const index = Number(item.dataset.index);
+    if (Number.isNaN(index)) return;
+    updateGalleryData();
+    open(index);
+  });
+
   document.getElementById('lb-close').addEventListener('click', close);
   document.getElementById('lb-backdrop').addEventListener('click', close);
   document.getElementById('lb-prev').addEventListener('click', prev);
@@ -2010,6 +1946,118 @@ footer {
   window.addEventListener('scroll', () => {
     navbar.classList.remove('mobile-open');
   }, { passive: true });
+})();
+
+/* ── CARROSSEL DE GALERIA ── */
+(function() {
+  const galleryImages = [
+    { src: 'img-nimsay/deusanim5.png', title: 'Nimsay · Forma Ascendida' },
+    { src: 'img-nimsay/armescura2.png', title: 'Magia Lunar' },
+    { src: 'img-nimsay/say.png', title: 'Domínio dos Mares' },
+    { src: 'img-nimsay/armadurabranca.png', title: 'Deusa' },
+    { src: 'img-nimsay/deusanim.png', title: 'Encarnação Divina' },
+    { src: 'img-nimsay/Nimsay.png', title: 'Herança de Afrodite' }
+  ];
+
+  let currentIndex = 0;
+  let autoPlayTimer = null;
+
+  const container = document.getElementById('galleryContainer');
+  const indicators = document.getElementById('indicators');
+  const imageCounter = document.getElementById('imageCounter');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  // Renderizar galeria
+  function renderGallery() {
+    container.innerHTML = '';
+    
+    // Item principal
+    const mainItem = document.createElement('div');
+    mainItem.className = 'gallery-item tall';
+    mainItem.dataset.index = currentIndex;
+    mainItem.innerHTML = `
+      <img src="${galleryImages[currentIndex].src}" alt="${galleryImages[currentIndex].title}">
+      <div class="gallery-overlay">
+        <span>${galleryImages[currentIndex].title}</span>
+      </div>
+    `;
+    container.appendChild(mainItem);
+
+    // Próximas 3 imagens em grid
+    for (let i = 1; i <= 3; i++) {
+      const idx = (currentIndex + i) % galleryImages.length;
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.dataset.index = idx;
+      item.innerHTML = `
+        <img src="${galleryImages[idx].src}" alt="${galleryImages[idx].title}">
+        <div class="gallery-overlay">
+          <span>${galleryImages[idx].title}</span>
+        </div>
+      `;
+      container.appendChild(item);
+    }
+
+    updateIndicators();
+    imageCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+  }
+
+  // Indicadores
+  function renderIndicators() {
+    indicators.innerHTML = '';
+    galleryImages.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'indicator' + (i === currentIndex ? ' active' : '');
+      dot.addEventListener('click', () => {
+        currentIndex = i;
+        renderGallery();
+        resetAutoPlay();
+      });
+      indicators.appendChild(dot);
+    });
+  }
+
+  function updateIndicators() {
+    document.querySelectorAll('.indicator').forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  // Navegação
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    renderGallery();
+    resetAutoPlay();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    renderGallery();
+    resetAutoPlay();
+  }
+
+  function autoPlay() {
+    nextSlide();
+  }
+
+  function resetAutoPlay() {
+    clearInterval(autoPlayTimer);
+    autoPlayTimer = setInterval(autoPlay, 5000);
+  }
+
+  // Event listeners
+  prevBtn.addEventListener('click', prevSlide);
+  nextBtn.addEventListener('click', nextSlide);
+
+  // Inicializar
+  renderGallery();
+  renderIndicators();
+  resetAutoPlay();
+
+  // Pausar ao passar mouse (desktop)
+  container.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
+  container.addEventListener('mouseleave', resetAutoPlay);
 })();
 </script>
 </body>
