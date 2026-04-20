@@ -1355,6 +1355,317 @@ nav {
   }
 }
 
+
+
+/* ── FX KNULL ── */
+#banner-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.78;
+}
+
+.cursor-aura {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 30;
+  opacity: 0;
+  background:
+    radial-gradient(circle, rgba(204,0,34,0.16) 0%, rgba(139,0,0,0.08) 28%, rgba(106,79,207,0.05) 48%, transparent 72%);
+  filter: blur(16px);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease;
+}
+
+body.fx-cursor .cursor-aura { opacity: 1; }
+
+.reveal-knull {
+  opacity: 0;
+  transform: translateY(34px) scale(0.985);
+  filter: blur(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+}
+
+.reveal-knull.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+section {
+  overflow: clip;
+}
+
+section::after {
+  content: '';
+  position: absolute;
+  inset: auto 10% -12rem 10%;
+  height: 16rem;
+  background: radial-gradient(ellipse at center, rgba(204,0,34,0.12), rgba(106,79,207,0.06) 38%, transparent 72%);
+  opacity: 0;
+  filter: blur(32px);
+  transform: translateY(30px) scale(0.92);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+section.section-awake::after {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.power-item,
+.story-block,
+.about-photo,
+.gallery-panel {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.section-header h2,
+.story-title,
+.power-title {
+  transition: text-shadow 0.35s ease, color 0.35s ease;
+}
+
+section.section-awake .section-header h2,
+.story-block:hover .story-title,
+.power-item:hover .power-title {
+  text-shadow: 0 0 26px rgba(204,0,34,0.22), 0 0 46px rgba(106,79,207,0.12);
+  color: #f5dca0;
+}
+
+.gallery-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.gallery-panel {
+  position: relative;
+  min-height: clamp(260px, 34vw, 400px);
+  border: 1px solid rgba(204,0,34,0.16);
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, rgba(13,0,8,0.9), rgba(3,3,8,0.98));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.gallery-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(204,0,34,0.06), transparent 38%, rgba(106,79,207,0.08));
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gallery-panel::after {
+  content: '';
+  position: absolute;
+  inset: auto -15% -40% -15%;
+  height: 55%;
+  background: radial-gradient(circle at center, rgba(204,0,34,0.28), transparent 62%);
+  filter: blur(34px);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 1;
+}
+
+.gallery-panel:hover {
+  border-color: rgba(204,0,34,0.38);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.28), 0 0 26px rgba(204,0,34,0.14);
+  transform: translateY(-4px);
+}
+
+.gallery-panel:hover::after,
+.gallery-panel.is-active::after {
+  opacity: 1;
+}
+
+.gallery-visual {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 1s ease, opacity 0.7s ease, filter 0.7s ease;
+  transform: scale(1.02);
+}
+
+.gallery-panel.is-transitioning .gallery-visual {
+  animation: knullPanelShift 1s ease;
+}
+
+.gallery-panel.is-active .gallery-visual {
+  transform: scale(1.05);
+}
+
+.gallery-panel:hover .gallery-visual {
+  transform: scale(1.08);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 3;
+  padding: 1.2rem 1.1rem 1.1rem;
+  background: linear-gradient(to top, rgba(3,3,8,0.96), rgba(3,3,8,0.58), transparent);
+}
+
+.gallery-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.gallery-index,
+.gallery-track {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.gallery-track {
+  color: rgba(240,208,128,0.72);
+}
+
+.gallery-overlay span {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f1dfb0;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+.gallery-panel-sub {
+  margin-top: 0.5rem;
+  font-size: 0.92rem;
+  color: rgba(232,220,200,0.8);
+  line-height: 1.55;
+  max-width: 28ch;
+}
+
+.gallery-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  padding: 0 2rem;
+  flex-wrap: wrap;
+}
+
+.gallery-btn {
+  appearance: none;
+  border: 1px solid rgba(204,0,34,0.35);
+  background: linear-gradient(135deg, rgba(204,0,34,0.14), rgba(3,3,8,0.2));
+  color: var(--gold-light);
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gallery-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(204,0,34,0.8);
+  box-shadow: 0 10px 24px rgba(204,0,34,0.16);
+}
+
+.gallery-status {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  opacity: 0.9;
+}
+
+.gallery-status strong {
+  color: var(--char-accent);
+  font-weight: 700;
+}
+
+.gallery-hint.knull-hint {
+  display: block;
+  text-align: center;
+  margin-top: 0.85rem;
+  color: rgba(232,220,200,0.7);
+}
+
+@media (max-width: 900px) {
+  .gallery-showcase {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-panel {
+    min-height: clamp(240px, 54vw, 360px);
+  }
+}
+
+@media (max-width: 560px) {
+  .gallery-showcase,
+  .gallery-controls {
+    padding: 0 1rem;
+  }
+
+  .gallery-overlay {
+    padding: 1rem 0.9rem;
+  }
+
+  .gallery-panel-sub {
+    font-size: 0.86rem;
+  }
+}
+
+@keyframes knullPanelShift {
+  0% { opacity: 0.55; transform: scale(0.985); filter: blur(6px) saturate(0.9); }
+  50% { opacity: 0.92; transform: scale(1.035); filter: blur(0) saturate(1.08); }
+  100% { opacity: 1; transform: scale(1.02); filter: blur(0) saturate(1); }
+}
+
+@keyframes sectionFlare {
+  0%, 100% { opacity: 0.22; transform: scale(1); }
+  50% { opacity: 0.38; transform: scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-aura,
+  #banner-fx,
+  .gallery-panel.is-transitioning {
+    animation: none !important;
+  }
+
+  .reveal-knull {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1377,6 +1688,7 @@ nav {
 
 <!-- BANNER HERO -->
 <section id="banner">
+  <div id="banner-fx-wrap"><canvas id="banner-fx"></canvas></div>
   <div class="banner-bg" style="background-image: url('img-knull/knuulbanner.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
@@ -1412,13 +1724,13 @@ nav {
 
 <!-- SOBRE -->
 <section id="sobre">
-  <div class="section-header reveal">
+  <div class="section-header reveal reveal-knull">
     <span class="section-label">Identidade</span>
     <h2>Quem é Knull</h2>
     <div class="section-rule"></div>
   </div>
 
-  <div class="about-grid reveal">
+  <div class="about-grid reveal reveal-knull">
     <div class="about-photo-wrap">
       <div class="about-photo" style="background-image: url('img-knull/yurik.png')">
         <div class="photo-frame-corner tl"></div>
@@ -1457,7 +1769,7 @@ nav {
 
 <!-- PODERES -->
 <section id="poderes">
-  <div class="section-header reveal">
+  <div class="section-header reveal reveal-knull">
     <span class="section-label">Arsenal completo</span>
     <h2>Poderes & Habilidades</h2>
     <div class="section-rule"></div>
@@ -1566,32 +1878,32 @@ nav {
 
 <!-- HISTÓRIA -->
 <section id="historia">
-  <div class="section-header reveal">
+  <div class="section-header reveal reveal-knull">
     <span class="section-label">Trajetória</span>
     <h2>A História de Yuri</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="story-body">
-    <div class="story-block reveal">
+    <div class="story-block reveal reveal-knull">
       <div class="story-chapter">Capítulo I</div>
       <div class="story-title">O Começo</div>
       <p>Yuri nunca foi comum — mesmo antes de saber disso. Portador de um sangue duplo raríssimo, cresceu compreendendo que cada técnica que aprendia era absorvida de forma diferente por seu corpo. O Sharingan acordou cedo. O Byakugan veio logo depois. E o sangue Sayadin garantiu que nenhum dos dois tivesse limite.</p>
     </div>
 
-    <div class="story-block reveal">
+    <div class="story-block reveal reveal-knull">
       <div class="story-chapter">Capítulo II</div>
       <div class="story-title">O Encontro dos Seis</div>
       <p>Foi quando os seis se reuniram que tudo mudou. Lucas, Leonardo, Yasmin, Jéssica e Anna — cada um com sua própria herança impossível. Yuri não escolheu liderar. Mas foi ele quem começou a registrar. Cada batalha, cada vitória, cada perda quase certa. O diário nasceu ali.</p>
     </div>
 
-    <div class="story-block reveal">
+    <div class="story-block reveal reveal-knull">
       <div class="story-chapter">Capítulo III</div>
       <div class="story-title">O Cavaleiro Negro & A Ascensão</div>
       <p>A primeira grande batalha contra o Cavaleiro Negro foi o batismo de fogo do grupo. Yuri levou a luta ao limite — combinando Susanoo, Bankai e Cosmos numa sequência que reescreveu o que se acreditava possível. A vitória custou caro. Mas o prêmio foi a ascensão: Yuri tornou-se <strong>Mestre Elemental</strong>.</p>
     </div>
 
-    <div class="story-block reveal">
+    <div class="story-block reveal reveal-knull">
       <div class="story-chapter">Capítulo IV</div>
       <div class="story-title">A Besta & A Deificação</div>
       <p>O confronto com A Besta foi diferente de tudo que veio antes. A criatura primordial do Divino não lutava — ela consumia. Cada golpe era uma tentativa de apagar a existência dos seis. Foi no momento em que Yuri abriu mão do nome humano que o poder verdadeiro emergiu. O que restou não era mais Yuri. Era <strong>Knull</strong> — e o mundo nunca mais seria o mesmo.</p>
@@ -1601,34 +1913,66 @@ nav {
 
 <!-- GALERIA -->
 <section id="galeria">
-  <div class="section-header reveal">
+  <div class="section-header reveal reveal-knull">
     <span class="section-label">Imagens</span>
     <h2>Galeria de Knull</h2>
     <div class="section-rule"></div>
   </div>
 
-  <div class="gallery-grid reveal">
-    <div class="gallery-item tall" style="background-image: url('img-knull/yuri0.png')">
-      <div class="gallery-overlay"><span>Knull · Forma Divina</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-knull/yurinull.png')">
-      <div class="gallery-overlay"><span>Sharingan Despertado</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-knull/nullk.png')">
-      <div class="gallery-overlay"><span>Armadura de Ouro</span></div>
-    </div>
-       <div class="gallery-item" style="background-image: url('img-knull/yuri.png')">
-      <div class="gallery-overlay"><span>Armadura de Ouro</span></div>
-    </div>
-       <div class="gallery-item" style="background-image: url('img-knull/knullsay.png')">
-      <div class="gallery-overlay"><span>Armadura de Ouro</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-knull/null.png')">
-      <div class="gallery-overlay"><span>Modo Sábio</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-knull/k.png')">
-      <div class="gallery-overlay"><span>Cosmos ao Limite</span></div>
-    </div>
+  <div class="gallery-showcase reveal reveal-knull" id="gallery-showcase">
+    <article class="gallery-panel is-active" data-lane="0">
+      <div class="gallery-visual" style="background-image: url('img-knull/yuri0.png')"></div>
+      <div class="gallery-overlay">
+        <div class="gallery-meta">
+          <span class="gallery-index">Bloco I</span>
+          <span class="gallery-track">Ciclo Carmesim</span>
+        </div>
+        <span>Knull · Forma Divina</span>
+        <p class="gallery-panel-sub">A presença central. O aspecto mais absoluto de Knull abrindo a rotação da galeria.</p>
+      </div>
+    </article>
+
+    <article class="gallery-panel" data-lane="1">
+      <div class="gallery-visual" style="background-image: url('img-knull/yurinull.png')"></div>
+      <div class="gallery-overlay">
+        <div class="gallery-meta">
+          <span class="gallery-index">Bloco II</span>
+          <span class="gallery-track">Olhar do Abismo</span>
+        </div>
+        <span>Sharingan Despertado</span>
+        <p class="gallery-panel-sub">Uma linha mais agressiva, destacando o olhar e a energia sombria em ascensão.</p>
+      </div>
+    </article>
+
+    <article class="gallery-panel" data-lane="2">
+      <div class="gallery-visual" style="background-image: url('img-knull/nullk.png')"></div>
+      <div class="gallery-overlay">
+        <div class="gallery-meta">
+          <span class="gallery-index">Bloco III</span>
+          <span class="gallery-track">Peso Cósmico</span>
+        </div>
+        <span>Armadura de Ouro</span>
+        <p class="gallery-panel-sub">Foco na imponência visual e na escala divina que o personagem carrega.</p>
+      </div>
+    </article>
+
+    <article class="gallery-panel" data-lane="3">
+      <div class="gallery-visual" style="background-image: url('img-knull/null.png')"></div>
+      <div class="gallery-overlay">
+        <div class="gallery-meta">
+          <span class="gallery-index">Bloco IV</span>
+          <span class="gallery-track">Ruptura Final</span>
+        </div>
+        <span>Modo Sábio</span>
+        <p class="gallery-panel-sub">A trilha mais mística da seção, misturando domínio, mutação e ruptura.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="gallery-controls reveal reveal-knull">
+    <button class="gallery-btn" id="gallery-prev" type="button">← Recuar ciclos</button>
+    <div class="gallery-status" id="gallery-status">4 blocos <strong>em loop</strong> · rotação escalonada e swipe no mobile</div>
+    <button class="gallery-btn" id="gallery-next" type="button">Avançar ciclos →</button>
   </div>
 
 </section>
@@ -1926,6 +2270,291 @@ nav {
     if (e.key === 'ArrowRight') next();
     if (e.key === 'Escape')     close();
   });
+})();
+
+
+/* ── CURSOR AURA DO KNULL ── */
+(function () {
+  if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const aura = document.createElement('div');
+  aura.className = 'cursor-aura';
+  document.body.appendChild(aura);
+  document.body.classList.add('fx-cursor');
+
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let x = targetX, y = targetY;
+
+  window.addEventListener('mousemove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    aura.style.opacity = '1';
+  }, { passive: true });
+
+  window.addEventListener('mouseleave', () => {
+    aura.style.opacity = '0';
+  });
+
+  function animate() {
+    x += (targetX - x) * 0.14;
+    y += (targetY - y) * 0.14;
+    aura.style.transform = `translate(${x - 130}px, ${y - 130}px)`;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+
+/* ── BRASAS / PARTÍCULAS DO BANNER ── */
+(function () {
+  const canvas = document.getElementById('banner-fx');
+  const banner = document.getElementById('banner');
+  if (!canvas || !banner || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ctx = canvas.getContext('2d');
+  let w = 0, h = 0, sparks = [];
+
+  function resize() {
+    const rect = banner.getBoundingClientRect();
+    w = canvas.width = Math.max(1, Math.floor(rect.width));
+    h = canvas.height = Math.max(1, Math.floor(rect.height));
+  }
+
+  function makeSpark() {
+    return {
+      x: Math.random() * w,
+      y: h + Math.random() * h * 0.2,
+      size: Math.random() * 2.2 + 0.8,
+      speedY: Math.random() * 0.7 + 0.35,
+      driftX: (Math.random() - 0.5) * 0.45,
+      alpha: Math.random() * 0.45 + 0.15,
+      hue: Math.random() > 0.78 ? 280 : 0
+    };
+  }
+
+  function init() {
+    sparks = Array.from({ length: 46 }, makeSpark);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    for (const s of sparks) {
+      s.y -= s.speedY;
+      s.x += s.driftX;
+      s.alpha *= 0.997;
+      if (s.y < -20 || s.alpha < 0.04) Object.assign(s, makeSpark());
+
+      const grad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 8);
+      grad.addColorStop(0, s.hue === 280 ? `rgba(160,122,240,${s.alpha})` : `rgba(255,120,120,${s.alpha})`);
+      grad.addColorStop(0.45, s.hue === 280 ? `rgba(106,79,207,${s.alpha * 0.45})` : `rgba(204,0,34,${s.alpha * 0.4})`);
+      grad.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size * 7.5, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  init();
+  draw();
+  window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
+})();
+
+/* ── EFEITO DE PRESENÇA NAS SEÇÕES ── */
+(function () {
+  const sections = Array.from(document.querySelectorAll('section'));
+  if (!sections.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('section-awake', entry.isIntersecting && entry.intersectionRatio > 0.18);
+    });
+  }, { threshold: [0.18, 0.45, 0.75] });
+
+  sections.forEach((section) => io.observe(section));
+})();
+
+/* ── INCLINAÇÃO SUTIL DOS BLOCOS ── */
+(function () {
+  if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const cards = document.querySelectorAll('.power-item, .story-block, .about-photo, .gallery-panel');
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+      const rotateY = (px - 0.5) * 8;
+      const rotateX = (0.5 - py) * 7;
+      card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-2px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+})();
+
+/* ── GALERIA KNULL EM 4 BLOCOS E LOOP ── */
+(function () {
+  const panels = Array.from(document.querySelectorAll('.gallery-panel'));
+  const showcase = document.getElementById('gallery-showcase');
+  const prevBtn = document.getElementById('gallery-prev');
+  const nextBtn = document.getElementById('gallery-next');
+  const status = document.getElementById('gallery-status');
+  if (!panels.length || !showcase) return;
+
+  const slides = [
+    {
+      bg: "url('img-knull/yuri0.png')",
+      title: 'Knull · Forma Divina',
+      sub: 'A presença central. O aspecto mais absoluto de Knull em sua manifestação máxima.'
+    },
+    {
+      bg: "url('img-knull/yurinull.png')",
+      title: 'Sharingan Despertado',
+      sub: 'O olhar rubro ganha o foco e concentra a tensão visual do personagem.'
+    },
+    {
+      bg: "url('img-knull/nullk.png')",
+      title: 'Armadura de Ouro',
+      sub: 'A imponência divina e a aura de soberania entram em primeiro plano.'
+    },
+    {
+      bg: "url('img-knull/yuri.png')",
+      title: 'Ascensão Elemental',
+      sub: 'Uma leitura mais heroica e monumental da presença de Yuri antes da ruptura final.'
+    },
+    {
+      bg: "url('img-knull/knullsay.png')",
+      title: 'Sangue Sayadin',
+      sub: 'A herança amplificada aparece como força viva, densa e instável.'
+    },
+    {
+      bg: "url('img-knull/null.png')",
+      title: 'Modo Sábio',
+      sub: 'A face mais ritualística do poder, com um peso mais místico e silencioso.'
+    },
+    {
+      bg: "url('img-knull/k.png')",
+      title: 'Cosmos ao Limite',
+      sub: 'O estágio em que o personagem parece maior que o próprio espaço ao redor.'
+    }
+  ];
+
+  const laneNames = ['Ciclo Carmesim', 'Olhar do Abismo', 'Peso Cósmico', 'Ruptura Final'];
+  const laneOffsets = [0, 1, 2, 5];
+  let globalOffset = 0;
+  let paused = false;
+  let timers = [];
+  let touchStartX = 0;
+
+  function panelData(panelIndex) {
+    const idx = (globalOffset + laneOffsets[panelIndex] + slides.length) % slides.length;
+    return { slide: slides[idx], absoluteIndex: idx };
+  }
+
+  function renderPanel(panel, panelIndex, emphasize = false) {
+    const { slide, absoluteIndex } = panelData(panelIndex);
+    const visual = panel.querySelector('.gallery-visual');
+    const title = panel.querySelector('.gallery-overlay span');
+    const sub = panel.querySelector('.gallery-panel-sub');
+    const index = panel.querySelector('.gallery-index');
+    const track = panel.querySelector('.gallery-track');
+
+    panel.classList.remove('is-transitioning', 'is-active');
+    if (visual) visual.style.backgroundImage = slide.bg;
+    if (title) title.textContent = slide.title;
+    if (sub) sub.textContent = slide.sub;
+    if (index) index.textContent = `Bloco ${['I','II','III','IV'][panelIndex]} · ${String(absoluteIndex + 1).padStart(2, '0')}`;
+    if (track) track.textContent = laneNames[panelIndex];
+    void panel.offsetWidth;
+    panel.classList.add('is-transitioning');
+    if (emphasize) panel.classList.add('is-active');
+  }
+
+  function renderAll(direction = 1) {
+    panels.forEach((panel, panelIndex) => {
+      const activePanel = direction > 0 ? ((globalOffset + panelIndex) % 2 === 0 ? panelIndex === 0 || panelIndex === 2 : panelIndex === 1) : panelIndex === 3;
+      renderPanel(panel, panelIndex, activePanel);
+    });
+
+    if (status) {
+      status.innerHTML = paused
+        ? '4 blocos <strong>pausados</strong> · interação do usuário ativa'
+        : '4 blocos <strong>em loop</strong> · rotação escalonada e swipe no mobile';
+    }
+  }
+
+  function shift(direction = 1) {
+    globalOffset = (globalOffset + direction + slides.length) % slides.length;
+    renderAll(direction);
+  }
+
+  function clearTimers() {
+    timers.forEach(clearInterval);
+    timers = [];
+  }
+
+  function startLoop() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    clearTimers();
+    [0, 1, 2, 3].forEach((laneIndex) => {
+      const delay = 4200 + laneIndex * 700;
+      timers.push(setInterval(() => {
+        if (!paused) {
+          globalOffset = (globalOffset + 1) % slides.length;
+          renderPanel(panels[laneIndex], laneIndex, true);
+          if (status) status.innerHTML = '4 blocos <strong>em loop</strong> · rotação escalonada e swipe no mobile';
+        }
+      }, delay));
+    });
+  }
+
+  function setPaused(value) {
+    paused = value;
+    if (status) {
+      status.innerHTML = paused
+        ? '4 blocos <strong>pausados</strong> · interação do usuário ativa'
+        : '4 blocos <strong>em loop</strong> · rotação escalonada e swipe no mobile';
+    }
+  }
+
+  prevBtn?.addEventListener('click', () => {
+    setPaused(true);
+    shift(-1);
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    setPaused(true);
+    shift(1);
+  });
+
+  showcase.addEventListener('mouseenter', () => setPaused(true));
+  showcase.addEventListener('mouseleave', () => setPaused(false));
+
+  showcase.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+    setPaused(true);
+  }, { passive: true });
+
+  showcase.addEventListener('touchend', (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const delta = endX - touchStartX;
+    if (Math.abs(delta) > 35) {
+      shift(delta < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+
+  panels.forEach((panel) => {
+    panel.addEventListener('animationend', () => panel.classList.remove('is-transitioning'));
+  });
+
+  renderAll(1);
+  startLoop();
 })();
 
 /* ── MOBILE MENU TOGGLE ── */

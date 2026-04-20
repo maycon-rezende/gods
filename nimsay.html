@@ -1591,6 +1591,111 @@ nav {
   }
 }
 
+
+
+/* ── FX NIMSAY ── */
+#banner-fx {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+}
+
+.cursor-aura-nimsay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 30;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(74,158,187,0.16) 0%, rgba(200,184,232,0.12) 30%, rgba(160,122,240,0.08) 48%, transparent 72%);
+  filter: blur(18px);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease;
+}
+
+body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
+
+.reveal-nimsay {
+  opacity: 0;
+  transform: translateY(26px) scale(0.99);
+  filter: blur(6px);
+  transition: opacity 0.85s ease, transform 0.85s ease, filter 0.85s ease;
+}
+
+.reveal-nimsay.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+}
+
+.gallery-item {
+  isolation: isolate;
+}
+
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 22%, rgba(74,158,187,0.20), rgba(200,184,232,0.14) 28%, transparent 62%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 1;
+}
+
+.gallery-item:hover::after,
+.gallery-item.is-active::after {
+  opacity: 1;
+}
+
+.gallery-item.is-transitioning {
+  animation: nimsayGalleryFlow 0.9s ease;
+}
+
+.gallery-item.is-active {
+  box-shadow: 0 0 0 1px rgba(74,158,187,0.28), 0 0 24px rgba(200,184,232,0.18);
+}
+
+.gallery-overlay {
+  z-index: 2;
+}
+
+.gallery-hint::before {
+  content: '✦ ';
+  color: var(--moon);
+}
+
+@keyframes nimsayGalleryFlow {
+  0% { opacity: 0.5; transform: translateY(10px) scale(0.985); filter: blur(5px) saturate(0.95); }
+  55% { opacity: 0.88; transform: translateY(0) scale(1.018); filter: blur(0) saturate(1.06); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0) saturate(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor-aura-nimsay,
+  #banner-fx,
+  .gallery-item.is-transitioning {
+    display: none !important;
+  }
+
+  .reveal-nimsay {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1602,6 +1707,7 @@ nav {
 
 <!-- NAV -->
 <nav id="navbar">
+  
   <a href="#sobre">Sobre</a>
   <a href="#poderes">Poderes</a>
   <a href="#historia">História</a>
@@ -1611,6 +1717,7 @@ nav {
 
 <!-- BANNER HERO -->
 <section id="banner">
+  <div id="banner-fx-wrap"><canvas id="banner-fx"></canvas></div>
   <div class="banner-bg" style="background-image: url('img-nimsay/deusanim4.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
@@ -1646,13 +1753,13 @@ nav {
 
 <!-- SOBRE -->
 <section id="sobre">
-  <div class="section-header reveal">
+  <div class="section-header reveal reveal-nimsay">
     <span class="section-label">Identidade</span>
     <h2>Quem é Nimsay</h2>
     <div class="section-rule"></div>
   </div>
 
-  <div class="about-grid reveal">
+  <div class="about-grid reveal reveal-nimsay">
     <div class="about-photo-wrap">
       <div class="about-photo" style="background-image: url('img-nimsay/nimbanner.png')">
         <div class="photo-frame-corner tl"></div>
@@ -1689,7 +1796,7 @@ nav {
 
 <!-- PODERES -->
 <section id="poderes">
-  <div class="section-header reveal">
+  <div class="section-header reveal reveal-nimsay">
     <span class="section-label">Arsenal completo</span>
     <h2>Poderes & Habilidades</h2>
     <div class="section-rule"></div>
@@ -1697,7 +1804,7 @@ nav {
 
   <div class="powers-list">
 
-    <div class="power-item reveal">
+    <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
         <div class="power-icon-big">🌊</div>
       </div>
@@ -1709,7 +1816,7 @@ nav {
       </div>
     </div>
 
-    <div class="power-item reveal">
+    <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
         <div class="power-icon-big">🌙</div>
       </div>
@@ -1721,7 +1828,7 @@ nav {
       </div>
     </div>
 
-    <div class="power-item reveal">
+    <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
         <div class="power-icon-big">💫</div>
       </div>
@@ -1733,7 +1840,7 @@ nav {
       </div>
     </div>
 
-    <div class="power-item reveal">
+    <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
         <div class="power-icon-big">🔮</div>
       </div>
@@ -1745,7 +1852,7 @@ nav {
       </div>
     </div>
 
-    <div class="power-item reveal">
+    <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
         <div class="power-icon-big">⚗️</div>
       </div>
@@ -1757,7 +1864,7 @@ nav {
       </div>
     </div>
 
-    <div class="power-item reveal">
+    <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
         <div class="power-icon-big">✨</div>
       </div>
@@ -1774,32 +1881,32 @@ nav {
 
 <!-- HISTÓRIA -->
 <section id="historia">
-  <div class="section-header reveal">
+  <div class="section-header reveal reveal-nimsay">
     <span class="section-label">Trajetória</span>
     <h2>A História de Yasmin</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="story-body">
-    <div class="story-block reveal">
+    <div class="story-block reveal reveal-nimsay">
       <div class="story-chapter">Capítulo I</div>
       <div class="story-title">A Filha dos Dois Mundos</div>
       <p>Nascer filha de Poseidon e Afrodite é nascer entre dois mundos — a força bruta dos oceanos e a graça irresistível do amor. Yasmin cresceu aprendendo a equilibrar essas duas heranças, descobrindo cedo que a lua exercia sobre ela um fascínio que ia além do emocional: era uma conexão de sangue, antiga e poderosa.</p>
     </div>
 
-    <div class="story-block reveal">
+    <div class="story-block reveal reveal-nimsay">
       <div class="story-chapter">Capítulo II</div>
       <div class="story-title">O Encontro com Yuri</div>
       <p>Conhecer Yuri — UchiHyuuga Yuri — foi o momento em que tudo se encaixou. Não era apenas atração: era reconhecimento. Dois seres com heranças impossíveis, destinados a caminhar juntos. Yasmin tornou-se sua companheira antes mesmo de compreender o que os aguardava. E permaneceu ao seu lado em cada batalha que se seguiu.</p>
     </div>
 
-    <div class="story-block reveal">
+    <div class="story-block reveal reveal-nimsay">
       <div class="story-chapter">Capítulo III</div>
       <div class="story-title">As Batalhas & A Evolução</div>
       <p>O confronto com o Cavaleiro Negro foi o primeiro teste real de Yasmin como guerreira. Combinando feitiçaria lunar e domínio das águas, provou que não precisava de nenhum dos seis para se proteger — ela era uma força em si mesma. A cada batalha seguinte, seu domínio da magia aprofundou-se ainda mais.</p>
     </div>
 
-    <div class="story-block reveal">
+    <div class="story-block reveal reveal-nimsay">
       <div class="story-chapter">Capítulo IV</div>
       <div class="story-title">A Ascensão · Nimsay</div>
       <p>Depois de A Besta — depois de tudo — o que restou de Yasmin era mais do que qualquer nome humano poderia conter. <strong>Nimsay</strong> emergiu da batalha como algo novo: uma entidade onde a filha de Poseidon, a descendente da lua e a maga se tornaram uma coisa só. Indivisível. Eterna.</p>
@@ -1809,13 +1916,13 @@ nav {
 
 <!-- GALERIA -->
 <section id="galeria">
-  <div class="section-header reveal">
+  <div class="section-header reveal reveal-nimsay">
     <span class="section-label">Imagens</span>
     <h2>Galeria de Nimsay</h2>
     <div class="section-rule"></div>
   </div>
 
-  <div class="gallery-grid reveal" id="galleryContainer">
+  <div class="gallery-grid reveal reveal-nimsay" id="galleryContainer">
     <!-- As imagens serão inseridas aqui via JavaScript -->
   </div>
 
@@ -1835,10 +1942,9 @@ nav {
   <div class="footer-nav">
     <a href="knull.html">← Knull</a>
     <span class="footer-sep">·</span>
-    <a href="index.html">Início</a>
+    <a href="index.html">← Voltar ao Início</a>
     <span class="footer-sep">·</span>
     <a href="onull.html">Onull →</a>
-    <a href="index.html">← Voltar ao Início</a>
   </div>
   <div class="footer-title">Nimsay</div>
   <div class="footer-sub">"O mar e a lua nunca pedem permissão. Eu também não."</div>
@@ -2219,10 +2325,11 @@ nav {
 /* ── CARROSSEL DE GALERIA ── */
 (function() {
   const galleryImages = [
-    { src: 'img-nimsay/deusanim5.png', title: 'Nimsay · Forma Ascendida' },
-    { src: 'img-nimsay/armescura2.png', title: 'Magia Lunar' },
+    { src: 'img-nimsay/deusanim4.png', title: 'Nimsay · Forma Ascendida' },
+    { src: 'img-nimsay/armescura2.png', title: 'Magia Lunar Àgua' },
+    { src: 'img-nimsay/armescura1.png', title: 'Magia Lunar Fogo' },
     { src: 'img-nimsay/say.png', title: 'Domínio dos Mares' },
-    { src: 'img-nimsay/armadurabranca.png', title: 'Deusa' },
+    { src: 'img-nimsay/deusanim5.png', title: 'Deusa' },
     { src: 'img-nimsay/deusanim.png', title: 'Encarnação Divina' },
     { src: 'img-nimsay/Nimsay.png', title: 'Herança de Afrodite' }
   ];
@@ -2327,6 +2434,192 @@ nav {
   container.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
   container.addEventListener('mouseleave', resetAutoPlay);
 })();
+
+
+/* ── CURSOR AURA DA NIMSAY ── */
+(function () {
+  if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const aura = document.createElement('div');
+  aura.className = 'cursor-aura-nimsay';
+  document.body.appendChild(aura);
+  document.body.classList.add('fx-cursor-nimsay');
+
+  let targetX = window.innerWidth / 2;
+  let targetY = window.innerHeight / 2;
+  let x = targetX, y = targetY;
+
+  window.addEventListener('mousemove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+    aura.style.opacity = '1';
+  }, { passive: true });
+
+  window.addEventListener('mouseleave', () => { aura.style.opacity = '0'; });
+
+  function animate() {
+    x += (targetX - x) * 0.12;
+    y += (targetY - y) * 0.12;
+    aura.style.transform = `translate(${x - 120}px, ${y - 120}px)`;
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ── PARTÍCULAS ETÉREAS DO BANNER ── */
+(function () {
+  const canvas = document.getElementById('banner-fx');
+  const banner = document.getElementById('banner');
+  if (!canvas || !banner || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const ctx = canvas.getContext('2d');
+  let w = 0, h = 0, motes = [];
+
+  function resize() {
+    const rect = banner.getBoundingClientRect();
+    w = canvas.width = Math.max(1, Math.floor(rect.width));
+    h = canvas.height = Math.max(1, Math.floor(rect.height));
+  }
+
+  function makeMote() {
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 2.8 + 0.8,
+      vy: -(Math.random() * 0.28 + 0.06),
+      vx: (Math.random() - 0.5) * 0.18,
+      alpha: Math.random() * 0.35 + 0.15,
+      hue: Math.random() > 0.5 ? '74,158,187' : '200,184,232',
+      pulse: Math.random() * Math.PI * 2,
+    };
+  }
+
+  function init() {
+    motes = Array.from({ length: Math.max(24, Math.min(65, Math.floor(w / 24))) }, makeMote);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    for (const m of motes) {
+      m.x += m.vx + Math.sin(m.pulse) * 0.08;
+      m.y += m.vy;
+      m.pulse += 0.018;
+      if (m.y < -20 || m.x < -20 || m.x > w + 20) {
+        Object.assign(m, makeMote(), { y: h + 10 });
+      }
+      const a = m.alpha * (0.7 + 0.3 * Math.sin(m.pulse));
+      const g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 7);
+      g.addColorStop(0, `rgba(${m.hue},${a})`);
+      g.addColorStop(0.35, `rgba(${m.hue},${a * 0.45})`);
+      g.addColorStop(1, `rgba(${m.hue},0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r * 7, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
+  resize();
+  init();
+  draw();
+})();
+
+/* ── PARALLAX ETÉREO DO BANNER ── */
+(function () {
+  const bg = document.querySelector('.banner-bg');
+  const content = document.querySelector('.banner-content');
+  if (!bg) return;
+
+  const img = new Image();
+  img.onload = () => bg.classList.add('loaded');
+  const url = bg.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+  if (url && url !== 'none') img.src = url;
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const limit = window.innerHeight;
+    if (scrollY <= limit) {
+      bg.style.transform = `scale(1.05) translateY(${scrollY * 0.18}px)`;
+      if (content) content.style.transform = `translateY(${scrollY * -0.04}px)`;
+    }
+  }, { passive: true });
+})();
+
+/* ── REALCE SUAVE EM CARDS IMPORTANTES ── */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.power-item, .story-block, .about-photo').forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      el.style.boxShadow = '0 0 24px rgba(74,158,187,0.10), 0 0 40px rgba(200,184,232,0.06)';
+      el.style.transition = 'box-shadow 0.35s ease, transform 0.35s ease';
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.boxShadow = '';
+    });
+  });
+})();
+
+/* ── SWIPE + LOOP MAIS SUAVE DA GALERIA ── */
+(function () {
+  const container = document.getElementById('galleryContainer');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  if (!container || !prevBtn || !nextBtn) return;
+
+  let touchStartX = 0;
+  let touchDeltaX = 0;
+  let hoverPaused = false;
+
+  function animateItems() {
+    const items = container.querySelectorAll('.gallery-item');
+    items.forEach((item, idx) => {
+      item.classList.remove('is-transitioning', 'is-active');
+      void item.offsetWidth;
+      item.classList.add('is-transitioning');
+      if (idx === 0) item.classList.add('is-active');
+    });
+  }
+
+  const originalNext = nextBtn.onclick;
+  const originalPrev = prevBtn.onclick;
+  nextBtn.addEventListener('click', animateItems, true);
+  prevBtn.addEventListener('click', animateItems, true);
+
+  container.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+    touchDeltaX = 0;
+  }, { passive: true });
+
+  container.addEventListener('touchmove', (e) => {
+    touchDeltaX = e.changedTouches[0].clientX - touchStartX;
+  }, { passive: true });
+
+  container.addEventListener('touchend', () => {
+    if (Math.abs(touchDeltaX) < 40) return;
+    if (touchDeltaX < 0) nextBtn.click();
+    else prevBtn.click();
+  }, { passive: true });
+
+  container.addEventListener('mouseenter', () => {
+    hoverPaused = true;
+  });
+  container.addEventListener('mouseleave', () => {
+    hoverPaused = false;
+  });
+
+  const status = document.getElementById('imageCounter');
+  if (status) {
+    const obs = new MutationObserver(() => {
+      animateItems();
+    });
+    obs.observe(status, { childList: true, characterData: true, subtree: true });
+  }
+
+  setTimeout(animateItems, 250);
+})();
+
 </script>
 </body>
 </html>
