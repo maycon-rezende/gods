@@ -1323,6 +1323,274 @@ h2 {
   color: var(--text-dim);
   line-height: 1.9;
 }
+
+
+/* === AJUSTES FINAIS DE RESPONSIVIDADE === */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+section, .section-header, .synopsis-body, .timeline, .cards-grid, .powers-grid,
+.about-grid, .story-body, .powers-list, .gallery-grid, footer, .chars-intro {
+  width: min(100%, 100%);
+}
+
+nav {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .section-header {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .cards-grid,
+  .powers-grid,
+  .timeline,
+  .synopsis-body,
+  .story-body,
+  .powers-list,
+  .gallery-grid,
+  footer,
+  .chars-intro {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  nav {
+    gap: 0.5rem;
+    padding: 0.85rem 0.9rem;
+  }
+
+  nav.mobile-open {
+    align-items: stretch;
+  }
+
+  .section-header {
+    padding-top: 4rem;
+    padding-bottom: 2.25rem;
+  }
+
+  #hero,
+  #banner {
+    min-height: auto;
+  }
+
+  .banner-content,
+  .hero-sub,
+  .banner-quote {
+    max-width: 100%;
+  }
+
+  .timeline::before {
+    left: 0.75rem !important;
+    transform: none !important;
+  }
+
+  .tl-item,
+  .tl-item.left,
+  .tl-item.right {
+    grid-template-columns: 1.5rem 1fr !important;
+    gap: 1rem !important;
+    margin-bottom: 2rem;
+  }
+
+  .tl-item .tl-dot {
+    grid-column: 1 !important;
+  }
+
+  .tl-item .tl-content {
+    grid-column: 2 !important;
+    text-align: left !important;
+  }
+
+  .tl-item .tl-empty {
+    display: none !important;
+  }
+
+  .cards-grid,
+  .powers-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .banner-stats,
+  .about-tags,
+  .char-tags,
+  .footer-nav {
+    gap: 0.75rem;
+  }
+
+  .bstat-sep {
+    display: none;
+  }
+
+  .power-item {
+    grid-template-columns: 1fr !important;
+  }
+
+  .power-icon-big {
+    text-align: left !important;
+    padding-top: 0;
+  }
+
+  .story-block {
+    padding-left: 1.25rem !important;
+  }
+
+  .story-block::before {
+    top: 2rem !important;
+  }
+
+  .gallery-item.wide,
+  .gallery-item.tall {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  nav {
+    align-items: flex-start;
+    padding-right: 3.5rem;
+  }
+
+  #menu-toggle {
+    right: 0.65rem;
+  }
+
+  nav.mobile-open > a {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero-emblem {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 1.5rem;
+  }
+
+  .scroll-hint {
+    display: none;
+  }
+
+  .highlight-box {
+    padding: 1rem 1rem 1rem 1.1rem;
+  }
+
+  .synopsis-body p:first-child::first-letter {
+    font-size: 3rem;
+    margin-top: 0.05em;
+  }
+
+  .char-card,
+  .power-block,
+  .about-photo,
+  .gallery-item {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+  }
+
+  .section-label,
+  .hero-eyebrow,
+  .banner-eyebrow,
+  .char-group-label,
+  .footer-copy,
+  nav a,
+  .bstat-label {
+    letter-spacing: 0.12em !important;
+  }
+
+  .section-header,
+  .synopsis-body,
+  .timeline,
+  .cards-grid,
+  .powers-grid,
+  .about-grid,
+  .story-body,
+  .powers-list,
+  .gallery-grid,
+  footer,
+  .chars-intro {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .banner-content {
+    padding: 2rem 1rem 2.5rem !important;
+    max-width: 100% !important;
+  }
+
+  .banner-stats {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cards-grid,
+  .powers-grid,
+  .gallery-grid {
+    gap: 1rem !important;
+  }
+
+  .char-card,
+  .power-block {
+    padding: 1.25rem !important;
+  }
+
+  .about-photo-wrap {
+    width: 100%;
+  }
+
+  .carousel-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .about-photo-wrap {
+    position: static !important;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .banner-content {
+    padding: 2.5rem 1.25rem 3rem !important;
+    max-width: 100% !important;
+  }
+
+  .gallery-carousel-controls {
+    flex-direction: column;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1334,7 +1602,6 @@ h2 {
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="index.html">← Voltar ao Início</a>
   <a href="#sobre">Sobre</a>
   <a href="#poderes">Poderes</a>
   <a href="#historia">História</a>
@@ -1571,6 +1838,7 @@ h2 {
     <a href="index.html">Início</a>
     <span class="footer-sep">·</span>
     <a href="onull.html">Onull →</a>
+    <a href="index.html">← Voltar ao Início</a>
   </div>
   <div class="footer-title">Nimsay</div>
   <div class="footer-sub">"O mar e a lua nunca pedem permissão. Eu também não."</div>
