@@ -1696,6 +1696,230 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
   }
 }
 
+
+
+/* ── SHOWCASE LUNAR EM 4 PAINÉIS ── */
+.gallery-showcase {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 2vw, 1.25rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 2rem);
+}
+
+.gallery-panel {
+  position: relative;
+  min-height: clamp(260px, 38vw, 360px);
+  border: 1px solid rgba(74,158,187,0.18);
+  border-radius: 10px;
+  overflow: hidden;
+  background: linear-gradient(160deg, rgba(10,18,28,0.98), rgba(12,12,22,0.95));
+  box-shadow: inset 0 0 0 1px rgba(200,184,232,0.05), 0 14px 40px rgba(3,3,8,0.24);
+  isolation: isolate;
+}
+
+.gallery-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(200,184,232,0.08), transparent 28%, transparent 72%, rgba(74,158,187,0.10));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gallery-panel::after {
+  content: '';
+  position: absolute;
+  inset: auto -20% -45% -20%;
+  height: 55%;
+  background: radial-gradient(circle at 50% 0%, rgba(74,158,187,0.22), rgba(200,184,232,0.14) 35%, transparent 72%);
+  filter: blur(18px);
+  opacity: 0.7;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gallery-panel-media {
+  position: absolute;
+  inset: 0;
+}
+
+.gallery-panel-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 1.15s ease, transform 6s ease;
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.gallery-panel-media img.is-visible {
+  opacity: 1;
+  transform: scale(1.0);
+}
+
+.gallery-panel-header,
+.gallery-panel-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 1rem 1.1rem;
+}
+
+.gallery-panel-header {
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(to bottom, rgba(3,3,8,0.72), transparent);
+}
+
+.gallery-panel-footer {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(3,3,8,0.9), rgba(3,3,8,0.35), transparent);
+}
+
+.gallery-panel-kicker,
+.gallery-panel-count {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.gallery-panel-kicker { color: var(--moon); }
+.gallery-panel-count { color: rgba(232,220,200,0.7); }
+
+.gallery-panel-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: #eef7ff;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.05em;
+  text-shadow: 0 2px 16px rgba(3,3,8,0.7);
+}
+
+.gallery-panel-desc {
+  font-size: 0.92rem;
+  color: rgba(232,220,200,0.82);
+  line-height: 1.65;
+  max-width: 34ch;
+}
+
+.gallery-panel-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+}
+
+.gallery-panel-status::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--moon), var(--char-accent));
+  box-shadow: 0 0 12px rgba(74,158,187,0.55);
+  animation: nimsayPulse 2.8s ease-in-out infinite;
+}
+
+.gallery-showcase-controls {
+  margin-top: 0.4rem;
+}
+
+.gallery-state-label {
+  font-size: 0.85rem;
+  color: var(--char-accent);
+  letter-spacing: 0.08em;
+  text-align: center;
+}
+
+.section-aura {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.section-aura::before {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 120%;
+  left: -10%;
+  top: -20%;
+  background: radial-gradient(circle at 50% 50%, rgba(74,158,187,0.08), rgba(200,184,232,0.04) 35%, transparent 72%);
+  filter: blur(22px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+section.section-lit .section-aura::before {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.content-motes {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+}
+
+.power-item, .story-block, .about-photo, .gallery-panel {
+  transform-style: preserve-3d;
+}
+
+.lunar-tilt {
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.lunar-tilt.is-tilting {
+  box-shadow: 0 18px 38px rgba(74,158,187,0.14), 0 0 26px rgba(200,184,232,0.08);
+  border-color: rgba(200,184,232,0.34);
+}
+
+@keyframes nimsayPulse {
+  0%,100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.18); opacity: 1; }
+}
+
+@media (max-width: 820px) {
+  .gallery-showcase {
+    grid-template-columns: 1fr;
+  }
+  .gallery-panel {
+    min-height: 290px;
+  }
+  .gallery-panel-desc {
+    max-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content-motes,
+  .gallery-panel-status::before,
+  .section-aura::before {
+    display: none !important;
+  }
+  .gallery-panel-media img {
+    transition: none !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1707,7 +1931,7 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
 
 <!-- NAV -->
 <nav id="navbar">
-  
+  <a href="index.html">← Voltar ao Início</a>
   <a href="#sobre">Sobre</a>
   <a href="#poderes">Poderes</a>
   <a href="#historia">História</a>
@@ -1922,18 +2146,14 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
     <div class="section-rule"></div>
   </div>
 
-  <div class="gallery-grid reveal reveal-nimsay" id="galleryContainer">
-    <!-- As imagens serão inseridas aqui via JavaScript -->
+  <div class="gallery-showcase reveal reveal-nimsay" id="galleryContainer">
+    <!-- Os 4 painéis vivos serão inseridos aqui via JavaScript -->
   </div>
 
-  <div class="gallery-carousel-controls">
-    <button class="carousel-btn" id="prevBtn">← Anterior</button>
-    <span id="imageCounter" style="font-size: 0.9rem; color: var(--char-accent);">1 / 6</span>
-    <button class="carousel-btn" id="nextBtn">Próximo →</button>
-  </div>
-
-  <div class="carousel-indicators" id="indicators">
-    <!-- Indicadores serão inseridos aqui -->
+  <div class="gallery-carousel-controls gallery-showcase-controls">
+    <button class="carousel-btn" id="prevBtn">← Fluxo anterior</button>
+    <span id="imageCounter" class="gallery-state-label">4 painéis vivos · loop lunar</span>
+    <button class="carousel-btn" id="nextBtn">Próximo fluxo →</button>
   </div>
 </section>
 
@@ -1942,7 +2162,7 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
   <div class="footer-nav">
     <a href="knull.html">← Knull</a>
     <span class="footer-sep">·</span>
-    <a href="index.html">← Voltar ao Início</a>
+    <a href="index.html">Início</a>
     <span class="footer-sep">·</span>
     <a href="onull.html">Onull →</a>
   </div>
@@ -2322,117 +2542,163 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
   }, { passive: true });
 })();
 
-/* ── CARROSSEL DE GALERIA ── */
+/* ── SHOWCASE DE GALERIA DA NIMSAY ── */
 (function() {
   const galleryImages = [
-    { src: 'img-nimsay/deusanim4.png', title: 'Nimsay · Forma Ascendida' },
-    { src: 'img-nimsay/armescura2.png', title: 'Magia Lunar Àgua' },
-    { src: 'img-nimsay/armescura1.png', title: 'Magia Lunar Fogo' },
-    { src: 'img-nimsay/say.png', title: 'Domínio dos Mares' },
-    { src: 'img-nimsay/deusanim5.png', title: 'Deusa' },
-    { src: 'img-nimsay/deusanim.png', title: 'Encarnação Divina' },
-    { src: 'img-nimsay/Nimsay.png', title: 'Herança de Afrodite' }
+    { src: 'img-nimsay/deusanim5.png', title: 'Forma Ascendida', desc: 'A presença divina mais pura de Nimsay, envolta por brilho celestial e força serena.' },
+    { src: 'img-nimsay/armescura2.png', title: 'Magia Lunar', desc: 'O lado místico e refinado da sua feitiçaria, guiado por luz, silêncio e precisão.' },
+    { src: 'img-nimsay/say.png', title: 'Domínio dos Mares', desc: 'Água, maré e calma poderosa em uma forma que parece viva dentro da própria página.' },
+    { src: 'img-nimsay/armadurabranca.png', title: 'Deusa', desc: 'A versão majestosa e régia de Nimsay, com imponência divina e elegância absoluta.' },
+    { src: 'img-nimsay/deusanim.png', title: 'Encarnação Divina', desc: 'A fusão entre magia, realeza e energia ancestral em uma presença quase eterna.' },
+    { src: 'img-nimsay/Nimsay.png', title: 'Herança de Afrodite', desc: 'A delicadeza do encanto e do amor moldada em uma aura de deusa imortal.' }
   ];
 
-  let currentIndex = 0;
-  let autoPlayTimer = null;
+  const panels = [
+    { label: 'Painel da Lua', speed: 4400, step: 1 },
+    { label: 'Painel do Mar', speed: 5200, step: 1 },
+    { label: 'Painel da Magia', speed: 6100, step: 1 },
+    { label: 'Painel Celestial', speed: 7000, step: 1 }
+  ];
 
   const container = document.getElementById('galleryContainer');
-  const indicators = document.getElementById('indicators');
-  const imageCounter = document.getElementById('imageCounter');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
+  const stateLabel = document.getElementById('imageCounter');
+  if (!container || !prevBtn || !nextBtn || !stateLabel) return;
 
-  // Renderizar galeria
-  function renderGallery() {
-    container.innerHTML = '';
-    
-    // Item principal
-    const mainItem = document.createElement('div');
-    mainItem.className = 'gallery-item tall';
-    mainItem.dataset.index = currentIndex;
-    mainItem.innerHTML = `
-      <img src="${galleryImages[currentIndex].src}" alt="${galleryImages[currentIndex].title}">
-      <div class="gallery-overlay">
-        <span>${galleryImages[currentIndex].title}</span>
+  let baseIndex = 0;
+  let timers = [];
+  let startX = 0;
+  let deltaX = 0;
+
+  function buildPanel(panel, panelIdx) {
+    const wrap = document.createElement('article');
+    wrap.className = 'gallery-panel lunar-tilt';
+    wrap.dataset.panel = panelIdx;
+    wrap.dataset.current = (baseIndex + panelIdx) % galleryImages.length;
+
+    const current = galleryImages[(baseIndex + panelIdx) % galleryImages.length];
+    const next = galleryImages[(baseIndex + panelIdx + 1) % galleryImages.length];
+
+    wrap.innerHTML = `
+      <div class="gallery-panel-media">
+        <img class="is-visible" src="${current.src}" alt="${current.title}">
+        <img src="${next.src}" alt="${next.title}">
+      </div>
+      <div class="gallery-panel-header">
+        <span class="gallery-panel-kicker">${panel.label}</span>
+        <span class="gallery-panel-count">${panelIdx + 1} / ${panels.length}</span>
+      </div>
+      <div class="gallery-panel-footer">
+        <div class="gallery-panel-title">${current.title}</div>
+        <div class="gallery-panel-desc">${current.desc}</div>
+        <div class="gallery-panel-status">loop em fluxo suave</div>
       </div>
     `;
-    container.appendChild(mainItem);
-
-    // Próximas 3 imagens em grid
-    for (let i = 1; i <= 3; i++) {
-      const idx = (currentIndex + i) % galleryImages.length;
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-      item.dataset.index = idx;
-      item.innerHTML = `
-        <img src="${galleryImages[idx].src}" alt="${galleryImages[idx].title}">
-        <div class="gallery-overlay">
-          <span>${galleryImages[idx].title}</span>
-        </div>
-      `;
-      container.appendChild(item);
-    }
-
-    updateIndicators();
-    imageCounter.textContent = `${currentIndex + 1} / ${galleryImages.length}`;
+    return wrap;
   }
 
-  // Indicadores
-  function renderIndicators() {
-    indicators.innerHTML = '';
-    galleryImages.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.className = 'indicator' + (i === currentIndex ? ' active' : '');
-      dot.addEventListener('click', () => {
-        currentIndex = i;
-        renderGallery();
-        resetAutoPlay();
+  function renderPanels() {
+    container.innerHTML = '';
+    panels.forEach((panel, idx) => container.appendChild(buildPanel(panel, idx)));
+    stateLabel.textContent = `${panels.length} painéis vivos · ${galleryImages.length} imagens em rotação`;
+    applyTilt();
+  }
+
+  function advancePanel(panelEl, direction = 1) {
+    const panelIdx = Number(panelEl.dataset.panel);
+    let current = Number(panelEl.dataset.current);
+    current = (current + direction + galleryImages.length) % galleryImages.length;
+    panelEl.dataset.current = String(current);
+
+    const currentData = galleryImages[current];
+    const nextData = galleryImages[(current + 1) % galleryImages.length];
+    const imgs = panelEl.querySelectorAll('img');
+    const visible = Array.from(imgs).find(img => img.classList.contains('is-visible'));
+    const hidden = Array.from(imgs).find(img => !img.classList.contains('is-visible'));
+    if (!visible || !hidden) return;
+
+    hidden.src = currentData.src;
+    hidden.alt = currentData.title;
+    requestAnimationFrame(() => {
+      visible.classList.remove('is-visible');
+      hidden.classList.add('is-visible');
+    });
+
+    const title = panelEl.querySelector('.gallery-panel-title');
+    const desc = panelEl.querySelector('.gallery-panel-desc');
+    if (title) title.textContent = currentData.title;
+    if (desc) desc.textContent = currentData.desc;
+
+    window.setTimeout(() => {
+      const nonVisible = Array.from(panelEl.querySelectorAll('img')).find(img => !img.classList.contains('is-visible'));
+      if (nonVisible) {
+        nonVisible.src = nextData.src;
+        nonVisible.alt = nextData.title;
+      }
+    }, 1200);
+  }
+
+  function startLoops() {
+    stopLoops();
+    container.querySelectorAll('.gallery-panel').forEach((panelEl, idx) => {
+      const timer = window.setInterval(() => advancePanel(panelEl, 1), panels[idx].speed);
+      timers.push(timer);
+    });
+  }
+
+  function stopLoops() {
+    timers.forEach(clearInterval);
+    timers = [];
+  }
+
+  function rotateAll(direction = 1) {
+    baseIndex = (baseIndex + direction + galleryImages.length) % galleryImages.length;
+    container.querySelectorAll('.gallery-panel').forEach((panelEl) => advancePanel(panelEl, direction));
+  }
+
+  function applyTilt() {
+    if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    container.querySelectorAll('.lunar-tilt').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width;
+        const py = (e.clientY - rect.top) / rect.height;
+        const rx = (0.5 - py) * 6;
+        const ry = (px - 0.5) * 7;
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+        card.classList.add('is-tilting');
       });
-      indicators.appendChild(dot);
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.classList.remove('is-tilting');
+      });
     });
   }
 
-  function updateIndicators() {
-    document.querySelectorAll('.indicator').forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentIndex);
-    });
-  }
+  prevBtn.addEventListener('click', () => { rotateAll(-1); startLoops(); });
+  nextBtn.addEventListener('click', () => { rotateAll(1); startLoops(); });
 
-  // Navegação
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % galleryImages.length;
-    renderGallery();
-    resetAutoPlay();
-  }
+  container.addEventListener('mouseenter', stopLoops);
+  container.addEventListener('mouseleave', startLoops);
 
-  function prevSlide() {
-    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-    renderGallery();
-    resetAutoPlay();
-  }
+  container.addEventListener('touchstart', (e) => {
+    startX = e.changedTouches[0].clientX;
+    deltaX = 0;
+  }, { passive: true });
 
-  function autoPlay() {
-    nextSlide();
-  }
+  container.addEventListener('touchmove', (e) => {
+    deltaX = e.changedTouches[0].clientX - startX;
+  }, { passive: true });
 
-  function resetAutoPlay() {
-    clearInterval(autoPlayTimer);
-    autoPlayTimer = setInterval(autoPlay, 5000);
-  }
+  container.addEventListener('touchend', () => {
+    if (Math.abs(deltaX) < 40) return;
+    rotateAll(deltaX < 0 ? 1 : -1);
+    startLoops();
+  }, { passive: true });
 
-  // Event listeners
-  prevBtn.addEventListener('click', prevSlide);
-  nextBtn.addEventListener('click', nextSlide);
-
-  // Inicializar
-  renderGallery();
-  renderIndicators();
-  resetAutoPlay();
-
-  // Pausar ao passar mouse (desktop)
-  container.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
-  container.addEventListener('mouseleave', resetAutoPlay);
+  renderPanels();
+  startLoops();
 })();
 
 
@@ -2561,63 +2827,72 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
   });
 })();
 
-/* ── SWIPE + LOOP MAIS SUAVE DA GALERIA ── */
+/* ── SEÇÕES COM AURA SUAVE ── */
 (function () {
-  const container = document.getElementById('galleryContainer');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  if (!container || !prevBtn || !nextBtn) return;
-
-  let touchStartX = 0;
-  let touchDeltaX = 0;
-  let hoverPaused = false;
-
-  function animateItems() {
-    const items = container.querySelectorAll('.gallery-item');
-    items.forEach((item, idx) => {
-      item.classList.remove('is-transitioning', 'is-active');
-      void item.offsetWidth;
-      item.classList.add('is-transitioning');
-      if (idx === 0) item.classList.add('is-active');
-    });
-  }
-
-  const originalNext = nextBtn.onclick;
-  const originalPrev = prevBtn.onclick;
-  nextBtn.addEventListener('click', animateItems, true);
-  prevBtn.addEventListener('click', animateItems, true);
-
-  container.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].clientX;
-    touchDeltaX = 0;
-  }, { passive: true });
-
-  container.addEventListener('touchmove', (e) => {
-    touchDeltaX = e.changedTouches[0].clientX - touchStartX;
-  }, { passive: true });
-
-  container.addEventListener('touchend', () => {
-    if (Math.abs(touchDeltaX) < 40) return;
-    if (touchDeltaX < 0) nextBtn.click();
-    else prevBtn.click();
-  }, { passive: true });
-
-  container.addEventListener('mouseenter', () => {
-    hoverPaused = true;
-  });
-  container.addEventListener('mouseleave', () => {
-    hoverPaused = false;
+  document.querySelectorAll('main section, body > section').forEach((section) => {
+    if (!section.querySelector('.section-aura')) {
+      const aura = document.createElement('div');
+      aura.className = 'section-aura';
+      section.prepend(aura);
+    }
   });
 
-  const status = document.getElementById('imageCounter');
-  if (status) {
-    const obs = new MutationObserver(() => {
-      animateItems();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      entry.target.classList.toggle('section-lit', entry.isIntersecting);
     });
-    obs.observe(status, { childList: true, characterData: true, subtree: true });
+  }, { threshold: 0.18 });
+
+  document.querySelectorAll('body > section').forEach((section) => io.observe(section));
+})();
+
+/* ── PARTÍCULAS SUAVES NO CORPO DA PÁGINA ── */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const canvas = document.createElement('canvas');
+  canvas.className = 'content-motes';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  let w = 0, h = 0;
+  let motes = [];
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    motes = Array.from({ length: Math.max(18, Math.min(38, Math.floor(w / 42))) }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.9 + 0.4,
+      vx: (Math.random() - 0.5) * 0.16,
+      vy: -(Math.random() * 0.22 + 0.05),
+      a: Math.random() * 0.28 + 0.06,
+      hue: Math.random() > 0.5 ? '74,158,187' : '200,184,232'
+    }));
   }
 
-  setTimeout(animateItems, 250);
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    motes.forEach((m) => {
+      m.x += m.vx;
+      m.y += m.vy;
+      if (m.y < -10) { m.y = h + 10; m.x = Math.random() * w; }
+      if (m.x < -10) m.x = w + 10;
+      if (m.x > w + 10) m.x = -10;
+      const g = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 7);
+      g.addColorStop(0, `rgba(${m.hue},${m.a})`);
+      g.addColorStop(0.45, `rgba(${m.hue},${m.a * 0.45})`);
+      g.addColorStop(1, `rgba(${m.hue},0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r * 7, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+  draw();
 })();
 
 </script>
