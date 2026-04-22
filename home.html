@@ -146,50 +146,6 @@
         filter 1s ease;
     }
 
-    #emblem {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto 2rem;
-      animation:
-        emblem-appear 1.5s 0.5s ease both,
-        emblem-pulse 4s 2s ease-in-out infinite;
-    }
-
-    #emblem svg,
-    #emblem img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      filter:
-        drop-shadow(0 0 16px rgba(201,168,76,0.8))
-        drop-shadow(0 0 40px rgba(106,79,207,0.4));
-    }
-
-    @keyframes emblem-appear {
-      from {
-        opacity: 0;
-        transform: scale(0.6) rotate(-15deg);
-        filter: blur(8px);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-        filter: blur(0);
-      }
-    }
-
-    @keyframes emblem-pulse {
-      0%, 100% {
-        transform: scale(1);
-        filter: brightness(1);
-      }
-      50% {
-        transform: scale(1.06);
-        filter: brightness(1.25);
-      }
-    }
-
     #eyebrow {
       font-family: 'Cinzel', serif;
       font-size: 0.68rem;
@@ -199,6 +155,13 @@
       margin-bottom: 1.2rem;
       opacity: 0;
       animation: fade-up 1.2s 1s ease forwards;
+    }
+
+    #title-wrap {
+      position: relative;
+      display: inline-block;
+      opacity: 0;
+      animation: fade-up 1.2s 1.3s ease forwards;
     }
 
     #title {
@@ -216,8 +179,6 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       filter: drop-shadow(0 0 40px rgba(201,168,76,0.4));
-      opacity: 0;
-      animation: fade-up 1.2s 1.3s ease forwards;
     }
 
     #title-sub {
@@ -232,12 +193,61 @@
       background-clip: text;
     }
 
+    #emblem {
+      position: absolute;
+      left: 50%;
+      bottom: -58px;
+      transform: translateX(-50%);
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      animation:
+        emblem-appear 1.5s 1.8s ease both,
+        emblem-pulse 4s 3.3s ease-in-out infinite;
+    }
+
+    #emblem img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(201,168,76,0.45);
+      box-shadow:
+        0 0 16px rgba(201,168,76,0.5),
+        0 0 38px rgba(106,79,207,0.25);
+      filter: brightness(1.03) saturate(1.08);
+    }
+
+    @keyframes emblem-appear {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.6);
+        filter: blur(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes emblem-pulse {
+      0%, 100% {
+        transform: translateX(-50%) scale(1);
+        filter: brightness(1);
+      }
+      50% {
+        transform: translateX(-50%) scale(1.06);
+        filter: brightness(1.18);
+      }
+    }
+
     #divider {
       width: 0;
       height: 1px;
       background: linear-gradient(90deg,
         transparent, var(--gold), var(--divine-light), var(--gold), transparent);
-      margin: 1.8rem auto;
+      margin: 5.2rem auto 1.8rem;
       animation: expand-line 1.2s 2s ease forwards;
     }
 
@@ -475,13 +485,13 @@
       }
 
       #emblem {
-        width: 70px;
-        height: 70px;
-        margin-bottom: 1.5rem;
+        width: 60px;
+        height: 60px;
+        bottom: -48px;
       }
 
       #divider {
-        margin: 1.4rem auto;
+        margin: 4.4rem auto 1.4rem;
       }
 
       #phrase {
@@ -521,9 +531,9 @@
       }
 
       #emblem {
-        width: 58px;
-        height: 58px;
-        margin-bottom: 1.2rem;
+        width: 52px;
+        height: 52px;
+        bottom: -42px;
       }
 
       #eyebrow {
@@ -532,7 +542,7 @@
       }
 
       #divider {
-        margin: 1.2rem auto;
+        margin: 4rem auto 1.2rem;
       }
 
       #phrase {
@@ -601,9 +611,13 @@
       }
 
       #emblem {
-        width: 55px;
-        height: 55px;
-        margin-bottom: 1rem;
+        width: 50px;
+        height: 50px;
+        bottom: -38px;
+      }
+
+      #divider {
+        margin-top: 3.6rem;
       }
 
       #phrase {
@@ -644,29 +658,18 @@
   <div id="vignette"></div>
 
   <div id="content">
-    <div id="emblem">
-      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="60" cy="60" r="55" stroke="#c9a84c" stroke-width="0.8" stroke-dasharray="4 6"/>
-        <polygon points="60,8 73,48 115,48 83,72 95,112 60,88 25,112 37,72 5,48 47,48"
-          fill="none" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
-        <polygon points="60,22 96,82 24,82" fill="none" stroke="#6a4fcf" stroke-width="1" opacity="0.8"/>
-        <polygon points="60,98 24,38 96,38" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.6"/>
-        <ellipse cx="60" cy="60" rx="14" ry="9" fill="none" stroke="#f0d080" stroke-width="1"/>
-        <circle cx="60" cy="60" r="5" fill="#c9a84c" opacity="0.9"/>
-        <circle cx="60" cy="60" r="2" fill="#f0d080"/>
-        <line x1="60" y1="2" x2="60" y2="18" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
-        <line x1="60" y1="102" x2="60" y2="118" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
-        <line x1="2" y1="60" x2="18" y2="60" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
-        <line x1="102" y1="60" x2="118" y2="60" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
-      </svg>
-    </div>
-
     <p id="eyebrow">A saga de Knull</p>
 
-    <h1 id="title">
-      <span id="title-sub">O Diário de um</span>
-      Deus
-    </h1>
+    <div id="title-wrap">
+      <h1 id="title">
+        <span id="title-sub">O Diário de um</span>
+        Deus
+      </h1>
+
+      <div id="emblem">
+        <img src="img-logo/olhos.jpg" alt="Olho dourado">
+      </div>
+    </div>
 
     <div id="divider"></div>
 
