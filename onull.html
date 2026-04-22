@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onull — O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  /* ── VARIÁVEIS E RESET ── */
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+  --void: #030308;
+  --deep: #07070f;
+  --surface: #13131f;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --divine: #6a4fcf;
+  --divine-light: #a07af0;
+
+  /* Cores exclusivas do Onull */
+  --char-accent: #d4a820;
+  --char-accent-dim: #8a6a10;
+  --char-accent-glow: rgba(212,168,32,0.35);
+  --human: #e8c870;
+  --human-dim: #9a8040;
+  --human-glow: rgba(232,200,112,0.3);
+  --silver: #c8d0d8;
+  --silver-dim: #7a8088;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+#cosmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(to bottom, rgba(3,3,8,0.95), transparent);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(212,168,32,0.15);
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--char-accent);
+  text-shadow: 0 0 20px var(--char-accent-glow);
+}
+
+/* ── BANNER ── */
+#banner {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.banner-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+  background-color: #0a0800;
+  background-image:
+    radial-gradient(ellipse at 55% 25%,
+      rgba(212,168,32,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 25% 65%,
+      rgba(200,208,216,0.1) 0%, transparent 50%);
+}
+
+.banner-bg.loaded { transform: scale(1); }
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top,
+      rgba(3,3,8,1) 0%,
+      rgba(3,3,8,0.75) 35%,
+      rgba(3,3,8,0.3) 65%,
+      rgba(3,3,8,0.1) 100%),
+    linear-gradient(to right,
+      rgba(3,3,8,0.6) 0%,
+      transparent 60%);
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 5vw 5rem;
+  max-width: 780px;
+}
+
+.banner-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fade-up 1s 0.2s ease forwards;
+}
+
+.banner-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 900;
+  line-height: 0.95;
+  background: linear-gradient(135deg,
+    #ffffff 0%,
+    #f0e0a0 20%,
+    #d4a820 50%,
+    #e8c870 75%,
+    #c8d0d8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(212,168,32,0.45));
+  opacity: 0;
+  animation: fade-up 1s 0.4s ease forwards;
+}
+
+.banner-human {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  margin-top: 0.6rem;
+  opacity: 0;
+  animation: fade-up 1s 0.6s ease forwards;
+}
+
+.banner-divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    var(--char-accent), var(--silver), transparent);
+  margin: 1.8rem 0;
+  opacity: 0;
+  animation: fade-up 1s 0.8s ease forwards;
+}
+
+.banner-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  max-width: 560px;
+  line-height: 1.7;
+  opacity: 0;
+  animation: fade-up 1s 0.9s ease forwards;
+}
+
+/* ── STATS DO BANNER ── */
+.banner-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 1s 1.1s ease forwards;
+}
+
+.bstat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bstat-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.08em;
+}
+
+.bstat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.bstat-sep {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom,
+    transparent, rgba(212,168,32,0.4), transparent);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  right: 5vw;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--char-accent);
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+
+/* ── ANIMAÇÕES ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ── REVEAL ON SCROLL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+/* ── SEÇÕES COMPARTILHADAS ── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+}
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  text-shadow: 0 0 40px rgba(212,168,32,0.2);
+}
+
+.section-rule {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, var(--char-accent), var(--silver), transparent);
+  margin: 1.5rem auto 0;
+}
+
+/* ── SOBRE ── */
+#sobre {
+  padding-bottom: 5rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  align-items: start;
+}
+
+.about-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 6rem;
+}
+
+.about-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center;
+  background-color: #080600;
+  background-image:
+    radial-gradient(ellipse at 50% 30%,
+      rgba(212,168,32,0.2) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 80%,
+      rgba(200,208,216,0.1) 0%, transparent 60%);
+  position: relative;
+  border: 1px solid rgba(212,168,32,0.2);
+}
+
+.photo-frame-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.photo-frame-corner.tl {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--char-accent);
+  border-left: 2px solid var(--char-accent);
+}
+
+.photo-frame-corner.tr {
+  top: -1px; right: -1px;
+  border-top: 2px solid var(--char-accent);
+  border-right: 2px solid var(--char-accent);
+}
+
+.photo-frame-corner.bl {
+  bottom: -1px; left: -1px;
+  border-bottom: 2px solid var(--char-accent);
+  border-left: 2px solid var(--char-accent);
+}
+
+.photo-frame-corner.br {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--char-accent);
+  border-right: 2px solid var(--char-accent);
+}
+
+.about-photo-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  text-align: center;
+}
+
+.about-text p {
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.4rem;
+  font-size: 1.05rem;
+}
+
+.about-text p strong { color: var(--gold-light); }
+
+.about-text p em {
+  color: var(--char-accent);
+  font-style: normal;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(212,168,32,0.2);
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border-radius: 1px;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.tag:hover {
+  border-color: var(--char-accent);
+  color: var(--gold-light);
+}
+
+.tag.human-tag {
+  border-color: rgba(232,200,112,0.35);
+  color: var(--human);
+}
+
+.tag.divine-tag {
+  border-color: rgba(160,122,240,0.3);
+  color: var(--divine-light);
+}
+
+.tag.gold-tag {
+  border-color: rgba(212,168,32,0.4);
+  color: var(--char-accent);
+}
+
+/* ── PODERES ── */
+#poderes {
+  padding-bottom: 5rem;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(212,168,32,0.03),
+    rgba(200,208,216,0.02),
+    transparent);
+}
+
+.powers-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.power-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(212,168,32,0.08);
+  align-items: start;
+  transition: background 0.3s;
+}
+
+.power-item:hover {
+  background: rgba(212,168,32,0.03);
+}
+
+.power-item:last-child { border-bottom: none; }
+
+.power-icon-big {
+  font-size: 2.5rem;
+  text-align: center;
+  filter: drop-shadow(0 0 12px var(--char-accent-glow));
+  padding-top: 0.2rem;
+}
+
+.power-origin {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  margin-bottom: 0.4rem;
+}
+
+.power-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.power-body {
+  font-size: 0.97rem;
+  color: var(--text-dim);
+  line-height: 1.85;
+}
+
+.power-body em {
+  color: var(--gold-light);
+  font-style: normal;
+}
+
+.power-bar-wrap {
+  margin-top: 1.2rem;
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.power-bar {
+  height: 100%;
+  background: linear-gradient(90deg,
+    var(--char-accent-dim), var(--char-accent));
+  border-radius: 2px;
+  transition: width 1.5s ease;
+  width: 0;
+}
+
+.power-bar.human {
+  background: linear-gradient(90deg, var(--human-dim), var(--human));
+}
+
+.power-bar.gold {
+  background: linear-gradient(90deg, var(--char-accent-dim), var(--gold-light));
+}
+
+.power-bar.silver {
+  background: linear-gradient(90deg, var(--silver-dim), var(--silver));
+}
+
+/* ── HISTÓRIA ── */
+#historia { padding-bottom: 5rem; }
+
+.story-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-block {
+  padding: 2.5rem 0 2.5rem 2.5rem;
+  border-left: 1px solid rgba(212,168,32,0.2);
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.story-block:hover {
+  border-color: rgba(212,168,32,0.5);
+}
+
+.story-block::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 2.7rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--char-accent);
+  box-shadow:
+    0 0 12px var(--char-accent-glow),
+    0 0 24px var(--human-glow);
+}
+
+.story-chapter {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  margin-bottom: 0.4rem;
+}
+
+.story-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 1rem;
+}
+
+.story-block p {
+  font-size: 1rem;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+
+.story-block p strong { color: var(--gold-light); }
+.story-block p em {
+  color: var(--char-accent);
+  font-style: normal;
+}
+
+/* ── GALERIA ── */
+#galeria { padding-bottom: 5rem; }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 260px 260px;
+  gap: 0.8rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.gallery-item {
+  background-size: cover;
+  background-position: center;
+  background-color: #080600;
+  background-image:
+    radial-gradient(ellipse at 50% 50%,
+      rgba(212,168,32,0.12) 0%, transparent 70%);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(212,168,32,0.1);
+  transition: border-color 0.3s;
+}
+
+.gallery-item:hover {
+  border-color: rgba(212,168,32,0.45);
+}
+
+.gallery-item.tall { grid-row: span 2; }
+.gallery-item.wide { grid-column: span 2; }
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(3,3,8,0.9) 0%, transparent 50%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+.gallery-overlay span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--human);
+}
+
+.gallery-hint {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  opacity: 0.6;
+}
+
+.gallery-hint code {
+  font-family: monospace;
+  color: var(--char-accent);
+  font-style: normal;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(212,168,32,0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover { color: var(--char-accent); }
+
+.footer-sep {
+  color: var(--gold-dim);
+  opacity: 0.4;
+}
+
+.footer-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  color: var(--char-accent);
+  margin-bottom: 0.6rem;
+}
+
+.footer-sub {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba(122,98,40,0.5);
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-photo-wrap {
+    position: static !important;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: 180px 180px 180px !important;
+  }
+
+  .gallery-item.tall { grid-row: span 1 !important; }
+  .gallery-item.wide { grid-column: span 2 !important; }
+
+  nav { gap: 1.2rem; flex-wrap: wrap; }
+  nav a { font-size: 0.68rem; }
+
+  .power-item {
+    grid-template-columns: 50px 1fr;
+    gap: 1.2rem;
+  }
+
+  .banner-content { padding: 4rem 1.5rem 4rem; }
+}
+
+@media (max-width: 480px) {
+  .about-grid    { padding: 0 1.2rem; }
+  .powers-list   { padding: 0 1.2rem; }
+  .story-body    { padding: 0 1.2rem; }
+  .gallery-grid  { padding: 0 1.2rem; }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 140px 140px 140px !important;
+  }
+
+  .power-item {
+    grid-template-columns: 44px 1fr;
+    gap: 1rem;
+    padding: 1.5rem 0;
+  }
+
+  .story-block { padding: 1.5rem 0 1.5rem 1.8rem; }
+}
+  /* === CSS VIRÁ NAS PARTES 2 E 3 === */
+</style>
+</head>
+<body>
+
+<canvas id="cosmos-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="home.html">← Voltar ao Início</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#poderes">Poderes</a>
+  <a href="#historia">História</a>
+  <a href="#galeria">Galeria</a>
+</nav>
+
+<!-- BANNER HERO -->
+<section id="banner">
+  <div class="banner-bg" style="background-image: url('onull-banner.jpg')"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <p class="banner-eyebrow">Mestre Humano · Deus Onull · Transcendido</p>
+    <h1 class="banner-name">Onull</h1>
+    <p class="banner-human">Antes conhecido como <em>Lucas</em></p>
+    <div class="banner-divider"></div>
+    <p class="banner-quote">"Disseram que eu era apenas humano. Eu provei que apenas humano é o suficiente para destruir deuses."</p>
+    <div class="banner-stats">
+      <div class="bstat">
+        <span class="bstat-val">Humano</span>
+        <span class="bstat-label">Domínio</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Transcendência</span>
+        <span class="bstat-label">Condição</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Mestre Humano</span>
+        <span class="bstat-label">Título</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Deus</span>
+        <span class="bstat-label">Ascensão</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-header reveal">
+    <span class="section-label">Identidade</span>
+    <h2>Quem é Onull</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="about-grid reveal">
+    <div class="about-photo-wrap">
+      <div class="about-photo" style="background-image: url('onull-perfil.jpg')">
+        <div class="photo-frame-corner tl"></div>
+        <div class="photo-frame-corner tr"></div>
+        <div class="photo-frame-corner bl"></div>
+        <div class="photo-frame-corner br"></div>
+      </div>
+      <div class="about-photo-label">Onull · O Limite do Humano</div>
+    </div>
+    <div class="about-text">
+      <p>
+        Entre os seis, Lucas era o que mais parecia comum — e era exatamente isso que o tornava extraordinário. Enquanto Yuri carregava sangues lendários e as meninas descendiam de deuses olímpicos, Lucas era <em>humano</em>. Pura e simplesmente humano. E foi por isso que ninguém jamais viu o que estava por vir.
+      </p>
+      <p>
+        O título de <strong>Mestre Humano</strong> não era uma consolação — era o reconhecimento de algo que pouquíssimos compreendem: que o ser humano, levado ao seu limite absoluto, é uma das forças mais imprevisíveis e devastadoras que existem. Lucas não tinha sangue divino para amplificar seus poderes. Ele tinha algo mais raro — <strong>vontade sem teto</strong>.
+      </p>
+      <p>
+        A cada batalha, enquanto os outros evoluíam pelos seus poderes inatos, Lucas evoluía pela <em>superação</em>. Cada derrota quase certa era convertida em uma nova forma de combater. Cada limite atingido era imediatamente substituído por um novo patamar. Não havia para ele um limite definido — porque o limite humano, quando empurrado com força suficiente, simplesmente desaparece.
+      </p>
+      <p>
+        Depois da deificação, o nome Lucas cedeu lugar a <strong>Onull</strong> — o deus que prova, pela sua própria existência, que a humanidade nunca foi fraqueza. Foi sempre o maior dos poderes.
+      </p>
+      <div class="about-tags">
+        <span class="tag">Mestre Humano</span>
+        <span class="tag human-tag">Transcendência</span>
+        <span class="tag human-tag">Vontade Absoluta</span>
+        <span class="tag divine-tag">Deus Onull</span>
+        <span class="tag">Superação</span>
+        <span class="tag gold-tag">Potencial Ilimitado</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PODERES -->
+<section id="poderes">
+  <div class="section-header reveal">
+    <span class="section-label">Arsenal completo</span>
+    <h2>Poderes & Habilidades</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="powers-list">
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">💪</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Essência Humana</div>
+        <div class="power-title">Potencial Humano Ilimitado</div>
+        <div class="power-body">O poder central de Onull — e o mais incompreendido. O ser humano possui um potencial que, diferente de qualquer outra raça ou linhagem, não tem teto definido. Lucas dominou a arte de empurrar esse teto continuamente. A cada batalha, seu corpo e mente se adaptam, evoluem e superam o que era considerado impossível para um mortal.</div>
+        <div class="power-bar-wrap"><div class="power-bar human" data-width="100"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🧠</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Domínio Mental</div>
+        <div class="power-title">Intelecto Tático & Adaptação</div>
+        <div class="power-body">Lucas compensa ausência de poderes inatos com uma inteligência tática que beira o sobre-humano. Em batalha, processa informações em tempo real, identifica padrões em segundos e adapta sua estratégia continuamente. Nenhum inimigo que ele já enfrentou mais de uma vez o surpreendeu da mesma forma duas vezes.</div>
+        <div class="power-bar-wrap"><div class="power-bar gold" data-width="97"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">⚡</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Superação de Limites</div>
+        <div class="power-title">Segunda Chance — Forma de Crise</div>
+        <div class="power-body">Quando Lucas atinge o ponto de colapso — o momento em que qualquer outro seria destruído — algo em seu interior desperta. Sua <em>Forma de Crise</em> libera uma explosão de potencial reprimido que multiplica temporariamente todas as suas capacidades físicas e mentais. Quanto mais próximo da derrota, mais devastador o despertar.</div>
+        <div class="power-bar-wrap"><div class="power-bar human" data-width="95"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🛡️</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Resistência Humana</div>
+        <div class="power-title">Vontade Inabalável</div>
+        <div class="power-body">Nenhum genjutsu, ilusão, encantamento ou manipulação mental jamais conseguiu manter Lucas subjugado por tempo suficiente. Sua vontade funciona como um escudo interno — não por imunidade mágica, mas porque sua determinação simplesmente recusa qualquer realidade que não seja a que ele escolheu. É resistência pura, sem magia, sem truque.</div>
+        <div class="power-bar-wrap"><div class="power-bar gold" data-width="99"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🤝</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Liderança Humana</div>
+        <div class="power-title">Presença & Carisma de Batalha</div>
+        <div class="power-body">A presença de Lucas em combate tem um efeito mensurável nos aliados. Sua determinação é contagiante — quando os outros estão à beira do colapso, um olhar ou uma palavra de Lucas é suficiente para recuperar a resolução do grupo. É o poder mais silencioso dos seis, e talvez o mais importante em batalhas prolongadas.</div>
+        <div class="power-bar-wrap"><div class="power-bar human" data-width="92"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">👑</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Condição Divina</div>
+        <div class="power-title">Transcendência · Onull</div>
+        <div class="power-body">A deificação de Lucas foi diferente de todos os outros. Enquanto os demais ascenderam amplificando poderes já existentes, Lucas transcendeu a própria definição de humano — e ao fazer isso, não perdeu a humanidade. Onull é a prova viva de que um deus pode ser forjado sem sangue divino. Apenas com vontade, superação e recusa em aceitar qualquer limite.</div>
+        <div class="power-bar-wrap"><div class="power-bar gold" data-width="100"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HISTÓRIA -->
+<section id="historia">
+  <div class="section-header reveal">
+    <span class="section-label">Trajetória</span>
+    <h2>A História de Lucas</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="story-body">
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo I</div>
+      <div class="story-title">O Único Sem Sangue Especial</div>
+      <p>Quando os seis se reuniram pela primeira vez, Lucas foi o único que não trouxe uma herança impossível. Sem sangue de clã lendário, sem descendência divina, sem poderes inatos. Apenas Lucas — e uma determinação que nenhum dos outros conseguia medir ou prever. Foi subestimado desde o primeiro dia. E desde o primeiro dia, provou que era um erro fazer isso.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo II</div>
+      <div class="story-title">O Cavaleiro Negro & A Primeira Prova</div>
+      <p>No confronto com o Cavaleiro Negro, Lucas foi o que mais sofreu — e o que mais surpreendeu. Sem poderes sobrenaturais para recorrer, desenvolveu no calor da batalha uma forma de combate que integrava a observação dos padrões do inimigo em tempo real. Quando o Cavaleiro Negro achava que tinha Lucas derrotado, encontrava uma versão mais perigosa do que havia enfrentado segundos antes.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo III</div>
+      <div class="story-title">Mestre Humano</div>
+      <p>O título não foi dado — foi reconhecido. Após a primeira grande vitória, quando os poderes de cada um foram formalmente reconhecidos, Lucas recebeu o título de <strong>Mestre Humano</strong>. Não como consolação pela falta de poderes divinos, mas como reconhecimento de que ele havia dominado algo que os outros, com toda a sua herança, ainda não tinham alcançado: o controle absoluto do próprio limite.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo IV</div>
+      <div class="story-title">A Besta & A Deificação · Onull</div>
+      <p>Foi contra A Besta que Lucas chegou ao ponto mais próximo da morte que qualquer dos seis havia experimentado. E foi exatamente nesse ponto que a <em>Forma de Crise</em> atingiu seu ápice absoluto — um nível que nunca havia sido visto antes. O que emergiu daquele momento não era mais Lucas. Era <strong>Onull</strong>: o deus que nasceu não de sangue divino, mas da recusa humana em aceitar o fim.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="section-header reveal">
+    <span class="section-label">Imagens</span>
+    <h2>Galeria de Onull</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="gallery-grid reveal">
+    <div class="gallery-item tall" style="background-image: url('onull-01.jpg')">
+      <div class="gallery-overlay"><span>Onull · Forma Divina</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('onull-02.jpg')">
+      <div class="gallery-overlay"><span>Forma de Crise</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('onull-03.jpg')">
+      <div class="gallery-overlay"><span>Mestre Humano</span></div>
+    </div>
+    <div class="gallery-item wide" style="background-image: url('onull-04.jpg')">
+      <div class="gallery-overlay"><span>Transcendência · O Limite Rompido</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('onull-05.jpg')">
+      <div class="gallery-overlay"><span>Vontade Inabalável</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('onull-06.jpg')">
+      <div class="gallery-overlay"><span>Lucas · Antes da Ascensão</span></div>
+    </div>
+  </div>
+
+  <p class="gallery-hint reveal">
+    Substitua os arquivos <code>onull-01.jpg</code> até <code>onull-06.jpg</code> pelas imagens do personagem na mesma pasta do HTML.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-nav">
+    <a href="nimsay.html">← Nimsay</a>
+    <span class="footer-sep">·</span>
+    <a href="home.html">Início</a>
+    <span class="footer-sep">·</span>
+    <a href="anull.html">Anull →</a>
+  </div>
+  <div class="footer-title">Onull</div>
+  <div class="footer-sub">"O limite humano não existe. Existe apenas o momento em que você decide parar."</div>
+  <div class="footer-copy">O Diário de um Deus · Todos os direitos reservados</div>
+</footer>
+
+<script>
+  /* ── COSMOS CANVAS ── */
+(function () {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx    = canvas.getContext('2d');
+  let W, H, stars = [], nebulas = [], sparks = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 240; i++) {
+      stars.push({
+        x:       Math.random() * W,
+        y:       Math.random() * H,
+        r:       Math.random() * 1.5 + 0.2,
+        a:       Math.random(),
+        speed:   Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+
+    /* Névoas do Onull: dourado e prata */
+    nebulas = [];
+    const colors = [
+      'rgba(212,168,32,',
+      'rgba(232,200,112,',
+      'rgba(200,208,216,',
+      'rgba(160,140,80,'
+    ];
+    for (let i = 0; i < 5; i++) {
+      nebulas.push({
+        x:     Math.random() * W,
+        y:     Math.random() * H,
+        r:     Math.random() * 320 + 150,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a:     Math.random() * 0.06 + 0.02
+      });
+    }
+
+    /* Faíscas humanas — pequenas e rápidas */
+    sparks = [];
+    for (let i = 0; i < 25; i++) {
+      sparks.push({
+        x:      Math.random() * W,
+        y:      Math.random() * H,
+        r:      Math.random() * 1.2 + 0.3,
+        a:      Math.random() * 0.8 + 0.2,
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: -(Math.random() * 0.6 + 0.2),
+        life:   Math.random(),
+        decay:  Math.random() * 0.004 + 0.001
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Fundo dourado escuro */
+    const bg = ctx.createLinearGradient(0, 0, W, H);
+    bg.addColorStop(0,   '#060500');
+    bg.addColorStop(0.4, '#080700');
+    bg.addColorStop(0.8, '#070600');
+    bg.addColorStop(1,   '#050400');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Névoas */
+    nebulas.forEach(n => {
+      const grad = ctx.createRadialGradient(
+        n.x, n.y, 0, n.x, n.y, n.r
+      );
+      grad.addColorStop(0, n.color + n.a + ')');
+      grad.addColorStop(1, n.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Estrelas em tom dourado/branco */
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(240,225,180,${alpha})`;
+      ctx.fill();
+    });
+
+    /* Faíscas humanas subindo */
+    sparks.forEach(p => {
+      p.x    += p.speedX;
+      p.y    += p.speedY;
+      p.life -= p.decay;
+
+      /* Renascimento ao morrer */
+      if (p.life <= 0) {
+        p.x     = Math.random() * W;
+        p.y     = H + 10;
+        p.life  = 1;
+        p.speedX = (Math.random() - 0.5) * 0.5;
+        p.speedY = -(Math.random() * 0.6 + 0.2);
+      }
+
+      const alpha = p.a * p.life;
+
+      /* Halo dourado */
+      const grad = ctx.createRadialGradient(
+        p.x, p.y, 0, p.x, p.y, p.r * 4
+      );
+      grad.addColorStop(0, `rgba(240,200,80,${alpha})`);
+      grad.addColorStop(1,  'rgba(212,168,32,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  function animate() {
+    draw();
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  initStars();
+  animate();
+})();
+</script>
+</body>
+</html>
