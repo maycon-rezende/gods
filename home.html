@@ -1,949 +1,1625 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>O Diário de um Deus</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --gold: #c9a84c;
-      --gold-light: #f0d080;
-      --gold-dim: #7a6228;
-      --void: #030308;
-      --deep: #07070f;
-      --text: #e8dcc8;
-      --text-dim: #9a8f7a;
-      --divine: #6a4fcf;
-      --divine-light: #a07af0;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: var(--void);
-    }
-
-    body {
-      font-family: 'EB Garamond', serif;
-      cursor: default;
-    }
-
-    #particles {
-      position: fixed;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    #slideshow {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at center, rgba(20,18,30,0.55), rgba(3,3,8,0.95)),
-        linear-gradient(180deg, #08080f 0%, #030308 100%);
-    }
-
-    .slide {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
-      opacity: 0;
-      transform: scale(1.05);
-      transition:
-        opacity 1.5s ease,
-        filter 1.5s ease,
-        transform 1.5s ease;
-      filter: brightness(0.92) saturate(0.95);
-    }
-
-    .slide::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(to bottom,
-          rgba(0,0,0,0.08) 0%,
-          rgba(0,0,0,0.18) 40%,
-          rgba(0,0,0,0.28) 100%);
-      pointer-events: none;
-    }
-
-    .slide.active {
-      opacity: 1;
-      animation: slide-zoom 8s ease forwards;
-    }
-
-    .slide.leaving {
-      opacity: 0;
-    }
-
-    @keyframes slide-zoom {
-      from {
-        transform: scale(1.05);
-        filter: brightness(0.9) saturate(0.95);
-      }
-      to {
-        transform: scale(1.12);
-        filter: brightness(1) saturate(1.02);
-      }
-    }
-
-    #overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      background:
-        linear-gradient(to top,
-          rgba(3,3,8,0.84) 0%,
-          rgba(3,3,8,0.56) 40%,
-          rgba(3,3,8,0.34) 70%,
-          rgba(3,3,8,0.48) 100%);
-      pointer-events: none;
-      transition: opacity 0.8s ease;
-    }
-
-    #vignette {
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      background: radial-gradient(
-        ellipse at center,
-        transparent 45%,
-        rgba(3,3,8,0.7) 100%
-      );
-      pointer-events: none;
-      transition: opacity 0.8s ease;
-    }
-
-    #content {
-      position: fixed;
-      inset: 0;
-      z-index: 5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
-      pointer-events: none;
-      transition:
-        opacity 0.9s ease,
-        transform 1.1s ease,
-        filter 1s ease;
-    }
-
-    #eyebrow {
-      font-family: 'Cinzel', serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-      margin-bottom: 1.2rem;
-      opacity: 0;
-      animation: fade-up 1.2s 1s ease forwards;
-    }
-
-    #title-wrap {
-      position: relative;
-      display: inline-block;
-      opacity: 0;
-      animation: fade-up 1.2s 1.3s ease forwards;
-    }
-
-    #title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(3rem, 9vw, 7.5rem);
-      font-weight: 900;
-      line-height: 1;
-      background: linear-gradient(135deg,
-        #ffffff 0%,
-        #f0d080 25%,
-        #c9a84c 50%,
-        #fff5c0 70%,
-        #7a6228 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter: drop-shadow(0 0 40px rgba(201,168,76,0.4));
-    }
-
-    #title-sub {
-      display: block;
-      font-size: 0.38em;
-      letter-spacing: 0.35em;
-      margin-bottom: 0.2em;
-      background: linear-gradient(90deg,
-        var(--divine-light), var(--gold-light), var(--divine-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    #emblem {
-      position: absolute;
-      left: 50%;
-      bottom: -58px;
-      transform: translateX(-50%);
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      animation:
-        emblem-appear 1.5s 1.8s ease both,
-        emblem-pulse 4s 3.3s ease-in-out infinite;
-    }
-
-    #emblem img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 2px solid rgba(201,168,76,0.45);
-      box-shadow:
-        0 0 16px rgba(201,168,76,0.5),
-        0 0 38px rgba(106,79,207,0.25);
-      filter: brightness(1.03) saturate(1.08);
-    }
-
-    @keyframes emblem-appear {
-      from {
-        opacity: 0;
-        transform: translateX(-50%) scale(0.6);
-        filter: blur(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
-        filter: blur(0);
-      }
-    }
-
-    @keyframes emblem-pulse {
-      0%, 100% {
-        transform: translateX(-50%) scale(1);
-        filter: brightness(1);
-      }
-      50% {
-        transform: translateX(-50%) scale(1.06);
-        filter: brightness(1.18);
-      }
-    }
-
-    #divider {
-      width: 0;
-      height: 1px;
-      background: linear-gradient(90deg,
-        transparent, var(--gold), var(--divine-light), var(--gold), transparent);
-      margin: 5.2rem auto 1.8rem;
-      animation: expand-line 1.2s 2s ease forwards;
-    }
-
-    @keyframes expand-line {
-      from {
-        width: 0;
-        opacity: 0;
-      }
-      to {
-        width: 200px;
-        opacity: 1;
-      }
-    }
-
-    #phrase {
-      font-family: 'EB Garamond', serif;
-      font-style: italic;
-      font-size: clamp(0.95rem, 2vw, 1.2rem);
-      color: var(--text-dim);
-      line-height: 1.9;
-      max-width: 520px;
-      opacity: 0;
-      animation: fade-up 1.2s 2.2s ease forwards;
-    }
-
-    #names {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.5rem 0.8rem;
-      margin-top: 1.8rem;
-      opacity: 0;
-      animation: fade-up 1.2s 2.6s ease forwards;
-    }
-
-    .char-name {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(0.7rem, 1.5vw, 0.92rem);
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .char-name.gods {
-      color: var(--gold-light);
-      text-shadow: 0 0 20px rgba(201,168,76,0.3);
-    }
-
-    .char-name.guardians {
-      color: var(--divine-light);
-      text-shadow: 0 0 20px rgba(160,122,240,0.3);
-    }
-
-    .name-sep {
-      color: var(--gold-dim);
-      font-family: 'Cinzel', serif;
-      font-size: 0.75rem;
-      opacity: 0.5;
-    }
-
-    .name-sep.long {
-      opacity: 0.3;
-      font-size: 1rem;
-      margin: 0 0.3rem;
-    }
-
-    #enter-btn {
-      position: relative;
-      margin-top: 3rem;
-      padding: 1rem 3.5rem;
-      background: rgba(255,255,255,0.015);
-      border: 1px solid rgba(201,168,76,0.4);
-      color: var(--gold-light);
-      font-family: 'Cinzel', serif;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      cursor: pointer;
-      pointer-events: all;
-      overflow: hidden;
-      opacity: 0;
-      animation: fade-up 1.2s 3s ease forwards;
-      transition:
-        border-color 0.4s,
-        color 0.4s,
-        box-shadow 0.4s,
-        letter-spacing 0.4s,
-        transform 0.25s ease,
-        background 0.4s;
-      backdrop-filter: blur(8px);
-    }
-
-    #enter-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg,
-        rgba(201,168,76,0) 0%,
-        rgba(201,168,76,0.08) 50%,
-        rgba(201,168,76,0) 100%);
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    #enter-btn::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: -100%;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg,
-        transparent, var(--gold-light), transparent);
-      transition: left 0.5s ease;
-    }
-
-    #enter-btn:hover {
-      border-color: var(--gold-light);
-      color: #ffffff;
-      background: rgba(255,255,255,0.03);
-      box-shadow:
-        0 0 30px rgba(201,168,76,0.2),
-        0 0 60px rgba(201,168,76,0.1),
-        inset 0 0 30px rgba(201,168,76,0.05);
-      letter-spacing: 0.55em;
-    }
-
-    #enter-btn:hover::before {
-      opacity: 1;
-    }
-
-    #enter-btn:hover::after {
-      left: 100%;
-    }
-
-    #enter-btn:active {
-      transform: scale(0.97);
-    }
-
-    #btn-text {
-      position: relative;
-      z-index: 1;
-    }
-
-    #btn-line {
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(90deg,
-        transparent,
-        rgba(255,255,255,0.06),
-        transparent);
-      transform: skewX(-20deg);
-      animation: btn-shine 4s 4s ease infinite;
-    }
-
-    @keyframes btn-shine {
-      0% { left: -100%; }
-      30% { left: 150%; }
-      100% { left: 150%; }
-    }
-
-    #slide-dots {
-      position: fixed;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      display: flex;
-      gap: 0.6rem;
-      align-items: center;
-      opacity: 0;
-      animation: fade-up 1.2s 3.2s ease forwards;
-      pointer-events: none;
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    .dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: rgba(201,168,76,0.25);
-      transition: all 0.5s ease;
-    }
-
-    .dot.active {
-      background: var(--gold-light);
-      box-shadow: 0 0 8px rgba(201,168,76,0.6);
-      width: 18px;
-      border-radius: 3px;
-    }
-
-    #transition-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      background:
-        radial-gradient(circle at center,
-          rgba(255,255,255,0.04) 0%,
-          rgba(10,10,16,0.12) 18%,
-          rgba(3,3,8,0.82) 55%,
-          rgba(3,3,8,1) 100%);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.7s ease, backdrop-filter 0.7s ease;
-      backdrop-filter: blur(0px);
-    }
-
-    #transition-screen.fade-in {
-      opacity: 1;
-      pointer-events: all;
-      backdrop-filter: blur(10px);
-    }
-
-    @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-        filter: blur(4px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .slide {
-        background-position: center 20%;
-      }
-
-      #emblem {
-        width: 60px;
-        height: 60px;
-        bottom: -48px;
-      }
-
-      #divider {
-        margin: 4.4rem auto 1.4rem;
-      }
-
-      #phrase {
-        font-size: 0.92rem;
-        padding: 0 1rem;
-        line-height: 1.8;
-      }
-
-      #names {
-        gap: 0.4rem 0.6rem;
-        margin-top: 1.4rem;
-        padding: 0 1rem;
-      }
-
-      .name-sep.long {
-        display: none;
-      }
-
-      #enter-btn {
-        margin-top: 2.2rem;
-        padding: 0.9rem 2.8rem;
-        font-size: 0.75rem;
-      }
-
-      #slide-dots {
-        bottom: 1.8rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      #content {
-        padding: 1.5rem;
-      }
-
-      .slide {
-        background-position: center 22%;
-      }
-
-      #emblem {
-        width: 52px;
-        height: 52px;
-        bottom: -42px;
-      }
-
-      #eyebrow {
-        font-size: 0.58rem;
-        letter-spacing: 0.3em;
-      }
-
-      #divider {
-        margin: 4rem auto 1.2rem;
-      }
-
-      #phrase {
-        font-size: 0.88rem;
-        line-height: 1.75;
-      }
-
-      #names {
-        margin-top: 1.2rem;
-      }
-
-      .char-name {
-        font-size: 0.65rem;
-      }
-
-      #enter-btn {
-        margin-top: 2rem;
-        padding: 0.85rem 2.4rem;
-        font-size: 0.7rem;
-        letter-spacing: 0.35em;
-      }
-
-      #slide-dots {
-        bottom: 1.5rem;
-        gap: 0.5rem;
-      }
-
-      .dot {
-        width: 4px;
-        height: 4px;
-      }
-
-      .dot.active {
-        width: 14px;
-      }
-    }
-
-    @media (max-width: 360px) {
-      #title {
-        font-size: clamp(2.2rem, 11vw, 3rem);
-      }
-
-      #phrase {
-        font-size: 0.82rem;
-      }
-
-      #enter-btn {
-        padding: 0.8rem 2rem;
-        font-size: 0.65rem;
-      }
-
-      .char-name {
-        font-size: 0.6rem;
-      }
-
-      .name-sep {
-        font-size: 0.65rem;
-      }
-    }
-
-    @media (max-width: 768px) and (orientation: landscape) {
-      #content {
-        justify-content: flex-start;
-        padding-top: 4rem;
-        overflow-y: auto;
-      }
-
-      #emblem {
-        width: 50px;
-        height: 50px;
-        bottom: -38px;
-      }
-
-      #divider {
-        margin-top: 3.6rem;
-      }
-
-      #phrase {
-        font-size: 0.85rem;
-      }
-
-      #names {
-        margin-top: 1rem;
-      }
-
-      #enter-btn {
-        margin-top: 1.5rem;
-      }
-
-      #slide-dots {
-        bottom: 1rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  /* === CSS VIRÁ AQUI (Partes 2 e 3) === */
+  /* ── VARIÁVEIS E RESET ── */
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+  --blood: #8b0000;
+  --blood-bright: #cc0022;
+  --void: #030308;
+  --deep: #07070f;
+  --mid: #0d0d1a;
+  --surface: #13131f;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --divine: #6a4fcf;
+  --divine-light: #a07af0;
+  --cyan: #2af0e8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+#cosmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  gap: clamp(0.5rem, 2vw, 2.5rem);
+  padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1rem, 3vw, 2rem);
+  background: linear-gradient(to bottom, rgba(3,3,8,0.95), transparent);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+  flex-wrap: wrap;
+}
+
+nav.mobile-open {
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: linear-gradient(to bottom, rgba(3,3,8,0.98), rgba(3,3,8,0.95));
+}
+
+#menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--gold-dim);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s;
+}
+
+#menu-toggle:hover {
+  color: var(--gold-light);
+}
+
+@media (max-width: 640px) {
+  #menu-toggle {
+    display: block;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  nav {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  nav > a {
+    display: none;
+  }
+
+  nav.mobile-open > a {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    text-align: left;
+  }
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--gold-light);
+  text-shadow: 0 0 20px rgba(201,168,76,0.6);
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  overflow: hidden;
+}
+
+.hero-emblem {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 2.5rem;
+  position: relative;
+  animation: emblem-pulse 4s ease-in-out infinite;
+}
+
+.hero-emblem svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 20px rgba(201,168,76,0.7))
+          drop-shadow(0 0 50px rgba(106,79,207,0.4));
+}
+
+@keyframes emblem-pulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50%       { transform: scale(1.06); filter: brightness(1.2); }
+}
+
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 1.2rem;
+  opacity: 0;
+  animation: fade-up 1s 0.3s ease forwards;
+}
+
+h1.title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2.4rem, 7vw, 6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  background: linear-gradient(135deg,
+    #f0d080 0%, #c9a84c 40%, #fff5c0 60%, #7a6228 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(201,168,76,0.3));
+  opacity: 0;
+  animation: fade-up 1s 0.6s ease forwards;
+}
+
+h1.title span {
+  display: block;
+  font-size: 0.45em;
+  letter-spacing: 0.3em;
+  margin-bottom: 0.3em;
+  background: linear-gradient(90deg,
+    var(--divine-light), var(--gold-light), var(--divine-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  max-width: 540px;
+  margin: 1.8rem auto 0;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fade-up 1s 0.9s ease forwards;
+}
+
+.hero-divider {
+  width: 160px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 2.5rem auto;
+  opacity: 0;
+  animation: fade-up 1s 1.1s ease forwards;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+
+/* ── ANIMAÇÕES BASE ── */
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── REVEAL ON SCROLL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+}
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  text-shadow: 0 0 40px rgba(201,168,76,0.25);
+}
+
+.section-rule {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 1.5rem auto 0;
+}
+
+/* ── SINOPSE ── */
+#synopsis {
+  padding: 2rem 0 5rem;
+}
+
+.synopsis-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: clamp(1rem, 5vw, 2rem);
+}
+
+.synopsis-body p {
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.4rem;
+  font-size: 1.05rem;
+}
+
+.synopsis-body p:first-child::first-letter {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 4.5rem;
+  float: left;
+  line-height: 0.75;
+  margin: 0.1em 0.12em 0 0;
+  color: var(--gold);
+  filter: drop-shadow(0 0 16px rgba(201,168,76,0.5));
+}
+
+.highlight-box {
+  border-left: 2px solid var(--gold);
+  padding: 1.2rem 1.8rem;
+  margin: 2rem 0;
+  background: linear-gradient(90deg, rgba(201,168,76,0.06), transparent);
+  font-style: italic;
+  color: var(--gold-light);
+  font-size: 1.1rem;
+}
+
+/* ── TIMELINE ── */
+#historia {
+  padding-bottom: 5rem;
+}
+
+.timeline {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(1rem, 5vw, 2rem);
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent, var(--gold-dim), var(--divine), var(--gold-dim), transparent);
+  transform: translateX(-50%);
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+  align-items: start;
+}
+
+.tl-item.left  .tl-content { grid-column: 1; text-align: right; }
+.tl-item.left  .tl-dot     { grid-column: 2; }
+.tl-item.left  .tl-empty   { grid-column: 3; }
+
+.tl-item.right .tl-empty   { grid-column: 1; }
+.tl-item.right .tl-dot     { grid-column: 2; }
+.tl-item.right .tl-content { grid-column: 3; }
+
+.tl-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 16px rgba(201,168,76,0.7),
+              0 0 40px rgba(201,168,76,0.3);
+  margin-top: 0.3rem;
+  flex-shrink: 0;
+}
+
+.tl-dot.divine {
+  background: var(--divine-light);
+  box-shadow: 0 0 16px rgba(160,122,240,0.8),
+              0 0 40px rgba(106,79,207,0.4);
+}
+
+.tl-dot.blood {
+  background: var(--blood-bright);
+  box-shadow: 0 0 16px rgba(204,0,34,0.8),
+              0 0 40px rgba(139,0,0,0.4);
+}
+
+.tl-dot.cyan {
+  background: var(--cyan);
+  box-shadow: 0 0 16px rgba(42,240,232,0.8),
+              0 0 40px rgba(42,240,232,0.4);
+}
+
+.tl-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.tl-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  margin-bottom: 0.6rem;
+}
+
+.tl-text {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+/* ── PERSONAGENS ── */
+#personagens {
+  padding-bottom: 5rem;
+}
+
+.chars-intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  padding: 0 2rem;
+  font-style: italic;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+
+.char-group-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 3rem;
+}
+
+.char-group-label::before,
+.char-group-label::after {
+  content: '— ';
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.char-card {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: 2px;
+  padding: 2rem 1.6rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.3s;
+  cursor: pointer;
+}
+
+.char-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(201,168,76,0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.char-card:hover {
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-4px);
+}
+
+.char-card:hover::before { opacity: 1; }
+
+.char-card.divine-card {
+  border-color: rgba(106,79,207,0.2);
+}
+
+.char-card.divine-card::before {
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(106,79,207,0.1) 0%, transparent 70%);
+}
+
+.char-card.divine-card:hover {
+  border-color: rgba(160,122,240,0.5);
+}
+
+.card-corner {
+  position: absolute;
+  top: 0; right: 0;
+  width: 40px; height: 40px;
+  border-top: 1px solid var(--gold);
+  border-right: 1px solid var(--gold);
+  opacity: 0.4;
+}
+
+.card-corner.divine-c {
+  border-color: var(--divine-light);
+}
+
+.char-sigil {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  display: block;
+  filter: drop-shadow(0 0 10px rgba(201,168,76,0.5));
+}
+
+.char-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--gold-light);
+  margin-bottom: 0.2rem;
+}
+
+.char-divine-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--divine-light);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.char-role {
+  font-size: 0.8rem;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.15em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+
+.char-desc {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+.char-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(201,168,76,0.25);
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border-radius: 1px;
+}
+
+.tag.divine-tag {
+  border-color: rgba(160,122,240,0.3);
+  color: var(--divine-light);
+}
+
+.tag.blood-tag {
+  border-color: rgba(204,0,34,0.35);
+  color: #e06070;
+}
+
+.tag.cyan-tag {
+  border-color: rgba(42,240,232,0.35);
+  color: var(--cyan);
+}
+
+/* ── LINKS DE PERSONAGENS ── */
+.char-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.char-card-link:hover .char-card {
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-4px);
+}
+
+.char-card-link:hover .char-card::before {
+  opacity: 1;
+}
+
+.char-card-link:hover.divine-link .char-card {
+  border-color: rgba(160,122,240,0.5);
+}
+
+/* ── PODERES ── */
+#poderes {
+  padding-bottom: 5rem;
+}
+
+.powers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  padding: 0 2rem;
+}
+
+.power-block {
+  padding: 2rem;
+  border: 1px solid rgba(201,168,76,0.1);
+  background: var(--surface);
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.power-block:hover {
+  border-color: rgba(201,168,76,0.3);
+}
+
+.power-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+}
+
+.power-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.08em;
+}
+
+.power-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.power-bar-wrap {
+  margin-top: 1rem;
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.power-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+  border-radius: 2px;
+  transition: width 1.5s ease;
+  width: 0;
+}
+
+.power-bar.divine {
+  background: linear-gradient(90deg, var(--divine), var(--divine-light));
+}
+
+.power-bar.blood {
+  background: linear-gradient(90deg, var(--blood), var(--blood-bright));
+}
+
+.power-bar.cyan {
+  background: linear-gradient(90deg, #1a8f8b, var(--cyan));
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  color: var(--gold-dim);
+  margin-bottom: 0.6rem;
+}
+
+.footer-sub {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+}
+
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba(122,98,40,0.5);
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVO ── */
+/* Extra Small: Smartphones < 360px */
+@media (max-width: 360px) {
+  body { font-size: 16px; }
+  nav { gap: 0.6rem; padding: 0.8rem 1rem; }
+  nav a { font-size: 0.6rem; letter-spacing: 0.1em; }
+  h1.title { font-size: 1.8rem; }
+  .hero-eyebrow { font-size: 0.6rem; }
+  .hero-sub { font-size: 0.95rem; margin: 1.2rem auto 0; }
+  #hero { padding: 4rem 1rem 3rem; }
+  .section-header { padding: 3rem 1rem 2rem; }
+  h2 { font-size: 1.4rem; }
+  .cards-grid { grid-template-columns: 1fr; gap: 1rem; padding: 0 1rem; }
+  .char-card { padding: 1.5rem 1.2rem; }
+  .synopsis-body { padding: 0 1rem; }
+  .timeline { padding: 1rem 1rem; }
+  .powers-grid { grid-template-columns: 1fr; gap: 1rem; padding: 0 1rem; }
+}
+
+/* Small: Smartphones 360px - 480px */
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  nav { gap: 1rem; padding: 1rem 1.2rem; }
+  nav a { font-size: 0.65rem; }
+  #hero { padding: 5rem 1.5rem 3rem; }
+  h1.title { font-size: 2rem; }
+  .hero-eyebrow { font-size: 0.65rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-emblem { width: 80px; height: 80px; margin: 0 auto 2rem; }
+  .section-header { padding: 3.5rem 1.5rem 2.5rem; }
+  h2 { font-size: 1.6rem; }
+  .cards-grid { grid-template-columns: 1fr; gap: 1.2rem; padding: 0 1.5rem; }
+  .char-card { padding: 1.5rem; }
+  .char-sigil { font-size: 2rem; }
+  .char-name { font-size: 0.95rem; }
+  .synopsis-body { padding: 0 1.5rem; }
+  .synopsis-body p { font-size: 0.95rem; }
+  .timeline { padding: 1rem 1.5rem; }
+  .timeline::before { left: 24px; }
+  .tl-item { grid-template-columns: auto 1fr; }
+  .tl-item.left .tl-content,
+  .tl-item.right .tl-content { grid-column: 2; text-align: left; }
+  .tl-item .tl-dot { grid-column: 1; }
+  .tl-item .tl-empty { display: none; }
+  .powers-grid { grid-template-columns: 1fr; gap: 1.2rem; padding: 0 1.5rem; }
+  .power-block { padding: 1.5rem; }
+  footer { padding: 3rem 1.5rem; }
+}
+
+/* Medium: Tablets 481px - 768px */
+@media (max-width: 768px) {
+  body { font-size: 17px; }
+  nav { gap: 1.2rem; padding: 1.2rem 1.5rem; }
+  nav a { font-size: 0.7rem; }
+  #hero { padding: 5rem 2rem 4rem; }
+  h1.title { font-size: 2.4rem; }
+  .hero-emblem { width: 100px; height: 100px; margin: 0 auto 2.2rem; }
+  .section-header { padding: 4rem 2rem 3rem; }
+  h2 { font-size: 1.8rem; }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding: 0 2rem; }
+  .char-card { padding: 1.8rem; }
+  .synopsis-body { padding: 0 2rem; max-width: 100%; }
+  .timeline { padding: 1.5rem 2rem; }
+  .timeline::before { left: 50%; }
+  .tl-item { grid-template-columns: 1fr auto 1fr; }
+  .tl-item.left .tl-content { grid-column: 1; text-align: right; }
+  .tl-item.right .tl-content { grid-column: 3; text-align: left; }
+  .tl-item .tl-dot { grid-column: 2; }
+  .powers-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding: 0 2rem; }
+  footer { padding: 3.5rem 2rem; }
+}
+
+/* Large: Desktop 769px - 1024px */
+@media (max-width: 1024px) {
+  .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .powers-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+}
+
+/* Extra Large: Desktop > 1024px */
+@media (min-width: 1025px) {
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .powers-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+  body { font-size: 18px; }
+}
+
+
+/* === AJUSTES FINAIS DE RESPONSIVIDADE === */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+section, .section-header, .synopsis-body, .timeline, .cards-grid, .powers-grid,
+.about-grid, .story-body, .powers-list, .gallery-grid, footer, .chars-intro {
+  width: min(100%, 100%);
+}
+
+nav {
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .section-header {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .cards-grid,
+  .powers-grid,
+  .timeline,
+  .synopsis-body,
+  .story-body,
+  .powers-list,
+  .gallery-grid,
+  footer,
+  .chars-intro {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  nav {
+    gap: 0.5rem;
+    padding: 0.85rem 0.9rem;
+  }
+
+  nav.mobile-open {
+    align-items: stretch;
+  }
+
+  .section-header {
+    padding-top: 4rem;
+    padding-bottom: 2.25rem;
+  }
+
+  #hero,
+  #banner {
+    min-height: auto;
+  }
+
+  .banner-content,
+  .hero-sub,
+  .banner-quote {
+    max-width: 100%;
+  }
+
+  .timeline::before {
+    left: 0.75rem !important;
+    transform: none !important;
+  }
+
+  .tl-item,
+  .tl-item.left,
+  .tl-item.right {
+    grid-template-columns: 1.5rem 1fr !important;
+    gap: 1rem !important;
+    margin-bottom: 2rem;
+  }
+
+  .tl-item .tl-dot {
+    grid-column: 1 !important;
+  }
+
+  .tl-item .tl-content {
+    grid-column: 2 !important;
+    text-align: left !important;
+  }
+
+  .tl-item .tl-empty {
+    display: none !important;
+  }
+
+  .cards-grid,
+  .powers-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .banner-stats,
+  .about-tags,
+  .char-tags,
+  .footer-nav {
+    gap: 0.75rem;
+  }
+
+  .bstat-sep {
+    display: none;
+  }
+
+  .power-item {
+    grid-template-columns: 1fr !important;
+  }
+
+  .power-icon-big {
+    text-align: left !important;
+    padding-top: 0;
+  }
+
+  .story-block {
+    padding-left: 1.25rem !important;
+  }
+
+  .story-block::before {
+    top: 2rem !important;
+  }
+
+  .gallery-item.wide,
+  .gallery-item.tall {
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  nav {
+    align-items: flex-start;
+    padding-right: 3.5rem;
+  }
+
+  #menu-toggle {
+    right: 0.65rem;
+  }
+
+  nav.mobile-open > a {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero-emblem {
+    width: 88px;
+    height: 88px;
+    margin-bottom: 1.5rem;
+  }
+
+  .scroll-hint {
+    display: none;
+  }
+
+  .highlight-box {
+    padding: 1rem 1rem 1rem 1.1rem;
+  }
+
+  .synopsis-body p:first-child::first-letter {
+    font-size: 3rem;
+    margin-top: 0.05em;
+  }
+
+  .char-card,
+  .power-block,
+  .about-photo,
+  .gallery-item {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 15px;
+  }
+
+  .section-label,
+  .hero-eyebrow,
+  .banner-eyebrow,
+  .char-group-label,
+  .footer-copy,
+  nav a,
+  .bstat-label {
+    letter-spacing: 0.12em !important;
+  }
+
+  .section-header,
+  .synopsis-body,
+  .timeline,
+  .cards-grid,
+  .powers-grid,
+  .about-grid,
+  .story-body,
+  .powers-list,
+  .gallery-grid,
+  footer,
+  .chars-intro {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .banner-content {
+    padding: 2rem 1rem 2.5rem !important;
+    max-width: 100% !important;
+  }
+
+  .banner-stats {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cards-grid,
+  .powers-grid,
+  .gallery-grid {
+    gap: 1rem !important;
+  }
+
+  .char-card,
+  .power-block {
+    padding: 1.25rem !important;
+  }
+
+  .about-photo-wrap {
+    width: 100%;
+  }
+
+  .carousel-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) { .cards-grid, .powers-grid { grid-template-columns: 1fr !important; } }
+
+</style>
 </head>
 <body>
   <audio autoplay loop hidden>
-    <source src="audio/themepic.mp3" type="audio/mpeg" />
+    <source src="audio/themepic5.mp3" type="audio/mpeg" />
   </audio>
+<canvas id="cosmos-bg"></canvas>
 
-  <canvas id="particles"></canvas>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero">Início</a>
+  <a href="#synopsis">Sinopse</a>
+  <a href="#historia">História</a>
+  <a href="#personagens">Personagens</a>
+  <a href="#poderes">Poderes</a>
+  <button id="menu-toggle" aria-label="Menu">☰</button>
+</nav>
 
-  <div id="slideshow">
-    <div class="slide active" style="background-image: url('img-knull/nullk.png'); background-position: center 18%;"></div>
-    <div class="slide" style="background-image: url('img-knull/knullsay.png'); background-position: center 12%;"></div>
-    <div class="slide" style="background-image: url('img-knull/k.png'); background-position: center 15%;"></div>
-    <div class="slide" style="background-image: url('img-nimsay/armescura1.png'); background-position: center 18%;"></div>
-    <div class="slide" style="background-image: url('img-nimsay/nimbanner.png'); background-position: center 15%;"></div>
-    <div class="slide" style="background-image: url('img-knull/knull.png'); background-position: center 16%;"></div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-emblem">
+    <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="55" stroke="#c9a84c" stroke-width="0.8" stroke-dasharray="4 6"/>
+      <polygon points="60,8 73,48 115,48 83,72 95,112 60,88 25,112 37,72 5,48 47,48" fill="none" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+      <polygon points="60,22 96,82 24,82" fill="none" stroke="#6a4fcf" stroke-width="1" opacity="0.8"/>
+      <polygon points="60,98 24,38 96,38" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.6"/>
+      <ellipse cx="60" cy="60" rx="14" ry="9" fill="none" stroke="#f0d080" stroke-width="1"/>
+      <circle cx="60" cy="60" r="5" fill="#c9a84c" opacity="0.9"/>
+      <circle cx="60" cy="60" r="2" fill="#f0d080"/>
+      <line x1="60" y1="2" x2="60" y2="18" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <line x1="60" y1="102" x2="60" y2="118" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <line x1="2" y1="60" x2="18" y2="60" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+      <line x1="102" y1="60" x2="118" y2="60" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+    </svg>
   </div>
 
-  <div id="overlay"></div>
-  <div id="vignette"></div>
+  <p class="hero-eyebrow">A saga de Knull, Onull e Anull</p>
+  <h1 class="title">
+    <span>O Diário de um</span>
+    Deus
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">
+    Éramos humanos. Depois, Mestres. Por fim, algo que o mundo ainda não tinha nome para descrever.
+  </p>
+  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+</section>
 
-  <div id="content">
-    <p id="eyebrow">A saga de Knull</p>
+<!-- SINOPSE -->
+<section id="synopsis">
+  <div class="section-header reveal">
+    <span class="section-label">Sobre a obra</span>
+    <h2>Sinopse</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="synopsis-body">
+    <p class="reveal">
+      Este é o relato de quem esteve lá — não como observador, mas como protagonista. A história começa com seis jovens cujos nomes ainda eram humanos: Yuri, Lucas, Leonardo, Yasmin, Jéssica e Anna. Unidos por laços que nem eles mesmos compreendiam completamente, foram arremessados contra forças que deveriam tê-los destruído.
+    </p>
+    <div class="highlight-box reveal">
+      "Nós não escolhemos o caminho dos deuses. O caminho nos escolheu — e nós decidimos não recuar."
+    </div>
+    <p class="reveal">
+      Escrita na primeira pessoa por UchiHyuuga Yuri, a narrativa atravessa três grandes arcos: a ascensão à condição de Mestres após a derrota do Cavaleiro Negro, a segunda batalha e a evolução dos poderes, e por fim o confronto com A Besta — a primeira criatura forjada pelo Divino — que selou a transformação definitiva dos seis em entidades além da compreensão humana.
+    </p>
+    <p class="reveal">
+      O que você tem em mãos não é apenas um diário. É a memória viva de uma deificação.
+    </p>
+  </div>
+</section>
 
-    <div id="title-wrap">
-      <h1 id="title">
-        <span id="title-sub">O Diário de um</span>
-        Deus
-      </h1>
+<!-- TIMELINE -->
+<section id="historia">
+  <div class="section-header reveal">
+    <span class="section-label">Cronologia dos eventos</span>
+    <h2>A Jornada</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="timeline">
 
-      <div id="emblem">
-        <img src="img-logo/olhos.jpg" alt="Olho dourado">
+    <div class="tl-item left reveal">
+      <div class="tl-content">
+        <div class="tl-label">Arco I — Início</div>
+        <div class="tl-title">O Encontro dos Seis</div>
+        <div class="tl-text">Yuri, Lucas, Leonardo, Yasmin, Jéssica e Anna. Seis indivíduos com origens e poderes distintos, reunidos pelo destino antes de compreenderem o peso daquele encontro.</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item right reveal">
+      <div class="tl-empty"></div>
+      <div class="tl-dot blood"></div>
+      <div class="tl-content">
+        <div class="tl-label">Arco I — Clímax</div>
+        <div class="tl-title">Primeira Batalha: O Cavaleiro Negro</div>
+        <div class="tl-text">O primeiro grande antagonista surge. Numa luta que testou os limites de cada um dos seis, o Cavaleiro Negro foi derrotado — e o grupo provou ao mundo e a si mesmo do que era capaz.</div>
       </div>
     </div>
 
-    <div id="divider"></div>
-
-    <p id="phrase">
-      Eu não nasci como um deus..<br>
-      Eu me torinei um.
-    </p>
-
-    <div id="names">
-      <span class="char-name gods">Knull</span>
-      <span class="name-sep">·</span>
-      <span class="char-name gods">Onull</span>
-      <span class="name-sep">·</span>
-      <span class="char-name gods">Anull</span>
-      <span class="name-sep long">—</span>
-      <span class="char-name guardians">Nimsay</span>
-      <span class="name-sep">·</span>
-      <span class="char-name guardians">Aicitel</span>
-      <span class="name-sep">·</span>
-      <span class="char-name guardians">Aliban</span>
+    <div class="tl-item left reveal">
+      <div class="tl-content">
+        <div class="tl-label">Ascensão</div>
+        <div class="tl-title">Instituição como Mestres</div>
+        <div class="tl-text">Yuri torna-se <em>Mestre Elemental</em>. Lucas, <em>Mestre Humano</em>. Leonardo, <em>Mestre Espiritual</em>. As meninas também evoluem, afirmando seus papéis como guardiãs e feiticeiras.</div>
+      </div>
+      <div class="tl-dot divine"></div>
+      <div class="tl-empty"></div>
     </div>
 
-    <button id="enter-btn">
-      <span id="btn-text">Entrar</span>
-      <span id="btn-line"></span>
-    </button>
-
-    <div id="slide-dots">
-      <span class="dot active"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+    <div class="tl-item right reveal">
+      <div class="tl-empty"></div>
+      <div class="tl-dot blood"></div>
+      <div class="tl-content">
+        <div class="tl-label">Arco II — Retorno</div>
+        <div class="tl-title">Segunda Batalha: O Cavaleiro Ressurge</div>
+        <div class="tl-text">O Cavaleiro Negro retorna mais poderoso. Desta vez, a vitória vem acompanhada de uma evolução extraordinária dos poderes — cada um dos seis ultrapassa os próprios limites anteriores.</div>
+      </div>
     </div>
+
+    <div class="tl-item left reveal">
+      <div class="tl-content">
+        <div class="tl-label">Arco III — O Fim de uma Era</div>
+        <div class="tl-title">A Besta: Primeira Criatura do Divino</div>
+        <div class="tl-text">O maior dos confrontos. A Besta, criatura primordial gerada pelo próprio Divino, exigiu tudo. O preço da vitória foi a humanidade de cada um — e o começo de algo inteiramente novo.</div>
+      </div>
+      <div class="tl-dot blood"></div>
+      <div class="tl-empty"></div>
+    </div>
+
+    <div class="tl-item right reveal">
+      <div class="tl-empty"></div>
+      <div class="tl-dot cyan"></div>
+      <div class="tl-content">
+        <div class="tl-label">Transcendência</div>
+        <div class="tl-title">A Deificação</div>
+        <div class="tl-text">Os nomes humanos cedem lugar aos divinos. Yuri torna-se <strong style="color:#f0d080">Knull</strong>, Lucas torna-se <strong style="color:#f0d080">Onull</strong>, Leonardo torna-se <strong style="color:#f0d080">Anull</strong>. Yasmin vira <strong style="color:#a07af0">Nimsay</strong>, Jéssica vira <strong style="color:#a07af0">Aicitel</strong>, Anna vira <strong style="color:#a07af0">Aliban</strong>.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PERSONAGENS -->
+<section id="personagens">
+  <div class="section-header reveal">
+    <span class="section-label">Elenco divino</span>
+    <h2>Personagens</h2>
+    <div class="section-rule"></div>
+  </div>
+  <p class="chars-intro reveal">
+    Antes, eram humanos com nomes comuns. Depois da deificação, os nomes antigos tornaram-se ecos — e os nomes divinos, eternidade.
+  </p>
+
+  <div class="char-group-label reveal">Os Três Mestres · Agora Deuses</div>
+  <div class="cards-grid">
+
+    <a href="knull.html" class="char-card-link reveal">
+      <div class="char-card">
+        <div class="card-corner"></div>
+        <span class="char-sigil">⚡</span>
+        <div class="char-name">Yuri · Knull</div>
+        <span class="char-divine-name">→ Deus Knull</span>
+        <div class="char-role">Mestre Elemental · Narrador</div>
+        <div class="char-desc">UchiHyuuga — portador do sangue Uchiha e Hyuuga. Possui sangue Sayadin, armadura de ouro dos Cavaleiros do Zodíaco, habilidades de Shinigami e domina Chakra, Ki e Cosmos. A voz que registra o diário.</div>
+        <div class="char-tags">
+          <span class="tag">Uchiha</span>
+          <span class="tag">Hyuuga</span>
+          <span class="tag">Sayadin</span>
+          <span class="tag divine-tag">Shinigami</span>
+          <span class="tag cyan-tag">Chakra · Ki · Cosmos</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="onull.html" class="char-card-link reveal">
+      <div class="char-card">
+        <div class="card-corner"></div>
+        <span class="char-sigil">🔱</span>
+        <div class="char-name">Lucas · Onull</div>
+        <span class="char-divine-name">→ Deus Onull</span>
+        <div class="char-role">Mestre Humano</div>
+        <div class="char-desc">Representa a essência da humanidade em sua forma mais elevada, nascido na Cidadela das Sombras, Lucas possui sangue bruxo puro e possui uma habilidade incomum, fazer os ossos de seu corpo como arma— o que os mortais podem se tornar quando ultrapassam seus próprios limites. Após a deificação, transcende a própria definição de humano.</div>
+        <div class="char-tags">
+          <span class="tag">Mestre Humano</span>
+          <span class="tag divine-tag">Transcendência</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="anull.html" class="char-card-link reveal">
+      <div class="char-card">
+        <div class="card-corner"></div>
+        <span class="char-sigil">👁️</span>
+        <div class="char-name">Leonardo · Anull</div>
+        <span class="char-divine-name">→ Deus Anull</span>
+        <div class="char-role">Mestre Espiritual</div>
+        <div class="char-desc">O elo entre o mundo material e os planos espirituais. Anull é a vontade feita além-corpo, o espírito que não se dissolve mesmo quando tudo ao redor colapsa.</div>
+        <div class="char-tags">
+          <span class="tag">Mestre Espiritual</span>
+          <span class="tag divine-tag">Plano Espiritual</span>
+        </div>
+      </div>
+    </a>
+
   </div>
 
-  <div id="transition-screen"></div>
+  <div class="char-group-label reveal">As Três Guardiãs · Ascendidas</div>
+  <div class="cards-grid">
 
-  <script>
-    (function () {
-      const slides = document.querySelectorAll('.slide');
-      const dots = document.querySelectorAll('.dot');
-      let current = 0;
-      let timer = null;
+    <a href="nimsay.html" class="char-card-link divine-link reveal">
+      <div class="char-card divine-card">
+        <div class="card-corner divine-c"></div>
+        <span class="char-sigil">🌊</span>
+        <div class="char-name">Yasmin · Nimsay</div>
+        <span class="char-divine-name">→ Nimsay</span>
+        <div class="char-role">Companheira de Yuri · Feiticeira & Maga</div>
+        <div class="char-desc">Filha de Poseidon com Afrodite, descendente da deusa da lua. Aprendiz de feiticeira, bruxa e maga — carrega em si o poder dos mares e o encanto do amor divino.</div>
+        <div class="char-tags">
+          <span class="tag">Filha de Poseidon</span>
+          <span class="tag blood-tag">Filha de Afrodite</span>
+          <span class="tag divine-tag">Descendente da Lua</span>
+          <span class="tag cyan-tag">Feiticeira · Maga</span>
+        </div>
+      </div>
+    </a>
 
-      function goTo(index) {
-        const currentSlide = slides[current];
-        currentSlide.classList.remove('active');
-        currentSlide.classList.add('leaving');
-        dots[current].classList.remove('active');
+    <a href="aicitel.html" class="char-card-link divine-link reveal">
+      <div class="char-card divine-card">
+        <div class="card-corner divine-c"></div>
+        <span class="char-sigil">🌿</span>
+        <div class="char-name">Jéssica · Aicitel</div>
+        <span class="char-divine-name">→ Aicitel</span>
+        <div class="char-role">Protetora da Natureza · Filha de Hera</div>
+        <div class="char-desc">Filha de Hera e descendente da deusa da lua. Guardiã da natureza em seu estado mais sagrado. Aprendiz de feiticeira, bruxa e maga — e deusa da própria lua.</div>
+        <div class="char-tags">
+          <span class="tag">Filha de Hera</span>
+          <span class="tag divine-tag">Deusa da Lua</span>
+          <span class="tag cyan-tag">Protetora da Natureza</span>
+        </div>
+      </div>
+    </a>
 
-        setTimeout(() => {
-          currentSlide.classList.remove('leaving');
-          currentSlide.style.transform = 'scale(1)';
-        }, 1500);
+    <a href="aliban.html" class="char-card-link divine-link reveal">
+      <div class="char-card divine-card">
+        <div class="card-corner divine-c"></div>
+        <span class="char-sigil">🦉</span>
+        <div class="char-name">Anna · Aliban</div>
+        <span class="char-divine-name">→ Aliban</span>
+        <div class="char-role">Filha de Athena · Descendente da Lua</div>
+        <div class="char-desc">Filha de Athena e descendente da deusa da lua. Alia a sabedoria estratégica da mãe à magia lunar ancestral. Sua ascensão para Aliban marca o despertar de um poder há muito adormecido.</div>
+        <div class="char-tags">
+          <span class="tag">Filha de Athena</span>
+          <span class="tag divine-tag">Descendente da Lua</span>
+          <span class="tag blood-tag">Estrategista</span>
+        </div>
+      </div>
+    </a>
 
-        current = index;
-        slides[current].classList.add('active');
-        dots[current].classList.add('active');
-      }
+  </div>
+</section>
 
-      function next() {
-        goTo((current + 1) % slides.length);
-      }
+<!-- PODERES -->
+<section id="poderes">
+  <div class="section-header reveal">
+    <span class="section-label">Arsenal de Knull</span>
+    <h2>Poderes & Herança</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="powers-grid">
 
-      function startTimer() {
-        clearInterval(timer);
-        timer = setInterval(next, 6000);
-      }
+    <div class="power-block reveal">
+      <div class="power-icon">👁️</div>
+      <div class="power-name">Sangue Uchiha — Sharingan / Mangekyō</div>
+      <div class="power-desc">Olhos que veem além do véu — copiando técnicas, prevendo movimentos e acessando o Mangekyō para desencadear Amaterasu, Tsukuyomi e Susanoo.</div>
+      <div class="power-bar-wrap"><div class="power-bar blood" data-width="95"></div></div>
+    </div>
 
-      dots.forEach((dot, i) => {
-        dot.style.pointerEvents = 'all';
-        dot.addEventListener('click', () => {
-          goTo(i);
-          startTimer();
-        });
+    <div class="power-block reveal">
+      <div class="power-icon">🔮</div>
+      <div class="power-name">Sangue Hyuuga — Byakugan</div>
+      <div class="power-desc">Visão de 360° que penetra qualquer ilusão. Permite enxergar o sistema de chakra do oponente e destruí-lo ponto a ponto com o Jūken.</div>
+      <div class="power-bar-wrap"><div class="power-bar" data-width="88"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">⚔️</div>
+      <div class="power-name">Armadura de Ouro — Cavaleiros do Zodíaco</div>
+      <div class="power-desc">Uma das doze armaduras mais sagradas do cosmos. Forjada com metal divino, amplifica o Cosmos do portador e o protege de ataques de nível olímpico.</div>
+      <div class="power-bar-wrap"><div class="power-bar divine" data-width="92"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">💀</div>
+      <div class="power-name">Habilidades de Shinigami — Bleach</div>
+      <div class="power-desc">Zanpakutō com Shikai e Bankai. Domínio do Kidō, Sonído e Hierro — poderes que cruzam a fronteira entre o mundo dos vivos e o além.</div>
+      <div class="power-bar-wrap"><div class="power-bar blood" data-width="90"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">🌀</div>
+      <div class="power-name">Chakra — Naruto</div>
+      <div class="power-desc">Energia vital moldada pela mente e pelo corpo. Permite jutsu de todos os elementos, Modo Sábio e acesso ao chakra do mundo natural.</div>
+      <div class="power-bar-wrap"><div class="power-bar cyan" data-width="97"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">🔥</div>
+      <div class="power-name">Ki — Dragon Ball</div>
+      <div class="power-desc">A força vital em sua forma mais pura e explosiva. Permite voo, escudos de energia e ondas que podem varrer montanhas da face da Terra.</div>
+      <div class="power-bar-wrap"><div class="power-bar" data-width="93"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">✨</div>
+      <div class="power-name">Cosmos — Saint Seiya</div>
+      <div class="power-desc">A chama que arde no coração de todo cavaleiro. Quando levado ao limite absoluto, o Cosmos permite alcançar a velocidade da luz e tocar o divino.</div>
+      <div class="power-bar-wrap"><div class="power-bar divine" data-width="89"></div></div>
+    </div>
+
+    <div class="power-block reveal">
+      <div class="power-icon">🧬</div>
+      <div class="power-name">Sangue Sayadin</div>
+      <div class="power-desc">Uma herança rara que potencializa cada poder existente. O sangue Sayadin atua como multiplicador, elevando o limite máximo de cada habilidade além do possível.</div>
+      <div class="power-bar-wrap"><div class="power-bar blood" data-width="100"></div></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-title">O Diário de um Deus</div>
+  <div class="footer-sub">"Antes éramos nomes. Agora somos eternidade."</div>
+  <div class="hero-divider" style="opacity:0.3; margin: 1.5rem auto;"></div>
+  <div class="footer-copy">Obra de UchiHyuuga Yuri · Todos os direitos reservados</div>
+</footer>
+
+<script>
+  /* === JAVASCRIPT VIRÁ AQUI (Parte 4) === */
+  (function() {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx = canvas.getContext('2d');
+  const hero = document.getElementById('hero');
+  let W, H, stars = [], nebulas = [], magicParticles = [], heroArea = { x: 0, y: 0, w: 0, h: 0 };
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    updateHeroArea();
+  }
+
+  function updateHeroArea() {
+    if (!hero) {
+      heroArea = { x: W / 2, y: H * 0.3, w: 340, h: 260 };
+      return;
+    }
+
+    const rect = hero.getBoundingClientRect();
+    heroArea = {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+      w: rect.width,
+      h: rect.height
+    };
+  }
+
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 220; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.4 + 0.2,
+        a: Math.random(),
+        speed: Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2
       });
+    }
 
-      startTimer();
-    })();
-
-    (function () {
-      const canvas = document.getElementById('particles');
-      const ctx = canvas.getContext('2d');
-      let W, H, particles = [];
-
-      function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-      }
-
-      function initParticles() {
-        particles = [];
-
-        for (let i = 0; i < 80; i++) {
-          particles.push({
-            type: 'gold',
-            x: Math.random() * W,
-            y: Math.random() * H,
-            r: Math.random() * 1.8 + 0.3,
-            a: Math.random() * 0.7 + 0.1,
-            speedX: (Math.random() - 0.5) * 0.25,
-            speedY: -(Math.random() * 0.4 + 0.1),
-            twinkle: Math.random() * Math.PI * 2,
-            tSpeed: Math.random() * 0.02 + 0.01
-          });
-        }
-
-        for (let i = 0; i < 40; i++) {
-          particles.push({
-            type: 'divine',
-            x: Math.random() * W,
-            y: Math.random() * H,
-            r: Math.random() * 2.2 + 0.5,
-            a: Math.random() * 0.5 + 0.1,
-            speedX: (Math.random() - 0.5) * 0.2,
-            speedY: -(Math.random() * 0.3 + 0.05),
-            twinkle: Math.random() * Math.PI * 2,
-            tSpeed: Math.random() * 0.015 + 0.008
-          });
-        }
-
-        for (let i = 0; i < 15; i++) {
-          particles.push({
-            type: 'spark',
-            x: Math.random() * W,
-            y: Math.random() * H,
-            r: Math.random() * 3.5 + 1.5,
-            a: Math.random() * 0.4 + 0.05,
-            speedX: (Math.random() - 0.5) * 0.15,
-            speedY: -(Math.random() * 0.2 + 0.05),
-            twinkle: Math.random() * Math.PI * 2,
-            tSpeed: Math.random() * 0.01 + 0.005
-          });
-        }
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-
-        particles.forEach(p => {
-          p.x += p.speedX;
-          p.y += p.speedY;
-          p.twinkle += p.tSpeed;
-
-          if (p.y < -10) {
-            p.y = H + 10;
-            p.x = Math.random() * W;
-          }
-          if (p.x < -10) p.x = W + 10;
-          if (p.x > W + 10) p.x = -10;
-
-          const alpha = p.a * (0.5 + 0.5 * Math.sin(p.twinkle));
-
-          if (p.type === 'gold') {
-            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3);
-            grad.addColorStop(0, `rgba(240,208,120,${alpha})`);
-            grad.addColorStop(1, 'rgba(201,168,76,0)');
-            ctx.fillStyle = grad;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r * 3, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255,240,180,${alpha * 1.4})`;
-            ctx.fill();
-          } else if (p.type === 'divine') {
-            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
-            grad.addColorStop(0, `rgba(160,122,240,${alpha})`);
-            grad.addColorStop(1, 'rgba(106,79,207,0)');
-            ctx.fillStyle = grad;
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(200,180,255,${alpha * 1.2})`;
-            ctx.fill();
-          } else if (p.type === 'spark') {
-            const size = p.r * (0.8 + 0.4 * Math.sin(p.twinkle));
-            ctx.save();
-            ctx.translate(p.x, p.y);
-
-            const gH = ctx.createLinearGradient(-size * 4, 0, size * 4, 0);
-            gH.addColorStop(0, 'rgba(240,208,120,0)');
-            gH.addColorStop(0.5, `rgba(255,245,200,${alpha})`);
-            gH.addColorStop(1, 'rgba(240,208,120,0)');
-            ctx.fillStyle = gH;
-            ctx.fillRect(-size * 4, -size * 0.3, size * 8, size * 0.6);
-
-            const gV = ctx.createLinearGradient(0, -size * 4, 0, size * 4);
-            gV.addColorStop(0, 'rgba(240,208,120,0)');
-            gV.addColorStop(0.5, `rgba(255,245,200,${alpha})`);
-            gV.addColorStop(1, 'rgba(240,208,120,0)');
-            ctx.fillStyle = gV;
-            ctx.fillRect(-size * 0.3, -size * 4, size * 0.6, size * 8);
-
-            ctx.beginPath();
-            ctx.arc(0, 0, size * 0.8, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255,255,240,${alpha * 1.5})`;
-            ctx.fill();
-
-            ctx.restore();
-          }
-        });
-
-        requestAnimationFrame(draw);
-      }
-
-      window.addEventListener('resize', () => {
-        resize();
-        initParticles();
+    nebulas = [];
+    const colors = [
+      'rgba(106,79,207,',
+      'rgba(201,168,76,',
+      'rgba(139,0,0,',
+      'rgba(42,240,232,'
+    ];
+    for (let i = 0; i < 5; i++) {
+      nebulas.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 300 + 150,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a: Math.random() * 0.06 + 0.02
       });
+    }
+  }
 
-      resize();
-      initParticles();
-      draw();
-    })();
-
-    (function () {
-      const btn = document.getElementById('enter-btn');
-      const transition = document.getElementById('transition-screen');
-      const content = document.getElementById('content');
-      const dots = document.getElementById('slide-dots');
-      const overlay = document.getElementById('overlay');
-      const vignette = document.getElementById('vignette');
-
-      function enterSite() {
-        if (btn.disabled) return;
-
-        btn.disabled = true;
-        btn.style.pointerEvents = 'none';
-
-        const activeSlide = document.querySelector('.slide.active');
-
-        if (activeSlide) {
-          activeSlide.style.animation = 'none';
-          activeSlide.style.transition =
-            'transform 1.4s cubic-bezier(0.22, 1, 0.36, 1), filter 1.4s ease, opacity 1.4s ease';
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              activeSlide.style.transform = 'scale(1.08)';
-              activeSlide.style.filter = 'brightness(1.04) saturate(1.05) blur(1px)';
-            });
-          });
-        }
-
-        content.style.opacity = '0';
-        content.style.transform = 'scale(1.03) translateY(-8px)';
-        content.style.filter = 'blur(10px)';
-        dots.style.opacity = '0';
-        overlay.style.opacity = '0.18';
-        vignette.style.opacity = '0.25';
-
-        setTimeout(() => {
-          transition.classList.add('fade-in');
-        }, 850);
-
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 1750);
-      }
-
-      btn.addEventListener('click', enterSite);
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          enterSite();
-        }
+  function initMagicParticles() {
+    magicParticles = [];
+    for (let i = 0; i < 65; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const orbit = Math.random() * Math.min(heroArea.w, heroArea.h) * 0.38 + 40;
+      magicParticles.push({
+        angle,
+        orbit,
+        speed: Math.random() * 0.03 + 0.01,
+        angularVelocity: (Math.random() - 0.5) * 0.004,
+        r: Math.random() * 1.6 + 0.6,
+        a: Math.random() * 0.5 + 0.3,
+        color: Math.random() < 0.65 ? 'rgba(201,168,76,' : 'rgba(106,79,207,'
       });
-    })();
-  </script>
+    }
+  }
+
+  function drawMagic() {
+    magicParticles.forEach(p => {
+      p.angle += p.angularVelocity;
+      p.orbit += Math.sin(frame * 0.02 + p.speed * 10) * 0.02;
+      const x = heroArea.x + Math.cos(p.angle) * p.orbit;
+      const y = heroArea.y + Math.sin(p.angle) * p.orbit;
+      const alpha = p.a * (0.55 + 0.45 * Math.sin(frame * 0.03 + p.speed * 12));
+
+      const glow = ctx.createRadialGradient(x, y, 0, x, y, p.r * 5);
+      glow.addColorStop(0, p.color + alpha + ')');
+      glow.addColorStop(1, p.color + '0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(x - p.r * 5, y - p.r * 5, p.r * 10, p.r * 10);
+
+      ctx.beginPath();
+      ctx.arc(x, y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + alpha + ')';
+      ctx.fill();
+    });
+  }
+
+  let frame = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Gradiente de fundo */
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0,   '#030308');
+    bg.addColorStop(0.5, '#07070f');
+    bg.addColorStop(1,   '#0a0310');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Névoas coloridas */
+    nebulas.forEach(n => {
+      const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+      grad.addColorStop(0, n.color + n.a + ')');
+      grad.addColorStop(1, n.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Estrelas com cintilação */
+    frame += 0.008;
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const alpha = s.a * (0.6 + 0.4 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(230,215,180,${alpha})`;
+      ctx.fill();
+    });
+
+    /* Partículas divinas ao redor do herói */
+    drawMagic();
+
+    /* Brilho dourado sutil no rodapé */
+    const horizon = ctx.createLinearGradient(0, H * 0.7, 0, H);
+    horizon.addColorStop(0, 'transparent');
+    horizon.addColorStop(1, 'rgba(201,168,76,0.04)');
+    ctx.fillStyle = horizon;
+    ctx.fillRect(0, H * 0.7, W, H * 0.3);
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); initStars(); initMagicParticles(); });
+  resize();
+  initStars();
+  initMagicParticles();
+  draw();
+})();
+
+/* ── SCROLL REVEAL ── */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── CONTROLE DE ÁUDIO ── */
+(function() {
+  const audio = document.querySelector('audio');
+  if (!audio) return;
+
+  function playAudio() {
+    audio.muted = false;
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        console.log('Autoplay bloqueado pelo navegador. Áudio aguarda interação.');
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(playAudio, 100);
+    });
+  } else {
+    setTimeout(playAudio, 100);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && audio.paused) {
+      setTimeout(playAudio, 50);
+    }
+  });
+
+  document.addEventListener('click', () => {
+    if (audio.paused) playAudio();
+  }, { once: true });
+})();
+
+/* ── BARRAS DE PODER (animam ao entrar na tela) ── */
+(function() {
+  const bars = document.querySelectorAll('.power-bar');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const bar = e.target;
+        const target = bar.getAttribute('data-width');
+        setTimeout(() => { bar.style.width = target + '%'; }, 200);
+        io.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  bars.forEach(b => io.observe(b));
+})();
+
+/* ── MOBILE MENU TOGGLE ── */
+(function () {
+  const navbar = document.getElementById('navbar');
+  const toggle = document.getElementById('menu-toggle');
+  if (!toggle) return;
+
+  toggle.addEventListener('click', () => {
+    navbar.classList.toggle('mobile-open');
+  });
+
+  /* Fechar menu ao clicar em um link */
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      navbar.classList.remove('mobile-open');
+    });
+  });
+
+  /* Fechar menu ao fazer scroll */
+  window.addEventListener('scroll', () => {
+    navbar.classList.remove('mobile-open');
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
