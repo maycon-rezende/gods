@@ -772,6 +772,7 @@ footer {
 
   .story-block { padding: 1.5rem 0 1.5rem 1.8rem; }
 }
+
   /* === CSS VIRÁ NAS PARTES 2 E 3 === */
 </style>
 </head>
@@ -781,7 +782,7 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a href="home.html">← Voltar ao Início</a>
+  <a href="index.html">← Voltar ao Início</a>
   <a href="#sobre">Sobre</a>
   <a href="#poderes">Poderes</a>
   <a href="#historia">História</a>
@@ -1027,7 +1028,7 @@ footer {
   <div class="footer-nav">
     <a href="nimsay.html">← Nimsay</a>
     <span class="footer-sep">·</span>
-    <a href="home.html">Início</a>
+    <a href="index.html">Início</a>
     <span class="footer-sep">·</span>
     <a href="anull.html">Anull →</a>
   </div>
@@ -1165,11 +1166,53 @@ footer {
     requestAnimationFrame(animate);
   }
 
-  window.addEventListener('resize', resize);
-  resize();
-  initStars();
-  animate();
+  window.addEventListener('load', () => {
+    resize();
+    initStars();
+    animate();
+  });
+
+  window.addEventListener('resize', () => {
+    resize();
+    initStars();
+  });
 })();
+</script>
+
+<script>
+  /* ── SCROLL REVEAL ── */
+  (function() {
+    const els = document.querySelectorAll('.reveal');
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    els.forEach(el => io.observe(el));
+  })();
+
+  /* ── BARRAS DE PODER (animam ao entrar na tela) ── */
+  (function() {
+    const bars = document.querySelectorAll('.power-bar');
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const bar = e.target;
+          const target = bar.getAttribute('data-width');
+          setTimeout(() => { bar.style.width = target + '%'; }, 200);
+          io.unobserve(bar);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    bars.forEach(b => io.observe(b));
+  })();
 </script>
 </body>
 </html>

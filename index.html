@@ -639,7 +639,7 @@
   </style>
 </head>
 <body>
-  <audio autoplay loop hidden>
+   <audio loop hidden>
     <source src="audio/themepic.mp3" type="audio/mpeg" />
   </audio>
 
@@ -941,6 +941,57 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           enterSite();
+        }
+      });
+    })();
+  </script>
+
+  <script>
+    /* ── CONTROLE DE ÁUDIO ── */
+    (function() {
+      const audio = document.querySelector('audio');
+      if (!audio) return;
+
+      let audioStarted = false;
+
+      function playAudio() {
+        if (audioStarted) {
+          audio.muted = false;
+        } else {
+          audio.muted = true;
+          audio.play().then(() => {
+            audioStarted = true;
+            // Após iniciar muted, podemos tentar desmutar no próximo clique
+          }).catch(() => {
+            console.log('Autoplay bloqueado. Áudio aguarda interação.');
+          });
+        }
+      }
+
+      // Tenta tocar muted no carregamento
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(playAudio, 100);
+        });
+      } else {
+        setTimeout(playAudio, 100);
+      }
+
+      // No primeiro clique, desmuta se estiver tocando muted
+      document.addEventListener('click', () => {
+        if (audio.muted && audioStarted) {
+          audio.muted = false;
+        } else if (!audioStarted) {
+          audio.muted = false;
+          audio.play().catch(() => {
+            console.log('Falha ao tocar áudio.');
+          });
+        }
+      }, { once: true });
+
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && audio.paused && audioStarted) {
+          audio.play().catch(() => {});
         }
       });
     })();
