@@ -598,57 +598,127 @@ h2 {
 /* ── GALERIA ── */
 #galeria { padding-bottom: 5rem; }
 
-.gallery-grid {
+.gallery-showcase {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 260px 260px;
-  gap: 0.8rem;
-  max-width: 1100px;
+  grid-template-columns: 1fr;
+  width: min(760px, 100%);
+  gap: clamp(0.9rem, 2vw, 1.4rem);
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-.gallery-item {
+.gallery-panel {
+  position: relative;
+  min-height: clamp(260px, 34vw, 360px);
+  border: 1px solid rgba(212,168,32,0.16);
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, rgba(13,0,8,0.9), rgba(3,3,8,0.98));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.gallery-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212,168,32,0.06), transparent 38%, rgba(200,208,216,0.08));
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gallery-panel::after {
+  content: '';
+  position: absolute;
+  inset: auto -15% -40% -15%;
+  height: 55%;
+  background: radial-gradient(circle at center, rgba(212,168,32,0.28), transparent 62%);
+  filter: blur(34px);
+  opacity: 0;
+  transition: opacity 0.45s ease-in-out;
+  z-index: 1;
+}
+
+.gallery-panel:hover {
+  border-color: rgba(212,168,32,0.38);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.28), 0 0 26px rgba(212,168,32,0.14);
+  transform: translateY(-4px);
+}
+
+.gallery-panel:hover::after,
+.gallery-panel.is-active::after {
+  opacity: 1;
+}
+
+.gallery-visual {
+  position: absolute;
+  inset: 0;
   background-size: cover;
   background-position: center;
-  background-color: #080600;
-  background-image:
-    radial-gradient(ellipse at 50% 50%,
-      rgba(212,168,32,0.12) 0%, transparent 70%);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  border: 1px solid rgba(212,168,32,0.1);
-  transition: border-color 0.3s;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s ease-in-out, transform 1.2s ease-in-out, filter 0.9s ease-in-out;
+  transform: scale(1.02);
+  opacity: 1;
 }
 
-.gallery-item:hover {
-  border-color: rgba(212,168,32,0.45);
+.gallery-panel.is-transitioning .gallery-visual {
+  animation: knullPanelShift 1.2s ease-in-out;
 }
 
-.gallery-item.tall { grid-row: span 2; }
-.gallery-item.wide { grid-column: span 2; }
+.gallery-panel.is-active .gallery-visual {
+  transform: scale(1.04);
+}
+
+.gallery-panel:hover .gallery-visual {
+  transform: scale(1.06);
+}
 
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top,
-    rgba(3,3,8,0.9) 0%, transparent 50%);
+  background: linear-gradient(to top, rgba(3,3,8,0.9) 0%, transparent 50%);
   display: flex;
   align-items: flex-end;
   padding: 1.2rem;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.45s ease-in-out;
+  z-index: 3;
 }
 
-.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-panel:hover .gallery-overlay {
+  opacity: 1;
+}
 
 .gallery-overlay span {
   font-family: 'Cinzel', serif;
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--human);
+}
+
+.gallery-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-bottom: 0.8rem;
+}
+
+.gallery-index,
+.gallery-track {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(232,200,112,0.85);
+}
+
+.gallery-panel-sub {
+  margin-top: 0.8rem;
+  max-width: 580px;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(232,200,112,0.9);
 }
 
 .gallery-hint {
@@ -664,6 +734,12 @@ h2 {
   font-family: monospace;
   color: var(--char-accent);
   font-style: normal;
+}
+
+@keyframes knullPanelShift {
+  0% { opacity: 0.75; transform: scale(1); filter: blur(4px) saturate(0.95); }
+  50% { opacity: 0.88; transform: scale(1.015); filter: blur(2px) saturate(1.02); }
+  100% { opacity: 1; transform: scale(1.02); filter: blur(0) saturate(1); }
 }
 
 /* ── FOOTER ── */
@@ -778,6 +854,10 @@ footer {
 </head>
 <body>
 
+     <audio autoplay loop hidden preload="auto" playsinline>
+    <source src="audio/themepic3.mp3" type="audio/mpeg" />
+  </audio>
+
 <canvas id="cosmos-bg"></canvas>
 
 <!-- NAV -->
@@ -791,7 +871,7 @@ footer {
 
 <!-- BANNER HERO -->
 <section id="banner">
-  <div class="banner-bg" style="background-image: url('onull-banner.jpg')"></div>
+  <div class="banner-bg" style="background-image: url('img-onull/onullbanner.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
     <p class="banner-eyebrow">Mestre Humano · Deus Onull · Transcendido</p>
@@ -834,7 +914,7 @@ footer {
 
   <div class="about-grid reveal">
     <div class="about-photo-wrap">
-      <div class="about-photo" style="background-image: url('onull-perfil.jpg')">
+      <div class="about-photo" style="background-image: url('img-onull/onullbanner2.png')">
         <div class="photo-frame-corner tl"></div>
         <div class="photo-frame-corner tr"></div>
         <div class="photo-frame-corner bl"></div>
@@ -997,29 +1077,22 @@ footer {
     <div class="section-rule"></div>
   </div>
 
-  <div class="gallery-grid reveal">
-    <div class="gallery-item tall" style="background-image: url('onull-01.jpg')">
-      <div class="gallery-overlay"><span>Onull · Forma Divina</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('onull-02.jpg')">
-      <div class="gallery-overlay"><span>Forma de Crise</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('onull-03.jpg')">
-      <div class="gallery-overlay"><span>Mestre Humano</span></div>
-    </div>
-    <div class="gallery-item wide" style="background-image: url('onull-04.jpg')">
-      <div class="gallery-overlay"><span>Transcendência · O Limite Rompido</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('onull-05.jpg')">
-      <div class="gallery-overlay"><span>Vontade Inabalável</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('onull-06.jpg')">
-      <div class="gallery-overlay"><span>Lucas · Antes da Ascensão</span></div>
-    </div>
+  <div class="gallery-showcase reveal" id="gallery-showcase">
+    <article class="gallery-panel is-active" data-lane="0">
+      <div class="gallery-visual" style="background-image: url('img-onull/onullarmadura.png')"></div>
+      <div class="gallery-overlay">
+        <div class="gallery-meta">
+          <span class="gallery-index">Bloco I · 01</span>
+          <span class="gallery-track">Ciclo Humano</span>
+        </div>
+        <span>Onull · Forma Divina</span>
+        <p class="gallery-panel-sub">A origem humana que supera todos os limites e se torna mito.</p>
+      </div>
+    </article>
   </div>
 
   <p class="gallery-hint reveal">
-    Substitua os arquivos <code>onull-01.jpg</code> até <code>onull-06.jpg</code> pelas imagens do personagem na mesma pasta do HTML.
+    A galeria roda em loop automático e mostra as imagens de Onull sem precisar de controles.
   </p>
 </section>
 
@@ -1212,6 +1285,74 @@ footer {
     }, { threshold: 0.35 });
 
     bars.forEach(b => io.observe(b));
+  })();
+</script>
+
+<script>
+  /* ── GALERIA ONULL EM LOOP ── */
+  (function () {
+    const showcase = document.getElementById('gallery-showcase');
+    if (!showcase) return;
+
+    const panel = showcase.querySelector('.gallery-panel');
+    if (!panel) return;
+
+    const slides = [
+      {
+        bg: "url('img-onull/onull.png')",
+        title: 'Onull · Forma Divina',
+        sub: 'A origem humana que supera todos os limites e se torna mito.'
+      },
+      {
+        bg: "url('img-onull/onullarmadura.png')",
+        title: 'Forma de Crise',
+        sub: 'O momento em que o humano se transforma em força pura de sobrevivência.'
+      },
+      
+    ];
+
+    function preloadGalleryImages() {
+      slides.forEach(item => {
+        const url = item.bg.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '');
+        const img = new Image();
+        img.src = url;
+      });
+    }
+
+    function updatePanel(index) {
+      const slide = slides[index];
+      const visual = panel.querySelector('.gallery-visual');
+      const title = panel.querySelector('.gallery-overlay span');
+      const sub = panel.querySelector('.gallery-panel-sub');
+      const indexLabel = panel.querySelector('.gallery-index');
+      const track = panel.querySelector('.gallery-track');
+
+      if (visual) {
+        visual.style.opacity = '0';
+        setTimeout(() => {
+          visual.style.backgroundImage = slide.bg;
+          visual.style.opacity = '1';
+        }, 60);
+      }
+      if (title) title.textContent = slide.title;
+      if (sub) sub.textContent = slide.sub;
+      if (indexLabel) indexLabel.textContent = `Bloco I · ${String(index + 1).padStart(2, '0')}`;
+      if (track) track.textContent = 'Ciclo Humano';
+      panel.classList.add('is-transitioning');
+    }
+
+    let current = 0;
+    preloadGalleryImages();
+    updatePanel(current);
+
+    panel.addEventListener('animationend', () => {
+      panel.classList.remove('is-transitioning');
+    });
+
+    setInterval(() => {
+      current = (current + 1) % slides.length;
+      updatePanel(current);
+    }, 4200);
   })();
 </script>
 </body>
