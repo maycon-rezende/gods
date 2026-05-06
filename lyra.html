@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lyra — O Diário de um Deus</title>
+<link rel="stylesheet" href="effects.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  /* ── VARIÁVEIS E RESET ── */
+:root {
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+  --void: #030308;
+  --deep: #07070f;
+  --surface: #13131f;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --divine: #6a4fcf;
+  --divine-light: #a07af0;
+
+  /* Cores exclusivas da Lyra */
+  --char-accent: #5aaa7a;
+  --char-accent-dim: #2a6a4a;
+  --char-accent-glow: rgba(90,170,122,0.35);
+  --life: #70c090;
+  --life-dim: #3a7a5a;
+  --life-glow: rgba(112,192,144,0.3);
+  --link: #a0d4b8;
+  --link-dim: #4a8a6a;
+  --link-glow: rgba(160,212,184,0.3);
+  --pearl: #e8f4ee;
+  --pearl-dim: #8ab4a0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+#cosmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(to bottom, rgba(3,3,8,0.95), transparent);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid rgba(90,170,122,0.15);
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--life);
+  text-shadow: 0 0 20px var(--life-glow);
+}
+
+.nav-logo img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(90,170,122,0.3);
+  box-shadow: 0 0 12px rgba(90,170,122,0.4);
+  transition: box-shadow 0.3s;
+  display: block;
+}
+
+.nav-logo img:hover {
+  box-shadow:
+    0 0 20px rgba(112,192,144,0.7),
+    0 0 40px rgba(106,79,207,0.3);
+}
+
+/* ── BANNER ── */
+#banner {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.banner-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+  background-color: #020a05;
+  background-image:
+    radial-gradient(ellipse at 60% 25%,
+      rgba(90,170,122,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 65%,
+      rgba(160,212,184,0.12) 0%, transparent 50%);
+}
+
+.banner-bg.loaded { transform: scale(1); }
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top,
+      rgba(3,3,8,1)    0%,
+      rgba(3,3,8,0.75) 35%,
+      rgba(3,3,8,0.3)  65%,
+      rgba(3,3,8,0.12) 100%),
+    linear-gradient(to right,
+      rgba(3,3,8,0.65) 0%,
+      transparent      60%);
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 5vw 5rem;
+  max-width: 780px;
+  width: 100%;
+}
+
+.banner-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--life);
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fade-up 1s 0.2s ease forwards;
+}
+
+.banner-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  line-height: 0.95;
+  background: linear-gradient(135deg,
+    #f0fff8 0%,
+    #b0e8c8 20%,
+    #5aaa7a 45%,
+    #a0d4b8 70%,
+    #e8f4ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(90,170,122,0.5));
+  opacity: 0;
+  animation: fade-up 1s 0.4s ease forwards;
+}
+
+.banner-human {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  margin-top: 0.6rem;
+  opacity: 0;
+  animation: fade-up 1s 0.6s ease forwards;
+}
+
+.banner-divider {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    var(--life), var(--link), transparent);
+  margin: 1.8rem 0;
+  opacity: 0;
+  animation: fade-up 1s 0.8s ease forwards;
+}
+
+.banner-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--text-dim);
+  max-width: 520px;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fade-up 1s 0.9s ease forwards;
+}
+
+/* ── STATS DO BANNER ── */
+.banner-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 1s 1.1s ease forwards;
+}
+
+.bstat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bstat-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.08em;
+}
+
+.bstat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.bstat-sep {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom,
+    transparent, rgba(90,170,122,0.4), transparent);
+  flex-shrink: 0;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  right: 5vw;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--life);
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+
+/* ── ANIMAÇÕES ── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ── REVEAL ON SCROLL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVO — BANNER E NAV
+════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  nav { gap: 1.8rem; }
+  .banner-content { padding: 4rem 4vw 4rem; }
+}
+
+@media (max-width: 768px) {
+  nav {
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.9rem 1rem;
+  }
+
+  nav a { font-size: 0.68rem; letter-spacing: 0.12em; }
+  .nav-logo img { width: 30px; height: 30px; }
+
+  .banner-content {
+    padding: 5rem 1.5rem 3.5rem;
+    max-width: 100%;
+  }
+
+  .banner-overlay {
+    background:
+      linear-gradient(to top,
+        rgba(3,3,8,1)    0%,
+        rgba(3,3,8,0.88) 45%,
+        rgba(3,3,8,0.55) 70%,
+        rgba(3,3,8,0.2)  100%),
+      linear-gradient(to right,
+        rgba(3,3,8,0.7) 0%,
+        rgba(3,3,8,0.2) 100%);
+  }
+
+  .banner-quote  { font-size: 1rem; max-width: 100%; }
+  .banner-stats  { gap: 0.8rem; margin-top: 1.8rem; }
+  .bstat-val     { font-size: 0.75rem; }
+  .bstat-label   { font-size: 0.5rem; }
+  .bstat-sep     { height: 28px; }
+
+  .scroll-hint {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  nav { gap: 0.6rem; padding: 0.8rem; }
+  nav a { font-size: 0.62rem; }
+
+  .banner-content { padding: 5rem 1.2rem 3rem; }
+
+  .banner-overlay {
+    background:
+      linear-gradient(to top,
+        rgba(3,3,8,1)    0%,
+        rgba(3,3,8,0.92) 50%,
+        rgba(3,3,8,0.65) 75%,
+        rgba(3,3,8,0.25) 100%);
+  }
+
+  .banner-eyebrow { font-size: 0.55rem; letter-spacing: 0.2em; }
+  .banner-human   { font-size: 0.95rem; }
+  .banner-quote   { font-size: 0.92rem; line-height: 1.65; }
+
+  .bstat-sep { display: none; }
+
+  .bstat {
+    background: rgba(90,170,122,0.06);
+    border: 1px solid rgba(90,170,122,0.15);
+    padding: 0.4rem 0.8rem;
+    border-radius: 1px;
+  }
+
+  .bstat-val   { font-size: 0.7rem; }
+  .bstat-label { font-size: 0.48rem; }
+}
+
+@media (max-width: 360px) {
+  .banner-name    { font-size: clamp(2.2rem, 13vw, 3.2rem); }
+  .banner-content { padding: 5rem 1rem 2.5rem; }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  #banner         { min-height: 100svh; }
+  .banner-content { padding: 3.5rem 4vw 2.5rem; }
+  .banner-stats   { margin-top: 1.2rem; }
+}
+/* ── SEÇÕES COMPARTILHADAS ── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+}
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--life);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--gold-light);
+  text-shadow: 0 0 40px rgba(90,170,122,0.2);
+}
+
+.section-rule {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, var(--life), var(--link), transparent);
+  margin: 1.5rem auto 0;
+}
+
+/* ── SOBRE ── */
+#sobre { padding-bottom: 5rem; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  align-items: start;
+}
+
+.about-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 6rem;
+}
+
+.about-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center;
+  background-color: #020a05;
+  background-image:
+    radial-gradient(ellipse at 50% 30%,
+      rgba(90,170,122,0.2) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 80%,
+      rgba(160,212,184,0.1) 0%, transparent 60%);
+  position: relative;
+  border: 1px solid rgba(90,170,122,0.2);
+}
+
+.photo-frame-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+
+.photo-frame-corner.tl {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--life);
+  border-left: 2px solid var(--life);
+}
+
+.photo-frame-corner.tr {
+  top: -1px; right: -1px;
+  border-top: 2px solid var(--life);
+  border-right: 2px solid var(--life);
+}
+
+.photo-frame-corner.bl {
+  bottom: -1px; left: -1px;
+  border-bottom: 2px solid var(--link);
+  border-left: 2px solid var(--link);
+}
+
+.photo-frame-corner.br {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--link);
+  border-right: 2px solid var(--link);
+}
+
+.about-photo-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--life);
+  text-align: center;
+}
+
+.about-text p {
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.4rem;
+  font-size: 1.05rem;
+}
+
+.about-text p strong { color: var(--gold-light); }
+
+.about-text p em {
+  color: var(--life);
+  font-style: normal;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(90,170,122,0.2);
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border-radius: 1px;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.tag:hover {
+  border-color: var(--life);
+  color: var(--gold-light);
+}
+
+.tag.life-tag {
+  border-color: rgba(112,192,144,0.4);
+  color: var(--life);
+}
+
+.tag.link-tag {
+  border-color: rgba(160,212,184,0.4);
+  color: var(--link);
+}
+
+.tag.divine-tag {
+  border-color: rgba(160,122,240,0.3);
+  color: var(--divine-light);
+}
+
+/* ── DESCRIÇÃO ── */
+#descricao { padding-bottom: 5rem; }
+
+.desc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.desc-card {
+  background: linear-gradient(135deg,
+    var(--surface) 0%, var(--deep) 100%);
+  border: 1px solid rgba(90,170,122,0.12);
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.3s;
+}
+
+.desc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(90,170,122,0.07) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.desc-card:hover {
+  border-color: rgba(112,192,144,0.4);
+  transform: translateY(-4px);
+}
+
+.desc-card:hover::before { opacity: 1; }
+
+.desc-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px var(--life-glow));
+}
+
+.desc-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--life);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.desc-text {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+/* ── PODERES ── */
+#poderes {
+  padding-bottom: 5rem;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(90,170,122,0.03),
+    rgba(160,212,184,0.02),
+    transparent);
+}
+
+.powers-list {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.power-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(90,170,122,0.08);
+  align-items: start;
+  transition: background 0.3s;
+}
+
+.power-item:hover {
+  background: rgba(90,170,122,0.03);
+}
+
+.power-item:last-child { border-bottom: none; }
+
+.power-icon-big {
+  font-size: 2.5rem;
+  text-align: center;
+  filter: drop-shadow(0 0 12px var(--char-accent-glow));
+  padding-top: 0.2rem;
+}
+
+.power-origin {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--life);
+  margin-bottom: 0.4rem;
+}
+
+.power-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.power-body {
+  font-size: 0.97rem;
+  color: var(--text-dim);
+  line-height: 1.85;
+}
+
+.power-body em {
+  color: var(--gold-light);
+  font-style: normal;
+}
+
+.power-bar-wrap {
+  margin-top: 1.2rem;
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.power-bar {
+  height: 100%;
+  background: linear-gradient(90deg,
+    var(--char-accent-dim), var(--char-accent));
+  border-radius: 2px;
+  transition: width 1.5s ease;
+  width: 0;
+}
+
+.power-bar.life {
+  background: linear-gradient(90deg,
+    var(--life-dim), var(--life));
+}
+
+.power-bar.link {
+  background: linear-gradient(90deg,
+    var(--link-dim), var(--link));
+}
+
+.power-bar.divine {
+  background: linear-gradient(90deg,
+    var(--divine), var(--divine-light));
+}
+
+/* ── HISTÓRIA ── */
+#historia { padding-bottom: 5rem; }
+
+.story-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-block {
+  padding: 2.5rem 0 2.5rem 2.5rem;
+  border-left: 1px solid rgba(90,170,122,0.2);
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.story-block:hover {
+  border-color: rgba(112,192,144,0.5);
+}
+
+.story-block::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 2.7rem;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--life);
+  box-shadow:
+    0 0 12px var(--life-glow),
+    0 0 24px var(--link-glow);
+}
+
+.story-chapter {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--life);
+  margin-bottom: 0.4rem;
+}
+
+.story-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 1rem;
+}
+
+.story-block p {
+  font-size: 1rem;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+
+.story-block p strong { color: var(--gold-light); }
+
+/* ── GALERIA EM LOOP ── */
+#galeria { padding-bottom: 5rem; }
+
+.gallery-loop-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+/* Quadro principal */
+.gallery-main {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  background-color: #020a05;
+  background-image:
+    radial-gradient(ellipse at 50% 50%,
+      rgba(90,170,122,0.15) 0%, transparent 70%);
+  border: 1px solid rgba(90,170,122,0.2);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.gallery-main:hover {
+  border-color: rgba(112,192,144,0.5);
+}
+
+/* Overlay do quadro principal */
+.gallery-main-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(3,3,8,0.85) 0%, transparent 50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.8rem;
+}
+
+.gallery-main-caption {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--life);
+  margin-bottom: 0.4rem;
+}
+
+.gallery-main-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+/* Indicador de progresso */
+.gallery-progress {
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.05);
+  margin-top: 0.8rem;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.gallery-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--life-dim), var(--life));
+  border-radius: 2px;
+  width: 0%;
+  transition: width linear;
+}
+
+/* Thumbnails */
+.gallery-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+
+.gallery-thumb {
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+  background-color: #020a05;
+  border: 1px solid rgba(90,170,122,0.1);
+  cursor: pointer;
+  transition: border-color 0.3s, opacity 0.3s;
+  opacity: 0.5;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-thumb.active {
+  border-color: var(--life);
+  opacity: 1;
+  box-shadow: 0 0 12px var(--life-glow);
+}
+
+.gallery-thumb:hover {
+  opacity: 0.8;
+  border-color: rgba(112,192,144,0.4);
+}
+
+/* Controles */
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.gallery-btn {
+  background: none;
+  border: 1px solid rgba(90,170,122,0.25);
+  color: var(--life);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: border-color 0.3s, color 0.3s;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.gallery-btn:hover {
+  border-color: var(--life);
+  color: var(--pearl);
+}
+
+.gallery-btn-play {
+  width: 48px;
+  height: 48px;
+  font-size: 1.1rem;
+  border-color: rgba(112,192,144,0.4);
+}
+
+.gallery-counter {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  min-width: 60px;
+  text-align: center;
+}
+
+.gallery-hint {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  opacity: 0.6;
+}
+
+.gallery-hint code {
+  font-family: monospace;
+  color: var(--life);
+  font-style: normal;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid rgba(90,170,122,0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover { color: var(--life); }
+
+.footer-sep { color: var(--gold-dim); opacity: 0.4; }
+
+.footer-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  color: var(--life);
+  margin-bottom: 0.6rem;
+}
+
+.footer-sub {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba(122,98,40,0.5);
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVO — SEÇÕES
+════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .about-grid      { grid-template-columns: 280px 1fr; gap: 3rem; padding: 0 1.5rem; }
+  .powers-list     { padding: 0 1.5rem; }
+  .story-body      { padding: 0 1.5rem; }
+  .gallery-loop-wrap { padding: 0 1.5rem; }
+  .desc-grid       { grid-template-columns: repeat(2, 1fr); padding: 0 1.5rem; }
+  .section-header  { padding: 4rem 1.5rem 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  .section-header { padding: 3.5rem 1.5rem 2rem; }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1.5rem;
+  }
+
+  .about-photo-wrap {
+    position: static !important;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .about-photo  { aspect-ratio: 3 / 3.5; }
+  .about-text p { font-size: 0.97rem; }
+
+  .desc-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 1.5rem;
+    gap: 1rem;
+  }
+
+  .desc-card { padding: 1.5rem 1.2rem; }
+  .desc-card:hover { transform: none; }
+
+  .powers-list { padding: 0 1.5rem; }
+
+  .power-item {
+    grid-template-columns: 56px 1fr;
+    gap: 1.2rem;
+    padding: 2rem 0;
+  }
+
+  .power-icon-big { font-size: 2rem; }
+  .power-title    { font-size: 1rem; }
+  .power-body     { font-size: 0.9rem; }
+
+  .story-body    { padding: 0 1.5rem; }
+  .story-title   { font-size: 1.05rem; }
+  .story-block p { font-size: 0.93rem; }
+
+  .gallery-loop-wrap { padding: 0 1.5rem; }
+
+  .gallery-thumbs {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  footer { padding: 3rem 1.5rem; }
+  .footer-title { font-size: 1.1rem; }
+}
+
+@media (max-width: 480px) {
+  .section-header { padding: 3rem 1.2rem 1.8rem; }
+
+  h2 { font-size: clamp(1.3rem, 6vw, 2rem); }
+  .section-label { font-size: 0.58rem; letter-spacing: 0.3em; }
+
+  .about-grid       { padding: 0 1.2rem; gap: 1.5rem; }
+  .about-photo-wrap { max-width: 220px; }
+  .about-photo      { aspect-ratio: 1 / 1; }
+  .about-text p     { font-size: 0.93rem; }
+
+  .about-tags { gap: 0.35rem; }
+  .tag {
+    font-size: 0.5rem !important;
+    padding: 0.2rem 0.5rem !important;
+  }
+
+  .desc-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .desc-card  { padding: 1.2rem 1rem; }
+  .desc-icon  { font-size: 1.6rem; margin-bottom: 0.6rem; }
+  .desc-title { font-size: 0.8rem; }
+  .desc-text  { font-size: 0.85rem; }
+
+  .powers-list { padding: 0 1.2rem; }
+
+  .power-item {
+    grid-template-columns: 44px 1fr;
+    gap: 1rem;
+    padding: 1.5rem 0;
+  }
+
+  .power-icon-big { font-size: 1.7rem; }
+  .power-origin   { font-size: 0.55rem; }
+  .power-title    { font-size: 0.92rem; }
+  .power-body     { font-size: 0.86rem; line-height: 1.75; }
+  .power-bar-wrap { height: 3px; }
+
+  .story-body  { padding: 0 1.2rem; }
+
+  .story-block { padding: 1.5rem 0 1.5rem 1.8rem; }
+
+  .story-block::before {
+    width: 8px; height: 8px; left: -4px;
+  }
+
+  .story-chapter { font-size: 0.55rem; }
+  .story-title   { font-size: 0.97rem; }
+  .story-block p { font-size: 0.88rem; }
+
+  .gallery-loop-wrap { padding: 0 1.2rem; }
+
+  .gallery-thumbs {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+  }
+
+  .gallery-btn      { width: 36px; height: 36px; font-size: 0.9rem; }
+  .gallery-btn-play { width: 42px; height: 42px; }
+  .gallery-counter  { font-size: 0.6rem; min-width: 50px; }
+
+  .gallery-hint { font-size: 0.78rem; padding: 0 1.2rem; }
+
+  footer { padding: 2.5rem 1.2rem; }
+
+  .footer-nav { flex-direction: column; gap: 0.5rem; }
+  .footer-sep   { display: none; }
+  .footer-title { font-size: 1rem; }
+  .footer-sub   { font-size: 0.8rem; }
+}
+
+@media (max-width: 360px) {
+  .about-photo-wrap { max-width: 190px; }
+
+  .power-item { grid-template-columns: 1fr; }
+
+  .power-icon-big {
+    text-align: left;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .story-block { padding-left: 1.5rem; }
+
+  .story-block::before {
+    left: -4px; width: 7px; height: 7px;
+  }
+
+  .gallery-thumbs { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .desc-card:hover  { transform: none; }
+  nav a { padding: 0.4rem 0.2rem; }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .section-header { padding: 2.5rem 1.5rem 1.5rem; }
+  .story-block    { padding: 1.5rem 0 1.5rem 2rem; }
+  .desc-grid      { grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+  .desc-card      { padding: 1rem; }
+}
+  /* === CSS VIRÁ NAS PARTES 2 E 3 === */
+</style>
+</head>
+<body>
+
+<canvas id="cosmos-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="img-logo/olhos.jpg" alt="Logo">
+  </a>
+  <a href="#sobre">Sobre</a>
+  <a href="#poderes">Poderes</a>
+  <a href="#historia">História</a>
+  <a href="#galeria">Galeria</a>
+</nav>
+
+<!-- BANNER -->
+<section id="banner">
+  <div class="banner-bg" style="background-image: url('lyra-banner.jpg')"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <p class="banner-eyebrow">Deusa da Vida e da Conexão · Companheira de Anull</p>
+    <h1 class="banner-name">Lyra</h1>
+    <p class="banner-human">Antes conhecida como <em>Anna</em></p>
+    <div class="banner-divider"></div>
+    <p class="banner-quote">"Ela não domina o espaço. Ela se conecta a ele, atravessa, sente, mantém."</p>
+    <div class="banner-stats">
+      <div class="bstat">
+        <span class="bstat-val">Vida · Conexão</span>
+        <span class="bstat-label">Domínio</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">A Ponte</span>
+        <span class="bstat-label">Essência</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Humana Ascendida</span>
+        <span class="bstat-label">Origem</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Deusa</span>
+        <span class="bstat-label">Condição</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-header reveal">
+    <span class="section-label">Identidade</span>
+    <h2>Quem é Lyra</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="about-grid reveal">
+    <div class="about-photo-wrap">
+      <div class="about-photo" style="background-image: url('lyra-perfil.jpg')">
+        <div class="photo-frame-corner tl"></div>
+        <div class="photo-frame-corner tr"></div>
+        <div class="photo-frame-corner bl"></div>
+        <div class="photo-frame-corner br"></div>
+      </div>
+      <div class="about-photo-label">Lyra · A Ponte Entre Tudo</div>
+    </div>
+    <div class="about-text">
+      <p>
+        Lyra não está completamente em um único plano. Ela é <em>a ponte</em>. Sua presença é suave, mas profundamente inquietante para quem percebe além da superfície. Ela não domina o espaço — ela se conecta a ele, atravessa, sente, mantém.
+      </p>
+      <p>
+        Seu corpo é delicado, mas não frágil. Há algo nela que não pode ser quebrado porque não está completamente contido em uma única forma. Seu rosto é sereno, mas seu olhar é distante — não por ausência, mas por <strong>excesso</strong>. É como se ela estivesse vendo mais do que deveria, sentindo mais do que o mundo suporta.
+      </p>
+      <p>
+        Antes de tudo isso, Anna era uma pessoa tímida — observadora, reservada, mais na dela do que qualquer outra coisa. O grupo a conhecia, mas cada um seguia sua própria vida. Foi o dia em que o céu ficou vermelho que mudou tudo. Quando os cinco percorreram uma distância considerável para chegar até ela, Anna não era mais apenas alguém que eles conheciam. Era <em>parte do grupo</em> — e nunca mais deixou de ser.
+      </p>
+      <p>
+        Sua aura não é explosiva. Ela se <strong>expande</strong>. Fios de energia luminosa conectam tudo ao redor — o ar, o espaço, as outras presenças. Onde Lyra está, tudo parece mais vivo, mais interligado, mais consciente de si. E essa conexão nunca se fecha completamente. Ela sempre permanece aberta.
+      </p>
+      <div class="about-tags">
+        <span class="tag">Companheira de Anull</span>
+        <span class="tag life-tag">Deusa da Vida</span>
+        <span class="tag life-tag">Deusa da Conexão</span>
+        <span class="tag link-tag">A Ponte</span>
+        <span class="tag">Humana Ascendida</span>
+        <span class="tag divine-tag">Filha de Athena</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESCRIÇÃO -->
+<section id="descricao">
+  <div class="section-header reveal">
+    <span class="section-label">Presença</span>
+    <h2>A Essência de Lyra</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="desc-grid reveal">
+    <div class="desc-card">
+      <div class="desc-icon">🌿</div>
+      <div class="desc-title">O Corpo</div>
+      <div class="desc-text">Delicado, mas não frágil. Há algo nela que não pode ser quebrado — porque não está completamente contido em uma única forma. Ela existe além dos limites do físico.</div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-icon">👁️</div>
+      <div class="desc-title">O Olhar</div>
+      <div class="desc-text">Sereno, mas distante. Não por ausência — por excesso. Ela vê mais do que deveria, sente mais do que o mundo suporta. Seu olhar atravessa planos.</div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-icon">✨</div>
+      <div class="desc-title">A Aura</div>
+      <div class="desc-text">Não explosiva — expansiva. Fios de energia luminosa conectam tudo ao redor. Onde Lyra está, tudo parece mais vivo, mais interligado, mais consciente de si.</div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-icon">🔗</div>
+      <div class="desc-title">A Conexão</div>
+      <div class="desc-text">Nunca se fecha completamente. Sempre permanece aberta. Lyra não representa apenas vida — ela representa a ligação entre tudo que existe, em todos os planos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PODERES -->
+<section id="poderes">
+  <div class="section-header reveal">
+    <span class="section-label">Arsenal completo</span>
+    <h2>Poderes & Habilidades</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="powers-list">
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🌱</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Domínio Divino</div>
+        <div class="power-title">Domínio da Vida</div>
+        <div class="power-body">Lyra sente a vida em tudo — cada ser vivo ao seu redor é uma presença que ela percebe e pode influenciar. Pode acelerar a cura de aliados, restaurar energia vital consumida em batalha e, nos momentos mais extremos, estabilizar a força vital de alguém à beira da morte. Sua presença em combate prolonga a resistência do grupo de forma mensurável.</div>
+        <div class="power-bar-wrap"><div class="power-bar life" data-width="98"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🔗</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Domínio Divino</div>
+        <div class="power-title">Conexão Universal</div>
+        <div class="power-body">O poder mais singular de Lyra — e o mais incompreendido. Ela sente os fios que conectam tudo: pessoas, lugares, eventos, planos de existência. Pode seguir esses fios para localizar qualquer coisa ou qualquer pessoa, perceber rupturas na realidade antes que se tornem visíveis, e em casos extremos, tecer novas conexões onde foram destruídas.</div>
+        <div class="power-bar-wrap"><div class="power-bar link" data-width="100"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🌊</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Presença</div>
+        <div class="power-title">Campo de Vida — Aura Expansiva</div>
+        <div class="power-body">Onde Lyra está, tudo parece mais vivo. Sua aura expansiva cria um campo ao redor do grupo que amplifica as capacidades de cada um — não por injeção de poder, mas por conexão mais profunda com a própria força vital de cada aliado. Em batalhas prolongadas, esse campo é a diferença entre colapso e resistência.</div>
+        <div class="power-bar-wrap"><div class="power-bar life" data-width="95"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🧿</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Percepção</div>
+        <div class="power-title">Visão dos Fios — Percepção Total</div>
+        <div class="power-body">Lyra enxerga os fios invisíveis que conectam tudo. Em batalha, isso se traduz em percepção total do campo — ela sente a intenção de cada movimento antes de ser executado, percebe pontos de ruptura no plano físico e espiritual, e consegue guiar os aliados pelos caminhos de menor resistência mesmo em caos absoluto.</div>
+        <div class="power-bar-wrap"><div class="power-bar link" data-width="97"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">🌸</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Filha de Athena</div>
+        <div class="power-title">Sabedoria & Estratégia</div>
+        <div class="power-body">A herança de Athena se manifesta na Anna de uma forma diferente do esperado — não como liderança agressiva, mas como sabedoria silenciosa. Ela observa, processa e compreende situações complexas antes que os outros percebam o que está acontecendo. Em batalha, suas orientações chegam no momento exato em que são necessárias — nunca antes, nunca depois.</div>
+        <div class="power-bar-wrap"><div class="power-bar divine" data-width="93"></div></div>
+      </div>
+    </div>
+
+    <div class="power-item reveal">
+      <div class="power-left">
+        <div class="power-icon-big">♾️</div>
+      </div>
+      <div class="power-right">
+        <div class="power-origin">Condição Divina</div>
+        <div class="power-title">Ascensão · Lyra</div>
+        <div class="power-body">A deificação de Anna foi silenciosa — como tudo nela. Não houve explosão, não houve ruptura. Os fios que ela sempre sentiu simplesmente se tornaram parte dela de forma permanente e irreversível. Como Lyra, ela não está em um único plano — está em todos simultaneamente, conectando, mantendo, sustentando. A ponte que nunca se fecha.</div>
+        <div class="power-bar-wrap"><div class="power-bar life" data-width="100"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HISTÓRIA -->
+<section id="historia">
+  <div class="section-header reveal">
+    <span class="section-label">Trajetória</span>
+    <h2>A História de Anna</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="story-body">
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo I</div>
+      <div class="story-title">A Observadora</div>
+      <p>Anna era tímida — não por insegurança, mas por escolha. Preferia observar a participar, sentir a falar, estar presente sem ser o centro. O grupo a conhecia, mas cada um seguia sua própria vida. Havia algo nela que os outros percebiam sem conseguir nomear: uma presença que tornava o ambiente mais calmo, mais consciente, mais conectado.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo II</div>
+      <div class="story-title">O Céu Vermelho</div>
+      <p>Quando o caos começou, Anna estava em outra escola — a uma distância razoável do grupo. O céu ficou vermelho, os raios cortaram as nuvens e o mundo mudou em minutos. Isolada, em meio ao colapso ao redor, Anna não entrou em pânico. Observou. Processou. E esperou — não por passividade, mas porque sabia, de alguma forma, que eles viriam.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo III</div>
+      <div class="story-title">A União</div>
+      <p>Quando Yuri, Lucas, Leonardo, Yasmin e Jéssica finalmente chegaram até ela — após atravessarem mortos-vivos, distância e caos — algo mudou de forma permanente. Não foi um momento dramático. Foi simples, quase silencioso. Mas todos sentiram: os seis agora eram um grupo de verdade. E Anna, a observadora tímida, era parte essencial desse todo.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo IV</div>
+      <div class="story-title">A Batalha & O Crescimento</div>
+      <p>Nas batalhas que se seguiram, Anna encontrou seu lugar de forma natural. Não na linha de frente — mas como a presença que mantinha o grupo coeso quando tudo ao redor ameaçava despedaçar. Sua percepção dos fios entre as pessoas guiou decisões que salvaram vidas mais de uma vez. Sua força nunca foi barulhenta. Era constante.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo V</div>
+      <div class="story-title">A Ascensão · Lyra</div>
+      <p>Após o confronto com A Besta, quando a deificação chegou para cada um dos seis, a transformação de Anna foi a mais silenciosa de todas. Os fios que ela sempre havia sentido ao redor simplesmente se tornaram permanentes — extensões dela mesma em todos os planos. O nome Anna cedeu lugar a <strong>Lyra</strong>: a ponte que existe entre tudo, que nunca se fecha, que sempre permanece aberta.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERIA EM LOOP -->
+<section id="galeria">
+  <div class="section-header reveal">
+    <span class="section-label">Imagens</span>
+    <h2>Galeria de Lyra</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="gallery-loop-wrap reveal">
+
+    <!-- Quadro principal -->
+    <div class="gallery-main">
+      <div class="gallery-main-overlay">
+        <div class="gallery-main-caption">Lyra · Forma Divina</div>
+        <div class="gallery-main-sub">A deusa que existe em todos os planos</div>
+      </div>
+    </div>
+
+    <!-- Barra de progresso do loop -->
+    <div class="gallery-progress">
+      <div class="gallery-progress-bar"></div>
+    </div>
+
+    <!-- Thumbnails -->
+    <div class="gallery-thumbs">
+      <div class="gallery-thumb active"></div>
+      <div class="gallery-thumb"></div>
+      <div class="gallery-thumb"></div>
+      <div class="gallery-thumb"></div>
+      <div class="gallery-thumb"></div>
+      <div class="gallery-thumb"></div>
+    </div>
+
+    <!-- Controles -->
+    <div class="gallery-controls">
+      <button class="gallery-btn" id="gallery-prev">&#8592;</button>
+      <button class="gallery-btn gallery-btn-play" id="gallery-play">⏸</button>
+      <span class="gallery-counter">1 / 6</span>
+      <button class="gallery-btn" id="gallery-next">&#8594;</button>
+    </div>
+
+  </div>
+
+  <p class="gallery-hint reveal">
+    Substitua os arquivos <code>lyra-01.jpg</code> até <code>lyra-06.jpg</code> pelas imagens da personagem na mesma pasta do HTML.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-nav">
+    <a href="kaelith.html">← Kaelith</a>
+    <span class="footer-sep">·</span>
+    <a href="index.html">Início</a>
+    <span class="footer-sep">·</span>
+    <a href="knull.html">Knull →</a>
+  </div>
+  <div class="footer-title">Lyra</div>
+  <div class="footer-sub">"Onde ela está, tudo parece mais vivo. Mais interligado. Mais consciente de si."</div>
+  <div class="footer-copy">O Diário de um Deus · Todos os direitos reservados</div>
+</footer>
+
+<script>
+/* ── COSMOS CANVAS ── */
+(function () {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx    = canvas.getContext('2d');
+  let W, H, stars = [], nebulas = [], threads = [], orbs = [], petals = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    /* Estrelas esverdeadas/perladas */
+    stars = [];
+    for (let i = 0; i < 260; i++) {
+      stars.push({
+        x:       Math.random() * W,
+        y:       Math.random() * H,
+        r:       Math.random() * 1.6 + 0.2,
+        a:       Math.random(),
+        speed:   Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+
+    /* Névoas: verde-vida e pérola */
+    nebulas = [];
+    const colors = [
+      'rgba(90,170,122,',
+      'rgba(112,192,144,',
+      'rgba(160,212,184,',
+      'rgba(232,244,238,',
+      'rgba(58,122,90,'
+    ];
+    for (let i = 0; i < 6; i++) {
+      nebulas.push({
+        x:     Math.random() * W,
+        y:     Math.random() * H,
+        r:     Math.random() * 360 + 180,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a:     Math.random() * 0.06 + 0.015
+      });
+    }
+
+    /* Fios de conexão — exclusivos da Lyra */
+    threads = [];
+    for (let i = 0; i < 18; i++) {
+      threads.push(newThread());
+    }
+
+    /* Orbs de vida flutuantes */
+    orbs = [];
+    for (let i = 0; i < 10; i++) {
+      orbs.push({
+        x:      Math.random() * W,
+        y:      Math.random() * H,
+        r:      Math.random() * 5 + 2,
+        a:      Math.random() * 0.3 + 0.05,
+        speedX: (Math.random() - 0.5) * 0.15,
+        speedY: (Math.random() - 0.5) * 0.15,
+        pulse:  Math.random() * Math.PI * 2,
+        pSpeed: Math.random() * 0.012 + 0.005
+      });
+    }
+
+    /* Pétalas de luz subindo */
+    petals = [];
+    for (let i = 0; i < 35; i++) {
+      petals.push(newPetal());
+    }
+  }
+
+  function newThread() {
+    const x1 = Math.random() * W;
+    const y1 = Math.random() * H;
+    const angle = Math.random() * Math.PI * 2;
+    const len   = Math.random() * 200 + 80;
+    return {
+      x1, y1,
+      x2: x1 + Math.cos(angle) * len,
+      y2: y1 + Math.sin(angle) * len,
+      a:      Math.random() * 0.25 + 0.05,
+      life:   Math.random(),
+      decay:  Math.random() * 0.004 + 0.001,
+      travel: Math.random(),
+      tSpeed: Math.random() * 0.008 + 0.003,
+      color:  Math.random() > 0.4 ? 'life' : 'link'
+    };
+  }
+
+  function newPetal() {
+    return {
+      x:      Math.random() * W,
+      y:      H + Math.random() * 100,
+      r:      Math.random() * 3 + 1,
+      a:      Math.random() * 0.5 + 0.1,
+      speedX: (Math.random() - 0.5) * 0.4,
+      speedY: -(Math.random() * 0.4 + 0.1),
+      spin:   Math.random() * Math.PI * 2,
+      spinS:  (Math.random() - 0.5) * 0.03,
+      life:   Math.random(),
+      decay:  Math.random() * 0.003 + 0.001,
+      color:  Math.random() > 0.5 ? 'life' : 'pearl'
+    };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Fundo verde-escuro profundo */
+    const bg = ctx.createLinearGradient(0, 0, W, H);
+    bg.addColorStop(0,   '#010805');
+    bg.addColorStop(0.3, '#020a06');
+    bg.addColorStop(0.7, '#020908');
+    bg.addColorStop(1,   '#010806');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Névoas */
+    nebulas.forEach(n => {
+      const grad = ctx.createRadialGradient(
+        n.x, n.y, 0, n.x, n.y, n.r
+      );
+      grad.addColorStop(0, n.color + n.a + ')');
+      grad.addColorStop(1, n.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Estrelas */
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(200,240,220,${alpha})`;
+      ctx.fill();
+    });
+
+    /* Fios de conexão */
+    threads.forEach((t, i) => {
+      t.life   -= t.decay;
+      t.travel += t.tSpeed;
+      if (t.travel > 1) t.travel = 0;
+
+      if (t.life <= 0) {
+        threads[i] = newThread();
+        return;
+      }
+
+      const alpha = t.a * t.life;
+      const color = t.color === 'life'
+        ? `rgba(112,192,144,${alpha})`
+        : `rgba(160,212,184,${alpha})`;
+
+      /* Linha base */
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.4;
+      ctx.strokeStyle = color;
+      ctx.lineWidth   = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(t.x1, t.y1);
+      ctx.lineTo(t.x2, t.y2);
+      ctx.stroke();
+
+      /* Ponto viajante ao longo do fio */
+      const tx = t.x1 + (t.x2 - t.x1) * t.travel;
+      const ty = t.y1 + (t.y2 - t.y1) * t.travel;
+
+      ctx.globalAlpha = 1;
+      const tGrad = ctx.createRadialGradient(tx, ty, 0, tx, ty, 6);
+      tGrad.addColorStop(0, t.color === 'life'
+        ? `rgba(200,255,220,${alpha})`
+        : `rgba(220,255,240,${alpha})`);
+      tGrad.addColorStop(1, 'rgba(90,170,122,0)');
+      ctx.fillStyle = tGrad;
+      ctx.beginPath();
+      ctx.arc(tx, ty, 6, 0, Math.PI * 2);
+      ctx.fill();
+
+      /* Núcleo do ponto viajante */
+      ctx.beginPath();
+      ctx.arc(tx, ty, 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(240,255,248,${alpha})`;
+      ctx.fill();
+
+      ctx.restore();
+    });
+
+    /* Orbs de vida */
+    orbs.forEach(o => {
+      o.x     += o.speedX;
+      o.y     += o.speedY;
+      o.pulse += o.pSpeed;
+
+      if (o.x < -o.r * 10) o.x = W + o.r * 10;
+      if (o.x > W + o.r * 10) o.x = -o.r * 10;
+      if (o.y < -o.r * 10) o.y = H + o.r * 10;
+      if (o.y > H + o.r * 10) o.y = -o.r * 10;
+
+      const pulseR = o.r * (1 + 0.35 * Math.sin(o.pulse));
+      const alpha  = o.a * (0.6 + 0.4 * Math.sin(o.pulse));
+
+      /* Halo do orb */
+      const grad = ctx.createRadialGradient(
+        o.x, o.y, 0, o.x, o.y, pulseR * 12
+      );
+      grad.addColorStop(0,   `rgba(160,220,180,${alpha})`);
+      grad.addColorStop(0.4, `rgba(90,170,122,${alpha * 0.5})`);
+      grad.addColorStop(1,    'rgba(58,122,90,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(o.x, o.y, pulseR * 12, 0, Math.PI * 2);
+      ctx.fill();
+
+      /* Núcleo */
+      ctx.beginPath();
+      ctx.arc(o.x, o.y, pulseR, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(220,255,235,${alpha * 1.6})`;
+      ctx.fill();
+
+      /* Anel pulsante */
+      ctx.beginPath();
+      ctx.arc(o.x, o.y, pulseR * 4, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(112,192,144,${alpha * 0.25})`;
+      ctx.lineWidth   = 0.8;
+      ctx.stroke();
+
+      /* Segundo anel */
+      ctx.beginPath();
+      ctx.arc(o.x, o.y, pulseR * 8, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(160,212,184,${alpha * 0.1})`;
+      ctx.lineWidth   = 0.5;
+      ctx.stroke();
+    });
+
+    /* Pétalas de luz */
+    petals.forEach((p, i) => {
+      p.x    += p.speedX;
+      p.y    += p.speedY;
+      p.spin += p.spinS;
+      p.life -= p.decay;
+
+      if (p.life <= 0 || p.y < -20) {
+        petals[i] = newPetal();
+        return;
+      }
+
+      const alpha = p.a * p.life;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.spin);
+      ctx.globalAlpha = alpha;
+
+      /* Pétala em forma de elipse */
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.r * 2, p.r * 0.8, 0, 0, Math.PI * 2);
+      ctx.fillStyle = p.color === 'life'
+        ? `rgba(112,192,144,${alpha})`
+        : `rgba(232,244,238,${alpha})`;
+      ctx.fill();
+
+      /* Brilho central */
+      ctx.beginPath();
+      ctx.arc(0, 0, p.r * 0.5, 0, Math.PI * 2);
+      ctx.fillStyle = p.color === 'life'
+        ? `rgba(200,255,220,${alpha * 1.4})`
+        : `rgba(255,255,255,${alpha * 1.4})`;
+      ctx.fill();
+
+      ctx.restore();
+    });
+
+    /* Véu de vida central */
+    const veil = ctx.createRadialGradient(
+      W * 0.5, H * 0.45, 0,
+      W * 0.5, H * 0.45, H * 0.7
+    );
+    veil.addColorStop(0,   'rgba(90,170,122,0.04)');
+    veil.addColorStop(0.5, 'rgba(112,192,144,0.02)');
+    veil.addColorStop(1,   'rgba(58,122,90,0)');
+    ctx.fillStyle = veil;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Brilho verde no rodapé */
+    const horizon = ctx.createLinearGradient(0, H * 0.78, 0, H);
+    horizon.addColorStop(0, 'transparent');
+    horizon.addColorStop(1, 'rgba(58,122,90,0.08)');
+    ctx.fillStyle = horizon;
+    ctx.fillRect(0, H * 0.78, W, H * 0.22);
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize();
+  init();
+  draw();
+})();
+
+/* ── PARALLAX DO BANNER ── */
+(function () {
+  const bg = document.querySelector('.banner-bg');
+  if (!bg) return;
+
+  const img = new Image();
+  img.onload = () => bg.classList.add('loaded');
+  const url = bg.style.backgroundImage
+    .replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+  if (url && url !== 'none') img.src = url;
+
+  const mq = window.matchMedia('(min-width: 769px)');
+
+  window.addEventListener('scroll', () => {
+    if (!mq.matches) return;
+    const scrollY = window.scrollY;
+    if (scrollY <= window.innerHeight) {
+      bg.style.transform =
+        `scale(1.05) translateY(${scrollY * 0.25}px)`;
+    }
+  }, { passive: true });
+})();
+
+/* ── SCROLL REVEAL ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── BARRAS DE PODER ── */
+(function () {
+  const bars = document.querySelectorAll('.power-bar');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const bar    = e.target;
+        const target = bar.getAttribute('data-width');
+        setTimeout(() => { bar.style.width = target + '%'; }, 200);
+        io.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  bars.forEach(b => io.observe(b));
+})();
+
+/* ── GALERIA EM LOOP ── */
+(function () {
+  /* Dados das imagens */
+  const slides = [
+    { src: 'lyra-01.jpg', caption: 'Lyra · Forma Divina',     sub: 'A deusa que existe em todos os planos' },
+    { src: 'lyra-02.jpg', caption: 'Os Fios da Conexão',       sub: 'Energia que une tudo ao redor' },
+    { src: 'lyra-03.jpg', caption: 'Campo de Vida',            sub: 'Onde ela está, tudo é mais consciente' },
+    { src: 'lyra-04.jpg', caption: 'A Ponte Entre Tudo',       sub: 'A conexão que nunca se fecha' },
+    { src: 'lyra-05.jpg', caption: 'Visão dos Fios',           sub: 'Percepção além do plano físico' },
+    { src: 'lyra-06.jpg', caption: 'Anna · Antes da Ascensão', sub: 'Tímida, observadora, essencial' }
+  ];
+
+  /* Elementos */
+  const mainEl    = document.querySelector('.gallery-main');
+  const captionEl = document.querySelector('.gallery-main-caption');
+  const subEl     = document.querySelector('.gallery-main-sub');
+  const progBar   = document.querySelector('.gallery-progress-bar');
+  const thumbs    = document.querySelectorAll('.gallery-thumb');
+  const counterEl = document.querySelector('.gallery-counter');
+  const btnPrev   = document.getElementById('gallery-prev');
+  const btnNext   = document.getElementById('gallery-next');
+  const btnPlay   = document.getElementById('gallery-play');
+
+  if (!mainEl) return;
+
+  let current  = 0;
+  let playing  = true;
+  let timer    = null;
+  let progTimer = null;
+  const INTERVAL = 4500;
+
+  /* Inicializa thumbs */
+  thumbs.forEach((t, i) => {
+    t.style.backgroundImage = `url('${slides[i].src}')`;
+  });
+
+  function goTo(index, resetProg = true) {
+    current = (index + slides.length) % slides.length;
+
+    /* Atualiza imagem principal com fade */
+    mainEl.style.opacity = '0';
+    mainEl.style.transition = 'opacity 0.5s ease';
+
+    setTimeout(() => {
+      mainEl.style.backgroundImage = `url('${slides[current].src}')`;
+      captionEl.textContent = slides[current].caption;
+      subEl.textContent     = slides[current].sub;
+      mainEl.style.opacity  = '1';
+    }, 300);
+
+    /* Atualiza counter */
+    counterEl.textContent = `${current + 1} / ${slides.length}`;
+
+    /* Atualiza thumbs */
+    thumbs.forEach((t, i) => {
+      t.classList.toggle('active', i === current);
+    });
+
+    /* Reinicia progresso */
+    if (resetProg) resetProgress();
+  }
+
+  function resetProgress() {
+    clearInterval(progTimer);
+    progBar.style.transition = 'none';
+    progBar.style.width      = '0%';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        progBar.style.transition = `width ${INTERVAL}ms linear`;
+        progBar.style.width      = '100%';
+      });
+    });
+  }
+
+  function startLoop() {
+    clearInterval(timer);
+    timer = setInterval(() => {
+      goTo(current + 1);
+    }, INTERVAL);
+  }
+
+  function stopLoop() {
+    clearInterval(timer);
+    progBar.style.transition = 'none';
+    progBar.style.width = progBar.offsetWidth /
+      mainEl.offsetWidth * 100 + '%';
+  }
+
+  function togglePlay() {
+    playing = !playing;
+    btnPlay.textContent = playing ? '⏸' : '▶';
+
+    if (playing) {
+      startLoop();
+      resetProgress();
+    } else {
+      stopLoop();
+    }
+  }
+
+  /* Eventos */
+  btnPrev?.addEventListener('click', () => {
+    goTo(current - 1);
+    if (playing) startLoop();
+  });
+
+  btnNext?.addEventListener('click', () => {
+    goTo(current + 1);
+    if (playing) startLoop();
+  });
+
+  btnPlay?.addEventListener('click', togglePlay);
+
+  thumbs.forEach((t, i) => {
+    t.addEventListener('click', () => {
+      goTo(i);
+      if (playing) startLoop();
+    });
+  });
+
+  /* Swipe mobile na galeria */
+  let touchStartX = 0;
+
+  mainEl.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  mainEl.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      diff > 0 ? goTo(current + 1) : goTo(current - 1);
+      if (playing) startLoop();
+    }
+  }, { passive: true });
+
+  /* Pausa ao hover no desktop */
+  mainEl.addEventListener('mouseenter', () => {
+    if (playing) stopLoop();
+  });
+
+  mainEl.addEventListener('mouseleave', () => {
+    if (playing) { startLoop(); resetProgress(); }
+  });
+
+  /* Inicia */
+  goTo(0);
+  startLoop();
+})();
+
+/* ── EFEITO DE PARTÍCULAS NO MOUSE ── */
+(function () {
+  const canvas  = document.createElement('canvas');
+  canvas.id     = 'mouse-particles';
+  canvas.style.cssText = `
+    position: fixed;
+    inset: 0;
+    z-index: 4;
+    pointer-events: none;
+  `;
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+
+  let mouseX = -999, mouseY = -999;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    /* Cria partículas ao mover o mouse */
+    for (let i = 0; i < 2; i++) {
+      particles.push({
+        x:      mouseX + (Math.random() - 0.5) * 10,
+        y:      mouseY + (Math.random() - 0.5) * 10,
+        r:      Math.random() * 3 + 1,
+        a:      Math.random() * 0.6 + 0.2,
+        speedX: (Math.random() - 0.5) * 1.5,
+        speedY: (Math.random() - 0.5) * 1.5 - 0.5,
+        life:   1,
+        decay:  Math.random() * 0.04 + 0.02,
+        color:  Math.random() > 0.5 ? 'life' : 'pearl'
+      });
+    }
+  }, { passive: true });
+
+  /* Toque mobile */
+  document.addEventListener('touchmove', e => {
+    const t = e.touches[0];
+    for (let i = 0; i < 3; i++) {
+      particles.push({
+        x:      t.clientX + (Math.random() - 0.5) * 15,
+        y:      t.clientY + (Math.random() - 0.5) * 15,
+        r:      Math.random() * 4 + 1,
+        a:      Math.random() * 0.5 + 0.2,
+        speedX: (Math.random() - 0.5) * 1.8,
+        speedY: (Math.random() - 0.5) * 1.8 - 0.3,
+        life:   1,
+        decay:  Math.random() * 0.035 + 0.02,
+        color:  Math.random() > 0.5 ? 'life' : 'pearl'
+      });
+    }
+  }, { passive: true });
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    particles = particles.filter(p => p.life > 0);
+
+    particles.forEach(p => {
+      p.x    += p.speedX;
+      p.y    += p.speedY;
+      p.life -= p.decay;
+      p.speedY -= 0.02; /* gravidade inversa */
+
+      const alpha = p.a * p.life;
+      const r     = p.r * p.life;
+
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 3);
+
+      if (p.color === 'life') {
+        grad.addColorStop(0, `rgba(160,220,180,${alpha})`);
+        grad.addColorStop(1,  'rgba(90,170,122,0)');
+      } else {
+        grad.addColorStop(0, `rgba(232,244,238,${alpha})`);
+        grad.addColorStop(1,  'rgba(160,212,184,0)');
+      }
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r * 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color === 'life'
+        ? `rgba(220,255,235,${alpha * 1.4})`
+        : `rgba(255,255,255,${alpha * 1.4})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
+</script>
+<script src="effects.js"></script>
+</body>
+</html>
