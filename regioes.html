@@ -1502,8 +1502,606 @@ footer {
 </footer>
 
 <script src="effects.js"></script>
-<script>
-  /* === JAVASCRIPT VIRÁ NA PARTE 4 === */
+<script>/* ════════════════════════════════════
+   REGIÕES — JAVASCRIPT COMPLETO
+   Canvas Hero · Mapa Interativo
+   Canvas Templo · Scroll · Reveal
+════════════════════════════════════ */
+
+/* ── COSMOS CANVAS (fundo global) ── */
+(function () {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx    = canvas.getContext('2d');
+  let W, H, stars = [], nebulas = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    stars = [];
+    for (let i = 0; i < 220; i++) {
+      stars.push({
+        x:       Math.random() * W,
+        y:       Math.random() * H,
+        r:       Math.random() * 1.4 + 0.2,
+        a:       Math.random(),
+        speed:   Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+
+    nebulas = [];
+    const colors = [
+      'rgba(106,79,207,',
+      'rgba(201,168,76,',
+      'rgba(58,138,74,',
+      'rgba(74,138,176,',
+      'rgba(192,144,10,'
+    ];
+    for (let i = 0; i < 5; i++) {
+      nebulas.push({
+        x:     Math.random() * W,
+        y:     Math.random() * H,
+        r:     Math.random() * 320 + 150,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a:     Math.random() * 0.05 + 0.015
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0,   '#030308');
+    bg.addColorStop(0.5, '#05050f');
+    bg.addColorStop(1,   '#030308');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    nebulas.forEach(n => {
+      const grad = ctx.createRadialGradient(
+        n.x, n.y, 0, n.x, n.y, n.r
+      );
+      grad.addColorStop(0, n.color + n.a + ')');
+      grad.addColorStop(1, n.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(220,210,190,${alpha})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+})();
+
+/* ── CANVAS DO HERO ── */
+(function () {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, orbs = [], connections = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  /* Cinco orbs — um por região */
+  const regionColors = [
+    { r: 0.9, g: 0.6, b: 0.2 }, /* gold */
+    { r: 0.7, g: 0.6, b: 0.9 }, /* cidadela */
+    { r: 0.3, g: 0.7, b: 0.8 }, /* limiar */
+    { r: 0.4, g: 0.8, b: 0.4 }, /* nucleo */
+    { r: 0.8, g: 0.7, b: 0.5 }  /* templo */
+  ];
+
+  function init() {
+    orbs = regionColors.map((c, i) => ({
+      x:      W * (0.15 + i * 0.18),
+      y:      H * (0.3 + Math.sin(i * 1.2) * 0.2),
+      r:      Math.random() * 40 + 20,
+      vx:     (Math.random() - 0.5) * 0.3,
+      vy:     (Math.random() - 0.5) * 0.3,
+      pulse:  i * (Math.PI * 0.4),
+      pSpeed: 0.008 + i * 0.002,
+      color:  c
+    }));
+
+    connections = [];
+    for (let i = 0; i < orbs.length; i++) {
+      for (let j = i + 1; j < orbs.length; j++) {
+        connections.push({ a: i, b: j });
+      }
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Conexões entre orbs */
+    connections.forEach(conn => {
+      const a = orbs[conn.a];
+      const b = orbs[conn.b];
+      const dist = Math.hypot(b.x - a.x, b.y - a.y);
+      const maxDist = W * 0.5;
+
+      if (dist < maxDist) {
+        const alpha = (1 - dist / maxDist) * 0.15;
+        const grad  = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+        grad.addColorStop(0, `rgba(${Math.round(a.color.r*255)},${Math.round(a.color.g*255)},${Math.round(a.color.b*255)},${alpha})`);
+        grad.addColorStop(1, `rgba(${Math.round(b.color.r*255)},${Math.round(b.color.g*255)},${Math.round(b.color.b*255)},${alpha})`);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth   = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+      }
+    });
+
+    /* Orbs */
+    orbs.forEach(o => {
+      o.x += o.vx; o.y += o.vy;
+      o.pulse += o.pSpeed;
+
+      if (o.x < o.r || o.x > W - o.r) o.vx *= -1;
+      if (o.y < o.r || o.y > H - o.r) o.vy *= -1;
+
+      const pulseR = o.r * (1 + 0.15 * Math.sin(o.pulse));
+      const alpha  = 0.08 + 0.04 * Math.sin(o.pulse);
+      const cr = Math.round(o.color.r * 255);
+      const cg = Math.round(o.color.g * 255);
+      const cb = Math.round(o.color.b * 255);
+
+      /* Halo externo */
+      const grad = ctx.createRadialGradient(
+        o.x, o.y, 0, o.x, o.y, pulseR * 4
+      );
+      grad.addColorStop(0, `rgba(${cr},${cg},${cb},${alpha})`);
+      grad.addColorStop(1, `rgba(${cr},${cg},${cb},0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(o.x, o.y, pulseR * 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      /* Núcleo */
+      ctx.beginPath();
+      ctx.arc(o.x, o.y, pulseR * 0.6, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha * 3})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+})();
+
+/* ── MAPA INTERATIVO ── */
+(function () {
+  const mapCanvas = document.getElementById('map-canvas');
+  if (!mapCanvas) return;
+  const ctx = mapCanvas.getContext('2d');
+  let W, H;
+
+  /* Dados das regiões */
+  const regions = {
+    cidadela: {
+      name: 'Cidadela das Sombras',
+      type: 'Ponto de Origem',
+      href: 'cidadela.html',
+      color: [176, 160, 208],
+      pin: { left: 0.58, top: 0.28 }
+    },
+    limiar: {
+      name: 'Limiar da Continuidade',
+      type: 'Estado da Existência',
+      href: 'limiar.html',
+      color: [128, 192, 224],
+      pin: { left: 0.42, top: 0.38 }
+    },
+    cidade: {
+      name: 'Cidade das Mil Escolhas',
+      type: 'Plano Urbano Vivo',
+      href: 'cidade.html',
+      color: [224, 176, 64],
+      pin: { left: 0.52, top: 0.42 }
+    },
+    nucleo: {
+      name: 'Núcleo da Forma',
+      type: 'Plano Primordial',
+      href: 'nucleo.html',
+      color: [112, 192, 96],
+      pin: { left: 0.35, top: 0.55 }
+    },
+    templo: {
+      name: 'Templo dos Pilares',
+      type: 'Ponto de Transição',
+      href: 'templo.html',
+      color: [200, 184, 144],
+      pin: { left: 0.65, top: 0.48 }
+    }
+  };
+
+  function resize() {
+    W = mapCanvas.width  = mapCanvas.offsetWidth;
+    H = mapCanvas.height = mapCanvas.offsetHeight;
+  }
+
+  let frame = 0;
+
+  function drawMap() {
+    ctx.clearRect(0, 0, W, H);
+    frame += 0.008;
+
+    /* Grade do mapa */
+    ctx.save();
+    ctx.globalAlpha = 0.06;
+    ctx.strokeStyle = '#c9a84c';
+    ctx.lineWidth   = 0.5;
+
+    for (let x = 0; x < W; x += W / 12) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0); ctx.lineTo(x, H);
+      ctx.stroke();
+    }
+
+    for (let y = 0; y < H; y += H / 8) {
+      ctx.beginPath();
+      ctx.moveTo(0, y); ctx.lineTo(W, y);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    /* Linhas de conexão entre regiões */
+    const pins = Object.values(regions).map(r => ({
+      x: r.pin.left * W,
+      y: r.pin.top  * H,
+      color: r.color
+    }));
+
+    for (let i = 0; i < pins.length; i++) {
+      for (let j = i + 1; j < pins.length; j++) {
+        const a = pins[i], b = pins[j];
+        const travel = (Math.sin(frame + i + j) + 1) / 2;
+        const tx = a.x + (b.x - a.x) * travel;
+        const ty = a.y + (b.y - a.y) * travel;
+
+        /* Linha base */
+        ctx.save();
+        ctx.globalAlpha = 0.08;
+        ctx.strokeStyle = `rgb(${a.color.join(',')})`;
+        ctx.lineWidth   = 0.6;
+        ctx.setLineDash([4, 8]);
+        ctx.beginPath();
+        ctx.moveTo(a.x, a.y);
+        ctx.lineTo(b.x, b.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        /* Ponto viajante */
+        ctx.globalAlpha = 0.5;
+        const grad = ctx.createRadialGradient(tx, ty, 0, tx, ty, 6);
+        grad.addColorStop(0, `rgba(${a.color.join(',')},0.8)`);
+        grad.addColorStop(1, `rgba(${a.color.join(',')},0)`);
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(tx, ty, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    /* Névoas por região */
+    Object.values(regions).forEach(r => {
+      const x = r.pin.left * W;
+      const y = r.pin.top  * H;
+      const pulse = Math.sin(frame * 1.5) * 0.3 + 0.7;
+
+      const grad = ctx.createRadialGradient(x, y, 0, x, y, 80 * pulse);
+      grad.addColorStop(0, `rgba(${r.color.join(',')},0.08)`);
+      grad.addColorStop(1, `rgba(${r.color.join(',')},0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x, y, 80 * pulse, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(drawMap);
+  }
+
+  /* Tooltip ao hover nos pins */
+  const tooltip  = document.getElementById('map-tooltip');
+  const mapWorld = document.querySelector('.map-world');
+
+  document.querySelectorAll('.map-pin').forEach(pin => {
+    const key    = pin.getAttribute('data-region');
+    const region = regions[key];
+
+    pin.addEventListener('mouseenter', (e) => {
+      if (!tooltip || !region) return;
+      tooltip.querySelector('.tooltip-name').textContent =
+        region.name;
+      tooltip.querySelector('.tooltip-type').textContent =
+        region.type;
+      const link = tooltip.querySelector('.tooltip-link');
+      link.textContent = 'Explorar →';
+      link.href        = region.href;
+      link.style.color = `rgb(${region.color.join(',')})`;
+      tooltip.classList.remove('hidden');
+    });
+
+    pin.addEventListener('mousemove', (e) => {
+      if (!tooltip || !mapWorld) return;
+      const rect = mapWorld.getBoundingClientRect();
+      let left = e.clientX - rect.left + 16;
+      let top  = e.clientY - rect.top  + 16;
+
+      if (left + 200 > rect.width)  left -= 220;
+      if (top  + 120 > rect.height) top  -= 130;
+
+      tooltip.style.left = left + 'px';
+      tooltip.style.top  = top  + 'px';
+    });
+
+    pin.addEventListener('mouseleave', () => {
+      if (tooltip) tooltip.classList.add('hidden');
+    });
+
+    /* Clique navega para a região */
+    pin.addEventListener('click', () => {
+      if (region) window.location.href = region.href;
+    });
+  });
+
+  /* Ativa ao entrar na viewport */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        resize();
+        drawMap();
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  if (mapCanvas) io.observe(mapCanvas);
+
+  window.addEventListener('resize', resize, { passive: true });
+})();
+
+/* ── CANVAS DO TEMPLO ── */
+(function () {
+  const canvas = document.getElementById('templo-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, pillars = [], particles = [];
+  let active = false;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function init() {
+    /* Três pilares de luz */
+    pillars = [
+      { x: W * 0.25, color: [112,192,96],  label: 'Elemental' },
+      { x: W * 0.50, color: [201,168,76],  label: 'Humano'    },
+      { x: W * 0.75, color: [160,122,240], label: 'Espiritual'}
+    ];
+
+    /* Partículas flutuando para cima */
+    particles = [];
+    for (let i = 0; i < 50; i++) {
+      particles.push({
+        x:      Math.random() * W,
+        y:      Math.random() * H + H,
+        r:      Math.random() * 2 + 0.5,
+        a:      Math.random() * 0.5 + 0.1,
+        speedY: -(Math.random() * 0.6 + 0.2),
+        speedX: (Math.random() - 0.5) * 0.3,
+        life:   Math.random(),
+        decay:  Math.random() * 0.004 + 0.001,
+        pillar: Math.floor(Math.random() * 3)
+      });
+    }
+  }
+
+  let frame = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    frame += 0.012;
+
+    /* Pilares de luz */
+    pillars.forEach((p, i) => {
+      const pulse = Math.sin(frame + i * 2.1) * 0.3 + 0.7;
+      const [r, g, b] = p.color;
+
+      /* Pilar vertical */
+      const grad = ctx.createLinearGradient(p.x, H, p.x, 0);
+      grad.addColorStop(0, `rgba(${r},${g},${b},${0.15 * pulse})`);
+      grad.addColorStop(0.5, `rgba(${r},${g},${b},${0.06 * pulse})`);
+      grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.fillStyle = grad;
+      ctx.fillRect(p.x - 20 * pulse, 0, 40 * pulse, H);
+
+      /* Base do pilar */
+      const base = ctx.createRadialGradient(
+        p.x, H * 0.85, 0,
+        p.x, H * 0.85, 60 * pulse
+      );
+      base.addColorStop(0, `rgba(${r},${g},${b},${0.3 * pulse})`);
+      base.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.fillStyle = base;
+      ctx.beginPath();
+      ctx.arc(p.x, H * 0.85, 60 * pulse, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Partículas */
+    particles.forEach(p => {
+      p.x    += p.speedX;
+      p.y    += p.speedY;
+      p.life -= p.decay;
+
+      if (p.life <= 0 || p.y < -10) {
+        const pIdx = p.pillar;
+        p.x    = pillars[pIdx].x + (Math.random() - 0.5) * 80;
+        p.y    = H + 10;
+        p.life = 1;
+      }
+
+      const [r, g, b] = pillars[p.pillar].color;
+      const alpha = p.a * p.life;
+
+      const grad = ctx.createRadialGradient(
+        p.x, p.y, 0, p.x, p.y, p.r * 4
+      );
+      grad.addColorStop(0, `rgba(${r},${g},${b},${alpha})`);
+      grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(240,230,210,${alpha * 1.5})`;
+      ctx.fill();
+    });
+
+    /* Linha de horizon dourada */
+    const horizon = ctx.createLinearGradient(0, H * 0.8, W, H * 0.8);
+    horizon.addColorStop(0,   'rgba(201,168,76,0)');
+    horizon.addColorStop(0.25, `rgba(201,168,76,${0.1 + 0.05 * Math.sin(frame)})`);
+    horizon.addColorStop(0.5,  `rgba(201,168,76,${0.15 + 0.05 * Math.sin(frame + 1)})`);
+    horizon.addColorStop(0.75, `rgba(201,168,76,${0.1 + 0.05 * Math.sin(frame + 2)})`);
+    horizon.addColorStop(1,   'rgba(201,168,76,0)');
+    ctx.fillStyle = horizon;
+    ctx.fillRect(0, H * 0.8, W, 1);
+
+    requestAnimationFrame(draw);
+  }
+
+  /* Ativa ao entrar na viewport */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !active) {
+        active = true;
+        resize();
+        init();
+        draw();
+      }
+    });
+  }, { threshold: 0.2 });
+
+  io.observe(canvas);
+  window.addEventListener('resize', () => {
+    if (active) { resize(); init(); }
+  }, { passive: true });
+})();
+
+/* ── CARDS CLICÁVEIS ── */
+(function () {
+  const cards = document.querySelectorAll('.region-card');
+  cards.forEach(card => {
+    const href = card.getAttribute('data-href');
+    if (!href) return;
+    card.addEventListener('click', () => {
+      window.location.href = href;
+    });
+    card.style.cursor = 'pointer';
+  });
+})();
+
+/* ── SCROLL REVEAL ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  const io  = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── EFEITO PARALLAX NOS CARDS ── */
+(function () {
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  if (isMobile) return;
+
+  const cards = document.querySelectorAll('.region-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect   = card.getBoundingClientRect();
+      const cx     = rect.left + rect.width  / 2;
+      const cy     = rect.top  + rect.height / 2;
+      const dx     = (e.clientX - cx) / (rect.width  / 2);
+      const dy     = (e.clientY - cy) / (rect.height / 2);
+      const rotX   = dy * -4;
+      const rotY   = dx *  4;
+      card.style.transform =
+        `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.5s ease';
+      setTimeout(() => { card.style.transition = ''; }, 500);
+    });
+  });
+})();
+
+/* ── EFEITO NOS PINS AO SCROLL ── */
+(function () {
+  const pins = document.querySelectorAll('.map-pin');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        pins.forEach((pin, i) => {
+          setTimeout(() => {
+            pin.style.opacity   = '0';
+            pin.style.transform =
+              'translate(-50%, -50%) scale(0)';
+            pin.style.transition =
+              'opacity 0.5s ease, transform 0.5s ease';
+
+            setTimeout(() => {
+              pin.style.opacity   = '1';
+              pin.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 50);
+          }, i * 150);
+        });
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const mapa = document.getElementById('mapa');
+  if (mapa) io.observe(mapa);
+})();
 </script>
 </body>
 </html>
