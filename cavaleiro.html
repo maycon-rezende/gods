@@ -119,12 +119,17 @@ nav a:hover {
 
 .banner-bg {
   position: absolute;
-  inset: -5%;
+  z-index: 0;
+  z-index: 0;
+  inset: 0;
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  transform: scale(1.05);
-  transition: transform 8s ease;
+  transform: translate3d(0,0,0) scale(1.02);
+  transition: transform 12s ease, filter 0.8s ease;
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   background-color: var(--red-deep);
   background-image:
     radial-gradient(ellipse at 55% 30%,
@@ -135,7 +140,7 @@ nav a:hover {
 }
 
 .banner-bg.loaded {
-  transform: scale(1);
+  transform: translate3d(0,0,0) scale(1);
   filter: brightness(0.4) saturate(0.8);
 }
 
@@ -561,12 +566,15 @@ nav a:hover {
 
 .banner-bg {
   position: absolute;
-  inset: -5%;
+  inset: 0;
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  transform: scale(1.05);
-  transition: transform 8s ease;
+  transform: translate3d(0,0,0) scale(1.02);
+  transition: transform 12s ease, filter 0.8s ease;
+  will-change: transform, opacity, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   background-color: var(--red-deep);
   background-image:
     radial-gradient(ellipse at 55% 30%,
@@ -577,7 +585,7 @@ nav a:hover {
 }
 
 .banner-bg.loaded {
-  transform: scale(1);
+  transform: translate3d(0,0,0) scale(1);
   filter: brightness(0.4) saturate(0.8);
 }
 
@@ -891,7 +899,583 @@ nav a:hover {
   .banner-content { padding: 3.5rem 4vw 2.5rem; }
   .banner-stats   { margin-top: 1.2rem; }
 }
-  /* === CSS VIRÁ NAS PARTES 2 E 3 === */
+
+/* ════════════════════════════════════
+   CORREÇÕES — SEÇÕES, IMAGEM E RESPONSIVIDADE
+   Esta parte foi adicionada para impedir que os blocos abaixo do banner
+   fiquem sem estilo ou invisíveis, e para estabilizar a imagem do Cavaleiro.
+════════════════════════════════════ */
+
+section {
+  position: relative;
+  z-index: 2;
+  padding: clamp(4rem, 8vw, 7rem) clamp(1.2rem, 5vw, 5rem);
+  background:
+    radial-gradient(ellipse at top, rgba(139,0,0,0.08), transparent 45%),
+    linear-gradient(180deg, var(--void), var(--deep));
+}
+
+.section-header {
+  max-width: 980px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.section-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stag-line {
+  width: min(80px, 18vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--red-bright), transparent);
+}
+
+.stag-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+}
+
+.section-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.05;
+  color: var(--gold-light);
+  text-shadow: 0 0 30px rgba(204,0,34,0.18);
+}
+
+.section-title span {
+  color: var(--red-bright);
+}
+
+/* IDENTIDADE */
+.identity-grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.identity-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.identity-photo {
+  position: relative;
+  min-height: 560px;
+  border: 1px solid rgba(204,0,34,0.35);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: #120004;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,0.55),
+    0 0 42px rgba(139,0,0,0.16);
+  isolation: isolate;
+}
+
+/* Corrige o efeito de piscar/desaparecer da imagem */
+.identity-photo::after {
+  content: none !important;
+  display: none !important;
+  animation: none !important;
+}
+
+.photo-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.13;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.06) 0px,
+    rgba(255,255,255,0.06) 1px,
+    transparent 3px,
+    transparent 6px
+  );
+  z-index: 2;
+}
+
+.photo-corner {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border-color: rgba(204,0,34,0.75);
+  z-index: 3;
+}
+
+.photo-corner.tl { top: 1rem; left: 1rem; border-top: 1px solid; border-left: 1px solid; }
+.photo-corner.tr { top: 1rem; right: 1rem; border-top: 1px solid; border-right: 1px solid; }
+.photo-corner.bl { bottom: 1rem; left: 1rem; border-bottom: 1px solid; border-left: 1px solid; }
+.photo-corner.br { bottom: 1rem; right: 1rem; border-bottom: 1px solid; border-right: 1px solid; }
+
+.photo-glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 45%, rgba(3,3,8,0.55) 100%),
+    linear-gradient(to top, rgba(3,3,8,0.75), transparent 45%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.photo-label {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 4;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  background: rgba(3,3,8,0.72);
+  border: 1px solid rgba(204,0,34,0.35);
+  padding: 0.65rem 0.8rem;
+  backdrop-filter: blur(6px);
+}
+
+.identity-card {
+  border: 1px solid rgba(204,0,34,0.25);
+  background: linear-gradient(135deg, rgba(139,0,0,0.12), rgba(255,255,255,0.02));
+  padding: 1.2rem;
+}
+
+.icard-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.74rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  margin-bottom: 1rem;
+}
+
+.icard-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.icard-key {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.icard-val {
+  text-align: right;
+  color: var(--text);
+}
+
+.icard-val.danger {
+  color: var(--red-bright);
+}
+
+.identity-text {
+  color: rgba(232,220,200,0.9);
+  line-height: 1.85;
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+}
+
+.identity-text p + p {
+  margin-top: 1.15rem;
+}
+
+.identity-text strong,
+.identity-text em {
+  color: var(--gold-light);
+}
+
+.identity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.8rem;
+}
+
+.itag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  border: 1px solid rgba(201,168,76,0.22);
+  background: rgba(201,168,76,0.05);
+  padding: 0.55rem 0.75rem;
+}
+
+.danger-tag {
+  color: var(--red-bright);
+  border-color: rgba(204,0,34,0.3);
+  background: rgba(139,0,0,0.08);
+}
+
+/* PODERES */
+.powers-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.power-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 1.2rem;
+  border: 1px solid rgba(204,0,34,0.2);
+  background:
+    linear-gradient(135deg, rgba(139,0,0,0.12), rgba(255,255,255,0.025));
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  overflow: hidden;
+}
+
+.pcard-number {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.2rem;
+  color: rgba(204,0,34,0.5);
+}
+
+.pcard-icon {
+  font-size: 1.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.pcard-origin {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 0.4rem;
+}
+
+.pcard-name {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  color: var(--gold-light);
+  margin-bottom: 0.7rem;
+}
+
+.pcard-desc {
+  color: rgba(232,220,200,0.82);
+  line-height: 1.7;
+}
+
+.pcard-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.08);
+  margin-top: 1.1rem;
+  overflow: hidden;
+}
+
+.pbar-fill {
+  width: 0;
+  height: 100%;
+  transition: width 1s ease;
+}
+
+/* HISTÓRIA */
+.story-container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.story-chapter {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+}
+
+.chapter-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chapter-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.4rem;
+  color: var(--red-bright);
+}
+
+.chapter-line {
+  flex: 1;
+  width: 1px;
+  min-height: 80px;
+  background: linear-gradient(to bottom, rgba(204,0,34,0.65), transparent);
+}
+
+.chapter-body {
+  border-left: 1px solid rgba(204,0,34,0.18);
+  padding: 0.3rem 0 1.5rem 1.6rem;
+}
+
+.chapter-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red-bright);
+  margin-bottom: 0.55rem;
+}
+
+.chapter-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  color: var(--gold-light);
+  margin-bottom: 0.65rem;
+}
+
+.chapter-body p {
+  color: rgba(232,220,200,0.82);
+  line-height: 1.8;
+}
+
+/* GALERIA */
+.gallery-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 230px;
+  gap: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: #160004;
+  border: 1px solid rgba(204,0,34,0.22);
+  overflow: hidden;
+  min-height: 220px;
+}
+
+.gallery-item.tall {
+  grid-row: span 2;
+}
+
+.gallery-item.wide {
+  grid-column: span 2;
+}
+
+.gitem-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1rem;
+  background: linear-gradient(to top, rgba(3,3,8,0.9), transparent);
+}
+
+.gitem-overlay span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.gallery-hint {
+  max-width: 900px;
+  margin: 1.5rem auto 0;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+}
+
+.gallery-hint code {
+  color: var(--red-bright);
+}
+
+/* FOOTER */
+footer {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 1.5rem;
+  text-align: center;
+  background: #020204;
+  border-top: 1px solid rgba(204,0,34,0.2);
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.footer-nav a {
+  color: var(--gold-dim);
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  color: var(--red-bright);
+}
+
+.footer-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  color: var(--gold-light);
+  margin-bottom: 1rem;
+}
+
+.footer-quote {
+  color: var(--text-dim);
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(154,143,122,0.6);
+}
+
+/* RESPONSIVIDADE ADICIONAL */
+@media (max-width: 900px) {
+  .identity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .identity-photo {
+    min-height: 520px;
+  }
+
+  .gallery-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 220px;
+  }
+}
+
+@media (max-width: 640px) {
+  section {
+    padding: 4rem 1rem;
+  }
+
+  nav {
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  nav a {
+    flex: 0 0 auto;
+  }
+
+  .banner-content {
+    padding: 5rem 1rem 3rem;
+  }
+
+  .banner-tag {
+    gap: 0.65rem;
+  }
+
+  .tag-text {
+    letter-spacing: 0.22em;
+    white-space: normal;
+  }
+
+  .banner-name {
+    font-size: clamp(2.6rem, 16vw, 4rem);
+  }
+
+  .name-sub {
+    font-size: clamp(1.8rem, 11vw, 3rem);
+  }
+
+  .identity-photo {
+    min-height: 420px;
+  }
+
+  .power-card {
+    grid-template-columns: 1fr;
+  }
+
+  .pcard-number {
+    font-size: 1.6rem;
+  }
+
+  .story-chapter {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .chapter-aside {
+    align-items: flex-start;
+  }
+
+  .chapter-line {
+    display: none;
+  }
+
+  .chapter-body {
+    padding-left: 1rem;
+  }
+
+  .gallery-container {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 260px;
+  }
+
+  .gallery-item.tall,
+  .gallery-item.wide {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 420px) {
+  body {
+    font-size: 16px;
+  }
+
+  .identity-photo {
+    min-height: 360px;
+  }
+
+  .banner-stats {
+    align-items: stretch;
+  }
+
+  .bstat {
+    flex: 1 1 130px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -904,7 +1488,7 @@ nav a:hover {
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
-    <img src="logo.jpg" alt="Logo">
+    <img src="img-logo/olhos.jpg" alt="Logo">
   </a>
   <a href="viloes.html">← Vilões</a>
   <a href="#identidade">Identidade</a>
@@ -915,7 +1499,7 @@ nav a:hover {
 
 <!-- BANNER CINEMÁTICO -->
 <section id="banner">
-  <div class="banner-bg" style="background-image: url('cavaleiro-banner.jpg')"></div>
+  <div class="banner-bg" style="background-image: url('img-cavaleiro/cavaleirobanner.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-vignette"></div>
 
@@ -989,7 +1573,7 @@ nav a:hover {
     <!-- Foto -->
     <div class="identity-photo-wrap">
       <div class="identity-photo"
-        style="background-image: url('cavaleiro-perfil.jpg')">
+        style="background-image: url('img-cavaleiro/cavaleirobanner.png')">
         <div class="photo-scanlines"></div>
         <div class="photo-corner tl"></div>
         <div class="photo-corner tr"></div>
@@ -1534,7 +2118,7 @@ nav a:hover {
     const scrollY = window.scrollY;
     if (scrollY <= window.innerHeight) {
       bg.style.transform =
-        `scale(1.05) translateY(${scrollY * 0.22}px)`;
+        `translate3d(0, ${scrollY * 0.12}px, 0) scale(1.02)`;
     }
   }, { passive: true });
 })();
@@ -1606,47 +2190,7 @@ nav a:hover {
   setTimeout(triggerGlitch, 2000);
 })();
 
-/* ── EFEITO DE DISTORÇÃO NA FOTO ── */
-(function () {
-  const photo = document.querySelector('.identity-photo');
-  if (!photo) return;
-
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes photo-glitch {
-      0%   { clip-path: inset(0 0 100% 0); }
-      10%  { clip-path: inset(10% 0 60% 0); }
-      20%  { clip-path: inset(40% 0 30% 0); }
-      30%  { clip-path: inset(0 0 80% 0); }
-      40%  { clip-path: inset(60% 0 10% 0); }
-      50%  { clip-path: inset(0 0 0 0); }
-      100% { clip-path: inset(0 0 0 0); }
-    }
-
-    .identity-photo::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: inherit;
-      background-size: cover;
-      background-position: center top;
-      opacity: 0;
-      mix-blend-mode: screen;
-      transform: translateX(4px);
-      filter: hue-rotate(180deg) saturate(3);
-      animation: photo-glitch-layer 8s 3s infinite;
-    }
-
-    @keyframes photo-glitch-layer {
-      0%, 90%, 100% { opacity: 0; }
-      92%  { opacity: 0.4; clip-path: inset(20% 0 50% 0); }
-      94%  { opacity: 0.2; clip-path: inset(60% 0 10% 0); }
-      96%  { opacity: 0.4; clip-path: inset(5% 0 70% 0); }
-      98%  { opacity: 0; }
-    }
-  `;
-  document.head.appendChild(style);
-})();
+/* ── EFEITO DE DISTORÇÃO NA FOTO removido para evitar piscada/desaparecimento da imagem ── */
 
 /* ── EFEITO NOS CARDS DE PODER ── */
 (function () {

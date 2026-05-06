@@ -5,8 +5,10 @@
 ======================================== */
 
 /* ── CURSOR PERSONALIZADO ── */
-*, *::before, *::after {
-  cursor: none !important;
+@media (hover: hover) and (pointer: fine) {
+  @media (hover: hover) and (pointer: fine) {
+  *, *::before, *::after { cursor: none !important; }
+}
 }
 
 #cursor-outer {
@@ -524,3 +526,6 @@ body.menu-open .hamburger-line:nth-child(3) {
   #mobile-nav { gap: 1.5rem; }
   #mobile-nav a { font-size: clamp(1rem, 6vw, 1.4rem); }
 }
+
+/* RESPONSIVE SAFETY PATCH */
+@media (hover:none), (pointer:coarse){#cursor-outer,#cursor-inner,.cursor-trail{display:none!important}*,*::before,*::after{cursor:auto!important}}

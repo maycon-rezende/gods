@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anull — O Diário de um Deus</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<title>Kaelith — O Diário de um Deus</title>
+<link rel="stylesheet" href="effects.css">
 <link rel="stylesheet" href="responsive-fixes.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
   /* ── VARIÁVEIS E RESET ── */
 :root {
@@ -20,15 +21,18 @@
   --divine: #6a4fcf;
   --divine-light: #a07af0;
 
-  /* Cores exclusivas do Anull */
-  --char-accent: #7a9acc;
-  --char-accent-dim: #3a5a7a;
-  --char-accent-glow: rgba(122,154,204,0.35);
-  --spirit: #90b8e0;
-  --spirit-dim: #4a7aaa;
-  --spirit-glow: rgba(144,184,224,0.3);
-  --void-color: #2a1a4a;
-  --void-light: #8a70c0;
+  /* Cores exclusivas da Kaelith */
+  --char-accent: #c0842a;
+  --char-accent-dim: #7a4a10;
+  --char-accent-glow: rgba(192,132,42,0.4);
+  --justice: #d4a020;
+  --justice-dim: #8a6010;
+  --justice-glow: rgba(212,160,32,0.35);
+  --void-color: #3a1a6a;
+  --void-light: #9a60d0;
+  --void-glow: rgba(154,96,208,0.35);
+  --nature: #4a8a4a;
+  --nature-light: #80c080;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -63,7 +67,7 @@ nav {
   padding: 1rem 2rem;
   background: linear-gradient(to bottom, rgba(3,3,8,0.95), transparent);
   backdrop-filter: blur(4px);
-  border-bottom: 1px solid rgba(122,154,204,0.15);
+  border-bottom: 1px solid rgba(192,132,42,0.15);
 }
 
 nav a {
@@ -78,8 +82,8 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--char-accent);
-  text-shadow: 0 0 20px var(--char-accent-glow);
+  color: var(--justice);
+  text-shadow: 0 0 20px var(--justice-glow);
 }
 
 .nav-logo img {
@@ -87,16 +91,16 @@ nav a:hover {
   height: 36px;
   object-fit: cover;
   border-radius: 50%;
-  border: 1px solid rgba(122,154,204,0.3);
-  box-shadow: 0 0 12px rgba(122,154,204,0.4);
+  border: 1px solid rgba(192,132,42,0.3);
+  box-shadow: 0 0 12px rgba(192,132,42,0.4);
   transition: box-shadow 0.3s;
   display: block;
 }
 
 .nav-logo img:hover {
   box-shadow:
-    0 0 20px rgba(122,154,204,0.7),
-    0 0 40px rgba(106,79,207,0.3);
+    0 0 20px rgba(212,160,32,0.7),
+    0 0 40px rgba(154,96,208,0.3);
 }
 
 /* ── BANNER ── */
@@ -117,12 +121,12 @@ nav a:hover {
   background-repeat: no-repeat;
   transform: scale(1.05);
   transition: transform 8s ease;
-  background-color: #030510;
+  background-color: #0a0500;
   background-image:
     radial-gradient(ellipse at 60% 25%,
-      rgba(122,154,204,0.2) 0%, transparent 55%),
+      rgba(192,132,42,0.2) 0%, transparent 55%),
     radial-gradient(ellipse at 20% 65%,
-      rgba(42,26,74,0.3) 0%, transparent 50%);
+      rgba(58,26,106,0.3) 0%, transparent 50%);
 }
 
 .banner-bg.loaded { transform: scale(1); }
@@ -154,7 +158,7 @@ nav a:hover {
   font-size: 0.7rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--char-accent);
+  color: var(--justice);
   margin-bottom: 1rem;
   opacity: 0;
   animation: fade-up 1s 0.2s ease forwards;
@@ -166,15 +170,16 @@ nav a:hover {
   font-weight: 900;
   line-height: 0.95;
   background: linear-gradient(135deg,
-    #e8f0ff 0%,
-    #b0d0f0 20%,
-    #7a9acc 45%,
-    #c0a8f0 70%,
+    #fff8e0 0%,
+    #f0d080 15%,
+    #d4a020 35%,
+    #c0842a 55%,
+    #9a60d0 80%,
     #6a4fcf 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 40px rgba(122,154,204,0.5));
+  filter: drop-shadow(0 0 40px rgba(192,132,42,0.5));
   opacity: 0;
   animation: fade-up 1s 0.4s ease forwards;
 }
@@ -193,7 +198,7 @@ nav a:hover {
   width: 120px;
   height: 1px;
   background: linear-gradient(90deg,
-    var(--char-accent), var(--void-light), transparent);
+    var(--justice), var(--void-light), transparent);
   margin: 1.8rem 0;
   opacity: 0;
   animation: fade-up 1s 0.8s ease forwards;
@@ -202,7 +207,7 @@ nav a:hover {
 .banner-quote {
   font-family: 'EB Garamond', serif;
   font-style: italic;
-  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
   color: var(--text-dim);
   max-width: 500px;
   line-height: 1.7;
@@ -247,7 +252,7 @@ nav a:hover {
   width: 1px;
   height: 36px;
   background: linear-gradient(to bottom,
-    transparent, rgba(122,154,204,0.4), transparent);
+    transparent, rgba(192,132,42,0.4), transparent);
   flex-shrink: 0;
 }
 
@@ -258,7 +263,7 @@ nav a:hover {
   font-family: 'Cinzel', serif;
   font-size: 0.6rem;
   letter-spacing: 0.3em;
-  color: var(--char-accent);
+  color: var(--justice);
   text-transform: uppercase;
   animation: bounce 2s ease infinite;
 }
@@ -298,13 +303,11 @@ nav a:hover {
    RESPONSIVO — BANNER E NAV
 ════════════════════════════════════ */
 
-/* 1024px */
 @media (max-width: 1024px) {
   nav { gap: 1.8rem; }
   .banner-content { padding: 4rem 4vw 4rem; }
 }
 
-/* 768px */
 @media (max-width: 768px) {
   nav {
     gap: 1rem;
@@ -313,10 +316,7 @@ nav a:hover {
   }
 
   nav a { font-size: 0.68rem; letter-spacing: 0.12em; }
-
   .nav-logo img { width: 30px; height: 30px; }
-
-  #banner { align-items: flex-end; }
 
   .banner-content {
     padding: 5rem 1.5rem 3.5rem;
@@ -335,12 +335,11 @@ nav a:hover {
         rgba(3,3,8,0.2) 100%);
   }
 
-  .banner-quote { font-size: 1rem; max-width: 100%; }
-
-  .banner-stats { gap: 0.8rem; margin-top: 1.8rem; }
-  .bstat-val    { font-size: 0.75rem; }
-  .bstat-label  { font-size: 0.5rem; }
-  .bstat-sep    { height: 28px; }
+  .banner-quote  { font-size: 1rem; max-width: 100%; }
+  .banner-stats  { gap: 0.8rem; margin-top: 1.8rem; }
+  .bstat-val     { font-size: 0.75rem; }
+  .bstat-label   { font-size: 0.5rem; }
+  .bstat-sep     { height: 28px; }
 
   .scroll-hint {
     right: 50%;
@@ -349,7 +348,6 @@ nav a:hover {
   }
 }
 
-/* 480px */
 @media (max-width: 480px) {
   nav { gap: 0.6rem; padding: 0.8rem; }
   nav a { font-size: 0.62rem; }
@@ -369,12 +367,11 @@ nav a:hover {
   .banner-human   { font-size: 0.95rem; }
   .banner-quote   { font-size: 0.92rem; line-height: 1.65; }
 
-  /* Stats viram cards em mobile */
   .bstat-sep { display: none; }
 
   .bstat {
-    background: rgba(122,154,204,0.06);
-    border: 1px solid rgba(122,154,204,0.15);
+    background: rgba(192,132,42,0.06);
+    border: 1px solid rgba(192,132,42,0.15);
     padding: 0.4rem 0.8rem;
     border-radius: 1px;
   }
@@ -383,15 +380,13 @@ nav a:hover {
   .bstat-label { font-size: 0.48rem; }
 }
 
-/* 360px */
 @media (max-width: 360px) {
-  .banner-name { font-size: clamp(2.2rem, 13vw, 3.2rem); }
+  .banner-name    { font-size: clamp(2.2rem, 13vw, 3.2rem); }
   .banner-content { padding: 5rem 1rem 2.5rem; }
 }
 
-/* Landscape mobile */
 @media (max-width: 768px) and (orientation: landscape) {
-  #banner { min-height: 100svh; }
+  #banner         { min-height: 100svh; }
   .banner-content { padding: 3.5rem 4vw 2.5rem; }
   .banner-stats   { margin-top: 1.2rem; }
 }
@@ -411,7 +406,7 @@ section {
   font-size: 0.65rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--char-accent);
+  color: var(--justice);
   display: block;
   margin-bottom: 1rem;
 }
@@ -421,14 +416,14 @@ h2 {
   font-size: clamp(1.6rem, 4vw, 3rem);
   font-weight: 700;
   color: var(--gold-light);
-  text-shadow: 0 0 40px rgba(122,154,204,0.2);
+  text-shadow: 0 0 40px rgba(192,132,42,0.2);
 }
 
 .section-rule {
   width: 80px;
   height: 1px;
   background: linear-gradient(90deg,
-    transparent, var(--char-accent), var(--void-light), transparent);
+    transparent, var(--justice), var(--void-light), transparent);
   margin: 1.5rem auto 0;
 }
 
@@ -459,14 +454,14 @@ h2 {
   aspect-ratio: 3 / 4;
   background-size: cover;
   background-position: center;
-  background-color: #030510;
+  background-color: #0a0500;
   background-image:
     radial-gradient(ellipse at 50% 30%,
-      rgba(122,154,204,0.2) 0%, transparent 70%),
+      rgba(192,132,42,0.2) 0%, transparent 70%),
     radial-gradient(ellipse at 50% 80%,
-      rgba(42,26,74,0.25) 0%, transparent 60%);
+      rgba(58,26,106,0.2) 0%, transparent 60%);
   position: relative;
-  border: 1px solid rgba(122,154,204,0.2);
+  border: 1px solid rgba(192,132,42,0.2);
 }
 
 .photo-frame-corner {
@@ -477,26 +472,26 @@ h2 {
 
 .photo-frame-corner.tl {
   top: -1px; left: -1px;
-  border-top: 2px solid var(--spirit);
-  border-left: 2px solid var(--spirit);
+  border-top: 2px solid var(--justice);
+  border-left: 2px solid var(--justice);
 }
 
 .photo-frame-corner.tr {
   top: -1px; right: -1px;
-  border-top: 2px solid var(--spirit);
-  border-right: 2px solid var(--spirit);
+  border-top: 2px solid var(--justice);
+  border-right: 2px solid var(--justice);
 }
 
 .photo-frame-corner.bl {
   bottom: -1px; left: -1px;
-  border-bottom: 2px solid var(--spirit);
-  border-left: 2px solid var(--spirit);
+  border-bottom: 2px solid var(--void-light);
+  border-left: 2px solid var(--void-light);
 }
 
 .photo-frame-corner.br {
   bottom: -1px; right: -1px;
-  border-bottom: 2px solid var(--spirit);
-  border-right: 2px solid var(--spirit);
+  border-bottom: 2px solid var(--void-light);
+  border-right: 2px solid var(--void-light);
 }
 
 .about-photo-label {
@@ -504,7 +499,7 @@ h2 {
   font-size: 0.65rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--char-accent);
+  color: var(--justice);
   text-align: center;
 }
 
@@ -518,7 +513,7 @@ h2 {
 .about-text p strong { color: var(--gold-light); }
 
 .about-text p em {
-  color: var(--char-accent);
+  color: var(--justice);
   font-style: normal;
 }
 
@@ -534,7 +529,7 @@ h2 {
   font-size: 0.55rem;
   letter-spacing: 0.12em;
   padding: 0.3rem 0.7rem;
-  border: 1px solid rgba(122,154,204,0.2);
+  border: 1px solid rgba(192,132,42,0.2);
   color: var(--gold-dim);
   text-transform: uppercase;
   border-radius: 1px;
@@ -542,13 +537,23 @@ h2 {
 }
 
 .tag:hover {
-  border-color: var(--char-accent);
+  border-color: var(--justice);
   color: var(--gold-light);
 }
 
-.tag.spirit-tag {
-  border-color: rgba(144,184,224,0.35);
-  color: var(--spirit);
+.tag.justice-tag {
+  border-color: rgba(212,160,32,0.4);
+  color: var(--justice);
+}
+
+.tag.void-tag {
+  border-color: rgba(154,96,208,0.35);
+  color: var(--void-light);
+}
+
+.tag.nature-tag {
+  border-color: rgba(74,138,74,0.35);
+  color: var(--nature-light);
 }
 
 .tag.divine-tag {
@@ -556,9 +561,64 @@ h2 {
   color: var(--divine-light);
 }
 
-.tag.void-tag {
-  border-color: rgba(138,112,192,0.35);
-  color: var(--void-light);
+/* ── DESCRIÇÃO ── */
+#descricao { padding-bottom: 5rem; }
+
+.desc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.desc-card {
+  background: linear-gradient(135deg,
+    var(--surface) 0%, var(--deep) 100%);
+  border: 1px solid rgba(192,132,42,0.12);
+  padding: 2rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s, transform 0.3s;
+}
+
+.desc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(192,132,42,0.07) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.desc-card:hover {
+  border-color: rgba(212,160,32,0.4);
+  transform: translateY(-4px);
+}
+
+.desc-card:hover::before { opacity: 1; }
+
+.desc-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 10px var(--justice-glow));
+}
+
+.desc-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--justice);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.1em;
+}
+
+.desc-text {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  line-height: 1.75;
 }
 
 /* ── PODERES ── */
@@ -566,8 +626,8 @@ h2 {
   padding-bottom: 5rem;
   background: linear-gradient(to bottom,
     transparent,
-    rgba(122,154,204,0.03),
-    rgba(42,26,74,0.04),
+    rgba(192,132,42,0.03),
+    rgba(58,26,106,0.04),
     transparent);
 }
 
@@ -584,13 +644,13 @@ h2 {
   grid-template-columns: 80px 1fr;
   gap: 2rem;
   padding: 2.5rem 0;
-  border-bottom: 1px solid rgba(122,154,204,0.08);
+  border-bottom: 1px solid rgba(192,132,42,0.08);
   align-items: start;
   transition: background 0.3s;
 }
 
 .power-item:hover {
-  background: rgba(122,154,204,0.03);
+  background: rgba(192,132,42,0.03);
 }
 
 .power-item:last-child { border-bottom: none; }
@@ -607,7 +667,7 @@ h2 {
   font-size: 0.6rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--char-accent);
+  color: var(--justice);
   margin-bottom: 0.4rem;
 }
 
@@ -648,14 +708,24 @@ h2 {
   width: 0;
 }
 
-.power-bar.spirit {
+.power-bar.justice {
   background: linear-gradient(90deg,
-    var(--spirit-dim), var(--spirit));
+    var(--justice-dim), var(--justice));
 }
 
 .power-bar.void {
   background: linear-gradient(90deg,
     var(--void-color), var(--void-light));
+}
+
+.power-bar.nature {
+  background: linear-gradient(90deg,
+    var(--nature), var(--nature-light));
+}
+
+.power-bar.divine {
+  background: linear-gradient(90deg,
+    var(--divine), var(--divine-light));
 }
 
 /* ── HISTÓRIA ── */
@@ -671,13 +741,13 @@ h2 {
 
 .story-block {
   padding: 2.5rem 0 2.5rem 2.5rem;
-  border-left: 1px solid rgba(122,154,204,0.2);
+  border-left: 1px solid rgba(192,132,42,0.2);
   position: relative;
   transition: border-color 0.3s;
 }
 
 .story-block:hover {
-  border-color: rgba(122,154,204,0.5);
+  border-color: rgba(212,160,32,0.5);
 }
 
 .story-block::before {
@@ -688,10 +758,10 @@ h2 {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: var(--char-accent);
+  background: var(--justice);
   box-shadow:
-    0 0 12px var(--char-accent-glow),
-    0 0 24px var(--spirit-glow);
+    0 0 12px var(--justice-glow),
+    0 0 24px var(--void-glow);
 }
 
 .story-chapter {
@@ -699,7 +769,7 @@ h2 {
   font-size: 0.6rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--char-accent);
+  color: var(--justice);
   margin-bottom: 0.4rem;
 }
 
@@ -735,19 +805,19 @@ h2 {
 .gallery-item {
   background-size: cover;
   background-position: center;
-  background-color: #030510;
+  background-color: #0a0500;
   background-image:
     radial-gradient(ellipse at 50% 50%,
-      rgba(122,154,204,0.12) 0%, transparent 70%);
+      rgba(192,132,42,0.12) 0%, transparent 70%);
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  border: 1px solid rgba(122,154,204,0.1);
+  border: 1px solid rgba(192,132,42,0.1);
   transition: border-color 0.3s, transform 0.3s;
 }
 
 .gallery-item:hover {
-  border-color: rgba(144,184,224,0.45);
+  border-color: rgba(212,160,32,0.45);
   transform: scale(1.01);
 }
 
@@ -773,7 +843,7 @@ h2 {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--spirit);
+  color: var(--justice);
 }
 
 .gallery-hint {
@@ -787,7 +857,7 @@ h2 {
 
 .gallery-hint code {
   font-family: monospace;
-  color: var(--char-accent);
+  color: var(--justice);
   font-style: normal;
 }
 
@@ -795,7 +865,7 @@ h2 {
 footer {
   text-align: center;
   padding: 4rem 2rem;
-  border-top: 1px solid rgba(122,154,204,0.1);
+  border-top: 1px solid rgba(192,132,42,0.1);
   position: relative;
   z-index: 1;
 }
@@ -819,14 +889,14 @@ footer {
   transition: color 0.3s;
 }
 
-.footer-nav a:hover { color: var(--char-accent); }
+.footer-nav a:hover { color: var(--justice); }
 
 .footer-sep { color: var(--gold-dim); opacity: 0.4; }
 
 .footer-title {
   font-family: 'Cinzel Decorative', serif;
   font-size: 1.4rem;
-  color: var(--char-accent);
+  color: var(--justice);
   margin-bottom: 0.6rem;
 }
 
@@ -849,20 +919,18 @@ footer {
    RESPONSIVO — SEÇÕES
 ════════════════════════════════════ */
 
-/* 1024px */
 @media (max-width: 1024px) {
-  .about-grid    { grid-template-columns: 280px 1fr; gap: 3rem; padding: 0 1.5rem; }
-  .powers-list   { padding: 0 1.5rem; }
-  .story-body    { padding: 0 1.5rem; }
-  .gallery-grid  { padding: 0 1.5rem; grid-template-rows: 220px 220px; }
+  .about-grid   { grid-template-columns: 280px 1fr; gap: 3rem; padding: 0 1.5rem; }
+  .powers-list  { padding: 0 1.5rem; }
+  .story-body   { padding: 0 1.5rem; }
+  .gallery-grid { padding: 0 1.5rem; grid-template-rows: 220px 220px; }
+  .desc-grid    { grid-template-columns: repeat(2, 1fr); padding: 0 1.5rem; }
   .section-header { padding: 4rem 1.5rem 2.5rem; }
 }
 
-/* 768px */
 @media (max-width: 768px) {
   .section-header { padding: 3.5rem 1.5rem 2rem; }
 
-  /* Sobre */
   .about-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -875,10 +943,18 @@ footer {
     margin: 0 auto;
   }
 
-  .about-photo { aspect-ratio: 3 / 3.5; }
+  .about-photo  { aspect-ratio: 3 / 3.5; }
   .about-text p { font-size: 0.97rem; }
 
-  /* Poderes */
+  .desc-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 1.5rem;
+    gap: 1rem;
+  }
+
+  .desc-card { padding: 1.5rem 1.2rem; }
+  .desc-card:hover { transform: none; }
+
   .powers-list { padding: 0 1.5rem; }
 
   .power-item {
@@ -891,12 +967,10 @@ footer {
   .power-title    { font-size: 1rem; }
   .power-body     { font-size: 0.9rem; }
 
-  /* História */
   .story-body  { padding: 0 1.5rem; }
   .story-title { font-size: 1.05rem; }
   .story-block p { font-size: 0.93rem; }
 
-  /* Galeria */
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     grid-template-rows: 180px 180px 180px !important;
@@ -904,28 +978,24 @@ footer {
     gap: 0.6rem;
   }
 
-  .gallery-item.tall { grid-row: span 1 !important; }
-  .gallery-item.wide { grid-column: span 2 !important; }
+  .gallery-item.tall  { grid-row: span 1 !important; }
+  .gallery-item.wide  { grid-column: span 2 !important; }
   .gallery-item:hover { transform: none; }
 
-  /* Footer */
   footer { padding: 3rem 1.5rem; }
   .footer-title { font-size: 1.1rem; }
 }
 
-/* 480px */
 @media (max-width: 480px) {
   .section-header { padding: 3rem 1.2rem 1.8rem; }
 
   h2 { font-size: clamp(1.3rem, 6vw, 2rem); }
-
   .section-label { font-size: 0.58rem; letter-spacing: 0.3em; }
 
-  /* Sobre */
-  .about-grid      { padding: 0 1.2rem; gap: 1.5rem; }
+  .about-grid       { padding: 0 1.2rem; gap: 1.5rem; }
   .about-photo-wrap { max-width: 220px; }
-  .about-photo     { aspect-ratio: 1 / 1; }
-  .about-text p    { font-size: 0.93rem; }
+  .about-photo      { aspect-ratio: 1 / 1; }
+  .about-text p     { font-size: 0.93rem; }
 
   .about-tags { gap: 0.35rem; }
   .tag {
@@ -933,7 +1003,17 @@ footer {
     padding: 0.2rem 0.5rem !important;
   }
 
-  /* Poderes */
+  .desc-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .desc-card  { padding: 1.2rem 1rem; }
+  .desc-icon  { font-size: 1.6rem; margin-bottom: 0.6rem; }
+  .desc-title { font-size: 0.8rem; }
+  .desc-text  { font-size: 0.85rem; }
+
   .powers-list { padding: 0 1.2rem; }
 
   .power-item {
@@ -943,13 +1023,11 @@ footer {
   }
 
   .power-icon-big { font-size: 1.7rem; }
-  .power-origin   { font-size: 0.55rem; letter-spacing: 0.2em; }
+  .power-origin   { font-size: 0.55rem; }
   .power-title    { font-size: 0.92rem; }
   .power-body     { font-size: 0.86rem; line-height: 1.75; }
-
   .power-bar-wrap { height: 3px; }
 
-  /* História */
   .story-body  { padding: 0 1.2rem; }
 
   .story-block {
@@ -966,7 +1044,6 @@ footer {
   .story-title   { font-size: 0.97rem; }
   .story-block p { font-size: 0.88rem; }
 
-  /* Galeria */
   .gallery-grid {
     grid-template-columns: 1fr 1fr !important;
     grid-template-rows: 140px 140px 140px !important;
@@ -974,7 +1051,6 @@ footer {
     gap: 0.5rem;
   }
 
-  /* Touch: overlay sempre visível */
   .gallery-overlay { opacity: 1; }
 
   .gallery-overlay span {
@@ -982,12 +1058,8 @@ footer {
     letter-spacing: 0.12em;
   }
 
-  .gallery-hint {
-    font-size: 0.78rem;
-    padding: 0 1.2rem;
-  }
+  .gallery-hint { font-size: 0.78rem; padding: 0 1.2rem; }
 
-  /* Footer */
   footer { padding: 2.5rem 1.2rem; }
 
   .footer-nav {
@@ -995,19 +1067,17 @@ footer {
     gap: 0.5rem;
   }
 
-  .footer-sep  { display: none; }
+  .footer-sep   { display: none; }
   .footer-title { font-size: 1rem; }
-  .footer-sub  { font-size: 0.8rem; }
+  .footer-sub   { font-size: 0.8rem; }
 }
 
-/* 360px */
 @media (max-width: 360px) {
   .about-photo-wrap { max-width: 190px; }
 
   .gallery-grid {
     grid-template-columns: 1fr !important;
     grid-template-rows: auto !important;
-    gap: 0.5rem;
   }
 
   .gallery-item {
@@ -1033,17 +1103,18 @@ footer {
   }
 }
 
-/* Touch devices */
 @media (hover: none) and (pointer: coarse) {
   .gallery-item .gallery-overlay { opacity: 1; }
   .gallery-item:hover { transform: none; }
+  .desc-card:hover    { transform: none; }
   nav a { padding: 0.4rem 0.2rem; }
 }
 
-/* Landscape mobile */
 @media (max-width: 768px) and (orientation: landscape) {
   .section-header { padding: 2.5rem 1.5rem 1.5rem; }
   .story-block    { padding: 1.5rem 0 1.5rem 2rem; }
+  .desc-grid      { grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+  .desc-card      { padding: 1rem; }
 }
   /* === CSS VIRÁ NAS PARTES 2 E 3 === */
 
@@ -1109,12 +1180,17 @@ nav a { white-space: nowrap; }
   pointer-events: none;
 }
 
-.smooth-loop-panel img {
+.smooth-loop-panel img,
+.smooth-loop-panel .loop-bg-a,
+.smooth-loop-panel .loop-bg-b {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   opacity: 0;
   transform: scale(1.045);
   filter: saturate(0.96) brightness(0.92);
@@ -1125,7 +1201,9 @@ nav a { white-space: nowrap; }
   will-change: opacity, transform;
 }
 
-.smooth-loop-panel img.is-visible {
+.smooth-loop-panel img.is-visible,
+.smooth-loop-panel .loop-bg-a.is-visible,
+.smooth-loop-panel .loop-bg-b.is-visible {
   opacity: 1;
   transform: scale(1.11);
   filter: saturate(1.03) brightness(1);
@@ -1167,7 +1245,9 @@ nav a { white-space: nowrap; }
 }
 
 .smooth-loop-panel:hover .smooth-loop-meta { transform: translateY(-4px); }
-.smooth-loop-panel:hover img.is-visible { filter: saturate(1.08) brightness(1.04); }
+.smooth-loop-panel:hover img.is-visible,
+.smooth-loop-panel:hover .loop-bg-a.is-visible,
+.smooth-loop-panel:hover .loop-bg-b.is-visible { filter: saturate(1.08) brightness(1.04); }
 
 .gallery-carousel-controls, .smooth-loop-controls {
   width: min(1180px, calc(100% - 2rem));
@@ -1246,22 +1326,26 @@ nav a { white-space: nowrap; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .smooth-loop-panel img { transition: opacity .2s linear !important; transform: none !important; }
-  .smooth-loop-panel img.is-visible { transform: none !important; }
+  .smooth-loop-panel img,
+.smooth-loop-panel .loop-bg-a,
+.smooth-loop-panel .loop-bg-b { transition: opacity .2s linear !important; transform: none !important; }
+  .smooth-loop-panel img.is-visible,
+.smooth-loop-panel .loop-bg-a.is-visible,
+.smooth-loop-panel .loop-bg-b.is-visible { transform: none !important; }
 }
 
 </style>
 </head>
 <body>
-     <audio autoplay loop hidden preload="auto" playsinline>
-    <source src="audio/themepic4.mp3" type="audio/mpeg" />
+   <audio autoplay loop hidden>
+    <source src="audio/themepic12.mp3" type="audio/mpeg" />
   </audio>
 
 <canvas id="cosmos-bg"></canvas>
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="home.html" class="nav-logo">
     <img src="img-logo/olhos.jpg" alt="Logo">
   </a>
   <a href="#sobre">Sobre</a>
@@ -1272,33 +1356,33 @@ nav a { white-space: nowrap; }
 
 <!-- BANNER -->
 <section id="banner">
-  <div class="banner-bg" style="background-image: url('img-anull/anullbanner.png')"></div>
+  <div class="banner-bg" style="background-image: url('img-kaelith/k4.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
-    <p class="banner-eyebrow">Mestre Espiritual · Deus Anull · Transcendido</p>
-    <h1 class="banner-name">Anull</h1>
-    <p class="banner-human">Antes conhecido como <em>Leonardo</em></p>
+    <p class="banner-eyebrow">Deusa da Vingança e da Justiça · Companheira de Onull</p>
+    <h1 class="banner-name">Kaelith</h1>
+    <p class="banner-human">Antes conhecida como <em>Jéssica</em></p>
     <div class="banner-divider"></div>
-    <p class="banner-quote">"O corpo perece. O espírito não tem permissão para fazer o mesmo."</p>
+    <p class="banner-quote">"Ela não é equilíbrio. Ela é resposta."</p>
     <div class="banner-stats">
       <div class="bstat">
-        <span class="bstat-val">Espiritual</span>
+        <span class="bstat-val">Vingança · Justiça</span>
         <span class="bstat-label">Domínio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Plano Espiritual</span>
-        <span class="bstat-label">Território</span>
+        <span class="bstat-val">Humana Ascendida</span>
+        <span class="bstat-label">Origem</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Mestre Espiritual</span>
-        <span class="bstat-label">Título</span>
+        <span class="bstat-val">Guerreira · Maga</span>
+        <span class="bstat-label">Estilo</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Deus</span>
-        <span class="bstat-label">Ascensão</span>
+        <span class="bstat-val">Deusa</span>
+        <span class="bstat-label">Condição</span>
       </div>
     </div>
   </div>
@@ -1309,41 +1393,73 @@ nav a { white-space: nowrap; }
 <section id="sobre">
   <div class="section-header reveal">
     <span class="section-label">Identidade</span>
-    <h2>Quem é Anull</h2>
+    <h2>Quem é Kaelith</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="about-grid reveal">
     <div class="about-photo-wrap">
-      <div class="about-photo" style="background-image: url('img-anull/anull1.png')">
+      <div class="about-photo" style="background-image: url('img-kaelith/kaelith.png')">
         <div class="photo-frame-corner tl"></div>
         <div class="photo-frame-corner tr"></div>
         <div class="photo-frame-corner bl"></div>
         <div class="photo-frame-corner br"></div>
       </div>
-      <div class="about-photo-label">Anull · O Elo Entre os Mundos</div>
+      <div class="about-photo-label">Kaelith · A Resposta Inevitável</div>
     </div>
     <div class="about-text">
       <p>
-        Leonardo sempre enxergou o que os outros não conseguiam ver. Não era dom, não era treinamento — era uma percepção que parecia vir de outra camada da realidade. Enquanto Yuri lia o campo de batalha pelos olhos e Lucas pela mente, Leonardo o lia pela <em>alma</em>.
+        Kaelith não é equilíbrio. Ela é <em>resposta</em>. Sua presença carrega intensidade pura — uma força que não aceita desordem sem reação. Ela não é apenas justiça. Ela é o momento em que a justiça deixa de ser ideia e se torna ação inevitável.
       </p>
       <p>
-        O título de <strong>Mestre Espiritual</strong> não foi uma surpresa para nenhum dos seis. Leonardo era o elo natural entre o mundo material e o plano espiritual — aquele que transitava entre as duas camadas da existência com uma facilidade que beirava o impossível. Seu corpo podia estar presente numa batalha enquanto sua consciência percorria dimensões inteiramente diferentes.
+        Seu corpo é elegante, mas carregado de tensão — como se cada movimento pudesse se transformar em ataque ou decisão. Sua postura nunca é relaxada. Ela está sempre pronta, sempre atenta, sempre consciente do que precisa ser feito. Seus olhos não apenas observam — <strong>eles julgam</strong>. Não há hesitação neles, não há dúvida, apenas certeza afiada.
       </p>
       <p>
-        Mais do que um combatente, Leonardo era o <em>âncora</em> do grupo — aquele que mantinha os outros conectados ao propósito maior quando as batalhas ameaçavam consumir não apenas os corpos, mas as almas. Sua presença no plano espiritual era tão marcante quanto sua ausência seria devastadora.
+        Sua aura é instável — dourado misturado com roxo profundo, fragmentado, como se o espaço ao redor estivesse constantemente sendo pressionado, rachado, reorganizado. Pequenos estilhaços de energia surgem e desaparecem, como reflexos de decisões que ainda estão sendo tomadas.
       </p>
       <p>
-        Após o confronto com A Besta e a deificação, o nome Leonardo cedeu lugar a <strong>Anull</strong> — o deus que existe simultaneamente em todos os planos, cuja vontade ressoa tanto no mundo dos vivos quanto nas camadas mais profundas do espiritual.
+        Ela não pede. Ela não espera. Ela não hesita. Kaelith representa o momento em que algo precisa ser corrigido — <strong>e é</strong>. Nascida humana, forjada em batalha desde o primeiro dia, ascendeu não por herança divina, mas pela recusa absoluta em aceitar a injustiça como desfecho.
       </p>
       <div class="about-tags">
-        <span class="tag">Mestre Espiritual</span>
-        <span class="tag spirit-tag">Plano Espiritual</span>
-        <span class="tag spirit-tag">Consciência Dual</span>
-        <span class="tag divine-tag">Deus Anull</span>
-        <span class="tag">Âncora do Grupo</span>
-        <span class="tag void-tag">Transcendência</span>
+        <span class="tag">Companheira de Onull</span>
+        <span class="tag justice-tag">Deusa da Vingança</span>
+        <span class="tag justice-tag">Deusa da Justiça</span>
+        <span class="tag void-tag">Humana Ascendida</span>
+        <span class="tag nature-tag">Protetora</span>
+        <span class="tag divine-tag">Guerreira · Maga</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESCRIÇÃO -->
+<section id="descricao">
+  <div class="section-header reveal">
+    <span class="section-label">Presença</span>
+    <h2>A Aura de Kaelith</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="desc-grid reveal">
+    <div class="desc-card">
+      <div class="desc-icon">⚡</div>
+      <div class="desc-title">Postura</div>
+      <div class="desc-text">Nunca relaxada. Sempre pronta. Cada gesto carrega o peso de uma decisão iminente — como uma arma que nunca é guardada completamente.</div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-icon">👁️</div>
+      <div class="desc-title">O Olhar</div>
+      <div class="desc-text">Seus olhos não observam — julgam. Penetrantes, sem hesitação, sem dúvida. Quem é olhado por Kaelith sente que já foi avaliado antes de abrir a boca.</div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-icon">🌀</div>
+      <div class="desc-title">A Aura</div>
+      <div class="desc-text">Dourado fragmentado com roxo profundo. O espaço ao redor dela parece constantemente pressionado — estilhaços de energia surgem e somem como decisões ainda sendo tomadas.</div>
+    </div>
+    <div class="desc-card">
+      <div class="desc-icon">⚖️</div>
+      <div class="desc-title">A Essência</div>
+      <div class="desc-text">Não é ideia de justiça. É a justiça em movimento. Quando algo precisa ser corrigido, Kaelith não delibera — ela age. A resposta já estava pronta antes da pergunta existir.</div>
     </div>
   </div>
 </section>
@@ -1360,73 +1476,73 @@ nav a { white-space: nowrap; }
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">👁️</div>
+        <div class="power-icon-big">⚖️</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Essência Espiritual</div>
-        <div class="power-title">Visão Espiritual</div>
-        <div class="power-body">Anull enxerga além do plano físico — percebe auras, intenções, laços espirituais e entidades que existem fora da percepção comum. Em batalha, essa visão permite antecipar ataques antes que sejam executados no plano material, lendo a intenção espiritual do oponente antes do movimento físico.</div>
-        <div class="power-bar-wrap"><div class="power-bar spirit" data-width="97"></div></div>
+        <div class="power-origin">Domínio Divino</div>
+        <div class="power-title">Justiça Absoluta</div>
+        <div class="power-body">Kaelith percebe desequilíbrios em qualquer plano — físico, espiritual ou moral. Sua justiça não é subjetiva: ela enxerga a verdade por trás de cada ação e responde a ela com precisão absoluta. Ataques direcionados por sua Justiça Absoluta ignoram defesas construídas sobre mentiras ou injustiças.</div>
+        <div class="power-bar-wrap"><div class="power-bar justice" data-width="100"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🌀</div>
+        <div class="power-icon-big">🔥</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Domínio Espiritual</div>
-        <div class="power-title">Projeção Astral & Consciência Dual</div>
-        <div class="power-body">Anull pode separar sua consciência do corpo físico e projetar-se no plano astral enquanto o corpo continua presente no mundo material. No plano astral, atravessa barreiras físicas, percorre grandes distâncias instantaneamente e acessa informações inacessíveis no plano comum. Sua consciência dual permite operar em ambos os planos simultaneamente.</div>
-        <div class="power-bar-wrap"><div class="power-bar spirit" data-width="95"></div></div>
+        <div class="power-origin">Domínio Divino</div>
+        <div class="power-title">Vingança · Chama da Retribuição</div>
+        <div class="power-body">A Chama da Retribuição de Kaelith não queima aleatoriamente — ela amplifica o dano causado a ela e aos seus aliados e o devolve ao responsável multiplicado. Quanto mais injusto o ataque recebido, mais devastadora a resposta. É um poder que cresce com a crueldade do inimigo.</div>
+        <div class="power-bar-wrap"><div class="power-bar void" data-width="97"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">⚡</div>
+        <div class="power-icon-big">🌿</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Manipulação Espiritual</div>
-        <div class="power-title">Energia Espiritual — Forma de Combate</div>
-        <div class="power-body">A energia espiritual de Anull não é apenas defensiva — é uma força ofensiva devastadora. Pode condensá-la em golpes que afetam tanto o corpo físico quanto a alma do oponente, criando dano que nenhuma cura convencional consegue reverter completamente. Ataques que tocam a alma deixam marcas permanentes.</div>
-        <div class="power-bar-wrap"><div class="power-bar void" data-width="93"></div></div>
+        <div class="power-origin">Protetora da Natureza</div>
+        <div class="power-title">Proteção & Controle Natural</div>
+        <div class="power-body">Desde antes da ascensão, Jéssica protegia quem estava ao seu redor com uma determinação que ia além do treinamento. Como Kaelith, esse instinto evoluiu para controle real sobre elementos naturais — terra, vento e vegetação respondem à sua vontade, criando barreiras, armadilhas e escudos em batalha.</div>
+        <div class="power-bar-wrap"><div class="power-bar nature" data-width="91"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🛡️</div>
+        <div class="power-icon-big">🔮</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Proteção Espiritual</div>
-        <div class="power-title">Escudo de Alma</div>
-        <div class="power-body">Anull pode estender sua proteção espiritual aos aliados — criando um escudo que não bloqueia apenas danos físicos, mas também ataques mentais, maldições, genjutsu e qualquer forma de manipulação que atue sobre a consciência ou alma. Em batalhas prolongadas, esse escudo é a diferença entre os seis permanecerem íntegros ou serem consumidos.</div>
-        <div class="power-bar-wrap"><div class="power-bar spirit" data-width="98"></div></div>
+        <div class="power-origin">Feiticeira & Maga</div>
+        <div class="power-title">Alta Feitiçaria</div>
+        <div class="power-body">Kaelith combina feitiçaria ofensiva com magia de campo — maldições que se ativam quando o alvo comete uma injustiça, barreiras que devolvem dano proporcional ao atacante, e encantamentos que enfraquecem qualquer ser que aja com crueldade na sua presença. Sua magia é reativa por natureza — sempre uma resposta, nunca um ataque gratuito.</div>
+        <div class="power-bar-wrap"><div class="power-bar divine" data-width="94"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🔗</div>
+        <div class="power-icon-big">⚔️</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Elo Espiritual</div>
-        <div class="power-title">Conexão entre os Seis</div>
-        <div class="power-body">O poder mais único de Anull — e o mais invisível. Ele mantém um elo espiritual constante entre todos os seis, permitindo comunicação instantânea independente da distância, compartilhamento de percepções em batalha e, nos momentos mais críticos, transferência de energia entre os membros do grupo. É a razão pela qual os seis funcionam como um organismo único em combate.</div>
-        <div class="power-bar-wrap"><div class="power-bar void" data-width="100"></div></div>
+        <div class="power-origin">Combate</div>
+        <div class="power-title">Guerreira · Estilo de Resposta</div>
+        <div class="power-body">Kaelith não ataca primeiro — mas quando responde, é devastadora. Seu estilo de combate é construído sobre leitura de intenção e contra-ataque preciso. Cada golpe é calculado, cada movimento é necessário. Não há desperdício, não há excesso — apenas a quantidade exata de força que a situação exige.</div>
+        <div class="power-bar-wrap"><div class="power-bar justice" data-width="95"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">♾️</div>
+        <div class="power-icon-big">👑</div>
       </div>
       <div class="power-right">
         <div class="power-origin">Condição Divina</div>
-        <div class="power-title">Transcendência · Anull</div>
-        <div class="power-body">Como Anull, Leonardo transcendeu a barreira entre os planos — deixando de ser um ser que visita o espiritual para tornar-se uma entidade que existe em ambos simultaneamente e de forma permanente. Sua vontade ressoa em todas as camadas da realidade. Onde Knull dobra o mundo físico e Onull reescreve os limites humanos, Anull redefine o que é possível no plano da alma.</div>
-        <div class="power-bar-wrap"><div class="power-bar spirit" data-width="100"></div></div>
+        <div class="power-title">Ascensão · Kaelith</div>
+        <div class="power-body">Nascida humana, sem sangue divino, sem herança sobrenatural — Kaelith ascendeu pela força pura da vontade e da convicção. Como deusa da Vingança e da Justiça, sua presença altera o ambiente ao redor: o espaço racha sutilmente, a energia se fragmenta e reorganiza, e qualquer ser injusto em sua presença sente o peso do que fez antes mesmo de ser confrontado.</div>
+        <div class="power-bar-wrap"><div class="power-bar void" data-width="100"></div></div>
       </div>
     </div>
 
@@ -1437,7 +1553,7 @@ nav a { white-space: nowrap; }
 <section id="historia">
   <div class="section-header reveal">
     <span class="section-label">Trajetória</span>
-    <h2>A História de Leonardo</h2>
+    <h2>A História de Jéssica</h2>
     <div class="section-rule"></div>
   </div>
 
@@ -1445,26 +1561,32 @@ nav a { white-space: nowrap; }
 
     <div class="story-block reveal">
       <div class="story-chapter">Capítulo I</div>
-      <div class="story-title">O Que Via Além</div>
-      <p>Leonardo nunca precisou de treinamento para enxergar o espiritual — sempre foi assim. Desde antes de conhecer os outros cinco, percebia camadas da realidade que a maioria das pessoas nem sabia que existiam. Auras, intenções, presenças invisíveis. Para Leonardo, o mundo espiritual era tão real quanto o chão sob seus pés.</p>
+      <div class="story-title">O Dia em Que o Céu Ficou Vermelho</div>
+      <p>Era um dia comum na escola — até não ser mais. O céu virou vermelho de repente, raios vermelhos cortavam as nuvens e as pessoas ao redor começaram a mudar. Os vivos viravam mortos-vivos. Jéssica estava em outra sala quando o caos começou — separada de Lucas, separada de tudo que conhecia.</p>
     </div>
 
     <div class="story-block reveal">
       <div class="story-chapter">Capítulo II</div>
-      <div class="story-title">A Âncora dos Seis</div>
-      <p>Quando os seis se reuniram, Leonardo assumiu naturalmente o papel de âncora — não por decisão própria, mas porque era o único capaz de manter o grupo conectado num nível que ia além da comunicação comum. Seu elo espiritual entre os cinco era o sistema nervoso invisível que tornava o grupo mais do que a soma de suas partes.</p>
+      <div class="story-title">A Caminhada Até Ela</div>
+      <p>Yuri, Lucas, Leonardo e Yasmin lutaram para atravessar a escola tomada pelos mortos-vivos. Cada corredor era uma batalha. Cada porta, uma decisão. O objetivo era simples e urgente: chegar até Jéssica. Quando finalmente chegaram, ela não estava esperando ser salva — estava segurando sua posição, protegendo quem ainda estava vivo ao redor.</p>
     </div>
 
     <div class="story-block reveal">
       <div class="story-chapter">Capítulo III</div>
-      <div class="story-title">O Cavaleiro Negro & O Plano Espiritual</div>
-      <p>No confronto com o Cavaleiro Negro, Leonardo foi o primeiro a perceber que o inimigo operava em dois planos simultaneamente — e o único capaz de combatê-lo no plano espiritual enquanto os outros lutavam no físico. A vitória do grupo dependeu dessa percepção. Sem Anull, o Cavaleiro Negro teria vencido numa camada que os outros nem chegavam a enxergar.</p>
+      <div class="story-title">Lado a Lado Desde o Início</div>
+      <p>Juntos, os cinco saíram da escola em direção à outra instituição — uma caminhada longa, perigosa, com mortos-vivos em cada esquina. Jéssica não ficou atrás. Lutou ao lado dos meninos, deu suporte, protegeu quem precisava. Desde aquele primeiro dia, ficou claro que ela não era apenas a namorada de Lucas — era uma guerreira por direito próprio.</p>
     </div>
 
     <div class="story-block reveal">
       <div class="story-chapter">Capítulo IV</div>
-      <div class="story-title">A Besta & A Deificação · Anull</div>
-      <p>O confronto com A Besta foi onde Leonardo chegou mais perto de se perder — não o corpo, mas a alma. A criatura primordial tentou consumir o elo espiritual que ele mantinha entre os seis, o que teria destruído o grupo por dentro. Foi ao recusar essa perda — ao segurar o elo com uma força que ultrapassou qualquer limite anterior — que Leonardo se tornou <strong>Anull</strong>: o deus cujo espírito não tem permissão para perecer.</p>
+      <div class="story-title">As Batalhas & A Evolução</div>
+      <p>Nas batalhas seguintes — contra o Cavaleiro Negro, na segunda guerra, e finalmente contra A Besta — Jéssica evoluiu continuamente. Sua proteção ficou mais abrangente, sua feitiçaria mais precisa, seu instinto de justiça mais afiado. Não havia herança divina no sangue dela — havia algo mais difícil de forjar: <strong>escolha</strong>.</p>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="story-chapter">Capítulo V</div>
+      <div class="story-title">A Ascensão · Kaelith</div>
+      <p>Depois de A Besta — depois de tudo — o nome Jéssica cedeu lugar a algo que sempre esteve lá, esperando. <strong>Kaelith</strong>: a deusa da Vingança e da Justiça. Não por herança. Não por destino escrito. Mas porque, desde o primeiro dia em que o céu ficou vermelho, ela decidiu que nenhuma injustiça passaria sem resposta. E essa decisão, repetida em cada batalha, forjou uma deusa.</p>
     </div>
 
   </div>
@@ -1474,47 +1596,47 @@ nav a { white-space: nowrap; }
 <section id="galeria">
   <div class="section-header reveal">
     <span class="section-label">Imagens</span>
-    <h2>Galeria de Anull</h2>
+    <h2>Galeria de Kaelith</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="gallery-grid reveal">
-    <div class="gallery-item tall" style="background-image: url('anull-01.jpg')">
-      <div class="gallery-overlay"><span>Anull · Forma Divina</span></div>
+    <div class="gallery-item tall" style="background-image: url('img-kaelith/k.png')">
+      <div class="gallery-overlay"><span>Kaelith · Forma Divina</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('anull-02.jpg')">
-      <div class="gallery-overlay"><span>Visão Espiritual</span></div>
+    <div class="gallery-item" style="background-image: url('img-kaelith/k2.png')">
+      <div class="gallery-overlay"><span>Chama da Retribuição</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('anull-03.jpg')">
-      <div class="gallery-overlay"><span>Projeção Astral</span></div>
+    <div class="gallery-item" style="background-image: url('img-kaelith/k0.png')">
+      <div class="gallery-overlay"><span>Justiça Absoluta</span></div>
     </div>
-    <div class="gallery-item wide" style="background-image: url('anull-04.jpg')">
-      <div class="gallery-overlay"><span>O Elo dos Seis</span></div>
+    <div class="gallery-item wide" style="background-image: url('img-kaelith/k3.png')">
+      <div class="gallery-overlay"><span>A Resposta Inevitável</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('anull-05.jpg')">
-      <div class="gallery-overlay"><span>Escudo de Alma</span></div>
+    <div class="gallery-item" style="background-image: url('img-kaelith/k0.png')">
+      <div class="gallery-overlay"><span>Alta Feitiçaria</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('anull-06.jpg')">
-      <div class="gallery-overlay"><span>Leonardo · Antes da Ascensão</span></div>
+    <div class="gallery-item" style="background-image: url('img-kaelith/k3.png')">
+      <div class="gallery-overlay"><span>Jéssica · Antes da Ascensão</span></div>
     </div>
   </div>
 
   <p class="gallery-hint reveal">
-    Substitua os arquivos <code>anull-01.jpg</code> até <code>anull-06.jpg</code> pelas imagens do personagem na mesma pasta do HTML.
+    As imagens da galeria usam a pasta <code>img-kaelith/</code>: <code>k.png</code>, <code>k2.png</code>, <code>k0.png</code> e <code>k3.png</code>.
   </p>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-nav">
-    <a href="onull.html">← Onull</a>
+    <a href="anull.html">← Anull</a>
     <span class="footer-sep">·</span>
-    <a href="index.html">Início</a>
+    <a href="home.html">Início</a>
     <span class="footer-sep">·</span>
-    <a href="nimsay.html">Nimsay →</a>
+    <a href="aliban.html">Aliban →</a>
   </div>
-  <div class="footer-title">Anull</div>
-  <div class="footer-sub">"O espírito não tem permissão para perecer."</div>
+  <div class="footer-title">Kaelith</div>
+  <div class="footer-sub">"Ela não pede. Ela não espera. Ela não hesita."</div>
   <div class="footer-copy">O Diário de um Deus · Todos os direitos reservados</div>
 </footer>
 
@@ -1523,7 +1645,7 @@ nav a { white-space: nowrap; }
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx    = canvas.getContext('2d');
-  let W, H, stars = [], nebulas = [], spirits = [], orbs = [];
+  let W, H, stars = [], nebulas = [], shards = [], embers = [];
 
   function resize() {
     W = canvas.width  = window.innerWidth;
@@ -1531,9 +1653,9 @@ nav a { white-space: nowrap; }
   }
 
   function init() {
-    /* Estrelas azuladas */
+    /* Estrelas em tom dourado-âmbar */
     stars = [];
-    for (let i = 0; i < 250; i++) {
+    for (let i = 0; i < 230; i++) {
       stars.push({
         x:       Math.random() * W,
         y:       Math.random() * H,
@@ -1544,67 +1666,73 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Névoas espirituais: azul e roxo void */
+    /* Névoas: dourado-âmbar e roxo void */
     nebulas = [];
     const colors = [
-      'rgba(122,154,204,',
-      'rgba(90,130,180,',
-      'rgba(42,26,74,',
-      'rgba(106,79,207,',
-      'rgba(144,184,224,'
+      'rgba(192,132,42,',
+      'rgba(212,160,32,',
+      'rgba(58,26,106,',
+      'rgba(154,96,208,',
+      'rgba(74,138,74,'
     ];
     for (let i = 0; i < 6; i++) {
       nebulas.push({
         x:     Math.random() * W,
         y:     Math.random() * H,
-        r:     Math.random() * 340 + 150,
+        r:     Math.random() * 320 + 150,
         color: colors[Math.floor(Math.random() * colors.length)],
         a:     Math.random() * 0.07 + 0.02
       });
     }
 
-    /* Partículas espirituais — sobem lentamente */
-    spirits = [];
-    for (let i = 0; i < 50; i++) {
-      spirits.push({
-        x:       Math.random() * W,
-        y:       Math.random() * H,
-        r:       Math.random() * 1.8 + 0.4,
-        a:       Math.random() * 0.6 + 0.1,
-        speedX:  (Math.random() - 0.5) * 0.2,
-        speedY:  -(Math.random() * 0.35 + 0.08),
-        twinkle: Math.random() * Math.PI * 2,
-        tSpeed:  Math.random() * 0.02 + 0.008,
-        life:    Math.random()
-      });
+    /* Estilhaços de energia — exclusivos da Kaelith */
+    shards = [];
+    for (let i = 0; i < 30; i++) {
+      shards.push(newShard());
     }
 
-    /* Orbs espirituais — maiores, mais raros */
-    orbs = [];
-    for (let i = 0; i < 8; i++) {
-      orbs.push({
-        x:       Math.random() * W,
-        y:       Math.random() * H,
-        r:       Math.random() * 6 + 3,
-        a:       Math.random() * 0.25 + 0.05,
-        speedX:  (Math.random() - 0.5) * 0.12,
-        speedY:  (Math.random() - 0.5) * 0.12,
-        twinkle: Math.random() * Math.PI * 2,
-        tSpeed:  Math.random() * 0.008 + 0.003,
-        pulse:   Math.random() * Math.PI * 2
+    /* Brasas subindo — justiça em movimento */
+    embers = [];
+    for (let i = 0; i < 40; i++) {
+      embers.push({
+        x:      Math.random() * W,
+        y:      Math.random() * H,
+        r:      Math.random() * 1.5 + 0.3,
+        a:      Math.random() * 0.7 + 0.1,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: -(Math.random() * 0.5 + 0.15),
+        life:   Math.random(),
+        decay:  Math.random() * 0.003 + 0.001,
+        color:  Math.random() > 0.5 ? 'gold' : 'void'
       });
     }
+  }
+
+  function newShard() {
+    return {
+      x:       Math.random() * W,
+      y:       Math.random() * H,
+      vx:      (Math.random() - 0.5) * 1.5,
+      vy:      (Math.random() - 0.5) * 1.5,
+      len:     Math.random() * 18 + 6,
+      angle:   Math.random() * Math.PI * 2,
+      spin:    (Math.random() - 0.5) * 0.04,
+      a:       Math.random() * 0.5 + 0.1,
+      life:    Math.random(),
+      decay:   Math.random() * 0.006 + 0.002,
+      color:   Math.random() > 0.4 ? 'gold' : 'void'
+    };
   }
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
 
-    /* Fundo azul-void profundo */
+    /* Fundo: escuro com toque dourado e roxo */
     const bg = ctx.createLinearGradient(0, 0, W, H);
-    bg.addColorStop(0,   '#020308');
-    bg.addColorStop(0.3, '#030410');
-    bg.addColorStop(0.7, '#040315');
-    bg.addColorStop(1,   '#030210');
+    bg.addColorStop(0,   '#060400');
+    bg.addColorStop(0.3, '#080500');
+    bg.addColorStop(0.7, '#060310');
+    bg.addColorStop(1,   '#050210');
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
@@ -1627,103 +1755,113 @@ nav a { white-space: nowrap; }
       const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(200,220,255,${alpha})`;
+      ctx.fillStyle = `rgba(240,220,160,${alpha})`;
       ctx.fill();
     });
 
-    /* Partículas espirituais */
-    spirits.forEach(p => {
-      p.x      += p.speedX;
-      p.y      += p.speedY;
-      p.twinkle += p.tSpeed;
-      p.life   -= 0.0015;
+    /* Estilhaços de energia */
+    shards.forEach((s, i) => {
+      s.x     += s.vx;
+      s.y     += s.vy;
+      s.angle += s.spin;
+      s.life  -= s.decay;
 
       /* Renascimento */
-      if (p.life <= 0 || p.y < -10) {
-        p.x    = Math.random() * W;
-        p.y    = H + 10;
-        p.life = 1;
-        p.speedX = (Math.random() - 0.5) * 0.2;
-        p.speedY = -(Math.random() * 0.35 + 0.08);
+      if (s.life <= 0) {
+        shards[i] = newShard();
+        return;
       }
 
-      const alpha = p.a * p.life *
-        (0.5 + 0.5 * Math.sin(p.twinkle));
+      const alpha = s.a * s.life;
+      const cos   = Math.cos(s.angle);
+      const sin   = Math.sin(s.angle);
+      const hx    = cos * s.len * 0.5;
+      const hy    = sin * s.len * 0.5;
 
-      /* Halo azul espiritual */
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = s.color === 'gold'
+        ? `rgba(212,160,32,${alpha})`
+        : `rgba(154,96,208,${alpha})`;
+      ctx.lineWidth = 1;
+      ctx.shadowColor = s.color === 'gold'
+        ? 'rgba(212,160,32,0.8)'
+        : 'rgba(154,96,208,0.8)';
+      ctx.shadowBlur = 6;
+      ctx.beginPath();
+      ctx.moveTo(s.x - hx, s.y - hy);
+      ctx.lineTo(s.x + hx, s.y + hy);
+      ctx.stroke();
+
+      /* Brilho no centro do estilhaço */
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, 1.2, 0, Math.PI * 2);
+      ctx.fillStyle = s.color === 'gold'
+        ? `rgba(255,240,160,${alpha * 1.5})`
+        : `rgba(200,160,255,${alpha * 1.5})`;
+      ctx.fill();
+      ctx.restore();
+    });
+
+    /* Brasas subindo */
+    embers.forEach(p => {
+      p.x    += p.speedX;
+      p.y    += p.speedY;
+      p.life -= p.decay;
+
+      if (p.life <= 0 || p.y < -10) {
+        p.x     = Math.random() * W;
+        p.y     = H + 10;
+        p.life  = 1;
+        p.speedX = (Math.random() - 0.5) * 0.3;
+        p.speedY = -(Math.random() * 0.5 + 0.15);
+        p.color  = Math.random() > 0.5 ? 'gold' : 'void';
+      }
+
+      const alpha = p.a * p.life;
+
+      /* Halo da brasa */
       const grad = ctx.createRadialGradient(
         p.x, p.y, 0, p.x, p.y, p.r * 5
       );
-      grad.addColorStop(0, `rgba(144,184,224,${alpha})`);
-      grad.addColorStop(1,  'rgba(122,154,204,0)');
+
+      if (p.color === 'gold') {
+        grad.addColorStop(0, `rgba(240,180,40,${alpha})`);
+        grad.addColorStop(1,  'rgba(192,132,42,0)');
+      } else {
+        grad.addColorStop(0, `rgba(180,120,240,${alpha})`);
+        grad.addColorStop(1,  'rgba(154,96,208,0)');
+      }
+
       ctx.fillStyle = grad;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
       ctx.fill();
 
-      /* Núcleo branco azulado */
+      /* Núcleo da brasa */
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(220,235,255,${alpha * 1.4})`;
+      ctx.fillStyle = p.color === 'gold'
+        ? `rgba(255,240,180,${alpha * 1.6})`
+        : `rgba(220,190,255,${alpha * 1.6})`;
       ctx.fill();
     });
 
-    /* Orbs espirituais */
-    orbs.forEach(o => {
-      o.x     += o.speedX;
-      o.y     += o.speedY;
-      o.pulse += o.tSpeed;
-
-      /* Bounce nas bordas */
-      if (o.x < o.r * 6 || o.x > W - o.r * 6) o.speedX *= -1;
-      if (o.y < o.r * 6 || o.y > H - o.r * 6) o.speedY *= -1;
-
-      const pulseR = o.r * (1 + 0.3 * Math.sin(o.pulse));
-      const alpha  = o.a * (0.6 + 0.4 * Math.sin(o.pulse));
-
-      /* Orb com múltiplas camadas */
-      const grad = ctx.createRadialGradient(
-        o.x, o.y, 0,
-        o.x, o.y, pulseR * 10
-      );
-      grad.addColorStop(0,    `rgba(180,210,255,${alpha})`);
-      grad.addColorStop(0.3,  `rgba(122,154,204,${alpha * 0.6})`);
-      grad.addColorStop(0.7,  `rgba(106,79,207,${alpha * 0.2})`);
-      grad.addColorStop(1,     'rgba(42,26,74,0)');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(o.x, o.y, pulseR * 10, 0, Math.PI * 2);
-      ctx.fill();
-
-      /* Núcleo do orb */
-      ctx.beginPath();
-      ctx.arc(o.x, o.y, pulseR, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(220,240,255,${alpha * 1.5})`;
-      ctx.fill();
-
-      /* Anel do orb */
-      ctx.beginPath();
-      ctx.arc(o.x, o.y, pulseR * 3, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(144,184,224,${alpha * 0.3})`;
-      ctx.lineWidth   = 0.5;
-      ctx.stroke();
-    });
-
-    /* Véu espiritual no centro */
-    const veil = ctx.createRadialGradient(
-      W * 0.5, H * 0.4, 0,
-      W * 0.5, H * 0.4, H * 0.7
+    /* Tensão central — aura instável da Kaelith */
+    const tension = ctx.createRadialGradient(
+      W * 0.5, H * 0.45, 0,
+      W * 0.5, H * 0.45, H * 0.65
     );
-    veil.addColorStop(0,   'rgba(122,154,204,0.04)');
-    veil.addColorStop(0.5, 'rgba(106,79,207,0.02)');
-    veil.addColorStop(1,   'rgba(42,26,74,0)');
-    ctx.fillStyle = veil;
+    tension.addColorStop(0,   'rgba(192,132,42,0.05)');
+    tension.addColorStop(0.4, 'rgba(154,96,208,0.03)');
+    tension.addColorStop(1,   'rgba(3,3,8,0)');
+    ctx.fillStyle = tension;
     ctx.fillRect(0, 0, W, H);
 
-    /* Brilho azul no rodapé */
+    /* Brilho âmbar no rodapé */
     const horizon = ctx.createLinearGradient(0, H * 0.75, 0, H);
     horizon.addColorStop(0, 'transparent');
-    horizon.addColorStop(1, 'rgba(42,26,74,0.08)');
+    horizon.addColorStop(1, 'rgba(192,132,42,0.07)');
     ctx.fillStyle = horizon;
     ctx.fillRect(0, H * 0.75, W, H * 0.25);
 
@@ -1747,10 +1885,9 @@ nav a { white-space: nowrap; }
     .replace(/url\(['"]?(.*?)['"]?\)/, '$1');
   if (url && url !== 'none') img.src = url;
 
-  /* Só ativa parallax em telas grandes */
   const mq = window.matchMedia('(min-width: 769px)');
 
-  function onScroll() {
+  window.addEventListener('scroll', () => {
     if (!mq.matches) return;
     const scrollY = window.scrollY;
     const limit   = window.innerHeight;
@@ -1758,9 +1895,7 @@ nav a { white-space: nowrap; }
       bg.style.transform =
         `scale(1.05) translateY(${scrollY * 0.25}px)`;
     }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
+  }, { passive: true });
 })();
 
 /* ── SCROLL REVEAL ── */
@@ -1835,7 +1970,7 @@ nav a { white-space: nowrap; }
     #lb-backdrop {
       position: absolute;
       inset: 0;
-      background: rgba(2,3,8,0.97);
+      background: rgba(6,4,0,0.97);
       backdrop-filter: blur(12px);
     }
 
@@ -1862,11 +1997,11 @@ nav a { white-space: nowrap; }
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center;
-      background-color: #020308;
-      border: 1px solid rgba(122,154,204,0.25);
+      background-color: #060400;
+      border: 1px solid rgba(192,132,42,0.25);
       box-shadow:
-        0 0 60px rgba(122,154,204,0.08),
-        0 0 120px rgba(42,26,74,0.1);
+        0 0 60px rgba(192,132,42,0.08),
+        0 0 120px rgba(58,26,106,0.1);
     }
 
     #lb-caption {
@@ -1874,39 +2009,38 @@ nav a { white-space: nowrap; }
       font-size: 0.7rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #90b8e0;
+      color: #d4a020;
     }
 
     #lb-prev, #lb-next, #lb-close {
       background: none;
-      border: 1px solid rgba(122,154,204,0.25);
-      color: #7a9acc;
+      border: 1px solid rgba(192,132,42,0.25);
+      color: #c0842a;
       font-size: 1.2rem;
       width: 44px;
       height: 44px;
+      min-width: 44px;
+      min-height: 44px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: border-color 0.3s, color 0.3s;
       flex-shrink: 0;
-      min-width: 44px;
-      min-height: 44px;
     }
 
     #lb-prev:hover, #lb-next:hover, #lb-close:hover {
-      border-color: #90b8e0;
-      color: #e8f0ff;
+      border-color: #d4a020;
+      color: #fff8e0;
     }
 
     #lb-close {
       position: absolute;
       top: -3rem;
       right: 0;
-      border-color: rgba(122,154,204,0.2);
+      border-color: rgba(154,96,208,0.25);
     }
 
-    /* Lightbox responsivo */
     @media (max-width: 768px) {
       #lb-box { gap: 0.8rem; max-width: 95vw; }
       #lb-img {
@@ -1941,7 +2075,6 @@ nav a { white-space: nowrap; }
         height: 32px !important;
         min-width: 32px !important;
         min-height: 32px !important;
-        font-size: 0.9rem !important;
       }
     }
   `;
@@ -2004,7 +2137,7 @@ nav a { white-space: nowrap; }
     if (e.key === 'Escape')     close();
   });
 
-  /* Swipe no mobile */
+  /* Swipe mobile */
   let touchStartX = 0;
 
   lb.addEventListener('touchstart', e => {
@@ -2054,6 +2187,10 @@ nav a { white-space: nowrap; }
     return fromPanels;
   }
 
+  function cssUrl(src) {
+    return `url("${String(src).replace(/"/g, '\\"')}")`;
+  }
+
   function buildPanel(images, index, label) {
     const first = images[index % images.length];
     const second = images[(index + 1) % images.length];
@@ -2061,8 +2198,8 @@ nav a { white-space: nowrap; }
     panel.className = 'smooth-loop-panel';
     panel.dataset.current = String(index % images.length);
     panel.innerHTML = `
-      <img class="loop-img-a is-visible" src="${first.src}" alt="${first.title.replace(/"/g, '&quot;')}">
-      <img class="loop-img-b" src="${second.src}" alt="${second.title.replace(/"/g, '&quot;')}">
+      <div class="loop-bg-a is-visible" role="img" aria-label="${first.title.replace(/"/g, '&quot;')}" style="background-image: ${cssUrl(first.src)}"></div>
+      <div class="loop-bg-b" role="img" aria-label="${second.title.replace(/"/g, '&quot;')}" style="background-image: ${cssUrl(second.src)}"></div>
       <div class="smooth-loop-meta">
         <span class="smooth-loop-kicker">${label}</span>
         <strong class="smooth-loop-title">${first.title}</strong>
@@ -2074,14 +2211,14 @@ nav a { white-space: nowrap; }
 
   function updatePanel(panel, images, step) {
     if (!images.length) return;
-    const imgs = panel.querySelectorAll('img');
-    const visible = panel.querySelector('img.is-visible') || imgs[0];
-    const hidden = visible === imgs[0] ? imgs[1] : imgs[0];
+    const layers = panel.querySelectorAll('.loop-bg-a, .loop-bg-b');
+    const visible = panel.querySelector('.loop-bg-a.is-visible, .loop-bg-b.is-visible') || layers[0];
+    const hidden = visible === layers[0] ? layers[1] : layers[0];
     let current = Number(panel.dataset.current || 0);
     current = (current + step + images.length) % images.length;
     const data = images[current];
-    hidden.src = data.src;
-    hidden.alt = data.title;
+    hidden.style.backgroundImage = cssUrl(data.src);
+    hidden.setAttribute('aria-label', data.title);
     hidden.offsetHeight;
     visible.classList.remove('is-visible');
     hidden.classList.add('is-visible');

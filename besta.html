@@ -1,0 +1,2486 @@
+ <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Besta — O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="effects.css">
+<link rel="stylesheet" href="responsive-fixes.css">
+<style>
+  /* === CSS VIRÁ NAS PARTES 2 E 3 === */
+  /* ── VARIÁVEIS E RESET ── */
+:root {
+  --void: #030308;
+  --deep: #07070f;
+  --surface: #080010;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+
+  /* A Besta — roxo void primordial */
+  --purple: #2a0a3a;
+  --purple-bright: #8a20c0;
+  --purple-mid: #6010a0;
+  --purple-glow: rgba(138,32,192,0.45);
+  --purple-dim: rgba(42,10,58,0.2);
+  --purple-deep: #0a0010;
+  --crimson: #8b0010;
+  --crimson-bright: #cc0030;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+#noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  mix-blend-mode: overlay;
+}
+
+#cosmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(to bottom,
+    rgba(3,3,8,0.98), transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(42,10,58,0.3);
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--purple-bright);
+  text-shadow: 0 0 20px var(--purple-glow);
+}
+
+.nav-logo img {
+  width: 36px; height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(138,32,192,0.35);
+  box-shadow: 0 0 12px rgba(138,32,192,0.4);
+  transition: box-shadow 0.3s;
+  display: block;
+}
+
+.nav-logo img:hover {
+  box-shadow:
+    0 0 20px rgba(138,32,192,0.7),
+    0 0 40px rgba(42,10,58,0.5);
+}
+
+/* ── BANNER ── */
+#banner {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.banner-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+  background-color: var(--purple-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 40%,
+      rgba(138,32,192,0.25) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 70%,
+      rgba(42,10,58,0.3) 0%, transparent 50%);
+  filter: brightness(0.25) saturate(0.6);
+}
+
+.banner-bg.loaded {
+  transform: scale(1);
+  filter: brightness(0.35) saturate(0.7);
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top,
+      rgba(3,3,8,1)    0%,
+      rgba(5,0,10,0.8) 30%,
+      rgba(10,0,20,0.5) 65%,
+      rgba(3,3,8,0.2)  100%),
+    linear-gradient(to right,
+      rgba(3,3,8,0.9)  0%,
+      rgba(10,0,20,0.3) 50%,
+      rgba(3,3,8,0.7)  100%);
+}
+
+.banner-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 25%,
+    rgba(3,3,8,0.8) 100%
+  );
+  pointer-events: none;
+}
+
+/* Pulso primordial */
+.primal-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pulse-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(138,32,192,0.15);
+  transform: translate(-50%, -50%);
+  animation: primal-expand 6s ease-out infinite;
+}
+
+.pulse-ring.r1 { width: 200px; height: 200px; animation-delay: 0s; }
+.pulse-ring.r2 { width: 200px; height: 200px; animation-delay: 2s; }
+.pulse-ring.r3 { width: 200px; height: 200px; animation-delay: 4s; }
+
+@keyframes primal-expand {
+  0%   { width: 50px; height: 50px; opacity: 0.6; border-color: rgba(138,32,192,0.4); }
+  100% { width: 600px; height: 600px; opacity: 0; border-color: rgba(42,10,58,0); }
+}
+
+/* Conteúdo */
+.banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 5vw 5rem;
+  max-width: 780px;
+  width: 100%;
+}
+
+.banner-tag {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fade-up 1s 0.2s ease forwards;
+}
+
+.tag-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right,
+    var(--purple-bright), transparent);
+  max-width: 60px;
+}
+
+.tag-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+  white-space: nowrap;
+}
+
+.banner-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 900;
+  line-height: 0.9;
+  opacity: 0;
+  animation: fade-up 1s 0.4s ease forwards;
+}
+
+.name-article {
+  display: block;
+  font-size: clamp(1.2rem, 3.5vw, 2.5rem);
+  letter-spacing: 0.5em;
+  background: linear-gradient(90deg,
+    var(--purple-bright), var(--purple-mid));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.1em;
+}
+
+.banner-name {
+  font-size: clamp(4rem, 12vw, 10rem);
+  background: linear-gradient(135deg,
+    #ffffff   0%,
+    #d0a0ff  20%,
+    #8a20c0  50%,
+    #2a0a3a  80%,
+    #0a0010  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 50px rgba(138,32,192,0.6));
+}
+
+.banner-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.8rem 0;
+  opacity: 0;
+  animation: fade-up 1s 0.7s ease forwards;
+}
+
+.divider-line {
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(90deg,
+    var(--purple-bright), transparent);
+}
+
+.divider-symbol {
+  color: var(--purple-bright);
+  font-size: 1rem;
+  opacity: 0.7;
+  text-shadow: 0 0 12px var(--purple-glow);
+}
+
+.banner-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: rgba(200,160,240,0.85);
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  animation: fade-up 1s 0.9s ease forwards;
+}
+
+.banner-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 1s 1.1s ease forwards;
+}
+
+.bstat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bstat-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.08em;
+}
+
+.bstat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.bstat-sep {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom,
+    transparent, rgba(138,32,192,0.5), transparent);
+  flex-shrink: 0;
+}
+
+.banner-bottom-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent, var(--purple-bright),
+    transparent, var(--purple-mid), transparent);
+  animation: bar-pulse 4s ease infinite;
+}
+
+@keyframes bar-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  right: 5vw;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  color: rgba(138,32,192,0.6);
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+
+/* ── ANIMAÇÕES BASE ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ── REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVO — BANNER E NAV
+════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  nav { gap: 1.5rem; }
+  .banner-content { padding: 4rem 4vw 4rem; }
+}
+
+@media (max-width: 768px) {
+  nav { gap: 0.8rem; flex-wrap: wrap; padding: 0.9rem 1rem; }
+  nav a { font-size: 0.62rem; }
+  .nav-logo img { width: 30px; height: 30px; }
+  .banner-content { padding: 5rem 1.5rem 3.5rem; max-width: 100%; }
+  .banner-overlay {
+    background:
+      linear-gradient(to top,
+        rgba(3,3,8,1) 0%, rgba(5,0,10,0.9) 45%,
+        rgba(10,0,20,0.6) 70%, rgba(3,3,8,0.25) 100%);
+  }
+  .banner-stats { gap: 0.8rem; margin-top: 1.8rem; }
+  .bstat-sep    { height: 26px; }
+  .scroll-hint  {
+    right: 50%;
+    transform: translateX(50%);
+    bottom: 1.5rem;
+  }
+  .primal-pulse { display: none; }
+}
+
+@media (max-width: 480px) {
+  nav { gap: 0.5rem; padding: 0.8rem; }
+  nav a { font-size: 0.58rem; letter-spacing: 0.1em; }
+  .banner-content { padding: 5rem 1.2rem 3rem; }
+  .bstat-sep { display: none; }
+  .bstat {
+    background: rgba(138,32,192,0.08);
+    border: 1px solid rgba(138,32,192,0.2);
+    padding: 0.4rem 0.7rem;
+  }
+  .banner-quote { font-size: 0.9rem; }
+  .tag-text { font-size: 0.52rem; letter-spacing: 0.25em; }
+}
+
+@media (max-width: 360px) {
+  .banner-content { padding: 5rem 1rem 2.5rem; }
+  nav a { font-size: 0.54rem; }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  #banner { min-height: 100svh; }
+  .banner-content { padding: 3.5rem 4vw 2.5rem; }
+  .banner-stats   { margin-top: 1.2rem; }
+}
+/* ── SEÇÕES COMPARTILHADAS ── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+}
+
+.section-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stag-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, var(--purple-bright));
+}
+
+.stag-line:last-child {
+  background: linear-gradient(90deg,
+    var(--purple-bright), transparent);
+}
+
+.stag-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+}
+
+.section-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--text);
+  text-shadow: 0 0 30px rgba(138,32,192,0.3);
+}
+
+.section-title span {
+  background: linear-gradient(135deg,
+    #d090ff 0%, #8a20c0 50%, #2a0a3a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── IDENTIDADE ── */
+#identidade { padding-bottom: 5rem; }
+
+.identity-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  align-items: start;
+}
+
+.identity-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: sticky;
+  top: 6rem;
+}
+
+.identity-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center top;
+  background-color: var(--purple-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 30%,
+      rgba(138,32,192,0.25) 0%, transparent 70%);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(138,32,192,0.2);
+}
+
+.photo-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.06) 2px,
+    rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.photo-corner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  z-index: 2;
+}
+
+.photo-corner.tl {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--purple-bright);
+  border-left: 2px solid var(--purple-bright);
+}
+
+.photo-corner.tr {
+  top: -1px; right: -1px;
+  border-top: 2px solid var(--purple-bright);
+  border-right: 2px solid var(--purple-bright);
+}
+
+.photo-corner.bl {
+  bottom: -1px; left: -1px;
+  border-bottom: 2px solid var(--purple-mid);
+  border-left: 2px solid var(--purple-mid);
+}
+
+.photo-corner.br {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--purple-mid);
+  border-right: 2px solid var(--purple-mid);
+}
+
+.photo-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(42,10,58,0.8)   0%,
+    rgba(138,32,192,0.2) 40%,
+    transparent          100%);
+  pointer-events: none;
+}
+
+.photo-label {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(138,32,192,0.9);
+  z-index: 2;
+}
+
+.identity-card {
+  background: rgba(8,0,16,0.85);
+  border: 1px solid rgba(138,32,192,0.2);
+  padding: 1.2rem 1.4rem;
+}
+
+.icard-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(138,32,192,0.2);
+}
+
+.icard-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.icard-row:last-child { border-bottom: none; }
+
+.icard-key {
+  font-family: 'Cinzel', serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.icard-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  text-align: right;
+}
+
+.icard-val.danger {
+  color: var(--purple-bright);
+  text-shadow: 0 0 8px var(--purple-glow);
+}
+
+.identity-text p {
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.4rem;
+  font-size: 1.02rem;
+}
+
+.identity-text p em {
+  color: var(--purple-bright);
+  font-style: normal;
+}
+
+.identity-text p strong { color: var(--gold-light); }
+
+.identity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.itag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  padding: 0.28rem 0.65rem;
+  border: 1px solid rgba(138,32,192,0.2);
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border-radius: 1px;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.itag:hover {
+  border-color: rgba(138,32,192,0.5);
+  color: var(--text);
+}
+
+.itag.danger-tag {
+  border-color: rgba(138,32,192,0.35);
+  color: rgba(138,32,192,0.9);
+}
+
+/* ── FORMAS ── */
+#formas {
+  padding-bottom: 5rem;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(42,10,58,0.08),
+    transparent);
+}
+
+.forms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.form-card {
+  border: 1px solid rgba(138,32,192,0.15);
+  overflow: hidden;
+  transition: border-color 0.4s;
+}
+
+.form-card:hover {
+  border-color: rgba(138,32,192,0.4);
+}
+
+.form-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--purple-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+.form-photo-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.bestial-overlay {
+  background:
+    linear-gradient(to top,
+      rgba(8,0,16,0.9) 0%,
+      rgba(42,10,58,0.4) 50%,
+      rgba(139,0,16,0.2) 100%);
+}
+
+.humana-overlay {
+  background:
+    linear-gradient(to top,
+      rgba(8,0,16,0.9) 0%,
+      rgba(42,10,58,0.5) 50%,
+      transparent 100%);
+}
+
+.form-photo-label {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+  background: rgba(8,0,16,0.7);
+  padding: 0.3rem 0.7rem;
+  border: 1px solid rgba(138,32,192,0.25);
+}
+
+.form-content {
+  padding: 1.8rem;
+  background: rgba(8,0,16,0.7);
+  position: relative;
+}
+
+.form-number {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: rgba(138,32,192,0.06);
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.form-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+.form-desc {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+  margin-bottom: 1.2rem;
+}
+
+.form-attrs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fattr {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+}
+
+.fattr-icon { font-size: 0.9rem; }
+
+/* ── PODERES ── */
+#poderes {
+  padding-bottom: 5rem;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(42,10,58,0.05),
+    transparent);
+}
+
+.powers-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  background: rgba(138,32,192,0.08);
+  border: 1px solid rgba(138,32,192,0.1);
+}
+
+.power-card {
+  background: rgba(3,3,8,0.96);
+  padding: 2rem 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.power-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, rgba(138,32,192,0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.power-card:hover {
+  background: rgba(8,0,16,0.98);
+}
+
+.power-card:hover::before { opacity: 1; }
+
+.pcard-number {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: rgba(138,32,192,0.06);
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.pcard-content { position: relative; z-index: 1; }
+
+.pcard-icon {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px var(--purple-glow));
+}
+
+.pcard-origin {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+  margin-bottom: 0.4rem;
+  opacity: 0.8;
+}
+
+.pcard-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+}
+
+.pcard-desc {
+  font-size: 0.87rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+.pcard-bar {
+  margin-top: 1.2rem;
+  height: 2px;
+  background: rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+
+.pbar-fill {
+  height: 100%;
+  width: 0;
+  transition: width 1.5s ease;
+  border-radius: 1px;
+}
+
+/* ── HISTÓRIA ── */
+#historia { padding-bottom: 5rem; }
+
+.story-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.story-container::before {
+  content: '';
+  position: absolute;
+  left: 3.5rem;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(138,32,192,0.3),
+    rgba(138,32,192,0.5),
+    rgba(42,10,58,0.3),
+    transparent);
+}
+
+.story-chapter {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  padding: 0 0 3rem;
+  position: relative;
+}
+
+.chapter-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.chapter-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--purple-bright);
+  text-shadow: 0 0 16px var(--purple-glow);
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(138,32,192,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3,3,8,0.9);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.chapter-line {
+  width: 1px;
+  flex: 1;
+  background: linear-gradient(to bottom,
+    rgba(138,32,192,0.3), transparent);
+}
+
+.chapter-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+  margin-bottom: 0.4rem;
+  opacity: 0.8;
+}
+
+.chapter-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+.chapter-body p {
+  font-size: 0.98rem;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+
+/* ── GALERIA ── */
+#galeria { padding-bottom: 5rem; }
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 250px 250px;
+  gap: 1px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  background: rgba(138,32,192,0.08);
+}
+
+.gallery-item {
+  background-size: cover;
+  background-position: center;
+  background-color: var(--purple-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 50%,
+      rgba(138,32,192,0.15) 0%, transparent 70%);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  filter: brightness(0.6) saturate(0.5);
+  transition: filter 0.4s;
+}
+
+.gallery-item:hover {
+  filter: brightness(0.85) saturate(0.8);
+}
+
+.gallery-item.tall  { grid-row: span 2; }
+.gallery-item.wide  { grid-column: span 2; }
+
+.gitem-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(3,3,8,0.95) 0%, transparent 55%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery-item:hover .gitem-overlay { opacity: 1; }
+
+.gitem-overlay span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+}
+
+.gallery-hint {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--text-dim);
+  opacity: 0.5;
+  padding: 0 2rem;
+}
+
+.gallery-hint code {
+  font-family: monospace;
+  color: var(--purple-bright);
+  font-style: normal;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 5rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(138,32,192,0.12);
+  background: linear-gradient(to top,
+    rgba(8,0,16,0.8) 0%, transparent 100%);
+}
+
+.footer-inner { max-width: 600px; margin: 0 auto; }
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover { color: var(--purple-bright); }
+
+.footer-nav span {
+  color: var(--gold-dim);
+  opacity: 0.4;
+}
+
+.footer-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg,
+    #d090ff, #8a20c0, #2a0a3a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.8rem;
+}
+
+.footer-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: rgba(122,98,40,0.4);
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVO COMPLETO
+════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .identity-grid    { grid-template-columns: 260px 1fr; gap: 3rem; padding: 0 1.5rem; }
+  .powers-container { grid-template-columns: repeat(2, 1fr); padding: 0 1.5rem; }
+  .story-container  { padding: 0 1.5rem; }
+  .gallery-container { padding: 0 1.5rem; grid-template-rows: 220px 220px; }
+  .forms-grid       { padding: 0 1.5rem; }
+  .section-header   { padding: 4rem 1.5rem 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  .section-header { padding: 3.5rem 1.5rem 2rem; }
+
+  .identity-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1.5rem;
+  }
+
+  .identity-photo-wrap {
+    position: static !important;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .identity-photo { aspect-ratio: 3 / 3.5; }
+  .identity-text p { font-size: 0.97rem; }
+
+  .forms-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .form-photo { aspect-ratio: 16 / 9; }
+
+  .powers-container {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+
+  .power-card { padding: 1.8rem 1.5rem; }
+
+  .story-container  { padding: 0 1.5rem; }
+  .story-container::before { left: 2.8rem; }
+
+  .story-chapter {
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .chapter-num { width: 36px; height: 36px; font-size: 1.1rem; }
+  .chapter-title { font-size: 1rem; }
+
+  .gallery-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: 180px 180px 180px !important;
+    padding: 0 1.5rem;
+  }
+
+  .gallery-item.tall { grid-row: span 1 !important; }
+  .gallery-item.wide { grid-column: span 2 !important; }
+  .gitem-overlay { opacity: 1; }
+
+  footer { padding: 3.5rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .section-header { padding: 3rem 1.2rem 1.8rem; }
+  .section-title  { font-size: clamp(1.3rem, 6vw, 2rem); }
+
+  .identity-grid       { padding: 0 1.2rem; gap: 1.5rem; }
+  .identity-photo-wrap { max-width: 220px; }
+  .identity-photo      { aspect-ratio: 1 / 1; }
+  .identity-text p     { font-size: 0.93rem; }
+  .identity-tags       { gap: 0.35rem; }
+  .itag { font-size: 0.48rem !important; padding: 0.2rem 0.5rem !important; }
+
+  .forms-grid    { padding: 0 1.2rem; }
+  .form-content  { padding: 1.4rem 1.2rem; }
+  .form-name     { font-size: 0.92rem; }
+  .form-desc     { font-size: 0.86rem; }
+
+  .powers-container { padding: 0 1.2rem; }
+  .power-card       { padding: 1.5rem 1.2rem; }
+  .pcard-name       { font-size: 0.84rem; }
+  .pcard-desc       { font-size: 0.83rem; }
+
+  .story-container  { padding: 0 1.2rem; }
+  .story-container::before { left: 2.4rem; }
+  .story-chapter    { grid-template-columns: 52px 1fr; gap: 1.2rem; padding-bottom: 2rem; }
+  .chapter-num      { width: 32px; height: 32px; font-size: 0.95rem; }
+  .chapter-title    { font-size: 0.95rem; }
+  .chapter-body p   { font-size: 0.88rem; }
+
+  .gallery-container {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 140px 140px 140px !important;
+    padding: 0 1.2rem;
+  }
+
+  .gallery-hint { font-size: 0.75rem; padding: 0 1.2rem; }
+
+  footer { padding: 2.5rem 1.2rem; }
+  .footer-nav { flex-direction: column; gap: 0.5rem; }
+  .footer-nav span { display: none; }
+  .footer-name  { font-size: 1.1rem; }
+  .footer-quote { font-size: 0.88rem; }
+}
+
+@media (max-width: 360px) {
+  .identity-photo-wrap { max-width: 190px; }
+  .forms-grid { padding: 0 1rem; }
+
+  .gallery-container {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+
+  .gallery-item {
+    height: 180px !important;
+    grid-row: span 1 !important;
+    grid-column: span 1 !important;
+  }
+
+  .story-chapter { grid-template-columns: 46px 1fr; }
+  .chapter-num   { width: 28px; height: 28px; font-size: 0.85rem; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .gitem-overlay { opacity: 1; }
+  .power-card:hover { background: rgba(3,3,8,0.96); }
+  .form-card:hover  { border-color: rgba(138,32,192,0.15); }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .section-header   { padding: 2.5rem 1.5rem 1.5rem; }
+  .story-chapter    { padding-bottom: 1.8rem; }
+  .powers-container { grid-template-columns: repeat(2, 1fr); }
+  .forms-grid       { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<canvas id="cosmos-bg"></canvas>
+<div id="noise-overlay"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Logo">
+  </a>
+  <a href="viloes.html">← Vilões</a>
+  <a href="#identidade">Identidade</a>
+  <a href="#formas">Formas</a>
+  <a href="#poderes">Poderes</a>
+  <a href="#historia">História</a>
+  <a href="#galeria">Galeria</a>
+</nav>
+
+<!-- BANNER -->
+<section id="banner">
+  <div class="banner-bg" style="background-image: url('besta-banner.jpg')"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-vignette"></div>
+
+  <!-- Pulso primordial -->
+  <div class="primal-pulse">
+    <div class="pulse-ring r1"></div>
+    <div class="pulse-ring r2"></div>
+    <div class="pulse-ring r3"></div>
+  </div>
+
+  <div class="banner-content">
+    <div class="banner-tag">
+      <span class="tag-line"></span>
+      <span class="tag-text">Antagonista · Arco III · Criatura Primordial</span>
+      <span class="tag-line"></span>
+    </div>
+
+    <h1 class="banner-name">
+      <span class="name-article">A</span>
+      Besta
+    </h1>
+
+    <div class="banner-divider">
+      <span class="divider-line"></span>
+      <span class="divider-symbol">☩</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <p class="banner-quote">
+      "Ela existia antes que o mundo soubesse<br>
+      o que era o medo. Ela foi a primeira lição."
+    </p>
+
+    <div class="banner-stats">
+      <div class="bstat">
+        <span class="bstat-val">Primordial</span>
+        <span class="bstat-label">Origem</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Três Cabeças</span>
+        <span class="bstat-label">Forma Bestial</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Elemental & Trans.</span>
+        <span class="bstat-label">Domínio</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Indomável</span>
+        <span class="bstat-label">Natureza</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner-bottom-bar"></div>
+  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+</section>
+
+<!-- IDENTIDADE -->
+<section id="identidade">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">A Primeira</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">A Identidade da <span>Besta</span></h2>
+  </div>
+
+  <div class="identity-grid reveal">
+    <div class="identity-photo-wrap">
+      <div class="identity-photo"
+        style="background-image: url('besta-perfil.jpg')">
+        <div class="photo-scanlines"></div>
+        <div class="photo-corner tl"></div>
+        <div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div>
+        <div class="photo-corner br"></div>
+        <div class="photo-glow"></div>
+        <div class="photo-label">A Besta · Forma Humana</div>
+      </div>
+
+      <div class="identity-card">
+        <div class="icard-title">Registro Primordial</div>
+        <div class="icard-row">
+          <span class="icard-key">Classificação</span>
+          <span class="icard-val">Criatura Primordial</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Era</span>
+          <span class="icard-val">Antes dos Homens</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Formas</span>
+          <span class="icard-val">Bestial & Humana</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Cabeças</span>
+          <span class="icard-val danger">Três</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Vulnerabilidade</span>
+          <span class="icard-val danger">Armas Divinas</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Ameaça</span>
+          <span class="icard-val danger">Existencial</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="identity-text">
+      <p>Antes dos homens. Antes das civilizações. Antes de qualquer conceito de poder organizado — a Besta já existia. A <em>primeira fera mística da criação</em>, nascida quando o mundo ainda não sabia o que era ordem, quando as forças primordiais agiam sem restrição e sem propósito além de existir.</p>
+
+      <p>Mas a Besta não era força bruta sem consciência. Era o oposto: <strong>inteligência ancestral acumulada</strong> antes que a palavra "inteligência" existisse. Conhecimentos desenvolvidos em milênios de solidão, de observação, de experimentação sobre si mesma e sobre o mundo ao redor.</p>
+
+      <p>Acredita-se ter sido ela a primeira manipuladora de energia elemental e transdimensional — desenvolvendo esses domínios numa era em que nenhum ser humano havia dado seus primeiros passos. Quando os feiticeiros primitivos estavam descobrindo os rudimentos da magia, a Besta já havia esgotado e superado o que eles nunca alcançariam.</p>
+
+      <p>Sua forma bestial é colossal — três cabeças, corpo que apenas armas divinas conseguem perfurar, olhos em vermelho profundo como um rio de sangue que não para de correr. Mas ela aprendeu algo ainda mais perturbador: <strong>construir corpos</strong>. Sua forma humana é um homem alto, esguio, com um olhar que perfura a alma e cabelos longos presos — elegante, contida, e infinitamente mais assustadora do que a forma colossal.</p>
+
+      <div class="identity-tags">
+        <span class="itag">Primeira Criatura</span>
+        <span class="itag danger-tag">Três Cabeças</span>
+        <span class="itag">Energia Elemental</span>
+        <span class="itag danger-tag">Transdimensional</span>
+        <span class="itag">Forma Mutável</span>
+        <span class="itag danger-tag">Indomável</span>
+        <span class="itag">Inteligência Ancestral</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAS -->
+<section id="formas">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">Manifestações</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">As Duas <span>Formas</span></h2>
+  </div>
+
+  <div class="forms-grid reveal">
+
+    <!-- Forma Bestial -->
+    <div class="form-card bestial">
+      <div class="form-photo"
+        style="background-image: url('besta-bestial.jpg')">
+        <div class="form-photo-overlay bestial-overlay"></div>
+        <div class="form-photo-label">Forma Bestial</div>
+      </div>
+      <div class="form-content">
+        <div class="form-number">I</div>
+        <h3 class="form-name">A Besta Colossal</h3>
+        <p class="form-desc">Três cabeças que rugem em uníssono. Um corpo que o mundo sente antes de ver. Olhos em vermelho profundo como um rio de sangue que não cessa. Nenhuma arma comum perfura essa forma — apenas o divino consegue deixar marca.</p>
+        <div class="form-attrs">
+          <div class="fattr">
+            <span class="fattr-icon">💀</span>
+            <span>Corpo Impenetrável</span>
+          </div>
+          <div class="fattr">
+            <span class="fattr-icon">🔴</span>
+            <span>Três Cabeças</span>
+          </div>
+          <div class="fattr">
+            <span class="fattr-icon">⚡</span>
+            <span>Força Colossal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Forma Humana -->
+    <div class="form-card humana">
+      <div class="form-photo"
+        style="background-image: url('besta-humana.jpg')">
+        <div class="form-photo-overlay humana-overlay"></div>
+        <div class="form-photo-label">Forma Humana</div>
+      </div>
+      <div class="form-content">
+        <div class="form-number">II</div>
+        <h3 class="form-name">O Homem Esguio</h3>
+        <p class="form-desc">Alto. Esguio. Cabelos longos e presos. Um olhar que perfura a alma — não por hostilidade óbvia, mas por uma presença que o corpo humano simplesmente não consegue conter. Mais assustadora que a forma bestial porque parece, por um segundo, familiar.</p>
+        <div class="form-attrs">
+          <div class="fattr">
+            <span class="fattr-icon">👁️</span>
+            <span>Olhar que Julga</span>
+          </div>
+          <div class="fattr">
+            <span class="fattr-icon">🌀</span>
+            <span>Presença Distorcida</span>
+          </div>
+          <div class="fattr">
+            <span class="fattr-icon">🧠</span>
+            <span>Inteligência Máxima</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PODERES -->
+<section id="poderes">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">Arsenal primordial</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">Poderes & <span>Domínios</span></h2>
+  </div>
+
+  <div class="powers-container reveal">
+
+    <div class="power-card">
+      <div class="pcard-number">01</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">🔄</div>
+        <div class="pcard-origin">Dom Primordial</div>
+        <div class="pcard-name">Manipulação de Forma Física</div>
+        <div class="pcard-desc">A Besta foi a primeira a descobrir que existência não precisa ser fixada numa única forma. Pode construir e desconstruir corpos à vontade — da escala colossal à humana, com total controle sobre cada aspecto físico da manifestação escolhida.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="100"
+            style="background: linear-gradient(90deg, #2a0a3a, #8a20c0)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card">
+      <div class="pcard-number">02</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">⚡</div>
+        <div class="pcard-origin">Primogênita Elemental</div>
+        <div class="pcard-name">Energia Elemental Primordial</div>
+        <div class="pcard-desc">A primeira manipuladora de energia elemental da criação. Seu domínio não segue sistemas nem técnicas — é anterior a qualquer codificação. Fogo, terra, água, vento em sua forma mais bruta e sem restrições, como existiam antes que qualquer ser tentasse organizá-los.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="98"
+            style="background: linear-gradient(90deg, #2a0a3a, #8a20c0)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card">
+      <div class="pcard-number">03</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">🌀</div>
+        <div class="pcard-origin">Consciência Multidimensional</div>
+        <div class="pcard-name">Manipulação Transdimensional</div>
+        <div class="pcard-desc">Opera em múltiplos planos de existência simultaneamente. Sua consciência não está limitada a uma única camada da realidade — percebe e interfere em dimensões que outros seres sequer sabem que existem. A primeira a cruzar fronteiras entre planos.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="96"
+            style="background: linear-gradient(90deg, #2a0a3a, #8a20c0)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card">
+      <div class="pcard-number">04</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">💀</div>
+        <div class="pcard-origin">Corpo Primordial</div>
+        <div class="pcard-name">Resistência Absoluta</div>
+        <div class="pcard-desc">Em forma bestial, o corpo da Besta não pode ser perfurado por armas convencionais. Apenas armas de origem divina conseguem deixar marca. Milênios de existência consolidaram uma resistência física que vai além de qualquer blindagem conhecida.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="100"
+            style="background: linear-gradient(90deg, #2a0a3a, #8a20c0)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card">
+      <div class="pcard-number">05</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">🧠</div>
+        <div class="pcard-origin">Milênios de Observação</div>
+        <div class="pcard-name">Inteligência Ancestral</div>
+        <div class="pcard-desc">Não é estratégia aprendida — é sabedoria acumulada em eras de existência solitária. A Besta observou o mundo nascer, crescer e se organizar. Conhece padrões de comportamento, fraquezas de seres e estruturas de poder que nenhum ser vivo ainda está vivo para ter testemunhado.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="97"
+            style="background: linear-gradient(90deg, #2a0a3a, #8a20c0)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card">
+      <div class="pcard-number">06</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">🌑</div>
+        <div class="pcard-origin">Natureza Primordial</div>
+        <div class="pcard-name">Consumo de Existência</div>
+        <div class="pcard-desc">A Besta não luta para vencer — ela consome. Cada confronto é uma tentativa de apagar existências inteiras. Seu poder mais devastador não é físico nem elemental: é a capacidade de fazer com que algo deixe de ser, simplesmente porque ela decidiu que não deveria existir mais.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="95"
+            style="background: linear-gradient(90deg, #2a0a3a, #8a20c0)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HISTÓRIA -->
+<section id="historia">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">Desde o começo</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">A História da <span>Primeira</span></h2>
+  </div>
+
+  <div class="story-container">
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">I</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">O Começo de Tudo</div>
+        <h3 class="chapter-title">Antes dos Homens</h3>
+        <p>Quando o mundo ainda não tinha nome para si mesmo, a Besta já existia. Não havia testemunhas para seu nascimento — apenas as forças brutas da criação, indiferentes à existência de uma nova entidade entre elas. Ela aprendeu sozinha o que era existir. E depois aprendeu como existir melhor do que qualquer coisa ao redor.</p>
+      </div>
+    </div>
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">II</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">A Descoberta</div>
+        <h3 class="chapter-title">O Domínio Elemental</h3>
+        <p>Antes que qualquer feiticeiro humano descobrisse a magia, a Besta já havia mapeado e dominado as energias elementais que permeavam o mundo. Não por curiosidade — por necessidade de entender o que a cercava. O que os humanos chamariam milênios depois de "feitiçaria primordial" era, para ela, apenas a linguagem natural do mundo.</p>
+      </div>
+    </div>
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">III</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">A Evolução</div>
+        <h3 class="chapter-title">Aprendendo a Construir Corpos</h3>
+        <p>A descoberta mais perturbadora da Besta foi sobre si mesma: sua forma não era fixa. Experimentou. Errou. Reconstruiu. Ao longo de eras, desenvolveu a capacidade de construir corpos diferentes para si — da escala colossal e impenetrável à forma humana esguia e discreta. Dois extremos com o mesmo ser dentro.</p>
+      </div>
+    </div>
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">IV</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">A Observação</div>
+        <h3 class="chapter-title">Assistindo os Humanos</h3>
+        <p>A Besta observou a humanidade surgir, se organizar, criar civilizações e sistemas de poder. Não com desprezo — com curiosidade analítica. Aprendeu com o que viu. Compreendeu padrões de comportamento, pontos de fraqueza, momentos de força. Nenhum humano vivo pode afirmar ter sido observado por mais tempo por uma única entidade.</p>
+      </div>
+    </div>
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">V</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">O Confronto Final</div>
+        <h3 class="chapter-title">O Teste dos Seis</h3>
+        <p>O confronto com os seis foi diferente de tudo que a Besta havia experienciado. Não porque eles fossem superiores — mas porque, pela primeira vez, ela encontrou seres que se recusavam a aceitar o que ela era: o fim. A Besta não luta para destruir. Ela consome. E o preço da vitória dos seis foi transcender o que eram — tornando-se deuses no processo.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">Registros visuais</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">Galeria da <span>Besta</span></h2>
+  </div>
+
+  <div class="gallery-container reveal">
+    <div class="gallery-item tall"
+      style="background-image: url('besta-01.jpg')">
+      <div class="gitem-overlay">
+        <span>A Besta · Forma Colossal</span>
+      </div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('besta-02.jpg')">
+      <div class="gitem-overlay"><span>As Três Cabeças</span></div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('besta-03.jpg')">
+      <div class="gitem-overlay"><span>Forma Humana</span></div>
+    </div>
+    <div class="gallery-item wide"
+      style="background-image: url('besta-04.jpg')">
+      <div class="gitem-overlay">
+        <span>O Confronto Final</span>
+      </div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('besta-05.jpg')">
+      <div class="gitem-overlay"><span>Energia Primordial</span></div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('besta-06.jpg')">
+      <div class="gitem-overlay"><span>Antes dos Homens</span></div>
+    </div>
+  </div>
+
+  <p class="gallery-hint reveal">
+    Substitua <code>besta-01.jpg</code> até <code>besta-06.jpg</code>
+    pelas imagens da personagem.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-nav">
+      <a href="cavaleiro.html">← Cavaleiro Negro</a>
+      <span>·</span>
+      <a href="viloes.html">Todos os Vilões</a>
+      <span>·</span>
+      <a href="valar.html">Valar →</a>
+    </div>
+    <div class="footer-name">A Besta</div>
+    <div class="footer-quote">
+      "Ela não representa o mal.<br>
+      Ela representa o que existia antes que o bem e o mal fossem inventados."
+    </div>
+    <div class="footer-copy">
+      O Diário de um Deus · Todos os direitos reservados
+    </div>
+  </div>
+</footer>
+
+<script src="effects.js"></script>
+<script>
+    /* ════════════════════════════════════
+   A BESTA — JAVASCRIPT COMPLETO
+   Canvas · Parallax · Tremor · Lightbox
+════════════════════════════════════ */
+
+/* ── COSMOS CANVAS ── */
+(function () {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx    = canvas.getContext('2d');
+  let W, H, stars = [], nebulas = [], tentacles = [], voids = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    /* Estrelas roxas/escuras */
+    stars = [];
+    for (let i = 0; i < 220; i++) {
+      stars.push({
+        x:       Math.random() * W,
+        y:       Math.random() * H,
+        r:       Math.random() * 1.5 + 0.2,
+        a:       Math.random() * 0.5 + 0.1,
+        speed:   Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+
+    /* Névoas primordiais */
+    nebulas = [];
+    const colors = [
+      'rgba(42,10,58,',
+      'rgba(138,32,192,',
+      'rgba(80,0,120,',
+      'rgba(20,0,40,',
+      'rgba(139,0,16,'
+    ];
+    for (let i = 0; i < 6; i++) {
+      nebulas.push({
+        x:     Math.random() * W,
+        y:     Math.random() * H,
+        r:     Math.random() * 380 + 180,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a:     Math.random() * 0.08 + 0.02
+      });
+    }
+
+    /* Tentáculos de energia */
+    tentacles = [];
+    for (let i = 0; i < 5; i++) {
+      tentacles.push(newTentacle());
+    }
+
+    /* Buracos de vazio */
+    voids = [];
+    for (let i = 0; i < 3; i++) {
+      voids.push({
+        x:     Math.random() * W,
+        y:     Math.random() * H,
+        r:     Math.random() * 60 + 20,
+        pulse: Math.random() * Math.PI * 2,
+        pSpeed: Math.random() * 0.01 + 0.005,
+        a:     Math.random() * 0.15 + 0.05
+      });
+    }
+  }
+
+  function newTentacle() {
+    const startX = Math.random() * W;
+    const startY = Math.random() * H;
+    const pts    = [{ x: startX, y: startY }];
+    let cx = startX, cy = startY;
+    const steps = Math.floor(Math.random() * 10) + 6;
+
+    for (let i = 0; i < steps; i++) {
+      cx += (Math.random() - 0.5) * 80;
+      cy += Math.random() * 60 - 10;
+      pts.push({ x: cx, y: cy });
+    }
+
+    return {
+      pts,
+      a:      Math.random() * 0.3 + 0.05,
+      life:   Math.random(),
+      decay:  Math.random() * 0.003 + 0.001,
+      width:  Math.random() * 2 + 0.5,
+      travel: 0,
+      tSpeed: Math.random() * 0.006 + 0.002
+    };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Fundo void profundo */
+    const bg = ctx.createRadialGradient(
+      W * 0.5, H * 0.5, 0,
+      W * 0.5, H * 0.5, Math.max(W, H)
+    );
+    bg.addColorStop(0,   '#080010');
+    bg.addColorStop(0.3, '#050008');
+    bg.addColorStop(0.7, '#030308');
+    bg.addColorStop(1,   '#020205');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Névoas */
+    nebulas.forEach(n => {
+      const grad = ctx.createRadialGradient(
+        n.x, n.y, 0, n.x, n.y, n.r
+      );
+      grad.addColorStop(0, n.color + n.a + ')');
+      grad.addColorStop(1, n.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Estrelas */
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180,140,220,${alpha})`;
+      ctx.fill();
+    });
+
+    /* Buracos de vazio */
+    voids.forEach(v => {
+      v.pulse += v.pSpeed;
+      const pulseR = v.r * (1 + 0.2 * Math.sin(v.pulse));
+      const alpha  = v.a * (0.6 + 0.4 * Math.sin(v.pulse));
+
+      /* Buraco central */
+      const grad = ctx.createRadialGradient(
+        v.x, v.y, 0,
+        v.x, v.y, pulseR * 3
+      );
+      grad.addColorStop(0,   `rgba(0,0,0,${alpha * 2})`);
+      grad.addColorStop(0.5, `rgba(42,10,58,${alpha})`);
+      grad.addColorStop(1,    'rgba(42,10,58,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(v.x, v.y, pulseR * 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      /* Anel do vazio */
+      ctx.beginPath();
+      ctx.arc(v.x, v.y, pulseR, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(138,32,192,${alpha * 0.5})`;
+      ctx.lineWidth   = 1;
+      ctx.stroke();
+
+      /* Segundo anel */
+      ctx.beginPath();
+      ctx.arc(v.x, v.y, pulseR * 2, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(138,32,192,${alpha * 0.2})`;
+      ctx.lineWidth   = 0.5;
+      ctx.stroke();
+    });
+
+    /* Tentáculos de energia */
+    tentacles.forEach((t, i) => {
+      t.life   -= t.decay;
+      t.travel += t.tSpeed;
+      if (t.travel > 1) t.travel = 0;
+
+      if (t.life <= 0) {
+        tentacles[i] = newTentacle();
+        return;
+      }
+
+      const alpha = t.a * t.life;
+
+      /* Linha principal */
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.4;
+      ctx.strokeStyle = `rgba(138,32,192,${alpha})`;
+      ctx.lineWidth   = t.width;
+      ctx.shadowColor = '#8a20c0';
+      ctx.shadowBlur  = 10;
+      ctx.beginPath();
+      ctx.moveTo(t.pts[0].x, t.pts[0].y);
+      t.pts.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.stroke();
+
+      /* Ponto viajante */
+      const idx  = Math.floor(t.travel * (t.pts.length - 1));
+      const next = Math.min(idx + 1, t.pts.length - 1);
+      const frac = t.travel * (t.pts.length - 1) - idx;
+      const tx   = t.pts[idx].x + (t.pts[next].x - t.pts[idx].x) * frac;
+      const ty   = t.pts[idx].y + (t.pts[next].y - t.pts[idx].y) * frac;
+
+      ctx.globalAlpha = 1;
+      const tGrad = ctx.createRadialGradient(tx, ty, 0, tx, ty, 8);
+      tGrad.addColorStop(0, `rgba(200,150,255,${alpha})`);
+      tGrad.addColorStop(1,  'rgba(138,32,192,0)');
+      ctx.fillStyle = tGrad;
+      ctx.beginPath();
+      ctx.arc(tx, ty, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(tx, ty, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(240,200,255,${alpha})`;
+      ctx.fill();
+      ctx.restore();
+    });
+
+    /* Véu primordial */
+    const veil = ctx.createRadialGradient(
+      W * 0.5, H * 0.5, 0,
+      W * 0.5, H * 0.5, H * 0.8
+    );
+    veil.addColorStop(0,   'rgba(42,10,58,0.05)');
+    veil.addColorStop(0.5, 'rgba(138,32,192,0.02)');
+    veil.addColorStop(1,   'rgba(3,3,8,0)');
+    ctx.fillStyle = veil;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Brilho roxo no rodapé */
+    const horizon = ctx.createLinearGradient(0, H * 0.8, 0, H);
+    horizon.addColorStop(0, 'transparent');
+    horizon.addColorStop(1, 'rgba(42,10,58,0.1)');
+    ctx.fillStyle = horizon;
+    ctx.fillRect(0, H * 0.8, W, H * 0.2);
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize();
+  init();
+  draw();
+})();
+
+/* ── PARALLAX DO BANNER ── */
+(function () {
+  const bg = document.querySelector('.banner-bg');
+  if (!bg) return;
+
+  const img = new Image();
+  img.onload = () => bg.classList.add('loaded');
+  const url = bg.style.backgroundImage
+    .replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+  if (url && url !== 'none') img.src = url;
+
+  const mq = window.matchMedia('(min-width: 769px)');
+
+  window.addEventListener('scroll', () => {
+    if (!mq.matches) return;
+    const scrollY = window.scrollY;
+    if (scrollY <= window.innerHeight) {
+      bg.style.transform =
+        `scale(1.05) translateY(${scrollY * 0.22}px)`;
+    }
+  }, { passive: true });
+})();
+
+/* ── SCROLL REVEAL ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  const io  = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── BARRAS DE PODER ── */
+(function () {
+  const bars = document.querySelectorAll('.pbar-fill');
+  const io   = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const bar    = e.target;
+        const target = bar.getAttribute('data-width');
+        setTimeout(() => { bar.style.width = target + '%'; }, 200);
+        io.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.4 });
+  bars.forEach(b => io.observe(b));
+})();
+
+/* ── TREMOR AO ENTRAR NA SEÇÃO ── */
+(function () {
+  const sections = document.querySelectorAll('section');
+  let shook = false;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !shook &&
+          e.intersectionRatio > 0.3) {
+        shook = true;
+
+        /* Tremor progressivo */
+        let intensity = 0;
+        const maxShakes = 12;
+        let count = 0;
+
+        const shake = setInterval(() => {
+          count++;
+          intensity = count < 6
+            ? count * 0.5
+            : (maxShakes - count) * 0.5;
+
+          const x = (Math.random() - 0.5) * intensity;
+          const y = (Math.random() - 0.5) * intensity;
+          document.body.style.transform =
+            `translate(${x}px, ${y}px)`;
+
+          if (count >= maxShakes) {
+            clearInterval(shake);
+            document.body.style.transform = '';
+          }
+        }, 50);
+
+        /* Flash roxo */
+        const flash = document.createElement('div');
+        flash.style.cssText = `
+          position: fixed;
+          inset: 0;
+          background: rgba(138,32,192,0.12);
+          z-index: 9998;
+          pointer-events: none;
+          animation: besta-flash 0.6s ease forwards;
+        `;
+        document.body.appendChild(flash);
+        setTimeout(() => flash.remove(), 600);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  /* Aplica apenas na seção de identidade */
+  const identidade = document.getElementById('identidade');
+  if (identidade) io.observe(identidade);
+
+  /* Injeta keyframe */
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes besta-flash {
+      0%   { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+/* ── EFEITO NOS CARDS DE FORMAS ── */
+(function () {
+  const cards = document.querySelectorAll('.form-card');
+
+  cards.forEach(card => {
+    const photo = card.querySelector('.form-photo');
+
+    card.addEventListener('mouseenter', () => {
+      if (photo) {
+        photo.style.transition = 'filter 0.5s ease';
+        photo.style.filter =
+          'brightness(0.5) saturate(0.7)';
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (photo) {
+        photo.style.filter = '';
+      }
+    });
+  });
+})();
+
+/* ── EFEITO DE OLHOS VERMELHOS NO BANNER ── */
+(function () {
+  const banner = document.getElementById('banner');
+  if (!banner) return;
+
+  /* Cria três pares de olhos vermelhos */
+  const eyeCanvas = document.createElement('canvas');
+  eyeCanvas.style.cssText = `
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 2s ease;
+  `;
+  banner.appendChild(eyeCanvas);
+
+  const ctx = eyeCanvas.getContext('2d');
+  let W = eyeCanvas.width  = banner.offsetWidth;
+  let H = eyeCanvas.height = banner.offsetHeight;
+
+  const eyes = [
+    { x: W * 0.35, y: H * 0.35, phase: 0 },
+    { x: W * 0.50, y: H * 0.32, phase: 1.2 },
+    { x: W * 0.65, y: H * 0.38, phase: 2.4 }
+  ];
+
+  let frame = 0;
+  let visible = false;
+
+  function drawEyes() {
+    ctx.clearRect(0, 0, W, H);
+    frame += 0.015;
+
+    eyes.forEach(e => {
+      const blink = Math.sin(frame + e.phase);
+      if (blink < -0.7) return; /* Piscar */
+
+      const a = Math.max(0, blink) * 0.4;
+
+      /* Glow externo */
+      const glow = ctx.createRadialGradient(
+        e.x, e.y, 0, e.x, e.y, 30
+      );
+      glow.addColorStop(0, `rgba(200,0,30,${a * 0.8})`);
+      glow.addColorStop(1,  'rgba(139,0,0,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(e.x, e.y, 30, 0, Math.PI * 2);
+      ctx.fill();
+
+      /* Olho em si */
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(e.x, e.y, 10, 6, 0, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180,0,20,${a})`;
+      ctx.fill();
+
+      /* Pupila */
+      ctx.beginPath();
+      ctx.ellipse(e.x, e.y, 4, 4, 0, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,0,0,${a * 2})`;
+      ctx.fill();
+
+      /* Reflexo */
+      ctx.beginPath();
+      ctx.ellipse(e.x - 2, e.y - 1, 1.5, 1, 0, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,100,100,${a})`;
+      ctx.fill();
+      ctx.restore();
+    });
+
+    requestAnimationFrame(drawEyes);
+  }
+
+  /* Aparece após 3 segundos */
+  setTimeout(() => {
+    eyeCanvas.style.opacity = '1';
+    visible = true;
+  }, 3000);
+
+  /* Desaparece ao rolar */
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > window.innerHeight * 0.3) {
+      eyeCanvas.style.opacity = '0';
+    } else {
+      eyeCanvas.style.opacity = visible ? '1' : '0';
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    W = eyeCanvas.width  = banner.offsetWidth;
+    H = eyeCanvas.height = banner.offsetHeight;
+    eyes[0].x = W * 0.35; eyes[0].y = H * 0.35;
+    eyes[1].x = W * 0.50; eyes[1].y = H * 0.32;
+    eyes[2].x = W * 0.65; eyes[2].y = H * 0.38;
+  }, { passive: true });
+
+  drawEyes();
+})();
+
+/* ── GLITCH NO NOME DO BANNER ── */
+(function () {
+  const name = document.querySelector('.banner-name');
+  if (!name) return;
+
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes besta-glitch {
+      0%   { transform: translate(0); filter: brightness(1); }
+      10%  { transform: translate(-4px,2px); filter: brightness(1.4) hue-rotate(20deg); }
+      20%  { transform: translate(4px,-2px); filter: brightness(0.7) saturate(2); }
+      30%  { transform: translate(-2px,3px); filter: brightness(1.2); }
+      40%  { transform: translate(3px,-1px); filter: brightness(0.9) hue-rotate(-15deg); }
+      50%  { transform: translate(0); filter: brightness(1); }
+      60%  { transform: translate(-3px,1px); filter: brightness(1.3); }
+      70%  { transform: translate(2px,-2px); filter: brightness(0.8) saturate(1.5); }
+      100% { transform: translate(0); filter: brightness(1); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  function triggerGlitch() {
+    name.style.animation = 'besta-glitch 0.15s infinite';
+    setTimeout(() => { name.style.animation = ''; }, 500);
+    setTimeout(triggerGlitch, Math.random() * 8000 + 4000);
+  }
+
+  setTimeout(triggerGlitch, 2500);
+})();
+
+/* ── EFEITO NOS CARDS DE PODER ── */
+(function () {
+  const cards = document.querySelectorAll('.power-card');
+
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.style.boxShadow =
+        'inset 0 0 30px rgba(42,10,58,0.15), ' +
+        '0 0 20px rgba(138,32,192,0.1)';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.boxShadow = '';
+    });
+  });
+})();
+
+/* ── LIGHTBOX DA GALERIA ── */
+(function () {
+  const items = document.querySelectorAll('.gallery-item');
+  if (!items.length) return;
+
+  const lb = document.createElement('div');
+  lb.id = 'lightbox';
+  lb.innerHTML = `
+    <div id="lb-backdrop"></div>
+    <div id="lb-box">
+      <button id="lb-prev">&#8592;</button>
+      <div id="lb-img-wrap">
+        <div id="lb-img"></div>
+        <div id="lb-caption"></div>
+      </div>
+      <button id="lb-next">&#8594;</button>
+      <button id="lb-close">&#x2715;</button>
+    </div>
+  `;
+  document.body.appendChild(lb);
+
+  const style = document.createElement('style');
+  style.textContent = `
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.active { display: flex; }
+    #lb-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(5,0,10,0.97);
+      backdrop-filter: blur(14px);
+    }
+    #lb-box {
+      position: relative; z-index: 1;
+      display: flex; align-items: center;
+      gap: 1.5rem;
+      max-width: 90vw; max-height: 90vh;
+    }
+    #lb-img-wrap {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1rem;
+    }
+    #lb-img {
+      width: min(700px, 80vw);
+      height: min(500px, 70vh);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #080010;
+      border: 1px solid rgba(138,32,192,0.25);
+      box-shadow:
+        0 0 60px rgba(42,10,58,0.2),
+        0 0 120px rgba(138,32,192,0.08);
+      filter: brightness(0.85) saturate(0.75);
+    }
+    #lb-caption {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #8a20c0;
+    }
+    #lb-prev, #lb-next, #lb-close {
+      background: none;
+      border: 1px solid rgba(138,32,192,0.3);
+      color: #8a20c0;
+      font-size: 1.2rem;
+      width: 44px; height: 44px;
+      min-width: 44px; min-height: 44px;
+      cursor: pointer;
+      display: flex; align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+      flex-shrink: 0;
+    }
+    #lb-prev:hover, #lb-next:hover, #lb-close:hover {
+      border-color: #8a20c0;
+      color: #d0a0ff;
+      box-shadow: 0 0 16px rgba(138,32,192,0.4);
+    }
+    #lb-close {
+      position: absolute;
+      top: -3rem; right: 0;
+    }
+    @media (max-width: 768px) {
+      #lb-box { gap: 0.8rem; max-width: 95vw; }
+      #lb-img {
+        width: 85vw !important;
+        height: 60vw !important;
+        min-height: 200px;
+      }
+      #lb-close { top: -2.8rem; }
+    }
+    @media (max-width: 480px) {
+      #lb-img { width: 90vw !important; height: 65vw !important; }
+      #lb-prev, #lb-next {
+        width: 36px !important; height: 36px !important;
+        min-width: 36px !important; min-height: 36px !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  const data = Array.from(items).map(el => ({
+    bg:      el.style.backgroundImage,
+    caption: el.querySelector('.gitem-overlay span')
+               ?.textContent || ''
+  }));
+
+  let current = 0;
+
+  function open(i) {
+    current = i; show();
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function show() {
+    document.getElementById('lb-img').style.backgroundImage =
+      data[current].bg;
+    document.getElementById('lb-caption').textContent =
+      data[current].caption;
+  }
+
+  function close() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function prev() {
+    current = (current - 1 + data.length) % data.length;
+    show();
+  }
+
+  function next() {
+    current = (current + 1) % data.length;
+    show();
+  }
+
+  items.forEach((el, i) =>
+    el.addEventListener('click', () => open(i))
+  );
+
+  document.getElementById('lb-close')
+    .addEventListener('click', close);
+  document.getElementById('lb-backdrop')
+    .addEventListener('click', close);
+  document.getElementById('lb-prev')
+    .addEventListener('click', prev);
+  document.getElementById('lb-next')
+    .addEventListener('click', next);
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft')  prev();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'Escape')     close();
+  });
+
+  let touchStartX = 0;
+  lb.addEventListener('touchstart',
+    e => { touchStartX = e.touches[0].clientX; },
+    { passive: true }
+  );
+  lb.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+  }, { passive: true });
+})();
+  /* === JAVASCRIPT VIRÁ NA PARTE 4 === */
+</script>
+</body>
+</html>

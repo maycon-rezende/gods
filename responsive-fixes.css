@@ -1,0 +1,322 @@
+
+/* ========================================
+   RESPONSIVE-FIXES.CSS — ajustes globais
+   Mobile · Tablet · Notebook · Desktop
+======================================== */
+
+html {
+  max-width: 100%;
+  overflow-x: hidden;
+  scroll-padding-top: 90px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, video, canvas, svg {
+  max-width: 100%;
+}
+
+img, video {
+  height: auto;
+}
+
+a, button, [role="button"] {
+  touch-action: manipulation;
+}
+
+section, main, header, footer, .page-section, .section, .banner-content, .content, .container {
+  max-width: 100%;
+}
+
+/* Banners mais estáveis: evita flicker/repaint em mobile e Chrome Android */
+.banner-bg,
+.hero-bg,
+.slide {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.banner-bg {
+  inset: 0 !important;
+  transform: translate3d(0,0,0) scale(1.02) !important;
+  transition: transform 12s ease, filter 0.8s ease, opacity 0.8s ease !important;
+}
+
+.banner-bg.loaded {
+  transform: translate3d(0,0,0) scale(1) !important;
+}
+
+/* Imagens de banner: mantém presença cinematográfica sem estourar demais */
+#banner,
+#hero,
+#villain-hero {
+  min-height: 100svh;
+}
+
+/* Nav padrão para páginas sem menu hamburguer */
+nav {
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+nav a {
+  white-space: nowrap;
+}
+
+/* Grades comuns */
+.gallery,
+.gallery-grid,
+.galaxy-grid,
+.cards-grid,
+.profile-grid,
+.manifesto-grid,
+.powers-grid,
+.power-grid,
+.stats-grid,
+.regions-grid,
+.villains-grid,
+.character-grid,
+.info-grid,
+.timeline-grid,
+.lore-grid,
+.four-panel-gallery,
+.loop-gallery,
+.panel-grid {
+  min-width: 0;
+}
+
+.card,
+.info-card,
+.power-card,
+.profile-card,
+.manifesto-card,
+.region-card,
+.villain-card,
+.gallery-card,
+.panel,
+.section-card {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* Evita que textos Cinzel muito espaçados criem overflow no celular */
+[class*="title"],
+[class*="eyebrow"],
+[class*="label"],
+[class*="name"],
+nav a {
+  overflow-wrap: anywhere;
+}
+
+/* Cursor customizado só em dispositivos com mouse real */
+@media (hover: none), (pointer: coarse) {
+  #cursor-outer,
+  #cursor-inner,
+  .cursor-trail {
+    display: none !important;
+  }
+
+  *, *::before, *::after {
+    cursor: auto !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  nav {
+    gap: 1rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .banner-content {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+
+  .gallery,
+  .gallery-grid,
+  .cards-grid,
+  .profile-grid,
+  .manifesto-grid,
+  .powers-grid,
+  .power-grid,
+  .regions-grid,
+  .villains-grid,
+  .character-grid,
+  .info-grid,
+  .lore-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  nav {
+    justify-content: flex-start !important;
+    gap: 0.55rem !important;
+    padding: 0.75rem 0.85rem !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    background: linear-gradient(to bottom, rgba(3,3,8,0.98), rgba(3,3,8,0.72)) !important;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  nav a {
+    flex: 0 0 auto;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.12em !important;
+    padding: 0.45rem 0.55rem;
+  }
+
+  .nav-logo img {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  #banner,
+  #hero,
+  #villain-hero {
+    min-height: 100svh !important;
+    height: auto !important;
+  }
+
+  .banner-bg,
+  .hero-bg,
+  .slide {
+    background-position: center top !important;
+  }
+
+  .banner-content,
+  .vh-content,
+  .hero-content {
+    padding: 6rem 1rem 3rem !important;
+    max-width: 100% !important;
+  }
+
+  .banner-title,
+  .hero-title,
+  .vh-title,
+  h1 {
+    font-size: clamp(2.35rem, 12vw, 4rem) !important;
+    line-height: 1.02 !important;
+  }
+
+  .section-title,
+  h2 {
+    font-size: clamp(1.7rem, 8vw, 2.7rem) !important;
+    line-height: 1.12 !important;
+  }
+
+  .banner-eyebrow,
+  .hero-eyebrow,
+  .section-label,
+  .section-tag,
+  .vh-eyebrow {
+    font-size: 0.56rem !important;
+    letter-spacing: 0.22em !important;
+  }
+
+  section,
+  .section,
+  .page-section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .gallery,
+  .gallery-grid,
+  .cards-grid,
+  .profile-grid,
+  .manifesto-grid,
+  .powers-grid,
+  .power-grid,
+  .stats-grid,
+  .regions-grid,
+  .villains-grid,
+  .character-grid,
+  .info-grid,
+  .timeline-grid,
+  .lore-grid,
+  .four-panel-gallery,
+  .loop-gallery,
+  .panel-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .timeline,
+  .timeline-track,
+  .vtimeline {
+    padding-left: 1.25rem !important;
+  }
+
+  .photo-item,
+  .gallery-item,
+  .gallery-card,
+  .panel-img,
+  .portrait,
+  .portrait-wrap {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 15.5px;
+  }
+
+  nav a {
+    font-size: 0.56rem !important;
+    letter-spacing: 0.09em !important;
+  }
+
+  .banner-content,
+  .vh-content,
+  .hero-content {
+    padding-top: 5.2rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  .banner-title,
+  .hero-title,
+  .vh-title,
+  h1 {
+    font-size: clamp(2rem, 13vw, 3.2rem) !important;
+  }
+
+  p,
+  .banner-text,
+  .banner-desc,
+  .section-text,
+  .card-text {
+    line-height: 1.7 !important;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  #banner,
+  #hero,
+  #villain-hero {
+    min-height: 120svh !important;
+  }
+
+  .banner-content,
+  .vh-content,
+  .hero-content {
+    padding-top: 4.5rem !important;
+  }
+}
