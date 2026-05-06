@@ -1,0 +1,2217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Os Vilões — O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="effects.css">
+<style>
+  /* ── VARIÁVEIS E RESET ── */
+:root {
+  /* Paleta sombria global */
+  --void: #030308;
+  --deep: #07070f;
+  --surface: #0d0d14;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+
+  /* Cavaleiro Negro — vermelho sangue */
+  --cn-red: #8b0000;
+  --cn-red-bright: #cc0022;
+  --cn-red-glow: rgba(204,0,34,0.4);
+  --cn-red-dim: rgba(139,0,0,0.2);
+
+  /* A Besta — roxo void */
+  --besta-purple: #2a0a3a;
+  --besta-bright: #8a20c0;
+  --besta-glow: rgba(138,32,192,0.4);
+  --besta-dim: rgba(42,10,58,0.3);
+
+  /* Valar — dourado corrompido */
+  --valar-gold: #6a5010;
+  --valar-bright: #c0900a;
+  --valar-glow: rgba(192,144,10,0.4);
+  --valar-dim: rgba(106,80,16,0.2);
+  --valar-dark: #2a2010;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+#cosmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(to bottom,
+    rgba(3,3,8,0.98), transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(139,0,0,0.2);
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--cn-red-bright);
+  text-shadow: 0 0 20px var(--cn-red-glow);
+}
+
+.nav-logo img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(139,0,0,0.3);
+  box-shadow: 0 0 12px rgba(139,0,0,0.4);
+  transition: box-shadow 0.3s;
+  display: block;
+}
+
+.nav-logo img:hover {
+  box-shadow:
+    0 0 20px rgba(204,0,34,0.7),
+    0 0 40px rgba(138,32,192,0.3);
+}
+
+/* ── HERO DOS VILÕES ── */
+#villain-hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#villain-hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.vh-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(139,0,0,0.15) 0%,
+      rgba(42,10,58,0.1) 40%,
+      rgba(3,3,8,0.6)    100%),
+    linear-gradient(to bottom,
+      rgba(3,3,8,0.4) 0%,
+      rgba(3,3,8,0.2) 50%,
+      rgba(3,3,8,0.8) 100%);
+}
+
+.vh-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  max-width: 800px;
+}
+
+.vh-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--cn-red-bright);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fade-up 1s 0.3s ease forwards;
+}
+
+.vh-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2.5rem, 8vw, 6.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  opacity: 0;
+  animation: fade-up 1s 0.6s ease forwards;
+}
+
+.vh-title span {
+  display: block;
+  font-size: 0.38em;
+  letter-spacing: 0.4em;
+  background: linear-gradient(90deg,
+    var(--cn-red-bright), var(--besta-bright),
+    var(--valar-bright));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0.3em 0;
+}
+
+.vh-title {
+  background: linear-gradient(135deg,
+    #ffffff 0%, #e8dcc8 30%,
+    #cc0022 55%, #8a20c0 75%,
+    #c0900a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.vh-title span {
+  -webkit-text-fill-color: transparent;
+}
+
+.vh-divider {
+  width: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--cn-red-bright),
+    var(--besta-bright),
+    var(--valar-bright),
+    transparent);
+  margin: 2rem auto;
+  animation: expand-line 1.2s 1s ease forwards;
+}
+
+@keyframes expand-line {
+  from { width: 0; opacity: 0; }
+  to   { width: 240px; opacity: 1; }
+}
+
+.vh-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 560px;
+  margin: 0 auto;
+  opacity: 0;
+  animation: fade-up 1s 1.2s ease forwards;
+}
+
+.vh-scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 3rem;
+  opacity: 0;
+  animation: fade-up 1s 1.5s ease forwards;
+}
+
+.vh-scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom,
+    var(--cn-red-bright), transparent);
+  animation: scroll-line 2s ease infinite;
+}
+
+@keyframes scroll-line {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.vh-scroll-hint span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(204,0,34,0.6);
+}
+
+/* ── ANIMAÇÕES BASE ── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* ── REVEAL ON SCROLL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── EFEITO GLITCH ── */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 var(--cn-red-bright);
+  animation: glitch-1 3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: 2px 0 var(--besta-bright);
+  animation: glitch-2 2s infinite linear alternate-reverse;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-3px); }
+  40%  { transform: translateX(3px); }
+  60%  { transform: translateX(0); }
+  80%  { transform: translateX(2px); }
+  100% { transform: translateX(-2px); }
+}
+
+@keyframes glitch-2 {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(3px); }
+  50%  { transform: translateX(-3px); }
+  75%  { transform: translateX(1px); }
+  100% { transform: translateX(-1px); }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVO — HERO E NAV
+════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  nav { gap: 1.8rem; }
+}
+
+@media (max-width: 768px) {
+  nav {
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0.9rem 1rem;
+  }
+
+  nav a { font-size: 0.68rem; }
+  .nav-logo img { width: 30px; height: 30px; }
+
+  .vh-content { padding: 5rem 1.5rem 3rem; }
+
+  .vh-scroll-hint { margin-top: 2rem; }
+  .vh-scroll-line { height: 40px; }
+}
+
+@media (max-width: 480px) {
+  nav { gap: 0.6rem; padding: 0.8rem; }
+  nav a { font-size: 0.62rem; }
+  .vh-content { padding: 5rem 1.2rem 2.5rem; }
+  .vh-sub { font-size: 0.92rem; }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  #villain-hero { min-height: 100svh; }
+  .vh-content   { padding: 4rem 2rem 2rem; }
+}
+/* ── SEÇÕES DOS VILÕES ── */
+.villain-section {
+  position: relative;
+  min-height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* Fundo parallax de cada vilão */
+.villain-bg {
+  position: absolute;
+  inset: -10%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  will-change: transform;
+  filter: brightness(0.25) saturate(0.6);
+  transition: filter 1s ease;
+}
+
+.villain-section.active .villain-bg {
+  filter: brightness(0.35) saturate(0.8);
+}
+
+/* Overlays específicos de cada vilão */
+.villain-bg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cavaleiro-overlay {
+  background:
+    linear-gradient(135deg,
+      rgba(139,0,0,0.85)    0%,
+      rgba(60,0,0,0.6)      40%,
+      rgba(3,3,8,0.9)       100%),
+    linear-gradient(to right,
+      rgba(3,3,8,0.95)      0%,
+      rgba(139,0,0,0.1)     60%,
+      rgba(3,3,8,0.7)       100%);
+}
+
+.besta-overlay {
+  background:
+    linear-gradient(135deg,
+      rgba(42,10,58,0.9)    0%,
+      rgba(20,5,30,0.65)    40%,
+      rgba(3,3,8,0.92)      100%),
+    linear-gradient(to left,
+      rgba(3,3,8,0.95)      0%,
+      rgba(138,32,192,0.1)  60%,
+      rgba(3,3,8,0.7)       100%);
+}
+
+.valar-overlay {
+  background:
+    linear-gradient(135deg,
+      rgba(42,32,16,0.92)   0%,
+      rgba(20,15,5,0.65)    40%,
+      rgba(3,3,8,0.92)      100%),
+    linear-gradient(to right,
+      rgba(3,3,8,0.95)      0%,
+      rgba(192,144,10,0.1)  60%,
+      rgba(3,3,8,0.7)       100%);
+}
+
+/* Barras cinematográficas */
+.villain-cinema {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.cinema-bar {
+  position: absolute;
+  left: 0; right: 0;
+  height: 0;
+  background: var(--void);
+  transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cinema-bar.top    { top: 0; }
+.cinema-bar.bottom { bottom: 0; }
+
+.villain-section:not(.active) .cinema-bar {
+  height: 8vh;
+}
+
+/* Conteúdo do vilão */
+.villain-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8rem 3rem 5rem;
+}
+
+/* Header do vilão */
+.villain-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.villain-section.active .villain-header {
+  opacity: 1;
+  transform: none;
+}
+
+.villain-number {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.08;
+  color: #ffffff;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+.villain-era {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.villain-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.cavaleiro-name {
+  background: linear-gradient(135deg,
+    #ffffff 0%, #ffcccc 30%, #cc0022 60%, #8b0000 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(204,0,34,0.4));
+}
+
+.besta-name {
+  background: linear-gradient(135deg,
+    #ffffff 0%, #e8c0ff 30%, #8a20c0 60%, #2a0a3a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(138,32,192,0.4));
+}
+
+.valar-name {
+  background: linear-gradient(135deg,
+    #ffffff 0%, #f0d890 30%, #c0900a 60%, #6a5010 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(192,144,10,0.4));
+}
+
+.villain-aka {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+
+/* Grid principal */
+.villain-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 4rem;
+  align-items: start;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s 0.2s ease, transform 0.9s 0.2s ease;
+}
+
+.villain-grid.reverse {
+  grid-template-columns: 1fr 320px;
+}
+
+.villain-section.active .villain-grid {
+  opacity: 1;
+  transform: none;
+}
+
+/* Visual do vilão */
+.villain-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: sticky;
+  top: 8rem;
+}
+
+.villain-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center top;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Frames específicos */
+.villain-photo-frame {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(204,0,34,0.4);
+  pointer-events: none;
+}
+
+.besta-frame {
+  border-color: rgba(138,32,192,0.4);
+}
+
+.valar-frame {
+  border-color: rgba(192,144,10,0.4);
+}
+
+/* Glow de cada vilão */
+.villain-photo-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cavaleiro-glow {
+  background: linear-gradient(to top,
+    rgba(139,0,0,0.6)    0%,
+    rgba(139,0,0,0.2)    40%,
+    transparent          100%);
+}
+
+.besta-glow {
+  background: linear-gradient(to top,
+    rgba(42,10,58,0.7)   0%,
+    rgba(138,32,192,0.2) 40%,
+    transparent          100%);
+}
+
+.valar-glow {
+  background: linear-gradient(to top,
+    rgba(42,32,16,0.7)   0%,
+    rgba(192,144,10,0.2) 40%,
+    transparent          100%);
+}
+
+.villain-visual-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-align: center;
+}
+
+/* Stats rápidos */
+.villain-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.vstat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  text-align: center;
+}
+
+.vstat-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.05em;
+}
+
+.vstat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.48rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Texto do vilão */
+.villain-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.7;
+  padding: 1.2rem 1.8rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.cavaleiro-quote {
+  border-left: 2px solid var(--cn-red-bright);
+  background: linear-gradient(90deg,
+    rgba(139,0,0,0.08), transparent);
+  color: #ffcccc;
+}
+
+.besta-quote {
+  border-left: 2px solid var(--besta-bright);
+  background: linear-gradient(90deg,
+    rgba(138,32,192,0.08), transparent);
+  color: #e8c0ff;
+}
+
+.valar-quote {
+  border-left: 2px solid var(--valar-bright);
+  background: linear-gradient(90deg,
+    rgba(192,144,10,0.08), transparent);
+  color: #f0d890;
+}
+
+.villain-lore p {
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.3rem;
+  font-size: 1.02rem;
+}
+
+.villain-lore p em {
+  font-style: normal;
+}
+
+.cavaleiro-overlay ~ .villain-cinema ~ .villain-content
+  .villain-lore p em { color: #ff8888; }
+
+.villain-lore p strong { color: var(--gold-light); }
+
+/* Poderes */
+.villain-powers {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.villain-powers-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.cavaleiro-accent { color: var(--cn-red-bright); }
+.besta-accent     { color: var(--besta-bright); }
+.valar-accent     { color: var(--valar-bright); }
+
+.villain-power-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.vpower {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.02);
+  transition: border-color 0.3s, background 0.3s;
+  align-items: start;
+}
+
+.cavaleiro-vpower:hover {
+  border-color: rgba(204,0,34,0.3);
+  background: rgba(139,0,0,0.06);
+}
+
+.besta-vpower:hover {
+  border-color: rgba(138,32,192,0.3);
+  background: rgba(42,10,58,0.08);
+}
+
+.valar-vpower:hover {
+  border-color: rgba(192,144,10,0.3);
+  background: rgba(106,80,16,0.08);
+}
+
+.vpower-icon {
+  font-size: 1.6rem;
+  text-align: center;
+  padding-top: 0.1rem;
+}
+
+.vpower-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.06em;
+}
+
+.vpower-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* Timeline do vilão */
+.villain-timeline {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  gap: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s 0.4s ease, transform 0.9s 0.4s ease;
+}
+
+.villain-section.active .villain-timeline {
+  opacity: 1;
+  transform: none;
+}
+
+.vtl-item {
+  flex: 1;
+  padding: 0 1.5rem 0 0;
+  position: relative;
+}
+
+.vtl-item::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 0;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.vtl-item:last-child::before { display: none; }
+
+.vtl-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.cavaleiro-dot {
+  background: var(--cn-red-bright);
+  box-shadow: 0 0 12px var(--cn-red-glow);
+}
+
+.besta-dot {
+  background: var(--besta-bright);
+  box-shadow: 0 0 12px var(--besta-glow);
+}
+
+.valar-dot {
+  background: var(--valar-bright);
+  box-shadow: 0 0 12px var(--valar-glow);
+}
+
+.vtl-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 0.5rem;
+}
+
+.vtl-text {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* ── FOOTER ── */
+#villain-footer {
+  position: relative;
+  z-index: 1;
+  padding: 5rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(139,0,0,0.15);
+  background: linear-gradient(to top,
+    rgba(3,3,8,1) 0%,
+    transparent 100%);
+}
+
+.vf-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.vf-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  background: linear-gradient(90deg,
+    var(--cn-red-bright),
+    var(--besta-bright),
+    var(--valar-bright));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.8rem;
+}
+
+.vf-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.vf-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.vf-nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.vf-nav a:hover { color: var(--cn-red-bright); }
+
+.vf-nav span {
+  color: var(--gold-dim);
+  opacity: 0.4;
+}
+
+.vf-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: rgba(122,98,40,0.4);
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVO COMPLETO
+════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .villain-content {
+    padding: 7rem 2rem 4rem;
+  }
+
+  .villain-grid {
+    grid-template-columns: 260px 1fr;
+    gap: 3rem;
+  }
+
+  .villain-grid.reverse {
+    grid-template-columns: 1fr 260px;
+  }
+
+  .villain-timeline { gap: 0; }
+  .vtl-item { padding-right: 1rem; }
+}
+
+@media (max-width: 768px) {
+  .villain-content {
+    padding: 6rem 1.5rem 3.5rem;
+  }
+
+  .villain-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .villain-number {
+    font-size: clamp(3rem, 10vw, 5rem);
+  }
+
+  .villain-grid,
+  .villain-grid.reverse {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .villain-visual {
+    position: static;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .villain-grid.reverse .villain-text {
+    order: -1;
+  }
+
+  .villain-timeline {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .vtl-item {
+    padding: 0 0 0 2rem;
+    border-left: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+  }
+
+  .vtl-item::before { display: none; }
+
+  .vtl-dot {
+    position: absolute;
+    left: -8px;
+    top: 0;
+    margin-bottom: 0;
+  }
+
+  .villain-stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .villain-powers-title { font-size: 0.6rem; }
+  .vpower-name { font-size: 0.78rem; }
+  .vpower-desc { font-size: 0.85rem; }
+
+  .villain-section:not(.active) .cinema-bar {
+    height: 5vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .villain-content { padding: 5.5rem 1.2rem 3rem; }
+
+  .villain-name { font-size: clamp(1.6rem, 7vw, 2.5rem); }
+
+  .villain-grid,
+  .villain-grid.reverse {
+    gap: 2rem;
+  }
+
+  .villain-visual { max-width: 240px; }
+
+  .villain-stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+  }
+
+  .vstat { padding: 0.5rem 0.3rem; }
+  .vstat-val   { font-size: 0.55rem; }
+  .vstat-label { font-size: 0.42rem; }
+
+  .villain-quote {
+    font-size: 0.95rem;
+    padding: 1rem 1.2rem;
+  }
+
+  .villain-lore p { font-size: 0.95rem; }
+
+  .vpower {
+    grid-template-columns: 32px 1fr;
+    gap: 0.8rem;
+    padding: 0.8rem;
+  }
+
+  .vpower-icon { font-size: 1.3rem; }
+  .vpower-name { font-size: 0.75rem; }
+  .vpower-desc { font-size: 0.82rem; }
+
+  .vh-content { padding: 5rem 1.2rem 2.5rem; }
+
+  .vf-nav { flex-direction: column; gap: 0.6rem; }
+  .vf-nav span { display: none; }
+}
+
+@media (max-width: 360px) {
+  .villain-visual { max-width: 200px; }
+
+  .villain-stats { grid-template-columns: 1fr 1fr; }
+
+  .villain-timeline { gap: 1.2rem; }
+
+  .vtl-label { font-size: 0.52rem; }
+  .vtl-text  { font-size: 0.8rem; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .vpower:hover {
+    border-color: rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .villain-section:not(.active) .cinema-bar {
+    height: 4vh;
+  }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .villain-content { padding: 5rem 2rem 3rem; }
+  .villain-header  { margin-bottom: 2rem; }
+
+  .villain-grid,
+  .villain-grid.reverse {
+    grid-template-columns: 200px 1fr;
+    gap: 2rem;
+  }
+
+  .villain-visual { position: static; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="cosmos-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="img-logo/olhos.jpg" alt="Logo">
+  </a>
+  <a href="home.html">Início</a>
+  <a href="cavaleiro.html">Cavaleiro Negro</a>
+  <a href="besta.html">A Besta</a>
+  <a href="valar.html">Valar</a>
+</nav>
+
+<!-- HERO DOS VILÕES -->
+<section id="villain-hero">
+  <canvas id="villain-hero-canvas"></canvas>
+  <div class="vh-overlay"></div>
+  <div class="vh-content">
+    <p class="vh-eyebrow">Os Antagonistas da Saga</p>
+    <h1 class="vh-title">
+      <span>Os que</span>
+      Ameaçaram
+      <span>Tudo</span>
+    </h1>
+    <div class="vh-divider"></div>
+    <p class="vh-sub">Três forças que testaram os limites dos seis — e provaram que o verdadeiro poder nasce da resistência ao inevitável.</p>
+    <div class="vh-scroll-hint">
+      <div class="vh-scroll-line"></div>
+      <span>Role para conhecê-los</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     VILÃO 1 — O CAVALEIRO NEGRO
+═══════════════════════════ -->
+<section id="cavaleiro" class="villain-section" data-villain="cavaleiro">
+
+  <!-- Imagem de fundo parallax -->
+  <div class="villain-bg" style="background-image: url('cavaleiro-bg.jpg')"></div>
+  <div class="villain-bg-overlay cavaleiro-overlay"></div>
+ <a href="cavaleiro.html" class="char-card-link divine-link reveal"></a>
+  <!-- Entrada cinematográfica -->
+  <div class="villain-cinema">
+    <div class="cinema-bar top"></div>
+    <div class="cinema-bar bottom"></div>
+  </div>
+
+  <!-- Conteúdo -->
+  <div class="villain-content">
+
+    <!-- Header do vilão -->
+    <div class="villain-header">
+      <div class="villain-number">I</div>
+      <div class="villain-header-text">
+        <p class="villain-era">Geração Primitiva · Mestre Espiritual Corrompido</p>
+        <h2 class="villain-name cavaleiro-name">O Cavaleiro Negro</h2>
+        <p class="villain-aka">O Aprisionado · O Ambicioso</p>
+      </div>
+    </div>
+
+    <!-- Grid principal -->
+    <div class="villain-grid">
+
+      <!-- Foto/visual -->
+      <div class="villain-visual">
+        <div class="villain-photo cavaleiro-photo"
+          style="background-image: url('cavaleiro-perfil.jpg')">
+          <div class="villain-photo-frame"></div>
+          <div class="villain-photo-glow cavaleiro-glow"></div>
+        </div>
+        <div class="villain-visual-label">O Cavaleiro Negro · Mestre Corrompido</div>
+
+        <!-- Stats rápidos -->
+        <div class="villain-stats">
+          <div class="vstat">
+            <span class="vstat-val">Espiritual</span>
+            <span class="vstat-label">Domínio</span>
+          </div>
+          <div class="vstat">
+            <span class="vstat-val">Séculos</span>
+            <span class="vstat-label">Existência</span>
+          </div>
+          <div class="vstat">
+            <span class="vstat-val">Aprisionado</span>
+            <span class="vstat-label">Destino</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Texto -->
+      <div class="villain-text">
+        <div class="villain-quote cavaleiro-quote">
+          "Ele não queria destruir o mundo. Queria possuí-lo completamente."
+        </div>
+
+        <div class="villain-lore">
+          <p>Em uma era de feiticeiros nômades, o Cavaleiro Negro era um <em>prodígio</em>. Sua conexão com o outro lado era inexplicável para sua geração — profunda, instintiva, como se ele tivesse nascido com um pé já atravessando o véu entre os mundos.</p>
+
+          <p>Como Mestre Espiritual, formava com outros dois — um filho de deidade da natureza como Mestre Elemental e um bruxo como Mestre Humano — o equilíbrio primordial entre três forças. Um sistema que funcionava porque cada um sabia seu lugar.</p>
+
+          <p>Mas o Cavaleiro Negro descobriu que seus dons lhe permitiam ir <strong>além do lugar designado</strong>. Tomou para si os poderes dos outros dois. O equilíbrio se partiu. E o universo respondeu com aprisionamento — séculos de confinamento numa dimensão paralela, sozinho com sua ambição e o peso do que havia feito.</p>
+
+          <p>Séculos depois, com o enfraquecimento dos portões e o surgimento dos protagonistas, ele finalmente encontrou a fissura que precisava. O que emergiu não era mais o prodígio. Era algo forjado em séculos de isolamento e determinação inquebrável.</p>
+        </div>
+
+        <!-- Poderes -->
+        <div class="villain-powers">
+          <div class="villain-powers-title cavaleiro-accent">Arsenal</div>
+          <div class="villain-power-list">
+            <div class="vpower cavaleiro-vpower">
+              <span class="vpower-icon">👁️</span>
+              <div>
+                <div class="vpower-name">Feitiçaria Primordial</div>
+                <div class="vpower-desc">Magia de uma era anterior às regras — mais instável, mais devastadora, sem os limites que o refinamento impõe.</div>
+              </div>
+            </div>
+            <div class="vpower cavaleiro-vpower">
+              <span class="vpower-icon">🌀</span>
+              <div>
+                <div class="vpower-name">Domínio Triplo Roubado</div>
+                <div class="vpower-desc">Carrega os poderes elementais, humanos e espirituais absorvidos dos outros dois Mestres — uma combinação que o universo nunca deveria ter permitido.</div>
+              </div>
+            </div>
+            <div class="vpower cavaleiro-vpower">
+              <span class="vpower-icon">⚔️</span>
+              <div>
+                <div class="vpower-name">Combate Ancestral</div>
+                <div class="vpower-desc">Físico treinado para a arte militar combinado com séculos de estratégia. Sua postura carrega o peso de uma mente que prevê além de meras táticas.</div>
+              </div>
+            </div>
+            <div class="vpower cavaleiro-vpower">
+              <span class="vpower-icon">🔗</span>
+              <div>
+                <div class="vpower-name">Vínculo com o Outro Lado</div>
+                <div class="vpower-desc">Uma conexão ancestral com o plano espiritual que nenhum treinamento criou — nasceu com ele, e séculos de confinamento apenas aprofundaram.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Linha do tempo do vilão -->
+    <div class="villain-timeline">
+      <div class="vtl-item">
+        <div class="vtl-dot cavaleiro-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">Origem</div>
+          <div class="vtl-text">Prodígio da feitiçaria nômade, torna-se Mestre Espiritual do equilíbrio primordial.</div>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-dot cavaleiro-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">A Queda</div>
+          <div class="vtl-text">Absorve os poderes dos outros dois Mestres. O equilíbrio se parte. É aprisionado numa dimensão paralela.</div>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-dot cavaleiro-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">O Retorno</div>
+          <div class="vtl-text">Séculos depois, o enfraquecimento dos portões o liberta. Enfrenta os seis pela primeira vez.</div>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-dot cavaleiro-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">A Derrota</div>
+          <div class="vtl-text">Derrotado duas vezes pelos protagonistas — cada batalha mais intensa que a anterior.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     VILÃO 2 — A BESTA
+═══════════════════════════ -->
+<section id="besta" class="villain-section" data-villain="besta">
+
+  <div class="villain-bg" style="background-image: url('besta-bg.jpg')"></div>
+  <div class="villain-bg-overlay besta-overlay"></div>
+
+  <div class="villain-cinema">
+    <div class="cinema-bar top"></div>
+    <div class="cinema-bar bottom"></div>
+  </div>
+
+  <div class="villain-content">
+
+    <div class="villain-header">
+      <div class="villain-number">II</div>
+      <div class="villain-header-text">
+        <p class="villain-era">Antes dos Homens · Criatura Primordial</p>
+        <h2 class="villain-name besta-name">A Besta</h2>
+        <p class="villain-aka">A Primeira · A Indomável · Manipuladora Transdimensional</p>
+      </div>
+    </div>
+
+    <div class="villain-grid reverse">
+
+      <div class="villain-text">
+        <div class="villain-quote besta-quote">
+          "Ela existia antes que o mundo soubesse o que era o medo. Ela foi a primeira lição."
+        </div>
+
+        <div class="villain-lore">
+          <p>Antes dos homens. Antes das civilizações. Antes de qualquer conceito de poder organizado — a Besta já existia. A primeira fera mística da criação, nascida quando o mundo era habitado apenas por criaturas primordiais e forças brutas.</p>
+
+          <p>Mas a Besta não era apenas força bruta. Ela era <em>inteligência ancestral</em> — conhecimentos acumulados antes que qualquer ser humano soubesse que havia algo a aprender. Acredita-se ter sido ela a primeira manipuladora de energia elemental e transdimensional, desenvolvendo esses domínios milênios antes de qualquer feiticeiro humano dar seus primeiros passos.</p>
+
+          <p>Sua forma bestial é colossal — três cabeças, corpo que só pode ser perfurado por armas divinas, olhos em tons de vermelho profundo como um rio de sangue. Mas a Besta aprendeu a <strong>construir corpos</strong>. Sua forma humana é um homem alto, esguio, com um olhar que perfura a alma e cabelos longos e presos — elegante, contida, e infinitamente mais assustadora que a forma bestial.</p>
+
+          <p>O confronto com os seis foi o teste definitivo. A Besta não lutava para vencer — ela consumia. Cada golpe era uma tentativa de apagar existências inteiras.</p>
+        </div>
+
+        <div class="villain-powers">
+          <div class="villain-powers-title besta-accent">Arsenal</div>
+          <div class="villain-power-list">
+            <div class="vpower besta-vpower">
+              <span class="vpower-icon">🐉</span>
+              <div>
+                <div class="vpower-name">Forma Bestial Colossal</div>
+                <div class="vpower-desc">Três cabeças, corpo impenetrável por armas comuns. Apenas armas divinas conseguem atravessar sua forma primordial.</div>
+              </div>
+            </div>
+            <div class="vpower besta-vpower">
+              <span class="vpower-icon">🔄</span>
+              <div>
+                <div class="vpower-name">Manipulação de Forma Física</div>
+                <div class="vpower-desc">Pode construir e desconstruir corpos diferentes para si — da forma bestial colossal à forma humana esguia e contida.</div>
+              </div>
+            </div>
+            <div class="vpower besta-vpower">
+              <span class="vpower-icon">⚡</span>
+              <div>
+                <div class="vpower-name">Energia Elemental Primordial</div>
+                <div class="vpower-desc">A primeira manipuladora de energia elemental da criação. Seu domínio é anterior a qualquer sistema ou técnica conhecida.</div>
+              </div>
+            </div>
+            <div class="vpower besta-vpower">
+              <span class="vpower-icon">🌀</span>
+              <div>
+                <div class="vpower-name">Manipulação Transdimensional</div>
+                <div class="vpower-desc">Opera em múltiplos planos simultaneamente — sua consciência não está limitada a uma única camada da realidade.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="villain-visual">
+        <div class="villain-photo besta-photo"
+          style="background-image: url('besta-perfil.jpg')">
+          <div class="villain-photo-frame besta-frame"></div>
+          <div class="villain-photo-glow besta-glow"></div>
+        </div>
+        <div class="villain-visual-label">A Besta · Forma Humana</div>
+
+        <div class="villain-stats">
+          <div class="vstat">
+            <span class="vstat-val">Primordial</span>
+            <span class="vstat-label">Origem</span>
+          </div>
+          <div class="vstat">
+            <span class="vstat-val">Três Cabeças</span>
+            <span class="vstat-label">Forma Bestial</span>
+          </div>
+          <div class="vstat">
+            <span class="vstat-val">Indomável</span>
+            <span class="vstat-label">Natureza</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="villain-timeline">
+      <div class="vtl-item">
+        <div class="vtl-dot besta-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">Antes dos Homens</div>
+          <div class="vtl-text">Nasce como primeira fera mística. Desenvolve manipulação elemental e transdimensional milênios antes de qualquer humano.</div>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-dot besta-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">A Evolução</div>
+          <div class="vtl-text">Aprende a manipular sua forma física — constrói e desconstrói corpos, desenvolvendo a forma humana como alternativa à bestial.</div>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-dot besta-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">O Confronto Final</div>
+          <div class="vtl-text">Enfrenta os seis no teste definitivo da saga. O preço da vitória foi a humanidade de cada um — e o início da deificação.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════
+     VILÃO 3 — VALAR
+═══════════════════════════ -->
+<section id="valar" class="villain-section" data-villain="valar">
+
+  <div class="villain-bg" style="background-image: url('valar-bg.jpg')"></div>
+  <div class="villain-bg-overlay valar-overlay"></div>
+
+  <div class="villain-cinema">
+    <div class="cinema-bar top"></div>
+    <div class="cinema-bar bottom"></div>
+  </div>
+
+  <div class="villain-content">
+
+    <div class="villain-header">
+      <div class="villain-number">III</div>
+      <div class="villain-header-text">
+        <p class="villain-era">Primeiro Mestre Deificado · Corrompido pelas Trevas</p>
+        <h2 class="villain-name valar-name">Valar</h2>
+        <p class="villain-aka">O Aprisionado no Abismo · O Corrompido</p>
+      </div>
+    </div>
+
+    <div class="villain-grid">
+
+      <div class="villain-visual">
+        <div class="villain-photo valar-photo"
+          style="background-image: url('valar-perfil.jpg')">
+          <div class="villain-photo-frame valar-frame"></div>
+          <div class="villain-photo-glow valar-glow"></div>
+        </div>
+        <div class="villain-visual-label">Valar · O Primeiro Deificado</div>
+
+        <div class="villain-stats">
+          <div class="vstat">
+            <span class="vstat-val">Triplo</span>
+            <span class="vstat-label">Domínio</span>
+          </div>
+          <div class="vstat">
+            <span class="vstat-val">Deificado</span>
+            <span class="vstat-label">Condição</span>
+          </div>
+          <div class="vstat">
+            <span class="vstat-val">Abismo</span>
+            <span class="vstat-label">Prisão</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="villain-text">
+        <div class="villain-quote valar-quote">
+          "Ele foi o primeiro a alcançar o que os seis se tornaram. E foi exatamente isso que o destruiu."
+        </div>
+
+        <div class="villain-lore">
+          <p>Em uma era anterior à divisão dos três pilares, existia Valar — o primeiro e único ser a alcançar a deificação carregando simultaneamente os domínios Elemental, Humano e Espiritual em um único corpo. Uma façanha que não devia ser possível, e que o universo nunca havia visto antes.</p>
+
+          <p>Mas algo o encontrou nesse ápice. As forças das trevas — de origem desconhecida, anterior a qualquer registro — corromperam o que deveria ter sido a maior conquista da existência. O Criador interviu: aprisionou Valar num <em>abismo profundo do outro lado</em>, onde sua influência seria inexistente e seu poder, inerte.</p>
+
+          <p>Aparentemente um homem de meia idade — cabelos longos e grisalhos, vitalidade física que envergonharia qualquer militar treinado. Frio. Estrategista excepcional. Poderoso de uma forma que vai além de qualquer técnica ou herança.</p>
+
+          <p>Valar representa o aviso que a saga carrega em silêncio: <strong>o poder sem o alicerce certo não é conquista. É condenação.</strong></p>
+        </div>
+
+        <div class="villain-powers">
+          <div class="villain-powers-title valar-accent">Arsenal</div>
+          <div class="villain-power-list">
+            <div class="vpower valar-vpower">
+              <span class="vpower-icon">👑</span>
+              <div>
+                <div class="vpower-name">Domínio Triplo Unificado</div>
+                <div class="vpower-desc">Carrega os três pilares — Elemental, Humano e Espiritual — num único ser. Uma combinação que o universo só havia visto nele.</div>
+              </div>
+            </div>
+            <div class="vpower valar-vpower">
+              <span class="vpower-icon">⚫</span>
+              <div>
+                <div class="vpower-name">Corrupção das Trevas</div>
+                <div class="vpower-desc">Infectado por forças de origem desconhecida que distorceram seus poderes deificados em algo que o próprio Criador considerou ameaça existencial.</div>
+              </div>
+            </div>
+            <div class="vpower valar-vpower">
+              <span class="vpower-icon">🧠</span>
+              <div>
+                <div class="vpower-name">Estratégia Absoluta</div>
+                <div class="vpower-desc">Frio, calculista, com uma mente estratégica que opera décadas à frente de qualquer oponente. Nunca age sem ter planejado cada variável.</div>
+              </div>
+            </div>
+            <div class="vpower valar-vpower">
+              <span class="vpower-icon">♾️</span>
+              <div>
+                <div class="vpower-name">Vitalidade Deificada</div>
+                <div class="vpower-desc">Sua vitalidade física desafia qualquer explicação natural — um corpo que opera além dos limites humanos em cada aspecto mensurável.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="villain-timeline">
+      <div class="vtl-item">
+        <div class="vtl-dot valar-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">A Era dos Três Pilares</div>
+          <div class="vtl-text">Em uma era onde os três domínios coexistiam num único ser, Valar alcança a deificação completa — o primeiro e único.</div>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-dot valar-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">A Corrupção</div>
+          <div class="vtl-text">Forças das trevas de origem desconhecida o corrompem no ápice de seu poder. O Criador intervém.</div>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-dot valar-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">O Abismo</div>
+          <div class="vtl-text">Aprisionado pelo Criador num abismo profundo do outro lado — onde sua influência é inexistente e seu poder, inerte.</div>
+        </div>
+      </div>
+      <div class="vtl-item">
+        <div class="vtl-dot valar-dot"></div>
+        <div class="vtl-content">
+          <div class="vtl-label">A Ameaça Latente</div>
+          <div class="vtl-text">Permanece aprisionado — mas o abismo não é eterno. E Valar é paciente.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="villain-footer">
+  <div class="vf-content">
+    <div class="vf-title">Os Antagonistas</div>
+    <div class="vf-sub">"Todo herói é forjado pela resistência ao que tentou destruí-lo."</div>
+    <div class="vf-nav">
+      <a href="home.html">← Voltar ao Início</a>
+      <span>·</span>
+      <a href="knull.html">Ver os Heróis →</a>
+    </div>
+    <div class="vf-copy">O Diário de um Deus · Todos os direitos reservados</div>
+  </div>
+</footer>
+
+<script src="effects.js"></script>
+<script>
+  /* ════════════════════════════════════
+   VILÕES — JAVASCRIPT COMPLETO
+   Canvas · Scroll Cinema · Parallax
+   Glitch · Efeitos por Vilão
+════════════════════════════════════ */
+
+/* ── CANVAS DO HERO ── */
+(function () {
+  const canvas = document.getElementById('villain-hero-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, particles = [], cracks = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    /* Partículas sombrias tricolores */
+    particles = [];
+    const colors = [
+      'rgba(204,0,34,',
+      'rgba(138,32,192,',
+      'rgba(192,144,10,',
+      'rgba(139,0,0,',
+      'rgba(42,10,58,'
+    ];
+
+    for (let i = 0; i < 180; i++) {
+      particles.push({
+        x:      Math.random() * W,
+        y:      Math.random() * H,
+        r:      Math.random() * 2 + 0.3,
+        a:      Math.random() * 0.7 + 0.1,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: (Math.random() - 0.5) * 0.3,
+        twinkle: Math.random() * Math.PI * 2,
+        tSpeed:  Math.random() * 0.02 + 0.008,
+        color:   colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+
+    /* Raios de energia */
+    cracks = [];
+    for (let i = 0; i < 6; i++) {
+      cracks.push(newCrack());
+    }
+  }
+
+  function newCrack() {
+    const x = Math.random() * W;
+    const y = Math.random() * H;
+    const points = [{ x, y }];
+    let cx = x, cy = y;
+    const steps = Math.floor(Math.random() * 8) + 4;
+
+    for (let i = 0; i < steps; i++) {
+      cx += (Math.random() - 0.5) * 120;
+      cy += (Math.random() - 0.5) * 120;
+      points.push({ x: cx, y: cy });
+    }
+
+    const colors = ['#cc0022', '#8a20c0', '#c0900a'];
+    return {
+      points,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      a:     Math.random() * 0.3 + 0.05,
+      life:  Math.random(),
+      decay: Math.random() * 0.005 + 0.002
+    };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Fundo void absoluto */
+    const bg = ctx.createRadialGradient(
+      W * 0.5, H * 0.5, 0,
+      W * 0.5, H * 0.5, Math.max(W, H)
+    );
+    bg.addColorStop(0,   '#0a0005');
+    bg.addColorStop(0.3, '#050008');
+    bg.addColorStop(0.7, '#030308');
+    bg.addColorStop(1,   '#020205');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Névoa tricolor central */
+    const colors = [
+      { x: W * 0.3, y: H * 0.4, c: 'rgba(139,0,0,',      a: 0.08 },
+      { x: W * 0.7, y: H * 0.6, c: 'rgba(42,10,58,',     a: 0.08 },
+      { x: W * 0.5, y: H * 0.5, c: 'rgba(42,32,16,',     a: 0.06 }
+    ];
+
+    colors.forEach(n => {
+      const grad = ctx.createRadialGradient(
+        n.x, n.y, 0, n.x, n.y, H * 0.6
+      );
+      grad.addColorStop(0, n.c + n.a + ')');
+      grad.addColorStop(1, n.c + '0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+    });
+
+    /* Partículas */
+    particles.forEach(p => {
+      p.x      += p.speedX;
+      p.y      += p.speedY;
+      p.twinkle += p.tSpeed;
+
+      if (p.x < -5) p.x = W + 5;
+      if (p.x > W + 5) p.x = -5;
+      if (p.y < -5) p.y = H + 5;
+      if (p.y > H + 5) p.y = -5;
+
+      const alpha = p.a * (0.5 + 0.5 * Math.sin(p.twinkle));
+
+      const grad = ctx.createRadialGradient(
+        p.x, p.y, 0, p.x, p.y, p.r * 4
+      );
+      grad.addColorStop(0, p.color + alpha + ')');
+      grad.addColorStop(1, p.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,240,240,${alpha * 1.3})`;
+      ctx.fill();
+    });
+
+    /* Raios/rachaduras de energia */
+    cracks.forEach((c, i) => {
+      c.life -= c.decay;
+
+      if (c.life <= 0) {
+        cracks[i] = newCrack();
+        return;
+      }
+
+      const alpha = c.a * c.life;
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = c.color;
+      ctx.lineWidth   = 0.8;
+      ctx.shadowColor = c.color;
+      ctx.shadowBlur  = 8;
+      ctx.beginPath();
+      ctx.moveTo(c.points[0].x, c.points[0].y);
+      c.points.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.stroke();
+      ctx.restore();
+    });
+
+    /* Grade de tensão sutil */
+    ctx.save();
+    ctx.globalAlpha = 0.015;
+    ctx.strokeStyle = '#cc0022';
+    ctx.lineWidth   = 0.5;
+
+    for (let x = 0; x < W; x += 80) {
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, H);
+      ctx.stroke();
+    }
+
+    for (let y = 0; y < H; y += 80) {
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(W, y);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize();
+  init();
+  draw();
+})();
+
+/* ── CANVAS DE FUNDO GLOBAL ── */
+(function () {
+  const canvas = document.getElementById('cosmos-bg');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const bg = ctx.createLinearGradient(0, 0, 0, H);
+    bg.addColorStop(0,   '#030308');
+    bg.addColorStop(0.5, '#050005');
+    bg.addColorStop(1,   '#030308');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+  draw();
+})();
+
+/* ── ENTRADA CINEMATOGRÁFICA POR SCROLL ── */
+(function () {
+  const sections = document.querySelectorAll('.villain-section');
+  if (!sections.length) return;
+
+  /* Estado de cada seção */
+  const state = new Map();
+  sections.forEach(s => state.set(s, { active: false, progress: 0 }));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      const section = e.target;
+      const st      = state.get(section);
+
+      if (e.isIntersecting && e.intersectionRatio > 0.15) {
+        if (!st.active) {
+          st.active = true;
+          activateVillain(section);
+        }
+      }
+    });
+  }, {
+    threshold: [0.05, 0.15, 0.3, 0.5, 0.7, 1],
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  sections.forEach(s => io.observe(s));
+
+  function activateVillain(section) {
+    /* Remove barras de cinema */
+    section.classList.add('active');
+
+    /* Som de entrada (silêncio visual) */
+    const villain = section.getAttribute('data-villain');
+
+    /* Aplica classe de tema */
+    document.body.setAttribute('data-active-villain', villain);
+
+    /* Efeito de glitch no nome */
+    const name = section.querySelector('.villain-name');
+    if (name) {
+      name.setAttribute('data-text', name.textContent);
+      name.classList.add('glitch');
+
+      /* Remove glitch após 3s */
+      setTimeout(() => {
+        name.classList.remove('glitch');
+      }, 3000);
+    }
+
+    /* Partículas de entrada específicas por vilão */
+    spawnVillainParticles(section, villain);
+  }
+
+  function spawnVillainParticles(section, villain) {
+    const colors = {
+      cavaleiro: ['#cc0022', '#8b0000', '#ff4444'],
+      besta:     ['#8a20c0', '#2a0a3a', '#c060ff'],
+      valar:     ['#c0900a', '#6a5010', '#f0c030']
+    };
+
+    const palette = colors[villain] || colors.cavaleiro;
+    const rect    = section.getBoundingClientRect();
+
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        const p = document.createElement('div');
+        p.style.cssText = `
+          position: fixed;
+          width: ${Math.random() * 6 + 2}px;
+          height: ${Math.random() * 6 + 2}px;
+          border-radius: 50%;
+          background: ${palette[Math.floor(Math.random() * palette.length)]};
+          left: ${Math.random() * window.innerWidth}px;
+          top: ${Math.random() * window.innerHeight}px;
+          pointer-events: none;
+          z-index: 50;
+          box-shadow: 0 0 8px currentColor;
+          animation: particle-burst 1.2s ease forwards;
+        `;
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 1200);
+      }, i * 60);
+    }
+  }
+})();
+
+/* ── PARALLAX DAS SEÇÕES ── */
+(function () {
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  if (isMobile) return;
+
+  const bgs = document.querySelectorAll('.villain-bg');
+
+  function onScroll() {
+    bgs.forEach(bg => {
+      const section = bg.parentElement;
+      const rect    = section.getBoundingClientRect();
+      const center  = window.innerHeight / 2;
+      const dist    = rect.top + rect.height / 2 - center;
+      const move    = dist * 0.15;
+      bg.style.transform = `translateY(${move}px)`;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* ── EFEITO DE GLITCH NAS SEÇÕES ATIVAS ── */
+(function () {
+  /* Injeta keyframes do burst de partículas */
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes particle-burst {
+      0% {
+        opacity: 1;
+        transform: scale(0) translate(0, 0);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.5)
+          translate(
+            ${Math.random() > 0.5 ? '' : '-'}${Math.random() * 80 + 20}px,
+            ${Math.random() > 0.5 ? '' : '-'}${Math.random() * 80 + 20}px
+          );
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.5)
+          translate(
+            ${Math.random() > 0.5 ? '' : '-'}${Math.random() * 120 + 40}px,
+            ${Math.random() > 0.5 ? '' : '-'}${Math.random() * 120 + 40}px
+          );
+      }
+    }
+
+    /* Glitch nos nomes */
+    .villain-name.glitch {
+      animation: villain-glitch 0.15s infinite;
+    }
+
+    @keyframes villain-glitch {
+      0%   { transform: translate(0); }
+      20%  { transform: translate(-2px, 1px); }
+      40%  { transform: translate(2px, -1px); }
+      60%  { transform: translate(-1px, 2px); }
+      80%  { transform: translate(1px, -1px); }
+      100% { transform: translate(0); }
+    }
+
+    /* Scan line nas seções ativas */
+    .villain-section.active::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(255,255,255,0.03),
+        transparent);
+      z-index: 4;
+      pointer-events: none;
+      animation: scan-line 4s linear infinite;
+    }
+
+    @keyframes scan-line {
+      from { top: 0; }
+      to   { top: 100%; }
+    }
+
+    /* Pulso nos dots da timeline */
+    .cavaleiro-dot,
+    .besta-dot,
+    .valar-dot {
+      animation: dot-pulse 2s ease infinite;
+    }
+
+    @keyframes dot-pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.3); }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+/* ── CANVAS ESPECÍFICO POR VILÃO (sobreposição) ── */
+(function () {
+  const sections = document.querySelectorAll('.villain-section');
+
+  sections.forEach(section => {
+    const villain = section.getAttribute('data-villain');
+    const canvas  = document.createElement('canvas');
+    canvas.style.cssText = `
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    `;
+    section.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    let W, H, particles = [], active = false;
+    let animFrame;
+
+    function resize() {
+      W = canvas.width  = section.offsetWidth;
+      H = canvas.height = section.offsetHeight;
+    }
+
+    function getColors() {
+      const map = {
+        cavaleiro: {
+          nebula: 'rgba(139,0,0,',
+          spark:  'rgba(204,0,34,',
+          star:   '220,160,160'
+        },
+        besta: {
+          nebula: 'rgba(42,10,58,',
+          spark:  'rgba(138,32,192,',
+          star:   '200,160,220'
+        },
+        valar: {
+          nebula: 'rgba(42,32,16,',
+          spark:  'rgba(192,144,10,',
+          star:   '220,200,140'
+        }
+      };
+      return map[villain] || map.cavaleiro;
+    }
+
+    function initParticles() {
+      const colors = getColors();
+      particles = [];
+
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x:       Math.random() * W,
+          y:       Math.random() * H,
+          r:       Math.random() * 1.8 + 0.3,
+          a:       Math.random() * 0.5 + 0.1,
+          speedX:  (Math.random() - 0.5) * 0.4,
+          speedY:  (Math.random() - 0.5) * 0.4,
+          twinkle: Math.random() * Math.PI * 2,
+          tSpeed:  Math.random() * 0.025 + 0.01,
+          colors
+        });
+      }
+    }
+
+    function draw() {
+      if (!active) return;
+      ctx.clearRect(0, 0, W, H);
+
+      particles.forEach(p => {
+        p.x      += p.speedX;
+        p.y      += p.speedY;
+        p.twinkle += p.tSpeed;
+
+        if (p.x < -5) p.x = W + 5;
+        if (p.x > W + 5) p.x = -5;
+        if (p.y < -5) p.y = H + 5;
+        if (p.y > H + 5) p.y = -5;
+
+        const alpha = p.a * (0.4 + 0.6 * Math.sin(p.twinkle));
+
+        /* Halo */
+        const grad = ctx.createRadialGradient(
+          p.x, p.y, 0, p.x, p.y, p.r * 5
+        );
+        grad.addColorStop(0, p.colors.nebula + alpha + ')');
+        grad.addColorStop(1, p.colors.nebula + '0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+        ctx.fill();
+
+        /* Núcleo */
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle =
+          `rgba(${p.colors.star},${alpha * 1.4})`;
+        ctx.fill();
+      });
+
+      animFrame = requestAnimationFrame(draw);
+    }
+
+    /* Ativa quando a seção fica visível */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !active) {
+          active = true;
+          canvas.style.opacity = '0.6';
+          resize();
+          initParticles();
+          draw();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    io.observe(section);
+    window.addEventListener('resize', resize, { passive: true });
+  });
+})();
+
+/* ── SCROLL REVEAL GERAL ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── EFEITO DE DISTORÇÃO NO HOVER DOS PODERES ── */
+(function () {
+  const powers = document.querySelectorAll('.vpower');
+
+  powers.forEach(p => {
+    p.addEventListener('mouseenter', () => {
+      const section = p.closest('.villain-section');
+      const villain = section?.getAttribute('data-villain');
+
+      const glowColors = {
+        cavaleiro: '139,0,0',
+        besta:     '42,10,58',
+        valar:     '42,32,16'
+      };
+
+      const color = glowColors[villain] || '139,0,0';
+      p.style.boxShadow = `
+        inset 0 0 20px rgba(${color},0.1),
+        0 0 15px rgba(${color},0.15)
+      `;
+    });
+
+    p.addEventListener('mouseleave', () => {
+      p.style.boxShadow = '';
+    });
+  });
+})();
+
+/* ── INDICADOR DE VILÃO ATIVO NA NAV ── */
+(function () {
+  const sections  = document.querySelectorAll('.villain-section');
+  const navLinks  = document.querySelectorAll('nav a:not(.nav-logo)');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.4) {
+        const id = e.target.id;
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          const isActive = href === `#${id}`;
+          link.style.color = isActive
+            ? getVillainColor(e.target.getAttribute('data-villain'))
+            : '';
+          link.style.textShadow = isActive
+            ? `0 0 20px ${getVillainColor(e.target.getAttribute('data-villain'))}`
+            : '';
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(s => io.observe(s));
+
+  function getVillainColor(villain) {
+    const map = {
+      cavaleiro: '#cc0022',
+      besta:     '#8a20c0',
+      valar:     '#c0900a'
+    };
+    return map[villain] || '#c9a84c';
+  }
+})();
+
+/* ── EFEITO DE TREMOR AO ATIVAR VILÃO ── */
+(function () {
+  const sections = document.querySelectorAll('.villain-section');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.2) {
+        const villain = e.target.getAttribute('data-villain');
+        if (villain === 'besta') {
+          /* Tremor sutil para A Besta */
+          document.body.style.animation =
+            'body-shake 0.3s ease';
+          setTimeout(() => {
+            document.body.style.animation = '';
+          }, 300);
+        }
+      }
+    });
+  }, { threshold: 0.2 });
+
+  sections.forEach(s => io.observe(s));
+
+  /* Injeta keyframe do tremor */
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes body-shake {
+      0%   { transform: translate(0); }
+      20%  { transform: translate(-2px, 1px); }
+      40%  { transform: translate(2px, -1px); }
+      60%  { transform: translate(-1px, 1px); }
+      80%  { transform: translate(1px, -1px); }
+      100% { transform: translate(0); }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+  /* === JAVASCRIPT VIRÁ NA PARTE 4 === */
+</script>
+</body>
+</html>
