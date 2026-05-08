@@ -778,161 +778,210 @@ h2 {
 
 .story-block p strong { color: var(--gold-light); }
 
-/* ── GALERIA EM LOOP ── */
+/* ── GALERIA EM LOOP — TEIA VIVA DA LYRA ── */
 #galeria { padding-bottom: 5rem; }
 
 .gallery-loop-wrap {
-  max-width: 900px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
 }
 
-/* Quadro principal */
-.gallery-main {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background-size: cover;
-  background-position: center;
-  background-color: #020a05;
-  background-image:
-    radial-gradient(ellipse at 50% 50%,
-      rgba(90,170,122,0.15) 0%, transparent 70%);
-  border: 1px solid rgba(90,170,122,0.2);
+.lyra-gallery-showcase {
   position: relative;
+  display: grid;
+  grid-template-columns: 0.88fr 1.18fr 0.88fr;
+  gap: 1.1rem;
+  align-items: center;
+  padding: 1.2rem;
+  border: 1px solid rgba(112,192,144,0.14);
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(90,170,122,0.08), transparent 65%),
+    linear-gradient(135deg, rgba(3,3,8,0.72), rgba(2,10,5,0.88));
   overflow: hidden;
-  cursor: pointer;
-  transition: border-color 0.3s;
 }
 
-.gallery-main:hover {
-  border-color: rgba(112,192,144,0.5);
+.lyra-gallery-showcase::before,
+.lyra-gallery-showcase::after {
+  content: '';
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
 }
 
-/* Overlay do quadro principal */
-.gallery-main-overlay {
+.lyra-gallery-showcase::before {
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(160,212,184,0.08) 45%, transparent 52%),
+    linear-gradient(65deg, transparent 0%, rgba(112,192,144,0.08) 55%, transparent 62%);
+  animation: lyra-web-drift 9s ease-in-out infinite alternate;
+}
+
+.lyra-gallery-showcase::after {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(232,244,238,0.28) 0 1px, transparent 2px),
+    radial-gradient(circle at 75% 62%, rgba(112,192,144,0.25) 0 1px, transparent 2px),
+    radial-gradient(circle at 46% 18%, rgba(160,212,184,0.22) 0 1px, transparent 2px);
+  background-size: 140px 110px, 180px 140px, 220px 180px;
+  opacity: 0.45;
+  animation: lyra-stars-float 14s linear infinite;
+}
+
+@keyframes lyra-web-drift {
+  from { transform: translateX(-3%) translateY(-2%) rotate(-1deg); }
+  to   { transform: translateX(3%) translateY(2%) rotate(1deg); }
+}
+
+@keyframes lyra-stars-float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-80px); }
+}
+
+.lyra-panel {
+  position: relative;
+  min-height: 440px;
+  overflow: hidden;
+  border: 1px solid rgba(90,170,122,0.18);
+  background: #020a05;
+  box-shadow:
+    inset 0 0 35px rgba(90,170,122,0.06),
+    0 0 28px rgba(90,170,122,0.05);
+  isolation: isolate;
+  transform: translateY(10px) scale(0.96);
+  opacity: 0.82;
+  transition: transform 0.5s ease, opacity 0.5s ease, border-color 0.5s ease;
+}
+
+.lyra-panel.main {
+  min-height: 520px;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  border-color: rgba(160,212,184,0.35);
+  box-shadow:
+    inset 0 0 55px rgba(160,212,184,0.08),
+    0 0 45px rgba(90,170,122,0.14);
+}
+
+.lyra-panel:hover {
+  transform: translateY(-6px) scale(0.98);
+  opacity: 1;
+  border-color: rgba(160,212,184,0.45);
+}
+
+.lyra-panel.main:hover { transform: translateY(-6px) scale(1.01); }
+
+.lyra-panel-img {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top,
-    rgba(3,3,8,0.85) 0%, transparent 50%);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.8rem;
-}
-
-.gallery-main-caption {
-  font-family: 'Cinzel', serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--life);
-  margin-bottom: 0.4rem;
-}
-
-.gallery-main-sub {
-  font-family: 'EB Garamond', serif;
-  font-style: italic;
-  font-size: 0.9rem;
-  color: var(--text-dim);
-}
-
-/* Indicador de progresso */
-.gallery-progress {
-  width: 100%;
-  height: 2px;
-  background: rgba(255,255,255,0.05);
-  margin-top: 0.8rem;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.gallery-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--life-dim), var(--life));
-  border-radius: 2px;
-  width: 0%;
-  transition: width linear;
-}
-
-/* Thumbnails */
-.gallery-thumbs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.6rem;
-  margin-top: 0.8rem;
-}
-
-.gallery-thumb {
-  aspect-ratio: 1 / 1;
   background-size: cover;
-  background-position: center;
-  background-color: #020a05;
-  border: 1px solid rgba(90,170,122,0.1);
-  cursor: pointer;
-  transition: border-color 0.3s, opacity 0.3s;
-  opacity: 0.5;
-  position: relative;
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 1;
+  transform: scale(1.04);
+  transition: opacity 1.1s ease, transform 4.8s ease, filter 1.1s ease;
+  filter: brightness(0.76) saturate(0.86);
+  z-index: 0;
+}
+
+.lyra-panel.is-changing .lyra-panel-img {
+  opacity: 0;
+  transform: scale(1.1);
+  filter: brightness(1.05) saturate(1.05) blur(4px);
+}
+
+.lyra-panel.main .lyra-panel-img { filter: brightness(0.86) saturate(0.95); }
+
+.lyra-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(1,8,5,0.92) 0%, rgba(1,8,5,0.28) 58%, rgba(1,8,5,0.16) 100%),
+    radial-gradient(ellipse at 50% 40%, transparent 20%, rgba(2,10,5,0.5) 100%);
+}
+
+.lyra-panel::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(100deg, transparent 0%, rgba(232,244,238,0.1) 50%, transparent 58%),
+    repeating-linear-gradient(90deg, transparent 0 62px, rgba(160,212,184,0.06) 63px, transparent 65px);
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  animation: lyra-panel-thread 6s ease-in-out infinite;
+}
+
+@keyframes lyra-panel-thread {
+  0%, 100% { transform: translateX(-8%); opacity: 0.25; }
+  50%      { transform: translateX(8%);  opacity: 0.7; }
+}
+
+.lyra-panel-content {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 3;
+  padding: 1.6rem;
+}
+
+.lyra-panel-kicker {
+  font-family: 'Cinzel', serif;
+  font-size: 0.56rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--link);
+  margin-bottom: 0.45rem;
+}
+
+.lyra-panel-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.2rem, 2.4vw, 2rem);
+  line-height: 1.05;
+  color: var(--pearl);
+  text-shadow: 0 0 20px var(--life-glow);
+  margin-bottom: 0.45rem;
+}
+
+.lyra-panel-text {
+  color: var(--text-dim);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  max-width: 92%;
+}
+
+.lyra-panel-progress {
+  position: absolute;
+  left: 1.6rem;
+  right: 1.6rem;
+  bottom: 1rem;
+  height: 2px;
+  z-index: 4;
+  background: rgba(255,255,255,0.06);
   overflow: hidden;
 }
 
-.gallery-thumb.active {
-  border-color: var(--life);
-  opacity: 1;
+.lyra-panel-progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--life-dim), var(--life), var(--pearl));
   box-shadow: 0 0 12px var(--life-glow);
 }
 
-.gallery-thumb:hover {
-  opacity: 0.8;
-  border-color: rgba(112,192,144,0.4);
-}
-
-/* Controles */
-.gallery-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1.2rem;
-}
-
-.gallery-btn {
-  background: none;
-  border: 1px solid rgba(90,170,122,0.25);
-  color: var(--life);
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  transition: border-color 0.3s, color 0.3s;
-  border-radius: 1px;
-  flex-shrink: 0;
-}
-
-.gallery-btn:hover {
-  border-color: var(--life);
-  color: var(--pearl);
-}
-
-.gallery-btn-play {
-  width: 48px;
-  height: 48px;
-  font-size: 1.1rem;
-  border-color: rgba(112,192,144,0.4);
-}
-
-.gallery-counter {
-  font-family: 'Cinzel', serif;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  color: var(--gold-dim);
-  min-width: 60px;
+.lyra-gallery-note {
   text-align: center;
+  margin-top: 1.4rem;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  color: var(--text-dim);
+  opacity: 0.72;
 }
+
+.lyra-gallery-note span { color: var(--life); font-style: normal; }
 
 .gallery-hint {
   text-align: center;
@@ -947,6 +996,37 @@ h2 {
   font-family: monospace;
   color: var(--life);
   font-style: normal;
+}
+
+@media (max-width: 1024px) {
+  .lyra-gallery-showcase { gap: 0.8rem; padding: 0.9rem; }
+  .lyra-panel { min-height: 390px; }
+  .lyra-panel.main { min-height: 460px; }
+}
+
+@media (max-width: 768px) {
+  .lyra-gallery-showcase {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .lyra-panel,
+  .lyra-panel.main {
+    min-height: 390px;
+    transform: none;
+  }
+  .lyra-panel.main { order: -1; }
+  .lyra-panel:hover,
+  .lyra-panel.main:hover { transform: none; }
+}
+
+@media (max-width: 480px) {
+  .lyra-gallery-showcase { padding: 0.7rem; }
+  .lyra-panel,
+  .lyra-panel.main { min-height: 330px; }
+  .lyra-panel-content { padding: 1.2rem; }
+  .lyra-panel-progress { left: 1.2rem; right: 1.2rem; }
+  .lyra-panel-text { font-size: 0.84rem; }
 }
 
 /* ── FOOTER ── */
@@ -1436,47 +1516,52 @@ footer {
 <section id="galeria">
   <div class="section-header reveal">
     <span class="section-label">Imagens</span>
-    <h2>Galeria de Lyra</h2>
+    <h2>Teia Viva da Lyra</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="gallery-loop-wrap reveal">
+    <div class="lyra-gallery-showcase">
 
-    <!-- Quadro principal -->
-    <div class="gallery-main">
-      <div class="gallery-main-overlay">
-        <div class="gallery-main-caption">Lyra · Forma Divina</div>
-        <div class="gallery-main-sub">A deusa que existe em todos os planos</div>
-      </div>
+      <article class="lyra-panel" data-panel="vida">
+        <div class="lyra-panel-img"></div>
+        <div class="lyra-panel-content">
+          <div class="lyra-panel-kicker">Quadro I</div>
+          <h3 class="lyra-panel-title">Vida</h3>
+          <p class="lyra-panel-text">A presença que cura, sustenta e faz tudo ao redor respirar outra vez.</p>
+        </div>
+        <div class="lyra-panel-progress"><span></span></div>
+      </article>
+
+      <article class="lyra-panel main" data-panel="conexao">
+        <div class="lyra-panel-img"></div>
+        <div class="lyra-panel-content">
+          <div class="lyra-panel-kicker">Quadro II</div>
+          <h3 class="lyra-panel-title">Conexão</h3>
+          <p class="lyra-panel-text">Fios luminosos atravessam planos, pessoas e destinos — a ponte que nunca se fecha.</p>
+        </div>
+        <div class="lyra-panel-progress"><span></span></div>
+      </article>
+
+      <article class="lyra-panel" data-panel="ponte">
+        <div class="lyra-panel-img"></div>
+        <div class="lyra-panel-content">
+          <div class="lyra-panel-kicker">Quadro III</div>
+          <h3 class="lyra-panel-title">Ponte</h3>
+          <p class="lyra-panel-text">Entre o humano e o divino, entre mundos e memórias, Lyra permanece.</p>
+        </div>
+        <div class="lyra-panel-progress"><span></span></div>
+      </article>
+
     </div>
 
-    <!-- Barra de progresso do loop -->
-    <div class="gallery-progress">
-      <div class="gallery-progress-bar"></div>
-    </div>
-
-    <!-- Thumbnails -->
-    <div class="gallery-thumbs">
-      <div class="gallery-thumb active"></div>
-      <div class="gallery-thumb"></div>
-      <div class="gallery-thumb"></div>
-      <div class="gallery-thumb"></div>
-      <div class="gallery-thumb"></div>
-      <div class="gallery-thumb"></div>
-    </div>
-
-    <!-- Controles -->
-    <div class="gallery-controls">
-      <button class="gallery-btn" id="gallery-prev">&#8592;</button>
-      <button class="gallery-btn gallery-btn-play" id="gallery-play">⏸</button>
-      <span class="gallery-counter">1 / 6</span>
-      <button class="gallery-btn" id="gallery-next">&#8594;</button>
-    </div>
-
+    <p class="lyra-gallery-note">
+      Três quadros em looping, como fios vivos se alternando ao redor da deusa.
+    </p>
   </div>
 
   <p class="gallery-hint reveal">
-    Substitua os arquivos <code>lyra-01.jpg</code> até <code>lyra-06.jpg</code> pelas imagens da personagem na mesma pasta do HTML.
+    Use imagens na pasta <code>img-lyra</code>. Os quadros alternam entre <code>lyra.png</code>, <code>lyra-0.jpg</code>, <code>lyra-01.jpg</code>, <code>lyra-03.jpg</code>, <code>lyra-05.jpg</code> e <code>lyra-06.jpg</code>.
   </p>
 </section>
 
@@ -1855,154 +1940,70 @@ footer {
   bars.forEach(b => io.observe(b));
 })();
 
-/* ── GALERIA EM LOOP ── */
+/* ── GALERIA EM LOOP — TEIA VIVA DA LYRA ── */
 (function () {
-  /* Dados das imagens */
-  const slides = [
-    { src: 'lyra-01.jpg', caption: 'Lyra · Forma Divina',     sub: 'A deusa que existe em todos os planos' },
-    { src: 'lyra-02.jpg', caption: 'Os Fios da Conexão',       sub: 'Energia que une tudo ao redor' },
-    { src: 'lyra-03.jpg', caption: 'Campo de Vida',            sub: 'Onde ela está, tudo é mais consciente' },
-    { src: 'lyra-04.jpg', caption: 'A Ponte Entre Tudo',       sub: 'A conexão que nunca se fecha' },
-    { src: 'lyra-05.jpg', caption: 'Visão dos Fios',           sub: 'Percepção além do plano físico' },
-    { src: 'lyra-06.jpg', caption: 'Anna · Antes da Ascensão', sub: 'Tímida, observadora, essencial' }
-  ];
+  const panels = document.querySelectorAll('.lyra-panel');
+  if (!panels.length) return;
 
-  /* Elementos */
-  const mainEl    = document.querySelector('.gallery-main');
-  const captionEl = document.querySelector('.gallery-main-caption');
-  const subEl     = document.querySelector('.gallery-main-sub');
-  const progBar   = document.querySelector('.gallery-progress-bar');
-  const thumbs    = document.querySelectorAll('.gallery-thumb');
-  const counterEl = document.querySelector('.gallery-counter');
-  const btnPrev   = document.getElementById('gallery-prev');
-  const btnNext   = document.getElementById('gallery-next');
-  const btnPlay   = document.getElementById('gallery-play');
+  const groups = {
+    vida: [
+      { src: 'img-lyra/lyra.png', title: 'Vida', text: 'A presença que cura, sustenta e faz tudo ao redor respirar outra vez.' },
+      { src: 'img-lyra/lyra0.png', title: 'Campo de Vida', text: 'Onde ela está, tudo fica mais vivo, mais consciente e mais inteiro.' }
+    ],
+    conexao: [
+      { src: 'img-lyra/lyra1.png', title: 'Conexão', text: 'Fios luminosos atravessam planos, pessoas e destinos — a ponte que nunca se fecha.' },
+      { src: 'img-lyra/lyra2.png', title: 'A Ponte Entre Tudo', text: 'Lyra sente o que une cada presença, cada escolha e cada caminho possível.' }
+    ],
+    ponte: [
+      { src: 'img-lyra/lyra-3.png', title: 'Visão dos Fios', text: 'Percepção além do plano físico, seguindo conexões que ninguém mais vê.' },
+      { src: 'img-lyra/lyrabanner.png', title: 'Anna · Antes da Ascensão', text: 'Tímida, observadora e essencial antes de se tornar Lyra.' }
+    ]
+  };
 
-  if (!mainEl) return;
+  const INTERVAL = 4800;
 
-  let current  = 0;
-  let playing  = true;
-  let timer    = null;
-  let progTimer = null;
-  const INTERVAL = 4500;
+  panels.forEach((panel, panelIndex) => {
+    const key = panel.dataset.panel;
+    const items = groups[key] || [];
+    const img = panel.querySelector('.lyra-panel-img');
+    const title = panel.querySelector('.lyra-panel-title');
+    const text = panel.querySelector('.lyra-panel-text');
+    const bar = panel.querySelector('.lyra-panel-progress span');
+    if (!items.length || !img || !title || !text || !bar) return;
 
-  /* Inicializa thumbs */
-  thumbs.forEach((t, i) => {
-    t.style.backgroundImage = `url('${slides[i].src}')`;
-  });
+    let current = 0;
 
-  function goTo(index, resetProg = true) {
-    current = (index + slides.length) % slides.length;
-
-    /* Atualiza imagem principal com fade */
-    mainEl.style.opacity = '0';
-    mainEl.style.transition = 'opacity 0.5s ease';
-
-    setTimeout(() => {
-      mainEl.style.backgroundImage = `url('${slides[current].src}')`;
-      captionEl.textContent = slides[current].caption;
-      subEl.textContent     = slides[current].sub;
-      mainEl.style.opacity  = '1';
-    }, 300);
-
-    /* Atualiza counter */
-    counterEl.textContent = `${current + 1} / ${slides.length}`;
-
-    /* Atualiza thumbs */
-    thumbs.forEach((t, i) => {
-      t.classList.toggle('active', i === current);
-    });
-
-    /* Reinicia progresso */
-    if (resetProg) resetProgress();
-  }
-
-  function resetProgress() {
-    clearInterval(progTimer);
-    progBar.style.transition = 'none';
-    progBar.style.width      = '0%';
-
-    requestAnimationFrame(() => {
+    function resetBar() {
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
       requestAnimationFrame(() => {
-        progBar.style.transition = `width ${INTERVAL}ms linear`;
-        progBar.style.width      = '100%';
+        requestAnimationFrame(() => {
+          bar.style.transition = `width ${INTERVAL}ms linear`;
+          bar.style.width = '100%';
+        });
       });
-    });
-  }
-
-  function startLoop() {
-    clearInterval(timer);
-    timer = setInterval(() => {
-      goTo(current + 1);
-    }, INTERVAL);
-  }
-
-  function stopLoop() {
-    clearInterval(timer);
-    progBar.style.transition = 'none';
-    progBar.style.width = progBar.offsetWidth /
-      mainEl.offsetWidth * 100 + '%';
-  }
-
-  function togglePlay() {
-    playing = !playing;
-    btnPlay.textContent = playing ? '⏸' : '▶';
-
-    if (playing) {
-      startLoop();
-      resetProgress();
-    } else {
-      stopLoop();
     }
-  }
 
-  /* Eventos */
-  btnPrev?.addEventListener('click', () => {
-    goTo(current - 1);
-    if (playing) startLoop();
-  });
+    function render(index) {
+      current = index % items.length;
+      const item = items[current];
+      panel.classList.add('is-changing');
 
-  btnNext?.addEventListener('click', () => {
-    goTo(current + 1);
-    if (playing) startLoop();
-  });
-
-  btnPlay?.addEventListener('click', togglePlay);
-
-  thumbs.forEach((t, i) => {
-    t.addEventListener('click', () => {
-      goTo(i);
-      if (playing) startLoop();
-    });
-  });
-
-  /* Swipe mobile na galeria */
-  let touchStartX = 0;
-
-  mainEl.addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-  }, { passive: true });
-
-  mainEl.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      diff > 0 ? goTo(current + 1) : goTo(current - 1);
-      if (playing) startLoop();
+      setTimeout(() => {
+        img.style.backgroundImage = `url('${item.src}')`;
+        title.textContent = item.title;
+        text.textContent = item.text;
+        panel.classList.remove('is-changing');
+        resetBar();
+      }, 450);
     }
-  }, { passive: true });
 
-  /* Pausa ao hover no desktop */
-  mainEl.addEventListener('mouseenter', () => {
-    if (playing) stopLoop();
+    render(0);
+
+    setInterval(() => {
+      render(current + 1);
+    }, INTERVAL + panelIndex * 450);
   });
-
-  mainEl.addEventListener('mouseleave', () => {
-    if (playing) { startLoop(); resetProgress(); }
-  });
-
-  /* Inicia */
-  goTo(0);
-  startLoop();
 })();
 
 /* ── EFEITO DE PARTÍCULAS NO MOUSE ── */
