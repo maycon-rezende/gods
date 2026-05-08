@@ -526,6 +526,13 @@ h2 {
   transition: border-color 0.4s, transform 0.4s;
 }
 
+
+.region-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 .region-card:hover {
   transform: translateY(-6px);
 }
@@ -1167,6 +1174,25 @@ footer {
   .templo-content { padding: 2rem 1.5rem; }
   .regions-grid   { grid-template-columns: repeat(2, 1fr); }
 }
+.char-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.char-card-link:hover .char-card {
+  border-color: rgba(201,168,76,0.4);
+  transform: translateY(-4px);
+}
+
+.char-card-link:hover .char-card::before {
+  opacity: 1;
+}
+
+.char-card-link:hover.divine-link .char-card {
+  border-color: rgba(160,122,240,0.5);
+}
+
 </style>
 </head>
 <body>
@@ -1276,10 +1302,9 @@ footer {
   <div class="regions-grid">
 
     <!-- CIDADELA DAS SOMBRAS -->
-    <div class="region-card cidadela-card reveal"
-      data-href="cidadela.html">
+    <a href="cidadela.html" class="region-card cidadela-card reveal region-link">
       <div class="rcard-bg"
-        style="background-image: url('cidadela-bg.jpg')">
+        style="background-image: url('img-cidadela/cidadela.png')">
       </div>
       <div class="rcard-overlay cidadela-overlay"></div>
       <div class="rcard-content">
@@ -1305,7 +1330,7 @@ footer {
         </div>
       </div>
       <div class="rcard-number">01</div>
-    </div>
+    </a>
 
     <!-- LIMIAR DA CONTINUIDADE -->
     <div class="region-card limiar-card reveal"
