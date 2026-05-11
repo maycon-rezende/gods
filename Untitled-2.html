@@ -1,0 +1,2590 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valar — O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="effects.css">
+<style>
+  /* === CSS VIRÁ NAS PARTES 2 E 3 === */
+  /* ── VARIÁVEIS E RESET ── */
+:root {
+  --void: #030308;
+  --deep: #07070f;
+  --surface: #100800;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+
+  /* Valar — dourado corrompido */
+  --amber: #c0900a;
+  --amber-bright: #e0b020;
+  --amber-dim: rgba(192,144,10,0.15);
+  --amber-glow: rgba(192,144,10,0.45);
+  --amber-deep: #1a0e00;
+  --corrupt: #3a1a00;
+  --corrupt-bright: #6a3800;
+  --corrupt-glow: rgba(106,56,0,0.5);
+  --dark-gold: #2a1800;
+  --ash: #4a4030;
+  --ash-light: #8a7860;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+#noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  mix-blend-mode: overlay;
+}
+
+/* Corrupção de fundo */
+#corruption-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 120px,
+    rgba(106,56,0,0.015) 120px,
+    rgba(106,56,0,0.015) 121px
+  ),
+  repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 80px,
+    rgba(192,144,10,0.01) 80px,
+    rgba(192,144,10,0.01) 81px
+  );
+}
+
+#cosmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(to bottom,
+    rgba(3,3,8,0.98), transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(192,144,10,0.15);
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--amber-bright);
+  text-shadow: 0 0 20px var(--amber-glow);
+}
+
+.nav-logo img {
+  width: 36px; height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(192,144,10,0.35);
+  box-shadow: 0 0 12px rgba(192,144,10,0.4);
+  transition: box-shadow 0.3s;
+  display: block;
+}
+
+.nav-logo img:hover {
+  box-shadow:
+    0 0 20px rgba(224,176,32,0.7),
+    0 0 40px rgba(192,144,10,0.4);
+}
+
+/* ── BANNER ── */
+#banner {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.banner-bg {
+  position: absolute;
+  inset: -5%;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+  background-color: var(--amber-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 35%,
+      rgba(192,144,10,0.2) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 70%,
+      rgba(106,56,0,0.25) 0%, transparent 50%);
+  filter: brightness(0.25) saturate(0.5);
+}
+
+.banner-bg.loaded {
+  transform: scale(1);
+  filter: brightness(0.35) saturate(0.65);
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top,
+      rgba(3,3,8,1)     0%,
+      rgba(8,5,0,0.82)  30%,
+      rgba(15,10,0,0.5) 65%,
+      rgba(3,3,8,0.2)   100%),
+    linear-gradient(to right,
+      rgba(3,3,8,0.92)  0%,
+      rgba(15,10,0,0.3) 55%,
+      rgba(3,3,8,0.75)  100%);
+}
+
+.banner-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 25%,
+    rgba(3,3,8,0.75) 100%
+  );
+  pointer-events: none;
+}
+
+/* Grade de corrupção no banner */
+.corruption-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#corruption-canvas {
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+}
+
+/* Conteúdo */
+.banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 5vw 5rem;
+  max-width: 820px;
+  width: 100%;
+}
+
+.banner-tag {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fade-up 1s 0.2s ease forwards;
+}
+
+.tag-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right,
+    var(--amber), transparent);
+  max-width: 50px;
+}
+
+.tag-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.57rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--amber);
+  white-space: nowrap;
+}
+
+/* Nome com glitch */
+.banner-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(4.5rem, 14vw, 11rem);
+  font-weight: 900;
+  line-height: 0.88;
+  position: relative;
+  display: inline-block;
+  opacity: 0;
+  animation: fade-up 1s 0.4s ease forwards;
+  background: linear-gradient(135deg,
+    #ffffff   0%,
+    #f0e0a0  15%,
+    #c0900a  40%,
+    #6a3800  65%,
+    #2a1800  85%,
+    #0a0500  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 50px rgba(192,144,10,0.5));
+}
+
+/* Glitch layers */
+.banner-name::before,
+.banner-name::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.banner-name::before {
+  background: linear-gradient(135deg,
+    #ff8800, #c0900a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: valar-glitch-1 6s infinite;
+  clip-path: polygon(0 20%, 100% 20%, 100% 45%, 0 45%);
+}
+
+.banner-name::after {
+  background: linear-gradient(135deg,
+    #3a1800, #6a3800);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: valar-glitch-2 8s infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 85%, 0 85%);
+}
+
+@keyframes valar-glitch-1 {
+  0%, 85%, 100% { transform: translate(0); opacity: 0; }
+  87%  { transform: translate(-3px, 0); opacity: 0.8; }
+  89%  { transform: translate(3px, 0);  opacity: 0.6; }
+  91%  { transform: translate(0);       opacity: 0; }
+}
+
+@keyframes valar-glitch-2 {
+  0%, 75%, 100% { transform: translate(0); opacity: 0; }
+  77%  { transform: translate(4px, 0);  opacity: 0.7; }
+  79%  { transform: translate(-2px, 0); opacity: 0.5; }
+  81%  { transform: translate(0);       opacity: 0; }
+}
+
+.banner-era {
+  margin-top: 0.6rem;
+  opacity: 0;
+  animation: fade-up 1s 0.65s ease forwards;
+}
+
+.era-text {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.88rem, 1.8vw, 1.05rem);
+  color: rgba(192,144,10,0.7);
+  letter-spacing: 0.05em;
+}
+
+.banner-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.6rem 0;
+  opacity: 0;
+  animation: fade-up 1s 0.85s ease forwards;
+}
+
+.divider-line {
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(90deg,
+    var(--amber), transparent);
+}
+
+.divider-symbol {
+  color: var(--amber);
+  font-size: 1.2rem;
+  opacity: 0.6;
+  text-shadow: 0 0 12px var(--amber-glow);
+}
+
+.banner-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.93rem, 2vw, 1.12rem);
+  color: rgba(210,185,130,0.8);
+  line-height: 1.8;
+  max-width: 520px;
+  opacity: 0;
+  animation: fade-up 1s 1s ease forwards;
+}
+
+.banner-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 1s 1.2s ease forwards;
+}
+
+.bstat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.bstat-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.08em;
+}
+
+.bstat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.5rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.bstat-sep {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom,
+    transparent, rgba(192,144,10,0.5), transparent);
+  flex-shrink: 0;
+}
+
+.banner-bottom-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent, var(--amber),
+    var(--corrupt-bright),
+    var(--amber), transparent);
+  animation: bar-pulse 5s ease infinite;
+}
+
+@keyframes bar-pulse {
+  0%, 100% { opacity: 0.3; filter: brightness(0.8); }
+  50%       { opacity: 1;   filter: brightness(1.3); }
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  right: 5vw;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  color: rgba(192,144,10,0.6);
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+
+/* ── ANIMAÇÕES BASE ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ── REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVO — BANNER E NAV
+════════════════════════════════════ */
+@media (max-width: 1024px) {
+  nav { gap: 1.5rem; }
+  .banner-content { padding: 4rem 4vw 4rem; }
+}
+
+@media (max-width: 768px) {
+  nav { gap: 0.8rem; flex-wrap: wrap; padding: 0.9rem 1rem; }
+  nav a { font-size: 0.62rem; letter-spacing: 0.12em; }
+  .nav-logo img { width: 30px; height: 30px; }
+
+  .banner-content { padding: 5rem 1.5rem 3.5rem; max-width: 100%; }
+  .banner-overlay {
+    background:
+      linear-gradient(to top,
+        rgba(3,3,8,1) 0%, rgba(8,5,0,0.9) 45%,
+        rgba(15,10,0,0.6) 70%, rgba(3,3,8,0.25) 100%);
+  }
+  .banner-stats { gap: 0.8rem; margin-top: 1.8rem; }
+  .bstat-sep    { height: 26px; }
+  .scroll-hint  { right: 50%; transform: translateX(50%); bottom: 1.5rem; }
+  #corruption-canvas { opacity: 0.08; }
+}
+
+@media (max-width: 480px) {
+  nav { gap: 0.5rem; padding: 0.8rem; }
+  nav a { font-size: 0.58rem; letter-spacing: 0.1em; }
+  .banner-content { padding: 5rem 1.2rem 3rem; }
+  .bstat-sep { display: none; }
+  .bstat {
+    background: rgba(192,144,10,0.07);
+    border: 1px solid rgba(192,144,10,0.15);
+    padding: 0.4rem 0.8rem;
+  }
+  .banner-quote { font-size: 0.9rem; }
+  .tag-text { font-size: 0.5rem; letter-spacing: 0.22em; }
+}
+
+@media (max-width: 360px) {
+  .banner-content { padding: 5rem 1rem 2.5rem; }
+  nav a { font-size: 0.54rem; }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  #banner { min-height: 100svh; }
+  .banner-content { padding: 3.5rem 4vw 2.5rem; }
+  .banner-stats   { margin-top: 1.2rem; }
+}
+/* ── SEÇÕES COMPARTILHADAS ── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+}
+
+.section-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.stag-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, var(--amber));
+}
+
+.stag-line:last-child {
+  background: linear-gradient(90deg,
+    var(--amber), transparent);
+}
+
+.stag-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.section-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--text);
+  text-shadow: 0 0 30px rgba(192,144,10,0.25);
+}
+
+.section-title span {
+  background: linear-gradient(135deg,
+    #f0d080 0%, #c0900a 50%, #6a3800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── IDENTIDADE ── */
+#identidade { padding-bottom: 5rem; }
+
+.identity-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  align-items: start;
+}
+
+.identity-photo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: sticky;
+  top: 6rem;
+}
+
+.identity-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center top;
+  background-color: var(--amber-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 30%,
+      rgba(192,144,10,0.2) 0%, transparent 70%);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(192,144,10,0.18);
+}
+
+.photo-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.05) 2px,
+    rgba(0,0,0,0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Corrupção na foto */
+.photo-corruption {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 30px,
+      rgba(106,56,0,0.04) 30px,
+      rgba(106,56,0,0.04) 31px
+    );
+  pointer-events: none;
+  z-index: 1;
+  animation: photo-corrupt 8s ease infinite;
+}
+
+@keyframes photo-corrupt {
+  0%, 90%, 100% { opacity: 1; transform: translate(0); }
+  92% { opacity: 0.5; transform: translate(2px, 0); }
+  94% { opacity: 0.8; transform: translate(-2px, 0); }
+  96% { opacity: 0.3; transform: translate(1px, 0); }
+  98% { opacity: 1;   transform: translate(0); }
+}
+
+.photo-corner {
+  position: absolute;
+  width: 16px; height: 16px;
+  z-index: 2;
+}
+
+.photo-corner.tl {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--amber);
+  border-left: 2px solid var(--amber);
+}
+
+.photo-corner.tr {
+  top: -1px; right: -1px;
+  border-top: 2px solid var(--amber);
+  border-right: 2px solid var(--amber);
+}
+
+.photo-corner.bl {
+  bottom: -1px; left: -1px;
+  border-bottom: 2px solid var(--corrupt-bright);
+  border-left: 2px solid var(--corrupt-bright);
+}
+
+.photo-corner.br {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--corrupt-bright);
+  border-right: 2px solid var(--corrupt-bright);
+}
+
+.photo-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(26,14,0,0.85)   0%,
+    rgba(192,144,10,0.15) 40%,
+    transparent           100%);
+  pointer-events: none;
+}
+
+.photo-label {
+  position: absolute;
+  bottom: 0.8rem;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(192,144,10,0.85);
+  z-index: 2;
+}
+
+.identity-card {
+  background: rgba(10,7,0,0.88);
+  border: 1px solid rgba(192,144,10,0.18);
+  padding: 1.2rem 1.4rem;
+}
+
+.icard-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(192,144,10,0.18);
+}
+
+.icard-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.icard-row:last-child { border-bottom: none; }
+
+.icard-key {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.icard-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  text-align: right;
+}
+
+.icard-val.danger {
+  color: var(--amber-bright);
+  text-shadow: 0 0 8px var(--amber-glow);
+}
+
+.identity-text p {
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.4rem;
+  font-size: 1.02rem;
+}
+
+.identity-text p em {
+  color: var(--amber-bright);
+  font-style: normal;
+}
+
+.identity-text p strong { color: var(--gold-light); }
+
+.identity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.itag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.12em;
+  padding: 0.28rem 0.65rem;
+  border: 1px solid rgba(192,144,10,0.18);
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  border-radius: 1px;
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.itag:hover {
+  border-color: rgba(192,144,10,0.5);
+  color: var(--text);
+}
+
+.itag.danger-tag {
+  border-color: rgba(192,144,10,0.3);
+  color: var(--amber);
+}
+
+/* ── PODERES ── */
+#poderes {
+  padding-bottom: 5rem;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(26,14,0,0.06),
+    transparent);
+}
+
+.powers-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  background: rgba(192,144,10,0.08);
+  border: 1px solid rgba(192,144,10,0.1);
+}
+
+.power-card {
+  background: rgba(3,3,8,0.96);
+  padding: 2rem 1.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.power-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent, rgba(192,144,10,0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.power-card:hover { background: rgba(10,7,0,0.98); }
+.power-card:hover::before { opacity: 1; }
+
+/* Card corrompido */
+.power-card.corrupted {
+  background: rgba(5,3,0,0.98);
+}
+
+.power-card.corrupted::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(106,56,0,0.03) 10px,
+    rgba(106,56,0,0.03) 11px
+  );
+  pointer-events: none;
+}
+
+.pcard-number {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: rgba(192,144,10,0.06);
+  position: absolute;
+  top: 0.5rem; right: 1rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.pcard-content { position: relative; z-index: 1; }
+
+.pcard-icon {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px var(--amber-glow));
+}
+
+.pcard-origin {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.4rem;
+  opacity: 0.8;
+}
+
+.pcard-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+}
+
+.pcard-desc {
+  font-size: 0.87rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+}
+
+.pcard-desc em {
+  color: var(--amber-bright);
+  font-style: normal;
+}
+
+.pcard-bar {
+  margin-top: 1.2rem;
+  height: 2px;
+  background: rgba(255,255,255,0.04);
+  overflow: hidden;
+}
+
+.pbar-fill {
+  height: 100%;
+  width: 0;
+  transition: width 1.5s ease;
+  border-radius: 1px;
+}
+
+/* ── O ABISMO ── */
+#abismo {
+  padding-bottom: 5rem;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(10,7,0,0.4),
+    rgba(3,3,8,0.6),
+    rgba(10,7,0,0.4),
+    transparent);
+}
+
+.abyss-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+#abyss-canvas {
+  width: 100%;
+  height: 300px;
+  display: block;
+  border: 1px solid rgba(192,144,10,0.1);
+  margin-bottom: 2.5rem;
+}
+
+.abyss-content { }
+
+.abyss-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: rgba(192,144,10,0.8);
+  line-height: 1.8;
+  text-align: center;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba(192,144,10,0.12);
+  background: rgba(10,7,0,0.5);
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.abyss-quote::before,
+.abyss-quote::after {
+  content: '';
+  position: absolute;
+  width: 20px; height: 20px;
+}
+
+.abyss-quote::before {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--amber);
+  border-left: 2px solid var(--amber);
+}
+
+.abyss-quote::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--amber);
+  border-right: 2px solid var(--amber);
+}
+
+.abyss-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.afact {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 1rem;
+  padding: 1.4rem;
+  border: 1px solid rgba(192,144,10,0.1);
+  background: rgba(10,7,0,0.4);
+  transition: border-color 0.3s;
+  align-items: start;
+}
+
+.afact:hover {
+  border-color: rgba(192,144,10,0.3);
+}
+
+.afact-icon {
+  font-size: 1.6rem;
+  text-align: center;
+  filter: drop-shadow(0 0 8px var(--amber-glow));
+}
+
+.afact-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--amber-bright);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.08em;
+}
+
+.afact-desc {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+.afact-desc strong { color: var(--gold-light); }
+
+/* ── HISTÓRIA ── */
+#historia { padding-bottom: 5rem; }
+
+.story-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.story-container::before {
+  content: '';
+  position: absolute;
+  left: 3.5rem;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent,
+    rgba(192,144,10,0.3),
+    rgba(192,144,10,0.5),
+    rgba(106,56,0,0.3),
+    transparent);
+}
+
+.story-chapter {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 2rem;
+  padding: 0 0 3rem;
+  position: relative;
+}
+
+.chapter-aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.chapter-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--amber);
+  text-shadow: 0 0 16px var(--amber-glow);
+  width: 42px; height: 42px;
+  border: 1px solid rgba(192,144,10,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3,3,8,0.9);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.chapter-line {
+  width: 1px;
+  flex: 1;
+  background: linear-gradient(to bottom,
+    rgba(192,144,10,0.3), transparent);
+}
+
+.chapter-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 0.4rem;
+  opacity: 0.8;
+}
+
+.chapter-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+.chapter-body p {
+  font-size: 0.98rem;
+  color: var(--text-dim);
+  line-height: 1.9;
+}
+
+/* ── GALERIA ── */
+#galeria { padding-bottom: 5rem; }
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 250px 250px;
+  gap: 1px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  background: rgba(192,144,10,0.07);
+}
+
+.gallery-item {
+  background-size: cover;
+  background-position: center;
+  background-color: var(--amber-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 50%,
+      rgba(192,144,10,0.12) 0%, transparent 70%);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  filter: brightness(0.55) saturate(0.45);
+  transition: filter 0.4s;
+}
+
+.gallery-item:hover {
+  filter: brightness(0.8) saturate(0.7);
+}
+
+.gallery-item.tall  { grid-row: span 2; }
+.gallery-item.wide  { grid-column: span 2; }
+
+.gitem-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(3,3,8,0.95) 0%, transparent 55%);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery-item:hover .gitem-overlay { opacity: 1; }
+
+.gitem-overlay span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber-bright);
+}
+
+.gallery-hint {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--text-dim);
+  opacity: 0.5;
+  padding: 0 2rem;
+}
+
+.gallery-hint code {
+  font-family: monospace;
+  color: var(--amber);
+  font-style: normal;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  padding: 5rem 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(192,144,10,0.12);
+  background: linear-gradient(to top,
+    rgba(10,7,0,0.8) 0%, transparent 100%);
+}
+
+.footer-inner { max-width: 600px; margin: 0 auto; }
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover { color: var(--amber-bright); }
+
+.footer-nav span { color: var(--gold-dim); opacity: 0.4; }
+
+.footer-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg,
+    #f0d080, #c0900a, #6a3800);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.8rem;
+}
+
+.footer-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  color: rgba(122,98,40,0.4);
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════
+   RESPONSIVO COMPLETO
+════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .identity-grid    { grid-template-columns: 260px 1fr; gap: 3rem; padding: 0 1.5rem; }
+  .powers-container { grid-template-columns: repeat(2, 1fr); padding: 0 1.5rem; }
+  .story-container  { padding: 0 1.5rem; }
+  .gallery-container { padding: 0 1.5rem; grid-template-rows: 220px 220px; }
+  .abyss-container  { padding: 0 1.5rem; }
+  .abyss-facts      { gap: 1.2rem; }
+  .section-header   { padding: 4rem 1.5rem 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  .section-header { padding: 3.5rem 1.5rem 2rem; }
+
+  .identity-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1.5rem;
+  }
+
+  .identity-photo-wrap {
+    position: static !important;
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  .identity-photo { aspect-ratio: 3 / 3.5; }
+  .identity-text p { font-size: 0.97rem; }
+
+  .powers-container {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+
+  .power-card { padding: 1.8rem 1.5rem; }
+
+  .abyss-container { padding: 0 1.5rem; }
+  #abyss-canvas    { height: 220px; }
+
+  .abyss-facts {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .story-container { padding: 0 1.5rem; }
+  .story-container::before { left: 2.8rem; }
+
+  .story-chapter {
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .chapter-num   { width: 36px; height: 36px; font-size: 1.1rem; }
+  .chapter-title { font-size: 1rem; }
+
+  .gallery-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: 180px 180px 180px !important;
+    padding: 0 1.5rem;
+  }
+
+  .gallery-item.tall { grid-row: span 1 !important; }
+  .gallery-item.wide { grid-column: span 2 !important; }
+  .gitem-overlay { opacity: 1; }
+
+  footer { padding: 3.5rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .section-header { padding: 3rem 1.2rem 1.8rem; }
+  .section-title  { font-size: clamp(1.3rem,6vw,2rem); }
+
+  .identity-grid       { padding: 0 1.2rem; gap: 1.5rem; }
+  .identity-photo-wrap { max-width: 220px; }
+  .identity-photo      { aspect-ratio: 1 / 1; }
+  .identity-text p     { font-size: 0.93rem; }
+  .identity-tags       { gap: 0.35rem; }
+  .itag { font-size: 0.48rem !important; padding: 0.2rem 0.5rem !important; }
+
+  .powers-container { padding: 0 1.2rem; }
+  .power-card       { padding: 1.5rem 1.2rem; }
+  .pcard-name       { font-size: 0.84rem; }
+  .pcard-desc       { font-size: 0.83rem; }
+
+  .abyss-container  { padding: 0 1.2rem; }
+  #abyss-canvas     { height: 180px; }
+  .abyss-quote      { font-size: 0.92rem; padding: 1.2rem 1.2rem; }
+  .afact            { grid-template-columns: 36px 1fr; padding: 1.1rem; }
+  .afact-icon       { font-size: 1.3rem; }
+  .afact-title      { font-size: 0.7rem; }
+  .afact-desc       { font-size: 0.84rem; }
+
+  .story-container  { padding: 0 1.2rem; }
+  .story-container::before { left: 2.4rem; }
+  .story-chapter    { grid-template-columns: 52px 1fr; gap: 1.2rem; padding-bottom: 2rem; }
+  .chapter-num      { width: 32px; height: 32px; font-size: 0.95rem; }
+  .chapter-title    { font-size: 0.95rem; }
+  .chapter-body p   { font-size: 0.88rem; }
+
+  .gallery-container {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 140px 140px 140px !important;
+    padding: 0 1.2rem;
+  }
+
+  .gallery-hint { font-size: 0.75rem; padding: 0 1.2rem; }
+
+  footer { padding: 2.5rem 1.2rem; }
+  .footer-nav { flex-direction: column; gap: 0.5rem; }
+  .footer-nav span { display: none; }
+  .footer-name  { font-size: 1.1rem; }
+  .footer-quote { font-size: 0.88rem; }
+}
+
+@media (max-width: 360px) {
+  .identity-photo-wrap { max-width: 190px; }
+
+  .gallery-container {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+
+  .gallery-item {
+    height: 180px !important;
+    grid-row: span 1 !important;
+    grid-column: span 1 !important;
+  }
+
+  .story-chapter { grid-template-columns: 46px 1fr; }
+  .chapter-num   { width: 28px; height: 28px; font-size: 0.85rem; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .gitem-overlay { opacity: 1; }
+  .power-card:hover { background: rgba(3,3,8,0.96); }
+  .afact:hover { border-color: rgba(192,144,10,0.1); }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .section-header   { padding: 2.5rem 1.5rem 1.5rem; }
+  .story-chapter    { padding-bottom: 1.8rem; }
+  .powers-container { grid-template-columns: repeat(2,1fr); }
+  .abyss-facts      { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<canvas id="cosmos-bg"></canvas>
+<div id="noise-overlay"></div>
+
+<!-- CORRUPÇÃO DE FUNDO -->
+<div id="corruption-overlay"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="logo.jpg" alt="Logo">
+  </a>
+  <a href="viloes.html">← Vilões</a>
+  <a href="#identidade">Identidade</a>
+  <a href="#poderes">Poderes</a>
+  <a href="#abismo">O Abismo</a>
+  <a href="#historia">História</a>
+  <a href="#galeria">Galeria</a>
+</nav>
+
+<!-- BANNER -->
+<section id="banner">
+  <div class="banner-bg"
+    style="background-image: url('valar-banner.jpg')">
+  </div>
+  <div class="banner-overlay"></div>
+  <div class="banner-vignette"></div>
+
+  <!-- Grade de corrupção -->
+  <div class="corruption-grid">
+    <canvas id="corruption-canvas"></canvas>
+  </div>
+
+  <div class="banner-content">
+    <div class="banner-tag">
+      <span class="tag-line"></span>
+      <span class="tag-text">
+        Primeiro Mestre Deificado · Corrompido · Aprisionado
+      </span>
+      <span class="tag-line"></span>
+    </div>
+
+    <h1 class="banner-name" data-text="Valar">
+      Valar
+    </h1>
+
+    <div class="banner-era">
+      <span class="era-text">
+        O que foi antes de tudo — e o que aguarda além do abismo
+      </span>
+    </div>
+
+    <div class="banner-divider">
+      <span class="divider-line"></span>
+      <span class="divider-symbol">⛧</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <p class="banner-quote">
+      "Ele foi o primeiro a alcançar o que os seis se tornaram.<br>
+      E foi exatamente isso que o destruiu."
+    </p>
+
+    <div class="banner-stats">
+      <div class="bstat">
+        <span class="bstat-val">Triplo</span>
+        <span class="bstat-label">Domínio</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Deificado</span>
+        <span class="bstat-label">Condição</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Corrompido</span>
+        <span class="bstat-label">Estado</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">O Abismo</span>
+        <span class="bstat-label">Prisão</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner-bottom-bar"></div>
+  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+</section>
+
+<!-- IDENTIDADE -->
+<section id="identidade">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">O Primeiro</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">
+      A Identidade de <span>Valar</span>
+    </h2>
+  </div>
+
+  <div class="identity-grid reveal">
+    <div class="identity-photo-wrap">
+      <div class="identity-photo"
+        style="background-image: url('valar-perfil.jpg')">
+        <div class="photo-scanlines"></div>
+        <div class="photo-corruption"></div>
+        <div class="photo-corner tl"></div>
+        <div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div>
+        <div class="photo-corner br"></div>
+        <div class="photo-glow"></div>
+        <div class="photo-label">Valar · O Primeiro Deificado</div>
+      </div>
+
+      <div class="identity-card">
+        <div class="icard-title">Registro do Criador</div>
+        <div class="icard-row">
+          <span class="icard-key">Classificação</span>
+          <span class="icard-val">Deus Corrompido</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Era</span>
+          <span class="icard-val">Anterior à Divisão</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Domínio</span>
+          <span class="icard-val">Elemental · Humano · Espiritual</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Corrupção</span>
+          <span class="icard-val danger">Forças das Trevas</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Prisão</span>
+          <span class="icard-val danger">Abismo do Outro Lado</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Status</span>
+          <span class="icard-val danger">Aprisionado</span>
+        </div>
+        <div class="icard-row">
+          <span class="icard-key">Ameaça</span>
+          <span class="icard-val danger">Existencial · Latente</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="identity-text">
+      <p>Em uma era anterior à divisão dos três pilares, existia Valar — o primeiro e único ser a alcançar a <em>deificação completa</em> carregando simultaneamente os domínios Elemental, Humano e Espiritual em um único corpo. Uma façanha que o universo nunca havia visto e nunca deveria ter permitido.</p>
+
+      <p>Aparentemente um homem de meia idade — cabelos longos e grisalhos, vitalidade física que envergonharia qualquer militar treinado. Frio, calculista, com olhos que operam décadas à frente do presente. Mas a aparência é apenas a camada mais superficial de algo incompreensivelmente mais antigo.</p>
+
+      <p>Algo o encontrou no ápice. As <strong>forças das trevas</strong> — de origem desconhecida, anterior a qualquer registro existente — corromperam o que deveria ter sido a maior conquista da existência. O Criador não hesitou: aprisionou Valar num <em>abismo profundo do outro lado</em>, onde sua influência seria inexistente e seu poder, inerte.</p>
+
+      <p>Mas o abismo não é eterno. E Valar é, acima de tudo, <strong>paciente</strong>. O que o universo chamou de prisão, ele chama de espera.</p>
+
+      <div class="identity-tags">
+        <span class="itag">Primeiro Deificado</span>
+        <span class="itag danger-tag">Corrompido</span>
+        <span class="itag">Domínio Triplo</span>
+        <span class="itag danger-tag">Aprisionado</span>
+        <span class="itag">Estrategista</span>
+        <span class="itag danger-tag">Forças das Trevas</span>
+        <span class="itag">Ancião</span>
+        <span class="itag danger-tag">Ameaça Latente</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PODERES -->
+<section id="poderes">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">Arsenal deificado</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">
+      Poderes & <span>Corrupção</span>
+    </h2>
+  </div>
+
+  <div class="powers-container reveal">
+
+    <div class="power-card">
+      <div class="pcard-number">01</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">🌍</div>
+        <div class="pcard-origin">Domínio Deificado</div>
+        <div class="pcard-name">Mestre Elemental Deificado</div>
+        <div class="pcard-desc">Controle absoluto sobre os quatro elementos em sua forma mais pura e devastadora — amplificado pela deificação. Valar não manipula elementos. Ele os <em>reescreve</em>. Um gesto pode alterar a composição elementar de uma região inteira.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="95"
+            style="background: linear-gradient(90deg, #3a2800, #c0900a)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card">
+      <div class="pcard-number">02</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">👤</div>
+        <div class="pcard-origin">Domínio Deificado</div>
+        <div class="pcard-name">Mestre Humano Deificado</div>
+        <div class="pcard-desc">O potencial humano elevado à condição divina. Valar representa o teto absoluto do que um ser pode se tornar através da vontade e superação — sem os limites morais que o verdadeiro Mestre Humano carregaria. Força, velocidade e resistência além de qualquer parâmetro conhecido.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="97"
+            style="background: linear-gradient(90deg, #3a2800, #c0900a)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card">
+      <div class="pcard-number">03</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">👁️</div>
+        <div class="pcard-origin">Domínio Deificado</div>
+        <div class="pcard-name">Mestre Espiritual Deificado</div>
+        <div class="pcard-desc">Acesso total ao plano espiritual em sua condição divina. Valar percebe e opera em todas as camadas da existência simultaneamente. Sua consciência espiritual não tem fronteiras — ele sente eventos antes que aconteçam, em qualquer plano da realidade.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="98"
+            style="background: linear-gradient(90deg, #3a2800, #c0900a)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card corrupted">
+      <div class="pcard-number">04</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">⚫</div>
+        <div class="pcard-origin">Corrupção · Origem Desconhecida</div>
+        <div class="pcard-name">Força das Trevas</div>
+        <div class="pcard-desc">A corrupção que o Criador considerou ameaça suficiente para agir pessoalmente. De origem anterior a qualquer registro, as forças das trevas distorceram cada um dos três domínios de Valar em versões corrompidas de si mesmos — mais poderosas, mais instáveis, e fundamentalmente opostas ao equilíbrio.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="100"
+            style="background: linear-gradient(90deg, #1a0a00, #6a3000)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card">
+      <div class="pcard-number">05</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">🧠</div>
+        <div class="pcard-origin">Mente Deificada</div>
+        <div class="pcard-name">Estratégia Absoluta</div>
+        <div class="pcard-desc">Frio. Calculista. Uma mente que opera décadas à frente de qualquer oponente. Valar não reage — antecipa. Cada ação que toma é parte de um plano maior cujo horizonte nenhum outro ser consegue enxergar. O aprisionamento não interrompeu o planejamento. Apenas lhe deu mais tempo.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="99"
+            style="background: linear-gradient(90deg, #3a2800, #c0900a)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="power-card corrupted">
+      <div class="pcard-number">06</div>
+      <div class="pcard-content">
+        <div class="pcard-icon">♾️</div>
+        <div class="pcard-origin">Existência Deificada</div>
+        <div class="pcard-name">Vitalidade Além dos Limites</div>
+        <div class="pcard-desc">Um corpo que envergonharia qualquer militar treinado — com a aparência de meia-idade e a vitalidade de algo que nunca envelhece. A deificação tornou Valar imune ao tempo em todos os sentidos. Séculos de aprisionamento não deixaram marca física. Apenas afiaram o que já era cortante.</div>
+        <div class="pcard-bar">
+          <div class="pbar-fill" data-width="96"
+            style="background: linear-gradient(90deg, #3a2800, #c0900a)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- O ABISMO -->
+<section id="abismo">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">A prisão eterna</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">O <span>Abismo</span></h2>
+  </div>
+
+  <div class="abyss-container reveal">
+    <canvas id="abyss-canvas"></canvas>
+
+    <div class="abyss-content">
+      <div class="abyss-quote">
+        "O Criador não o destruiu. Destruir seria misericórdia.<br>
+        O aprisionou onde nada além de si mesmo existe."
+      </div>
+
+      <div class="abyss-facts">
+        <div class="afact">
+          <div class="afact-icon">🕳️</div>
+          <div class="afact-text">
+            <div class="afact-title">Localização</div>
+            <div class="afact-desc">Um abismo profundo no outro lado — além dos planos conhecidos, além do alcance de qualquer entidade que não seja o próprio Criador.</div>
+          </div>
+        </div>
+        <div class="afact">
+          <div class="afact-icon">⛓️</div>
+          <div class="afact-text">
+            <div class="afact-title">A Sentença</div>
+            <div class="afact-desc">Aprisionado onde sua influência seria inexistente e seu poder, inerte. Não há paredes no abismo — apenas ausência absoluta de tudo que não seja o próprio Valar.</div>
+          </div>
+        </div>
+        <div class="afact">
+          <div class="afact-icon">⏳</div>
+          <div class="afact-text">
+            <div class="afact-title">O Tempo</div>
+            <div class="afact-desc">O abismo não tem dia nem noite, não tem começo nem fim perceptível. Valar existe nele há eras. E continua planejando.</div>
+          </div>
+        </div>
+        <div class="afact">
+          <div class="afact-icon">⚠️</div>
+          <div class="afact-text">
+            <div class="afact-title">A Ameaça Latente</div>
+            <div class="afact-desc">O abismo não é eterno. Nada criado é. E Valar é, acima de qualquer outra característica, <strong>paciente</strong>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTÓRIA -->
+<section id="historia">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">Trajetória corrompida</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">A História de <span>Valar</span></h2>
+  </div>
+
+  <div class="story-container">
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">I</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">A Era dos Três Pilares</div>
+        <h3 class="chapter-title">Quando Tudo Cabia em Um</h3>
+        <p>Numa era anterior à necessidade de dividir os três domínios entre três seres distintos, existia Valar. Não havia regra que impedisse um único ser de carregar os três pilares — porque ninguém havia tentado antes. Ele não tentou. Ele simplesmente os alcançou, um por um, até que todos os três coexistissem nele como partes de um todo coerente.</p>
+      </div>
+    </div>
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">II</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">O Ápice</div>
+        <h3 class="chapter-title">A Deificação</h3>
+        <p>A deificação de Valar foi o momento mais extraordinário que o universo havia testemunhado até então. Três domínios, um único ser, poder que transcendia qualquer definição anterior. O Criador observou. O universo reconheceu. E por um breve período, Valar representou o que a existência era capaz de produzir quando todas as suas forças convergiam num único ponto.</p>
+      </div>
+    </div>
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">III</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">A Corrupção</div>
+        <h3 class="chapter-title">O que Veio das Trevas</h3>
+        <p>Ninguém sabe o que são as forças das trevas. Anteriores a qualquer registro, de origem que nem o Criador revelou. O que se sabe é o resultado: no ápice de seu poder, Valar foi encontrado por algo que não deveria existir. A corrupção não o destruiu. Fez algo pior — transformou cada um de seus três domínios em versões distorcidas de si mesmos.</p>
+      </div>
+    </div>
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">IV</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">A Intervenção</div>
+        <h3 class="chapter-title">O Criador Age</h3>
+        <p>O Criador raramente age diretamente. A existência de Valar corrompido foi uma das exceções. A ameaça era suficientemente existencial para justificar intervenção pessoal — e a sentença foi o abismo profundo do outro lado, onde nenhuma influência de Valar poderia alcançar o mundo que o Criador havia construído.</p>
+      </div>
+    </div>
+
+    <div class="story-chapter reveal">
+      <div class="chapter-aside">
+        <div class="chapter-num">V</div>
+        <div class="chapter-line"></div>
+      </div>
+      <div class="chapter-body">
+        <div class="chapter-label">O Abismo</div>
+        <h3 class="chapter-title">A Espera Infinita</h3>
+        <p>Valar existe no abismo há eras. Sem dia, sem noite, sem interação, sem nada além de si mesmo. Qualquer outro ser teria se fragmentado. Valar usou cada momento para refinar sua estratégia, para compreender a corrupção que carrega, para planejar o que acontecerá quando — não se — o abismo encontrar sua fissura. O universo chama isso de prisão. Valar chama de preparação.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">Registros visuais</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">Galeria de <span>Valar</span></h2>
+  </div>
+
+  <div class="gallery-container reveal">
+    <div class="gallery-item tall"
+      style="background-image: url('valar-01.jpg')">
+      <div class="gitem-overlay">
+        <span>Valar · O Primeiro Deificado</span>
+      </div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('valar-02.jpg')">
+      <div class="gitem-overlay"><span>A Deificação</span></div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('valar-03.jpg')">
+      <div class="gitem-overlay"><span>A Corrupção</span></div>
+    </div>
+    <div class="gallery-item wide"
+      style="background-image: url('valar-04.jpg')">
+      <div class="gitem-overlay">
+        <span>O Abismo · A Espera Eterna</span>
+      </div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('valar-05.jpg')">
+      <div class="gitem-overlay"><span>Domínio Triplo</span></div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('valar-06.jpg')">
+      <div class="gitem-overlay">
+        <span>Forças das Trevas</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="gallery-hint reveal">
+    Substitua <code>valar-01.jpg</code> até <code>valar-06.jpg</code>
+    pelas imagens do personagem.
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-nav">
+      <a href="besta.html">← A Besta</a>
+      <span>·</span>
+      <a href="viloes.html">Todos os Vilões</a>
+      <span>·</span>
+      <a href="home.html">Início →</a>
+    </div>
+    <div class="footer-name">Valar</div>
+    <div class="footer-quote">
+      "O poder sem o alicerce certo não é conquista.<br>
+      É condenação. E ele foi o primeiro a provar isso."
+    </div>
+    <div class="footer-copy">
+      O Diário de um Deus · Todos os direitos reservados
+    </div>
+  </div>
+</footer>
+<script src="effects.js"></script>
+<script>
+/* ════════════════════════════════════
+   VALAR — JAVASCRIPT COMPLETO
+   Canvas · Abismo · Corrupção · Lightbox
+════════════════════════════════════ */
+
+/* ── COSMOS CANVAS ── */
+(function () {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx    = canvas.getContext('2d');
+  let W, H, stars = [], nebulas = [], corruption = [], embers = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    /* Estrelas âmbar/escuras */
+    stars = [];
+    for (let i = 0; i < 210; i++) {
+      stars.push({
+        x:       Math.random() * W,
+        y:       Math.random() * H,
+        r:       Math.random() * 1.4 + 0.2,
+        a:       Math.random() * 0.5 + 0.1,
+        speed:   Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+
+    /* Névoas corrompidas */
+    nebulas = [];
+    const colors = [
+      'rgba(26,14,0,',
+      'rgba(192,144,10,',
+      'rgba(106,56,0,',
+      'rgba(60,30,0,',
+      'rgba(40,20,0,'
+    ];
+    for (let i = 0; i < 5; i++) {
+      nebulas.push({
+        x:     Math.random() * W,
+        y:     Math.random() * H,
+        r:     Math.random() * 360 + 160,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a:     Math.random() * 0.07 + 0.02
+      });
+    }
+
+    /* Linhas de corrupção */
+    corruption = [];
+    for (let i = 0; i < 8; i++) {
+      corruption.push(newCorruptLine());
+    }
+
+    /* Brasas douradas corrompidas */
+    embers = [];
+    for (let i = 0; i < 25; i++) {
+      embers.push({
+        x:      Math.random() * W,
+        y:      Math.random() * H,
+        r:      Math.random() * 1.6 + 0.3,
+        a:      Math.random() * 0.5 + 0.1,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: -(Math.random() * 0.4 + 0.08),
+        life:   Math.random(),
+        decay:  Math.random() * 0.003 + 0.001,
+        corrupt: Math.random() > 0.6
+      });
+    }
+  }
+
+  function newCorruptLine() {
+    const y = Math.random() * H;
+    return {
+      y,
+      width:  Math.random() * W * 0.4 + W * 0.1,
+      x:      Math.random() * W,
+      a:      Math.random() * 0.12 + 0.02,
+      life:   Math.random(),
+      decay:  Math.random() * 0.003 + 0.001,
+      speed:  (Math.random() - 0.5) * 0.3,
+      height: Math.random() * 1.5 + 0.3
+    };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Fundo âmbar escuro */
+    const bg = ctx.createRadialGradient(
+      W * 0.5, H * 0.4, 0,
+      W * 0.5, H * 0.4, Math.max(W, H)
+    );
+    bg.addColorStop(0,   '#0a0600');
+    bg.addColorStop(0.3, '#060400');
+    bg.addColorStop(0.7, '#030308');
+    bg.addColorStop(1,   '#020205');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Névoas */
+    nebulas.forEach(n => {
+      const grad = ctx.createRadialGradient(
+        n.x, n.y, 0, n.x, n.y, n.r
+      );
+      grad.addColorStop(0, n.color + n.a + ')');
+      grad.addColorStop(1, n.color + '0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    /* Estrelas */
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(210,180,120,${alpha})`;
+      ctx.fill();
+    });
+
+    /* Linhas de corrupção horizontais */
+    corruption.forEach((c, i) => {
+      c.x    += c.speed;
+      c.life -= c.decay;
+
+      if (c.x > W + c.width) c.x = -c.width;
+      if (c.x < -c.width)    c.x = W + c.width;
+
+      if (c.life <= 0) {
+        corruption[i] = newCorruptLine();
+        return;
+      }
+
+      const alpha = c.a * c.life;
+      const grad  = ctx.createLinearGradient(
+        c.x, c.y, c.x + c.width, c.y
+      );
+      grad.addColorStop(0,   'rgba(192,144,10,0)');
+      grad.addColorStop(0.3, `rgba(192,144,10,${alpha})`);
+      grad.addColorStop(0.7, `rgba(106,56,0,${alpha})`);
+      grad.addColorStop(1,   'rgba(106,56,0,0)');
+
+      ctx.fillStyle = grad;
+      ctx.fillRect(c.x, c.y - c.height / 2, c.width, c.height);
+
+      /* Núcleo brilhante */
+      ctx.fillStyle =
+        `rgba(224,176,32,${alpha * 0.4})`;
+      ctx.fillRect(
+        c.x + c.width * 0.3,
+        c.y - c.height * 0.25,
+        c.width * 0.4,
+        c.height * 0.5
+      );
+    });
+
+    /* Brasas corrompidas */
+    embers.forEach(p => {
+      p.x    += p.speedX;
+      p.y    += p.speedY;
+      p.life -= p.decay;
+
+      if (p.life <= 0 || p.y < -10) {
+        p.x      = Math.random() * W;
+        p.y      = H + 10;
+        p.life   = 1;
+        p.speedX = (Math.random() - 0.5) * 0.3;
+        p.speedY = -(Math.random() * 0.4 + 0.08);
+        p.corrupt = Math.random() > 0.6;
+      }
+
+      const alpha = p.a * p.life;
+      const color = p.corrupt
+        ? `rgba(106,56,0,${alpha})`
+        : `rgba(192,144,10,${alpha})`;
+      const coreColor = p.corrupt
+        ? `rgba(160,80,20,${alpha * 1.4})`
+        : `rgba(240,200,80,${alpha * 1.4})`;
+
+      const grad = ctx.createRadialGradient(
+        p.x, p.y, 0, p.x, p.y, p.r * 5
+      );
+      grad.addColorStop(0, color);
+      grad.addColorStop(1, 'rgba(26,14,0,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = coreColor;
+      ctx.fill();
+    });
+
+    /* Véu âmbar central */
+    const veil = ctx.createRadialGradient(
+      W * 0.5, H * 0.5, 0,
+      W * 0.5, H * 0.5, H * 0.7
+    );
+    veil.addColorStop(0,   'rgba(192,144,10,0.04)');
+    veil.addColorStop(0.5, 'rgba(106,56,0,0.02)');
+    veil.addColorStop(1,   'rgba(3,3,8,0)');
+    ctx.fillStyle = veil;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Brilho âmbar no rodapé */
+    const horizon = ctx.createLinearGradient(0, H * 0.8, 0, H);
+    horizon.addColorStop(0, 'transparent');
+    horizon.addColorStop(1, 'rgba(26,14,0,0.1)');
+    ctx.fillStyle = horizon;
+    ctx.fillRect(0, H * 0.8, W, H * 0.2);
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize();
+  init();
+  draw();
+})();
+
+/* ── CANVAS DE CORRUPÇÃO NO BANNER ── */
+(function () {
+  const canvas = document.getElementById('corruption-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, lines = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function initLines() {
+    lines = [];
+    for (let i = 0; i < 20; i++) {
+      lines.push({
+        y:     Math.random() * H,
+        x:    -Math.random() * W,
+        w:     Math.random() * W * 0.3 + 50,
+        speed: Math.random() * 0.8 + 0.2,
+        a:     Math.random() * 0.4 + 0.1,
+        h:     Math.random() * 2 + 0.5
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    lines.forEach(l => {
+      l.x += l.speed;
+      if (l.x > W) {
+        l.x = -l.w;
+        l.y = Math.random() * H;
+      }
+
+      const grad = ctx.createLinearGradient(l.x, 0, l.x + l.w, 0);
+      grad.addColorStop(0,   'rgba(192,144,10,0)');
+      grad.addColorStop(0.4, `rgba(192,144,10,${l.a})`);
+      grad.addColorStop(0.6, `rgba(224,176,32,${l.a * 0.8})`);
+      grad.addColorStop(1,   'rgba(106,56,0,0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(l.x, l.y, l.w, l.h);
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => {
+    resize(); initLines();
+  }, { passive: true });
+
+  resize();
+  initLines();
+  draw();
+})();
+
+/* ── CANVAS DO ABISMO ── */
+(function () {
+  const canvas = document.getElementById('abyss-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], rings = [];
+  let active = false;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function init() {
+    /* Partículas sugadas para o centro */
+    particles = [];
+    for (let i = 0; i < 80; i++) {
+      particles.push(newParticle());
+    }
+
+    /* Anéis do abismo */
+    rings = [];
+    for (let i = 0; i < 5; i++) {
+      rings.push({
+        r:      (i + 1) * (Math.min(W, H) * 0.08),
+        a:      0.3 - i * 0.05,
+        pulse:  i * (Math.PI * 0.4),
+        pSpeed: 0.008 + i * 0.003
+      });
+    }
+  }
+
+  function newParticle() {
+    const angle = Math.random() * Math.PI * 2;
+    const dist  = Math.random() * Math.min(W, H) * 0.45;
+    return {
+      x:    W / 2 + Math.cos(angle) * dist,
+      y:    H / 2 + Math.sin(angle) * dist,
+      r:    Math.random() * 1.5 + 0.3,
+      a:    Math.random() * 0.6 + 0.1,
+      angle,
+      dist,
+      speed: Math.random() * 0.008 + 0.003
+    };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    const cx = W / 2;
+    const cy = H / 2;
+
+    /* Fundo do abismo */
+    const bg = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(W,H) * 0.5);
+    bg.addColorStop(0,   '#000000');
+    bg.addColorStop(0.3, '#0a0600');
+    bg.addColorStop(0.7, '#030308');
+    bg.addColorStop(1,   '#020205');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Anéis do abismo */
+    rings.forEach(ring => {
+      ring.pulse += ring.pSpeed;
+      const alpha = ring.a * (0.5 + 0.5 * Math.sin(ring.pulse));
+      const pulseR = ring.r * (1 + 0.1 * Math.sin(ring.pulse));
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, pulseR, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(192,144,10,${alpha * 0.4})`;
+      ctx.lineWidth   = 0.8;
+      ctx.stroke();
+
+      /* Anel interno brilhante */
+      ctx.beginPath();
+      ctx.arc(cx, cy, pulseR * 0.95, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(224,176,32,${alpha * 0.15})`;
+      ctx.lineWidth   = 0.4;
+      ctx.stroke();
+    });
+
+    /* Buraco central do abismo */
+    const hole = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(W,H) * 0.12);
+    hole.addColorStop(0,   'rgba(0,0,0,1)');
+    hole.addColorStop(0.6, 'rgba(5,3,0,0.9)');
+    hole.addColorStop(1,   'rgba(10,6,0,0)');
+    ctx.fillStyle = hole;
+    ctx.beginPath();
+    ctx.arc(cx, cy, Math.min(W,H) * 0.15, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* Partículas sendo sugadas */
+    particles.forEach(p => {
+      /* Move em direção ao centro */
+      p.dist  = Math.max(0, p.dist - p.speed * p.dist * 0.015);
+      p.x     = cx + Math.cos(p.angle) * p.dist;
+      p.y     = cy + Math.sin(p.angle) * p.dist;
+      p.angle += 0.008;
+
+      if (p.dist < 3) {
+        /* Renascimento */
+        const angle = Math.random() * Math.PI * 2;
+        const dist  = Math.min(W, H) * (0.3 + Math.random() * 0.2);
+        p.angle = angle;
+        p.dist  = dist;
+        p.x     = cx + Math.cos(angle) * dist;
+        p.y     = cy + Math.sin(angle) * dist;
+      }
+
+      const alpha  = p.a * (p.dist / (Math.min(W, H) * 0.45));
+      const isGold = p.dist > Math.min(W, H) * 0.2;
+
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+      grad.addColorStop(0, isGold
+        ? `rgba(192,144,10,${alpha})`
+        : `rgba(106,56,0,${alpha})`);
+      grad.addColorStop(1, 'rgba(3,3,8,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = isGold
+        ? `rgba(224,176,32,${alpha * 1.4})`
+        : `rgba(160,80,20,${alpha * 1.2})`;
+      ctx.fill();
+    });
+
+    /* Texto "ABISMO" ao centro */
+    ctx.save();
+    ctx.globalAlpha = 0.06;
+    ctx.font = `${Math.min(W, H) * 0.12}px 'Cinzel Decorative', serif`;
+    ctx.fillStyle = '#c0900a';
+    ctx.textAlign  = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('ABISMO', cx, cy);
+    ctx.restore();
+
+    requestAnimationFrame(draw);
+  }
+
+  /* Ativa ao entrar na viewport */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !active) {
+        active = true;
+        resize();
+        init();
+        draw();
+      }
+    });
+  }, { threshold: 0.2 });
+
+  io.observe(canvas);
+
+  window.addEventListener('resize', () => {
+    if (active) resize();
+  }, { passive: true });
+})();
+
+/* ── PARALLAX DO BANNER ── */
+(function () {
+  const bg = document.querySelector('.banner-bg');
+  if (!bg) return;
+
+  const img = new Image();
+  img.onload = () => bg.classList.add('loaded');
+  const url = bg.style.backgroundImage
+    .replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+  if (url && url !== 'none') img.src = url;
+
+  const mq = window.matchMedia('(min-width: 769px)');
+
+  window.addEventListener('scroll', () => {
+    if (!mq.matches) return;
+    const scrollY = window.scrollY;
+    if (scrollY <= window.innerHeight) {
+      bg.style.transform =
+        `scale(1.05) translateY(${scrollY * 0.22}px)`;
+    }
+  }, { passive: true });
+})();
+
+/* ── SCROLL REVEAL ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  const io  = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── BARRAS DE PODER ── */
+(function () {
+  const bars = document.querySelectorAll('.pbar-fill');
+  const io   = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const bar    = e.target;
+        const target = bar.getAttribute('data-width');
+        setTimeout(() => { bar.style.width = target + '%'; }, 200);
+        io.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.4 });
+  bars.forEach(b => io.observe(b));
+})();
+
+/* ── EFEITO DE CORRUPÇÃO AO ROLAR ── */
+(function () {
+  let corruptActive = false;
+
+  window.addEventListener('scroll', () => {
+    const scrollPct = window.scrollY /
+      (document.body.scrollHeight - window.innerHeight);
+
+    /* Aumenta corrupção conforme rola */
+    const overlay = document.getElementById('corruption-overlay');
+    if (overlay) {
+      overlay.style.opacity = Math.min(scrollPct * 3, 1) * 0.06 + '';
+    }
+  }, { passive: true });
+})();
+
+/* ── EFEITO NOS CARDS DO ABISMO ── */
+(function () {
+  const facts = document.querySelectorAll('.afact');
+
+  facts.forEach(fact => {
+    fact.addEventListener('mouseenter', () => {
+      fact.style.boxShadow =
+        'inset 0 0 20px rgba(26,14,0,0.2), ' +
+        '0 0 15px rgba(192,144,10,0.08)';
+    });
+    fact.addEventListener('mouseleave', () => {
+      fact.style.boxShadow = '';
+    });
+  });
+})();
+
+/* ── EFEITO NOS CARDS DE PODER ── */
+(function () {
+  const cards = document.querySelectorAll('.power-card');
+
+  cards.forEach(card => {
+    const isCorrupted = card.classList.contains('corrupted');
+
+    card.addEventListener('mouseenter', () => {
+      card.style.boxShadow = isCorrupted
+        ? 'inset 0 0 30px rgba(106,56,0,0.15), 0 0 20px rgba(106,56,0,0.1)'
+        : 'inset 0 0 30px rgba(26,14,0,0.12), 0 0 20px rgba(192,144,10,0.08)';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.boxShadow = '';
+    });
+  });
+})();
+
+/* ── LIGHTBOX DA GALERIA ── */
+(function () {
+  const items = document.querySelectorAll('.gallery-item');
+  if (!items.length) return;
+
+  const lb = document.createElement('div');
+  lb.id = 'lightbox';
+  lb.innerHTML = `
+    <div id="lb-backdrop"></div>
+    <div id="lb-box">
+      <button id="lb-prev">&#8592;</button>
+      <div id="lb-img-wrap">
+        <div id="lb-img"></div>
+        <div id="lb-caption"></div>
+      </div>
+      <button id="lb-next">&#8594;</button>
+      <button id="lb-close">&#x2715;</button>
+    </div>
+  `;
+  document.body.appendChild(lb);
+
+  const style = document.createElement('style');
+  style.textContent = `
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox.active { display: flex; }
+    #lb-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(8,5,0,0.97);
+      backdrop-filter: blur(14px);
+    }
+    #lb-box {
+      position: relative; z-index: 1;
+      display: flex; align-items: center;
+      gap: 1.5rem;
+      max-width: 90vw; max-height: 90vh;
+    }
+    #lb-img-wrap {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 1rem;
+    }
+    #lb-img {
+      width: min(700px, 80vw);
+      height: min(500px, 70vh);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #0a0600;
+      border: 1px solid rgba(192,144,10,0.22);
+      box-shadow:
+        0 0 60px rgba(26,14,0,0.3),
+        0 0 120px rgba(192,144,10,0.06);
+      filter: brightness(0.88) saturate(0.6);
+    }
+    #lb-caption {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #c0900a;
+    }
+    #lb-prev, #lb-next, #lb-close {
+      background: none;
+      border: 1px solid rgba(192,144,10,0.25);
+      color: #c0900a;
+      font-size: 1.2rem;
+      width: 44px; height: 44px;
+      min-width: 44px; min-height: 44px;
+      cursor: pointer;
+      display: flex; align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+      flex-shrink: 0;
+    }
+    #lb-prev:hover, #lb-next:hover, #lb-close:hover {
+      border-color: #c0900a;
+      color: #f0d080;
+      box-shadow: 0 0 16px rgba(192,144,10,0.4);
+    }
+    #lb-close {
+      position: absolute;
+      top: -3rem; right: 0;
+    }
+    @media (max-width: 768px) {
+      #lb-box { gap: 0.8rem; max-width: 95vw; }
+      #lb-img {
+        width: 85vw !important;
+        height: 60vw !important;
+        min-height: 200px;
+      }
+      #lb-close { top: -2.8rem; }
+    }
+    @media (max-width: 480px) {
+      #lb-img { width: 90vw !important; height: 65vw !important; }
+      #lb-prev, #lb-next {
+        width: 36px !important; height: 36px !important;
+        min-width: 36px !important; min-height: 36px !important;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  const data = Array.from(items).map(el => ({
+    bg:      el.style.backgroundImage,
+    caption: el.querySelector('.gitem-overlay span')
+               ?.textContent || ''
+  }));
+
+  let current = 0;
+
+  function open(i) {
+    current = i; show();
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function show() {
+    document.getElementById('lb-img').style.backgroundImage =
+      data[current].bg;
+    document.getElementById('lb-caption').textContent =
+      data[current].caption;
+  }
+
+  function close() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function prev() {
+    current = (current - 1 + data.length) % data.length;
+    show();
+  }
+
+  function next() {
+    current = (current + 1) % data.length;
+    show();
+  }
+
+  items.forEach((el, i) =>
+    el.addEventListener('click', () => open(i))
+  );
+
+  document.getElementById('lb-close')
+    .addEventListener('click', close);
+  document.getElementById('lb-backdrop')
+    .addEventListener('click', close);
+  document.getElementById('lb-prev')
+    .addEventListener('click', prev);
+  document.getElementById('lb-next')
+    .addEventListener('click', next);
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft')  prev();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'Escape')     close();
+  });
+
+  let touchStartX = 0;
+  lb.addEventListener('touchstart',
+    e => { touchStartX = e.touches[0].clientX; },
+    { passive: true }
+  );
+  lb.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
