@@ -1039,7 +1039,127 @@ nav {
 }
 
 @media (max-width: 768px) { .cards-grid, .powers-grid { grid-template-columns: 1fr !important; } }
+.home-event-baile {
+  position: relative;
+  min-height: 520px;
+  margin: 5rem auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 4rem 7vw;
+  border-top: 1px solid rgba(201,168,76,0.18);
+  border-bottom: 1px solid rgba(201,168,76,0.18);
+}
 
+.baile-event-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('img-baile/baile-banner.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.55) saturate(1.05);
+  transform: scale(1.04);
+  transition: transform 1s ease, filter 1s ease;
+}
+
+.baile-event-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right,
+      rgba(3,3,8,0.95) 0%,
+      rgba(3,3,8,0.65) 45%,
+      rgba(0,0,0,0.85) 100%),
+    radial-gradient(circle at 75% 50%,
+      rgba(0,0,0,0.95),
+      transparent 35%);
+}
+
+.baile-event-content {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+}
+
+.baile-event-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.baile-event-content h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  margin: 1rem 0;
+  color: var(--gold-light);
+  text-shadow: 0 0 35px rgba(201,168,76,0.35);
+}
+
+.baile-event-content p {
+  color: var(--text-dim);
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.baile-event-btn {
+  display: inline-block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--gold-light);
+  border: 1px solid rgba(201,168,76,0.35);
+  padding: 0.9rem 1.6rem;
+  background: rgba(3,3,8,0.45);
+  transition: 0.35s ease;
+}
+
+.baile-event-btn:hover {
+  color: #fff;
+  border-color: var(--gold-light);
+  box-shadow: 0 0 25px rgba(201,168,76,0.25);
+}
+
+.baile-event-warning {
+  position: absolute;
+  z-index: 3;
+  right: 8vw;
+  bottom: 4rem;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 5vw, 5rem);
+  color: rgba(255,255,255,0);
+  text-shadow: none;
+  transition: 0.8s ease;
+}
+
+.home-event-baile:hover .baile-event-bg {
+  transform: scale(1.09);
+  filter: brightness(0.28) saturate(0.7);
+}
+
+.home-event-baile:hover .baile-event-warning {
+  color: rgba(255,255,255,0.9);
+  text-shadow:
+    0 0 20px rgba(120,0,160,0.7),
+    0 0 80px rgba(0,0,0,1);
+}
+
+@media (max-width: 768px) {
+  .home-event-baile {
+    min-height: 460px;
+    padding: 3rem 1.5rem;
+  }
+
+  .baile-event-warning {
+    right: 1.5rem;
+    bottom: 2rem;
+    opacity: 0.45;
+  }
+}
 </style>
 </head>
 <body>
@@ -1047,7 +1167,6 @@ nav {
     <source src="audio/themepic5.mp3" type="audio/mpeg" />
   </audio>
 <canvas id="cosmos-bg"></canvas>
-
 <!-- NAV -->
 <nav id="navbar">
   <a href="#hero">Início</a>
@@ -1055,6 +1174,7 @@ nav {
   <a href="#personagens">Personagens</a>
   <a href="regioes.html">Regiões</a>
   <a href="viloes.html">Vilões</a>
+  <a href="baile.html">Baile</a>
   <button id="menu-toggle" aria-label="Menu">☰</button>
 </nav>
 
@@ -1183,6 +1303,28 @@ nav {
   </div>
 </section>
 
+<section class="home-event-baile">
+  <div class="baile-event-bg"></div>
+  <div class="baile-event-overlay"></div>
+
+  <div class="baile-event-content">
+    <span class="baile-event-tag">Registro Histórico</span>
+
+    <h2>A Última Noite da Luz</h2>
+
+    <p>
+      O Baile dos Deuses e Guardiões marcou o fim de uma era de paz...
+    </p>
+
+    <a href="baile.html" class="baile-event-btn">
+      Reviver o Baile →
+    </a>
+  </div>
+
+  <div class="baile-event-warning">
+    Ela chegou.
+  </div>
+</section>
 <!-- PERSONAGENS -->
 <section id="personagens">
   <div class="section-header reveal">
