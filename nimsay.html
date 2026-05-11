@@ -1700,23 +1700,25 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
 
 
 
-/* ── SHOWCASE LUNAR EM 4 PAINÉIS ── */
+/* ── SHOWCASE LUNAR EM PAINEL ÚNICO ── */
 .gallery-showcase {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(0.9rem, 2vw, 1.25rem);
-  max-width: 1200px;
+  max-width: 860px;
   margin: 0 auto;
   padding: clamp(1rem, 4vw, 2rem);
 }
 
 .gallery-panel {
   position: relative;
-  min-height: clamp(260px, 38vw, 360px);
+  min-height: clamp(420px, 54vw, 620px);
   border: 1px solid rgba(74,158,187,0.18);
   border-radius: 10px;
   overflow: hidden;
-  background: linear-gradient(160deg, rgba(10,18,28,0.98), rgba(12,12,22,0.95));
+  background:
+    radial-gradient(circle at 50% 18%, rgba(74,158,187,0.18), transparent 38%),
+    linear-gradient(160deg, rgba(10,18,28,0.98), rgba(12,12,22,0.95));
   box-shadow: inset 0 0 0 1px rgba(200,184,232,0.05), 0 14px 40px rgba(3,3,8,0.24);
   isolation: isolate;
 }
@@ -1752,16 +1754,17 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   opacity: 0;
-  transform: scale(1.08);
+  transform: scale(0.98);
   transition: opacity 1.15s ease, transform 6s ease;
   filter: saturate(1.05) contrast(1.02);
 }
 
 .gallery-panel-media img.is-visible {
   opacity: 1;
-  transform: scale(1.0);
+  transform: scale(1.02);
 }
 
 .gallery-panel-header,
@@ -1904,7 +1907,7 @@ section.section-lit .section-aura::before {
     grid-template-columns: 1fr;
   }
   .gallery-panel {
-    min-height: 290px;
+    min-height: clamp(360px, 115vw, 540px);
   }
   .gallery-panel-desc {
     max-width: none;
@@ -2353,12 +2356,12 @@ nav a { white-space: nowrap; }
   </div>
 
   <div class="gallery-showcase reveal reveal-nimsay" id="galleryContainer">
-    <!-- Os 4 painéis vivos serão inseridos aqui via JavaScript -->
+    <!-- O painel vivo será inserido aqui via JavaScript -->
   </div>
 
   <div class="gallery-carousel-controls gallery-showcase-controls">
     <button class="carousel-btn" id="prevBtn">← Fluxo anterior</button>
-    <span id="imageCounter" class="gallery-state-label">4 painéis vivos · loop lunar</span>
+    <span id="imageCounter" class="gallery-state-label">1 painel vivo · loop lunar</span>
     <button class="carousel-btn" id="nextBtn">Próximo fluxo →</button>
   </div>
 </section>
@@ -2752,18 +2755,21 @@ nav a { white-space: nowrap; }
 (function() {
   const galleryImages = [
     { src: 'img-nimsay/deusanim5.png', title: 'Forma Ascendida', desc: 'A presença divina mais pura de Nimsay, envolta por brilho celestial e força serena.' },
-    { src: 'img-nimsay/armescura2.png', title: 'Magia Lunar', desc: 'O lado místico e refinado da sua feitiçaria, guiado por luz, silêncio e precisão.' },
-    { src: 'img-nimsay/say.png', title: 'Domínio dos Mares', desc: 'Água, maré e calma poderosa em uma forma que parece viva dentro da própria página.' },
-    { src: 'img-nimsay/armadurabranca.png', title: 'Deusa', desc: 'A versão majestosa e régia de Nimsay, com imponência divina e elegância absoluta.' },
+    { src: 'img-nimsay/armadurabranca.png', title: 'Armadura Branca', desc: 'A versão régia e luminosa de Nimsay, moldada por elegância divina e proteção lunar.' },
+    { src: 'img-nimsay/armescura2.png', title: 'Armadura Sombria', desc: 'O lado místico e refinado da sua feitiçaria, guiado por luz, silêncio e precisão.' },
     { src: 'img-nimsay/deusanim.png', title: 'Encarnação Divina', desc: 'A fusão entre magia, realeza e energia ancestral em uma presença quase eterna.' },
+    { src: 'img-nimsay/deusanim2.png', title: 'Aura Celestial', desc: 'Uma manifestação serena da ascensão, onde mar e lua se equilibram em poder.' },
+    { src: 'img-nimsay/deusanim3.png', title: 'Coroa Lunar', desc: 'A energia da lua tomando forma ao redor de Nimsay como um presságio antigo.' },
+    { src: 'img-nimsay/nim.png', title: 'Yasmin', desc: 'O rosto humano antes da ascensão, ainda carregando sinais da linhagem divina.' },
+    { src: 'img-nimsay/nim2.png', title: 'Herdeira dos Mares', desc: 'A força de Poseidon aparecendo em uma postura calma, profunda e inevitável.' },
+    { src: 'img-nimsay/nim3.png', title: 'Olhar de Feiticeira', desc: 'A presença de quem aprendeu a transformar encanto em magia e magia em destino.' },
+    { src: 'img-nimsay/nim4.png', title: 'Antes da Ascensão', desc: 'A transição entre Yasmin e Nimsay, ainda próxima do mundo humano.' },
+    { src: 'img-nimsay/nimsay1.png', title: 'Filha da Lua', desc: 'A herança lunar em destaque, fria, bela e poderosa.' },
     { src: 'img-nimsay/Nimsay.png', title: 'Herança de Afrodite', desc: 'A delicadeza do encanto e do amor moldada em uma aura de deusa imortal.' }
   ];
 
   const panels = [
-    { label: 'Painel da Lua', speed: 4400, step: 1 },
-    { label: 'Painel do Mar', speed: 5200, step: 1 },
-    { label: 'Painel da Magia', speed: 6100, step: 1 },
-    { label: 'Painel Celestial', speed: 7000, step: 1 }
+    { label: 'Galeria Lunar', speed: 4800, step: 1 }
   ];
 
   const container = document.getElementById('galleryContainer');
@@ -2807,7 +2813,8 @@ nav a { white-space: nowrap; }
   function renderPanels() {
     container.innerHTML = '';
     panels.forEach((panel, idx) => container.appendChild(buildPanel(panel, idx)));
-    stateLabel.textContent = `${panels.length} painéis vivos · ${galleryImages.length} imagens em rotação`;
+    stateLabel.textContent = `${galleryImages.length} imagens únicas · loop em um painel`;
+    document.getElementById('galeria')?.setAttribute('data-loop-patched', 'true');
     applyTilt();
   }
 
