@@ -133,12 +133,12 @@ nav a:hover {
       rgba(138,122,170,0.2) 0%, transparent 55%),
     radial-gradient(ellipse at 20% 70%,
       rgba(58,53,69,0.3) 0%, transparent 50%);
-  filter: brightness(0.25) saturate(0.4);
+  filter: brightness(0.72) saturate(0.95) contrast(1.04);
 }
 
 .banner-bg.loaded {
   transform: scale(1);
-  filter: brightness(0.35) saturate(0.55);
+  filter: brightness(0.86) saturate(1.08) contrast(1.04);
 }
 
 .banner-overlay {
@@ -146,14 +146,14 @@ nav a:hover {
   inset: 0;
   background:
     linear-gradient(to top,
-      rgba(3,3,8,1)      0%,
-      rgba(10,8,20,0.82) 30%,
-      rgba(20,16,36,0.5) 65%,
-      rgba(3,3,8,0.2)    100%),
+      rgba(3,3,8,0.82)   0%,
+      rgba(10,8,20,0.48) 30%,
+      rgba(20,16,36,0.18) 65%,
+      rgba(3,3,8,0.08)   100%),
     linear-gradient(to right,
-      rgba(3,3,8,0.92)   0%,
-      rgba(15,12,24,0.3) 55%,
-      rgba(3,3,8,0.75)   100%);
+      rgba(3,3,8,0.62)   0%,
+      rgba(15,12,24,0.12) 55%,
+      rgba(3,3,8,0.38)   100%);
 }
 
 .banner-vignette {
@@ -161,8 +161,8 @@ nav a:hover {
   inset: 0;
   background: radial-gradient(
     ellipse at center,
-    transparent 25%,
-    rgba(3,3,8,0.75) 100%
+    transparent 35%,
+    rgba(3,3,8,0.42) 100%
   );
   pointer-events: none;
 }
@@ -388,8 +388,8 @@ nav a:hover {
   .banner-overlay {
     background:
       linear-gradient(to top,
-        rgba(3,3,8,1) 0%, rgba(10,8,20,0.9) 45%,
-        rgba(20,16,36,0.6) 70%, rgba(3,3,8,0.25) 100%);
+        rgba(3,3,8,0.84) 0%, rgba(10,8,20,0.52) 45%,
+        rgba(20,16,36,0.22) 70%, rgba(3,3,8,0.1) 100%);
   }
   .banner-stats { gap: 0.8rem; margin-top: 1.8rem; }
   .bstat-sep    { height: 26px; }
@@ -1106,6 +1106,9 @@ footer {
 </style>
 </head>
 <body>
+    <audio autoplay loop hidden preload="auto" playsinline>
+    <source src="audio/themecidadela.mp3" type="audio/mpeg" />
+  </audio>
 
 <canvas id="cosmos-bg"></canvas>
 <div id="noise-overlay"></div>

@@ -544,12 +544,12 @@ h2 {
   background-size: cover;
   background-position: center;
   background-color: var(--deep);
-  filter: brightness(0.3) saturate(0.5);
+  filter: brightness(0.72) saturate(0.95) contrast(1.04);
   transition: filter 0.6s ease, transform 0.6s ease;
 }
 
 .region-card:hover .rcard-bg {
-  filter: brightness(0.45) saturate(0.7);
+  filter: brightness(0.88) saturate(1.08) contrast(1.04);
   transform: scale(1.05);
 }
 
@@ -559,33 +559,33 @@ h2 {
 .cidadela-overlay {
   background:
     linear-gradient(to top,
-      rgba(10,8,18,0.97) 0%,
-      rgba(40,30,60,0.7) 50%,
-      rgba(10,8,18,0.4)  100%);
+      rgba(10,8,18,0.78) 0%,
+      rgba(40,30,60,0.38) 50%,
+      rgba(10,8,18,0.16)  100%);
 }
 
 .limiar-overlay {
   background:
     linear-gradient(to top,
-      rgba(5,10,20,0.97) 0%,
-      rgba(20,50,80,0.7) 50%,
-      rgba(5,10,20,0.4)  100%);
+      rgba(5,10,20,0.78) 0%,
+      rgba(20,50,80,0.38) 50%,
+      rgba(5,10,20,0.16)  100%);
 }
 
 .cidade-overlay {
   background:
     linear-gradient(to top,
-      rgba(15,10,0,0.97) 0%,
-      rgba(60,40,10,0.7) 50%,
-      rgba(15,10,0,0.4)  100%);
+      rgba(15,10,0,0.78) 0%,
+      rgba(60,40,10,0.38) 50%,
+      rgba(15,10,0,0.16)  100%);
 }
 
 .nucleo-overlay {
   background:
     linear-gradient(to top,
-      rgba(5,15,5,0.97)  0%,
-      rgba(20,50,20,0.7) 50%,
-      rgba(5,15,5,0.4)   100%);
+      rgba(5,15,5,0.78)  0%,
+      rgba(20,50,20,0.38) 50%,
+      rgba(5,15,5,0.16)   100%);
 }
 
 /* Hover borders */
@@ -793,12 +793,12 @@ h2 {
   background-image:
     radial-gradient(ellipse at 50% 40%,
       rgba(200,184,144,0.15) 0%, transparent 60%);
-  filter: brightness(0.25) saturate(0.4);
+  filter: brightness(0.72) saturate(0.95) contrast(1.04);
   transition: filter 0.6s ease;
 }
 
 .templo-feature:hover .templo-bg {
-  filter: brightness(0.35) saturate(0.55);
+  filter: brightness(0.86) saturate(1.08) contrast(1.04);
 }
 
 .templo-overlay {
@@ -806,9 +806,9 @@ h2 {
   inset: 0;
   background:
     linear-gradient(135deg,
-      rgba(10,8,0,0.95)  0%,
-      rgba(20,16,4,0.75) 50%,
-      rgba(10,8,0,0.85)  100%);
+      rgba(10,8,0,0.72)  0%,
+      rgba(20,16,4,0.38) 50%,
+      rgba(10,8,0,0.5)   100%);
 }
 
 #templo-canvas {
@@ -1163,7 +1163,7 @@ footer {
 @media (hover: none) and (pointer: coarse) {
   .region-card:hover { transform: none; }
   .region-card:hover .rcard-bg {
-    filter: brightness(0.35) saturate(0.6);
+    filter: brightness(0.78) saturate(1) contrast(1.04);
   }
   .rcard-link { opacity: 1; transform: none; }
   .tpillar:hover { border-color: rgba(200,184,144,0.1); }
@@ -1196,12 +1196,15 @@ footer {
 </style>
 </head>
 <body>
+  <audio autoplay loop hidden preload="auto" playsinline>
+    <source src="audio/epic.mp3" type="audio/mpeg" />
+  </audio>
 
 <canvas id="cosmos-bg"></canvas>
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="home.html" class="nav-logo">
     <img src="img-logo/olhos.jpg" alt="Logo">
   </a>
   <a href="home.html">← Início</a>
@@ -1336,7 +1339,7 @@ footer {
     <div class="region-card limiar-card reveal"
       data-href="limiar.html">
       <div class="rcard-bg"
-        style="background-image: url('limiar-bg.jpg')">
+        style="background-image: url('img-limiar/leodominio.png')">
       </div>
       <div class="rcard-overlay limiar-overlay"></div>
       <div class="rcard-content">
@@ -1368,7 +1371,7 @@ footer {
     <div class="region-card cidade-card reveal"
       data-href="cidade.html">
       <div class="rcard-bg"
-        style="background-image: url('cidade-bg.jpg')">
+        style="background-image: url('img-cidade/onulldominio.png')">
       </div>
       <div class="rcard-overlay cidade-overlay"></div>
       <div class="rcard-content">
@@ -1400,7 +1403,7 @@ footer {
     <div class="region-card nucleo-card reveal"
       data-href="nucleo.html">
       <div class="rcard-bg"
-        style="background-image: url('nucleo-bg.jpg')">
+        style="background-image: url('img-nucleo/yuridominio.png')">
       </div>
       <div class="rcard-overlay nucleo-overlay"></div>
       <div class="rcard-content">

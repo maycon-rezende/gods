@@ -122,12 +122,12 @@ nav a:hover {
       rgba(192,128,48,0.2) 0%, transparent 55%),
     radial-gradient(ellipse at 25% 65%,
       rgba(224,112,32,0.15) 0%, transparent 50%);
-  filter: brightness(0.25) saturate(0.5);
+  filter: brightness(0.72) saturate(1) contrast(1.04);
 }
 
 .banner-bg.loaded {
   transform: scale(1);
-  filter: brightness(0.35) saturate(0.65);
+  filter: brightness(0.86) saturate(1.12) contrast(1.04);
 }
 
 .banner-overlay {
@@ -135,14 +135,14 @@ nav a:hover {
   inset: 0;
   background:
     linear-gradient(to top,
-      rgba(3,3,8,1)      0%,
-      rgba(10,6,0,0.82)  30%,
-      rgba(18,10,0,0.5)  65%,
-      rgba(3,3,8,0.2)    100%),
+      rgba(3,3,8,0.82)   0%,
+      rgba(10,6,0,0.48)  30%,
+      rgba(18,10,0,0.18) 65%,
+      rgba(3,3,8,0.08)   100%),
     linear-gradient(to right,
-      rgba(3,3,8,0.92)   0%,
-      rgba(15,9,0,0.3)   55%,
-      rgba(3,3,8,0.75)   100%);
+      rgba(3,3,8,0.62)   0%,
+      rgba(15,9,0,0.12)  55%,
+      rgba(3,3,8,0.38)   100%);
 }
 
 .banner-vignette {
@@ -150,8 +150,8 @@ nav a:hover {
   inset: 0;
   background: radial-gradient(
     ellipse at center,
-    transparent 25%,
-    rgba(3,3,8,0.75) 100%
+    transparent 35%,
+    rgba(3,3,8,0.42) 100%
   );
   pointer-events: none;
 }
@@ -371,8 +371,8 @@ nav a:hover {
   .banner-overlay {
     background:
       linear-gradient(to top,
-        rgba(3,3,8,1) 0%, rgba(10,6,0,0.9) 45%,
-        rgba(18,10,0,0.6) 70%, rgba(3,3,8,0.25) 100%);
+        rgba(3,3,8,0.84) 0%, rgba(10,6,0,0.52) 45%,
+        rgba(18,10,0,0.22) 70%, rgba(3,3,8,0.1) 100%);
   }
   .banner-stats { gap: 0.8rem; margin-top: 1.8rem; }
   .bstat-sep    { height: 26px; }
@@ -1105,6 +1105,9 @@ footer {
 </style>
 </head>
 <body>
+    <audio autoplay loop hidden preload="auto" playsinline>
+    <source src="audio/themecidade.mp3" type="audio/mpeg" />
+  </audio>
 
 <canvas id="cosmos-bg"></canvas>
 
@@ -1123,7 +1126,7 @@ footer {
 <!-- BANNER -->
 <section id="banner">
   <div class="banner-bg"
-    style="background-image: url('cidade-banner.jpg')">
+    style="background-image: url('img-cidade/mil.png')">
   </div>
   <div class="banner-overlay"></div>
   <div class="banner-vignette"></div>
@@ -1197,7 +1200,7 @@ footer {
   <div class="about-grid reveal">
     <div class="about-visual">
       <div class="about-photo"
-        style="background-image: url('cidade-visual.jpg')">
+        style="background-image: url('img-cidade/mil0.png')">
         <div class="photo-corner tl"></div>
         <div class="photo-corner tr"></div>
         <div class="photo-corner bl"></div>
@@ -1416,10 +1419,7 @@ footer {
     </div>
   </div>
 
-  <p class="gallery-hint reveal">
-    Substitua <code>cidade-01.jpg</code> até
-    <code>cidade-06.jpg</code> pelas imagens da região.
-  </p>
+
 </section>
 
 <!-- FOOTER -->

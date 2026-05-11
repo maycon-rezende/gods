@@ -120,24 +120,6 @@
 
     document.body.appendChild(mobileNav);
 
-    /* Player de música */
-    const player = document.createElement('div');
-    player.id = 'music-player';
-    player.innerHTML = `
-      <button id="music-btn" aria-label="Tocar música">▶</button>
-      <div class="music-viz paused">
-        <span></span><span></span><span></span>
-        <span></span><span></span>
-      </div>
-      <div class="music-info">
-        <span class="music-title">O Diário de um Deus</span>
-        <span class="music-sub">Trilha Ambiente</span>
-      </div>
-      <audio id="bg-music" loop>
-        <source src="music.mp3" type="audio/mpeg">
-      </audio>
-    `;
-    document.body.appendChild(player);
   }
 
   injectElements();
@@ -378,67 +360,6 @@
     });
   })();
 
-/* ── PLAYER DE MÚSICA ── */
-  (function () {
-    const player  = document.getElementById('music-player');
-    const btn     = document.getElementById('music-btn');
-    const audio   = document.getElementById('bg-music');
-    const viz     = document.querySelector('.music-viz');
-    if (!btn || !audio) return;
-
-    let playing = false;
-
-    /* Mostra player após 2s */
-    setTimeout(() => {
-      player.classList.add('visible');
-    }, 2000);
-
-    function play() {
-      audio.volume = 0;
-      audio.play().then(() => {
-        playing = true;
-        btn.textContent = '⏸';
-        viz.classList.remove('paused');
-        /* Fade in do volume */
-        let vol = 0;
-        const fade = setInterval(() => {
-          vol = Math.min(vol + 0.02, 0.35);
-          audio.volume = vol;
-          if (vol >= 0.35) clearInterval(fade);
-        }, 100);
-      }).catch(() => {});
-    }
-
-    function pause() {
-      /* Fade out do volume */
-      let vol = audio.volume;
-      const fade = setInterval(() => {
-        vol = Math.max(vol - 0.03, 0);
-        audio.volume = vol;
-        if (vol <= 0) {
-          clearInterval(fade);
-          audio.pause();
-          playing = false;
-          btn.textContent = '▶';
-          viz.classList.add('paused');
-        }
-      }, 80);
-    }
-
-    btn.addEventListener('click', () => {
-      playing ? pause() : play();
-    });
-
-    /* Auto-play ao primeiro clique na página */
-    let autoPlayed = false;
-    document.addEventListener('click', () => {
-      if (!autoPlayed && !playing) {
-        autoPlayed = true;
-        play();
-      }
-    }, { once: true });
-  })();
-
 /* ── PARALAXE NAS SEÇÕES ── */
   (function () {
     const isMobile = window.matchMedia(
@@ -492,18 +413,6 @@
 
       io.observe(el);
     });
-  })();
-
-/* ── MUSIC PLAYER VISÍVEL APÓS SCROLL ── */
-  (function () {
-    const player = document.getElementById('music-player');
-    const toTop  = document.getElementById('back-to-top');
-    if (!player || !toTop) return;
-
-    window.addEventListener('scroll', () => {
-      const show = window.scrollY > 300;
-      player.classList.toggle('visible', show);
-    }, { passive: true });
   })();
 
 })(); /* fim da IIFE global */

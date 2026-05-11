@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Núcleo da Forma — O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="effects.css">
+<style>
+:root {
+  --void: #030308;
+  --deep: #07070f;
+  --surface: #050a04;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+
+  /* Núcleo — verde primordial com terra */
+  --char-accent: #3a8a4a;
+  --char-accent-dim: #1a4a2a;
+  --char-accent-glow: rgba(58,138,74,0.4);
+  --leaf: #70c060;
+  --leaf-dim: #3a7030;
+  --leaf-glow: rgba(112,192,96,0.35);
+  --earth: #8a6030;
+  --earth-light: #b08040;
+  --earth-glow: rgba(138,96,48,0.35);
+  --stone: #5a5040;
+  --forest-deep: #020a02;
+
+  /* Elementos */
+  --fire: #e06020;
+  --fire-bright: #f09040;
+  --water: #2080b0;
+  --water-bright: #50b0e0;
+  --terra: #806030;
+  --terra-bright: #b09050;
+  --wind: #80c0a0;
+  --wind-bright: #b0e0c0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+#cosmos-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(to bottom,
+    rgba(3,3,8,0.98), transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(58,138,74,0.15);
+}
+
+nav a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.73rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--leaf);
+  text-shadow: 0 0 20px var(--char-accent-glow);
+}
+
+.nav-logo img {
+  width: 36px; height: 36px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid rgba(58,138,74,0.3);
+  box-shadow: 0 0 12px rgba(58,138,74,0.35);
+  transition: box-shadow 0.3s;
+  display: block;
+}
+
+.nav-logo img:hover {
+  box-shadow:
+    0 0 20px rgba(112,192,96,0.6),
+    0 0 40px rgba(58,138,74,0.3);
+}
+
+/* BANNER */
+#banner {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.banner-bg {
+  position: absolute;
+  inset: -5%;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+  background-color: var(--forest-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 35%,
+      rgba(58,138,74,0.2) 0%, transparent 55%),
+    radial-gradient(ellipse at 20% 65%,
+      rgba(112,192,96,0.1) 0%, transparent 50%);
+  filter: brightness(0.72) saturate(1) contrast(1.04);
+}
+
+.banner-bg.loaded {
+  transform: scale(1);
+  filter: brightness(0.86) saturate(1.12) contrast(1.04);
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top,
+      rgba(3,3,8,0.82)   0%,
+      rgba(2,8,2,0.48)   30%,
+      rgba(4,14,4,0.18)  65%,
+      rgba(3,3,8,0.08)   100%),
+    linear-gradient(to right,
+      rgba(3,3,8,0.62)   0%,
+      rgba(4,12,4,0.12)  55%,
+      rgba(3,3,8,0.38)   100%);
+}
+
+.banner-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 35%,
+    rgba(3,3,8,0.42) 100%
+  );
+  pointer-events: none;
+}
+
+#banner-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 5vw 5rem;
+  max-width: 820px;
+  width: 100%;
+}
+
+.banner-tag {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fade-up 1s 0.2s ease forwards;
+}
+
+.tag-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right,
+    var(--char-accent), transparent);
+  max-width: 55px;
+}
+
+.tag-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--char-accent);
+  white-space: nowrap;
+}
+
+.banner-name {
+  opacity: 0;
+  animation: fade-up 1s 0.4s ease forwards;
+  line-height: 0.9;
+}
+
+.name-pre {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.5rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  background: linear-gradient(135deg,
+    #e0f0d0, #70c060, #3a8a4a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.1em;
+}
+
+.name-main {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2.5rem, 7.5vw, 7rem);
+  font-weight: 900;
+  background: linear-gradient(135deg,
+    #ffffff   0%,
+    #c0e8a0  20%,
+    #70c060  45%,
+    #3a8a4a  70%,
+    #1a4020  100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(58,138,74,0.5));
+}
+
+.banner-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.8rem 0;
+  opacity: 0;
+  animation: fade-up 1s 0.7s ease forwards;
+}
+
+.divider-line {
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(90deg, var(--char-accent), transparent);
+}
+
+.divider-symbol {
+  font-size: 1.1rem;
+  opacity: 0.6;
+  filter: drop-shadow(0 0 8px var(--char-accent-glow));
+}
+
+.banner-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.93rem, 2vw, 1.15rem);
+  color: rgba(180,230,160,0.8);
+  line-height: 1.9;
+  max-width: 420px;
+  opacity: 0;
+  animation: fade-up 1s 0.9s ease forwards;
+}
+
+.banner-stats {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-up 1s 1.1s ease forwards;
+}
+
+.bstat { display: flex; flex-direction: column; gap: 0.2rem; }
+.bstat-val {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem; font-weight: 700;
+  color: var(--gold-light); letter-spacing: 0.08em;
+}
+.bstat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 0.5rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--gold-dim);
+}
+.bstat-sep {
+  width: 1px; height: 32px;
+  background: linear-gradient(to bottom,
+    transparent, rgba(58,138,74,0.5), transparent);
+  flex-shrink: 0;
+}
+
+.banner-bottom-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent, var(--char-accent),
+    var(--leaf), var(--char-accent), transparent);
+  animation: bar-pulse 4s ease infinite;
+}
+
+@keyframes bar-pulse {
+  0%, 100% { opacity: 0.3; }
+  50%       { opacity: 1; }
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem; right: 5vw;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem; letter-spacing: 0.3em;
+  color: rgba(58,138,74,0.6);
+  text-transform: uppercase;
+  animation: bounce 2s ease infinite;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* RESPONSIVO BANNER */
+@media (max-width: 1024px) {
+  nav { gap: 1.5rem; }
+  .banner-content { padding: 4rem 4vw 4rem; }
+}
+@media (max-width: 768px) {
+  nav { gap: 0.8rem; flex-wrap: wrap; padding: 0.9rem 1rem; }
+  nav a { font-size: 0.64rem; }
+  .nav-logo img { width: 30px; height: 30px; }
+  .banner-content { padding: 5rem 1.5rem 3.5rem; max-width: 100%; }
+  .banner-overlay {
+    background:
+      linear-gradient(to top,
+        rgba(3,3,8,0.84) 0%, rgba(2,8,2,0.52) 45%,
+        rgba(4,14,4,0.22) 70%, rgba(3,3,8,0.1) 100%);
+  }
+  .banner-stats { gap: 0.8rem; margin-top: 1.8rem; }
+  .bstat-sep { height: 26px; }
+  .scroll-hint { right: 50%; transform: translateX(50%); bottom: 1.5rem; }
+}
+@media (max-width: 480px) {
+  nav { gap: 0.5rem; padding: 0.8rem; }
+  nav a { font-size: 0.6rem; }
+  .banner-content { padding: 5rem 1.2rem 3rem; }
+  .bstat-sep { display: none; }
+  .bstat {
+    background: rgba(58,138,74,0.07);
+    border: 1px solid rgba(58,138,74,0.15);
+    padding: 0.4rem 0.8rem;
+  }
+  .name-main { font-size: clamp(2rem, 8vw, 3.5rem); }
+}
+@media (max-width: 360px) { .banner-content { padding: 5rem 1rem 2.5rem; } }
+@media (max-width: 768px) and (orientation: landscape) {
+  #banner { min-height: 100svh; }
+  .banner-content { padding: 3.5rem 4vw 2.5rem; }
+}
+/* SEÇÕES COMPARTILHADAS */
+section { position: relative; z-index: 1; }
+
+.section-header { text-align: center; padding: 5rem 2rem 3rem; }
+
+.section-tag {
+  display: flex; align-items: center;
+  justify-content: center; gap: 1rem; margin-bottom: 1rem;
+}
+
+.stag-line {
+  width: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--char-accent));
+}
+.stag-line:last-child {
+  background: linear-gradient(90deg, var(--char-accent), transparent);
+}
+.stag-text {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--char-accent);
+}
+
+.section-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  font-weight: 700; color: var(--text);
+  text-shadow: 0 0 30px rgba(58,138,74,0.2);
+}
+.section-title span {
+  background: linear-gradient(135deg,
+    #c0e8a0 0%, #70c060 50%, #3a8a4a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* SOBRE */
+#sobre { padding-bottom: 5rem; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  align-items: start;
+}
+
+.about-visual {
+  display: flex; flex-direction: column;
+  gap: 1rem; position: sticky; top: 6rem;
+}
+
+.about-photo {
+  width: 100%; aspect-ratio: 3 / 4;
+  background-size: cover; background-position: center;
+  background-color: var(--forest-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 40%,
+      rgba(58,138,74,0.2) 0%, transparent 70%);
+  position: relative; overflow: hidden;
+  border: 1px solid rgba(58,138,74,0.15);
+  filter: brightness(0.85) saturate(0.7);
+  transition: filter 0.4s;
+}
+.about-photo:hover { filter: brightness(1) saturate(0.9); }
+
+#photo-canvas {
+  position: absolute; inset: 0;
+  z-index: 1; pointer-events: none;
+}
+
+.photo-corner { position: absolute; width: 16px; height: 16px; z-index: 2; }
+.photo-corner.tl { top: -1px; left: -1px; border-top: 2px solid var(--leaf); border-left: 2px solid var(--leaf); }
+.photo-corner.tr { top: -1px; right: -1px; border-top: 2px solid var(--leaf); border-right: 2px solid var(--leaf); }
+.photo-corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--earth-light); border-left: 2px solid var(--earth-light); }
+.photo-corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--earth-light); border-right: 2px solid var(--earth-light); }
+
+.photo-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top,
+    rgba(2,8,2,0.75) 0%,
+    rgba(58,138,74,0.08) 50%,
+    transparent 100%);
+  z-index: 1;
+}
+
+.about-coord {
+  display: flex; flex-direction: column; gap: 0.3rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(58,138,74,0.12);
+  background: rgba(2,8,2,0.6);
+}
+.coord-label {
+  font-family: 'Cinzel', serif; font-size: 0.52rem;
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-dim);
+}
+.coord-val {
+  font-family: 'Cinzel', serif; font-size: 0.62rem;
+  font-weight: 600; color: var(--char-accent); letter-spacing: 0.08em;
+}
+
+.about-intro {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 1.1rem; color: var(--leaf); line-height: 1.8;
+  border-left: 2px solid var(--char-accent);
+  padding: 1rem 1.5rem;
+  background: rgba(58,138,74,0.05);
+  margin-bottom: 1.5rem;
+}
+.about-intro em { font-style: normal; color: var(--gold-light); }
+.about-text p { line-height: 2; color: var(--text); margin-bottom: 1.4rem; font-size: 1.02rem; }
+.about-text p strong { color: var(--gold-light); }
+.about-text p em { color: var(--leaf); font-style: normal; }
+
+.about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.atag {
+  font-family: 'Cinzel', serif; font-size: 0.52rem;
+  letter-spacing: 0.12em; padding: 0.28rem 0.65rem;
+  border: 1px solid rgba(58,138,74,0.18);
+  color: var(--gold-dim); text-transform: uppercase;
+  border-radius: 1px; transition: border-color 0.3s, color 0.3s;
+}
+.atag:hover { border-color: rgba(112,192,96,0.5); color: var(--text); }
+.atag.accent-tag { border-color: rgba(112,192,96,0.3); color: var(--leaf); }
+
+/* ELEMENTOS */
+#elementos {
+  padding-bottom: 5rem;
+  background: linear-gradient(to bottom,
+    transparent, rgba(2,8,2,0.06), transparent);
+}
+
+.elements-showcase {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  background: rgba(58,138,74,0.08);
+  border: 1px solid rgba(58,138,74,0.1);
+}
+
+.element-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  transition: flex 0.4s ease;
+  background: rgba(3,3,8,0.96);
+}
+
+.element-card:hover {
+  background: rgba(2,6,2,0.98);
+}
+
+.element-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.element-content {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.element-symbol {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.element-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 0.3rem;
+}
+
+.fire-name  { color: var(--fire-bright);  filter: drop-shadow(0 0 8px rgba(224,96,32,0.5)); }
+.water-name { color: var(--water-bright); filter: drop-shadow(0 0 8px rgba(80,176,224,0.5)); }
+.earth-name { color: var(--terra-bright); filter: drop-shadow(0 0 8px rgba(176,144,80,0.5)); }
+.air-name   { color: var(--wind-bright);  filter: drop-shadow(0 0 8px rgba(176,224,192,0.5)); }
+
+.element-verb {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.fire-verb  { color: var(--fire); }
+.water-verb { color: var(--water-bright); }
+.earth-verb { color: var(--terra-bright); }
+.air-verb   { color: var(--wind-bright); }
+
+.element-desc {
+  font-size: 0.86rem;
+  color: var(--text-dim);
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 1.2rem;
+}
+
+.element-attrs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.eattr {
+  font-family: 'Cinzel', serif;
+  font-size: 0.52rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1px;
+  border: 1px solid;
+  width: fit-content;
+}
+
+.fire-attr  { color: var(--fire-bright);  border-color: rgba(224,96,32,0.3); }
+.water-attr { color: var(--water-bright); border-color: rgba(80,176,224,0.3); }
+.earth-attr { color: var(--terra-bright); border-color: rgba(176,144,80,0.3); }
+.air-attr   { color: var(--wind-bright);  border-color: rgba(176,224,192,0.3); }
+
+/* FUNÇÃO */
+#funcao { padding-bottom: 5rem; }
+
+.funcao-container {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  align-items: start;
+}
+
+.funcao-quote {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  color: var(--leaf); line-height: 1.9;
+  text-align: center; padding: 2rem;
+  border: 1px solid rgba(58,138,74,0.15);
+  background: rgba(2,8,2,0.5);
+  margin-bottom: 2.5rem; position: relative;
+}
+.funcao-quote::before {
+  content: ''; position: absolute;
+  top: -1px; left: -1px; width: 20px; height: 20px;
+  border-top: 2px solid var(--char-accent);
+  border-left: 2px solid var(--char-accent);
+}
+.funcao-quote::after {
+  content: ''; position: absolute;
+  bottom: -1px; right: -1px; width: 20px; height: 20px;
+  border-bottom: 2px solid var(--earth-light);
+  border-right: 2px solid var(--earth-light);
+}
+
+.funcao-blocks {
+  display: flex; flex-direction: column; gap: 1px;
+  background: rgba(58,138,74,0.08);
+  border: 1px solid rgba(58,138,74,0.1);
+}
+
+.fblock {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 1.2rem; padding: 1.8rem 2rem;
+  background: rgba(3,3,8,0.96);
+  align-items: start; transition: background 0.3s;
+}
+.fblock:hover { background: rgba(2,8,2,0.98); }
+
+.fblock-icon { font-size: 1.8rem; text-align: center; padding-top: 0.1rem; }
+
+.fblock-title {
+  font-family: 'Cinzel', serif; font-size: 0.82rem;
+  font-weight: 700; color: var(--leaf); margin-bottom: 0.6rem;
+  letter-spacing: 0.08em;
+}
+.fblock-desc { font-size: 0.9rem; color: var(--text-dim); line-height: 1.8; margin: 0; }
+
+.funcao-sidebar {
+  display: flex; flex-direction: column;
+  gap: 1rem; position: sticky; top: 6rem;
+}
+
+.func-card {
+  padding: 1.4rem;
+  background: rgba(2,8,2,0.7);
+  border: 1px solid rgba(58,138,74,0.12);
+  transition: border-color 0.3s;
+}
+.func-card:hover { border-color: rgba(112,192,96,0.3); }
+.func-card.accent-card {
+  border-color: rgba(58,138,74,0.25);
+  background: rgba(4,12,4,0.8);
+}
+
+.fc-title {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--char-accent); margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(58,138,74,0.12);
+}
+.fc-body { font-size: 0.88rem; color: var(--text-dim); line-height: 1.75; }
+
+/* GALERIA */
+#galeria { padding-bottom: 5rem; }
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 250px 250px;
+  gap: 1px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  background: rgba(58,138,74,0.07);
+}
+
+.gallery-item {
+  background-size: cover; background-position: center;
+  background-color: var(--forest-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 50%,
+      rgba(58,138,74,0.12) 0%, transparent 70%);
+  position: relative; overflow: hidden;
+  cursor: pointer;
+  filter: brightness(0.55) saturate(0.5);
+  transition: filter 0.4s;
+}
+.gallery-item:hover { filter: brightness(0.82) saturate(0.8); }
+.gallery-item.tall  { grid-row: span 2; }
+.gallery-item.wide  { grid-column: span 2; }
+
+.gitem-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(3,3,8,0.95) 0%, transparent 55%);
+  display: flex; align-items: flex-end;
+  padding: 1.2rem; opacity: 0; transition: opacity 0.3s;
+}
+.gallery-item:hover .gitem-overlay { opacity: 1; }
+.gitem-overlay span {
+  font-family: 'Cinzel', serif; font-size: 0.65rem;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--leaf);
+}
+
+.gallery-hint {
+  text-align: center; margin-top: 1.5rem;
+  font-size: 0.82rem; font-style: italic;
+  color: var(--text-dim); opacity: 0.5; padding: 0 2rem;
+}
+.gallery-hint code { font-family: monospace; color: var(--char-accent); font-style: normal; }
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1;
+  padding: 5rem 2rem; text-align: center;
+  border-top: 1px solid rgba(58,138,74,0.12);
+  background: linear-gradient(to top, rgba(2,8,2,0.5) 0%, transparent 100%);
+}
+.footer-inner { max-width: 600px; margin: 0 auto; }
+.footer-nav {
+  display: flex; justify-content: center;
+  align-items: center; gap: 1.2rem;
+  margin-bottom: 2rem; flex-wrap: wrap;
+}
+.footer-nav a {
+  font-family: 'Cinzel', serif; font-size: 0.68rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-dim); text-decoration: none; transition: color 0.3s;
+}
+.footer-nav a:hover { color: var(--leaf); }
+.footer-nav span { color: var(--gold-dim); opacity: 0.4; }
+
+.footer-name {
+  font-family: 'Cinzel Decorative', serif; font-size: 1.4rem;
+  background: linear-gradient(135deg, #c0e8a0, #70c060, #3a8a4a);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 0.8rem;
+}
+.footer-quote {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 0.95rem; color: var(--text-dim);
+  line-height: 1.8; margin-bottom: 2rem;
+}
+.footer-copy {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  letter-spacing: 0.2em; color: rgba(122,98,40,0.4); text-transform: uppercase;
+}
+
+/* RESPONSIVO */
+@media (max-width: 1024px) {
+  .about-grid       { grid-template-columns: 260px 1fr; gap: 3rem; padding: 0 1.5rem; }
+  .elements-showcase { grid-template-columns: repeat(2,1fr); padding: 0 1.5rem; }
+  .funcao-container { grid-template-columns: 1fr 240px; gap: 2.5rem; padding: 0 1.5rem; }
+  .gallery-container { padding: 0 1.5rem; grid-template-rows: 220px 220px; }
+  .section-header   { padding: 4rem 1.5rem 2.5rem; }
+}
+
+@media (max-width: 768px) {
+  .section-header { padding: 3.5rem 1.5rem 2rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 2rem; padding: 0 1.5rem; }
+  .about-visual { position: static; max-width: 260px; margin: 0 auto; }
+  .about-photo { aspect-ratio: 3/3.5; }
+  .about-intro { font-size: 1rem; }
+  .about-text p { font-size: 0.97rem; }
+  .elements-showcase { grid-template-columns: repeat(2,1fr); padding: 0 1.5rem; }
+  .element-card { min-height: 340px; }
+  .funcao-container { grid-template-columns: 1fr; padding: 0 1.5rem; }
+  .funcao-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
+  .func-card { flex: 1 1 200px; }
+  .gallery-container {
+    grid-template-columns: repeat(2,1fr) !important;
+    grid-template-rows: 180px 180px 180px !important;
+    padding: 0 1.5rem;
+  }
+  .gallery-item.tall { grid-row: span 1 !important; }
+  .gallery-item.wide { grid-column: span 2 !important; }
+  .gitem-overlay { opacity: 1; }
+  footer { padding: 3.5rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .section-header { padding: 3rem 1.2rem 1.8rem; }
+  .section-title  { font-size: clamp(1.3rem,6vw,2rem); }
+  .about-grid     { padding: 0 1.2rem; gap: 1.5rem; }
+  .about-visual   { max-width: 220px; }
+  .about-photo    { aspect-ratio: 1/1; }
+  .about-intro    { font-size: 0.95rem; padding: 0.8rem 1.2rem; }
+  .about-text p   { font-size: 0.93rem; }
+  .about-tags     { gap: 0.35rem; }
+  .atag { font-size: 0.48rem !important; padding: 0.2rem 0.5rem !important; }
+  .elements-showcase { grid-template-columns: 1fr; padding: 0 1.2rem; }
+  .element-card { min-height: auto; }
+  .element-content { padding: 1.5rem 1.2rem; }
+  .funcao-container { padding: 0 1.2rem; }
+  .funcao-quote   { font-size: 0.95rem; padding: 1.4rem 1.2rem; }
+  .fblock         { grid-template-columns: 36px 1fr; gap: 1rem; padding: 1.4rem; }
+  .funcao-sidebar { flex-direction: column; }
+  .func-card      { flex: none; }
+  .gallery-container {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 140px 140px 140px !important;
+    padding: 0 1.2rem;
+  }
+  .gallery-hint { font-size: 0.75rem; padding: 0 1.2rem; }
+  footer { padding: 2.5rem 1.2rem; }
+  .footer-nav { flex-direction: column; gap: 0.5rem; }
+  .footer-nav span { display: none; }
+}
+
+@media (max-width: 360px) {
+  .about-visual { max-width: 190px; }
+  .gallery-container { grid-template-columns: 1fr !important; grid-template-rows: auto !important; }
+  .gallery-item { height: 180px !important; grid-row: span 1 !important; grid-column: span 1 !important; }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .gitem-overlay { opacity: 1; }
+  .fblock:hover  { background: rgba(3,3,8,0.96); }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+  .section-header { padding: 2.5rem 1.5rem 1.5rem; }
+  .elements-showcase { grid-template-columns: repeat(4,1fr); }
+  .funcao-container { grid-template-columns: 1fr 220px; }
+  .funcao-sidebar { flex-direction: column; position: sticky; top: 5rem; }
+}
+</style>
+</head>
+<body>
+
+  <audio autoplay loop hidden preload="auto" playsinline>
+    <source src="audio/themenucleo.mp3" type="audio/mpeg" />
+  </audio>
+
+<canvas id="cosmos-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="home.html" class="nav-logo">
+    <img src="img-logo/olhos.jpg" alt="Logo">
+  </a>
+  <a href="regioes.html">← Regiões</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#elementos">Elementos</a>
+  <a href="#funcao">Função</a>
+  <a href="#galeria">Galeria</a>
+</nav>
+
+<!-- BANNER -->
+<section id="banner">
+  <div class="banner-bg"
+    style="background-image: url('img-nucleo/nucleo0.png')">
+  </div>
+  <div class="banner-overlay"></div>
+  <div class="banner-vignette"></div>
+  <canvas id="banner-canvas"></canvas>
+
+  <div class="banner-content">
+    <div class="banner-tag">
+      <span class="tag-line"></span>
+      <span class="tag-text">
+        Plano Primordial · Domínio de Knull
+      </span>
+      <span class="tag-line"></span>
+    </div>
+
+    <h1 class="banner-name">
+      <span class="name-pre">Núcleo</span>
+      <span class="name-main">da Forma</span>
+    </h1>
+
+    <div class="banner-divider">
+      <span class="divider-line"></span>
+      <span class="divider-symbol">🌋</span>
+      <span class="divider-line"></span>
+    </div>
+
+    <p class="banner-quote">
+      "Tudo ali está em movimento —<br>
+      mesmo quando parece estático."
+    </p>
+
+    <div class="banner-stats">
+      <div class="bstat">
+        <span class="bstat-val">Primordial</span>
+        <span class="bstat-label">Natureza</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Andes · Himalaia</span>
+        <span class="bstat-label">Ancoragem</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Knull</span>
+        <span class="bstat-label">Domínio</span>
+      </div>
+      <div class="bstat-sep"></div>
+      <div class="bstat">
+        <span class="bstat-val">Forma</span>
+        <span class="bstat-label">Função</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner-bottom-bar"></div>
+  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">O Plano Primordial</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">
+      Sobre o <span>Núcleo</span>
+    </h2>
+  </div>
+
+  <div class="about-grid reveal">
+    <div class="about-visual">
+      <div class="about-photo"
+        style="background-image: url('img-nucleo/nucleo.png')">
+        <div class="photo-corner tl"></div>
+        <div class="photo-corner tr"></div>
+        <div class="photo-corner bl"></div>
+        <div class="photo-corner br"></div>
+        <div class="photo-overlay"></div>
+        <canvas id="photo-canvas"></canvas>
+      </div>
+      <div class="about-coord">
+        <span class="coord-label">Ancorado em</span>
+        <span class="coord-val">
+          Andes · Himalaia · Desertos Antigos · Florestas Primordiais
+        </span>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <div class="about-intro">
+        O <em>plano primordial da matéria</em>. Não possui localização geográfica direta — mas é acessado através de regiões naturais extremas. Os Andes, o Himalaia, desertos antigos, florestas primordiais são pontos de ancoragem, não entradas.
+      </div>
+
+      <p>Tudo ali está em movimento — mesmo quando parece estático. As <strong>montanhas respiram lentamente</strong>. Os rios mudam de curso sem aviso. O vento tem direção própria. O solo pulsa sob os pés. Não há violência nesse movimento — há uma presença constante, como de algo vivo que simplesmente não precisou parar nunca.</p>
+
+      <p>Não há construções. Não há caminhos definidos. Mas há <em>ordem</em> — uma ordem que não é imposta, mas emergente. Como se cada elemento soubesse exatamente o que precisa fazer e o fizesse continuamente, sem instrução, sem supervisão, sem falha.</p>
+
+      <p>Os elementos não são ferramentas. São <strong>presenças</strong>. O fogo observa. A água responde. A terra sustenta. O ar conecta. Não de forma antropomórfica — mas com uma intencionalidade que só se percebe quando se para de tentar controlar e começa a simplesmente existir dentro do plano.</p>
+
+      <div class="about-tags">
+        <span class="atag accent-tag">Movimento Constante</span>
+        <span class="atag">Montanhas que Respiram</span>
+        <span class="atag accent-tag">Ordem Emergente</span>
+        <span class="atag">Sem Construções</span>
+        <span class="atag">Elementos Vivos</span>
+        <span class="atag accent-tag">Matéria Primordial</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELEMENTOS -->
+<section id="elementos">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">As Presenças</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">
+      Os Quatro <span>Elementos</span>
+    </h2>
+  </div>
+
+  <div class="elements-showcase reveal">
+
+    <!-- FOGO -->
+    <div class="element-card fire-card">
+      <canvas class="element-canvas" id="fire-canvas"></canvas>
+      <div class="element-content">
+        <div class="element-symbol">🔥</div>
+        <h3 class="element-name fire-name">Fogo</h3>
+        <div class="element-verb fire-verb">Observa</div>
+        <p class="element-desc">
+          Não destrói por natureza — contempla. O fogo do Núcleo observa tudo ao redor com uma atenção que queima não pela temperatura, mas pela intensidade do olhar. Ele é a consciência do plano — o elemento que registra.
+        </p>
+        <div class="element-attrs">
+          <span class="eattr fire-attr">Consciência</span>
+          <span class="eattr fire-attr">Registro</span>
+          <span class="eattr fire-attr">Contemplação</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÁGUA -->
+    <div class="element-card water-card">
+      <canvas class="element-canvas" id="water-canvas"></canvas>
+      <div class="element-content">
+        <div class="element-symbol">🌊</div>
+        <h3 class="element-name water-name">Água</h3>
+        <div class="element-verb water-verb">Responde</div>
+        <p class="element-desc">
+          Não flui passivamente — reage. A água do Núcleo responde à intenção antes do movimento. Sentir sua temperatura é sentir a temperatura do que se carrega internamente. Ela é o espelho do estado de quem a toca.
+        </p>
+        <div class="element-attrs">
+          <span class="eattr water-attr">Resposta</span>
+          <span class="eattr water-attr">Reflexo</span>
+          <span class="eattr water-attr">Intenção</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TERRA -->
+    <div class="element-card earth-card">
+      <canvas class="element-canvas" id="earth-canvas"></canvas>
+      <div class="element-content">
+        <div class="element-symbol">🌍</div>
+        <h3 class="element-name earth-name">Terra</h3>
+        <div class="element-verb earth-verb">Sustenta</div>
+        <p class="element-desc">
+          Não é passiva — é a base ativa de tudo. A terra do Núcleo pulsa sob os pés com uma frequência que se sente antes de ser percebida. Ela sustenta não apenas peso, mas existência. Sem ela, os outros três elementos não têm onde atuar.
+        </p>
+        <div class="element-attrs">
+          <span class="eattr earth-attr">Base</span>
+          <span class="eattr earth-attr">Sustentação</span>
+          <span class="eattr earth-attr">Pulsação</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AR -->
+    <div class="element-card air-card">
+      <canvas class="element-canvas" id="air-canvas"></canvas>
+      <div class="element-content">
+        <div class="element-symbol">💨</div>
+        <h3 class="element-name air-name">Ar</h3>
+        <div class="element-verb air-verb">Conecta</div>
+        <p class="element-desc">
+          Não é vazio — é o meio pelo qual os outros três se comunicam. O ar do Núcleo carrega informação entre os elementos, garantindo que nenhum aja sem que os outros percebam. Ele é a linguagem do plano.
+        </p>
+        <div class="element-attrs">
+          <span class="eattr air-attr">Conexão</span>
+          <span class="eattr air-attr">Comunicação</span>
+          <span class="eattr air-attr">Linguagem</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FUNÇÃO -->
+<section id="funcao">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">Propósito</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">
+      A <span>Função</span> do Núcleo
+    </h2>
+  </div>
+
+  <div class="funcao-container reveal">
+
+    <div class="funcao-main">
+      <div class="funcao-quote">
+        "É o corpo do universo.<br>
+        Sem o Núcleo, a forma colapsa."
+      </div>
+
+      <div class="funcao-blocks">
+        <div class="fblock">
+          <div class="fblock-icon">🌋</div>
+          <div class="fblock-body">
+            <div class="fblock-title">Manter a Coerência Física</div>
+            <p class="fblock-desc">O Núcleo garante que a matéria permaneça coerente — que átomos se mantenham como átomos, que moléculas obedeçam às suas próprias leis, que a física não se fragmente sob o peso do espiritual ou do humano. É o alicerce material de tudo.</p>
+          </div>
+        </div>
+
+        <div class="fblock">
+          <div class="fblock-icon">⚖️</div>
+          <div class="fblock-body">
+            <div class="fblock-title">Impedir o Colapso Material</div>
+            <p class="fblock-desc">Quando forças espirituais ou de vontade pressionam além do que o plano físico suporta, é o Núcleo que absorve e redistribui. Sem ele, batalhas de escala divina fragmentariam a matéria em escala global. Ele é o amortecedor da realidade.</p>
+          </div>
+        </div>
+
+        <div class="fblock">
+          <div class="fblock-icon">🔄</div>
+          <div class="fblock-body">
+            <div class="fblock-title">Garantir que a Forma Continue</div>
+            <p class="fblock-desc">Nada que existe no Núcleo deixa de existir — transforma. A matéria não se perde, apenas muda de estado, de configuração, de propósito. O Núcleo é o garantidor de que a existência material seja perpétua em sua essência, mesmo que mutável em sua forma.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="funcao-sidebar">
+      <div class="func-card">
+        <div class="fc-title">Acesso</div>
+        <div class="fc-body">
+          Não é acessível diretamente por regiões físicas. Os Andes e o Himalaia são pontos de ancoragem — onde o Núcleo está mais próximo da superfície perceptível. Mas entrar requer mais do que chegar ao lugar.
+        </div>
+      </div>
+
+      <div class="func-card">
+        <div class="fc-title">Sem Caminhos</div>
+        <div class="fc-body">
+          Não há rotas definidas dentro do Núcleo. A ordem existe, mas não é cartografável. Quem tenta mapear o plano percebe que os mapas mudam — não o plano.
+        </div>
+      </div>
+
+      <div class="func-card accent-card">
+        <div class="fc-title">Domínio · Knull</div>
+        <div class="fc-body">
+          Knull — Deus Elemental — é a presença que sustenta o Núcleo. Não como criador, mas como extensão natural. Sua herança Uchiha, Hyuuga e Sayadin o torna o único ser capaz de operar em todos os aspectos do plano simultaneamente.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria">
+  <div class="section-header reveal">
+    <div class="section-tag">
+      <div class="stag-line"></div>
+      <span class="stag-text">Registros visuais</span>
+      <div class="stag-line"></div>
+    </div>
+    <h2 class="section-title">
+      Galeria do <span>Núcleo</span>
+    </h2>
+  </div>
+
+  <div class="gallery-container reveal">
+    <div class="gallery-item tall"
+      style="background-image: url('nucleo-01.jpg')">
+      <div class="gitem-overlay">
+        <span>O Núcleo · Vista Primordial</span>
+      </div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('nucleo-02.jpg')">
+      <div class="gitem-overlay"><span>O Fogo que Observa</span></div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('nucleo-03.jpg')">
+      <div class="gitem-overlay"><span>A Água que Responde</span></div>
+    </div>
+    <div class="gallery-item wide"
+      style="background-image: url('nucleo-04.jpg')">
+      <div class="gitem-overlay">
+        <span>A Terra que Sustenta · O Ar que Conecta</span>
+      </div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('nucleo-05.jpg')">
+      <div class="gitem-overlay"><span>Montanhas que Respiram</span></div>
+    </div>
+    <div class="gallery-item"
+      style="background-image: url('nucleo-06.jpg')">
+      <div class="gitem-overlay"><span>Ordem Emergente</span></div>
+    </div>
+  </div>
+
+ 
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-nav">
+      <a href="cidade.html">← Cidade das Mil Escolhas</a>
+      <span>·</span>
+      <a href="regioes.html">Regiões</a>
+      <span>·</span>
+      <a href="templo.html">Templo dos Pilares →</a>
+    </div>
+    <div class="footer-name">Núcleo da Forma</div>
+    <div class="footer-quote">
+      "Os elementos não são ferramentas.<br>
+      São presenças. E eles sabem disso."
+    </div>
+    <div class="footer-copy">
+      O Diário de um Deus · Todos os direitos reservados
+    </div>
+  </div>
+</footer>
+
+<script src="effects.js"></script>
+<script>
+ /* ════════════════════════════════════
+   NÚCLEO DA FORMA — JAVASCRIPT
+   Canvas · Elementos · Terra · Lightbox
+════════════════════════════════════ */
+
+/* ── COSMOS CANVAS ── */
+(function () {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx    = canvas.getContext('2d');
+  let W, H, stars = [], nebulas = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    stars = [];
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 1.3 + 0.2,
+        a: Math.random() * 0.5 + 0.1,
+        speed: Math.random() * 0.3 + 0.05,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+    nebulas = [];
+    const colors = [
+      'rgba(2,8,2,', 'rgba(58,138,74,',
+      'rgba(112,192,96,', 'rgba(138,96,48,'
+    ];
+    for (let i = 0; i < 5; i++) {
+      nebulas.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 340 + 160,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a: Math.random() * 0.06 + 0.015
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const bg = ctx.createRadialGradient(W*.5,H*.4,0,W*.5,H*.4,Math.max(W,H));
+    bg.addColorStop(0,   '#040800');
+    bg.addColorStop(0.3, '#030600');
+    bg.addColorStop(0.7, '#030308');
+    bg.addColorStop(1,   '#020205');
+    ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+    nebulas.forEach(n => {
+      const g = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r);
+      g.addColorStop(0, n.color+n.a+')');
+      g.addColorStop(1, n.color+'0)');
+      ctx.fillStyle = g; ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
+    });
+
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const a = s.a * (0.4 + 0.6 * Math.sin(s.twinkle));
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(190,220,180,${a})`; ctx.fill();
+    });
+
+    const h = ctx.createLinearGradient(0,H*.8,0,H);
+    h.addColorStop(0,'transparent');
+    h.addColorStop(1,'rgba(2,8,2,0.09)');
+    ctx.fillStyle = h; ctx.fillRect(0,H*.8,W,H*.2);
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+})();
+
+/* ── CANVAS DO BANNER — ELEMENTOS FLUTUANDO ── */
+(function () {
+  const canvas = document.getElementById('banner-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, leaves = [], sparks = [], drops = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function init() {
+    /* Folhas flutuando */
+    leaves = [];
+    for (let i = 0; i < 20; i++) {
+      leaves.push({
+        x: Math.random() * W, y: Math.random() * H,
+        size: Math.random() * 8 + 3,
+        angle: Math.random() * Math.PI * 2,
+        spin: (Math.random() - 0.5) * 0.03,
+        speedX: (Math.random() - 0.5) * 0.4,
+        speedY: -(Math.random() * 0.3 + 0.05),
+        a: Math.random() * 0.3 + 0.05,
+        life: Math.random()
+      });
+    }
+
+    /* Faíscas de fogo */
+    sparks = [];
+    for (let i = 0; i < 15; i++) {
+      sparks.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 2 + 0.5,
+        a: Math.random() * 0.4 + 0.1,
+        speedX: (Math.random() - 0.5) * 0.6,
+        speedY: -(Math.random() * 0.5 + 0.2),
+        life: Math.random(), decay: Math.random() * 0.008 + 0.003
+      });
+    }
+
+    /* Gotas de água */
+    drops = [];
+    for (let i = 0; i < 15; i++) {
+      drops.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 3 + 1,
+        a: Math.random() * 0.25 + 0.05,
+        speedX: (Math.random() - 0.5) * 0.3,
+        speedY: Math.random() * 0.4 + 0.1,
+        pulse: Math.random() * Math.PI * 2,
+        pSpeed: Math.random() * 0.02 + 0.008
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Folhas — terra/vento */
+    leaves.forEach((l, i) => {
+      l.x += l.speedX; l.y += l.speedY;
+      l.angle += l.spin; l.life -= 0.002;
+      if (l.life <= 0 || l.y < -20) {
+        l.x = Math.random() * W; l.y = H + 10; l.life = 1;
+      }
+      const a = l.a * l.life;
+      ctx.save();
+      ctx.translate(l.x, l.y); ctx.rotate(l.angle);
+      ctx.globalAlpha = a;
+      ctx.beginPath();
+      ctx.ellipse(0, 0, l.size, l.size * 0.5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(58,138,74,${a})`;
+      ctx.fill();
+      ctx.strokeStyle = `rgba(112,192,96,${a * 0.5})`;
+      ctx.lineWidth = 0.5; ctx.stroke();
+      ctx.restore();
+    });
+
+    /* Faíscas — fogo */
+    sparks.forEach((s, i) => {
+      s.x += s.speedX; s.y += s.speedY; s.life -= s.decay;
+      if (s.life <= 0 || s.y < -10) {
+        s.x = Math.random() * W; s.y = H + 5; s.life = 1;
+        s.speedX = (Math.random() - 0.5) * 0.6;
+        s.speedY = -(Math.random() * 0.5 + 0.2);
+      }
+      const a = s.a * s.life;
+      const g = ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*4);
+      g.addColorStop(0,`rgba(224,96,32,${a})`);
+      g.addColorStop(1,'rgba(224,96,32,0)');
+      ctx.fillStyle = g; ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r*4,0,Math.PI*2); ctx.fill();
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r*0.5,0,Math.PI*2);
+      ctx.fillStyle = `rgba(255,200,100,${a*2})`; ctx.fill();
+    });
+
+    /* Gotas — água */
+    drops.forEach(d => {
+      d.x += d.speedX; d.y += d.speedY; d.pulse += d.pSpeed;
+      if (d.y > H + 10) { d.x = Math.random() * W; d.y = -10; }
+      const a = d.a * (0.5 + 0.5 * Math.sin(d.pulse));
+      const g = ctx.createRadialGradient(d.x,d.y,0,d.x,d.y,d.r*4);
+      g.addColorStop(0,`rgba(80,176,224,${a})`);
+      g.addColorStop(1,'rgba(32,128,176,0)');
+      ctx.fillStyle = g; ctx.beginPath();
+      ctx.arc(d.x,d.y,d.r*4,0,Math.PI*2); ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+})();
+
+/* ── CANVAS DA FOTO — PULSO DA TERRA ── */
+(function () {
+  const canvas = document.getElementById('photo-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, pulses = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function init() {
+    pulses = [];
+    for (let i = 0; i < 5; i++) {
+      pulses.push({
+        x: W / 2, y: H * 0.7,
+        r: 0, maxR: Math.min(W, H) * 0.6,
+        a: Math.random() * 0.2 + 0.05,
+        speed: Math.random() * 0.8 + 0.3,
+        delay: i * 40
+      });
+    }
+  }
+
+  let frame = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    frame++;
+
+    pulses.forEach(p => {
+      if (frame < p.delay) return;
+      p.r += p.speed;
+      if (p.r > p.maxR) {
+        p.r = 0;
+        p.delay = frame + Math.floor(Math.random() * 60);
+      }
+      const a = p.a * (1 - p.r / p.maxR);
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(58,138,74,${a})`;
+      ctx.lineWidth = 0.8; ctx.stroke();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { resize(); init(); draw(); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.2 });
+
+  const photo = document.querySelector('.about-photo');
+  if (photo) io.observe(photo);
+  window.addEventListener('resize', resize, { passive: true });
+})();
+
+/* ── CANVAS DOS ELEMENTOS ── */
+(function () {
+  const configs = [
+    {
+      id: 'fire-canvas',
+      draw: (ctx, W, H, t) => {
+        /* Chamas subindo */
+        for (let i = 0; i < 3; i++) {
+          const x = W * (0.3 + i * 0.2);
+          const h = H * (0.3 + 0.1 * Math.sin(t * 1.5 + i));
+          const g = ctx.createRadialGradient(x, H, 0, x, H - h, h);
+          g.addColorStop(0, `rgba(224,96,32,0.2)`);
+          g.addColorStop(1, 'rgba(224,96,32,0)');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(x, H - h*0.5, h*0.4, 0, Math.PI*2); ctx.fill();
+        }
+      }
+    },
+    {
+      id: 'water-canvas',
+      draw: (ctx, W, H, t) => {
+        /* Ondas */
+        ctx.beginPath();
+        for (let x = 0; x <= W; x += 2) {
+          const y = H*0.5 + Math.sin(x*0.04 + t*2) * 15 + Math.sin(x*0.02 - t) * 8;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = 'rgba(80,176,224,0.15)';
+        ctx.lineWidth = 1.5; ctx.stroke();
+      }
+    },
+    {
+      id: 'earth-canvas',
+      draw: (ctx, W, H, t) => {
+        /* Pulsos de terra */
+        const cx = W/2, cy = H*0.6;
+        for (let i = 1; i <= 4; i++) {
+          const r = i * W * 0.1 * (1 + 0.1 * Math.sin(t + i));
+          const a = (0.12 - i * 0.02) * (0.7 + 0.3 * Math.sin(t*0.8 + i));
+          ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI*2);
+          ctx.strokeStyle = `rgba(138,96,48,${a})`;
+          ctx.lineWidth = 0.8; ctx.stroke();
+        }
+      }
+    },
+    {
+      id: 'air-canvas',
+      draw: (ctx, W, H, t) => {
+        /* Linhas de vento */
+        for (let i = 0; i < 5; i++) {
+          const y = H * (0.2 + i * 0.15);
+          const offset = Math.sin(t * 1.2 + i) * 20;
+          ctx.beginPath();
+          ctx.moveTo(0, y + offset);
+          for (let x = 0; x <= W; x += 5) {
+            const wy = y + offset + Math.sin(x * 0.03 + t * 1.5 + i) * 10;
+            ctx.lineTo(x, wy);
+          }
+          ctx.strokeStyle = `rgba(128,192,160,${0.08 + i * 0.01})`;
+          ctx.lineWidth = 0.8; ctx.stroke();
+        }
+      }
+    }
+  ];
+
+  configs.forEach(cfg => {
+    const canvas = document.getElementById(cfg.id);
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, active = false, t = 0;
+
+    function resize() {
+      W = canvas.width  = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      t += 0.016;
+      cfg.draw(ctx, W, H, t);
+      requestAnimationFrame(draw);
+    }
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !active) {
+          active = true; resize(); draw();
+        }
+      });
+    }, { threshold: 0.1 });
+
+    io.observe(canvas);
+    window.addEventListener('resize', () => { if (active) resize(); }, { passive: true });
+  });
+})();
+
+/* ── PARALLAX DO BANNER ── */
+(function () {
+  const bg = document.querySelector('.banner-bg');
+  if (!bg) return;
+  const img = new Image();
+  img.onload = () => bg.classList.add('loaded');
+  const url = bg.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/, '$1');
+  if (url && url !== 'none') img.src = url;
+  const mq = window.matchMedia('(min-width: 769px)');
+  window.addEventListener('scroll', () => {
+    if (!mq.matches) return;
+    const s = window.scrollY;
+    if (s <= window.innerHeight)
+      bg.style.transform = `scale(1.05) translateY(${s * 0.22}px)`;
+  }, { passive: true });
+})();
+
+/* ── SCROLL REVEAL ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  const io  = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── LIGHTBOX DA GALERIA ── */
+(function () {
+  const items = document.querySelectorAll('.gallery-item');
+  if (!items.length) return;
+  const lb = document.createElement('div');
+  lb.id = 'lightbox';
+  lb.innerHTML = `
+    <div id="lb-backdrop"></div>
+    <div id="lb-box">
+      <button id="lb-prev">&#8592;</button>
+      <div id="lb-img-wrap">
+        <div id="lb-img"></div>
+        <div id="lb-caption"></div>
+      </div>
+      <button id="lb-next">&#8594;</button>
+      <button id="lb-close">&#x2715;</button>
+    </div>`;
+  document.body.appendChild(lb);
+
+  const style = document.createElement('style');
+  style.textContent = `
+    #lightbox { display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center; }
+    #lightbox.active{display:flex;}
+    #lb-backdrop{position:absolute;inset:0;background:rgba(2,6,2,0.97);backdrop-filter:blur(14px);}
+    #lb-box{position:relative;z-index:1;display:flex;align-items:center;gap:1.5rem;max-width:90vw;max-height:90vh;}
+    #lb-img-wrap{display:flex;flex-direction:column;align-items:center;gap:1rem;}
+    #lb-img{width:min(700px,80vw);height:min(500px,70vh);background-size:contain;background-repeat:no-repeat;background-position:center;background-color:#020600;border:1px solid rgba(58,138,74,0.22);box-shadow:0 0 60px rgba(2,8,2,0.3);filter:brightness(0.9) saturate(0.7);}
+    #lb-caption{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:#70c060;}
+    #lb-prev,#lb-next,#lb-close{background:none;border:1px solid rgba(58,138,74,0.25);color:#3a8a4a;font-size:1.2rem;width:44px;height:44px;min-width:44px;min-height:44px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color 0.3s,color 0.3s,box-shadow 0.3s;flex-shrink:0;}
+    #lb-prev:hover,#lb-next:hover,#lb-close:hover{border-color:#70c060;color:#c0e8a0;box-shadow:0 0 16px rgba(58,138,74,0.35);}
+    #lb-close{position:absolute;top:-3rem;right:0;}
+    @media(max-width:768px){#lb-box{gap:0.8rem;max-width:95vw;}#lb-img{width:85vw!important;height:60vw!important;min-height:200px;}#lb-close{top:-2.8rem;}}
+    @media(max-width:480px){#lb-img{width:90vw!important;height:65vw!important;}#lb-prev,#lb-next{width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;}}
+  `;
+  document.head.appendChild(style);
+
+  const data = Array.from(items).map(el => ({
+    bg: el.style.backgroundImage,
+    caption: el.querySelector('.gitem-overlay span')?.textContent || ''
+  }));
+
+  let current = 0;
+  function open(i)  { current=i;show();lb.classList.add('active');document.body.style.overflow='hidden'; }
+  function show()   { document.getElementById('lb-img').style.backgroundImage=data[current].bg;document.getElementById('lb-caption').textContent=data[current].caption; }
+  function close()  { lb.classList.remove('active');document.body.style.overflow=''; }
+  function prev()   { current=(current-1+data.length)%data.length;show(); }
+  function next()   { current=(current+1)%data.length;show(); }
+
+  items.forEach((el,i)=>el.addEventListener('click',()=>open(i)));
+  document.getElementById('lb-close').addEventListener('click',close);
+  document.getElementById('lb-backdrop').addEventListener('click',close);
+  document.getElementById('lb-prev').addEventListener('click',prev);
+  document.getElementById('lb-next').addEventListener('click',next);
+  document.addEventListener('keydown',e=>{
+    if(!lb.classList.contains('active'))return;
+    if(e.key==='ArrowLeft')prev();
+    if(e.key==='ArrowRight')next();
+    if(e.key==='Escape')close();
+  });
+  let tx=0;
+  lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  lb.addEventListener('touchend',e=>{
+    const d=tx-e.changedTouches[0].clientX;
+    if(Math.abs(d)>50)d>0?next():prev();
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
