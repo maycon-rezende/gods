@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Baile dos Deuses e Guardiões — O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="effects.css">
+<style>
+/* ── VARIÁVEIS ── */
+:root {
+  --void: #030308;
+  --text: #e8dcc8;
+  --text-dim: #9a8f7a;
+  --gold: #c9a84c;
+  --gold-light: #f0d080;
+  --gold-dim: #7a6228;
+  --gold-glow: rgba(201,168,76,0.4);
+
+  /* Prólogo — dourado elegante */
+  --accent: #c8a850;
+  --accent-dim: #7a6228;
+  --accent-glow: rgba(200,168,80,0.35);
+  --ivory: #f0e8d0;
+  --ivory-dim: #c8b890;
+  --crimson: #8b1a1a;
+  --crimson-bright: #cc2222;
+  --dark-gold: #1a1400;
+  --parchment: #1a1608;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+}
+
+#cosmos-bg {
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: center;
+  align-items: center; gap: 2.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(to bottom, rgba(3,3,8,0.98), transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+
+nav a {
+  font-family: 'Cinzel', serif; font-size: 0.73rem;
+  font-weight: 600; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gold-dim);
+  text-decoration: none; transition: color 0.3s, text-shadow 0.3s;
+}
+
+nav a:hover {
+  color: var(--gold-light);
+  text-shadow: 0 0 20px var(--gold-glow);
+}
+
+.nav-logo img {
+  width: 36px; height: 36px; object-fit: cover;
+  border-radius: 50%; border: 1px solid rgba(201,168,76,0.3);
+  box-shadow: 0 0 12px rgba(201,168,76,0.35);
+  transition: box-shadow 0.3s; display: block;
+}
+
+.nav-logo img:hover {
+  box-shadow: 0 0 20px rgba(240,208,128,0.6),
+              0 0 40px rgba(201,168,76,0.3);
+}
+
+/* ── HERO ── */
+#hero {
+  position: relative; min-height: 100vh; min-height: 100svh;
+  display: flex; align-items: center;
+  justify-content: center; overflow: hidden;
+  text-align: center;
+}
+
+#hero-canvas {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+}
+
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(ellipse at center,
+      transparent 20%, rgba(3,3,8,0.55) 100%),
+    linear-gradient(to bottom,
+      rgba(3,3,8,0.4) 0%, transparent 35%,
+      transparent 60%, rgba(3,3,8,0.9) 100%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 6rem 2rem 4rem;
+  max-width: 780px;
+}
+
+.hero-label {
+  font-family: 'Cinzel', serif; font-size: 0.62rem;
+  letter-spacing: 0.5em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: 2rem;
+  opacity: 0; animation: fade-up 1s 0.3s ease forwards;
+}
+
+.hero-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 7vw, 5.5rem);
+  font-weight: 900; line-height: 1.05;
+  background: linear-gradient(135deg,
+    #ffffff 0%, #f0e8c8 20%,
+    #c8a850 50%, #8a6820 80%, #3a2a00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(200,168,80,0.4));
+  opacity: 0; animation: fade-up 1s 0.5s ease forwards;
+}
+
+.hero-title span {
+  display: block; font-size: 0.5em;
+  letter-spacing: 0.5em;
+  background: linear-gradient(90deg,
+    var(--gold-dim), var(--gold), var(--gold-dim));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0.3em 0;
+}
+
+.hero-ornament {
+  display: flex; align-items: center;
+  justify-content: center; gap: 1rem;
+  margin: 2.5rem 0;
+  opacity: 0; animation: fade-up 1s 0.8s ease forwards;
+}
+
+.orn-line {
+  flex: 1; max-width: 100px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.orn-symbol {
+  font-size: 1rem; color: var(--gold);
+  text-shadow: 0 0 12px var(--gold-glow);
+}
+
+.hero-sub {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: rgba(240,232,208,0.75); line-height: 1.8;
+  max-width: 500px; margin: 0 auto 3rem;
+  opacity: 0; animation: fade-up 1s 1s ease forwards;
+}
+
+/* Botões de versão */
+.hero-versions {
+  display: flex; align-items: center;
+  justify-content: center; gap: 2rem;
+  margin-bottom: 3rem;
+  opacity: 0; animation: fade-up 1s 1.2s ease forwards;
+}
+
+.version-btn {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.4rem;
+  text-decoration: none;
+  padding: 1.2rem 2.5rem;
+  border: 1px solid rgba(200,168,80,0.25);
+  background: rgba(10,8,0,0.6);
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.version-btn:hover {
+  border-color: rgba(200,168,80,0.6);
+  background: rgba(20,16,0,0.8);
+  box-shadow: 0 0 20px rgba(200,168,80,0.15);
+}
+
+.vbtn-num {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.5rem; font-weight: 900;
+  color: var(--accent);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+.vbtn-label {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.vbtn-sep {
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom,
+    transparent, rgba(200,168,80,0.4), transparent);
+}
+
+/* Scroll hint */
+.hero-scroll {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.8rem;
+  opacity: 0; animation: fade-up 1s 1.4s ease forwards;
+}
+
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scroll-pulse 2s ease infinite;
+}
+
+@keyframes scroll-pulse {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.hero-scroll span {
+  font-family: 'Cinzel', serif; font-size: 0.58rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+/* Animações */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVO HERO ── */
+@media (max-width: 768px) {
+  nav { gap: 1rem; flex-wrap: wrap; padding: 0.9rem 1rem; }
+  nav a { font-size: 0.65rem; }
+  .nav-logo img { width: 30px; height: 30px; }
+  .hero-content { padding: 5rem 1.5rem 3rem; }
+  .hero-versions { gap: 1rem; }
+  .version-btn { padding: 1rem 1.8rem; }
+  .vbtn-sep { height: 50px; }
+}
+
+@media (max-width: 480px) {
+  nav { gap: 0.6rem; padding: 0.8rem; }
+  nav a { font-size: 0.6rem; }
+  .hero-content { padding: 5rem 1.2rem 2.5rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-versions { flex-direction: column; gap: 0.8rem; }
+  .vbtn-sep { width: 80px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,168,80,0.4), transparent); }
+  .version-btn { width: 100%; max-width: 240px; flex-direction: row; gap: 1rem; }
+  .orn-line { max-width: 60px; }
+}
+/* ══════════════════════════════════
+   SEÇÕES DA HISTÓRIA
+══════════════════════════════════ */
+.story-section {
+  position: relative; z-index: 1;
+  padding-bottom: 6rem;
+}
+
+/* CABEÇALHO DO CAPÍTULO */
+.chapter-header {
+  text-align: center;
+  padding: 5rem 2rem 4rem;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+
+.chapter-ornament {
+  display: flex; align-items: center;
+  justify-content: center; gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.corn-line {
+  width: 50px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+
+.corn-line:last-child {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.corn-diamond { color: var(--gold); font-size: 0.8rem; }
+
+.chapter-label {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.5em; text-transform: uppercase;
+  color: var(--gold-dim); margin-bottom: 0.8rem;
+}
+
+.chapter-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.8rem, 5vw, 3.5rem);
+  font-weight: 900;
+  background: linear-gradient(135deg,
+    #ffffff 0%, #f0e0c0 30%, #c8a850 60%, #8a6820 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(200,168,80,0.25));
+  margin-bottom: 1rem;
+}
+
+.chapter-sub {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-dim); line-height: 1.8;
+  max-width: 520px; margin: 0 auto;
+}
+
+/* CORPO DA HISTÓRIA */
+.story-body {
+  max-width: 720px; margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.story-block {
+  margin-bottom: 2rem;
+}
+
+/* Parágrafos de texto */
+.story-block p {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 1.4rem;
+  text-indent: 1.5em;
+}
+
+/* Diálogos — sem indent, travessão em dourado */
+.story-block p:has(> em:first-child),
+.story-block p[data-dialogue] {
+  text-indent: 0;
+}
+
+/* Parágrafos que começam com travessão */
+.story-block p:first-letter {
+  /* Nada — mantém clean */
+}
+
+/* Narração em itálico sutil */
+.story-block p.narration {
+  color: var(--text-dim);
+  font-style: italic;
+  text-indent: 0;
+}
+
+/* Strong e em */
+.story-block strong { color: var(--gold-light); font-weight: 600; }
+.story-block em { color: var(--ivory-dim); font-style: italic; }
+
+/* Linha final dramática */
+.final-line {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem) !important;
+  color: var(--crimson-bright) !important;
+  font-style: italic !important;
+  text-indent: 0 !important;
+  padding: 1.5rem 2rem;
+  border-left: 3px solid var(--crimson-bright);
+  background: rgba(139,26,26,0.06);
+  margin-top: 2rem !important;
+  letter-spacing: 0.02em;
+  box-shadow: inset 0 0 30px rgba(139,26,26,0.05);
+}
+
+.final-line em {
+  color: var(--crimson-bright) !important;
+  font-weight: 600;
+  text-shadow: 0 0 20px rgba(204,34,34,0.4);
+}
+
+/* QUEBRA DE CENA */
+.scene-break {
+  display: flex; align-items: center;
+  justify-content: center; gap: 1rem;
+  margin: 3rem 0;
+  color: var(--gold-dim); font-size: 1rem;
+  opacity: 0.5;
+}
+
+/* GALERIA DO PROLOGO */
+.prologue-gallery {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 1rem auto 5rem;
+  padding: 0 2rem;
+}
+
+.gallery-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: rgba(8,6,2,0.72);
+  box-shadow: 0 0 60px rgba(0,0,0,0.45),
+              inset 0 0 80px rgba(201,168,76,0.035);
+}
+
+.gallery-frame::before,
+.gallery-frame::after {
+  content: '';
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.gallery-frame::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+}
+
+.gallery-frame::after {
+  right: -1px;
+  bottom: -1px;
+  border-right: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+.gallery-track {
+  display: flex;
+  width: max-content;
+  animation: gallery-loop 42s linear infinite;
+}
+
+.gallery-frame:hover .gallery-track {
+  animation-play-state: paused;
+}
+
+.gallery-slide {
+  position: relative;
+  width: min(78vw, 420px);
+  aspect-ratio: 4 / 5;
+  flex: 0 0 auto;
+  overflow: hidden;
+  border-right: 1px solid rgba(201,168,76,0.14);
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: brightness(0.78) saturate(1.02);
+  transform: scale(1.02);
+}
+
+.gallery-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba(3,3,8,0.92) 0%,
+    rgba(3,3,8,0.35) 38%,
+    transparent 72%);
+  pointer-events: none;
+}
+
+.gallery-caption {
+  position: absolute;
+  left: 1.2rem;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 2;
+}
+
+.gallery-caption span {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.45rem;
+}
+
+.gallery-caption strong {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.65rem);
+  line-height: 1.15;
+  color: var(--ivory);
+  text-shadow: 0 0 22px rgba(201,168,76,0.28);
+}
+
+@keyframes gallery-loop {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* DIVISOR ENTRE VERSÕES */
+.version-divider {
+  display: flex; align-items: center;
+  gap: 2rem; padding: 4rem 2rem;
+  max-width: 900px; margin: 0 auto;
+}
+
+.vdiv-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg,
+    transparent, rgba(201,168,76,0.3), transparent);
+}
+
+.vdiv-center {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.vdiv-symbol {
+  font-size: 1.2rem; color: var(--gold);
+  text-shadow: 0 0 12px var(--gold-glow);
+}
+
+.vdiv-text {
+  font-family: 'Cinzel', serif; font-size: 0.62rem;
+  letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--gold-dim); white-space: nowrap;
+}
+
+/* FIM DA HISTÓRIA */
+.story-end {
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+
+.end-ornament {
+  display: flex; align-items: center;
+  justify-content: center; gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.eorn-line {
+  flex: 1; max-width: 120px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.eorn-symbol {
+  font-family: 'Cinzel', serif; font-size: 0.7rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold-dim); white-space: nowrap;
+}
+
+.end-sub {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 1.05rem; color: var(--text-dim);
+  line-height: 1.8; margin-bottom: 2.5rem;
+  text-indent: 0 !important;
+}
+
+.end-sub em { color: var(--crimson-bright); }
+
+.end-btn {
+  display: inline-block;
+  font-family: 'Cinzel', serif; font-size: 0.72rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold-dim); text-decoration: none;
+  padding: 0.9rem 2.5rem;
+  border: 1px solid rgba(201,168,76,0.25);
+  background: rgba(10,8,0,0.6);
+  transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.end-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+  box-shadow: 0 0 20px rgba(201,168,76,0.15);
+}
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1;
+  padding: 5rem 2rem; text-align: center;
+  border-top: 1px solid rgba(201,168,76,0.1);
+}
+
+.footer-inner { max-width: 600px; margin: 0 auto; }
+
+.footer-nav {
+  display: flex; justify-content: center;
+  align-items: center; gap: 1.2rem;
+  margin-bottom: 2rem; flex-wrap: wrap;
+}
+
+.footer-nav a {
+  font-family: 'Cinzel', serif; font-size: 0.68rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-dim); text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-nav a:hover { color: var(--gold-light); }
+.footer-nav span { color: var(--gold-dim); opacity: 0.4; }
+
+.footer-name {
+  font-family: 'Cinzel Decorative', serif; font-size: 1.2rem;
+  background: linear-gradient(135deg, #f0e0c0, #c8a850, #8a6820);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 0.8rem;
+}
+
+.footer-quote {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 0.95rem; color: var(--text-dim);
+  line-height: 1.8; margin-bottom: 2rem;
+}
+
+.footer-copy {
+  font-family: 'Cinzel', serif; font-size: 0.55rem;
+  letter-spacing: 0.2em; color: rgba(122,98,40,0.4);
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════════
+   SEÇÃO DE CHAMADA NA HOME.HTML
+   (cole esse bloco separado na home)
+══════════════════════════════════ */
+.prologo-cta {
+  position: relative; z-index: 1;
+  padding: 6rem 2rem;
+  text-align: center;
+  overflow: hidden;
+}
+
+.prologo-cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at center,
+      rgba(200,168,80,0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.pcta-top {
+  display: flex; align-items: center;
+  justify-content: center; gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.pcta-line {
+  flex: 1; max-width: 120px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5));
+}
+
+.pcta-line:last-child {
+  background: linear-gradient(90deg, rgba(201,168,76,0.5), transparent);
+}
+
+.pcta-label {
+  font-family: 'Cinzel', serif; font-size: 0.6rem;
+  letter-spacing: 0.45em; text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+.pcta-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 5vw, 3.5rem); font-weight: 900;
+  background: linear-gradient(135deg,
+    #ffffff 0%, #f0e0c0 25%, #c8a850 55%, #8a6820 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(200,168,80,0.3));
+  margin-bottom: 1rem;
+}
+
+.pcta-sub {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.2rem); color: var(--text-dim);
+  line-height: 1.85; max-width: 560px; margin: 0 auto 3rem;
+}
+
+/* Convite visual */
+.pcta-invite {
+  display: inline-flex; flex-direction: column;
+  align-items: center; gap: 1rem;
+  padding: 2.5rem 4rem;
+  border: 1px solid rgba(201,168,76,0.25);
+  background: rgba(10,8,0,0.7);
+  position: relative; margin-bottom: 2rem;
+  text-decoration: none;
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+
+.pcta-invite::before,
+.pcta-invite::after {
+  content: '';
+  position: absolute; width: 24px; height: 24px;
+}
+
+.pcta-invite::before {
+  top: -1px; left: -1px;
+  border-top: 2px solid var(--gold);
+  border-left: 2px solid var(--gold);
+}
+
+.pcta-invite::after {
+  bottom: -1px; right: -1px;
+  border-bottom: 2px solid var(--gold);
+  border-right: 2px solid var(--gold);
+}
+
+.pcta-invite:hover {
+  border-color: rgba(201,168,76,0.5);
+  box-shadow: 0 0 40px rgba(201,168,76,0.1),
+              inset 0 0 40px rgba(201,168,76,0.03);
+}
+
+.pcta-invite-icon {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 12px rgba(201,168,76,0.4));
+}
+
+.pcta-invite-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1rem, 3vw, 1.6rem); font-weight: 700;
+  background: linear-gradient(135deg, #f0e0c0, #c8a850);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.pcta-invite-quote {
+  font-family: 'EB Garamond', serif; font-style: italic;
+  font-size: 0.98rem; color: var(--text-dim);
+  line-height: 1.7; max-width: 340px; text-align: center;
+}
+
+.pcta-invite-btn {
+  font-family: 'Cinzel', serif; font-size: 0.68rem;
+  letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--gold-dim); padding: 0.7rem 2rem;
+  border: 1px solid rgba(201,168,76,0.2);
+  background: rgba(20,16,0,0.8);
+  transition: border-color 0.3s, color 0.3s;
+  cursor: pointer; text-decoration: none;
+}
+
+.pcta-invite:hover .pcta-invite-btn {
+  border-color: rgba(201,168,76,0.5);
+  color: var(--gold-light);
+}
+
+/* ══════════════════════════════════
+   RESPONSIVO COMPLETO
+══════════════════════════════════ */
+
+/* EFEITOS NARRATIVOS DO PROLOGO */
+.prologue-mood,
+.prologue-rift {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+}
+
+.prologue-mood {
+  background:
+    radial-gradient(circle at 50% 58%, rgba(201,168,76,0.12), transparent 34%),
+    radial-gradient(circle at 50% 72%, rgba(139,26,26,0.16), transparent 48%),
+    linear-gradient(to bottom, transparent 0%, rgba(3,3,8,0.34) 100%);
+  mix-blend-mode: screen;
+}
+
+.prologue-rift {
+  background:
+    radial-gradient(ellipse at 50% 55%, transparent 0%, transparent 36%, rgba(3,3,8,0.46) 72%),
+    linear-gradient(115deg, transparent 0%, rgba(90,0,0,0.18) 48%, transparent 72%);
+  mix-blend-mode: multiply;
+}
+
+body.prologue-dance .prologue-mood { opacity: 0.7; }
+body.prologue-threat .prologue-rift { opacity: 0.78; }
+body.prologue-shield .prologue-mood {
+  opacity: 0.95;
+  background:
+    radial-gradient(circle at 50% 52%, rgba(240,208,128,0.18), transparent 24%),
+    radial-gradient(circle at 50% 58%, rgba(201,168,76,0.12), transparent 44%);
+}
+
+.divine-mote {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  background: rgba(240,208,128,0.86);
+  box-shadow: 0 0 12px rgba(201,168,76,0.75);
+  animation: divine-mote-rise 2.8s ease-out forwards;
+}
+
+@keyframes divine-mote-rise {
+  from { opacity: 0; transform: translate3d(0, 20px, 0) scale(0.55); }
+  18%  { opacity: 1; }
+  to   { opacity: 0; transform: translate3d(var(--mote-drift), -110px, 0) scale(1.25); }
+}
+
+.story-block p.story-event {
+  position: relative;
+  border-radius: 2px;
+}
+
+.story-block p.story-event::after {
+  content: '';
+  position: absolute;
+  inset: -0.35rem -0.7rem;
+  z-index: -1;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.08), transparent);
+  transition: opacity 0.6s ease;
+}
+
+.story-block p.story-event.is-active::after { opacity: 1; }
+
+.story-block p.event-threat.is-active {
+  color: #d8c5b0 !important;
+  text-shadow: 0 0 18px rgba(139,26,26,0.36);
+}
+
+.story-block p.event-shield.is-active {
+  color: #f1dfb2 !important;
+  text-shadow: 0 0 18px rgba(201,168,76,0.32);
+}
+
+.final-line.awakened {
+  animation: final-line-breath 2.6s ease-in-out infinite;
+}
+
+@keyframes final-line-breath {
+  0%, 100% { box-shadow: inset 0 0 30px rgba(139,26,26,0.05); }
+  50% { box-shadow: inset 0 0 42px rgba(139,26,26,0.18), 0 0 34px rgba(139,26,26,0.18); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prologue-mood,
+  .prologue-rift,
+  .divine-mote,
+  .final-line.awakened {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .story-body { padding: 0 1.5rem; }
+  .chapter-header { padding: 4rem 1.5rem 3rem; }
+  .version-divider { padding: 3rem 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  .story-body { padding: 0 1.5rem; max-width: 100%; }
+  .chapter-header { padding: 3.5rem 1.5rem 2.5rem; }
+  .story-block p { font-size: 1.05rem; line-height: 1.9; }
+  .final-line { font-size: 1.05rem !important; padding: 1.2rem 1.5rem; }
+  .version-divider { padding: 2.5rem 1.5rem; gap: 1rem; }
+  .vdiv-line { display: none; }
+  .prologue-gallery { padding: 0 1.5rem; margin-bottom: 4rem; }
+  .gallery-slide { width: min(82vw, 360px); }
+  .story-end { padding: 4rem 1.5rem 2.5rem; }
+  .pcta-invite { padding: 2rem 2.5rem; }
+  footer { padding: 3.5rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .story-body { padding: 0 1.2rem; }
+  .chapter-header { padding: 3rem 1.2rem 2rem; }
+  .chapter-title { font-size: clamp(1.5rem, 7vw, 2.5rem); }
+  .chapter-sub   { font-size: 0.92rem; }
+  .story-block p { font-size: 1rem; line-height: 1.85; text-indent: 0; }
+  .final-line { font-size: 1rem !important; }
+  .scene-break { font-size: 0.8rem; margin: 2rem 0; }
+  .prologue-gallery { padding: 0 1rem; }
+  .gallery-slide { width: 82vw; }
+  .gallery-caption { left: 1rem; right: 1rem; bottom: 1rem; }
+  .gallery-caption span { font-size: 0.52rem; letter-spacing: 0.22em; }
+  .story-end { padding: 3rem 1.2rem 2rem; }
+  .end-btn { font-size: 0.65rem; padding: 0.8rem 2rem; }
+  .pcta-invite { padding: 2rem 1.5rem; width: 100%; }
+  .pcta-invite-quote { font-size: 0.9rem; }
+  footer { padding: 2.5rem 1.2rem; }
+  .footer-nav { flex-direction: column; gap: 0.5rem; }
+  .footer-nav span { display: none; }
+}
+
+@media (max-width: 360px) {
+  .story-body { padding: 0 1rem; }
+  .story-block p { font-size: 0.97rem; }
+}
+</style>
+</head>
+<body>
+
+  <audio autoplay loop hidden>
+    <source src="audio/themebaile4.mp3" type="audio/mpeg" />
+  </audio>
+
+
+<canvas id="cosmos-bg"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="home.html" class="nav-logo">
+    <img src="img-logo/olhos.jpg" alt="Logo">
+  </a>
+  <a href="home.html">← Início</a>
+</nav>
+
+<!-- HERO DE ABERTURA -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-label">Prólogo · O Diário de um Deus</div>
+    <h1 class="hero-title">
+      O Baile dos Deuses
+      <span>&</span>
+      Guardiões
+    </h1>
+    <div class="hero-ornament">
+      <span class="orn-line"></span>
+      <span class="orn-symbol">✦</span>
+      <span class="orn-symbol">⛧</span>
+      <span class="orn-symbol">✦</span>
+      <span class="orn-line"></span>
+    </div>
+    <p class="hero-sub">
+      "Poucos sabem dos seus verdadeiros nomes.<br>
+      Mas que continue assim..."
+    </p>
+    <div class="hero-versions">
+      <a href="#versao1" class="version-btn">
+        <span class="vbtn-num">I</span>
+        <span class="vbtn-label">A Preparação</span>
+      </a>
+      <div class="vbtn-sep"></div>
+      <a href="#versao2" class="version-btn">
+        <span class="vbtn-num">II</span>
+        <span class="vbtn-label">O Salão</span>
+      </a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Começar a leitura</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     VERSÃO I — A PREPARAÇÃO
+══════════════════════════════════ -->
+<section id="versao1" class="story-section">
+  <div class="chapter-header reveal">
+    <div class="chapter-ornament">
+      <span class="corn-line"></span>
+      <span class="corn-diamond">◆</span>
+      <span class="corn-line"></span>
+    </div>
+    <div class="chapter-label">Primeira Versão</div>
+    <h2 class="chapter-title">A Preparação</h2>
+    <p class="chapter-sub">
+      O dia do Baile. A família se arruma, os heróis chegam,
+      e algo que não deveria acontecer — acontece.
+    </p>
+  </div>
+
+  <div class="story-body">
+
+    <div class="story-block reveal">
+      <p>— Noossa.... — Abano meu rosto com uma das mãos —... vocês estão deslumbrantes — vou até a minha esposa e estendo a mão para ela</p>
+
+      <p>— Isso me faz lembrar no baile da escola, aquele dia foi muito bom...</p>
+
+      <p>— Eu tenho ótimas memórias desse dia hihihi... — Nimsay fica corada</p>
+
+      <p>— O que aconteceu nesse dia papai? — Perguntou Aliban, nossa filha mais nova</p>
+
+      <p>— Ah, seu irmão foi...</p>
+
+      <p>— Null... — Nimsay aperta forte a minha mão que senti um osso quebrando, eu acho...</p>
+
+      <p>— Aii... F-foi quando escolhemos o nome do seu irmão, é uma longa história filha, outro dia o papai te conta, tá?</p>
+
+      <p>— Ta bom...</p>
+
+      <p>— Enfim... todos prontos?</p>
+
+      <p class="narration">Todos respondem sim e balançando a cabeça confirmando com um sinal de positivo.</p>
+
+      <p>— Então vamos lá — Cada um segurou a mão de quem estava do lado. Nimsay e as meninas estavam à minha esquerda, na minha direita estava Chris e sua esposa grávida, Mei — e em um piscar de olhos, eu teletransporto todos dali até ao planeta onde seria o evento. Aparecemos bem no jardim do palácio e alguns segundos depois, Ônull aparece com a sua família.</p>
+
+      <p>— Ora ora ora, olha só quem chegou 3 segundos depois de mim, haha — Fomos nos aproximando deles.</p>
+
+      <p>— Acho que foi ao mesmo tempo, haha — Respondeu Ônull.</p>
+
+      <p class="narration">Logo após termos nos cumprimentado, Ana apareceu com seus filhos gêmeos, Diana e Clark — mas o Anull não estava com eles. Assim que eles chegaram, fomos até eles e logo perguntamos:</p>
+
+      <p>— Ana, cadê o Mister. L?</p>
+
+      <p>— Bom, ele ainda não voltou da prisão. Disse que viria direto para cá, só não sei que horas...</p>
+
+      <p>— "E eu estou cumprindo com o que eu disse" — uma voz ecoou por detrás de nós. Nos viramos e era ele.</p>
+
+      <p>— Olha só, como dizem: "quem é vivo, sempre aparece!" haha — Disse Onull.</p>
+
+      <p>— Iáê, resolveu o que tinha que resolver? — Eu perguntei a ele.</p>
+
+      <p>— Eu espero que sim...</p>
+
+      <p>— Maravilha então, vamos entrar? — Apontei para a grande escada que dava acesso ao grande salão.</p>
+    </div>
+
+    <div class="scene-break reveal">
+      <span>✦</span><span>✦</span><span>✦</span>
+    </div>
+
+    <div class="story-block reveal">
+      <p class="narration">Logo após entrarmos, o salão estava completamente enfeitado — cada decoração mais linda que a outra. Era imenso o espaço. Fomos olhando cada canto que estava decorado, e muitas das decorações eram de épocas de lutas e batalhas que foram contadas em cada era. Era uma sala que contava como cada batalha ocorreu — de deveras interessante.</p>
+
+      <p class="narration">Fomos para onde iriam ser as apresentações dos novos deuses e guardiões, banquetes, e ainda havia as apresentações das coreografias divinas. Essa parte ficava no leste do palácio — que era enorme e muito rico em detalhes, com muita cor, o que dava vida àquele palácio. Cada cômodo com suas riquezas espalhadas, esculturas e quadros antigos mostrando a história das eras passadas.</p>
+
+      <p class="narration">Enfim chegamos ao salão. Entramos e fomos diretos para as nossas mesas. Geralmente nessas apresentações, são para apresentar os novos deuses e novos guardiões que assumiram os postos de seus antecessores — muitos se aposentam e outros morrem em batalhas. O anfitrião, o senhor Awrrond, deus guardião daquela parte da galáxia, resolveu fazer diferente naquela vez:</p>
+
+      <p>— "Senhoras e Senhores, esse ano eu gostaria de fazer algo diferente no Baile de Gala. Ao invés de começarmos com as apresentações, eu quero começar com outras apresentações... com a <em>dança de gala</em>, hehehe... É isso mesmo, senhoras e senhores, vamos começar com o momento que todos aguardam... Espero que não estejam com os estômagos cheios dessas delícias que temos aqui hoje. Vamos lá — vamos ao Baile dos Deuses!"</p>
+
+      <p class="narration">Todos nós aplaudimos e nos levantamos. Em um piscar de olhos, aquele salão que estava com várias mesas com várias comidas sobre elas já não estavam mais ali. Agora estávamos no salão principal, onde a dança aconteceria. Homens para um lado e mulheres para o outro lado, um de frente para o outro até a música começar e os pares se encontrarem e começarem a seguir o ritmo da música escolhida para tal momento.</p>
+
+      <p class="narration">Começamos a dançar com uma bela coreografia lembrando bastante um pouco de cada universo — mas logo que começamos a dançar, eu paro a dança com a Nimsay...</p>
+
+      <p>— O que houve? Por que você parou?... — Ela olhando para mim e me vendo olhando para uma direção, então ela percebeu também. E não só ela — os garotos e as garotas também notaram.</p>
+
+      <p class="narration">Foi muito rápido. No momento em que parei a dança, uma <strong>onda de escuridão</strong> começou a invadir todo o salão e começou a destruir tudo que estava em sua frente. Depois de alguns minutos, aquela onda escura passou pelo palácio — e com ela, a destruição junto. Havia somente poeira no ar.</p>
+
+      <p class="narration">Com um gesto de mãos bem sutil, Nimsay faz a poeira sumir do ar. O palácio estava todo destruído, mas com todos a salvo. Assim que a poeira some, aparece envolta de todo mundo um escudo grande em forma de um humanoide com uma barreira de proteção — eu e os garotos conseguimos proteger a todos no último instante.</p>
+
+      <p class="narration">Sem saber o que estava acontecendo, um soldado sobrevivente chegou até nós cambaleando, todo machucado. Mal conseguia ficar de pé — porém, ele estava dizendo apenas uma coisa:</p>
+
+      <p>— E...ela...ela chegou... ela...</p>
+
+      <p>— Calma soldado, encoste-se aqui e nos conte quem está vindo — Onull pegou o soldado e o colocou encostado em uma pedra grande que estava ali.</p>
+
+      <p>— Quem chegou? — Onull pergunta a ele.</p>
+
+      <p>— E-ela.... chegou... — Seus olhos estavam vidrados e paralisados com a expressão de medo. Eu me agacho e me aproximo dele.</p>
+
+      <p>— Quem chegou, soldado? De quem você está falando?? — Os olhos daquele soldado começaram a tornar-se todo negro e ele disse com um tom de voz alterado:</p>
+
+      <p class="final-line">— A escuridão... <em>a escuridão chegou</em>...!</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="prologue-gallery reveal" aria-label="Galeria visual do prologo">
+  <div class="chapter-ornament">
+    <span class="corn-line"></span>
+    <span class="corn-diamond">◆</span>
+    <span class="corn-line"></span>
+  </div>
+  <div class="chapter-label" style="text-align:center;">Galeria do Prologo</div>
+  <div class="gallery-frame">
+    <div class="gallery-track">
+      <figure class="gallery-slide">
+        <img src="img-baile/preparacao.png" alt="A familia se preparando para o baile">
+        <figcaption class="gallery-caption">
+          <span>A preparacao</span>
+          <strong>A ultima tranquilidade antes do baile.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/planeta.png" alt="O planeta primordial onde aconteceria o evento">
+        <figcaption class="gallery-caption">
+          <span>Centro de tudo</span>
+          <strong>O planeta do evento no coracao da galaxia.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/escada.png" alt="A grande escada do palacio">
+        <figcaption class="gallery-caption">
+          <span>A chegada</span>
+          <strong>A escadaria que leva ao grande salao.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/baile.png" alt="O salao do baile dos deuses e guardioes">
+        <figcaption class="gallery-caption">
+          <span>O salao</span>
+          <strong>Banquetes, esculturas e memorias das eras antigas.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/danca.png" alt="A danca de gala dos deuses">
+        <figcaption class="gallery-caption">
+          <span>A danca</span>
+          <strong>O instante em que o universo ainda parecia em paz.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/parou.png" alt="O momento em que Knull para de dancar">
+        <figcaption class="gallery-caption">
+          <span>O silencio</span>
+          <strong>Quando Knull parou, todos sentiram a ruptura.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/preparacao.png" alt="" aria-hidden="true">
+        <figcaption class="gallery-caption">
+          <span>A preparacao</span>
+          <strong>A ultima tranquilidade antes do baile.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/planeta.png" alt="" aria-hidden="true">
+        <figcaption class="gallery-caption">
+          <span>Centro de tudo</span>
+          <strong>O planeta do evento no coracao da galaxia.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/escada.png" alt="" aria-hidden="true">
+        <figcaption class="gallery-caption">
+          <span>A chegada</span>
+          <strong>A escadaria que leva ao grande salao.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/baile.png" alt="" aria-hidden="true">
+        <figcaption class="gallery-caption">
+          <span>O salao</span>
+          <strong>Banquetes, esculturas e memorias das eras antigas.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/danca.png" alt="" aria-hidden="true">
+        <figcaption class="gallery-caption">
+          <span>A danca</span>
+          <strong>O instante em que o universo ainda parecia em paz.</strong>
+        </figcaption>
+      </figure>
+      <figure class="gallery-slide">
+        <img src="img-baile/parou.png" alt="" aria-hidden="true">
+        <figcaption class="gallery-caption">
+          <span>O silencio</span>
+          <strong>Quando Knull parou, todos sentiram a ruptura.</strong>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- DIVISOR ENTRE VERSÕES -->
+<div class="version-divider reveal">
+  <div class="vdiv-line"></div>
+  <div class="vdiv-center">
+    <span class="vdiv-symbol">⛧</span>
+    <div class="vdiv-text">Segunda Versão</div>
+    <span class="vdiv-symbol">⛧</span>
+  </div>
+  <div class="vdiv-line"></div>
+</div>
+      <p class="end-sub">
+        O que vem a seguir é o maior desafio que eles ja enfretaram.<br>
+        <em>A escuridão ainda está chegando.</em>
+      </p>
+      <a href="home.html" class="end-btn">← Voltar ao Início</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-nav">
+      <a href="home.html">← Início</a>
+      <span>·</span>
+      <a href="regioes.html">Regiões</a>
+      <span>·</span>
+      <a href="viloes.html">Vilões</a>
+    </div>
+    <div class="footer-name">O Baile dos Deuses e Guardiões</div>
+    <div class="footer-quote">
+      "Seus feitos, seus nomes viraram um marco para a história.<br>
+      E foram além — viraram lendas."
+    </div>
+    <div class="footer-copy">
+      O Diário de um Deus · Todos os direitos reservados
+    </div>
+  </div>
+</footer>
+
+<script src="effects.js"></script>
+<script>
+/* ════════════════════════════════════
+   PRÓLOGO — JAVASCRIPT
+   Canvas · Baile · Partículas · Leitura
+════════════════════════════════════ */
+
+/* ── COSMOS CANVAS ── */
+(function () {
+  const canvas = document.getElementById('cosmos-bg');
+  const ctx    = canvas.getContext('2d');
+  let W, H, stars = [], nebulas = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    stars = [];
+    for (let i = 0; i < 240; i++) {
+      stars.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 1.5 + 0.2,
+        a: Math.random() * 0.6 + 0.1,
+        speed: Math.random() * 0.25 + 0.04,
+        twinkle: Math.random() * Math.PI * 2
+      });
+    }
+
+    nebulas = [];
+    const colors = [
+      'rgba(26,20,0,', 'rgba(201,168,76,',
+      'rgba(139,26,26,', 'rgba(60,40,0,'
+    ];
+    for (let i = 0; i < 5; i++) {
+      nebulas.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 380 + 160,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        a: Math.random() * 0.05 + 0.01
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    const bg = ctx.createRadialGradient(W*.5,H*.4,0,W*.5,H*.4,Math.max(W,H));
+    bg.addColorStop(0,   '#0a0800');
+    bg.addColorStop(0.3, '#060500');
+    bg.addColorStop(0.7, '#030308');
+    bg.addColorStop(1,   '#020205');
+    ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+
+    nebulas.forEach(n => {
+      const g = ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r);
+      g.addColorStop(0, n.color+n.a+')');
+      g.addColorStop(1, n.color+'0)');
+      ctx.fillStyle = g; ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
+    });
+
+    stars.forEach(s => {
+      s.twinkle += s.speed * 0.04;
+      const a = s.a * (0.4 + 0.6 * Math.sin(s.twinkle));
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(230,215,180,${a})`; ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+})();
+
+/* ── CANVAS DO HERO — BAILE DOURADO ── */
+(function () {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, confetti = [], waltzing = [], frame = 0;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function init() {
+    /* Confete dourado caindo — como um baile de gala */
+    confetti = [];
+    for (let i = 0; i < 60; i++) {
+      confetti.push({
+        x:      Math.random() * W,
+        y:      Math.random() * H - H,
+        w:      Math.random() * 8 + 3,
+        h:      Math.random() * 4 + 1.5,
+        angle:  Math.random() * Math.PI * 2,
+        spin:   (Math.random() - 0.5) * 0.06,
+        speedY: Math.random() * 1.2 + 0.3,
+        speedX: (Math.random() - 0.5) * 0.5,
+        a:      Math.random() * 0.5 + 0.1,
+        gold:   Math.random() > 0.3
+      });
+    }
+
+    /* Casais dançando — pontos orbitando */
+    waltzing = [];
+    for (let i = 0; i < 8; i++) {
+      const cx = W * (0.1 + i * 0.11);
+      const cy = H * (0.4 + Math.sin(i) * 0.15);
+      waltzing.push({
+        cx, cy,
+        r:      Math.random() * 30 + 15,
+        angle:  i * (Math.PI * 2 / 8),
+        speed:  (Math.random() * 0.008 + 0.004) * (i % 2 === 0 ? 1 : -1),
+        a:      Math.random() * 0.2 + 0.05,
+        size:   Math.random() * 2 + 1
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    frame += 0.012;
+
+    /* Casais dançando */
+    waltzing.forEach(p => {
+      p.angle += p.speed;
+      const x = p.cx + Math.cos(p.angle) * p.r;
+      const y = p.cy + Math.sin(p.angle) * p.r * 0.5;
+
+      const g = ctx.createRadialGradient(x,y,0,x,y,p.size*6);
+      g.addColorStop(0, `rgba(201,168,76,${p.a})`);
+      g.addColorStop(1, 'rgba(201,168,76,0)');
+      ctx.fillStyle = g; ctx.beginPath();
+      ctx.arc(x,y,p.size*6,0,Math.PI*2); ctx.fill();
+
+      ctx.beginPath(); ctx.arc(x,y,p.size,0,Math.PI*2);
+      ctx.fillStyle = `rgba(240,220,160,${p.a*2})`; ctx.fill();
+    });
+
+    /* Confete dourado caindo */
+    confetti.forEach(c => {
+      c.y     += c.speedY;
+      c.x     += c.speedX + Math.sin(frame + c.angle) * 0.3;
+      c.angle += c.spin;
+
+      if (c.y > H + 20) {
+        c.y = -20; c.x = Math.random() * W;
+      }
+
+      const color = c.gold
+        ? `rgba(201,168,76,${c.a})`
+        : `rgba(255,240,200,${c.a * 0.7})`;
+
+      ctx.save();
+      ctx.translate(c.x, c.y); ctx.rotate(c.angle);
+      ctx.globalAlpha = c.a;
+      ctx.fillStyle   = color;
+      ctx.fillRect(-c.w/2, -c.h/2, c.w, c.h);
+      ctx.restore();
+    });
+
+    /* Ondas de luz do salão */
+    for (let i = 0; i < 3; i++) {
+      const y = H * (0.3 + i * 0.15);
+      const a = 0.04 + 0.02 * Math.sin(frame * 1.5 + i);
+      const g = ctx.createLinearGradient(0, y, W, y);
+      g.addColorStop(0,   'rgba(201,168,76,0)');
+      g.addColorStop(0.3, `rgba(201,168,76,${a})`);
+      g.addColorStop(0.7, `rgba(201,168,76,${a})`);
+      g.addColorStop(1,   'rgba(201,168,76,0)');
+      ctx.fillStyle = g; ctx.fillRect(0, y-1, W, 2);
+    }
+
+    /* Onda de escuridão (sutil, no fundo) */
+    const darkPulse = Math.sin(frame * 0.3) * 0.5 + 0.5;
+    const dk = ctx.createRadialGradient(W*.5,H*.8,0,W*.5,H*.8,W*.4);
+    dk.addColorStop(0, `rgba(139,26,26,${darkPulse * 0.03})`);
+    dk.addColorStop(1, 'rgba(139,26,26,0)');
+    ctx.fillStyle = dk; ctx.fillRect(0,0,W,H);
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+})();
+
+/* ── SCROLL REVEAL ── */
+(function () {
+  const els = document.querySelectorAll('.reveal');
+  const io  = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ── EFEITO DE ESCURIDÃO NA LINHA FINAL ── */
+(function () {
+  const finalLines = document.querySelectorAll('.final-line');
+
+  finalLines.forEach(line => {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          /* Flash vermelho ao revelar */
+          const flash = document.createElement('div');
+          flash.style.cssText = `
+            position: fixed; inset: 0;
+            background: rgba(139,26,26,0.08);
+            z-index: 998; pointer-events: none;
+            animation: dark-flash 1.2s ease forwards;
+          `;
+          document.body.appendChild(flash);
+
+          const style = document.createElement('style');
+          style.textContent = `
+            @keyframes dark-flash {
+              0%   { opacity: 0; }
+              20%  { opacity: 1; }
+              100% { opacity: 0; }
+            }
+          `;
+          document.head.appendChild(style);
+
+          setTimeout(() => flash.remove(), 1200);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.8 });
+
+    io.observe(line);
+  });
+})();
+
+/* ── BARRA DE PROGRESSO DE LEITURA ── */
+(function () {
+  const bar = document.createElement('div');
+  bar.style.cssText = `
+    position: fixed; top: 0; left: 0; z-index: 999;
+    height: 2px; width: 0;
+    background: linear-gradient(90deg, #8b1a1a, #c8a850, #8b1a1a);
+    transition: width 0.1s linear;
+    pointer-events: none;
+  `;
+  document.body.appendChild(bar);
+
+  window.addEventListener('scroll', () => {
+    const scrollTop  = window.scrollY;
+    const docHeight  = document.body.scrollHeight - window.innerHeight;
+    const progress   = Math.min(scrollTop / docHeight, 1);
+    bar.style.width  = (progress * 100) + '%';
+  }, { passive: true });
+})();
+
+/* ── DESTAQUE DE PARÁGRAFOS AO ROLAR ── */
+(function () {
+  const paragraphs = document.querySelectorAll('.story-block p');
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.transition = 'color 0.6s ease';
+        e.target.style.color = 'var(--text)';
+      } else {
+        e.target.style.color = 'var(--text-dim)';
+      }
+    });
+  }, { threshold: 0.5 });
+
+  paragraphs.forEach(p => {
+    p.style.color = 'var(--text-dim)';
+    io.observe(p);
+  });
+})();
+
+/* NARRATIVA REATIVA AO SCROLL */
+(function () {
+  const paragraphs = Array.from(document.querySelectorAll('.story-block p'));
+  if (!paragraphs.length) return;
+
+  const mood = document.createElement('div');
+  mood.className = 'prologue-mood';
+  document.body.appendChild(mood);
+
+  const rift = document.createElement('div');
+  rift.className = 'prologue-rift';
+  document.body.appendChild(rift);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const activeEvents = new Set();
+
+  function normalizeText(text) {
+    return text
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  }
+
+  function classify(text, el) {
+    if (el.classList.contains('final-line')) return 'final';
+    if (text.includes('onda de escur') || text.includes('olhos daquele soldado')) return 'threat';
+    if (text.includes('escudo grande') || text.includes('barreira de prote')) return 'shield';
+    if (text.includes('danca de gala') || text.includes('dan') && text.includes('gala')) return 'dance';
+    return '';
+  }
+
+  function syncMood() {
+    document.body.classList.toggle('prologue-dance', activeEvents.has('dance'));
+    document.body.classList.toggle('prologue-threat', activeEvents.has('threat') || activeEvents.has('final'));
+    document.body.classList.toggle('prologue-shield', activeEvents.has('shield'));
+  }
+
+  function releaseMotes(kind) {
+    if (reduceMotion) return;
+
+    const count = kind === 'threat' || kind === 'final' ? 22 : 16;
+    for (let i = 0; i < count; i++) {
+      const mote = document.createElement('span');
+      mote.className = 'divine-mote';
+
+      const x = 15 + Math.random() * 70;
+      const y = kind === 'dance'
+        ? 28 + Math.random() * 42
+        : 42 + Math.random() * 45;
+
+      mote.style.left = x + 'vw';
+      mote.style.top = y + 'vh';
+      mote.style.setProperty('--mote-drift', ((Math.random() - 0.5) * 120) + 'px');
+
+      if (kind === 'threat' || kind === 'final') {
+        mote.style.background = 'rgba(70,0,0,0.9)';
+        mote.style.boxShadow = '0 0 14px rgba(139,26,26,0.75)';
+      }
+
+      document.body.appendChild(mote);
+      setTimeout(() => mote.remove(), 3000);
+    }
+  }
+
+  paragraphs.forEach(p => {
+    const kind = classify(normalizeText(p.textContent), p);
+    if (!kind) return;
+
+    p.dataset.event = kind;
+    p.classList.add('story-event', 'event-' + kind);
+  });
+
+  const eventParagraphs = paragraphs.filter(p => p.dataset.event);
+  if (!eventParagraphs.length) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const el = entry.target;
+      const kind = el.dataset.event;
+
+      if (entry.isIntersecting) {
+        activeEvents.add(kind);
+        el.classList.add('is-active');
+        if (kind === 'final') el.classList.add('awakened');
+        releaseMotes(kind);
+      } else {
+        activeEvents.delete(kind);
+        el.classList.remove('is-active');
+      }
+    });
+
+    syncMood();
+  }, {
+    threshold: 0.45,
+    rootMargin: '-12% 0px -18%'
+  });
+
+  eventParagraphs.forEach(p => io.observe(p));
+})();
+</script>
+</body>
+</html>

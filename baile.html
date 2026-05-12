@@ -591,8 +591,62 @@
                 font-size: 1rem
             }
         }
+        @keyframes scroll-pulse {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+.hero-scroll span {
+  font-family: 'Cinzel', serif; font-size: 0.58rem;
+  letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--gold-dim);
+}
+
+/* Animações */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); filter: blur(3px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVO HERO ── */
+@media (max-width: 768px) {
+  nav { gap: 1rem; flex-wrap: wrap; padding: 0.9rem 1rem; }
+  nav a { font-size: 0.65rem; }
+  .nav-logo img { width: 30px; height: 30px; }
+  .hero-content { padding: 5rem 1.5rem 3rem; }
+  .hero-versions { gap: 1rem; }
+  .version-btn { padding: 1rem 1.8rem; }
+  .vbtn-sep { height: 50px; }
+}
+
+@media (max-width: 480px) {
+  nav { gap: 0.6rem; padding: 0.8rem; }
+  nav a { font-size: 0.6rem; }
+  .hero-content { padding: 5rem 1.2rem 2.5rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-versions { flex-direction: column; gap: 0.8rem; }
+  .vbtn-sep { width: 80px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,168,80,0.4), transparent); }
+  .version-btn { width: 100%; max-width: 240px; flex-direction: row; gap: 1rem; }
+  .orn-line { max-width: 60px; }
+}
+
     </style>
 </head>
+
+  <audio autoplay loop hidden>
+    <source src="audio/themebaile5.mp3" type="audio/mpeg" />
+  </audio>
+
 
 <body>
     <canvas id="cosmos"></canvas>
@@ -623,12 +677,12 @@
                 <p>Entre roupas de gala, brincadeiras familiares e memórias antigas, a paz parecia finalmente real.</p>
             </div>
         </div>
-        <div class="visual-panel reveal" style="background-image:url('img-baile/escada0.png')">
+        <div class="visual-panel reveal" style="background-image:url('img-baile/preparacao.png')">
             <div class="visual-caption">Família · Memória · Última tranquilidade</div>
         </div>
     </section>
     <section id="centro" class="chapter reverse">
-        <div class="visual-panel reveal" style="background-image:url('img-baile/baile.png')">
+        <div class="visual-panel reveal" style="background-image:url('img-baile/planeta.png')">
             <div class="visual-caption">O Centro de Tudo · Galáxia primordial</div>
         </div>
         <div class="chapter-card reveal">
@@ -654,12 +708,12 @@
                 <p>Por alguns instantes, tudo parecia perfeito demais para terminar.</p>
             </div>
         </div>
-        <div class="visual-panel reveal" style="background-image:url('img-baile/escada.png.')">
+        <div class="visual-panel reveal" style="background-image:url('img-baile/danca.png')">
             <div class="visual-caption">A dança · O último brilho da era</div>
         </div>
     </section>
     <section id="interrupcao" class="chapter reverse">
-        <div class="visual-panel reveal" style="background-image:url('img-baile/escada.png')">
+        <div class="visual-panel reveal" style="background-image:url('img-baile/parou.png')">
             <div class="visual-caption">O instante em que a música parou</div>
         </div>
         <div class="chapter-card reveal">
@@ -690,12 +744,11 @@
             <div class="dialogue">
                 <p>Dos destroços, um soldado cambaleou, ferido, os olhos presos em algo que ninguém ainda podia ver.</p>
                 <p><strong>— E-ela... ela chegou...</strong></p>
-                <p>Quando perguntaram quem estava vindo, seus olhos ficaram <span class="black-eyes">completamente
+                <p>— Ela quem...soldado?- Knull perguntou a ele e seus olhos ficaram <span class="black-eyes">completamente
                         negros</span>.</p>
             </div>
             <div class="last-word">A Escuridão.</div>
-            <div class="end-actions"><a href="home.html" class="btn">Voltar ao início</a><a href="escuridao.html"
-                    class="btn dark">Conhecer a Escuridão →</a></div>
+            <div class="end-actions"><a href="home.html" class="btn">Voltar ao início</a>
         </div>
     </section>
     <script>
