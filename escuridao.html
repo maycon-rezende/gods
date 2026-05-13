@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>— O Diário de um Deus</title>
+<!-- Título propositalmente vazio — não revela nada -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ── RESET E BASE ── */
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #000000;
+}
+
+body {
+  background: #000000;
+  color: #e0d8c8;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 18px;
+  overflow-x: hidden;
+  min-height: 100vh;
+  cursor: default;
+}
+
+/* Canvas do vazio — fixo, estrelas desaparecendo */
+#void-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: #000000;
+}
+
+/* ── TELA DE ENTRADA ── */
+#entry-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.5s ease, visibility 1.5s ease;
+}
+
+#entry-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#entry-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+  padding: 2rem;
+  opacity: 0;
+  animation: entry-appear 2s 0.5s ease forwards;
+}
+
+@keyframes entry-appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.entry-warning {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(180,160,120,0.5);
+}
+
+#entry-btn {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 3vw, 1.3rem);
+  color: rgba(200,180,140,0.7);
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(200,180,140,0.2);
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: color 0.5s, border-color 0.5s;
+}
+
+#entry-btn:hover {
+  color: rgba(240,220,180,0.95);
+  border-color: rgba(200,180,140,0.5);
+}
+
+.entry-back a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(120,100,70,0.4);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.entry-back a:hover {
+  color: rgba(180,160,120,0.7);
+}
+
+/* ── CONTEÚDO PRINCIPAL ── */
+#main-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+#main-content.hidden {
+  display: none;
+}
+
+#main-content.visible {
+  display: block;
+}
+
+/* ── ABERTURA CINEMATIC ── */
+.void-opening {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  transition: opacity 1.5s ease;
+}
+
+.void-opening.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.void-opening.gone {
+  display: none;
+}
+
+.opening-line {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.9rem, 3vw, 1.4rem);
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(180,160,120,0);
+  transition: color 1s ease;
+}
+
+.opening-line.visible {
+  color: rgba(180,160,120,0.6);
+}
+
+.opening-line.accent {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-weight: 700;
+  color: rgba(200,180,140,0);
+}
+
+.opening-line.accent.visible {
+  color: rgba(200,180,140,0.9);
+  text-shadow: 0 0 30px rgba(200,180,140,0.2);
+}
+
+.opening-scroll {
+  color: rgba(180,160,120,0);
+  font-size: 1.2rem;
+  transition: color 1s ease;
+  animation: scroll-bob 2s ease infinite;
+}
+
+.opening-scroll.visible {
+  color: rgba(180,160,120,0.4);
+}
+
+@keyframes scroll-bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+/* ── RESPONSIVO ENTRADA ── */
+@media (max-width: 480px) {
+  .entry-warning { font-size: 0.65rem; letter-spacing: 0.25em; }
+  #entry-btn     { font-size: 1rem; }
+  .opening-line  { font-size: 0.85rem; letter-spacing: 0.2em; }
+  .opening-line.accent { font-size: 1.1rem; }
+}
+/* ── ARTIGO PRINCIPAL ── */
+#story-article {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 8rem 2rem 6rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Parágrafos — invisíveis por padrão, revelados ao scroll */
+.void-paragraph {
+  margin-bottom: 4rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.4s ease, transform 1.4s ease;
+}
+
+.void-paragraph.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.void-paragraph p {
+  font-family: 'EB Garamond', serif;
+  font-size: clamp(1.05rem, 2vw, 1.22rem);
+  line-height: 2.1;
+  color: rgba(200,188,165,0.85);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.01em;
+}
+
+.void-paragraph p:last-child { margin-bottom: 0; }
+
+/* Ênfase em itálico */
+.void-emphasis {
+  font-style: italic !important;
+  color: rgba(220,205,175,0.7) !important;
+  padding: 1rem 0 0.5rem;
+  border-left: 1px solid rgba(180,160,120,0.15) !important;
+  padding-left: 1.5rem !important;
+  margin-top: 0.5rem;
+}
+
+/* ── ELEMENTOS DRAMÁTICOS ── */
+
+/* Quebra dramática */
+.void-break {
+  text-align: center;
+  margin: 5rem 0;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 1.8s ease, transform 1.8s ease;
+}
+
+.void-break.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.void-break span {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.85rem, 2.5vw, 1.1rem);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(180,160,120,0.5);
+  display: inline-block;
+  padding: 1rem 2rem;
+  border-top: 1px solid rgba(180,160,120,0.1);
+  border-bottom: 1px solid rgba(180,160,120,0.1);
+}
+
+/* Silêncio */
+.void-silence {
+  text-align: center;
+  margin: 6rem 0;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.void-silence.revealed { opacity: 1; }
+
+.void-silence span {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: rgba(160,145,115,0.4);
+  letter-spacing: 0.08em;
+}
+
+/* Valar — linha de destaque */
+.void-valar {
+  text-align: center;
+  margin: 5rem 0;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+
+.void-valar.revealed { opacity: 1; }
+
+.void-valar span {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-weight: 700;
+  color: rgba(192,144,10,0.6);
+  text-shadow: 0 0 30px rgba(192,144,10,0.15);
+  letter-spacing: 0.05em;
+}
+
+/* Virada — o vazio percebe */
+.void-turn {
+  text-align: center;
+  margin: 6rem 0;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.void-turn.revealed { opacity: 1; }
+
+.turn-line {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.82rem, 2vw, 1rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(180,160,120,0.3);
+  margin-bottom: 1rem;
+}
+
+.turn-line.accent-line {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  font-weight: 900;
+  color: rgba(200,188,165,0.8);
+  text-shadow: 0 0 40px rgba(200,188,165,0.1);
+  letter-spacing: 0.08em;
+  text-transform: none;
+  margin-bottom: 0;
+}
+
+/* Pausa do vazio */
+.void-pause {
+  text-align: center;
+  margin: 6rem 0;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.void-pause.revealed { opacity: 1; }
+
+.pause-line {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: rgba(200,188,165,0.7);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.05em;
+}
+
+.pause-line.dim {
+  color: rgba(160,148,125,0.35);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+}
+
+.pause-line.accent-pause {
+  color: rgba(180,160,120,0.5);
+  font-size: clamp(0.82rem, 2vw, 1rem);
+  font-style: normal;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 1rem;
+  font-size: clamp(0.72rem, 1.8vw, 0.88rem);
+}
+
+/* Linha final — a mais aterrorizante */
+.void-final {
+  text-align: center;
+  margin: 7rem 0 4rem;
+  opacity: 0;
+  transition: opacity 2.5s ease;
+}
+
+.void-final.revealed { opacity: 1; }
+
+.final-text {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: rgba(200,188,165,0.75);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.final-text-2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  color: rgba(180,160,120,0.4);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: final-pulse 4s ease infinite;
+}
+
+@keyframes final-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.7; }
+}
+
+/* Saída */
+.void-exit {
+  text-align: center;
+  padding: 4rem 0 8rem;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.void-exit.revealed { opacity: 1; }
+
+.exit-link {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(120,105,80,0.35);
+  text-decoration: none;
+  transition: color 0.5s;
+}
+
+.exit-link:hover {
+  color: rgba(180,160,120,0.6);
+}
+
+/* ══════════════════════════════════
+   ENTRADAS ESCONDIDAS
+   Cole esses estilos nas páginas
+   onde os links secretos aparecem
+══════════════════════════════════ */
+
+/* 1. Link secreto no final do prólogo */
+.secret-prologo-link {
+  display: block;
+  text-align: center;
+  margin-top: 4rem;
+  padding: 2rem 0;
+  opacity: 0;
+  animation: secret-fade-in 3s 2s ease forwards;
+}
+
+@keyframes secret-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.secret-prologo-link a {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(180,160,120,0.25);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  transition: color 1s;
+  border-bottom: 1px solid rgba(180,160,120,0.08);
+  padding-bottom: 2px;
+}
+
+.secret-prologo-link a:hover {
+  color: rgba(180,160,120,0.55);
+}
+
+/* 2. Elemento escondido na home */
+.secret-home-element {
+  position: fixed;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: all;
+}
+
+.secret-home-element a {
+  font-family: 'Cinzel', serif;
+  font-size: 0.45rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(180,160,120,0.08);
+  text-decoration: none;
+  transition: color 2s;
+}
+
+.secret-home-element a:hover {
+  color: rgba(180,160,120,0.3);
+}
+
+/* ── RESPONSIVO ── */
+@media (max-width: 768px) {
+  #story-article { padding: 6rem 1.5rem 5rem; }
+  .void-paragraph   { margin-bottom: 3rem; }
+  .void-paragraph p { font-size: 1.05rem; line-height: 1.95; }
+  .void-break, .void-silence, .void-valar,
+  .void-turn, .void-pause { margin: 4rem 0; }
+  .void-final { margin: 5rem 0 3rem; }
+}
+
+@media (max-width: 480px) {
+  #story-article    { padding: 5rem 1.2rem 4rem; }
+  .void-paragraph p { font-size: 1rem; line-height: 1.85; }
+  .void-break span  { font-size: 0.72rem; padding: 0.8rem 1rem; }
+  .void-emphasis    { padding-left: 1rem !important; }
+  .void-exit        { padding: 3rem 0 5rem; }
+}
+
+@media (max-width: 360px) {
+  #story-article    { padding: 4.5rem 1rem 3.5rem; }
+  .void-paragraph p { font-size: 0.97rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Sem nav. Sem logo. Sem links visíveis. -->
+<!-- Só o vazio. -->
+
+<canvas id="void-canvas"></canvas>
+
+<!-- TELA DE ENTRADA -->
+<div id="entry-screen">
+  <div id="entry-text">
+    <p class="entry-warning">você não deveria estar aqui</p>
+    <button id="entry-btn">continuar mesmo assim</button>
+    <p class="entry-back">
+      <a href="javascript:history.back()">← voltar</a>
+    </p>
+  </div>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL — oculto até clicar -->
+<main id="main-content" class="hidden">
+
+  <!-- ABERTURA -->
+  <div class="void-opening" id="opening">
+    <div class="opening-line" data-delay="0">
+      Antes da primeira estrela.
+    </div>
+    <div class="opening-line" data-delay="1200">
+      Antes do tempo.
+    </div>
+    <div class="opening-line" data-delay="2400">
+      Antes da matéria.
+    </div>
+    <div class="opening-line" data-delay="3600">
+      Antes da vida.
+    </div>
+    <div class="opening-line accent" data-delay="5000">
+      Ela já existia.
+    </div>
+    <div class="opening-scroll" data-delay="6500">
+      <span>▼</span>
+    </div>
+  </div>
+
+  <!-- TEXTO PRINCIPAL — revelado parágrafo por parágrafo -->
+  <article id="story-article">
+
+    <div class="void-paragraph" data-index="0">
+      <p>Antes da primeira estrela atravessar o vazio, antes do tempo possuir direção, antes da matéria aprender a existir e antes mesmo da ideia de vida surgir dentro da criação, havia apenas duas presenças na imensidão primordial. O Criador era a completude absoluta: consciência, luz, possibilidade, expansão e forma. Nele existia o potencial para tudo aquilo que um dia seria chamado de universo. Mas ao redor dessa completude existia também outra realidade, uma presença tão antiga quanto o próprio silêncio primordial.</p>
+    </div>
+
+    <div class="void-paragraph" data-index="1">
+      <p>Ela não possuía nome, pois nomes ainda não existiam. Não possuía forma, pois forma ainda não havia sido concebida. Não possuía desejos humanos, emoções compreensíveis ou identidade individual como os seres vivos compreenderiam eras depois. Ela era apenas o vazio absoluto, a quietude eterna, a ausência plena de existência. Não nasceu, não foi criada e não surgiu de qualquer evento anterior.</p>
+      <p class="void-emphasis">Ela simplesmente era, da mesma maneira que o silêncio existe antes da primeira palavra.</p>
+    </div>
+
+    <div class="void-paragraph" data-index="2">
+      <p>Naquele estado primordial não havia conflito entre o Criador e o vazio, porque conflito exige separação, intenção e individualidade, coisas que ainda não existiam completamente. O vazio não odiava o Criador, assim como a noite não odeia o amanhecer. Ambos coexistiam numa realidade anterior ao próprio conceito de oposição.</p>
+    </div>
+
+    <div class="void-paragraph" data-index="3">
+      <p>Mas tudo mudou quando o Criador realizou o primeiro ato impossível: criar. Ao expandir a própria essência, ele rompeu o silêncio primordial e fez nascer aquilo que jamais existira antes — luz, matéria, tempo, alma, memória, identidade e vida. Pela primeira vez o vazio deixou de ser absoluto. Pela primeira vez existia algo ocupando aquilo que antes era apenas ausência eterna.</p>
+    </div>
+
+    <!-- QUEBRA DRAMÁTICA -->
+    <div class="void-break" data-index="4">
+      <span>E foi nesse instante que nasceu a primeira ruptura da existência.</span>
+    </div>
+
+    <div class="void-paragraph" data-index="5">
+      <p>Enquanto o Criador contemplava a beleza da multiplicidade, o vazio observava a criação como algo profundamente incompreensível. Para ele, a existência não parecia um presente, mas uma fragmentação. Viver significava separar-se do todo. Amar significava inevitavelmente perder. Possuir consciência significava carregar dor, medo, memória e sofrimento.</p>
+      <p>O Criador via significado na capacidade de existir apesar da dor; o vazio via apenas criaturas condenadas a sofrer para permanecerem sendo alguma coisa. Aquilo que os seres vivos chamariam eras depois de esperança, para ela parecia apenas resistência inútil diante do inevitável colapso de tudo que possui forma.</p>
+    </div>
+
+    <div class="void-paragraph" data-index="6">
+      <p>O Criador então afastou a criação do vazio primordial. Não através de guerra, porque não havia como destruir algo que existia antes da própria ideia de destruição, mas através de separação. Os universos foram erguidos longe daquela presença antiga. O fluxo da existência, os pilares primordiais e todas as estruturas cósmicas tornaram-se barreiras naturais entre a criação e o silêncio absoluto que existia antes dela.</p>
+      <p>Durante eras incontáveis, o vazio permaneceu distante, observando sem interferir diretamente, enquanto civilizações surgiam e desapareciam dentro do grande tecido da criação.</p>
+    </div>
+
+    <!-- QUEBRA SILENCIOSA -->
+    <div class="void-silence" data-index="7">
+      <span>Mas o vazio nunca deixou realmente de existir.</span>
+    </div>
+
+    <div class="void-paragraph" data-index="8">
+      <p>Ele permaneceu além das fronteiras do fluxo, além das camadas mais profundas da realidade, aguardando silenciosamente enquanto os próprios seres vivos caminhavam lentamente em direção às mesmas perguntas que o Criador enfrentara no princípio: qual o verdadeiro preço da existência? Vale a pena continuar existindo mesmo sabendo que toda vida inevitavelmente conhecerá sofrimento, perda e morte?</p>
+    </div>
+
+    <!-- VALAR -->
+    <div class="void-valar" data-index="9">
+      <span>Foi por isso que Valar tornou-se tão perigoso.</span>
+    </div>
+
+    <div class="void-paragraph" data-index="10">
+      <p>Séculos antes do nascimento dos mestres modernos, Valar tornou-se o único ser conhecido a reunir dentro de si todas as naturezas primordiais da criação. Espiritual, humana e elemental passaram a coexistir dentro dele até o ponto em que a própria estrutura da realidade começou a deformar-se ao redor da sua existência.</p>
+      <p>Inicialmente Valar acreditava estar transcendendo os limites impostos pelo Criador. Ele não desejava destruir a criação, mas corrigir suas imperfeições, eliminar desequilíbrios e elevar-se acima das limitações impostas aos demais seres. Contudo, ao ultrapassar as divisões fundamentais que sustentavam os pilares da existência, Valar aproximou-se perigosamente das regiões anteriores à própria criação. Sua ascensão abriu fissuras invisíveis nas barreiras erguidas pelo Criador eras atrás.</p>
+    </div>
+
+    <!-- VIRADA -->
+    <div class="void-turn" data-index="11">
+      <div class="turn-line">E pela primeira vez desde o princípio…</div>
+      <div class="turn-line accent-line">o vazio voltou a perceber a existência.</div>
+    </div>
+
+    <div class="void-paragraph" data-index="12">
+      <p>O Criador então aprisionou Valar numa prisão construída fora do fluxo comum da realidade, um lugar onde tempo, matéria e identidade permaneciam isolados das estruturas normais da criação. Mas mesmo selado, Valar tornou-se uma rachadura viva dentro da ordem cósmica. A simples existência dele enfraquecia lentamente as separações primordiais construídas no início de tudo.</p>
+    </div>
+
+    <!-- PAUSA DO VAZIO -->
+    <div class="void-pause" data-index="13">
+      <div class="pause-line">E o vazio aguardava.</div>
+      <div class="pause-line dim">Não com ódio.</div>
+      <div class="pause-line dim">Não com pressa.</div>
+      <div class="pause-line accent-pause">Mas com a paciência absoluta de algo que existia antes do próprio tempo.</div>
+    </div>
+
+    <div class="void-paragraph" data-index="14">
+      <p>Quando finalmente começasse a atravessar novamente as fronteiras da criação, sua chegada não seria marcada por guerras imediatas ou destruição comum. O universo começaria lentamente a esquecer de si mesmo. Estrelas desapareceriam silenciosamente do céu sem explosões. Nomes perderiam significado. Memórias começariam a desfazer-se dentro das almas. Regiões inteiras mergulhariam numa quietude impossível onde nem mesmo ecos espirituais sobreviveriam.</p>
+      <p>O vazio não destruiria a existência através da violência, mas através da anulação. Como um oceano apagando pegadas na areia.</p>
+    </div>
+
+    <!-- LINHA FINAL -->
+    <div class="void-final" data-index="15">
+      <div class="final-text">E o mais aterrorizante era que ela não se via como monstruosa.</div>
+      <div class="final-text-2">Pelo contrário.</div>
+    </div>
+
+    <!-- SAÍDA -->
+    <div class="void-exit" data-index="16">
+      <a href="javascript:history.back()" class="exit-link">
+        ← voltar para onde ainda existe luz
+      </a>
+    </div>
+
+  </article>
+</main>
+
+<script>
+/* ════════════════════════════════════
+   A ESCURIDÃO — JAVASCRIPT
+   Vazio · Estrelas desaparecendo · Revelação
+════════════════════════════════════ */
+
+/* ── CANVAS DO VAZIO — ESTRELAS QUE SOMEM ── */
+(function () {
+  const canvas = document.getElementById('void-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, stars = [];
+
+  /* Controle global de extinção */
+  let extinctionProgress = 0; /* 0 = todas visíveis → 1 = todas apagadas */
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    stars = [];
+    for (let i = 0; i < 280; i++) {
+      stars.push({
+        x:        Math.random() * W,
+        y:        Math.random() * H,
+        r:        Math.random() * 1.4 + 0.2,
+        baseA:    Math.random() * 0.6 + 0.15,
+        twinkle:  Math.random() * Math.PI * 2,
+        speed:    Math.random() * 0.02 + 0.005,
+        /* Cada estrela tem um threshold de extinção */
+        dieAt:    Math.random() /* 0-1: quando no scroll morre */
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(0, 0, W, H);
+
+    stars.forEach(s => {
+      s.twinkle += s.speed;
+
+      /* Calcula alpha considerando extinção */
+      const twinkleA = s.baseA * (0.5 + 0.5 * Math.sin(s.twinkle));
+
+      /* Estrela morre quando extinctionProgress passa do threshold */
+      let extinctFactor = 1;
+      if (extinctionProgress > s.dieAt) {
+        const deathProgress =
+          (extinctionProgress - s.dieAt) / (1 - s.dieAt + 0.001);
+        extinctFactor = Math.max(0, 1 - deathProgress * 2);
+      }
+
+      const finalA = twinkleA * extinctFactor;
+      if (finalA <= 0.001) return;
+
+      /* Glow sutil */
+      const glow = ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*3);
+      glow.addColorStop(0, `rgba(220,210,185,${finalA * 0.4})`);
+      glow.addColorStop(1, 'rgba(220,210,185,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r*3,0,Math.PI*2); ctx.fill();
+
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle = `rgba(230,220,195,${finalA})`; ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  /* Atualiza extinção baseado no scroll */
+  window.addEventListener('scroll', () => {
+    const scrollTop  = window.scrollY;
+    const docHeight  = document.body.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
+    extinctionProgress = Math.min(scrollTop / docHeight, 1);
+  }, { passive: true });
+
+  window.addEventListener('resize', () => { resize(); init(); });
+  resize(); init(); draw();
+})();
+
+/* ── TELA DE ENTRADA ── */
+(function () {
+  const entryScreen = document.getElementById('entry-screen');
+  const mainContent = document.getElementById('main-content');
+  const entryBtn    = document.getElementById('entry-btn');
+  const opening     = document.getElementById('opening');
+
+  if (!entryBtn) return;
+
+  entryBtn.addEventListener('click', () => {
+    /* Fade out da tela de entrada */
+    entryScreen.classList.add('fade-out');
+
+    setTimeout(() => {
+      entryScreen.style.display = 'none';
+      mainContent.classList.remove('hidden');
+      mainContent.classList.add('visible');
+
+      /* Inicia a abertura cinematográfica */
+      startOpening();
+    }, 1500);
+  });
+
+  function startOpening() {
+    const lines = opening.querySelectorAll('.opening-line, .opening-scroll');
+
+    lines.forEach(line => {
+      const delay = parseInt(line.getAttribute('data-delay') || '0');
+      setTimeout(() => {
+        line.classList.add('visible');
+      }, delay);
+    });
+
+    /* Após a abertura, faz scroll suavemente */
+    setTimeout(() => {
+      opening.classList.add('fade-out');
+      setTimeout(() => {
+        opening.classList.add('gone');
+        /* Scroll para o artigo */
+        document.getElementById('story-article')
+          ?.scrollIntoView({ behavior: 'smooth' });
+      }, 1500);
+    }, 8500);
+  }
+})();
+
+/* ── REVELAÇÃO DE PARÁGRAFOS AO SCROLL ── */
+(function () {
+  const elements = document.querySelectorAll(
+    '.void-paragraph, .void-break, .void-silence, ' +
+    '.void-valar, .void-turn, .void-pause, ' +
+    '.void-final, .void-exit'
+  );
+
+  if (!elements.length) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        /* Delay progressivo baseado no data-index */
+        const idx   = parseInt(
+          e.target.getAttribute('data-index') || '0'
+        );
+        const delay = idx * 80;
+
+        setTimeout(() => {
+          e.target.classList.add('revealed');
+        }, delay);
+
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  elements.forEach(el => io.observe(el));
+})();
+
+/* ── EFEITO DE DIGITAÇÃO LENTA NA LINHA FINAL ── */
+(function () {
+  const finalText = document.querySelector('.final-text');
+  if (!finalText) return;
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        /* Tremor sutil na tela ao revelar */
+        let count = 0;
+        const shiver = setInterval(() => {
+          count++;
+          const x = (Math.random() - 0.5) * 1.5;
+          const y = (Math.random() - 0.5) * 1.5;
+          document.body.style.transform = `translate(${x}px,${y}px)`;
+          if (count >= 8) {
+            clearInterval(shiver);
+            document.body.style.transform = '';
+          }
+        }, 80);
+
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.9 });
+
+  io.observe(finalText);
+})();
+
+/* ── CURSOR PERSONALIZADO ── */
+(function () {
+  /* Cursor minimalista — apenas um ponto */
+  const style = document.createElement('style');
+  style.textContent = `
+    body { cursor: none !important; }
+
+    #void-cursor {
+      position: fixed;
+      width: 6px; height: 6px;
+      background: rgba(180,160,120,0.6);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width 0.3s, height 0.3s, opacity 0.3s;
+      mix-blend-mode: screen;
+    }
+
+    #void-cursor.expanded {
+      width: 30px; height: 30px;
+      background: rgba(180,160,120,0.08);
+      border: 1px solid rgba(180,160,120,0.2);
+    }
+  `;
+  document.head.appendChild(style);
+
+  const cursor = document.createElement('div');
+  cursor.id = 'void-cursor';
+  document.body.appendChild(cursor);
+
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
+
+  document.addEventListener('mousedown', () => cursor.classList.add('expanded'));
+  document.addEventListener('mouseup',   () => cursor.classList.remove('expanded'));
+
+  /* Esconde cursor ao sair */
+  document.addEventListener('mouseleave', () => cursor.style.opacity = '0');
+  document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
+})();
+
+/* ── SOM AMBIENTE (SILÊNCIO) ── */
+/* Sem áudio — o silêncio é intencional */
+/* A ausência de som é parte da experiência */
+</script>
+</body>
+</html>

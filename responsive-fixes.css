@@ -28,6 +28,29 @@ a, button, [role="button"] {
   touch-action: manipulation;
 }
 
+.secret-entry-link {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.secret-entry-link a {
+  display: inline-block;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  color: rgba(201, 168, 76, 0.72);
+  text-decoration: none;
+  transition: color 0.4s ease, text-shadow 0.4s ease, opacity 0.4s ease;
+}
+
+.secret-entry-link a:hover,
+.secret-entry-link a:focus-visible {
+  color: rgba(240, 208, 128, 0.95);
+  opacity: 1;
+  text-shadow: 0 0 16px rgba(201, 168, 76, 0.45);
+}
+
 section, main, header, footer, .page-section, .section, .banner-content, .content, .container {
   max-width: 100%;
 }
