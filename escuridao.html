@@ -516,6 +516,156 @@ body {
   #story-article    { padding: 4.5rem 1rem 3.5rem; }
   .void-paragraph p { font-size: 0.97rem; }
 }
+/* ── A ESCURIDÃO EMERGINDO ── */
+.darkness-reveal {
+  position: relative;
+  margin-top: 6rem;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+.darkness-reveal.active { opacity: 1; }
+
+#darkness-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Nome emergindo */
+.darkness-name {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: nowrap;
+  width: min(100%, 620px);
+  padding-inline: 0.4rem;
+  box-sizing: border-box;
+  margin-bottom: 2.5rem;
+}
+
+.dn-letter {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 900;
+  color: rgba(255,255,255,0);
+  display: inline-block;
+  letter-spacing: 0.035em;
+  text-shadow:
+    0 0 0px rgba(255,255,255,0),
+    0 0 0px rgba(180,160,120,0);
+  transform: translateY(30px) scale(0.85);
+  transition:
+    color 1.2s ease,
+    text-shadow 1.2s ease,
+    transform 1.2s ease;
+  will-change: transform, color;
+}
+
+.dn-space {
+  display: inline-block;
+  width: clamp(0.5rem, 2vw, 1.2rem);
+}
+
+/* Estado revelado — letra por letra */
+.dn-letter.emerge {
+  color: rgba(200,188,165,0.9);
+  text-shadow:
+    0 0 30px rgba(200,188,165,0.2),
+    0 0 60px rgba(180,160,120,0.1),
+    0 0 100px rgba(160,145,115,0.05);
+  transform: translateY(0) scale(1);
+}
+
+/* Pulso depois de emergir */
+.dn-letter.pulse {
+  animation: letter-breathe 4s ease infinite;
+}
+
+@keyframes letter-breathe {
+  0%, 100% {
+    text-shadow:
+      0 0 20px rgba(200,188,165,0.15),
+      0 0 50px rgba(180,160,120,0.08);
+    color: rgba(200,188,165,0.85);
+  }
+  50% {
+    text-shadow:
+      0 0 40px rgba(200,188,165,0.3),
+      0 0 80px rgba(180,160,120,0.15),
+      0 0 120px rgba(160,145,115,0.08);
+    color: rgba(220,210,190,0.95);
+  }
+}
+
+/* Subtítulo */
+.darkness-sub {
+  position: relative;
+  z-index: 2;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: clamp(0.85rem, 2vw, 1.05rem);
+  color: rgba(180,160,120,0);
+  line-height: 1.8;
+  text-align: center;
+  letter-spacing: 0.05em;
+  transition: color 2s ease;
+}
+
+.darkness-sub.visible {
+  color: rgba(180,160,120,0.35);
+}
+
+.darkness-sub em {
+  color: rgba(200,188,165,0.45);
+  font-style: italic;
+}
+
+/* Sombra subindo por trás das letras */
+.darkness-shadow-layer {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 100%;
+  background: linear-gradient(to top,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,0.8) 30%,
+    rgba(0,0,0,0) 100%);
+  pointer-events: none;
+  z-index: 1;
+  transform: translateY(100%);
+  transition: transform 3s ease;
+}
+
+.darkness-shadow-layer.rise {
+  transform: translateY(0);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .darkness-reveal { min-height: 220px; margin-top: 4rem; }
+  .dn-letter { font-size: clamp(1.6rem, 7vw, 3.5rem); }
+}
+
+@media (max-width: 480px) {
+  .darkness-reveal { min-height: 180px; margin-top: 3rem; }
+  .dn-letter { font-size: clamp(1.3rem, 7vw, 2.5rem); letter-spacing: 0.04em; }
+  .darkness-sub { font-size: 0.82rem; }
+}
+
+@media (max-width: 360px) {
+  .dn-letter { font-size: clamp(1.1rem, 7vw, 2rem); }
+}
 </style>
 </head>
 <body>
@@ -639,10 +789,33 @@ body {
     </div>
 
     <!-- LINHA FINAL -->
-    <div class="void-final" data-index="15">
-      <div class="final-text">E o mais aterrorizante era que ela não se via como monstruosa.</div>
-      <div class="final-text-2">Pelo contrário.</div>
+<div class="void-final" data-index="15">
+  <div class="final-text">E o mais aterrorizante era que ela não se via como monstruosa.</div>
+  <div class="final-text-2">Pelo contrário.</div>
+
+  <!-- A ESCURIDÃO EMERGINDO -->
+  <div class="darkness-reveal" id="darkness-reveal">
+    <div class="darkness-shadow-layer" id="darkness-shadow-layer"></div>
+    <canvas id="darkness-canvas"></canvas>
+    <div class="darkness-name" id="darkness-name">
+      <span class="dn-letter" data-char="A">A</span>
+      <span class="dn-space"> </span>
+      <span class="dn-letter" data-char="E">E</span>
+      <span class="dn-letter" data-char="S">S</span>
+      <span class="dn-letter" data-char="C">C</span>
+      <span class="dn-letter" data-char="U">U</span>
+      <span class="dn-letter" data-char="R">R</span>
+      <span class="dn-letter" data-char="I">I</span>
+      <span class="dn-letter" data-char="D">D</span>
+      <span class="dn-letter" data-char="Ã">Ã</span>
+      <span class="dn-letter" data-char="O">O</span>
     </div>
+    <div class="darkness-sub" id="darkness-sub">
+      ela não precisa de nome.<br>
+      <em>mas agora você sabe o dela.</em>
+    </div>
+  </div>
+</div>
 
     <!-- SAÍDA -->
     <div class="void-exit" data-index="16">
@@ -842,6 +1015,138 @@ body {
   }, { threshold: 0.9 });
 
   io.observe(finalText);
+})();
+
+/* ── A ESCURIDÃO EMERGINDO ── */
+(function () {
+  const reveal = document.getElementById('darkness-reveal');
+  const canvas = document.getElementById('darkness-canvas');
+  const letters = document.querySelectorAll('#darkness-name .dn-letter');
+  const subtitle = document.getElementById('darkness-sub');
+  const shadow = document.getElementById('darkness-shadow-layer');
+
+  if (!reveal || !canvas || !letters.length) return;
+
+  const ctx = canvas.getContext('2d');
+  let W = 0;
+  let H = 0;
+  let smoke = [];
+  let active = false;
+  let frame = 0;
+
+  function resize() {
+    const rect = reveal.getBoundingClientRect();
+    W = Math.max(1, Math.floor(rect.width));
+    H = Math.max(1, Math.floor(rect.height));
+    canvas.width = W * window.devicePixelRatio;
+    canvas.height = H * window.devicePixelRatio;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+  }
+
+  function initSmoke() {
+    smoke = [];
+    for (let i = 0; i < 42; i++) {
+      smoke.push({
+        x: Math.random() * W,
+        y: H + Math.random() * H * 0.5,
+        r: 20 + Math.random() * 70,
+        a: 0.02 + Math.random() * 0.07,
+        vx: (Math.random() - 0.5) * 0.22,
+        vy: -0.18 - Math.random() * 0.55,
+        drift: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function drawSmoke() {
+    if (!active) return;
+
+    frame += 0.01;
+    ctx.clearRect(0, 0, W, H);
+
+    smoke.forEach(s => {
+      s.drift += 0.018;
+      s.x += s.vx + Math.sin(s.drift) * 0.16;
+      s.y += s.vy;
+
+      if (s.y + s.r < -20) {
+        s.x = Math.random() * W;
+        s.y = H + s.r;
+      }
+
+      const gradient = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r);
+      gradient.addColorStop(0, `rgba(210,200,175,${s.a})`);
+      gradient.addColorStop(0.45, `rgba(110,95,75,${s.a * 0.45})`);
+      gradient.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    const veil = ctx.createLinearGradient(0, 0, 0, H);
+    veil.addColorStop(0, 'rgba(0,0,0,0)');
+    veil.addColorStop(0.55, 'rgba(0,0,0,0.2)');
+    veil.addColorStop(1, 'rgba(0,0,0,0.85)');
+    ctx.fillStyle = veil;
+    ctx.fillRect(0, 0, W, H);
+
+    requestAnimationFrame(drawSmoke);
+  }
+
+  function startReveal() {
+    if (active) return;
+    active = true;
+
+    resize();
+    initSmoke();
+    reveal.classList.add('active');
+    shadow?.classList.add('rise');
+
+    letters.forEach((letter, index) => {
+      setTimeout(() => {
+        letter.classList.add('emerge');
+      }, 450 + index * 180);
+
+      setTimeout(() => {
+        letter.classList.add('pulse');
+      }, 2200 + index * 180);
+    });
+
+    setTimeout(() => {
+      subtitle?.classList.add('visible');
+    }, 3200);
+
+    drawSmoke();
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const finalBlock = reveal.closest('.void-final');
+        if (!finalBlock || finalBlock.classList.contains('revealed')) {
+          startReveal();
+        } else {
+          const mo = new MutationObserver(() => {
+            if (finalBlock.classList.contains('revealed')) {
+              mo.disconnect();
+              setTimeout(startReveal, 450);
+            }
+          });
+          mo.observe(finalBlock, { attributes: true, attributeFilter: ['class'] });
+        }
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.35 });
+
+  io.observe(reveal);
+  window.addEventListener('resize', () => {
+    resize();
+    if (active) initSmoke();
+  });
 })();
 
 /* ── CURSOR PERSONALIZADO ── */

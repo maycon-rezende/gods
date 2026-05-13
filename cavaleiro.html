@@ -1346,6 +1346,11 @@ footer {
   font-size: clamp(1.7rem, 4vw, 3rem);
   color: var(--gold-light);
   margin-bottom: 1rem;
+  display: inline-block;
+  max-width: 100%;
+  padding-inline: 0.18em;
+  overflow: visible;
+  line-height: 1.18;
 }
 
 .footer-quote {
@@ -1364,6 +1369,32 @@ footer {
 }
 
 /* RESPONSIVIDADE ADICIONAL */
+.banner-name,
+.name-article,
+.name-sub {
+  max-width: 100%;
+  overflow: visible;
+}
+
+.banner-name {
+  padding-inline: 0.08em;
+}
+
+.name-article,
+.name-sub {
+  padding-inline: 0.08em;
+  box-sizing: border-box;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.name-sub {
+  display: inline-block;
+  padding-right: 0.28em;
+  margin-right: -0.12em;
+  letter-spacing: 0.11em;
+}
+
 @media (max-width: 900px) {
   .identity-grid {
     grid-template-columns: 1fr;
