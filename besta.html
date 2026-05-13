@@ -123,8 +123,9 @@ nav a:hover {
 .banner-bg {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center top;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   background-repeat: no-repeat;
   transform: scale(1.05);
   transition: transform 8s ease;
@@ -139,7 +140,7 @@ nav a:hover {
 
 .banner-bg.loaded {
   transform: scale(1);
-  filter: brightness(0.35) saturate(0.7);
+  filter: brightness(0.52) saturate(0.9);
 }
 
 .banner-overlay {
@@ -521,8 +522,9 @@ section {
 .identity-photo {
   width: 100%;
   aspect-ratio: 3 / 4;
-  background-size: cover;
-  background-position: center top;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: var(--purple-deep);
   background-image:
     radial-gradient(ellipse at 50% 30%,
@@ -581,8 +583,8 @@ section {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top,
-    rgba(42,10,58,0.8)   0%,
-    rgba(138,32,192,0.2) 40%,
+    rgba(42,10,58,0.32)  0%,
+    rgba(138,32,192,0.1) 40%,
     transparent          100%);
   pointer-events: none;
 }
@@ -722,7 +724,8 @@ section {
 .form-photo {
   width: 100%;
   aspect-ratio: 4 / 3;
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   background-color: var(--purple-deep);
   position: relative;
@@ -1026,7 +1029,8 @@ section {
 }
 
 .gallery-item {
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   background-color: var(--purple-deep);
   background-image:
@@ -1035,7 +1039,7 @@ section {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  filter: brightness(0.6) saturate(0.5);
+  filter: brightness(0.88) saturate(0.8);
   transition: filter 0.4s;
 }
 
@@ -1473,7 +1477,7 @@ footer {
     <!-- Forma Bestial -->
     <div class="form-card bestial">
       <div class="form-photo"
-        style="background-image: url('besta-bestial.jpg')">
+        style="background-image: url('img-besta/bestabanner.png')">
         <div class="form-photo-overlay bestial-overlay"></div>
         <div class="form-photo-label">Forma Bestial</div>
       </div>
@@ -1501,7 +1505,7 @@ footer {
     <!-- Forma Humana -->
     <div class="form-card humana">
       <div class="form-photo"
-        style="background-image: url('besta-humana.jpg')">
+        style="background-image: url('img-besta/besta.png')">
         <div class="form-photo-overlay humana-overlay"></div>
         <div class="form-photo-label">Forma Humana</div>
       </div>
@@ -1724,31 +1728,31 @@ footer {
 
   <div class="gallery-container reveal">
     <div class="gallery-item tall"
-      style="background-image: url('besta-01.jpg')">
+      style="background-image: url('img-besta/bestabanner.png')">
       <div class="gitem-overlay">
         <span>A Besta · Forma Colossal</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('besta-02.jpg')">
+      style="background-image: url('img-besta/bestabanner0.png')">
       <div class="gitem-overlay"><span>As Três Cabeças</span></div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('besta-03.jpg')">
+      style="background-image: url('img-besta/besta.png')">
       <div class="gitem-overlay"><span>Forma Humana</span></div>
     </div>
     <div class="gallery-item wide"
-      style="background-image: url('besta-04.jpg')">
+      style="background-image: url('img-besta/bestabanner.png')">
       <div class="gitem-overlay">
         <span>O Confronto Final</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('besta-05.jpg')">
+      style="background-image: url('img-besta/bestabanner0.png')">
       <div class="gitem-overlay"><span>Energia Primordial</span></div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('besta-06.jpg')">
+      style="background-image: url('img-besta/besta.png')">
       <div class="gitem-overlay"><span>Antes dos Homens</span></div>
     </div>
   </div>
@@ -1763,7 +1767,7 @@ footer {
       <span>·</span>
       <a href="viloes.html">Todos os Vilões</a>
       <span>·</span>
-      <a href="valar.html">Valar →</a>
+      <a href="vallar.html">Valar →</a>
     </div>
     <div class="footer-name">A Besta</div>
     <div class="footer-quote">

@@ -146,8 +146,9 @@ nav a:hover {
 .banner-bg {
   position: absolute;
   inset: -5%;
-  background-size: cover;
-  background-position: center top;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   background-repeat: no-repeat;
   transform: scale(1.05);
   transition: transform 8s ease;
@@ -162,7 +163,7 @@ nav a:hover {
 
 .banner-bg.loaded {
   transform: scale(1);
-  filter: brightness(0.35) saturate(0.65);
+  filter: brightness(0.52) saturate(0.85);
 }
 
 .banner-overlay {
@@ -579,8 +580,9 @@ section {
 .identity-photo {
   width: 100%;
   aspect-ratio: 3 / 4;
-  background-size: cover;
-  background-position: center top;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   background-color: var(--amber-deep);
   background-image:
     radial-gradient(ellipse at 50% 30%,
@@ -663,8 +665,8 @@ section {
   position: absolute;
   inset: 0;
   background: linear-gradient(to top,
-    rgba(26,14,0,0.85)   0%,
-    rgba(192,144,10,0.15) 40%,
+    rgba(26,14,0,0.32)    0%,
+    rgba(192,144,10,0.08) 40%,
     transparent           100%);
   pointer-events: none;
 }
@@ -1106,7 +1108,8 @@ section {
 }
 
 .gallery-item {
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center;
   background-color: var(--amber-deep);
   background-image:
@@ -1115,7 +1118,7 @@ section {
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  filter: brightness(0.55) saturate(0.45);
+  filter: brightness(0.86) saturate(0.75);
   transition: filter 0.4s;
 }
 
@@ -1805,31 +1808,31 @@ footer {
 
   <div class="gallery-container reveal">
     <div class="gallery-item tall"
-      style="background-image: url('valar-01.jpg')">
+      style="background-image: url('img-vallar/vallar.png')">
       <div class="gitem-overlay">
         <span>Valar · O Primeiro Deificado</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('valar-02.jpg')">
+      style="background-image: url('img-vallar/vallarbanner.png')">
       <div class="gitem-overlay"><span>A Deificação</span></div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('valar-03.jpg')">
+      style="background-image: url('img-vallar/valar.png')">
       <div class="gitem-overlay"><span>A Corrupção</span></div>
     </div>
     <div class="gallery-item wide"
-      style="background-image: url('valar-04.jpg')">
+      style="background-image: url('img-vallar/vallarbanner.png')">
       <div class="gitem-overlay">
         <span>O Abismo · A Espera Eterna</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('valar-05.jpg')">
+      style="background-image: url('img-vallar/vallar.png')">
       <div class="gitem-overlay"><span>Domínio Triplo</span></div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('valar-06.jpg')">
+      style="background-image: url('img-vallar/valar.png')">
       <div class="gitem-overlay">
         <span>Forças das Trevas</span>
       </div>

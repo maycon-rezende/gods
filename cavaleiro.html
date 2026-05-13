@@ -122,8 +122,8 @@ nav a:hover {
   z-index: 0;
   z-index: 0;
   inset: 0;
-  background-size: cover;
-  background-position: center top;
+  background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
   transform: translate3d(0,0,0) scale(1.02);
   transition: transform 12s ease, filter 0.8s ease;
@@ -141,7 +141,7 @@ nav a:hover {
 
 .banner-bg.loaded {
   transform: translate3d(0,0,0) scale(1);
-  filter: brightness(0.4) saturate(0.8);
+  filter: brightness(0.55) saturate(0.95);
 }
 
 .banner-overlay {
@@ -586,7 +586,7 @@ nav a:hover {
 
 .banner-bg.loaded {
   transform: translate3d(0,0,0) scale(1);
-  filter: brightness(0.4) saturate(0.8);
+  filter: brightness(0.55) saturate(0.95);
 }
 
 .banner-overlay {
@@ -975,8 +975,8 @@ section {
   position: relative;
   min-height: 560px;
   border: 1px solid rgba(204,0,34,0.35);
-  background-size: cover;
-  background-position: center top;
+  background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
   background-color: #120004;
   overflow: hidden;
@@ -1025,8 +1025,8 @@ section {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at center, transparent 45%, rgba(3,3,8,0.55) 100%),
-    linear-gradient(to top, rgba(3,3,8,0.75), transparent 45%);
+    radial-gradient(ellipse at center, transparent 55%, rgba(3,3,8,0.28) 100%),
+    linear-gradient(to top, rgba(3,3,8,0.32), transparent 45%);
   z-index: 1;
   pointer-events: none;
 }
@@ -1261,8 +1261,8 @@ section {
 
 .gallery-item {
   position: relative;
-  background-size: cover;
-  background-position: center top;
+  background-size: contain;
+  background-position: center;
   background-repeat: no-repeat;
   background-color: #160004;
   border: 1px solid rgba(204,0,34,0.22);
@@ -1874,31 +1874,31 @@ footer {
 
   <div class="gallery-container reveal">
     <div class="gallery-item tall"
-      style="background-image: url('cavaleiro-01.jpg')">
+      style="background-image: url('img-cavaleiro/cavaleiro.png')">
       <div class="gitem-overlay">
         <span>O Cavaleiro · Forma Completa</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cavaleiro-02.jpg')">
+      style="background-image: url('img-cavaleiro/cavaleiro0.png')">
       <div class="gitem-overlay"><span>O Prodígio Nômade</span></div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cavaleiro-03.jpg')">
+      style="background-image: url('img-cavaleiro/cavaleirobanner.png')">
       <div class="gitem-overlay"><span>Feitiçaria Primordial</span></div>
     </div>
     <div class="gallery-item wide"
-      style="background-image: url('cavaleiro-04.jpg')">
+      style="background-image: url('img-cavaleiro/cavaleirobanner.png')">
       <div class="gitem-overlay">
         <span>O Retorno · Séculos Depois</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cavaleiro-05.jpg')">
+      style="background-image: url('img-cavaleiro/cavaleiro.png')">
       <div class="gitem-overlay"><span>Domínio Triplo</span></div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cavaleiro-06.jpg')">
+      style="background-image: url('img-cavaleiro/cavaleiro0.png')">
       <div class="gitem-overlay"><span>O Aprisionamento</span></div>
     </div>
   </div>
