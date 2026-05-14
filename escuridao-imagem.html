@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Escuridão — O Diário de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  background: #000;
+}
+
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  background: #000;
+  color: rgba(222,214,195,0.86);
+  font-family: 'EB Garamond', Georgia, serif;
+}
+
+#darkness-portrait-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #000;
+}
+
+.portrait-page {
+  position: relative;
+  z-index: 2;
+  min-height: 100svh;
+  display: block;
+}
+
+.portrait-center {
+  position: relative;
+  min-height: 100svh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.name-mark {
+  position: absolute;
+  inset: 0;
+  min-height: 100svh;
+  width: 100%;
+  text-align: center;
+  isolation: isolate;
+}
+
+.name-mark::before {
+  content: none;
+}
+
+.name-mark::after {
+  content: none;
+}
+
+.darkness-bg-loop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+  background: #000;
+}
+
+.darkness-bg-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.darkness-bg-slide.is-active {
+  opacity: 1;
+}
+
+.darkness-bg-slide::before,
+.darkness-bg-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--image);
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.darkness-bg-slide::before {
+  background-size: cover;
+  filter: blur(18px) brightness(0.72) contrast(1.1);
+  transform: scale(1.08);
+  opacity: 0.58;
+}
+
+.darkness-bg-slide::after {
+  background-size: contain;
+  filter: brightness(1.08) contrast(1.08) saturate(0.92);
+  transform: scale(0.995);
+}
+
+.darkness-bg-loop::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.16), rgba(0,0,0,0) 34%, rgba(0,0,0,0.06) 70%, rgba(0,0,0,0.28) 100%);
+  pointer-events: none;
+}
+
+@keyframes portrait-breathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(0.985);
+    opacity: 0.72;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.025);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .darkness-bg-slide::before,
+  .darkness-bg-slide::after {
+    background-position: center center;
+  }
+}
+</style>
+</head>
+<body>
+<canvas id="darkness-portrait-canvas" aria-hidden="true"></canvas>
+
+<main class="portrait-page">
+  <section class="portrait-center" aria-label="Imagem da Escuridão">
+    <div class="name-mark">
+      <div class="darkness-bg-loop" aria-hidden="true">
+        <div class="darkness-bg-slide is-active" style="--image: url('img-darkness/darkness.png')"></div>
+        <div class="darkness-bg-slide" style="--image: url('img-darkness/escuridao.png')"></div>
+        <div class="darkness-bg-slide" style="--image: url('img-darkness/thedarkness.png')"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  const canvas = document.getElementById('darkness-portrait-canvas');
+  const ctx = canvas.getContext('2d');
+  let w = 0;
+  let h = 0;
+  let motes = [];
+  let veils = [];
+
+  function resize() {
+    const ratio = window.devicePixelRatio || 1;
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = Math.floor(w * ratio);
+    canvas.height = Math.floor(h * ratio);
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+    ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    init();
+  }
+
+  function init() {
+    motes = [];
+    veils = [];
+
+    for (let i = 0; i < 170; i++) {
+      motes.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.2 + 0.2,
+        a: Math.random() * 0.28 + 0.04,
+        drift: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.018 + 0.006
+      });
+    }
+
+    for (let i = 0; i < 28; i++) {
+      veils.push({
+        x: Math.random() * w,
+        y: h * (0.2 + Math.random() * 0.8),
+        r: 90 + Math.random() * 260,
+        a: 0.018 + Math.random() * 0.045,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: -0.08 - Math.random() * 0.18
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, w, h);
+
+    const centerGlow = ctx.createRadialGradient(w / 2, h * 0.45, 0, w / 2, h * 0.45, Math.min(w, h) * 0.55);
+    centerGlow.addColorStop(0, 'rgba(214,202,174,0.1)');
+    centerGlow.addColorStop(0.34, 'rgba(46,39,31,0.14)');
+    centerGlow.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = centerGlow;
+    ctx.fillRect(0, 0, w, h);
+
+    veils.forEach(v => {
+      v.x += v.vx;
+      v.y += v.vy;
+      if (v.y + v.r < 0) {
+        v.x = Math.random() * w;
+        v.y = h + v.r;
+      }
+
+      const g = ctx.createRadialGradient(v.x, v.y, 0, v.x, v.y, v.r);
+      g.addColorStop(0, `rgba(190,174,140,${v.a})`);
+      g.addColorStop(0.45, `rgba(78,66,50,${v.a * 0.6})`);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(v.x, v.y, v.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    motes.forEach(m => {
+      m.drift += m.speed;
+      m.y -= m.speed * 8;
+      m.x += Math.sin(m.drift) * 0.12;
+      if (m.y < -10) {
+        m.y = h + 10;
+        m.x = Math.random() * w;
+      }
+
+      const fadeToCenter = 1 - Math.min(1, Math.hypot(m.x - w / 2, m.y - h * 0.45) / (Math.min(w, h) * 0.56));
+      const alpha = m.a * (0.18 + fadeToCenter);
+      ctx.fillStyle = `rgba(232,222,198,${alpha})`;
+      ctx.beginPath();
+      ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    const shade = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.18, w / 2, h / 2, Math.max(w, h) * 0.72);
+    shade.addColorStop(0, 'rgba(0,0,0,0)');
+    shade.addColorStop(0.65, 'rgba(0,0,0,0.42)');
+    shade.addColorStop(1, 'rgba(0,0,0,0.96)');
+    ctx.fillStyle = shade;
+    ctx.fillRect(0, 0, w, h);
+
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  draw();
+  window.addEventListener('resize', resize);
+})();
+
+(function () {
+  const slides = Array.from(document.querySelectorAll('.darkness-bg-slide'));
+  if (!slides.length) return;
+
+  let current = 0;
+
+  function showSlide(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle('is-active', slideIndex === current);
+    });
+  }
+
+  function nextSlide() {
+    showSlide(current + 1);
+  }
+
+  slides.forEach(slide => {
+    const preload = new Image();
+    const imageUrl = slide.style.getPropertyValue('--image').trim().replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+    preload.src = imageUrl;
+  });
+
+  showSlide(0);
+  window.setInterval(nextSlide, 4200);
+})();
+</script>
+</body>
+</html>

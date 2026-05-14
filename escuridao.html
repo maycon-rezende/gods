@@ -555,6 +555,26 @@ body {
   margin-bottom: 2.5rem;
 }
 
+.darkness-name,
+.darkness-name:visited {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.darkness-name:hover .dn-letter.emerge,
+.darkness-name:focus-visible .dn-letter.emerge {
+  color: rgba(235,225,205,0.98);
+  text-shadow:
+    0 0 36px rgba(235,225,205,0.35),
+    0 0 80px rgba(180,160,120,0.18),
+    0 0 130px rgba(160,145,115,0.1);
+}
+
+.darkness-name:focus-visible {
+  outline: 1px solid rgba(180,160,120,0.35);
+  outline-offset: 0.8rem;
+}
+
 .dn-letter {
   font-family: 'Cinzel Decorative', serif;
   font-size: clamp(2rem, 6vw, 3.4rem);
@@ -630,6 +650,52 @@ body {
 .darkness-sub em {
   color: rgba(200,188,165,0.45);
   font-style: italic;
+}
+
+.darkness-portrait-link {
+  position: relative;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.8rem;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.62rem, 1.8vw, 0.78rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(180,160,120,0.32);
+  text-decoration: none;
+  transition: color 0.7s ease, text-shadow 0.7s ease, transform 0.7s ease;
+}
+
+.darkness-portrait-link::before {
+  content: '';
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(180,160,120,0.18);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(220,210,190,0.22), transparent 18%),
+    radial-gradient(circle at 50% 50%, rgba(0,0,0,0.9), rgba(0,0,0,1) 66%);
+  box-shadow:
+    0 0 22px rgba(180,160,120,0.08),
+    inset 0 0 18px rgba(180,160,120,0.08);
+  transition: border-color 0.7s ease, box-shadow 0.7s ease;
+}
+
+.darkness-portrait-link:hover,
+.darkness-portrait-link:focus-visible {
+  color: rgba(220,205,175,0.72);
+  text-shadow: 0 0 24px rgba(180,160,120,0.2);
+  transform: translateY(-2px);
+}
+
+.darkness-portrait-link:hover::before,
+.darkness-portrait-link:focus-visible::before {
+  border-color: rgba(220,205,175,0.45);
+  box-shadow:
+    0 0 28px rgba(180,160,120,0.18),
+    inset 0 0 22px rgba(220,205,175,0.12);
 }
 
 /* Sombra subindo por trás das letras */
@@ -797,7 +863,7 @@ body {
   <div class="darkness-reveal" id="darkness-reveal">
     <div class="darkness-shadow-layer" id="darkness-shadow-layer"></div>
     <canvas id="darkness-canvas"></canvas>
-    <div class="darkness-name" id="darkness-name">
+    <a class="darkness-name" id="darkness-name" href="escuridao-imagem.html" aria-label="Ver a imagem da Escuridão">
       <span class="dn-letter" data-char="A">A</span>
       <span class="dn-space"> </span>
       <span class="dn-letter" data-char="E">E</span>
@@ -809,11 +875,14 @@ body {
       <span class="dn-letter" data-char="D">D</span>
       <span class="dn-letter" data-char="Ã">Ã</span>
       <span class="dn-letter" data-char="O">O</span>
-    </div>
+    </a>
     <div class="darkness-sub" id="darkness-sub">
       ela não precisa de nome.<br>
       <em>mas agora você sabe o dela.</em>
     </div>
+    <a class="darkness-portrait-link" href="escuridao-imagem.html">
+      quer conhece-la?
+    </a>
   </div>
 </div>
 
