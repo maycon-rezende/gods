@@ -41,6 +41,35 @@ body {
   display: block;
 }
 
+.back-link {
+  position: fixed;
+  top: calc(env(safe-area-inset-top, 0px) + clamp(1rem, 2vw, 1.5rem));
+  left: calc(env(safe-area-inset-left, 0px) + clamp(1rem, 2vw, 1.5rem));
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 1rem;
+  border: 1px solid rgba(220,205,175,0.22);
+  background: rgba(0,0,0,0.34);
+  color: rgba(226,214,188,0.72);
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  backdrop-filter: blur(7px);
+  transition: color 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  border-color: rgba(226,214,188,0.54);
+  background: rgba(0,0,0,0.52);
+  color: rgba(246,235,210,0.94);
+}
+
 .portrait-center {
   position: relative;
   min-height: 100svh;
@@ -132,6 +161,18 @@ body {
 }
 
 @media (max-width: 560px) {
+  .back-link {
+    top: auto;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+    left: calc(env(safe-area-inset-left, 0px) + 1rem);
+    min-height: 44px;
+    padding: 0 1.1rem;
+    background: rgba(0,0,0,0.68);
+    color: rgba(246,235,210,0.94);
+    border-color: rgba(226,214,188,0.46);
+    box-shadow: 0 0 28px rgba(0,0,0,0.55);
+  }
+
   .darkness-bg-slide::before,
   .darkness-bg-slide::after {
     background-position: center center;
@@ -143,6 +184,8 @@ body {
 <canvas id="darkness-portrait-canvas" aria-hidden="true"></canvas>
 
 <main class="portrait-page">
+  <a class="back-link" href="escuridao.html">← voltar</a>
+
   <section class="portrait-center" aria-label="Imagem da Escuridão">
     <div class="name-mark">
       <div class="darkness-bg-loop" aria-hidden="true">
