@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>O Cavaleiro Negro — O Diário de um Deus</title>
+<title>The Black Knight — O Diário de um Deus</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="effects.css">
 <style>
@@ -18,7 +18,7 @@
   --gold-light: #f0d080;
   --gold-dim: #7a6228;
 
-  /* Cavaleiro Negro — vermelho sangue */
+  /* The Black Knight — vermelho sangue */
   --red: #8b0000;
   --red-bright: #cc0022;
   --red-mid: #aa0018;
@@ -202,7 +202,7 @@ nav a:hover {
 .banner-content {
   position: relative;
   z-index: 2;
-  padding: 4rem 5vw 5rem;
+  padding: 4rem max(5vw, 4rem) 5rem;
   max-width: 780px;
   width: 100%;
 }
@@ -237,9 +237,10 @@ nav a:hover {
 .banner-name {
   font-family: 'Cinzel Decorative', serif;
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 1.04;
   opacity: 0;
   animation: fade-up 1s 0.4s ease forwards;
+  overflow: visible;
 }
 
 .name-article {
@@ -258,8 +259,8 @@ nav a:hover {
   font-size: clamp(3rem, 9vw, 7.5rem);
   background: linear-gradient(135deg,
     #ffffff 0%, #ffaaaa 20%,
-    #cc0022 50%, #8b0000 80%,
-    #3a0008 100%);
+    #cc0022 50%, #aa0018 78%,
+    #8b0000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -268,10 +269,12 @@ nav a:hover {
 
 .name-sub {
   display: block;
-  font-size: clamp(2rem, 6vw, 5rem);
-  letter-spacing: 0.15em;
+  font-size: clamp(2rem, 5.7vw, 4.7rem);
+  letter-spacing: 0.1em;
+  line-height: 1.08;
+  padding-inline: 0.08em 0.18em;
   background: linear-gradient(135deg,
-    #cc0022 0%, #8b0000 50%, #3a0008 100%);
+    #cc0022 0%, #aa0018 55%, #8b0000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -408,7 +411,7 @@ nav a:hover {
 ════════════════════════════════════ */
 @media (max-width: 1024px) {
   nav { gap: 1.8rem; }
-  .banner-content { padding: 4rem 4vw 4rem; }
+  .banner-content { padding: 4rem max(4vw, 4rem) 4rem; }
 }
 
 @media (max-width: 768px) {
@@ -465,7 +468,7 @@ nav a:hover {
   --gold-light: #f0d080;
   --gold-dim: #7a6228;
 
-  /* Cavaleiro Negro — vermelho sangue */
+  /* The Black Knight — vermelho sangue */
   --red: #8b0000;
   --red-bright: #cc0022;
   --red-mid: #aa0018;
@@ -647,7 +650,7 @@ nav a:hover {
 .banner-content {
   position: relative;
   z-index: 2;
-  padding: 4rem 5vw 5rem;
+  padding: 4rem max(5vw, 4rem) 5rem;
   max-width: 780px;
   width: 100%;
 }
@@ -682,9 +685,10 @@ nav a:hover {
 .banner-name {
   font-family: 'Cinzel Decorative', serif;
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 1.04;
   opacity: 0;
   animation: fade-up 1s 0.4s ease forwards;
+  overflow: visible;
 }
 
 .name-article {
@@ -703,8 +707,8 @@ nav a:hover {
   font-size: clamp(3rem, 9vw, 7.5rem);
   background: linear-gradient(135deg,
     #ffffff 0%, #ffaaaa 20%,
-    #cc0022 50%, #8b0000 80%,
-    #3a0008 100%);
+    #cc0022 50%, #aa0018 78%,
+    #8b0000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -713,10 +717,12 @@ nav a:hover {
 
 .name-sub {
   display: block;
-  font-size: clamp(2rem, 6vw, 5rem);
-  letter-spacing: 0.15em;
+  font-size: clamp(2rem, 5.7vw, 4.7rem);
+  letter-spacing: 0.1em;
+  line-height: 1.08;
+  padding-inline: 0.08em 0.18em;
   background: linear-gradient(135deg,
-    #cc0022 0%, #8b0000 50%, #3a0008 100%);
+    #cc0022 0%, #aa0018 55%, #8b0000 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -853,7 +859,7 @@ nav a:hover {
 ════════════════════════════════════ */
 @media (max-width: 1024px) {
   nav { gap: 1.8rem; }
-  .banner-content { padding: 4rem 4vw 4rem; }
+  .banner-content { padding: 4rem max(4vw, 4rem) 4rem; }
 }
 
 @media (max-width: 768px) {
@@ -1520,7 +1526,7 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">
+  <a href="home.html" class="nav-logo">
     <img src="img-logo/olhos.jpg" alt="Logo">
   </a>
   <a href="viloes.html">← Vilões</a>
@@ -1550,9 +1556,9 @@ footer {
       <span class="tag-line"></span>
     </div>
     <h1 class="banner-name">
-      <span class="name-article">O</span>
-      Cavaleiro
-      <span class="name-sub">Negro</span>
+      <span class="name-article">The</span>
+      Black
+      <span class="name-sub">Knight</span>
     </h1>
     <div class="banner-divider">
       <span class="divider-line"></span>
@@ -1598,7 +1604,7 @@ footer {
       <span class="stag-text">Quem ele é</span>
       <div class="stag-line"></div>
     </div>
-    <h2 class="section-title">A Identidade do <span>Cavaleiro</span></h2>
+    <h2 class="section-title">A Identidade do <span>Black Knight</span></h2>
   </div>
 
   <div class="identity-grid reveal">
@@ -1613,7 +1619,7 @@ footer {
         <div class="photo-corner bl"></div>
         <div class="photo-corner br"></div>
         <div class="photo-glow"></div>
-        <div class="photo-label">O Cavaleiro Negro</div>
+        <div class="photo-label">The Black Knight</div>
       </div>
 
       <!-- Ficha de dados -->
@@ -1648,9 +1654,9 @@ footer {
 
       <p>Como Mestre Espiritual, formava com outros dois o equilíbrio primordial entre três forças. Um filho de deidade da natureza como Mestre Elemental. Um bruxo como Mestre Humano. Três pilares que sustentavam algo maior do que qualquer um dos três individualmente.</p>
 
-      <p>Mas o Cavaleiro Negro descobriu que seus dons lhe permitiam ir <strong>além do lugar designado</strong>. Por ambição — não por necessidade, não por sobrevivência, mas por pura e calculada ambição — tomou para si os poderes dos outros dois. O equilíbrio se partiu. O universo respondeu.</p>
+      <p>Mas The Black Knight descobriu que seus dons lhe permitiam ir <strong>além do lugar designado</strong>. Por ambição — não por necessidade, não por sobrevivência, mas por pura e calculada ambição — tomou para si os poderes dos outros dois. O equilíbrio se partiu. O universo respondeu.</p>
 
-      <p>O aprisionamento durou séculos. Uma dimensão paralela, sozinho com sua ambição e o peso interminável do silêncio. Qualquer outro teria se fragmentado. O Cavaleiro Negro usou o tempo para <strong>refinar</strong>.</p>
+      <p>O aprisionamento durou séculos. Uma dimensão paralela, sozinho com sua ambição e o peso interminável do silêncio. Qualquer outro teria se fragmentado. The Black Knight usou o tempo para <strong>refinar</strong>.</p>
 
       <p>Quando os portões enfraqueceram com o surgimento dos seis, ele encontrou a fissura que precisava. O que emergiu não era mais o prodígio impulsivo. Era algo que séculos de confinamento e ruminação tinham tornado infinitamente mais perigoso.</p>
 
@@ -1761,7 +1767,7 @@ footer {
         <div class="pcard-icon">🧠</div>
         <div class="pcard-origin">Séculos de Refinamento</div>
         <div class="pcard-name">Estratégia Além da Compreensão</div>
-        <div class="pcard-desc">Séculos numa dimensão paralela, sozinho com sua própria mente. O Cavaleiro Negro usou cada segundo para planejar, refinar e antecipar. Sua estratégia não opera em batalhas — opera em eras. Cada ação é parte de um plano maior.</div>
+        <div class="pcard-desc">Séculos numa dimensão paralela, sozinho com sua própria mente. The Black Knight usou cada segundo para planejar, refinar e antecipar. Sua estratégia não opera em batalhas — opera em eras. Cada ação é parte de um plano maior.</div>
         <div class="pcard-bar">
           <div class="pbar-fill" data-width="95"
             style="background: linear-gradient(90deg, #8b0000, #cc0022)">
@@ -1781,7 +1787,7 @@ footer {
       <span class="stag-text">Trajetória sombria</span>
       <div class="stag-line"></div>
     </div>
-    <h2 class="section-title">A História do <span>Cavaleiro</span></h2>
+    <h2 class="section-title">A História do <span>Black Knight</span></h2>
   </div>
 
   <div class="story-container">
@@ -1806,7 +1812,7 @@ footer {
       <div class="chapter-body">
         <div class="chapter-label">O Equilíbrio</div>
         <h3 class="chapter-title">Os Três Mestres</h3>
-        <p>O universo exige equilíbrio entre forças primordiais. Três foram escolhidos: um filho de deidade da natureza como Mestre Elemental, um bruxo como Mestre Humano, e ele como Mestre Espiritual. Um sistema de contrapesos que funcionava porque cada um aceitava seu lugar. O Cavaleiro Negro aceitou o seu — por um tempo.</p>
+        <p>O universo exige equilíbrio entre forças primordiais. Três foram escolhidos: um filho de deidade da natureza como Mestre Elemental, um bruxo como Mestre Humano, e ele como Mestre Espiritual. Um sistema de contrapesos que funcionava porque cada um aceitava seu lugar. The Black Knight aceitou o seu — por um tempo.</p>
       </div>
     </div>
 
@@ -1842,7 +1848,7 @@ footer {
       <div class="chapter-body">
         <div class="chapter-label">O Retorno</div>
         <h3 class="chapter-title">A Fissura nos Portões</h3>
-        <p>O surgimento dos seis protagonistas enfraqueceu os portões entre dimensões — um efeito colateral que ninguém havia previsto. O Cavaleiro Negro percebeu a fissura antes que ela existisse completamente. Esperou o momento exato. E quando saiu, não havia pressa em seus movimentos. Havia apenas a certeza de quem havia planejado isso por séculos.</p>
+        <p>O surgimento dos seis protagonistas enfraqueceu os portões entre dimensões — um efeito colateral que ninguém havia previsto. The Black Knight percebeu a fissura antes que ela existisse completamente. Esperou o momento exato. E quando saiu, não havia pressa em seus movimentos. Havia apenas a certeza de quem havia planejado isso por séculos.</p>
       </div>
     </div>
 
@@ -1854,7 +1860,7 @@ footer {
       <div class="chapter-body">
         <div class="chapter-label">As Batalhas</div>
         <h3 class="chapter-title">Dois Confrontos, Duas Derrotas</h3>
-        <p>O primeiro confronto com os seis foi o teste. O segundo foi a guerra. Em ambos, o Cavaleiro Negro demonstrou que séculos de refinamento tinham feito dele algo que ultrapassava qualquer definição anterior de ameaça. Sua derrota final não foi por subestimação — foi porque os seis se tornaram, naquelas batalhas, algo que nem seus planos haviam antecipado.</p>
+        <p>O primeiro confronto com os seis foi o teste. O segundo foi a guerra. Em ambos, The Black Knight demonstrou que séculos de refinamento tinham feito dele algo que ultrapassava qualquer definição anterior de ameaça. Sua derrota final não foi por subestimação — foi porque os seis se tornaram, naquelas batalhas, algo que nem seus planos haviam antecipado.</p>
       </div>
     </div>
 
@@ -1869,14 +1875,14 @@ footer {
       <span class="stag-text">Registros visuais</span>
       <div class="stag-line"></div>
     </div>
-    <h2 class="section-title">Galeria do <span>Cavaleiro</span></h2>
+    <h2 class="section-title">Galeria do <span>Black Knight</span></h2>
   </div>
 
   <div class="gallery-container reveal">
     <div class="gallery-item tall"
       style="background-image: url('img-cavaleiro/cavaleiro.png')">
       <div class="gitem-overlay">
-        <span>O Cavaleiro · Forma Completa</span>
+        <span>The Black Knight · Forma Completa</span>
       </div>
     </div>
     <div class="gallery-item"
@@ -1913,7 +1919,7 @@ footer {
       <span>·</span>
       <a href="besta.html">A Besta →</a>
     </div>
-    <div class="footer-name">O Cavaleiro Negro</div>
+    <div class="footer-name">The Black Knight</div>
     <div class="footer-quote">
       "Não há prisão que dure para sempre.<br>
       Apenas vontades que se esgotam antes dela."
