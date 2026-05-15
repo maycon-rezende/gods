@@ -1080,7 +1080,7 @@ nav a { white-space: nowrap; }
 #galeria .gallery-grid.is-upgraded-loop,
 #galeria .gallery-showcase.is-upgraded-loop {
   display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   gap: clamp(0.85rem, 1.8vw, 1.35rem) !important;
   width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
@@ -1089,7 +1089,8 @@ nav a { white-space: nowrap; }
 
 .smooth-loop-panel {
   position: relative;
-  min-height: clamp(230px, 29vw, 390px);
+  aspect-ratio: 4 / 5;
+  min-height: 0;
   border: 1px solid rgba(201,168,76,0.18);
   background: rgba(3,3,8,0.7);
   overflow: hidden;
@@ -1210,7 +1211,7 @@ nav a { white-space: nowrap; }
 @media (max-width: 1100px) {
   #galeria .gallery-grid.is-upgraded-loop,
   #galeria .gallery-showcase.is-upgraded-loop {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
@@ -1229,7 +1230,7 @@ nav a { white-space: nowrap; }
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     width: min(100% - 1.5rem, 720px);
   }
-  .smooth-loop-panel { min-height: clamp(210px, 55vw, 330px); }
+  .smooth-loop-panel { aspect-ratio: 4 / 5; }
 }
 
 @media (max-width: 480px) {
@@ -1241,7 +1242,7 @@ nav a { white-space: nowrap; }
     grid-template-columns: 1fr !important;
     width: min(100% - 1.1rem, 420px);
   }
-  .smooth-loop-panel { min-height: 290px; }
+  .smooth-loop-panel { aspect-ratio: 4 / 5; }
   .smooth-loop-controls, .gallery-carousel-controls { width: min(100% - 1.1rem, 420px); }
   .smooth-loop-btn, .carousel-btn { width: 100%; }
 }
@@ -1273,7 +1274,7 @@ nav a { white-space: nowrap; }
 
 <!-- BANNER -->
 <section id="banner">
-  <div class="banner-bg" style="background-image: url('img-anull/anullbanner.png')"></div>
+  <div class="banner-bg" style="background-image: url('img-anull/anullbanner2.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
     <p class="banner-eyebrow">Mestre Espiritual · Deus Anull · Transcendido</p>
@@ -1481,22 +1482,40 @@ nav a { white-space: nowrap; }
 
   <div class="gallery-grid reveal">
     <div class="gallery-item tall" style="background-image: url('img-anull/anull.png')">
-      <div class="gallery-overlay"><span>Anull · Forma Divina</span></div>
+      <div class="gallery-overlay"><span>Anull - Forma Divina</span></div>
     </div>
     <div class="gallery-item" style="background-image: url('img-anull/anull1.png')">
-      <div class="gallery-overlay"><span>Visão Espiritual</span></div>
+      <div class="gallery-overlay"><span>Visao Espiritual</span></div>
     </div>
     <div class="gallery-item" style="background-image: url('img-anull/anullbanner.png')">
-      <div class="gallery-overlay"><span>Projeção Astral</span></div>
+      <div class="gallery-overlay"><span>Projecao Astral</span></div>
     </div>
     <div class="gallery-item wide" style="background-image: url('img-anull/anullbanner1.png')">
       <div class="gallery-overlay"><span>O Elo dos Seis</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('img-anull/anull.png')">
+    <div class="gallery-item" style="background-image: url('img-anull/anullbanner2.png')">
       <div class="gallery-overlay"><span>Escudo de Alma</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('img-anull/anullbanner1.png')">
-      <div class="gallery-overlay"><span>Leonardo · Antes da Ascensão</span></div>
+    <div class="gallery-item" style="background-image: url('img-anull/anull0.png')">
+      <div class="gallery-overlay"><span>Leonardo - Antes da Ascensao</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('img-anull/a.png')">
+      <div class="gallery-overlay"><span>Fragmento de Alma</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('img-anull/a1.png')">
+      <div class="gallery-overlay"><span>Memoria Celeste</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('img-anull/l.png')">
+      <div class="gallery-overlay"><span>Laco Espiritual</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('img-anull/l1.png')">
+      <div class="gallery-overlay"><span>Eco do Elo</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('img-anull/leolyra.png')">
+      <div class="gallery-overlay"><span>Leonardo e Lyra</span></div>
+    </div>
+    <div class="gallery-item" style="background-image: url('img-anull/ll.png')">
+      <div class="gallery-overlay"><span>Almas Entrelaçadas</span></div>
     </div>
   </div>
 </section>
@@ -2026,6 +2045,15 @@ nav a { white-space: nowrap; }
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
   function getBgUrl(el) {
     const inline = el.getAttribute('style') || '';
     const matchInline = inline.match(/background-image\s*:\s*url\(['"]?([^'")]+)['"]?\)/i);
@@ -2057,12 +2085,13 @@ nav a { white-space: nowrap; }
     const panel = document.createElement('article');
     panel.className = 'smooth-loop-panel';
     panel.dataset.current = String(index % images.length);
+    panel.dataset.galleryIndex = String(index % images.length);
     panel.innerHTML = `
-      <img class="loop-img-a is-visible" src="${first.src}" alt="${first.title.replace(/"/g, '&quot;')}">
-      <img class="loop-img-b" src="${second.src}" alt="${second.title.replace(/"/g, '&quot;')}">
+      <img class="loop-img-a is-visible" src="${escapeHtml(first.src)}" alt="${escapeHtml(first.title)}">
+      <img class="loop-img-b" src="${escapeHtml(second.src)}" alt="${escapeHtml(second.title)}">
       <div class="smooth-loop-meta">
-        <span class="smooth-loop-kicker">${label}</span>
-        <strong class="smooth-loop-title">${first.title}</strong>
+        <span class="smooth-loop-kicker">${escapeHtml(label)}</span>
+        <strong class="smooth-loop-title">${escapeHtml(first.title)}</strong>
         <span class="smooth-loop-desc">${first.desc || 'loop automático com transição suave'}</span>
       </div>
     `;
@@ -2083,8 +2112,58 @@ nav a { white-space: nowrap; }
     visible.classList.remove('is-visible');
     hidden.classList.add('is-visible');
     panel.dataset.current = String(current);
+    panel.dataset.galleryIndex = String(current);
     panel.querySelector('.smooth-loop-title').textContent = data.title;
     panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop automático com transição suave';
+  }
+
+  function setupLoopLightbox(images) {
+    let lb = document.getElementById('lightbox');
+    if (!lb) {
+      lb = document.createElement('div');
+      lb.id = 'lightbox';
+      lb.innerHTML = `
+        <div id="lb-backdrop"></div>
+        <div id="lb-box">
+          <button id="lb-prev" type="button">&#8592;</button>
+          <div id="lb-img-wrap">
+            <div id="lb-img"></div>
+            <div id="lb-caption"></div>
+          </div>
+          <button id="lb-next" type="button">&#8594;</button>
+          <button id="lb-close" type="button">&#x2715;</button>
+        </div>
+      `;
+      document.body.appendChild(lb);
+    }
+
+    let current = 0;
+    const img = document.getElementById('lb-img');
+    const caption = document.getElementById('lb-caption');
+
+    function show(index) {
+      current = (index + images.length) % images.length;
+      img.style.backgroundImage = `url('${images[current].src}')`;
+      caption.textContent = images[current].title;
+    }
+
+    window.openAnullGalleryImage = function (index) {
+      show(index);
+      lb.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    if (lb.dataset.loopLightboxReady === 'true') return;
+    lb.dataset.loopLightboxReady = 'true';
+
+    document.getElementById('lb-prev')?.addEventListener('click', () => show(current - 1));
+    document.getElementById('lb-next')?.addEventListener('click', () => show(current + 1));
+
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('active')) return;
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
   }
 
   function upgradeGallery() {
@@ -2101,10 +2180,16 @@ nav a { white-space: nowrap; }
     container.classList.add('is-upgraded-loop');
     container.innerHTML = '';
 
-    const visiblePanels = Math.min(4, images.length);
+    const visiblePanels = Math.min(2, images.length);
     for (let i = 0; i < visiblePanels; i++) {
-      container.appendChild(buildPanel(images, i, `Painel ${String(i + 1).padStart(2, '0')}`));
+      const panel = buildPanel(images, i, `Painel ${String(i + 1).padStart(2, '0')}`);
+      panel.addEventListener('click', () => {
+        window.openAnullGalleryImage?.(Number(panel.dataset.galleryIndex || 0));
+      });
+      container.appendChild(panel);
     }
+
+    setupLoopLightbox(images);
 
     let direction = 1;
     const controls = document.createElement('div');

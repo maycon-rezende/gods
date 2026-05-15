@@ -1043,14 +1043,13 @@ h2 {
   background: linear-gradient(to top, rgba(1,8,5,0.92) 0%, rgba(1,8,5,0.12) 58%, transparent 100%);
 }
 
-#galeria .lyra-panel-progress,
 #galeria .lyra-gallery-note {
   display: none;
 }
 
 @media (min-width: 900px) {
   #galeria .lyra-gallery-showcase {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
@@ -1351,7 +1350,7 @@ footer {
 
 <!-- BANNER -->
 <section id="banner">
-  <div class="banner-bg" style="background-image: url('img-lyra/lyra0.png')"></div>
+  <div class="banner-bg" style="background-image: url('img-lyra/lyrabanner0.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
     <p class="banner-eyebrow">Deusa da Vida e da Conexão · Companheira de Anull</p>
@@ -1588,7 +1587,7 @@ footer {
 </section>
 
 <!-- GALERIA EM LOOP -->
-<section id="galeria" data-static-gallery="true">
+<section id="galeria">
   <div class="section-header reveal">
     <span class="section-label">Imagens</span>
     <h2>Teia Viva da Lyra</h2>
@@ -1597,13 +1596,12 @@ footer {
 
   <div class="gallery-loop-wrap reveal">
     <div class="lyra-gallery-showcase">
-
       <article class="lyra-panel" data-panel="vida">
         <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra.png')"></div>
         <div class="lyra-panel-content">
           <div class="lyra-panel-kicker">Quadro I</div>
           <h3 class="lyra-panel-title">Vida</h3>
-          <p class="lyra-panel-text">A presença que cura, sustenta e faz tudo ao redor respirar outra vez.</p>
+          <p class="lyra-panel-text">A presenca que cura, sustenta e faz tudo ao redor respirar outra vez.</p>
         </div>
         <div class="lyra-panel-progress"><span></span></div>
       </article>
@@ -1612,60 +1610,18 @@ footer {
         <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra1.png')"></div>
         <div class="lyra-panel-content">
           <div class="lyra-panel-kicker">Quadro II</div>
-          <h3 class="lyra-panel-title">Conexão</h3>
-          <p class="lyra-panel-text">Fios luminosos atravessam planos, pessoas e destinos — a ponte que nunca se fecha.</p>
+          <h3 class="lyra-panel-title">Conexao</h3>
+          <p class="lyra-panel-text">Fios luminosos atravessam planos, pessoas e destinos, a ponte que nunca se fecha.</p>
         </div>
         <div class="lyra-panel-progress"><span></span></div>
       </article>
-
-      <article class="lyra-panel" data-panel="ponte">
-        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra2.png')"></div>
-        <div class="lyra-panel-content">
-          <div class="lyra-panel-kicker">Quadro III</div>
-          <h3 class="lyra-panel-title">Ponte</h3>
-          <p class="lyra-panel-text">Entre o humano e o divino, entre mundos e memórias, Lyra permanece.</p>
-        </div>
-        <div class="lyra-panel-progress"><span></span></div>
-      </article>
-
-      <article class="lyra-panel" data-panel="visao">
-        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra3.png')"></div>
-        <div class="lyra-panel-content">
-          <div class="lyra-panel-kicker">Quadro IV</div>
-          <h3 class="lyra-panel-title">Visao dos Fios</h3>
-          <p class="lyra-panel-text">Percepcao alem do plano fisico, seguindo conexoes que ninguem mais ve.</p>
-        </div>
-        <div class="lyra-panel-progress"><span></span></div>
-      </article>
-
-      <article class="lyra-panel" data-panel="campo">
-        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra0.png')"></div>
-        <div class="lyra-panel-content">
-          <div class="lyra-panel-kicker">Quadro V</div>
-          <h3 class="lyra-panel-title">Campo de Vida</h3>
-          <p class="lyra-panel-text">Onde ela esta, tudo fica mais vivo, mais consciente e mais inteiro.</p>
-        </div>
-        <div class="lyra-panel-progress"><span></span></div>
-      </article>
-
-      <article class="lyra-panel" data-panel="anna">
-        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyrabanner.png')"></div>
-        <div class="lyra-panel-content">
-          <div class="lyra-panel-kicker">Quadro VI</div>
-          <h3 class="lyra-panel-title">Anna</h3>
-          <p class="lyra-panel-text">Timida, observadora e essencial antes de se tornar Lyra.</p>
-        </div>
-        <div class="lyra-panel-progress"><span></span></div>
-      </article>
-
     </div>
 
     <p class="lyra-gallery-note">
-      Três quadros em looping, como fios vivos se alternando ao redor da deusa.
+      Dois quadros em looping, como fios vivos se alternando ao redor da deusa.
     </p>
   </div>
 </section>
-
 <!-- FOOTER -->
 <footer>
   <div class="footer-nav">
@@ -2051,16 +2007,22 @@ footer {
 
   const groups = {
     vida: [
-      { src: 'img-lyra/lyra.png', title: 'Vida', text: 'A presença que cura, sustenta e faz tudo ao redor respirar outra vez.' },
-      { src: 'img-lyra/lyra0.png', title: 'Campo de Vida', text: 'Onde ela está, tudo fica mais vivo, mais consciente e mais inteiro.' }
+      { src: 'img-lyra/lyra.png', title: 'Vida', text: 'A presenca que cura, sustenta e faz tudo ao redor respirar outra vez.' },
+      { src: 'img-lyra/lyra2.png', title: 'Ponte', text: 'Entre o humano e o divino, entre mundos e memorias, Lyra permanece.' },
+      { src: 'img-lyra/lyra4.png', title: 'Campo de Vida', text: 'Onde ela esta, tudo fica mais vivo, mais consciente e mais inteiro.' },
+      { src: 'img-lyra/ly.png', title: 'Fio Luminoso', text: 'A vida se organiza ao redor dos fios que ela desperta.' },
+      { src: 'img-lyra/ly2.png', title: 'Eco Verde', text: 'Um instante de cura atravessando o silencio.' },
+      { src: 'img-lyra/bailelyra.png', title: 'Baile de Lyra', text: 'A delicadeza viva no centro do movimento.' },
+      { src: 'img-lyra/lyrabanner0.png', title: 'Ascensao', text: 'A deusa como presenca que une, protege e floresce.' }
     ],
     conexao: [
-      { src: 'img-lyra/lyra1.png', title: 'Conexão', text: 'Fios luminosos atravessam planos, pessoas e destinos — a ponte que nunca se fecha.' },
-      { src: 'img-lyra/lyra2.png', title: 'A Ponte Entre Tudo', text: 'Lyra sente o que une cada presença, cada escolha e cada caminho possível.' }
-    ],
-    ponte: [
-      { src: 'img-lyra/lyra3.png', title: 'Visão dos Fios', text: 'Percepção além do plano físico, seguindo conexões que ninguém mais vê.' },
-      { src: 'img-lyra/lyrabanner.png', title: 'Anna · Antes da Ascensão', text: 'Tímida, observadora e essencial antes de se tornar Lyra.' }
+      { src: 'img-lyra/lyra1.png', title: 'Conexao', text: 'Fios luminosos atravessam planos, pessoas e destinos, a ponte que nunca se fecha.' },
+      { src: 'img-lyra/lyra0.png', title: 'Origem', text: 'Anna antes da ascensao, timida, observadora e essencial.' },
+      { src: 'img-lyra/lyra3.png', title: 'Visao dos Fios', text: 'Percepcao alem do plano fisico, seguindo conexoes que ninguem mais ve.' },
+      { src: 'img-lyra/lyrabanner.png', title: 'Anna', text: 'O passado humano que ainda pulsa dentro da deusa.' },
+      { src: 'img-lyra/l.png', title: 'Laco Vivo', text: 'Um elo delicado, mas impossivel de romper.' },
+      { src: 'img-lyra/ly1.png', title: 'Memoria Verde', text: 'A conexao se revela em pequenos sinais de luz.' },
+      { src: 'img-lyra/ly3.png', title: 'Teia Viva', text: 'Todos os caminhos tocados pela presenca de Lyra.' }
     ]
   };
 
