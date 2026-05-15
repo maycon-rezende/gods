@@ -1150,16 +1150,16 @@ nav a { white-space: nowrap; }
 #galeria .gallery-grid.is-upgraded-loop,
 #galeria .gallery-showcase.is-upgraded-loop {
   display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: clamp(0.85rem, 1.8vw, 1.35rem) !important;
-  width: min(1180px, calc(100% - 2rem));
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(0.7rem, 1.4vw, 1rem) !important;
+  width: min(760px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 0 !important;
 }
 
 .smooth-loop-panel {
   position: relative;
-  min-height: clamp(230px, 29vw, 390px);
+  min-height: clamp(190px, 24vw, 300px);
   border: 1px solid rgba(201,168,76,0.18);
   background: rgba(3,3,8,0.7);
   overflow: hidden;
@@ -1250,7 +1250,7 @@ nav a { white-space: nowrap; }
 .smooth-loop-panel:hover .loop-bg-b.is-visible { filter: saturate(1.08) brightness(1.04); }
 
 .gallery-carousel-controls, .smooth-loop-controls {
-  width: min(1180px, calc(100% - 2rem));
+  width: min(760px, calc(100% - 2rem));
   margin: clamp(1rem, 2vw, 1.5rem) auto 0;
   display: flex;
   align-items: center;
@@ -1289,7 +1289,7 @@ nav a { white-space: nowrap; }
 @media (max-width: 1100px) {
   #galeria .gallery-grid.is-upgraded-loop,
   #galeria .gallery-showcase.is-upgraded-loop {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
@@ -1306,9 +1306,9 @@ nav a { white-space: nowrap; }
   #galeria .gallery-grid.is-upgraded-loop,
   #galeria .gallery-showcase.is-upgraded-loop {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    width: min(100% - 1.5rem, 720px);
+    width: min(100% - 1.5rem, 640px);
   }
-  .smooth-loop-panel { min-height: clamp(210px, 55vw, 330px); }
+  .smooth-loop-panel { min-height: clamp(180px, 44vw, 260px); }
 }
 
 @media (max-width: 480px) {
@@ -1319,10 +1319,10 @@ nav a { white-space: nowrap; }
   #galeria .gallery-showcase.is-upgraded-loop {
     grid-template-columns: 1fr !important;
     grid-template-rows: none !important;
-    grid-auto-rows: minmax(320px, auto) !important;
+    grid-auto-rows: minmax(280px, auto) !important;
     width: min(100% - 1.1rem, 420px);
   }
-  .smooth-loop-panel { min-height: 290px; }
+  .smooth-loop-panel { min-height: 260px; }
   .smooth-loop-controls, .gallery-carousel-controls { width: min(100% - 1.1rem, 420px); }
   .smooth-loop-btn, .carousel-btn { width: 100%; }
 }
@@ -1356,13 +1356,13 @@ nav a { white-space: nowrap; }
   #galeria .gallery-showcase.is-upgraded-loop {
     grid-template-columns: 1fr !important;
     grid-template-rows: none !important;
-    grid-auto-rows: minmax(320px, auto) !important;
+    grid-auto-rows: minmax(280px, auto) !important;
     width: min(100% - 1.25rem, 430px) !important;
     padding: 0 !important;
   }
 
   #galeria .smooth-loop-panel {
-    min-height: min(76vh, 460px);
+    min-height: min(68vh, 380px);
     aspect-ratio: 3 / 4;
   }
 
@@ -1404,6 +1404,69 @@ nav a { white-space: nowrap; }
 .smooth-loop-panel .loop-bg-b.is-visible { transform: none !important; }
 }
 
+/* Galeria da Kaelith: quadros responsivos sem corte de banner */
+#galeria .gallery-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
+  grid-template-rows: none !important;
+  grid-auto-rows: auto !important;
+  align-items: start;
+  width: min(1180px, calc(100% - clamp(1.5rem, 5vw, 4rem)));
+  max-width: none;
+  margin: 0 auto;
+  padding: 0 !important;
+  gap: clamp(0.75rem, 1.8vw, 1.25rem);
+}
+
+#galeria .gallery-item,
+#galeria .gallery-item.tall,
+#galeria .gallery-item.wide {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  height: auto !important;
+  min-height: clamp(240px, 44vw, 520px);
+  aspect-ratio: 3 / 4;
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-color: rgba(8,6,2,0.82);
+  border-color: rgba(192,132,42,0.18);
+}
+
+#galeria .gallery-item:nth-child(2),
+#galeria .gallery-item:nth-child(5) {
+  aspect-ratio: 4 / 5;
+}
+
+#galeria .gallery-item:nth-child(3),
+#galeria .gallery-item:nth-child(6) {
+  aspect-ratio: 1 / 1;
+}
+
+#galeria .gallery-overlay {
+  opacity: 1;
+  background: linear-gradient(to top, rgba(3,3,8,0.9), rgba(3,3,8,0.08) 56%, transparent);
+}
+
+@media (min-width: 900px) {
+  #galeria .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #galeria .gallery-grid {
+    grid-template-columns: 1fr !important;
+    width: min(100% - 1.25rem, 430px) !important;
+  }
+
+  #galeria .gallery-item,
+  #galeria .gallery-item.tall,
+  #galeria .gallery-item.wide {
+    min-height: clamp(300px, 86vw, 520px);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1426,7 +1489,7 @@ nav a { white-space: nowrap; }
 
 <!-- BANNER -->
 <section id="banner">
-  <div class="banner-bg" style="background-image: url('img-kaelith/kaelith.png')"></div>
+  <div class="banner-bg" style="background-image: url('img-kaelith/k3.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
     <p class="banner-eyebrow">Deusa da Vingança e da Justiça · Companheira de Onull</p>
@@ -1663,7 +1726,7 @@ nav a { white-space: nowrap; }
 </section>
 
 <!-- GALERIA -->
-<section id="galeria">
+<section id="galeria" data-static-gallery="true">
   <div class="section-header reveal">
     <span class="section-label">Imagens</span>
     <h2>Galeria de Kaelith</h2>
@@ -1677,7 +1740,7 @@ nav a { white-space: nowrap; }
     <div class="gallery-item" style="background-image: url('img-kaelith/k2.png')">
       <div class="gallery-overlay"><span>Chama da Retribuição</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('img-kaelith/k0.png')">
+    <div class="gallery-item" style="background-image: url('img-kaelith/k1.png')">
       <div class="gallery-overlay"><span>Justiça Absoluta</span></div>
     </div>
     <div class="gallery-item wide" style="background-image: url('img-kaelith/k3.png')">
@@ -1686,7 +1749,7 @@ nav a { white-space: nowrap; }
     <div class="gallery-item" style="background-image: url('img-kaelith/k0.png')">
       <div class="gallery-overlay"><span>Alta Feitiçaria</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('img-kaelith/k3.png')">
+    <div class="gallery-item" style="background-image: url('img-kaelith/k4.png')">
       <div class="gallery-overlay"><span>Jéssica · Antes da Ascensão</span></div>
     </div>
   </div>
@@ -2296,7 +2359,7 @@ nav a { white-space: nowrap; }
 
   function upgradeGallery() {
     const section = document.getElementById('galeria');
-    if (!section || section.dataset.loopPatched === 'true') return;
+    if (!section || section.dataset.staticGallery === 'true' || section.dataset.loopPatched === 'true') return;
 
     const images = collectImages(section);
     if (images.length < 2) return;
@@ -2308,7 +2371,7 @@ nav a { white-space: nowrap; }
     container.classList.add('is-upgraded-loop');
     container.innerHTML = '';
 
-    const visiblePanels = Math.min(4, images.length);
+    const visiblePanels = Math.min(2, images.length);
     for (let i = 0; i < visiblePanels; i++) {
       container.appendChild(buildPanel(images, i, `Painel ${String(i + 1).padStart(2, '0')}`));
     }

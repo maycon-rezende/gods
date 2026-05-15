@@ -998,6 +998,77 @@ h2 {
   font-style: normal;
 }
 
+/* Galeria da Lyra: quadros responsivos sem corte de banner */
+#galeria .gallery-loop-wrap {
+  width: min(1180px, calc(100% - clamp(1.5rem, 5vw, 4rem)));
+  max-width: none;
+  padding: 0 !important;
+}
+
+#galeria .lyra-gallery-showcase {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
+  align-items: start;
+  gap: clamp(0.75rem, 1.8vw, 1.25rem);
+  padding: clamp(0.7rem, 1.8vw, 1.1rem);
+}
+
+#galeria .lyra-panel,
+#galeria .lyra-panel.main {
+  min-height: clamp(240px, 44vw, 520px);
+  aspect-ratio: 3 / 4;
+  transform: none !important;
+  opacity: 1;
+}
+
+#galeria .lyra-panel:nth-child(2),
+#galeria .lyra-panel:nth-child(5) {
+  aspect-ratio: 4 / 5;
+}
+
+#galeria .lyra-panel:nth-child(3),
+#galeria .lyra-panel:nth-child(6) {
+  aspect-ratio: 1 / 1;
+}
+
+#galeria .lyra-panel-img {
+  background-size: contain !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  transform: none !important;
+  filter: brightness(0.92) saturate(0.95);
+}
+
+#galeria .lyra-panel::before {
+  background: linear-gradient(to top, rgba(1,8,5,0.92) 0%, rgba(1,8,5,0.12) 58%, transparent 100%);
+}
+
+#galeria .lyra-panel-progress,
+#galeria .lyra-gallery-note {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  #galeria .lyra-gallery-showcase {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #galeria .gallery-loop-wrap {
+    width: min(100% - 1.25rem, 430px) !important;
+  }
+
+  #galeria .lyra-gallery-showcase {
+    grid-template-columns: 1fr !important;
+  }
+
+  #galeria .lyra-panel,
+  #galeria .lyra-panel.main {
+    min-height: clamp(300px, 86vw, 520px);
+  }
+}
+
 @media (max-width: 1024px) {
   .lyra-gallery-showcase { gap: 0.8rem; padding: 0.9rem; }
   .lyra-panel { min-height: 390px; }
@@ -1517,7 +1588,7 @@ footer {
 </section>
 
 <!-- GALERIA EM LOOP -->
-<section id="galeria">
+<section id="galeria" data-static-gallery="true">
   <div class="section-header reveal">
     <span class="section-label">Imagens</span>
     <h2>Teia Viva da Lyra</h2>
@@ -1528,7 +1599,7 @@ footer {
     <div class="lyra-gallery-showcase">
 
       <article class="lyra-panel" data-panel="vida">
-        <div class="lyra-panel-img"></div>
+        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra.png')"></div>
         <div class="lyra-panel-content">
           <div class="lyra-panel-kicker">Quadro I</div>
           <h3 class="lyra-panel-title">Vida</h3>
@@ -1538,7 +1609,7 @@ footer {
       </article>
 
       <article class="lyra-panel main" data-panel="conexao">
-        <div class="lyra-panel-img"></div>
+        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra1.png')"></div>
         <div class="lyra-panel-content">
           <div class="lyra-panel-kicker">Quadro II</div>
           <h3 class="lyra-panel-title">Conexão</h3>
@@ -1548,11 +1619,41 @@ footer {
       </article>
 
       <article class="lyra-panel" data-panel="ponte">
-        <div class="lyra-panel-img"></div>
+        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra2.png')"></div>
         <div class="lyra-panel-content">
           <div class="lyra-panel-kicker">Quadro III</div>
           <h3 class="lyra-panel-title">Ponte</h3>
           <p class="lyra-panel-text">Entre o humano e o divino, entre mundos e memórias, Lyra permanece.</p>
+        </div>
+        <div class="lyra-panel-progress"><span></span></div>
+      </article>
+
+      <article class="lyra-panel" data-panel="visao">
+        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra3.png')"></div>
+        <div class="lyra-panel-content">
+          <div class="lyra-panel-kicker">Quadro IV</div>
+          <h3 class="lyra-panel-title">Visao dos Fios</h3>
+          <p class="lyra-panel-text">Percepcao alem do plano fisico, seguindo conexoes que ninguem mais ve.</p>
+        </div>
+        <div class="lyra-panel-progress"><span></span></div>
+      </article>
+
+      <article class="lyra-panel" data-panel="campo">
+        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyra0.png')"></div>
+        <div class="lyra-panel-content">
+          <div class="lyra-panel-kicker">Quadro V</div>
+          <h3 class="lyra-panel-title">Campo de Vida</h3>
+          <p class="lyra-panel-text">Onde ela esta, tudo fica mais vivo, mais consciente e mais inteiro.</p>
+        </div>
+        <div class="lyra-panel-progress"><span></span></div>
+      </article>
+
+      <article class="lyra-panel" data-panel="anna">
+        <div class="lyra-panel-img" style="background-image: url('img-lyra/lyrabanner.png')"></div>
+        <div class="lyra-panel-content">
+          <div class="lyra-panel-kicker">Quadro VI</div>
+          <h3 class="lyra-panel-title">Anna</h3>
+          <p class="lyra-panel-text">Timida, observadora e essencial antes de se tornar Lyra.</p>
         </div>
         <div class="lyra-panel-progress"><span></span></div>
       </article>
@@ -1942,6 +2043,9 @@ footer {
 
 /* ── GALERIA EM LOOP — TEIA VIVA DA LYRA ── */
 (function () {
+  const gallery = document.getElementById('galeria');
+  if (gallery?.dataset.staticGallery === 'true') return;
+
   const panels = document.querySelectorAll('.lyra-panel');
   if (!panels.length) return;
 
@@ -1955,7 +2059,7 @@ footer {
       { src: 'img-lyra/lyra2.png', title: 'A Ponte Entre Tudo', text: 'Lyra sente o que une cada presença, cada escolha e cada caminho possível.' }
     ],
     ponte: [
-      { src: 'img-lyra/lyra-3.png', title: 'Visão dos Fios', text: 'Percepção além do plano físico, seguindo conexões que ninguém mais vê.' },
+      { src: 'img-lyra/lyra3.png', title: 'Visão dos Fios', text: 'Percepção além do plano físico, seguindo conexões que ninguém mais vê.' },
       { src: 'img-lyra/lyrabanner.png', title: 'Anna · Antes da Ascensão', text: 'Tímida, observadora e essencial antes de se tornar Lyra.' }
     ]
   };
