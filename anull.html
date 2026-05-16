@@ -1252,6 +1252,88 @@ nav a { white-space: nowrap; }
   .smooth-loop-panel img.is-visible { transform: none !important; }
 }
 
+/* Galeria do Anull: blocos fluidos e sem sobreposicao no mobile */
+#galeria {
+  overflow-x: hidden;
+}
+
+#galeria .gallery-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
+  grid-template-rows: none !important;
+  grid-auto-rows: auto !important;
+  align-items: start;
+  width: min(1100px, calc(100% - clamp(1.5rem, 5vw, 4rem)));
+  max-width: none;
+  margin: 0 auto;
+  padding: 0 !important;
+  gap: clamp(0.75rem, 1.8vw, 1.25rem);
+}
+
+#galeria .gallery-item,
+#galeria .gallery-item.tall,
+#galeria .gallery-item.wide {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  height: auto !important;
+  min-height: clamp(240px, 44vw, 520px);
+  aspect-ratio: 3 / 4;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+#galeria .gallery-item:nth-child(3n + 2) {
+  aspect-ratio: 4 / 5;
+}
+
+#galeria .gallery-item:nth-child(4n) {
+  aspect-ratio: 1 / 1;
+}
+
+#galeria .gallery-overlay {
+  opacity: 1;
+}
+
+#galeria .gallery-grid.is-upgraded-loop,
+#galeria .gallery-showcase.is-upgraded-loop {
+  grid-template-rows: none !important;
+  grid-auto-rows: minmax(280px, auto) !important;
+}
+
+#galeria .smooth-loop-panel {
+  min-height: 280px;
+}
+
+@media (min-width: 900px) {
+  #galeria .gallery-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #galeria .gallery-grid,
+  #galeria .gallery-grid.is-upgraded-loop,
+  #galeria .gallery-showcase.is-upgraded-loop {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: none !important;
+    grid-auto-rows: minmax(300px, auto) !important;
+    width: min(100% - 1.25rem, 430px) !important;
+    padding: 0 !important;
+  }
+
+  #galeria .gallery-item,
+  #galeria .gallery-item.tall,
+  #galeria .gallery-item.wide {
+    min-height: clamp(300px, 86vw, 520px);
+    aspect-ratio: 3 / 4;
+  }
+
+  #galeria .smooth-loop-panel {
+    min-height: clamp(300px, 92vw, 520px);
+  }
+}
+
 </style>
 </head>
 <body>
