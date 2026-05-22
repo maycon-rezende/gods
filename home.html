@@ -604,80 +604,6 @@ h2 {
   border-color: rgba(160,122,240,0.5);
 }
 
-/* ── PODERES ── */
-#poderes {
-  padding-bottom: 5rem;
-}
-
-.powers-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  max-width: 1100px;
-  margin: 2rem auto 0;
-  padding: 0 2rem;
-}
-
-.power-block {
-  padding: 2rem;
-  border: 1px solid rgba(201,168,76,0.1);
-  background: var(--surface);
-  position: relative;
-  transition: border-color 0.3s;
-}
-
-.power-block:hover {
-  border-color: rgba(201,168,76,0.3);
-}
-
-.power-icon {
-  font-size: 2rem;
-  margin-bottom: 0.8rem;
-}
-
-.power-name {
-  font-family: 'Cinzel', serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--gold-light);
-  margin-bottom: 0.6rem;
-  letter-spacing: 0.08em;
-}
-
-.power-desc {
-  font-size: 0.9rem;
-  color: var(--text-dim);
-  line-height: 1.7;
-}
-
-.power-bar-wrap {
-  margin-top: 1rem;
-  height: 2px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.power-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
-  border-radius: 2px;
-  transition: width 1.5s ease;
-  width: 0;
-}
-
-.power-bar.divine {
-  background: linear-gradient(90deg, var(--divine), var(--divine-light));
-}
-
-.power-bar.blood {
-  background: linear-gradient(90deg, var(--blood), var(--blood-bright));
-}
-
-.power-bar.cyan {
-  background: linear-gradient(90deg, #1a8f8b, var(--cyan));
-}
-
 /* ── FOOTER ── */
 footer {
   text-align: center;
@@ -725,7 +651,6 @@ footer {
   .char-card { padding: 1.5rem 1.2rem; }
   .synopsis-body { padding: 0 1rem; }
   .timeline { padding: 1rem 1rem; }
-  .powers-grid { grid-template-columns: 1fr; gap: 1rem; padding: 0 1rem; }
 }
 
 /* Small: Smartphones 360px - 480px */
@@ -753,8 +678,6 @@ footer {
   .tl-item.right .tl-content { grid-column: 2; text-align: left; }
   .tl-item .tl-dot { grid-column: 1; }
   .tl-item .tl-empty { display: none; }
-  .powers-grid { grid-template-columns: 1fr; gap: 1.2rem; padding: 0 1.5rem; }
-  .power-block { padding: 1.5rem; }
   footer { padding: 3rem 1.5rem; }
 }
 
@@ -777,20 +700,17 @@ footer {
   .tl-item.left .tl-content { grid-column: 1; text-align: right; }
   .tl-item.right .tl-content { grid-column: 3; text-align: left; }
   .tl-item .tl-dot { grid-column: 2; }
-  .powers-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding: 0 2rem; }
   footer { padding: 3.5rem 2rem; }
 }
 
 /* Large: Desktop 769px - 1024px */
 @media (max-width: 1024px) {
   .cards-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .powers-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 }
 
 /* Extra Large: Desktop > 1024px */
 @media (min-width: 1025px) {
   .cards-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-  .powers-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
   body { font-size: 18px; }
 }
 
@@ -806,8 +726,8 @@ img, video, canvas, svg {
   height: auto;
 }
 
-section, .section-header, .synopsis-body, .timeline, .cards-grid, .powers-grid,
-.about-grid, .story-body, .powers-list, .gallery-grid, footer, .chars-intro {
+section, .section-header, .synopsis-body, .timeline, .cards-grid,
+.about-grid, .story-body, .gallery-grid, footer, .chars-intro {
   width: min(100%, 100%);
 }
 
@@ -822,11 +742,9 @@ nav {
   }
 
   .cards-grid,
-  .powers-grid,
   .timeline,
   .synopsis-body,
   .story-body,
-  .powers-list,
   .gallery-grid,
   footer,
   .chars-intro {
@@ -891,8 +809,7 @@ nav {
     display: none !important;
   }
 
-  .cards-grid,
-  .powers-grid {
+  .cards-grid {
     grid-template-columns: 1fr !important;
   }
 
@@ -905,15 +822,6 @@ nav {
 
   .bstat-sep {
     display: none;
-  }
-
-  .power-item {
-    grid-template-columns: 1fr !important;
-  }
-
-  .power-icon-big {
-    text-align: left !important;
-    padding-top: 0;
   }
 
   .story-block {
@@ -970,7 +878,6 @@ nav {
   }
 
   .char-card,
-  .power-block,
   .about-photo,
   .gallery-item {
     min-width: 0;
@@ -995,11 +902,9 @@ nav {
   .section-header,
   .synopsis-body,
   .timeline,
-  .cards-grid,
-  .powers-grid,
-  .about-grid,
-  .story-body,
-  .powers-list,
+    .cards-grid,
+    .about-grid,
+    .story-body,
   .gallery-grid,
   footer,
   .chars-intro {
@@ -1018,13 +923,11 @@ nav {
   }
 
   .cards-grid,
-  .powers-grid,
   .gallery-grid {
     gap: 1rem !important;
   }
 
-  .char-card,
-  .power-block {
+  .char-card {
     padding: 1.25rem !important;
   }
 
@@ -1038,7 +941,7 @@ nav {
   }
 }
 
-@media (max-width: 768px) { .cards-grid, .powers-grid { grid-template-columns: 1fr !important; } }
+@media (max-width: 768px) { .cards-grid { grid-template-columns: 1fr !important; } }
 .home-event-baile {
   position: relative;
   min-height: 520px;
@@ -1425,73 +1328,6 @@ nav {
 
 
 
-<!-- PODERES -->
-<section id="poderes">
-  <div class="section-header reveal">
-    <span class="section-label">Arsenal de Knull</span>
-    <h2>Poderes & Herança</h2>
-    <div class="section-rule"></div>
-  </div>
-  <div class="powers-grid">
-
-    <div class="power-block reveal">
-      <div class="power-icon">👁️</div>
-      <div class="power-name">Sangue Uchiha — Sharingan / Mangekyō</div>
-      <div class="power-desc">Olhos que veem além do véu — copiando técnicas, prevendo movimentos e acessando o Mangekyō para desencadear Amaterasu, Tsukuyomi e Susanoo.</div>
-      <div class="power-bar-wrap"><div class="power-bar blood" data-width="95"></div></div>
-    </div>
-
-    <div class="power-block reveal">
-      <div class="power-icon">🔮</div>
-      <div class="power-name">Sangue Hyuuga — Byakugan</div>
-      <div class="power-desc">Visão de 360° que penetra qualquer ilusão. Permite enxergar o sistema de chakra do oponente e destruí-lo ponto a ponto com o Jūken.</div>
-      <div class="power-bar-wrap"><div class="power-bar" data-width="88"></div></div>
-    </div>
-
-    <div class="power-block reveal">
-      <div class="power-icon">⚔️</div>
-      <div class="power-name">Armadura de Ouro — Cavaleiros do Zodíaco</div>
-      <div class="power-desc">Uma das doze armaduras mais sagradas do cosmos. Forjada com metal divino, amplifica o Cosmos do portador e o protege de ataques de nível olímpico.</div>
-      <div class="power-bar-wrap"><div class="power-bar divine" data-width="92"></div></div>
-    </div>
-
-    <div class="power-block reveal">
-      <div class="power-icon">💀</div>
-      <div class="power-name">Habilidades de Shinigami — Bleach</div>
-      <div class="power-desc">Zanpakutō com Shikai e Bankai. Domínio do Kidō, Sonído e Hierro — poderes que cruzam a fronteira entre o mundo dos vivos e o além.</div>
-      <div class="power-bar-wrap"><div class="power-bar blood" data-width="90"></div></div>
-    </div>
-
-    <div class="power-block reveal">
-      <div class="power-icon">🌀</div>
-      <div class="power-name">Chakra — Naruto</div>
-      <div class="power-desc">Energia vital moldada pela mente e pelo corpo. Permite jutsu de todos os elementos, Modo Sábio e acesso ao chakra do mundo natural.</div>
-      <div class="power-bar-wrap"><div class="power-bar cyan" data-width="97"></div></div>
-    </div>
-
-    <div class="power-block reveal">
-      <div class="power-icon">🔥</div>
-      <div class="power-name">Ki — Dragon Ball</div>
-      <div class="power-desc">A força vital em sua forma mais pura e explosiva. Permite voo, escudos de energia e ondas que podem varrer montanhas da face da Terra.</div>
-      <div class="power-bar-wrap"><div class="power-bar" data-width="93"></div></div>
-    </div>
-
-    <div class="power-block reveal">
-      <div class="power-icon">✨</div>
-      <div class="power-name">Cosmos — Saint Seiya</div>
-      <div class="power-desc">A chama que arde no coração de todo cavaleiro. Quando levado ao limite absoluto, o Cosmos permite alcançar a velocidade da luz e tocar o divino.</div>
-      <div class="power-bar-wrap"><div class="power-bar divine" data-width="89"></div></div>
-    </div>
-
-    <div class="power-block reveal">
-      <div class="power-icon">🧬</div>
-      <div class="power-name">Sangue Sayadin</div>
-      <div class="power-desc">Uma herança rara que potencializa cada poder existente. O sangue Sayadin atua como multiplicador, elevando o limite máximo de cada habilidade além do possível.</div>
-      <div class="power-bar-wrap"><div class="power-bar blood" data-width="100"></div></div>
-    </div>
-
-  </div>
-</section>
 <section class="home-event-baile">
   <div class="baile-event-bg"></div>
   <div class="baile-event-overlay"></div>
@@ -1726,24 +1562,6 @@ nav {
   document.addEventListener('click', () => {
     if (audio.paused) playAudio();
   }, { once: true });
-})();
-
-/* ── BARRAS DE PODER (animam ao entrar na tela) ── */
-(function() {
-  const bars = document.querySelectorAll('.power-bar');
-
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const bar = e.target;
-        const target = bar.getAttribute('data-width');
-        setTimeout(() => { bar.style.width = target + '%'; }, 200);
-        io.unobserve(bar);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  bars.forEach(b => io.observe(b));
 })();
 
 /* ── MOBILE MENU TOGGLE ── */

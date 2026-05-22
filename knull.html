@@ -515,86 +515,51 @@ h2 {
 /* ── PODERES ── */
 #poderes {
   padding-bottom: 5rem;
-  background: linear-gradient(to bottom,
-    transparent, rgba(139,0,0,0.04), transparent);
 }
 
-.powers-list {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.power-item {
+.powers-grid {
   display: grid;
-  grid-template-columns: clamp(40px, 8vw, 80px) 1fr;
-  gap: clamp(1rem, 3vw, 2rem);
-  padding: clamp(1.5rem, 4vw, 2.5rem) 0;
-  border-bottom: 1px solid rgba(201,168,76,0.07);
-  align-items: start;
-  transition: background 0.3s;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  padding: 0 2rem;
 }
 
-@media (max-width: 480px) {
-  .power-item {
-    grid-template-columns: 1fr;
-  }
-
-  .power-icon-big {
-    font-size: clamp(1.5rem, 6vw, 2.5rem);
-    margin-bottom: 0.5rem;
-  }
+.power-block {
+  padding: 2rem;
+  border: 1px solid rgba(201,168,76,0.1);
+  background: var(--surface);
+  position: relative;
+  transition: border-color 0.3s;
 }
 
-.power-item:hover {
-  background: rgba(204,0,34,0.03);
+.power-block:hover {
+  border-color: rgba(201,168,76,0.3);
 }
 
-.power-item:last-child {
-  border-bottom: none;
+.power-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
 }
 
-.power-icon-big {
-  font-size: 2.5rem;
-  text-align: center;
-  filter: drop-shadow(0 0 12px var(--char-accent-glow));
-  padding-top: 0.2rem;
-}
-
-.power-origin {
+.power-name {
   font-family: 'Cinzel', serif;
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--char-accent);
-  margin-bottom: 0.4rem;
-}
-
-.power-title {
-  font-family: 'Cinzel', serif;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--gold-light);
-  margin-bottom: 0.8rem;
-  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.08em;
 }
 
-.power-body {
-  font-size: 0.97rem;
+.power-desc {
+  font-size: 0.9rem;
   color: var(--text-dim);
-  line-height: 1.85;
-}
-
-.power-body em {
-  color: var(--gold-light);
-  font-style: normal;
+  line-height: 1.7;
 }
 
 .power-bar-wrap {
-  margin-top: 1.2rem;
+  margin-top: 1rem;
   height: 2px;
   background: rgba(255,255,255,0.05);
   border-radius: 2px;
@@ -609,12 +574,12 @@ h2 {
   width: 0;
 }
 
-.power-bar.blood {
-  background: linear-gradient(90deg, var(--blood), var(--blood-bright));
-}
-
 .power-bar.divine {
   background: linear-gradient(90deg, var(--divine), var(--divine-light));
+}
+
+.power-bar.blood {
+  background: linear-gradient(90deg, var(--blood), var(--blood-bright));
 }
 
 .power-bar.cyan {
@@ -903,10 +868,6 @@ footer {
     display: none;
   }
 
-  .powers-list {
-    padding: 0 clamp(1rem, 3vw, 1.5rem);
-  }
-
   footer {
     padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 1.5rem);
   }
@@ -975,9 +936,6 @@ footer {
     display: block;
   }
 
-  .powers-list {
-    padding: 0 clamp(1.5rem, 4vw, 2rem);
-  }
 }
 
 /* Desktop: 768px+ */
@@ -1005,10 +963,6 @@ footer {
 
   .timeline {
     padding: 1rem 2rem;
-  }
-
-  .powers-list {
-    padding: 0 2rem;
   }
 
   footer {
@@ -1079,7 +1033,6 @@ footer {
   .gallery-item.tall { grid-row: span 1; }
   .gallery-item.wide { grid-column: span 2; }
   .powers-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; padding: 0 2rem; }
-  .power-item { grid-template-columns: 50px 1fr; gap: 1.2rem; }
   footer { padding: 4rem 2rem; }
 }
 
@@ -1109,7 +1062,7 @@ img, video, canvas, svg {
 }
 
 section, .section-header, .synopsis-body, .timeline, .cards-grid, .powers-grid,
-.about-grid, .story-body, .powers-list, .gallery-grid, footer, .chars-intro {
+.about-grid, .story-body, .gallery-grid, footer, .chars-intro {
   width: min(100%, 100%);
 }
 
@@ -1128,7 +1081,6 @@ nav {
   .timeline,
   .synopsis-body,
   .story-body,
-  .powers-list,
   .gallery-grid,
   footer,
   .chars-intro {
@@ -1207,15 +1159,6 @@ nav {
 
   .bstat-sep {
     display: none;
-  }
-
-  .power-item {
-    grid-template-columns: 1fr !important;
-  }
-
-  .power-icon-big {
-    text-align: left !important;
-    padding-top: 0;
   }
 
   .story-block {
@@ -1301,7 +1244,6 @@ nav {
   .powers-grid,
   .about-grid,
   .story-body,
-  .powers-list,
   .gallery-grid,
   footer,
   .chars-intro {
@@ -1424,7 +1366,6 @@ section.section-awake::after {
   transform: translateY(0) scale(1);
 }
 
-.power-item,
 .story-block,
 .about-photo,
 .gallery-panel {
@@ -1433,14 +1374,12 @@ section.section-awake::after {
 }
 
 .section-header h2,
-.story-title,
-.power-title {
+.story-title {
   transition: text-shadow 0.35s ease, color 0.35s ease;
 }
 
 section.section-awake .section-header h2,
-.story-block:hover .story-title,
-.power-item:hover .power-title {
+.story-block:hover .story-title {
   text-shadow: 0 0 26px rgba(204,0,34,0.22), 0 0 46px rgba(106,79,207,0.12);
   color: #f5dca0;
 }
@@ -1688,7 +1627,7 @@ nav {
 nav::-webkit-scrollbar { display: none; }
 nav a { white-space: nowrap; }
 
-.banner-content, .section-header, .about-grid, .story-body, .powers-list,
+.banner-content, .section-header, .about-grid, .story-body,
 .cards-grid, .powers-grid, .desc-grid, .synopsis-body, .timeline,
 .gallery-grid, .gallery-showcase, footer {
   max-width: 100%;
@@ -1974,110 +1913,70 @@ nav a { white-space: nowrap; }
   </div>
 </section>
 
+
 <!-- PODERES -->
 <section id="poderes">
-  <div class="section-header reveal reveal-knull">
-    <span class="section-label">Arsenal completo</span>
-    <h2>Poderes & Habilidades</h2>
+  <div class="section-header reveal">
+    <span class="section-label">Arsenal de Knull</span>
+    <h2>Poderes & Herança</h2>
     <div class="section-rule"></div>
   </div>
+  <div class="powers-grid">
 
-  <div class="powers-list">
-
-    <div class="power-item reveal">
-      <div class="power-left">
-        <div class="power-icon-big">👁️</div>
-      </div>
-      <div class="power-right">
-        <div class="power-origin">Naruto · Clã Uchiha</div>
-        <div class="power-title">Sharingan & Mangekyō Sharingan</div>
-        <div class="power-body">Os olhos vermelhos que definiram gerações. O Sharingan de Yuri evoluiu para o Mangekyō — despertando o <em>Amaterasu</em>, chamas negras que consomem tudo e não se apagam, o <em>Tsukuyomi</em>, genjutsu capaz de aprisionar a mente em séculos de ilusão em segundos, e o <em>Susanoo</em>, guerreiro colossal de chakra que serve de armadura e arma ao mesmo tempo.</div>
-        <div class="power-bar-wrap"><div class="power-bar blood" data-width="95"></div></div>
-      </div>
+    <div class="power-block reveal">
+      <div class="power-icon">👁️</div>
+      <div class="power-name">Sangue Uchiha — Sharingan / Mangekyō</div>
+      <div class="power-desc">Olhos que veem além do véu — copiando técnicas, prevendo movimentos e acessando o Mangekyō para desencadear Amaterasu, Tsukuyomi e Susanoo.</div>
+      <div class="power-bar-wrap"><div class="power-bar blood" data-width="95"></div></div>
     </div>
 
-    <div class="power-item reveal">
-      <div class="power-left">
-        <div class="power-icon-big">🔮</div>
-      </div>
-      <div class="power-right">
-        <div class="power-origin">Naruto · Clã Hyuuga</div>
-        <div class="power-title">Byakugan & Jūken</div>
-        <div class="power-body">A visão branca que tudo enxerga. O Byakugan garante campo de visão de 360° sem pontos cegos, penetrando qualquer ilusão e enxergando o sistema de chakra do oponente. Combinado ao Jūken — o estilo de combate corpo a corpo Hyuuga — permite fechar os pontos de chakra do inimigo com precisão cirúrgica.</div>
-        <div class="power-bar-wrap"><div class="power-bar" data-width="88"></div></div>
-      </div>
+    <div class="power-block reveal">
+      <div class="power-icon">🔮</div>
+      <div class="power-name">Sangue Hyuuga — Byakugan</div>
+      <div class="power-desc">Visão de 360° que penetra qualquer ilusão. Permite enxergar o sistema de chakra do oponente e destruí-lo ponto a ponto com o Jūken.</div>
+      <div class="power-bar-wrap"><div class="power-bar" data-width="88"></div></div>
     </div>
 
-    <div class="power-item reveal">
-      <div class="power-left">
-        <div class="power-icon-big">⚔️</div>
-      </div>
-      <div class="power-right">
-        <div class="power-origin">Saint Seiya · Cavaleiros do Zodíaco</div>
-        <div class="power-title">Armadura de Ouro</div>
-        <div class="power-body">Uma das doze armaduras mais sagradas do cosmos — forjada com metal divino e imbuída com a energia dos astros. A armadura de Knull amplifica seu Cosmos ao limite máximo, protege contra ataques de nível olímpico e ressoa com a constelação que representa, liberando técnicas exclusivas de velocidade e poder cósmico devastador.</div>
-        <div class="power-bar-wrap"><div class="power-bar divine" data-width="92"></div></div>
-      </div>
+    <div class="power-block reveal">
+      <div class="power-icon">⚔️</div>
+      <div class="power-name">Armadura de Ouro — Cavaleiros do Zodíaco</div>
+      <div class="power-desc">Uma das doze armaduras mais sagradas do cosmos. Forjada com metal divino, amplifica o Cosmos do portador e o protege de ataques de nível olímpico.</div>
+      <div class="power-bar-wrap"><div class="power-bar divine" data-width="92"></div></div>
     </div>
 
-    <div class="power-item reveal">
-      <div class="power-left">
-        <div class="power-icon-big">💀</div>
-      </div>
-      <div class="power-right">
-        <div class="power-origin">Bleach · Shinigami</div>
-        <div class="power-title">Zanpakutō · Shikai & Bankai</div>
-        <div class="power-body">A espada da alma — uma extensão da própria essência de Knull. No <em>Shikai</em>, a Zanpakutō assume sua forma verdadeira e libera habilidades elementais únicas. No <em>Bankai</em>, o poder se multiplica exponencialmente, transformando o campo de batalha inteiro. Knull domina também o <em>Kidō</em>, feitiçaria dos Shinigami, além do <em>Sonído</em> para movimentação em velocidades além da percepção.</div>
-        <div class="power-bar-wrap"><div class="power-bar blood" data-width="90"></div></div>
-      </div>
+    <div class="power-block reveal">
+      <div class="power-icon">💀</div>
+      <div class="power-name">Habilidades de Shinigami — Bleach</div>
+      <div class="power-desc">Zanpakutō com Shikai e Bankai. Domínio do Kidō, Sonído e Hierro — poderes que cruzam a fronteira entre o mundo dos vivos e o além.</div>
+      <div class="power-bar-wrap"><div class="power-bar blood" data-width="90"></div></div>
     </div>
 
-    <div class="power-item reveal">
-      <div class="power-left">
-        <div class="power-icon-big">🌀</div>
-      </div>
-      <div class="power-right">
-        <div class="power-origin">Naruto · Energia Vital</div>
-        <div class="power-title">Chakra & Modo Sábio</div>
-        <div class="power-body">O Chakra de Knull é amplificado pelo sangue Sayadin, tornando sua reserva praticamente inesgotável. Domina jutsu de todos os elementos — fogo, vento, terra, água e raio — e alcançou o <em>Modo Sábio</em>, absorvendo a energia natural do mundo para potencializar ainda mais cada técnica. Seus selos são executados em frações de segundo.</div>
-        <div class="power-bar-wrap"><div class="power-bar cyan" data-width="97"></div></div>
-      </div>
+    <div class="power-block reveal">
+      <div class="power-icon">🌀</div>
+      <div class="power-name">Chakra — Naruto</div>
+      <div class="power-desc">Energia vital moldada pela mente e pelo corpo. Permite jutsu de todos os elementos, Modo Sábio e acesso ao chakra do mundo natural.</div>
+      <div class="power-bar-wrap"><div class="power-bar cyan" data-width="97"></div></div>
     </div>
 
-    <div class="power-item reveal">
-      <div class="power-left">
-        <div class="power-icon-big">🔥</div>
-      </div>
-      <div class="power-right">
-        <div class="power-origin">Dragon Ball · Força Vital</div>
-        <div class="power-title">Ki</div>
-        <div class="power-body">O Ki de Knull é denso o suficiente para ser sentido a quilômetros de distância quando liberado. Permite voo irrestrito, criação de escudos e barreiras de energia, e disparo de ondas expansivas capazes de varrer continentes. O sangue Sayadin funciona como amplificador constante — não há teto para o Ki de Knull.</div>
-        <div class="power-bar-wrap"><div class="power-bar" data-width="93"></div></div>
-      </div>
+    <div class="power-block reveal">
+      <div class="power-icon">🔥</div>
+      <div class="power-name">Ki — Dragon Ball</div>
+      <div class="power-desc">A força vital em sua forma mais pura e explosiva. Permite voo, escudos de energia e ondas que podem varrer montanhas da face da Terra.</div>
+      <div class="power-bar-wrap"><div class="power-bar" data-width="93"></div></div>
     </div>
 
-    <div class="power-item reveal">
-      <div class="power-left">
-        <div class="power-icon-big">✨</div>
-      </div>
-      <div class="power-right">
-        <div class="power-origin">Saint Seiya · Cavaleiros do Zodíaco</div>
-        <div class="power-title">Cosmos</div>
-        <div class="power-body">A chama interior que todo cavaleiro carrega — mas pouquíssimos levam ao limite absoluto. Knull é um deles. Seu Cosmos elevado à máxima potência permite movimento na velocidade da luz, ataques que ignoram defesas físicas convencionais e acesso a técnicas cósmicas que afetam a realidade ao redor.</div>
-        <div class="power-bar-wrap"><div class="power-bar divine" data-width="89"></div></div>
-      </div>
+    <div class="power-block reveal">
+      <div class="power-icon">✨</div>
+      <div class="power-name">Cosmos — Saint Seiya</div>
+      <div class="power-desc">A chama que arde no coração de todo cavaleiro. Quando levado ao limite absoluto, o Cosmos permite alcançar a velocidade da luz e tocar o divino.</div>
+      <div class="power-bar-wrap"><div class="power-bar divine" data-width="89"></div></div>
     </div>
 
-    <div class="power-item reveal">
-      <div class="power-left">
-        <div class="power-icon-big">🧬</div>
-      </div>
-      <div class="power-right">
-        <div class="power-origin">Herança Única</div>
-        <div class="power-title">Sangue Sayadin</div>
-        <div class="power-body">O multiplicador que torna Knull singular. O sangue Sayadin não é um poder em si — é um catalisador. Ele eleva o teto máximo de cada habilidade existente, permitindo que Chakra, Ki e Cosmos coexistam e se potencializem mutuamente em vez de se anularem. É a razão pela qual Knull não tem limite definido.</div>
-        <div class="power-bar-wrap"><div class="power-bar blood" data-width="100"></div></div>
-      </div>
+    <div class="power-block reveal">
+      <div class="power-icon">🧬</div>
+      <div class="power-name">Sangue Sayadin</div>
+      <div class="power-desc">Uma herança rara que potencializa cada poder existente. O sangue Sayadin atua como multiplicador, elevando o limite máximo de cada habilidade além do possível.</div>
+      <div class="power-bar-wrap"><div class="power-bar blood" data-width="100"></div></div>
     </div>
 
   </div>
@@ -2548,7 +2447,7 @@ nav a { white-space: nowrap; }
 (function () {
   if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const cards = document.querySelectorAll('.power-item, .story-block, .about-photo, .gallery-panel');
+  const cards = document.querySelectorAll('.power-block, .story-block, .about-photo, .gallery-panel');
   cards.forEach((card) => {
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();

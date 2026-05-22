@@ -493,12 +493,23 @@ h2 {
   nav a { font-size: 0.62rem; }
 
   .hero-content { padding: 5rem 1.2rem 2.5rem; }
+  .hero-title span { letter-spacing: 0.2em; }
   .section-header { padding: 3rem 1.2rem 2rem; }
 
   .map-container { padding: 0 1.2rem; }
   .map-world { aspect-ratio: 1 / 1; }
 
-  .map-pin { display: none; }
+  .map-pin {
+    display: grid;
+    min-width: 36px;
+    min-height: 36px;
+    place-items: center;
+  }
+  .pin-dot,
+  .pin-pulse {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 @media (max-width: 768px) and (orientation: landscape) {
@@ -1117,11 +1128,15 @@ footer {
   .region-card    { min-height: 360px; }
   .rcard-content  { padding: 2rem 1.5rem; }
   .rcard-name     { font-size: clamp(1.1rem, 4vw, 1.4rem); }
+  .rcard-tag      { letter-spacing: 0.22em; }
+  .rcard-location { letter-spacing: 0.1em; }
   .rcard-desc     { font-size: 0.88rem; -webkit-line-clamp: 2; }
   .rcard-number   { font-size: 3rem; }
+  .rcard-footer   { align-items: flex-start; flex-direction: column; gap: 0.45rem; }
 
   .templo-feature { padding: 0 1.2rem; }
   .templo-content { padding: 2.5rem 1.2rem; }
+  .templo-tag     { letter-spacing: 0.24em; }
   .templo-name    { font-size: clamp(1.5rem, 6vw, 2.2rem); }
   .templo-desc    { font-size: 0.92rem; }
 
@@ -1146,8 +1161,17 @@ footer {
 
   .templo-btn {
     font-size: 0.65rem;
+    letter-spacing: 0.18em;
     padding: 0.8rem 1.5rem;
   }
+
+  .tfact {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .tfact-val { text-align: left; }
 
   footer { padding: 2.5rem 1.2rem; }
   .footer-nav { flex-direction: column; gap: 0.5rem; }
@@ -1158,6 +1182,9 @@ footer {
   .regions-grid { padding: 0 1rem; }
   .region-card  { min-height: 320px; }
   .rcard-content { padding: 1.5rem 1.2rem; }
+  nav { gap: 0.35rem; padding: 0.65rem; }
+  nav a { padding: 0.35rem 0.4rem; }
+  .hero-title span { letter-spacing: 0.14em; }
 }
 
 @media (hover: none) and (pointer: coarse) {
@@ -1343,7 +1370,7 @@ footer {
       </div>
       <div class="rcard-overlay limiar-overlay"></div>
       <div class="rcard-content">
-        <div class="rcard-icon">🌊</div>
+        
         <div class="rcard-tag limiar-tag">Estado da Existência</div>
         <h3 class="rcard-name limiar-name">
           Limiar da Continuidade
@@ -1375,7 +1402,6 @@ footer {
       </div>
       <div class="rcard-overlay cidade-overlay"></div>
       <div class="rcard-content">
-        <div class="rcard-icon">🏙️</div>
         <div class="rcard-tag cidade-tag">Plano Urbano Vivo</div>
         <h3 class="rcard-name cidade-name">
           Cidade das Mil Escolhas
@@ -1407,7 +1433,6 @@ footer {
       </div>
       <div class="rcard-overlay nucleo-overlay"></div>
       <div class="rcard-content">
-        <div class="rcard-icon">🌋</div>
         <div class="rcard-tag nucleo-tag">Plano Primordial</div>
         <h3 class="rcard-name nucleo-name">
           Núcleo da Forma
