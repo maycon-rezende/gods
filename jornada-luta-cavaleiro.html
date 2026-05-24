@@ -139,17 +139,50 @@
     color: rgba(232,220,200,0.82);
   }
 
+  .battle-body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 0%, rgba(204,0,34,0.12), transparent 42%);
+    mix-blend-mode: screen;
+  }
   .battle-body {
+    position: relative;
     max-width: 760px;
     margin: 0 auto;
     padding: 5rem 2rem 7rem;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
   }
   .chapter-card {
     position: relative;
+    width: 100%;
     padding: 2.6rem 2rem;
     border: 1px solid rgba(204,0,34,0.22);
-    background: rgba(10,0,2,0.58);
-    box-shadow: 0 26px 70px rgba(0,0,0,0.35), inset 0 0 40px rgba(0,0,0,0.35);
+    border-radius: 1.2rem;
+    background: linear-gradient(180deg, rgba(18,0,3,0.84), rgba(8,0,1,0.74));
+    box-shadow: 0 28px 88px rgba(0,0,0,0.38), inset 0 0 48px rgba(204,0,34,0.12);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transform: translateY(30px);
+    display: none;
+    transition: opacity 0.35s ease, transform 0.35s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .chapter-card.active {
+    display: block;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+  .chapter-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,85,85,0.6);
+    box-shadow: 0 34px 98px rgba(0,0,0,0.45), inset 0 0 58px rgba(204,0,34,0.18);
+  }
+  .chapter-card:nth-of-type(odd) {
+    background: linear-gradient(180deg, rgba(18,0,5,0.92), rgba(10,0,2,0.72));
   }
   .chapter-card::before,
   .chapter-card::after {
@@ -177,16 +210,86 @@
     letter-spacing: 0.34em;
     text-transform: uppercase;
     color: var(--gold-light);
+    text-shadow: 0 0 14px rgba(240,208,128,0.16);
   }
   .chapter-card p {
+    position: relative;
     font-size: clamp(1.05rem, 2vw, 1.2rem);
     line-height: 2;
     color: var(--text);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.24);
+  }
+  .chapter-card p::first-letter {
+    font-size: 1.38em;
+    font-weight: 700;
+    color: var(--gold-light);
+    float: left;
+    line-height: 1;
+    margin: 0 0.24em 0.08em 0;
   }
   .chapter-card p + p { margin-top: 1.35rem; }
   .chapter-card strong {
     color: var(--gold-light);
-    text-shadow: 0 0 18px rgba(240,208,128,0.35);
+    text-shadow: 0 0 24px rgba(240,208,128,0.42);
+  }
+  .chapter-card .scene-emphasis {
+    display: inline-block;
+    color: #ffdca8;
+    background: rgba(255,85,85,0.08);
+    border-left: 3px solid rgba(204,0,34,0.7);
+    padding: 0.26rem 0.52rem;
+    margin: 0.35rem 0 0.35rem -0.52rem;
+    line-height: 1.8;
+    border-radius: 0.28rem;
+  }
+
+  .page-arrows {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 11;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: min(100%, 520px);
+    padding: 0.7rem 1rem;
+    background: rgba(3,3,8,0.94);
+    border: 1px solid rgba(204,0,34,0.22);
+    border-radius: 999px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 18px 30px rgba(0,0,0,0.35);
+  }
+  .page-arrow {
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid rgba(204,0,34,0.28);
+    border-radius: 999px;
+    background: rgba(16,0,3,0.95);
+    color: var(--text);
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
+  }
+  .page-arrow:hover,
+  .page-arrow:focus-visible {
+    transform: scale(1.05);
+    border-color: rgba(255,85,85,0.55);
+    box-shadow: 0 0 18px rgba(255,85,85,0.18);
+    color: #ffdddd;
+  }
+  .page-arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+    transform: none;
+  }
+  .page-counter {
+    font-family: 'Cinzel', serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold-light);
   }
 
   .return-link {
@@ -202,7 +305,7 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     text-decoration: none;
-    transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   }
   .return-link:hover {
     color: #ff5555;
@@ -219,17 +322,35 @@
     .hero-kicker::after { width: 32px; }
     .battle-body { padding: 3.5rem 1.2rem 5rem; }
     .chapter-card { padding: 2rem 1.35rem; }
+    .page-arrows {
+      bottom: 1rem;
+      width: min(100%, 100%);
+      padding: 0.7rem 1.2rem;
+      gap: 0.75rem;
+    }
+    .page-counter { font-size: 0.68rem; }
+    .page-arrow { width: 2.7rem; height: 2.7rem; }
   }
 </style>
 </head>
 <body>
 <canvas id="battle-sparks"></canvas>
 
+<audio autoplay loop hidden preload="auto" playsinline>
+  <source src="audio/themeluta.mp3" type="audio/mpeg" />
+</audio>
+
 <nav>
   <a href="jornada-cavaleiro.html">← Voltar ao livro</a>
   <a href="#luta">A luta</a>
   <a href="home.html">A Jornada</a>
 </nav>
+
+<div class="page-arrows" aria-label="Navegação entre páginas da luta">
+  <button class="page-arrow prev" type="button" aria-label="Página anterior">←</button>
+  <span class="page-counter">1 / 8</span>
+  <button class="page-arrow next" type="button" aria-label="Próxima página">→</button>
+</div>
 
 <main>
   <section class="battle-hero">
@@ -244,14 +365,144 @@
 
   <section id="luta" class="battle-body">
     <div class="chapter-card">
-      <div class="chapter-label">Página em construção</div>
-      <p>
-        Este é o lugar da luta entre Yuri, Leo, Lucas, Yasmin, Anna, Jéssica e o <strong>Cavaleiro Negro</strong>.
-        O livro já foi aberto; falta escrever cada golpe, cada defesa e o momento em que o confronto revela quem ele realmente é.
-      </p>
-      <p>
-        Enquanto isso, esta página guarda a entrada da batalha com o mesmo peso do capítulo anterior, pronta para receber a cena completa.
-      </p>
+      <div class="chapter-label">O Primeiro Encontro</div>
+      <p>O grito cortou o ar e estourou em risadas macabras: "AAAAAHHHHHRRR HAHAHAHAHahahahahahahahaha...". Do outro lado da rua, uma figura envolta em armadura negra surgiu como se saísse de uma sombra viva.</p>
+      <p>— Quem é esse aí? — perguntou Lucas.</p>
+      <p>— Essa é uma boa pergunta, Lucas. Logo vamos descobrir, pelo jeito... — respondi, sentindo a energia dele vibrar sombriamente no ambiente.</p>
+      <p>Ele olhou para nós e disse:</p>
+      <p>— Seja lá quem ele for, ele possui uma energia muito grande e sombria — falei num tom mais sério.</p>
+      <p>O homem de armadura negra virou-se e encarou a gente.</p>
+      <p>— Então... são vocês?</p>
+      <p>— Ei, amigo, do que você está falando? — disse Lucas.</p>
+      <p>— Hummm, vocês me parecem meio... novos... AHAHAHAHA ISSO SERÁ MUITO DIVERTIDOOO! — ele gargalhou e, em questão de segundos, desapareceu. Apareceu na nossa frente e desferiu um soco em Lucas. Em seguida, chutou com força em mim e em Léo. Nós três fomos arremessados para trás pela pressão dos golpes.</p>
+      <p>O Cavaleiro Negro sorriu para as meninas.</p>
+      <p>— Vocês me parecem muito interessantes hahahah. — Ele sacou um punhal e avançou sobre Anna, que estava mais próxima. Enfiou a lâmina no peito dela, bem sobre o lugar onde o coração batia.</p>
+      <p>Em seguida, partiu para Yasmin e a atingiu com outra adaga na garganta. Jéssica mal teve tempo de reagir; quando piscou, o homem de armadura já estava atrás dela e quebrou seu pescoço sem dó.</p>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-label">A Reação</div>
+      <p>— Hmm... eu esperava mais... — ele murmurou, voltando-se para sair.</p>
+      <p>Mas antes que pudesse andar, seus pés ficaram presos em água que brotou do chão.</p>
+      <p>Ele olhou para trás, onde as meninas estavam, mas não as viu. Sua atenção voltou-se para Yasmin, que controlava a água e o mantinha preso. Ele tentou escapar, mas Anna conjurou uma magia das sombras e o deteve.</p>
+      <p>Jéssica aproveitou a oportunidade e acertou um belo soco na cara dele. O impacto fez o Cavaleiro recuar.</p>
+      <p>— Há, essa é a minha garota haha — disse Lucas, orgulhoso.</p>
+      <p>— Foi um belo feito, porque aquele chute dele foi de quebrar costelas — comentou Léo.</p>
+      <p>— Vamos ajudá-las, boys — eu disse, e nós nos levantamos correndo para o resgate.</p>
+      <p>— Hey, vocês estão bem? — perguntou Léo.</p>
+      <p>— Sim, sim, estamos. Ele é muito forte — respondeu Jéssica.</p>
+      <p>— Não podemos vacilar com ele ou a gente vai morrer. — Lucas fez o alerta.</p>
+      <p>— Eu não tenho planos para morrer hoje...</p>
+      <p>— Muito menos eu, Léo — ele respondeu.</p>
+      <p>Uma gargalhada sinistra brotou do Cavaleiro Negro.</p>
+      <p>— HAHAHAHAHAHAHAHA... isso foi... bem interessante... mas tá na hora de matar vocês.</p>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-label">O Sharingan</div>
+      <p>Fechei os olhos e senti o mundo se concentrar. Ao abri-los, minhas íris haviam se transformado em vermelho vivo, com pupilas negras e marcas circulares negras: os tomoe.</p>
+      <p>O número de tomoe representa o nível de evolução do olho. Um tomoe é o estágio inicial. Com dois, o Sharingan ganha percepção avançada. Com três, ele completa a forma comum. Quando ativado, os tomoe começam a girar, criando uma aparência hipnótica e ameaçadora.</p>
+      <p>O Sharingan geralmente aparece em emoções extremas: medo, tristeza profunda ou o desejo intenso de proteger alguém. Essa habilidade é herdada pelo clã Uchiha da Vila da Folha, onde nasci. Nasci tanto no clã Uchiha (herdando o poder do Sharingan) quanto no clã Hyuuga (herdando o Byakugan). São os dois clãs mais temidos do mundo shinobi, porque seus poderes visuais marcaram uma era inteira.</p>
+      <p>Mas isso não vinha ao caso agora. O importante era o Cavaleiro de armadura negra à nossa frente.</p>
+      <p>Meu Sharingan tinha três tomoe; minha percepção era extrema. Eu conseguia perceber movimentos em câmera lenta, acompanhar ataques muito rápidos, ler os músculos do inimigo, prever ações e copiar qualquer técnica que observasse. Dentro desse leque de habilidades, o Sharingan é extremamente poderoso em ilusões mentais e, em certo nível, em ilusões na vida real.</p>
+      <p>Para despertar o Mangekyou Sharingan, o Uchiha precisa sofrer um trauma emocional extremo, normalmente ligado à perda de alguém amado. No meu caso, foi a morte dos meus pais no fatídico dia do massacre dos Uchiha, quando todo o meu clã foi brutalmente assassinado por um traidor do próprio clã. Eu não estava em casa, mas quando cheguei à vila, vi meu pai e minha mãe sendo mortos. O desejo e a vontade de protegê-los me marcaram profundamente, e naquele dia eu despertei o Mangekyou.</p>
+      <p>Meu irmão mais velho, Dante, havia deixado a vila muitos anos antes. Não sabia nada dele desde sua partida para o "mundo dos homens". O uso contínuo do Mangekyou causa cegueira, então era arriscado mantê-lo ligado por muito tempo. Há maneiras de reduzir esse risco, mas agora não era hora de pensar nisso.</p>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-label">O Contra-ataque</div>
+      <p>O Cavaleiro Negro desapareceu e reapareceu no nosso meio. Desta vez, o Sharingan já tinha previsto onde ele surgiria. Quando ele preparou o soco, eu bloqueei com firmeza.</p>
+      <p>— Dessa vez não... — disse, e em seguida murmurei: — Punho suave, dois golpes.</p>
+      <p>Misturei a técnica dos Hyuuga do punho gentil com o poder do Sharingan. Dei dois golpes precisos em pontos exatos da corrente sanguínea dele. Léo aproveitou a deixa e usou suas correntes para prendê-lo. Lucas convocou fogo ao redor das correntes, fazendo com que elas ardessem.</p>
+      <p>Mas o Cavaleiro absorveu todo aquele fogo e começou a manipulá-lo.</p>
+      <p>— Droga! — Lucas praguejou.</p>
+      <p>— Calma, Lucas, não desanime — eu disse.</p>
+      <p>Mesmo assim, ele despedaçou as correntes espectrais de Léo e absorveu o fogo. Eu olhava para sua rede sanguínea e ela estava intacta.</p>
+      <p>— Hehehe, até que vocês dançam muito bem. Era como eu esperava de vocês, apesar de...</p>
+      <p>— Hei, mas quem diabos é você? — Anna perguntou.</p>
+      <p>— Podem me chamar de... Cavaleiro Negro... e esse será o último nome que vocês se lembrarão!</p>
+      <p>— Esse cara aí é bem convencido, não? — Lucas comentou.</p>
+      <p>— Pior que você, Lucas. — respondi.</p>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-label">A Esfera Negra</div>
+      <p>O ar ficou mais pesado. O Cavaleiro Negro começou a reunir uma esfera imensa de energia negra, com relâmpagos vermelhos e negros se espalhando pela sua superfície.</p>
+      <p>— Esse será o fim de vocês... — ele avisou.</p>
+      <p>Ele lançou a esfera na nossa direção. O poder era devastador; destruiria tudo pelo caminho. Estávamos em uma rua de Sword City com prédios, casas, comércios e carros, mas a rua estava deserta. Parecia que a própria vida tinha sido apagada pela chegada dele.</p>
+      <p>Antes que a esfera nos acertasse, as meninas se reuniram. Fizeram uma magia que teleportou a massa densa de energia para a cidade de onde nós vínhamos, alguns quilômetros atrás. A explosão foi gigantesca, como uma bomba nuclear de altíssimo nível.</p>
+      <p>— Meu Deus... — eu disse, surpreso. Todos estávamos espantados com a magnitude do estrondo.</p>
+      <p>Não havia tempo para refletir. Ele mandou várias esferas negras sobre nós. Eu desvias em alta velocidade. Os garotos e as meninas tentavam se proteger com escudos, mas cada impacto destruía o escudo, e onde a esfera tocava, tudo virava pó instantaneamente.</p>
+      <p>Enquanto eu observava em câmera lenta, usei uma técnica de terra e ergui paredes maciças para nos proteger.</p>
+      <p>— Estilo Terra: Técnica das Paredes de Terra! — gritei.</p>
+      <p>Diversas camadas de terra se levantaram como uma barreira, nos dando tempo para nos reagrupar. Mas, assim que as esferas atingiram a defesa, a poeira subiu e as paredes foram destruídas.</p>
+      <p>Procuramos abrigo numa loja de conveniência. Lá, tentamos pensar em algo, mas o teto foi destruído por uma nova onda de energia.</p>
+      <p>— Acho que eu achei vocês hahahahah. Hora de morrer! — o Cavaleiro gritou.</p>
+      <p>Ele lançou outra esfera devastadora que acertou o local com potência brutal. O lugar e tudo ao redor viraram uma cratera.</p>
+      <p>Todos acharam que tínhamos morrido. Quando a poeira baixou, um enorme escudo humanoide se ergueu sobre nós.</p>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-label">Susano'o</div>
+      <p>Com o meu Sharingan, eu tinha previsto o ataque do Cavaleiro. No último segundo, o meu Susano'o apareceu.</p>
+      <p>O Susano'o é a manifestação suprema do poder ocular do Mangekyou Sharingan. É uma gigantesca entidade de chakra criada ao redor do usuário, funcionando como armadura, arma, escudo e avatar espiritual. Tem estágios:</p>
+      <p>— Primeiro estágio: forma esquelética, com ossos gigantes de chakra, braços parciais e proteção básica.</p>
+      <p>— Segunda fase: forma humanoide completa, com músculos de chakra e corpo definido. Já pode lutar de modo brutal.</p>
+      <p>— Terceira fase: forma blindada, com armadura samurai, elmo e armas completas. Defesa e poder ofensivo aumentam absurdamente.</p>
+      <p>— Forma final: Susano'o completo, um titã colossal comparável a uma montanha. Ganha voo, destruição massiva, espadas gigantes e ataques capazes de cortar montanhas. Vira uma fortaleza viva capaz de bloquear explosões, suportar ataques devastadores e proteger quem estiver ao lado do usuário.</p>
+      <p>Meu Susano'o era vermelho com tons pretos. Quando a poeira baixou, só ele ficou visível no centro da cratera. O ataque havia sido muito menor do que antes, pois ainda havia algumas estruturas de pé.</p>
+      <p>— Hã?? Não morremos?</p>
+      <p>— Aparentemente... não, Lucas. — Léo respondeu, ambos surpresos.</p>
+      <p>— Vou levar vocês para cima. Lá, se escondam e pensem em uma forma de mandar esse cara de volta aonde veio... — eu disse. Usei a mão do meu Susano'o para erguer o pessoal e colocá-los em um lugar mais seguro, fora da cratera.</p>
+      <p>Quando voltei, desfiz o Susano'o e ataquei o Cavaleiro com uma enorme esfera rotativa que segurava na palma da mão.</p>
+      <p>Ele se esquivou, sacou uma espada com runas gravadas e avançou. Começamos a lutar corpo a corpo com lâminas. Ele me golpeava, eu defendia. Eu o atingia, ele defendia.</p>
+      <p>Ele lançou várias espinhos em minha direção. Eu esquivei e, quando ele apareceu ao meu lado para um ataque certeiro, eu respondi com um soco. Ele me acertou e eu voei para trás. Ao cair no chão, usei a técnica de substituição: meu corpo foi trocado por uma madeira, e reapareci acima dele.</p>
+      <p>Ele pulou para me atingir com tudo. Eu contra-atquei. Meu soco o atingiu, seu chute me acertou. Fomos parar em lados opostos. Eu me levantei e cuspi sangue.</p>
+      <p>— Hehehe, você sabe mesmo me causar um bom entretenimento — ele disse, e percebeu que também estava sangrando.</p>
+      <p>— O-o... o que... o que é isso...? Isso é... sangue? — Ele passou a mão na boca e mudou instantaneamente. Entrou em modo berserk, insano.</p>
+      <p>Ele veio tão rápido que eu não consegui acompanhar com os olhos. Desferiu vários socos no meu rosto. Eu voava enquanto ele me batia com força. Sentia meus ossos rangendo, mas não podia desistir.</p>
+      <p>Ativei meu Mangekyou Sharingan. Seu formato é de átomos, e com ele consigo controlar o fluxo atômico de técnicas. Quando o próximo soco veio, eu o previ e bloqueei. Dei uma cabeçada no meio do nariz dele e devolvi exatamente o que ele me fez.</p>
+      <p>Comecei a desferir vários socos no rosto e no corpo dele até que ele conseguiu bloquear. Ele tentou um chute na cabeça; eu esquivei agachando e tentei uma rasteira nas pernas. Ele saltou e, ao descer, tentou me acertar novamente — bloqueei e contra-atquei com um chute. Ele segurou minha perna e me lançou para longe.</p>
+      <p>Consegui me estabilizar. Ele lançou ataques simultâneos de energia destrutiva, mas eu desfiz todos, destruindo os átomos das técnicas dele.</p>
+      <p>Meu olho esquerdo começou a sangrar. Senti meu corpo pesar, mas precisava continuar até o pessoal encontrar um jeito de mandar ele de volta para onde veio.</p>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-label">O Desespero do Pessoal</div>
+      <p>O Cavaleiro me encarou, ofegante e com a mesma raiva assassina de antes. Ele olhou para trás, para a janela onde o pessoal se escondia.</p>
+      <p>— Hey Luca, bora fazer uma aposta? Cem reais que o Yuri vai levar uma surra. — disse alguém entre risos.</p>
+      <p>— Apostado. — respondeu outro.</p>
+      <p>Jéssica não acreditou.</p>
+      <p>— Eu não acredito nisso... como vocês conseguem apostar num momento desses? Isso não é hora nem momento! — ela reclamou, revoltada.</p>
+      <p>— Ya, o que vamos fazer? — Anna perguntou.</p>
+      <p>Ela olhou pela janela, viu eu levando a pior e colocou a mão na boca. Seus olhos se encheram de lágrimas. Anna e Jéssica se abraçaram enquanto observavam a luta em flashs de socos e explosões.</p>
+      <p>— O que será que aconteceu e por que ele está olhando para nós? — questionou Jéssica.</p>
+      <p>O Cavaleiro olhou para mim e sorriu.</p>
+      <p>— Diga adeus a quem você ama. — ele disse.</p>
+      <p>Minutos depois, ele lançou uma esfera negra ainda mais densa do que as anteriores em direção à janela.</p>
+      <p>— A gente vai morrer... — Anna sussurrou.</p>
+      <p>Todos fecharam os olhos, esperando o fim. Eu não pude salvar meus pais e nem os colegas da escola, mas eles... eles eu podia.</p>
+      <p>Antes que a esfera atingisse o esconderijo, desfiz ela por completo, átomo por átomo. Isso custou um imenso gasto de chakra; meus olhos sangraram e uma dor lancinante queimou no meu rosto.</p>
+    </div>
+
+    <div class="chapter-card">
+      <div class="chapter-label">A Fuga</div>
+      <p>— AAAAH, SEU MALDITO, EU VOU TE MATAR! — gritei.</p>
+      <p>— Hehehe, ficou nervoso foi... cooff, cooff... — ele tossiu sangue. — Vamos terminar logo essa dança. Eu não sou o único aqui que está ficando sem energia.</p>
+      <p>Eu estava ajoelhado, um joelho no chão. Levantei-me com dificuldade e continuei.</p>
+      <p>— Você tem razão. Vamos acabar logo com isso! — eu disse.</p>
+      <p>O Cavaleiro Negro começou a aumentar seu poder. Tudo ao redor ficou mais denso e ele subiu, flutuando alto acima da cratera.</p>
+      <p>Saí da cratera e fui até onde o pessoal estava. Ainda tinha energia suficiente para alcançá-los. Eles saíram do esconderijo e vieram ao meu encontro.</p>
+      <p>— Que lindo, todos morreram juntos... MORRAM! — ele gritou.</p>
+      <p>A enorme esfera de energia atingiu o solo e causou uma explosão que devastou toda Sword City e tudo ao redor: vegetação, animais, floresta. Deixou apenas um rastro de destruição e morte.</p>
+      <p>— Hmmm, até que foi bem interessante essa luta... — ele murmurou, observando a fumaça.</p>
+      <p>Entre a poeira, viu algo vermelho e grande.</p>
+      <p>— Arrrghh, mas não é possível... — ele ficou furioso.</p>
+      <p>Era meu Susano'o incompleto, ainda presente no meio da cratera. Eu estava ofegante, com os olhos perdendo o brilho e sangrando. A visão estava turva, mas eu olhei para cima e sorri.</p>
+      <p>— He... he... achou que ganhou... não é... — eu disse.</p>
+      <p>O Cavaleiro pensou em atacar. De repente, a mesma fenda de realidade que o trouxe apareceu e o puxou de volta.</p>
+      <p>— OOOO QUE???? O QUE É ISSO??!!! NÃAAO, SEUS MISERÁVEIS, EU VOU MATAR VOCÊS! — ele gritou, enquanto era sugado pela fenda.</p>
+      <p>Ele desapareceu na escuridão. Eu cuspi mais sangue e caí no chão. Meu corpo estava exausto, meus olhos queimavam. Antes de fechar os olhos, vi o rosto da Ya. Aquela imagem me confortou, e assim eu desliguei lentamente.</p>
     </div>
 
     <a class="return-link" href="jornada-cavaleiro.html">← Fechar o livro</a>
@@ -303,5 +554,44 @@
   draw();
 })();
 </script>
+<script>
+(function () {
+  const cards = Array.from(document.querySelectorAll('.chapter-card'));
+  if (!cards.length) return;
+
+  const controls = document.querySelector('.page-arrows');
+  if (!controls) return;
+
+  const prevButton = controls.querySelector('.prev');
+  const nextButton = controls.querySelector('.next');
+  const pageCounter = controls.querySelector('.page-counter');
+  let currentIndex = 0;
+
+  function updateButtons() {
+    pageCounter.textContent = `${currentIndex + 1} / ${cards.length}`;
+    prevButton.disabled = currentIndex === 0;
+    nextButton.disabled = currentIndex === cards.length - 1;
+  }
+
+  function showCard(index) {
+    currentIndex = Math.max(0, Math.min(index, cards.length - 1));
+    cards.forEach((card, i) => {
+      card.classList.toggle('active', i === currentIndex);
+    });
+    updateButtons();
+  }
+
+  prevButton.addEventListener('click', () => showCard(currentIndex - 1));
+  nextButton.addEventListener('click', () => showCard(currentIndex + 1));
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowRight') showCard(currentIndex + 1);
+    if (event.key === 'ArrowLeft') showCard(currentIndex - 1);
+  });
+
+  showCard(0);
+})();
+</script>
+<script src="effects.js"></script>
 </body>
 </html>

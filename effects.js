@@ -254,15 +254,21 @@
       pt.classList.add('leaving');
       setTimeout(() => {
         pt.classList.remove('leaving');
-      }, 800);
+      }, 900);
     }
 
     /* Saída da página */
     function pageLeave(href) {
+      document.body.classList.remove('transition-shadow', 'transition-map');
+      if (/viloes|cavaleiro|besta|vallar|valar/i.test(href)) {
+        document.body.classList.add('transition-shadow');
+      } else if (/regioes|templo|cidadela|cidade|home/i.test(href)) {
+        document.body.classList.add('transition-map');
+      }
       pt.classList.add('entering');
       setTimeout(() => {
         window.location.href = href;
-      }, 700);
+      }, 780);
     }
 
     /* Intercepta todos os links internos */
@@ -412,6 +418,118 @@
       }, { threshold: 0.5 });
 
       io.observe(el);
+    });
+  })();
+
+/* Recursos narrativos: marcador, memórias, typing e auras */
+  (function () {
+    const chapterTitle = document.querySelector('.chapter-title, .banner-name .name-pre');
+    const storyBody = document.querySelector('.story-body');
+    const isChapter = !!storyBody && !!document.querySelector('.story-block');
+
+    if (isChapter && !document.querySelector('.chapter-marker')) {
+      const marker = document.createElement('aside');
+      marker.className = 'chapter-marker';
+      marker.innerHTML = `
+        <span class="chapter-marker-label">${chapterTitle ? chapterTitle.textContent.trim() : 'Capitulo'}</span>
+        <span class="chapter-marker-progress"><span></span></span>
+        <button type="button" class="chapter-read-toggle" aria-label="Modo leitura">L</button>
+        <button type="button" class="chapter-memory-jump" aria-label="Abrir fragmento">F</button>
+      `;
+      document.body.appendChild(marker);
+
+      const fill = marker.querySelector('.chapter-marker-progress span');
+      const updateMarker = () => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = max > 0 ? Math.min(window.scrollY / max, 1) * 100 : 0;
+        fill.style.height = pct + '%';
+      };
+
+      marker.querySelector('.chapter-read-toggle').addEventListener('click', () => {
+        document.body.classList.toggle('reading-mode');
+      });
+
+      marker.querySelector('.chapter-memory-jump').addEventListener('click', () => {
+        document.querySelector('.memory-fragment button')?.click();
+      });
+
+      window.addEventListener('scroll', updateMarker, { passive: true });
+      updateMarker();
+    }
+
+    const finalBlock = document.querySelector('.story-block-final');
+    if (isChapter && finalBlock && !document.querySelector('.memory-fragment')) {
+      const path = location.pathname.toLowerCase();
+      const memories = {
+        'jornada-encontro': 'Naquela epoca, nenhum de nos sabia o tamanho da sombra que estava caminhando em nossa direcao. O destino nao gritou. Ele apenas sentou conosco na sala de aula.',
+        'jornada-cavaleiro': 'Quando o ceu ficou vermelho, eu entendi tarde demais: aquilo nao era o inicio do caos. Era um convite.',
+        'jornada-luta-cavaleiro': 'O Cavaleiro Negro nao surgiu para vencer apenas uma batalha. Ele veio para medir se ainda eramos humanos.'
+      };
+      const key = Object.keys(memories).find(k => path.includes(k));
+      const text = memories[key] || 'Algumas lembrancas nao cabem no capitulo. Elas ficam nas margens, esperando alguem tocar o papel.';
+      const fragment = document.createElement('div');
+      fragment.className = 'memory-fragment reveal visible';
+      fragment.innerHTML = '<button type="button">Fragmento de Memoria</button>';
+      finalBlock.insertAdjacentElement('afterend', fragment);
+
+      const modal = document.createElement('div');
+      modal.className = 'memory-modal';
+      modal.innerHTML = `
+        <div class="memory-modal-card" role="dialog" aria-modal="true" aria-label="Fragmento de memoria">
+          <div class="memory-modal-kicker">Memoria desbloqueada</div>
+          <div class="memory-modal-text">${text}</div>
+          <button type="button" class="memory-modal-close">Fechar</button>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const close = () => modal.classList.remove('open');
+      fragment.querySelector('button').addEventListener('click', () => modal.classList.add('open'));
+      modal.querySelector('.memory-modal-close').addEventListener('click', close);
+      modal.addEventListener('click', e => {
+        if (e.target === modal) close();
+      });
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') close();
+      });
+    }
+
+    document.querySelectorAll('.final-quote, .banner-quote, .vh-sub').forEach(el => {
+      if (el.dataset.typingReady) return;
+      el.dataset.typingReady = 'true';
+      const original = el.innerHTML;
+      const text = el.textContent;
+      el.classList.add('typing-reveal');
+
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          io.unobserve(el);
+          el.classList.add('typing-active');
+          el.textContent = '';
+          let i = 0;
+          const timer = setInterval(() => {
+            el.textContent += text[i] || '';
+            i++;
+            if (i >= text.length) {
+              clearInterval(timer);
+              el.innerHTML = original;
+              el.classList.remove('typing-active');
+              el.classList.add('typing-done');
+            }
+          }, 22);
+        });
+      }, { threshold: 0.5 });
+
+      io.observe(el);
+    });
+
+    document.querySelectorAll('.char-card, .villain-photo').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--aura-x', ((e.clientX - rect.left) / rect.width * 100) + '%');
+        card.style.setProperty('--aura-y', ((e.clientY - rect.top) / rect.height * 100) + '%');
+      });
     });
   })();
 
