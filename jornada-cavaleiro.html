@@ -182,7 +182,44 @@ nav a:hover { color: #ff4444; text-shadow: 0 0 20px var(--char-accent-glow); }
 
 .story-body { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
 
-.story-block { margin-bottom: 3.5rem; padding-bottom: 3.5rem; border-bottom: 1px solid rgba(204,0,34,0.06); }
+.story-block {
+  margin-bottom: 3.5rem; padding-bottom: 3.5rem;
+  border-bottom: 1px solid rgba(204,0,34,0.06);
+  opacity: 0; animation: reveal-smooth 0.9s ease forwards;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.story-block:hover {
+  transform: translateX(8px);
+  border-bottom-color: rgba(204,0,34,0.15);
+}
+
+.story-block::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; height: 100%;
+  width: 2px; background: linear-gradient(to bottom,
+    var(--char-accent), transparent);
+  opacity: 0; transition: opacity 0.5s;
+}
+
+.story-block:hover::before {
+  opacity: 0.6;
+}
+
+@keyframes reveal-smooth {
+  0% { opacity: 0; transform: translateY(40px) translateX(-20px); filter: blur(4px); }
+  100% { opacity: 1; transform: translateY(0) translateX(0); filter: blur(0); }
+}
+
+.story-block:nth-child(1) { animation-delay: 0.1s; }
+.story-block:nth-child(2) { animation-delay: 0.25s; }
+.story-block:nth-child(3) { animation-delay: 0.4s; }
+.story-block:nth-child(4) { animation-delay: 0.55s; }
+.story-block:nth-child(5) { animation-delay: 0.7s; }
+.story-block:nth-child(6) { animation-delay: 0.85s; }
+.story-block:nth-child(n+7) { animation-delay: 1s; }
+
 .story-block:last-of-type { border-bottom: none; }
 
 .block-label {
@@ -196,7 +233,20 @@ nav a:hover { color: #ff4444; text-shadow: 0 0 20px var(--char-accent-glow); }
   line-height: 2.1; color: var(--text); margin-bottom: 1.4rem; text-indent: 1.5em;
 }
 .story-block p:last-child { margin-bottom: 0; }
-.story-block strong { color: var(--gold-light); font-weight: 600; }
+.story-block strong { 
+  color: var(--gold-light); font-weight: 600;
+  text-shadow: 0 0 15px rgba(240,208,128,0.4);
+  transition: all 0.4s ease;
+  cursor: highlight;
+  position: relative;
+}
+
+.story-block strong:hover {
+  color: #ffffff;
+  text-shadow: 0 0 30px rgba(240,208,128,0.8),
+               0 0 20px rgba(204,0,34,0.5);
+  font-weight: 700;
+}
 .story-block em { color: rgba(204,0,34,0.85); font-style: italic; }
 
 /* Diálogos */
@@ -212,7 +262,32 @@ nav a:hover { color: #ff4444; text-shadow: 0 0 20px var(--char-accent-glow); }
 }
 .dialogue:last-child { margin-bottom: 0 !important; }
 
-.scene-break { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 3rem 0; color: var(--gold-dim); font-size: 1rem; opacity: 0.4; }
+/* QUEBRA DE CENA */
+.scene-break {
+  display: flex; align-items: center;
+  justify-content: center; gap: 1rem;
+  margin: 3rem 0; color: var(--gold-dim); font-size: 1rem; 
+  opacity: 0; animation: scene-fade-in 1.2s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes scene-fade-in {
+  0% { opacity: 0; transform: scale(0.8) translateY(-10px); }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.4; transform: scale(1) translateY(0); }
+}
+
+.scene-break::before,
+.scene-break::after {
+  content: ''; width: 40px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--char-accent), transparent);
+  animation: line-expand 1.5s ease infinite;
+}
+
+@keyframes line-expand {
+  0%, 100% { width: 30px; opacity: 0.3; }
+  50% { width: 50px; opacity: 0.7; }
+}
 
 /* Bloco final */
 .story-block-final {
@@ -287,10 +362,14 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
 </head>
 <body>
 
+  <audio autoplay loop hidden>
+    <source src="audio/31.mp3" type="audio/mpeg" />
+  </audio>
+
 <canvas id="cosmos-bg"></canvas>
 
 <nav>
-  <a href="index.html" class="nav-logo"><img src="img-logo/olhos.jpg" alt="Logo"></a>
+  <a href="home.html" class="nav-logo"><img src="img-logo/olhos.jpg" alt="Logo"></a>
   <a href="jornada-encontro.html">← Capítulo I</a>
   <a href="#historia">A Batalha</a>
   <a href="jornada-mestres.html">Próximo →</a>
@@ -615,6 +694,80 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
 
 /* ── BARRA DE PROGRESSO ── */
 (function(){const bar=document.createElement('div');bar.style.cssText='position:fixed;top:0;left:0;z-index:999;height:2px;width:0;background:linear-gradient(90deg,#8b0000,#cc0022,#ff4444);transition:width 0.1s linear;pointer-events:none;';document.body.appendChild(bar);window.addEventListener('scroll',()=>{const p=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight),1);bar.style.width=(p*100)+'%';},{passive:true});})();
+
+/* ── PARALLAX NOS BLOCOS DE HISTÓRIA ── */
+(function(){
+  const blocks=document.querySelectorAll('.story-block');
+  window.addEventListener('scroll',()=>{
+    blocks.forEach((block,i)=>{
+      const rect=block.getBoundingClientRect();
+      const speed=(i%2?-1:1)*0.15;
+      block.style.transform=`translateY(${rect.top*speed}px)`;
+    });
+  },{passive:true});
+})();
+
+/* ── EFEITO DE BRILHO QUE SEGUE O MOUSE ── */
+(function(){
+  const stories=document.querySelectorAll('.story-block');
+  const createGlowElement=()=>{
+    const glow=document.createElement('div');
+    glow.style.cssText=`
+      position:fixed;pointer-events:none;border-radius:50%;z-index:500;
+      background:radial-gradient(circle,rgba(204,0,34,0.3) 0%,transparent 70%);
+      width:300px;height:300px;
+    `;
+    document.body.appendChild(glow);
+    return glow;
+  };
+  const glow=createGlowElement();
+  let mouseX=0,mouseY=0;
+  document.addEventListener('mousemove',e=>{
+    mouseX=e.clientX;mouseY=e.clientY;
+    glow.style.left=(mouseX-150)+'px';
+    glow.style.top=(mouseY-150)+'px';
+  });
+  stories.forEach(story=>{
+    story.addEventListener('mouseenter',()=>{
+      glow.style.opacity='0.4';
+      glow.style.background='radial-gradient(circle,rgba(204,0,34,0.5) 0%,transparent 70%)';
+    });
+    story.addEventListener('mouseleave',()=>{
+      glow.style.opacity='0.1';
+      glow.style.background='radial-gradient(circle,rgba(204,0,34,0.3) 0%,transparent 70%)';
+    });
+  });
+})();
+
+/* ── PARTÍCULAS MÁGICAS FLUINDO ── */
+(function(){
+  const container=document.getElementById('historia')||document.body;
+  const particleCount=15;
+  for(let i=0;i<particleCount;i++){
+    const particle=document.createElement('div');
+    const size=Math.random()*4+2;
+    const delay=Math.random()*5;
+    particle.style.cssText=`
+      position:fixed;pointer-events:none;z-index:10;width:${size}px;height:${size}px;
+      background:radial-gradient(circle,#cc0022 0%,transparent 70%);
+      border-radius:50%;box-shadow:0 0 ${size*3}px rgba(204,0,34,0.8);
+      opacity:0;animation:float-particles 8s infinite ease-in-out;
+      animation-delay:${delay}s;
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+    `;
+    document.body.appendChild(particle);
+  }
+  const style=document.createElement('style');
+  style.textContent=`
+    @keyframes float-particles{
+      0%{transform:translateY(100vh) translateX(0);opacity:0;}
+      10%{opacity:0.6;}
+      90%{opacity:0.6;}
+      100%{transform:translateY(-100vh) translateX(${Math.random()*100-50}px);opacity:0;}
+    }
+  `;
+  document.head.appendChild(style);
+})();
 </script>
 </body>
 </html>
