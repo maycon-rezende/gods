@@ -314,6 +314,163 @@ nav a:hover { color: #ff4444; text-shadow: 0 0 20px var(--char-accent-glow); }
 }
 @keyframes name-pulse { 0%,100%{filter:drop-shadow(0 0 20px rgba(204,0,34,0.4));} 50%{filter:drop-shadow(0 0 40px rgba(204,0,34,0.7));} }
 
+/* Livro para a luta */
+.battle-book-section {
+  display: flex;
+  justify-content: center;
+  margin: 4.5rem 0 5rem;
+  perspective: 1200px;
+}
+.battle-book-link {
+  position: relative;
+  display: block;
+  width: min(100%, 520px);
+  min-height: 220px;
+  color: var(--text);
+  text-decoration: none;
+  outline: none;
+}
+.battle-book-link::before {
+  content: '';
+  position: absolute;
+  inset: 18px 12px -18px;
+  background: radial-gradient(ellipse at center, rgba(204,0,34,0.32), transparent 68%);
+  filter: blur(18px);
+  opacity: 0.55;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.battle-book {
+  position: relative;
+  min-height: 220px;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(30,0,5,0.95), rgba(95,0,14,0.82) 42%, rgba(12,0,3,0.96)),
+    radial-gradient(circle at 70% 20%, rgba(240,208,128,0.18), transparent 34%);
+  border: 1px solid rgba(240,208,128,0.34);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 0 38px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(204,0,34,0.22);
+  transform: rotateX(8deg) rotateY(-10deg);
+  transform-origin: left center;
+  transition: transform 0.55s ease, box-shadow 0.55s ease, border-color 0.55s ease;
+}
+.battle-book-spine {
+  position: relative;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.45), rgba(240,208,128,0.12), rgba(0,0,0,0.5)),
+    linear-gradient(180deg, rgba(204,0,34,0.7), rgba(35,0,6,0.95));
+  border-right: 1px solid rgba(240,208,128,0.28);
+}
+.battle-book-spine::before,
+.battle-book-spine::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  right: 15px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  opacity: 0.7;
+}
+.battle-book-spine::before { top: 34px; }
+.battle-book-spine::after { bottom: 34px; }
+.battle-book-cover {
+  position: relative;
+  padding: 2.2rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.battle-book-cover::before {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(240,208,128,0.24);
+  pointer-events: none;
+}
+.battle-book-cover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -18px;
+  width: 44px;
+  background: repeating-linear-gradient(90deg, rgba(232,220,200,0.85) 0 2px, rgba(92,67,45,0.5) 2px 4px);
+  transform: skewY(-10deg);
+  opacity: 0.72;
+  transition: right 0.55s ease, opacity 0.55s ease;
+}
+.book-kicker {
+  position: relative;
+  z-index: 1;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+.book-title {
+  position: relative;
+  z-index: 1;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.45rem, 4vw, 2.65rem);
+  font-weight: 900;
+  line-height: 1.08;
+  background: linear-gradient(135deg, #ffffff, #f0d080 28%, #ff4444 62%, #8b0000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 18px rgba(204,0,34,0.38));
+}
+.book-invite {
+  position: relative;
+  z-index: 1;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.02rem;
+  font-style: italic;
+  color: rgba(232,220,200,0.78);
+  line-height: 1.6;
+  max-width: 330px;
+}
+.book-seal {
+  position: absolute;
+  right: 2rem;
+  bottom: 1.7rem;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(240,208,128,0.55);
+  color: var(--gold-light);
+  background: radial-gradient(circle, rgba(204,0,34,0.55), rgba(10,0,2,0.95));
+  box-shadow: 0 0 24px rgba(204,0,34,0.42);
+  font-size: 1.2rem;
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+.battle-book-link:hover::before,
+.battle-book-link:focus-visible::before {
+  opacity: 1;
+  transform: scale(1.05);
+}
+.battle-book-link:hover .battle-book,
+.battle-book-link:focus-visible .battle-book {
+  transform: rotateX(0) rotateY(-24deg) translateY(-8px);
+  border-color: rgba(240,208,128,0.72);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.65), 0 0 42px rgba(204,0,34,0.28), inset 0 0 38px rgba(0,0,0,0.48);
+}
+.battle-book-link:hover .battle-book-cover::after,
+.battle-book-link:focus-visible .battle-book-cover::after {
+  right: -6px;
+  opacity: 0.95;
+}
+.battle-book-link:hover .book-seal,
+.battle-book-link:focus-visible .book-seal {
+  transform: rotate(-10deg) scale(1.08);
+  box-shadow: 0 0 34px rgba(240,208,128,0.35), 0 0 34px rgba(204,0,34,0.48);
+}
+
 /* Navegação */
 .chapter-nav { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; margin-top: 5rem; padding-top: 3rem; border-top: 1px solid rgba(204,0,34,0.1); }
 .cnav-btn { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dim); text-decoration: none; padding: 0.8rem 1.5rem; border: 1px solid rgba(204,0,34,0.2); background: rgba(10,0,2,0.5); transition: border-color 0.3s, color 0.3s, box-shadow 0.3s; white-space: nowrap; }
@@ -342,6 +499,10 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   .chapter-header { padding: 3.5rem 1.5rem 2.5rem; }
   .chapter-nav { grid-template-columns: 1fr 1fr; gap: 1rem; }
   .cnav-info { display: none; }
+  .battle-book-link { min-height: 200px; }
+  .battle-book { min-height: 200px; grid-template-columns: 42px 1fr; transform: rotateX(5deg) rotateY(-5deg); }
+  .battle-book-cover { padding: 1.7rem 1.5rem; }
+  .book-seal { right: 1.2rem; bottom: 1.2rem; width: 44px; height: 44px; }
   .dialogue-block { padding: 1rem 1.2rem; }
   footer { padding: 3.5rem 1.5rem; }
 }
@@ -352,6 +513,11 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   .name-main { font-size: clamp(1.8rem, 8vw, 3.5rem); }
   .story-body { padding: 0 1.2rem; }
   .story-block p { font-size: 1rem; text-indent: 0; }
+  .battle-book-section { margin: 3rem 0 3.5rem; }
+  .battle-book { grid-template-columns: 34px 1fr; }
+  .battle-book-cover { padding: 1.45rem 1.15rem 4.2rem; }
+  .book-kicker { font-size: 0.54rem; letter-spacing: 0.24em; }
+  .book-invite { font-size: 0.95rem; }
   .chapter-nav { grid-template-columns: 1fr 1fr; }
   .cnav-btn { font-size: 0.6rem; padding: 0.7rem 1rem; }
   footer { padding: 2.5rem 1.2rem; }
@@ -540,6 +706,20 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
         Foi aí que ele surgiu. Um homem de cabelos longos e negros apareceu diante de nós. Seu olhar era penetrante. Essa foi a primeira vez que nós o vimos.
       </p>
       <p class="final-name">O Cavaleiro Negro.</p>
+    </div>
+
+    <div class="battle-book-section reveal">
+      <a class="battle-book-link" href="jornada-luta-cavaleiro.html" aria-label="Abrir o livro da luta contra o Cavaleiro Negro">
+        <span class="battle-book">
+          <span class="battle-book-spine" aria-hidden="true"></span>
+          <span class="battle-book-cover">
+            <span class="book-kicker">Abrir registro proibido</span>
+            <span class="book-title">A Luta Contra<br>o Cavaleiro Negro</span>
+            <span class="book-invite">Clique no livro e veja o confronto que começou quando a esfera negra rasgou o mundo.</span>
+            <span class="book-seal" aria-hidden="true">⚔</span>
+          </span>
+        </span>
+      </a>
     </div>
 
     <!-- NAVEGAÇÃO -->
