@@ -1051,6 +1051,75 @@ nav {
     0 0 80px rgba(0,0,0,1);
 }
 
+/* ── BOTÕES DA TIMELINE ── */
+.tl-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--divine);
+  text-decoration: none;
+  padding: 0.45rem 1rem;
+  border: 1px solid rgba(106,79,207,0.25);
+  background: rgba(106,79,207,0.05);
+  transition: border-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.tl-btn:hover {
+  border-color: rgba(106,79,207,0.6);
+  color: var(--divine-light);
+  box-shadow: 0 0 12px rgba(106,79,207,0.15);
+}
+
+.tl-btn-blood {
+  color: rgba(204,0,34,0.8);
+  border-color: rgba(204,0,34,0.2);
+  background: rgba(204,0,34,0.04);
+}
+
+.tl-btn-blood:hover {
+  border-color: rgba(204,0,34,0.5);
+  color: #ff4444;
+  box-shadow: 0 0 12px rgba(204,0,34,0.15);
+}
+
+.tl-btn-divine {
+  color: var(--gold);
+  border-color: rgba(201,168,76,0.25);
+  background: rgba(201,168,76,0.04);
+}
+
+.tl-btn-divine:hover {
+  border-color: rgba(201,168,76,0.6);
+  color: var(--gold-light);
+  box-shadow: 0 0 12px rgba(201,168,76,0.15);
+}
+
+.tl-btn-cyan {
+  color: #50d0e0;
+  border-color: rgba(80,208,224,0.25);
+  background: rgba(80,208,224,0.04);
+}
+
+.tl-btn-cyan:hover {
+  border-color: rgba(80,208,224,0.6);
+  color: #90e8f8;
+  box-shadow: 0 0 12px rgba(80,208,224,0.15);
+}
+
+/* Dot clicável */
+.tl-dot-click {
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tl-dot-click:hover {
+  transform: scale(1.4);
+  box-shadow: 0 0 20px currentColor;
+}
+
 @media (max-width: 768px) {
   .home-event-baile {
     min-height: 460px;
@@ -1148,18 +1217,24 @@ nav {
         <div class="tl-label">Arco I — Início</div>
         <div class="tl-title">O Encontro dos Seis</div>
         <div class="tl-text">Yuri, Lucas, Leonardo, Yasmin, Jéssica e Anna. Seis indivíduos com origens e poderes distintos, reunidos pelo destino antes de compreenderem o peso daquele encontro.</div>
+        <a href="jornada-encontro.html" class="tl-btn">
+          Ler este capítulo →
+        </a>
       </div>
-      <div class="tl-dot"></div>
+      <div class="tl-dot tl-dot-click" onclick="window.location='jornada-encontro.html'"></div>
       <div class="tl-empty"></div>
     </div>
 
     <div class="tl-item right reveal">
       <div class="tl-empty"></div>
-      <div class="tl-dot blood"></div>
+      <div class="tl-dot blood tl-dot-click" onclick="window.location='jornada-cavaleiro1.html'"></div>
       <div class="tl-content">
         <div class="tl-label">Arco I — Clímax</div>
         <div class="tl-title">Primeira Batalha: O Cavaleiro Negro</div>
         <div class="tl-text">O primeiro grande antagonista surge. Numa luta que testou os limites de cada um dos seis, o Cavaleiro Negro foi derrotado — e o grupo provou ao mundo e a si mesmo do que era capaz.</div>
+        <a href="jornada-cavaleiro1.html" class="tl-btn tl-btn-blood">
+          Ler este capítulo →
+        </a>
       </div>
     </div>
 
@@ -1168,18 +1243,24 @@ nav {
         <div class="tl-label">Ascensão</div>
         <div class="tl-title">Instituição como Mestres</div>
         <div class="tl-text">Yuri torna-se <em>Mestre Elemental</em>. Lucas, <em>Mestre Humano</em>. Leonardo, <em>Mestre Espiritual</em>. As meninas também evoluem, afirmando seus papéis como guardiãs e feiticeiras.</div>
+        <a href="jornada-mestres.html" class="tl-btn tl-btn-divine">
+          Ler este capítulo →
+        </a>
       </div>
-      <div class="tl-dot divine"></div>
+      <div class="tl-dot divine tl-dot-click" onclick="window.location='jornada-mestres.html'"></div>
       <div class="tl-empty"></div>
     </div>
 
     <div class="tl-item right reveal">
       <div class="tl-empty"></div>
-      <div class="tl-dot blood"></div>
+      <div class="tl-dot blood tl-dot-click" onclick="window.location='jornada-cavaleiro2.html'"></div>
       <div class="tl-content">
         <div class="tl-label">Arco II — Retorno</div>
         <div class="tl-title">Segunda Batalha: O Cavaleiro Ressurge</div>
         <div class="tl-text">O Cavaleiro Negro retorna mais poderoso. Desta vez, a vitória vem acompanhada de uma evolução extraordinária dos poderes — cada um dos seis ultrapassa os próprios limites anteriores.</div>
+        <a href="jornada-cavaleiro2.html" class="tl-btn tl-btn-blood">
+          Ler este capítulo →
+        </a>
       </div>
     </div>
 
@@ -1188,24 +1269,29 @@ nav {
         <div class="tl-label">Arco III — O Fim de uma Era</div>
         <div class="tl-title">A Besta: Primeira Criatura do Divino</div>
         <div class="tl-text">O maior dos confrontos. A Besta, criatura primordial gerada pelo próprio Divino, exigiu tudo. O preço da vitória foi a humanidade de cada um — e o começo de algo inteiramente novo.</div>
+        <a href="jornada-besta.html" class="tl-btn tl-btn-blood">
+          Ler este capítulo →
+        </a>
       </div>
-      <div class="tl-dot blood"></div>
+      <div class="tl-dot blood tl-dot-click" onclick="window.location='jornada-besta.html'"></div>
       <div class="tl-empty"></div>
     </div>
 
     <div class="tl-item right reveal">
       <div class="tl-empty"></div>
-      <div class="tl-dot cyan"></div>
+      <div class="tl-dot cyan tl-dot-click" onclick="window.location='jornada-valar.html'"></div>
       <div class="tl-content">
         <div class="tl-label">Transcendência</div>
-        <div class="tl-title">A Deificação</div>
-        <div class="tl-text">Os nomes humanos cedem lugar aos divinos. Yuri torna-se <strong style="color:#f0d080">Knull</strong>, Lucas torna-se <strong style="color:#f0d080">Onull</strong>, Leonardo torna-se <strong style="color:#f0d080">Anull</strong>. Yasmin vira <strong style="color:#a07af0">Nimsay</strong>, Jéssica vira <strong style="color:#a07af0">Aicitel</strong>, Anna vira <strong style="color:#a07af0">Aliban</strong>.</div>
+        <div class="tl-title">A Deificação — O Confronto com Valar</div>
+        <div class="tl-text">O último e maior antagonista. Valar — o primeiro ser a se deificar — foi o confronto que custou tudo. E foi nele que os seis deixaram de ser humanos para sempre. Os nomes antigos cederam lugar aos divinos.</div>
+        <a href="jornada-valar.html" class="tl-btn tl-btn-cyan">
+          Ler este capítulo →
+        </a>
       </div>
     </div>
 
   </div>
 </section>
-
 
 <!-- PERSONAGENS -->
 <section id="personagens">
