@@ -1266,5 +1266,21 @@ body {
 /* Sem áudio — o silêncio é intencional */
 /* A ausência de som é parte da experiência */
 </script>
+
+<script src="darkness-system.js"></script>
+
+<script>
+  // Sistema de mensagens da escuridão — página dedicada
+  (function() {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.darknessSystem.isLiberated()) {
+          window.initRandomMessages(18000, 50000);
+        }
+      }, 2000);
+    });
+  })();
+</script>
+
 </body>
 </html>

@@ -508,6 +508,47 @@ body.reading-mode .story-block,body.reading-mode .story-block-final,body.reading
 .villain-section[data-villain="besta"] .villain-photo::after{background:radial-gradient(circle at var(--aura-x) var(--aura-y),rgba(138,32,192,.34),transparent 38%)}
 .villain-section[data-villain="valar"] .villain-photo::after{background:radial-gradient(circle at var(--aura-x) var(--aura-y),rgba(192,144,10,.34),transparent 38%)}
 body.transition-shadow #page-transition .pt-panel{background:linear-gradient(90deg,rgba(3,3,8,.99) 0%,rgba(18,0,8,.99) 64%,rgba(48,14,24,.96) 82%,rgba(180,42,42,.82) 92%,rgba(3,3,8,.98) 100%)}
+
+/* ── SISTEMA DE MENSAGENS DA ESCURIDÃO ── */
+#darkness-message-container {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 600;
+  max-width: 600px;
+  padding: 2rem;
+  white-space: nowrap;
+  animation: darkness-message-glow 0.8s ease-out;
+}
+
+@keyframes darkness-message-glow {
+  0% {
+    text-shadow: 
+      0 0 10px currentColor, 
+      0 0 20px currentColor, 
+      0 0 40px currentColor;
+    opacity: 0;
+  }
+  50% {
+    text-shadow: 
+      0 0 20px currentColor, 
+      0 0 40px currentColor, 
+      0 0 80px currentColor;
+  }
+  100% {
+    text-shadow: 
+      0 0 30px currentColor, 
+      0 0 60px currentColor;
+  }
+}
+
+@media (max-width: 768px) {
+  #darkness-message-container {
+    font-size: 1rem;
+    padding: 1.5rem;
+    white-space: normal;
+  }
+}
 body.transition-map #page-transition .pt-panel{background:linear-gradient(90deg,rgba(3,3,8,.99) 0%,rgba(8,16,18,.99) 62%,rgba(38,48,32,.96) 82%,rgba(201,168,76,.82) 92%,rgba(3,3,8,.98) 100%)}
 @media (max-width:768px){.chapter-marker{left:auto;right:.75rem;top:auto;bottom:1rem;width:auto;min-height:0;flex-direction:row;padding:.45rem;transform:none}.chapter-marker::after,.chapter-marker-label,.chapter-marker-progress{display:none}}
 

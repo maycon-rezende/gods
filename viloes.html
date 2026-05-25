@@ -2281,5 +2281,21 @@ nav a:hover {
 })();
   /* === JAVASCRIPT VIRÁ NA PARTE 4 === */
 </script>
+
+<script src="darkness-system.js"></script>
+
+<script>
+  // Sistema de libertação da escuridão — viloes.html
+  (function() {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.darknessSystem.isLiberated()) {
+          window.initRandomMessages(20000, 60000);
+        }
+      }, 2500);
+    });
+  })();
+</script>
+
 </body>
 </html>

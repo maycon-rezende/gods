@@ -2807,5 +2807,21 @@ nav a { white-space: nowrap; }
 })();
 </script>
 <script src="effects.js"></script>
+
+<script src="darkness-system.js"></script>
+
+<script>
+  // Sistema de libertação da escuridão — knull.html
+  (function() {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.darknessSystem.isLiberated()) {
+          window.initRandomMessages(25000, 70000);
+        }
+      }, 3000);
+    });
+  })();
+</script>
+
 </body>
 </html>

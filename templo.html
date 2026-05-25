@@ -1733,5 +1733,21 @@ footer {
   });
 })();
 </script>
+
+<script src="darkness-system.js"></script>
+
+<script>
+  // Sistema de libertação da escuridão — templo.html
+  (function() {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.darknessSystem.isLiberated()) {
+          window.initRandomMessages(22000, 65000);
+        }
+      }, 2500);
+    });
+  })();
+</script>
+
 </body>
 </html>

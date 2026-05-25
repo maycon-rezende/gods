@@ -1375,5 +1375,28 @@ nav a { white-space: nowrap; }
 })();
 </script>
 
+<script src="darkness-system.js"></script>
+
+<script>
+  // Sistema de libertação da escuridão no index
+  (function() {
+    // Mostra mensagem aleatória antes que o usuário entre
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        window.initRandomMessages(12000, 35000);
+      }, 2000);
+    });
+
+    // Quando clica em "Entrar", não liberamos a escuridão ainda.
+    // Isso mantém as mensagens sutis funcionando nas próximas páginas.
+    const enterBtn = document.getElementById('enter-btn');
+    if (enterBtn) {
+      enterBtn.addEventListener('click', function() {
+        // O clique apenas avança a entrada, sem alterar o estado da escuridão.
+      });
+    }
+  })();
+</script>
+
 </body>
 </html>

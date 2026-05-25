@@ -757,4 +757,41 @@
     </script>
 </body>
 
+<script src="darkness-system.js"></script>
+
+<script>
+  // Sistema de libertação da escuridão — baile.html
+  // A escuridão é libertada quando o usuário lê "A Escuridão"
+  (function() {
+    const lastWordElement = document.querySelector('.last-word');
+    
+    if (lastWordElement && lastWordElement.textContent.includes('Escuridão')) {
+      // Aguarda o usuário ler e depois liberta
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !window.darknessSystem.isLiberated()) {
+            // Elemento visível na tela
+            setTimeout(() => {
+              observer.disconnect();
+            }, 1500);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(lastWordElement);
+    }
+
+    // Ativa mensagens aleatórias nesta página
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.darknessSystem.isLiberated()) {
+          window.initRandomMessages(18000, 50000);
+        }
+      }, 2000);
+    });
+  })();
+</script>
+
+</body>
+
 </html>

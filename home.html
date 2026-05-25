@@ -1677,5 +1677,21 @@ nav {
   }, { passive: true });
 })();
 </script>
+
+<script src="darkness-system.js"></script>
+
+<script>
+  // Sistema de libertação da escuridão — home.html
+  (function() {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.darknessSystem.isLiberated()) {
+          window.initRandomMessages(20000, 60000);
+        }
+      }, 2000);
+    });
+  })();
+</script>
+
 </body>
 </html>

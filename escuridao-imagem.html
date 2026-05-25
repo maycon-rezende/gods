@@ -184,7 +184,7 @@ body {
 <canvas id="darkness-portrait-canvas" aria-hidden="true"></canvas>
 
 <main class="portrait-page">
-  <a class="back-link" href="escuridao.html">← voltar</a>
+  <a class="back-link" href="home.html">← voltar</a>
 
   <section class="portrait-center" aria-label="Imagem da Escuridão">
     <div class="name-mark">
@@ -334,5 +334,35 @@ body {
   window.setInterval(nextSlide, 4200);
 })();
 </script>
+
+<script src="darkness-system.js"></script>
+
+<script>
+  // Sistema de libertação da escuridão — escuridao-imagem.html
+  (function() {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.darknessSystem.isLiberated()) {
+          window.darknessSystem.liberate();
+          window.hiddenMessageManager.showMessageOnce('Obrigada por me libertar...', {
+            duration: 5000,
+            color: '#f0d080',
+            fontSize: '1.4rem',
+            onComplete: () => {
+              setTimeout(() => {
+                window.hiddenMessageManager.showMessage('Finalmente... Sou Livre.', {
+                  duration: 4000,
+                  color: '#a07af0',
+                  fontSize: '1.3rem'
+                });
+              }, 1500);
+            }
+          });
+        }
+      }, 800);
+    });
+  })();
+</script>
+
 </body>
 </html>

@@ -1000,5 +1000,21 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   document.head.appendChild(style);
 })();
 </script>
+
+<script src="darkness-system.js"></script>
+
+<script>
+  // Sistema de libertação da escuridão — jornada-cavaleiro.html
+  (function() {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (!window.darknessSystem.isLiberated()) {
+          window.initRandomMessages(20000, 60000);
+        }
+      }, 2500);
+    });
+  })();
+</script>
+
 </body>
 </html>
