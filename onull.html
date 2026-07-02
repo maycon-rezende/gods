@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Onull — O Diário de um Deus</title>
+<title>Onull &mdash; O Di&aacute;rio de um Deus</title>
 <link rel="stylesheet" href="effects.css">
 <link rel="stylesheet" href="responsive-fixes.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-  /* ── VARIÁVEIS E RESET ── */
+  /* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --gold: #c9a84c;
   --gold-light: #f0d080;
@@ -52,7 +52,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -82,7 +82,7 @@ nav a:hover {
   text-shadow: 0 0 20px var(--char-accent-glow);
 }
 
-/* ── BANNER ── */
+/* -- BANNER -- */
 #banner {
   position: relative;
   min-height: 100vh;
@@ -191,7 +191,7 @@ nav a:hover {
   animation: fade-up 1s 0.9s ease forwards;
 }
 
-/* ── STATS DO BANNER ── */
+/* -- STATS DO BANNER -- */
 .banner-stats {
   display: flex;
   align-items: center;
@@ -243,7 +243,7 @@ nav a:hover {
   animation: bounce 2s ease infinite;
 }
 
-/* ── ANIMAÇÕES ── */
+/* -- ANIMA&Ccedil;&Otilde;ES -- */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -254,7 +254,7 @@ nav a:hover {
   50%       { transform: translateY(8px); }
 }
 
-/* ── REVEAL ON SCROLL ── */
+/* -- REVEAL ON SCROLL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -265,7 +265,7 @@ nav a:hover {
   opacity: 1;
   transform: none;
 }
-/* ── SEÇÕES COMPARTILHADAS ── */
+/* -- SE&Ccedil;&Otilde;ES COMPARTILHADAS -- */
 section {
   position: relative;
   z-index: 1;
@@ -302,7 +302,7 @@ h2 {
   margin: 1.5rem auto 0;
 }
 
-/* ── SOBRE ── */
+/* -- SOBRE -- */
 #sobre {
   padding-bottom: 5rem;
 }
@@ -433,7 +433,7 @@ h2 {
   color: var(--char-accent);
 }
 
-/* ── PODERES ── */
+/* -- PODERES -- */
 #poderes {
   padding-bottom: 5rem;
   background: linear-gradient(to bottom,
@@ -532,7 +532,7 @@ h2 {
   background: linear-gradient(90deg, var(--silver-dim), var(--silver));
 }
 
-/* ── HISTÓRIA ── */
+/* -- HISTRIA -- */
 #historia { padding-bottom: 5rem; }
 
 .story-body {
@@ -597,7 +597,7 @@ h2 {
   font-style: normal;
 }
 
-/* ── GALERIA ── */
+/* -- GALERIA -- */
 #galeria { padding-bottom: 5rem; }
 
 .gallery-showcase {
@@ -744,7 +744,7 @@ h2 {
   100% { opacity: 1; transform: scale(1.02); filter: blur(0) saturate(1); }
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 footer {
   text-align: center;
   padding: 4rem 2rem;
@@ -800,7 +800,7 @@ footer {
   text-transform: uppercase;
 }
 
-/* ── RESPONSIVO ── */
+/* -- RESPONSIVO -- */
 @media (max-width: 768px) {
   .about-grid {
     grid-template-columns: 1fr;
@@ -851,11 +851,10 @@ footer {
   .story-block { padding: 1.5rem 0 1.5rem 1.8rem; }
 }
 
-  /* === CSS VIRÁ NAS PARTES 2 E 3 === */
 
 
 /* ==========================================================
-   PATCH RESPONSIVO + GALERIA LOOP SUAVE — revisão ChatGPT
+   PATCH RESPONSIVO + GALERIA LOOP SUAVE  revis&atilde;o ChatGPT
    ========================================================== */
 html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 body { min-width: 0; }
@@ -1068,10 +1067,10 @@ nav a { white-space: nowrap; }
 
 <!-- NAV -->
 <nav>
-  <a href="home.html">← Voltar ao Início</a>
+  <a href="home.html">? Voltar ao In&iacute;cio</a>
   <a href="#sobre">Sobre</a>
   <a href="#poderes">Poderes</a>
-  <a href="#historia">História</a>
+  <a href="#historia">Hist&oacute;ria</a>
   <a href="#galeria">Galeria</a>
 </nav>
 
@@ -1080,41 +1079,41 @@ nav a { white-space: nowrap; }
   <div class="banner-bg" style="background-image: url('img-onull/onullbanner2.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
-    <p class="banner-eyebrow">Mestre Humano · Deus Onull · Transcendido</p>
+    <p class="banner-eyebrow">Mestre Humano  Deus Onull  Transcendido</p>
     <h1 class="banner-name">Onull</h1>
     <p class="banner-human">Antes conhecido como <em>Lucas</em></p>
     <div class="banner-divider"></div>
-    <p class="banner-quote">"Disseram que eu era apenas humano. Eu provei que apenas humano é o suficiente para destruir deuses."</p>
+    <p class="banner-quote">"Disseram que eu era apenas humano. Eu provei que apenas humano  o suficiente para destruir deuses."</p>
     <div class="banner-stats">
       <div class="bstat">
         <span class="bstat-val">Humano</span>
-        <span class="bstat-label">Domínio</span>
+        <span class="bstat-label">Dom&iacute;nio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Transcendência</span>
-        <span class="bstat-label">Condição</span>
+        <span class="bstat-val">Transcend&ecirc;ncia</span>
+        <span class="bstat-label">Condi&ccedil;&atilde;o</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Mestre Humano</span>
-        <span class="bstat-label">Título</span>
+        <span class="bstat-label">T&iacute;tulo</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Deus</span>
-        <span class="bstat-label">Ascensão</span>
+        <span class="bstat-label">Ascens&atilde;o</span>
       </div>
     </div>
   </div>
-  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+  <div class="scroll-hint">? &nbsp; Role para baixo</div>
 </section>
 
 <!-- SOBRE -->
 <section id="sobre">
   <div class="section-header reveal">
     <span class="section-label">Identidade</span>
-    <h2>Quem é Onull</h2>
+    <h2>Quem  Onull</h2>
     <div class="section-rule"></div>
   </div>
 
@@ -1126,27 +1125,27 @@ nav a { white-space: nowrap; }
         <div class="photo-frame-corner bl"></div>
         <div class="photo-frame-corner br"></div>
       </div>
-      <div class="about-photo-label">Onull · O Limite do Humano</div>
+      <div class="about-photo-label">Onull  O Limite do Humano</div>
     </div>
     <div class="about-text">
       <p>
-        Entre os seis, Lucas era o que mais parecia comum — e era exatamente isso que o tornava extraordinário. Enquanto Yuri carregava sangues lendários e as meninas descendiam de deuses olímpicos, Lucas era <em>humano</em>. Pura e simplesmente humano. E foi por isso que ninguém jamais viu o que estava por vir.
+        Entre os seis, Lucas era o que mais parecia comum  e era exatamente isso que o tornava extraordinrio. Enquanto Yuri carregava sangues lendrios e as meninas descendiam de deuses olmpicos, Lucas era <em>humano</em>. Pura e simplesmente humano. E foi por isso que ningum jamais viu o que estava por vir.
       </p>
       <p>
-        O título de <strong>Mestre Humano</strong> não era uma consolação — era o reconhecimento de algo que pouquíssimos compreendem: que o ser humano, levado ao seu limite absoluto, é uma das forças mais imprevisíveis e devastadoras que existem. Lucas não tinha sangue divino para amplificar seus poderes. Ele tinha algo mais raro — <strong>vontade sem teto</strong>.
+        O t&iacute;tulo de <strong>Mestre Humano</strong> n&atilde;o era uma consolao  era o reconhecimento de algo que pouqussimos compreendem: que o ser humano, levado ao seu limite absoluto,  uma das for&ccedil;as mais imprevisveis e devastadoras que existem. Lucas n&atilde;o tinha sangue divino para amplificar seus poderes. Ele tinha algo mais raro  <strong>vontade sem teto</strong>.
       </p>
       <p>
-        A cada batalha, enquanto os outros evoluíam pelos seus poderes inatos, Lucas evoluía pela <em>superação</em>. Cada derrota quase certa era convertida em uma nova forma de combater. Cada limite atingido era imediatamente substituído por um novo patamar. Não havia para ele um limite definido — porque o limite humano, quando empurrado com força suficiente, simplesmente desaparece.
+        A cada batalha, enquanto os outros evoluam pelos seus poderes inatos, Lucas evolua pela <em>superao</em>. Cada derrota quase certa era convertida em uma nova forma de combater. Cada limite atingido era imediatamente substitudo por um novo patamar. N&atilde;o havia para ele um limite definido  porque o limite humano, quando empurrado com for&ccedil;a suficiente, simplesmente desaparece.
       </p>
       <p>
-        Depois da deificação, o nome Lucas cedeu lugar a <strong>Onull</strong> — o deus que prova, pela sua própria existência, que a humanidade nunca foi fraqueza. Foi sempre o maior dos poderes.
+        Depois da deifica&ccedil;&atilde;o, o nome Lucas cedeu lugar a <strong>Onull</strong>  o deus que prova, pela sua prpria exist&ecirc;ncia, que a humanidade nunca foi fraqueza. Foi sempre o maior dos poderes.
       </p>
       <div class="about-tags">
         <span class="tag">Mestre Humano</span>
-        <span class="tag human-tag">Transcendência</span>
+        <span class="tag human-tag">Transcend&ecirc;ncia</span>
         <span class="tag human-tag">Vontade Absoluta</span>
         <span class="tag divine-tag">Deus Onull</span>
-        <span class="tag">Superação</span>
+        <span class="tag">Superao</span>
         <span class="tag gold-tag">Potencial Ilimitado</span>
       </div>
     </div>
@@ -1165,72 +1164,72 @@ nav a { white-space: nowrap; }
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">💪</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Essência Humana</div>
+        <div class="power-origin">Ess&ecirc;ncia Humana</div>
         <div class="power-title">Potencial Humano Ilimitado</div>
-        <div class="power-body">O poder central de Onull — e o mais incompreendido. O ser humano possui um potencial que, diferente de qualquer outra raça ou linhagem, não tem teto definido. Lucas dominou a arte de empurrar esse teto continuamente. A cada batalha, seu corpo e mente se adaptam, evoluem e superam o que era considerado impossível para um mortal.</div>
+        <div class="power-body">O poder central de Onull  e o mais incompreendido. O ser humano possui um potencial que, diferente de qualquer outra raa ou linhagem, n&atilde;o tem teto definido. Lucas dominou a arte de empurrar esse teto continuamente. A cada batalha, seu corpo e mente se adaptam, evoluem e superam o que era considerado imposs&iacute;vel para um mortal.</div>
         <div class="power-bar-wrap"><div class="power-bar human" data-width="100"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🧠</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Domínio Mental</div>
-        <div class="power-title">Intelecto Tático & Adaptação</div>
-        <div class="power-body">Lucas compensa ausência de poderes inatos com uma inteligência tática que beira o sobre-humano. Em batalha, processa informações em tempo real, identifica padrões em segundos e adapta sua estratégia continuamente. Nenhum inimigo que ele já enfrentou mais de uma vez o surpreendeu da mesma forma duas vezes.</div>
+        <div class="power-origin">Dom&iacute;nio Mental</div>
+        <div class="power-title">Intelecto Ttico & Adaptao</div>
+        <div class="power-body">Lucas compensa ausncia de poderes inatos com uma inteligncia ttica que beira o sobre-humano. Em batalha, processa informaes em tempo real, identifica padres em segundos e adapta sua estratgia continuamente. Nenhum inimigo que ele j enfrentou mais de uma vez o surpreendeu da mesma forma duas vezes.</div>
         <div class="power-bar-wrap"><div class="power-bar gold" data-width="97"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">⚡</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Superação de Limites</div>
-        <div class="power-title">Segunda Chance — Forma de Crise</div>
-        <div class="power-body">Quando Lucas atinge o ponto de colapso — o momento em que qualquer outro seria destruído — algo em seu interior desperta. Sua <em>Forma de Crise</em> libera uma explosão de potencial reprimido que multiplica temporariamente todas as suas capacidades físicas e mentais. Quanto mais próximo da derrota, mais devastador o despertar.</div>
+        <div class="power-origin">Superao de Limites</div>
+        <div class="power-title">Segunda Chance  Forma de Crise</div>
+        <div class="power-body">Quando Lucas atinge o ponto de colap&oacute;so  o momento em que qualquer outro seria destrudo  algo em seu interior desperta. Sua <em>Forma de Crise</em> libera uma explos&atilde;o de potencial reprimido que multiplica temporariamente todas as suas capacidades fsicas e mentais. Quanto mais prximo da derrota, mais devastador o despertar.</div>
         <div class="power-bar-wrap"><div class="power-bar human" data-width="95"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🛡️</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Resistência Humana</div>
-        <div class="power-title">Vontade Inabalável</div>
-        <div class="power-body">Nenhum genjutsu, ilusão, encantamento ou manipulação mental jamais conseguiu manter Lucas subjugado por tempo suficiente. Sua vontade funciona como um escudo interno — não por imunidade mágica, mas porque sua determinação simplesmente recusa qualquer realidade que não seja a que ele escolheu. É resistência pura, sem magia, sem truque.</div>
+        <div class="power-origin">Resistncia Humana</div>
+        <div class="power-title">Vontade Inabalvel</div>
+        <div class="power-body">Nenhum genjutsu, ilus&atilde;o, encantamento ou manipula&ccedil;&atilde;o mental jamais conseguiu manter Lucas subjugado por tempo suficiente. Sua vontade funciona como um escudo interno  n&atilde;o por imunidade mgica, mas porque sua determinao simplesmente recusa qualquer realidade que n&atilde;o seja a que ele escolheu.  resistncia pura, sem magia, sem truque.</div>
         <div class="power-bar-wrap"><div class="power-bar gold" data-width="99"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🤝</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Liderança Humana</div>
-        <div class="power-title">Presença & Carisma de Batalha</div>
-        <div class="power-body">A presença de Lucas em combate tem um efeito mensurável nos aliados. Sua determinação é contagiante — quando os outros estão à beira do colapso, um olhar ou uma palavra de Lucas é suficiente para recuperar a resolução do grupo. É o poder mais silencioso dos seis, e talvez o mais importante em batalhas prolongadas.</div>
+        <div class="power-origin">Liderana Humana</div>
+        <div class="power-title">Presena & Carisma de Batalha</div>
+        <div class="power-body">A presena de Lucas em combate tem um efeito mensurvel nos aliados. Sua determinao  contagiante  quando os outros esto  beira do colap&oacute;so, um olhar ou uma palavra de Lucas  suficiente para recuperar a resoluo do grupo.  o poder mais silencioso dos seis, e talvez o mais importante em batalhas prolongadas.</div>
         <div class="power-bar-wrap"><div class="power-bar human" data-width="92"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">👑</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Condição Divina</div>
-        <div class="power-title">Transcendência · Onull</div>
-        <div class="power-body">A deificação de Lucas foi diferente de todos os outros. Enquanto os demais ascenderam amplificando poderes já existentes, Lucas transcendeu a própria definição de humano — e ao fazer isso, não perdeu a humanidade. Onull é a prova viva de que um deus pode ser forjado sem sangue divino. Apenas com vontade, superação e recusa em aceitar qualquer limite.</div>
+        <div class="power-origin">Condi&ccedil;&atilde;o Divina</div>
+        <div class="power-title">Transcend&ecirc;ncia  Onull</div>
+        <div class="power-body">A deifica&ccedil;&atilde;o de Lucas&oacute; foi diferente de todos os outros. Enquanto os demais ascenderam amplificando poderes j existentes, Lucas transcendeu a prpria definio de humano  e ao fazer isso, n&atilde;o perdeu a humanidade. Onull  a prova viva de que um deus pode ser forjado sem sangue divino. Apenas com vontade, superao e recusa em aceitar qualquer limite.</div>
         <div class="power-bar-wrap"><div class="power-bar gold" data-width="100"></div></div>
       </div>
     </div>
@@ -1238,38 +1237,38 @@ nav a { white-space: nowrap; }
   </div>
 </section>
 
-<!-- HISTÓRIA -->
+<!-- HISTRIA -->
 <section id="historia">
   <div class="section-header reveal">
-    <span class="section-label">Trajetória</span>
-    <h2>A História de Lucas</h2>
+    <span class="section-label">Trajet&oacute;ria</span>
+    <h2>A Hist&oacute;ria de Lucas</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="story-body">
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo I</div>
-      <div class="story-title">O Único Sem Sangue Especial</div>
-      <p>Quando os seis se reuniram pela primeira vez, Lucas foi o único que não trouxe uma herança impossível. Sem sangue de clã lendário, sem descendência divina, sem poderes inatos. Apenas Lucas — e uma determinação que nenhum dos outros conseguia medir ou prever. Foi subestimado desde o primeiro dia. E desde o primeiro dia, provou que era um erro fazer isso.</p>
+      <div class="story-chapter">Cap&iacute;tulo I</div>
+      <div class="story-title">O &uacute;nico Sem Sangue Especial</div>
+      <p>Quando os seis se reuniram pela primeira vez, Lucas&oacute; foi o &uacute;nico que n&atilde;o trouxe uma heran&ccedil;a imposs&iacute;vel. Sem sangue de cl lendrio, sem descendncia divina, sem poderes inatos. Apenas Lucas  e uma determinao que nenhum dos outros conseguia medir ou prever. Foi subestimado desde o primeiro dia. E desde o primeiro dia, provou que era um erro fazer isso.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo II</div>
+      <div class="story-chapter">Cap&iacute;tulo II</div>
       <div class="story-title">O Cavaleiro Negro & A Primeira Prova</div>
-      <p>No confronto com o Cavaleiro Negro, Lucas foi o que mais sofreu — e o que mais surpreendeu. Sem poderes sobrenaturais para recorrer, desenvolveu no calor da batalha uma forma de combate que integrava a observação dos padrões do inimigo em tempo real. Quando o Cavaleiro Negro achava que tinha Lucas derrotado, encontrava uma versão mais perigosa do que havia enfrentado segundos antes.</p>
+      <p>No confronto com o Cavaleiro Negro, Lucas&oacute; foi o que mais sofreu  e o que mais surpreendeu. Sem poderes sobrenaturais para recorrer, desenvolveu no calor da batalha uma forma de combate que integrava a observao dos padres do inimigo em tempo real. Quando o Cavaleiro Negro achava que tinha Lucas derrotado, encontrava uma vers&atilde;o mais perigosa do que havia enfrentado segundos antes.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo III</div>
+      <div class="story-chapter">Cap&iacute;tulo III</div>
       <div class="story-title">Mestre Humano</div>
-      <p>O título não foi dado — foi reconhecido. Após a primeira grande vitória, quando os poderes de cada um foram formalmente reconhecidos, Lucas recebeu o título de <strong>Mestre Humano</strong>. Não como consolação pela falta de poderes divinos, mas como reconhecimento de que ele havia dominado algo que os outros, com toda a sua herança, ainda não tinham alcançado: o controle absoluto do próprio limite.</p>
+      <p>O t&iacute;tulo n&atilde;o foi dado  foi reconhecido. Aps a primeira grande vitria, quando os poderes de cada um foram formalmente reconhecidos, Lucas recebeu o t&iacute;tulo de <strong>Mestre Humano</strong>. N&atilde;o como consolao pela falta de poderes divinos, mas como reconhecimento de que ele havia dominado algo que os outros, com toda a sua heran&ccedil;a, ainda n&atilde;o tinham alcanado: o controle absoluto do prprio limite.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo IV</div>
-      <div class="story-title">A Besta & A Deificação · Onull</div>
-      <p>Foi contra A Besta que Lucas chegou ao ponto mais próximo da morte que qualquer dos seis havia experimentado. E foi exatamente nesse ponto que a <em>Forma de Crise</em> atingiu seu ápice absoluto — um nível que nunca havia sido visto antes. O que emergiu daquele momento não era mais Lucas. Era <strong>Onull</strong>: o deus que nasceu não de sangue divino, mas da recusa humana em aceitar o fim.</p>
+      <div class="story-chapter">Cap&iacute;tulo IV</div>
+      <div class="story-title">A Besta & A Deifica&ccedil;&atilde;o  Onull</div>
+      <p>Foi contra A Besta que Lucas chegou ao ponto mais prximo da morte que qualquer dos seis havia experimentado. E foi exatamente nesse ponto que a <em>Forma de Crise</em> atingiu seu &aacute;pice absoluto  um nvel que nunca havia sido visto antes. O que emergiu daquele momento n&atilde;o era mais Lucas. Era <strong>Onull</strong>: o deus que nasceu n&atilde;o de sangue divino, mas da recusa humana em aceitar o fim.</p>
     </div>
 
   </div>
@@ -1288,10 +1287,10 @@ nav a { white-space: nowrap; }
       <div class="gallery-visual" style="background-image: url('img-onull/onullarmadura.png')"></div>
       <div class="gallery-overlay">
         <div class="gallery-meta">
-          <span class="gallery-index">Bloco I · 01</span>
+          <span class="gallery-index">Bloco I  01</span>
           <span class="gallery-track">Ciclo Humano</span>
         </div>
-        <span>Onull · Forma Divina</span>
+        <span>Onull  Forma Divina</span>
         <p class="gallery-panel-sub">A origem humana que supera todos os limites e se torna mito.</p>
       </div>
     </article>
@@ -1303,21 +1302,21 @@ nav a { white-space: nowrap; }
 <!-- FOOTER -->
 <footer>
   <div class="footer-nav">
-    <span class="footer-sep">·</span>
-    <a href="knull.html">  Knull →</a>
-    <a href="nimsay.html">← Nimsay</a>
-    <span class="footer-sep">·</span>
-    <a href="home.html">Início</a>
-    <span class="footer-sep">·</span>
-    <a href="anull.html">Anull →</a>
+    <span class="footer-sep"></span>
+    <a href="knull.html">  Knull ?</a>
+    <a href="nimsay.html">? Nimsay</a>
+    <span class="footer-sep"></span>
+    <a href="home.html">In&iacute;cio</a>
+    <span class="footer-sep"></span>
+    <a href="anull.html">Anull ?</a>
   </div>
   <div class="footer-title">Onull</div>
-  <div class="footer-sub">"O limite humano não existe. Existe apenas o momento em que você decide parar."</div>
-  <div class="footer-copy">O Diário de um Deus · Todos os direitos reservados</div>
+  <div class="footer-sub">"O limite humano n&atilde;o existe. Existe apenas o momento em que voc&ecirc; decide parar."</div>
+  <div class="footer-copy">O Di&aacute;rio de um Deus  Todos os direitos reservados</div>
 </footer>
 
 <script>
-  /* ── COSMOS CANVAS ── */
+  /* -- COSMOS CANVAS -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx    = canvas.getContext('2d');
@@ -1341,7 +1340,7 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Névoas do Onull: dourado e prata */
+    /* Nvoas do Onull: dourado e prata */
     nebulas = [];
     const colors = [
       'rgba(212,168,32,',
@@ -1359,7 +1358,7 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Faíscas humanas — pequenas e rápidas */
+    /* Fascas humanas  pequenas e rpidas */
     sparks = [];
     for (let i = 0; i < 25; i++) {
       sparks.push({
@@ -1387,7 +1386,7 @@ nav a { white-space: nowrap; }
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    /* Névoas */
+    /* Nvoas */
     nebulas.forEach(n => {
       const grad = ctx.createRadialGradient(
         n.x, n.y, 0, n.x, n.y, n.r
@@ -1410,7 +1409,7 @@ nav a { white-space: nowrap; }
       ctx.fill();
     });
 
-    /* Faíscas humanas subindo */
+    /* Fascas humanas subindo */
     sparks.forEach(p => {
       p.x    += p.speedX;
       p.y    += p.speedY;
@@ -1459,7 +1458,7 @@ nav a { white-space: nowrap; }
 </script>
 
 <script>
-  /* ── SCROLL REVEAL ── */
+  /* -- SCROLL REVEAL -- */
   (function() {
     const els = document.querySelectorAll('.reveal');
 
@@ -1475,7 +1474,7 @@ nav a { white-space: nowrap; }
     els.forEach(el => io.observe(el));
   })();
 
-  /* ── BARRAS DE PODER (animam ao entrar na tela) ── */
+  /* -- BARRAS DE PODER (animam ao entrar na tela) -- */
   (function() {
     const bars = document.querySelectorAll('.power-bar');
 
@@ -1495,7 +1494,7 @@ nav a { white-space: nowrap; }
 </script>
 
 <script>
-  /* ── GALERIA ONULL EM LOOP ── */
+  /* -- GALERIA ONULL EM LOOP -- */
   (function () {
     const showcase = document.getElementById('gallery-showcase');
     if (!showcase) return;
@@ -1506,29 +1505,29 @@ nav a { white-space: nowrap; }
     const slides = [
         {
         bg: "url('img-onull/onullposluta.png')",
-        title: 'Onull · Forma Divina',
+        title: 'Onull  Forma Divina',
         sub: 'A origem humana que supera todos os limites e se torna mito.'
       },
       
         {
-        bg: "url('img-onull/onullcidadela.png')",
-        title: 'Onull · Forma Divina',
+        bg: "url('img-onull/onulcidadela.png')",
+        title: 'Onull  Forma Divina',
         sub: 'A origem humana que supera todos os limites e se torna mito.'
       },
               {
         bg: "url('img-onull/onullcidadela1.png')",
-        title: 'Onull · Forma Divina',
+        title: 'Onull  Forma Divina',
         sub: 'A origem humana que supera todos os limites e se torna mito.'
       },
       {
         bg: "url('img-onull/onull.png')",
-        title: 'Onull · Forma Divina',
+        title: 'Onull  Forma Divina',
         sub: 'A origem humana que supera todos os limites e se torna mito.'
       },
       {
         bg: "url('img-onull/onullarmadura.png')",
         title: 'Forma de Crise',
-        sub: 'O momento em que o humano se transforma em força pura de sobrevivência.'
+        sub: 'O momento em que o humano se transforma em for&ccedil;a pura de sobrevivncia.'
       },
 
        {
@@ -1568,7 +1567,7 @@ nav a { white-space: nowrap; }
       }
       if (title) title.textContent = slide.title;
       if (sub) sub.textContent = slide.sub;
-      if (indexLabel) indexLabel.textContent = `Bloco I · ${String(index + 1).padStart(2, '0')}`;
+      if (indexLabel) indexLabel.textContent = `Bloco I  ${String(index + 1).padStart(2, '0')}`;
       if (track) track.textContent = 'Ciclo Humano';
       panel.classList.add('is-transitioning');
     }
@@ -1591,7 +1590,7 @@ nav a { white-space: nowrap; }
 
 <script>
 /* ==========================================================
-   Patch: transforma qualquer galeria da página em loop suave
+   Patch: transforma qualquer galeria da p&aacute;gina em loop suave
    ========================================================== */
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1633,7 +1632,7 @@ nav a { white-space: nowrap; }
       <div class="smooth-loop-meta">
         <span class="smooth-loop-kicker">${label}</span>
         <strong class="smooth-loop-title">${first.title}</strong>
-        <span class="smooth-loop-desc">${first.desc || 'loop automático com transição suave'}</span>
+        <span class="smooth-loop-desc">${first.desc || 'loop autom&aacute;tico com transio suave'}</span>
       </div>
     `;
     return panel;
@@ -1654,7 +1653,7 @@ nav a { white-space: nowrap; }
     hidden.classList.add('is-visible');
     panel.dataset.current = String(current);
     panel.querySelector('.smooth-loop-title').textContent = data.title;
-    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop automático com transição suave';
+    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop autom&aacute;tico com transio suave';
   }
 
   function upgradeGallery() {
@@ -1680,9 +1679,9 @@ nav a { white-space: nowrap; }
     const controls = document.createElement('div');
     controls.className = 'smooth-loop-controls';
     controls.innerHTML = `
-      <button class="smooth-loop-btn" type="button" data-loop-prev>← Anterior</button>
-      <span class="smooth-loop-state">${images.length} imagens · looping suave</span>
-      <button class="smooth-loop-btn" type="button" data-loop-next>Próxima →</button>
+      <button class="smooth-loop-btn" type="button" data-loop-prev>? Anterior</button>
+      <span class="smooth-loop-state">${images.length} imagens  looping suave</span>
+      <button class="smooth-loop-btn" type="button" data-loop-next>Pr&oacute;xima ?</button>
     `;
     const oldControls = section.querySelector('.gallery-carousel-controls');
     if (oldControls) oldControls.replaceWith(controls);
@@ -1718,7 +1717,7 @@ nav a { white-space: nowrap; }
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — onull.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  onull.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -1732,3 +1731,7 @@ nav a { white-space: nowrap; }
 
 </body>
 </html>
+
+
+
+

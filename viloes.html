@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Os Vilões — O Diário de um Deus</title>
+<title>Os Vil&otilde;es &mdash; O Di&aacute;rio de um Deus</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="effects.css">
 <link rel="stylesheet" href="responsive-fixes.css">
 <style>
-  /* ── VARIÁVEIS E RESET ── */
+  /* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   /* Paleta sombria global */
   --void: #030308;
@@ -20,19 +20,19 @@
   --gold-light: #f0d080;
   --gold-dim: #7a6228;
 
-  /* The Black Knight — vermelho sangue */
+  /* The Black Knight  vermelho sangue */
   --cn-red: #8b0000;
   --cn-red-bright: #cc0022;
   --cn-red-glow: rgba(204,0,34,0.4);
   --cn-red-dim: rgba(139,0,0,0.2);
 
-  /* A Besta — roxo void */
+  /* A Besta  roxo void */
   --besta-purple: #2a0a3a;
   --besta-bright: #8a20c0;
   --besta-glow: rgba(138,32,192,0.4);
   --besta-dim: rgba(42,10,58,0.3);
 
-  /* Valar — dourado corrompido */
+  /* Valar  dourado corrompido */
   --valar-gold: #6a5010;
   --valar-bright: #c0900a;
   --valar-glow: rgba(192,144,10,0.4);
@@ -60,7 +60,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -109,7 +109,7 @@ nav a:hover {
     0 0 40px rgba(138,32,192,0.3);
 }
 
-/* ── HERO DOS VILÕES ── */
+/* -- HERO DOS VILES -- */
 #villain-hero {
   position: relative;
   min-height: 100vh;
@@ -260,7 +260,7 @@ nav a:hover {
   color: rgba(204,0,34,0.6);
 }
 
-/* ── ANIMAÇÕES BASE ── */
+/* -- ANIMA&Ccedil;&Otilde;ES BASE -- */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -274,7 +274,7 @@ nav a:hover {
   }
 }
 
-/* ── REVEAL ON SCROLL ── */
+/* -- REVEAL ON SCROLL -- */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -286,7 +286,7 @@ nav a:hover {
   transform: none;
 }
 
-/* ── EFEITO GLITCH ── */
+/* -- EFEITO GLITCH -- */
 .glitch {
   position: relative;
 }
@@ -337,9 +337,9 @@ nav a:hover {
   100% { transform: translateX(-1px); }
 }
 
-/* ════════════════════════════════════
-   RESPONSIVO — HERO E NAV
-════════════════════════════════════ */
+/* ------------------------------------
+   RESPONSIVO  HERO E NAV
+------------------------------------ */
 
 @media (max-width: 1024px) {
   nav { gap: 1.8rem; }
@@ -372,7 +372,7 @@ nav a:hover {
   #villain-hero { min-height: 100svh; }
   .vh-content   { padding: 4rem 2rem 2rem; }
 }
-/* ── SEÇÕES DOS VILÕES ── */
+/* -- SE&Ccedil;&Otilde;ES DOS VILES -- */
 .villain-section {
   position: relative;
   min-height: 100vh;
@@ -382,7 +382,7 @@ nav a:hover {
   align-items: center;
 }
 
-/* Fundo parallax de cada vilão */
+/* Fundo parallax de cada vilo */
 .villain-bg {
   position: absolute;
   inset: -10%;
@@ -399,7 +399,7 @@ nav a:hover {
   filter: brightness(0.55) saturate(1);
 }
 
-/* Overlays específicos de cada vilão */
+/* Overlays especficos de cada vilo */
 .villain-bg-overlay {
   position: absolute;
   inset: 0;
@@ -443,7 +443,7 @@ nav a:hover {
       rgba(3,3,8,0.5)       100%);
 }
 
-/* Barras cinematográficas */
+/* Barras cinematogrficas */
 .villain-cinema {
   position: absolute;
   inset: 0;
@@ -466,7 +466,7 @@ nav a:hover {
   height: 8vh;
 }
 
-/* Conteúdo do vilão */
+/* Contedo do vilo */
 .villain-content {
   position: relative;
   z-index: 3;
@@ -476,7 +476,7 @@ nav a:hover {
   padding: 8rem 3rem 5rem;
 }
 
-/* Header do vilão */
+/* Header do vilo */
 .villain-header {
   display: flex;
   align-items: flex-start;
@@ -574,7 +574,7 @@ nav a:hover {
   transform: none;
 }
 
-/* Visual do vilão */
+/* Visual do vilo */
 .villain-visual {
   display: flex;
   flex-direction: column;
@@ -602,7 +602,7 @@ nav a:hover {
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-/* Frames específicos */
+/* Frames especficos */
 .villain-photo-link:hover .villain-photo,
 .villain-photo-link:focus-visible .villain-photo {
   transform: translateY(-4px);
@@ -639,7 +639,7 @@ nav a:hover {
   border-color: rgba(192,144,10,0.4);
 }
 
-/* Glow de cada vilão */
+/* Glow de cada vilo */
 .villain-photo-glow {
   position: absolute;
   inset: 0;
@@ -699,7 +699,7 @@ nav a:hover {
   background: rgba(3,3,8,0.82);
 }
 
-/* Stats rápidos */
+/* Stats rpidos */
 .villain-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -732,7 +732,7 @@ nav a:hover {
   color: var(--text-dim);
 }
 
-/* Texto do vilão */
+/* Texto do vilo */
 .villain-quote {
   font-family: 'EB Garamond', serif;
   font-style: italic;
@@ -852,7 +852,7 @@ nav a:hover {
   line-height: 1.7;
 }
 
-/* Timeline do vilão */
+/* Timeline do vilo */
 .villain-timeline {
   margin-top: 3.5rem;
   padding-top: 2.5rem;
@@ -927,7 +927,7 @@ nav a:hover {
   line-height: 1.7;
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 #villain-footer {
   position: relative;
   z-index: 1;
@@ -1000,9 +1000,9 @@ nav a:hover {
   text-transform: uppercase;
 }
 
-/* ════════════════════════════════════
+/* ------------------------------------
    RESPONSIVO COMPLETO
-════════════════════════════════════ */
+------------------------------------ */
 
 @media (max-width: 1024px) {
   .villain-content {
@@ -1176,13 +1176,13 @@ nav a:hover {
   <a href="index.html" class="nav-logo">
     <img src="img-logo/olhos.jpg" alt="Logo">
   </a>
-  <a href="home.html">Início</a>
+  <a href="home.html">In&iacute;cio</a>
   <a href="cavaleiro.html">The Black Knight</a>
   <a href="besta.html">A Besta</a>
   <a href="vallar.html">Valar</a>
 </nav>
 
-<!-- HERO DOS VILÕES -->
+<!-- HERO DOS VILES -->
 <section id="villain-hero">
   <canvas id="villain-hero-canvas"></canvas>
   <div class="vh-overlay"></div>
@@ -1190,42 +1190,42 @@ nav a:hover {
     <p class="vh-eyebrow">Os Antagonistas da Saga</p>
     <h1 class="vh-title">
       <span>Os que</span>
-      Ameaçaram
+      Ameaaram
       <span>Tudo</span>
     </h1>
     <div class="vh-divider"></div>
-    <p class="vh-sub">Três forças que testaram os limites dos seis — e provaram que o verdadeiro poder nasce da resistência ao inevitável.</p>
+    <p class="vh-sub">Trs for&ccedil;as que testaram os limites dos seis  e provaram que o verdadeiro poder nasce da resistncia ao inevitvel.</p>
     <div class="vh-scroll-hint">
       <div class="vh-scroll-line"></div>
-      <span>Role para conhecê-los</span>
+      <span>Role para conhec-los</span>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     VILÃO 1 — O CAVALEIRO NEGRO
-═══════════════════════════ -->
+<!-- ---------------------------
+     VILO 1  O CAVALEIRO NEGRO
+--------------------------- -->
 <section id="cavaleiro" class="villain-section" data-villain="cavaleiro">
 
   <!-- Imagem de fundo parallax -->
   <div class="villain-bg" style="background-image: url('img-cavaleiro/cavaleirobanner.png')"></div>
   <div class="villain-bg-overlay cavaleiro-overlay"></div>
-  <!-- Entrada cinematográfica -->
+  <!-- Entrada cinematogrfica -->
   <div class="villain-cinema">
     <div class="cinema-bar top"></div>
     <div class="cinema-bar bottom"></div>
   </div>
 
-  <!-- Conteúdo -->
+  <!-- Contedo -->
   <div class="villain-content">
 
-    <!-- Header do vilão -->
+    <!-- Header do vilo -->
     <div class="villain-header">
       <div class="villain-number">I</div>
       <div class="villain-header-text">
-        <p class="villain-era">Geração Primitiva · Mestre Espiritual Corrompido</p>
+        <p class="villain-era">Gerao Primitiva  Mestre Espiritual Corrompido</p>
         <h2 class="villain-name cavaleiro-name">The Black Knight</h2>
-        <p class="villain-aka">O Aprisionado · O Ambicioso</p>
+        <p class="villain-aka">O Aprisionado  O Ambicioso</p>
       </div>
     </div>
 
@@ -1234,24 +1234,24 @@ nav a:hover {
 
       <!-- Foto/visual -->
       <div class="villain-visual">
-        <a href="cavaleiro.html" class="villain-photo-link" aria-label="Abrir página: The Black Knight">
+        <a href="cavaleiro.html" class="villain-photo-link" aria-label="Abrir p&aacute;gina: The Black Knight">
           <div class="villain-photo cavaleiro-photo"
             style="background-image: url('img-cavaleiro/cavaleiro.png')">
             <div class="villain-photo-frame"></div>
             <div class="villain-photo-glow cavaleiro-glow"></div>
           </div>
         </a>
-        <div class="villain-visual-label">The Black Knight · Mestre Corrompido</div>
+        <div class="villain-visual-label">The Black Knight  Mestre Corrompido</div>
 
-        <!-- Stats rápidos -->
+        <!-- Stats rpidos -->
         <div class="villain-stats">
           <div class="vstat">
             <span class="vstat-val">Espiritual</span>
-            <span class="vstat-label">Domínio</span>
+            <span class="vstat-label">Dom&iacute;nio</span>
           </div>
           <div class="vstat">
-            <span class="vstat-val">Séculos</span>
-            <span class="vstat-label">Existência</span>
+            <span class="vstat-val">Sculos</span>
+            <span class="vstat-label">Existncia</span>
           </div>
           <div class="vstat">
             <span class="vstat-val">Aprisionado</span>
@@ -1263,51 +1263,51 @@ nav a:hover {
       <!-- Texto -->
       <div class="villain-text">
         <div class="villain-quote cavaleiro-quote">
-          "Ele não queria destruir o mundo. Queria possuí-lo completamente."
+          "Ele n&atilde;o queria destruir o mundo. Queria possu-lo completamente."
         </div>
 
         <div class="villain-lore">
-          <p>Em uma era de feiticeiros nômades, The Black Knight era um <em>prodígio</em>. Sua conexão com o outro lado era inexplicável para sua geração — profunda, instintiva, como se ele tivesse nascido com um pé já atravessando o véu entre os mundos.</p>
+          <p>Em uma era de feiticeiros n&ocirc;mades, The Black Knight era um <em>prodgio</em>. Sua conexo com o outro lado era inexplicvel para sua gerao  profunda, instintiva, como se ele tivesse nascido com um p j atravessando o vu entre os mundos.</p>
 
-          <p>Como Mestre Espiritual, formava com outros dois — um filho de deidade da natureza como Mestre Elemental e um bruxo como Mestre Humano — o equilíbrio primordial entre três forças. Um sistema que funcionava porque cada um sabia seu lugar.</p>
+          <p>Como Mestre Espiritual, formava com outros dois  um filho de deidade da natureza como Mestre Elemental e um bruxo como Mestre Humano  o equil&iacute;brio primordial entre trs for&ccedil;as. Um sistema que funcionava porque cada um sabia seu lugar.</p>
 
-          <p>Mas The Black Knight descobriu que seus dons lhe permitiam ir <strong>além do lugar designado</strong>. Tomou para si os poderes dos outros dois. O equilíbrio se partiu. E o universo respondeu com aprisionamento — séculos de confinamento numa dimensão paralela, sozinho com sua ambição e o peso do que havia feito.</p>
+          <p>Mas The Black Knight descobriu que seus dons lhe permitiam ir <strong>al&eacute;m do lugar designado</strong>. Tomou para si os poderes dos outros dois. O equil&iacute;brio se partiu. E o universo respondeu com aprisionamento  sculos de confinamento numa dimens&atilde;o paralela, sozinho com sua ambio e o peso do que havia feito.</p>
 
-          <p>Séculos depois, com o enfraquecimento dos portões e o surgimento dos protagonistas, ele finalmente encontrou a fissura que precisava. O que emergiu não era mais o prodígio. Era algo forjado em séculos de isolamento e determinação inquebrável.</p>
+          <p>Sculos depois, com o enfraquecimento dos portes e o surgimento dos protagonistas, ele finalmente encontrou a fissura que precisava. O que emergiu n&atilde;o era mais o prodgio. Era algo forjado em sculos de isolamento e determinao inquebrvel.</p>
         </div>
 
-        <a href="cavaleiro.html" class="villain-page-link">Abrir página: The Black Knight</a>
+        <a href="cavaleiro.html" class="villain-page-link">Abrir p&aacute;gina: The Black Knight</a>
 
         <!-- Poderes -->
         <div class="villain-powers">
           <div class="villain-powers-title cavaleiro-accent">Arsenal</div>
           <div class="villain-power-list">
             <div class="vpower cavaleiro-vpower">
-              <span class="vpower-icon">👁️</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
-                <div class="vpower-name">Feitiçaria Primordial</div>
-                <div class="vpower-desc">Magia de uma era anterior às regras — mais instável, mais devastadora, sem os limites que o refinamento impõe.</div>
+                <div class="vpower-name">Feitiaria Primordial</div>
+                <div class="vpower-desc">Magia de uma era anterior s regras  mais instvel, mais devastadora, sem os limites que o refinamento impe.</div>
               </div>
             </div>
             <div class="vpower cavaleiro-vpower">
-              <span class="vpower-icon">🌀</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
-                <div class="vpower-name">Domínio Triplo Roubado</div>
-                <div class="vpower-desc">Carrega os poderes elementais, humanos e espirituais absorvidos dos outros dois Mestres — uma combinação que o universo nunca deveria ter permitido.</div>
+                <div class="vpower-name">Dom&iacute;nio Triplo Roubado</div>
+                <div class="vpower-desc">Carrega os poderes elementais, humanos e espirituais absorvidos dos outros dois Mestres  uma combinao que o universo nunca deveria ter permitido.</div>
               </div>
             </div>
             <div class="vpower cavaleiro-vpower">
-              <span class="vpower-icon">⚔️</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
                 <div class="vpower-name">Combate Ancestral</div>
-                <div class="vpower-desc">Físico treinado para a arte militar combinado com séculos de estratégia. Sua postura carrega o peso de uma mente que prevê além de meras táticas.</div>
+                <div class="vpower-desc">Fsico treinado para a arte militar combinado com sculos de estratgia. Sua postura carrega o peso de uma mente que prev al&eacute;m de meras tticas.</div>
               </div>
             </div>
             <div class="vpower cavaleiro-vpower">
-              <span class="vpower-icon">🔗</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
-                <div class="vpower-name">Vínculo com o Outro Lado</div>
-                <div class="vpower-desc">Uma conexão ancestral com o plano espiritual que nenhum treinamento criou — nasceu com ele, e séculos de confinamento apenas aprofundaram.</div>
+                <div class="vpower-name">Vnculo com o Outro Lado</div>
+                <div class="vpower-desc">Uma conexo ancestral com o plano espiritual que nenhum treinamento criou  nasceu com ele, e sculos de confinamento apenas aprofundaram.</div>
               </div>
             </div>
           </div>
@@ -1316,34 +1316,34 @@ nav a:hover {
       </div>
     </div>
 
-    <!-- Linha do tempo do vilão -->
+    <!-- Linha do tempo do vilo -->
     <div class="villain-timeline">
       <div class="vtl-item">
         <div class="vtl-dot cavaleiro-dot"></div>
         <div class="vtl-content">
           <div class="vtl-label">Origem</div>
-          <div class="vtl-text">Prodígio da feitiçaria nômade, torna-se Mestre Espiritual do equilíbrio primordial.</div>
+          <div class="vtl-text">Prodgio da feitiaria nmade, torna-se Mestre Espiritual do equil&iacute;brio primordial.</div>
         </div>
       </div>
       <div class="vtl-item">
         <div class="vtl-dot cavaleiro-dot"></div>
         <div class="vtl-content">
           <div class="vtl-label">A Queda</div>
-          <div class="vtl-text">Absorve os poderes dos outros dois Mestres. O equilíbrio se parte. É aprisionado numa dimensão paralela.</div>
+          <div class="vtl-text">Absorve os poderes dos outros dois Mestres. O equil&iacute;brio se parte.  aprisionado numa dimens&atilde;o paralela.</div>
         </div>
       </div>
       <div class="vtl-item">
         <div class="vtl-dot cavaleiro-dot"></div>
         <div class="vtl-content">
           <div class="vtl-label">O Retorno</div>
-          <div class="vtl-text">Séculos depois, o enfraquecimento dos portões o liberta. Enfrenta os seis pela primeira vez.</div>
+          <div class="vtl-text">Sculos depois, o enfraquecimento dos portes o liberta. Enfrenta os seis pela primeira vez.</div>
         </div>
       </div>
       <div class="vtl-item">
         <div class="vtl-dot cavaleiro-dot"></div>
         <div class="vtl-content">
           <div class="vtl-label">A Derrota</div>
-          <div class="vtl-text">Derrotado duas vezes pelos protagonistas — cada batalha mais intensa que a anterior.</div>
+          <div class="vtl-text">Derrotado duas vezes pelos protagonistas  cada batalha mais intensa que a anterior.</div>
         </div>
       </div>
     </div>
@@ -1351,9 +1351,9 @@ nav a:hover {
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     VILÃO 2 — A BESTA
-═══════════════════════════ -->
+<!-- ---------------------------
+     VILO 2  A BESTA
+--------------------------- -->
 <section id="besta" class="villain-section" data-villain="besta">
 
   <div class="villain-bg" style="background-image: url('img-besta/besta.png')"></div>
@@ -1369,9 +1369,9 @@ nav a:hover {
     <div class="villain-header">
       <div class="villain-number">II</div>
       <div class="villain-header-text">
-        <p class="villain-era">Antes dos Homens · Criatura Primordial</p>
+        <p class="villain-era">Antes dos Homens  Criatura Primordial</p>
         <h2 class="villain-name besta-name">A Besta</h2>
-        <p class="villain-aka">A Primeira · A Indomável · Manipuladora Transdimensional</p>
+        <p class="villain-aka">A Primeira  A Indomvel  Manipuladora Transdimensional</p>
       </div>
     </div>
 
@@ -1379,50 +1379,50 @@ nav a:hover {
 
       <div class="villain-text">
         <div class="villain-quote besta-quote">
-          "Ela existia antes que o mundo soubesse o que era o medo. Ela foi a primeira lição."
+          "Ela existia antes que o mundo soubesse o que era o medo. Ela foi a primeira lio."
         </div>
 
         <div class="villain-lore">
-          <p>Antes dos homens. Antes das civilizações. Antes de qualquer conceito de poder organizado — a Besta já existia. A primeira fera mística da criação, nascida quando o mundo era habitado apenas por criaturas primordiais e forças brutas.</p>
+          <p>Antes dos homens. Antes das civilizaes. Antes de qualquer conceito de poder organizado  a Besta j existia. A primeira fera mstica da criao, nascida quando o mundo era habitado apenas por criaturas primordiais e for&ccedil;as brutas.</p>
 
-          <p>Mas a Besta não era apenas força bruta. Ela era <em>inteligência ancestral</em> — conhecimentos acumulados antes que qualquer ser humano soubesse que havia algo a aprender. Acredita-se ter sido ela a primeira manipuladora de energia elemental e transdimensional, desenvolvendo esses domínios milênios antes de qualquer feiticeiro humano dar seus primeiros passos.</p>
+          <p>Mas a Besta n&atilde;o era apenas for&ccedil;a bruta. Ela era <em>inteligncia ancestral</em>  conhecimentos acumulados antes que qualquer ser humano soubesse que havia algo a aprender. Acredita-se ter sido ela a primeira manipuladora de energia elemental e transdimensional, desenvolvendo esses dom&iacute;nios milnios antes de qualquer feiticeiro humano dar seus primeiros passos.</p>
 
-          <p>Sua forma bestial é colossal — três cabeças, corpo que só pode ser perfurado por armas divinas, olhos em tons de vermelho profundo como um rio de sangue. Mas a Besta aprendeu a <strong>construir corpos</strong>. Sua forma humana é um homem alto, esguio, com um olhar que perfura a alma e cabelos longos e presos — elegante, contida, e infinitamente mais assustadora que a forma bestial.</p>
+          <p>Sua forma bestial  colossal  trs cabeas, corpo que s pode ser perfurado por armas divinas, olhos em tons de vermelho profundo como um rio de sangue. Mas a Besta aprendeu a <strong>construir corpos</strong>. Sua forma humana  um homem alto, esguio, com um olhar que perfura a alma e cabelos longos e presos  elegante, contida, e infinitamente mais assustadora que a forma bestial.</p>
 
-          <p>O confronto com os seis foi o teste definitivo. A Besta não lutava para vencer — ela consumia. Cada golpe era uma tentativa de apagar existências inteiras.</p>
+          <p>O confronto com os seis&oacute; foi o teste definitivo. A Besta n&atilde;o lutava para vencer  ela consumia. Cada golpe era uma tentativa de apagar exist&ecirc;ncias inteiras.</p>
         </div>
 
-        <a href="besta.html" class="villain-page-link">Abrir página da Besta</a>
+        <a href="besta.html" class="villain-page-link">Abrir p&aacute;gina da Besta</a>
 
         <div class="villain-powers">
           <div class="villain-powers-title besta-accent">Arsenal</div>
           <div class="villain-power-list">
             <div class="vpower besta-vpower">
-              <span class="vpower-icon">🐉</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
                 <div class="vpower-name">Forma Bestial Colossal</div>
-                <div class="vpower-desc">Três cabeças, corpo impenetrável por armas comuns. Apenas armas divinas conseguem atravessar sua forma primordial.</div>
+                <div class="vpower-desc">Trs cabeas, corpo impenetrvel por armas comuns. Apenas armas divinas conseguem atravessar sua forma primordial.</div>
               </div>
             </div>
             <div class="vpower besta-vpower">
-              <span class="vpower-icon">🔄</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
-                <div class="vpower-name">Manipulação de Forma Física</div>
-                <div class="vpower-desc">Pode construir e desconstruir corpos diferentes para si — da forma bestial colossal à forma humana esguia e contida.</div>
+                <div class="vpower-name">Manipula&ccedil;&atilde;o de Forma Fsica</div>
+                <div class="vpower-desc">Pode construir e desconstruir corpos diferentes para si  da forma bestial colossal  forma humana esguia e contida.</div>
               </div>
             </div>
             <div class="vpower besta-vpower">
-              <span class="vpower-icon">⚡</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
                 <div class="vpower-name">Energia Elemental Primordial</div>
-                <div class="vpower-desc">A primeira manipuladora de energia elemental da criação. Seu domínio é anterior a qualquer sistema ou técnica conhecida.</div>
+                <div class="vpower-desc">A primeira manipuladora de energia elemental da criao. Seu dom&iacute;nio  anterior a qualquer sistema ou tcnica conhecida.</div>
               </div>
             </div>
             <div class="vpower besta-vpower">
-              <span class="vpower-icon">🌀</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
-                <div class="vpower-name">Manipulação Transdimensional</div>
-                <div class="vpower-desc">Opera em múltiplos planos simultaneamente — sua consciência não está limitada a uma única camada da realidade.</div>
+                <div class="vpower-name">Manipula&ccedil;&atilde;o Transdimensional</div>
+                <div class="vpower-desc">Opera em mltiplos planos simultaneamente  sua consci&ecirc;ncia n&atilde;o est limitada a uma &uacute;nica camada da realidade.</div>
               </div>
             </div>
           </div>
@@ -1431,14 +1431,14 @@ nav a:hover {
       </div>
 
       <div class="villain-visual">
-        <a href="besta.html" class="villain-photo-link" aria-label="Abrir página da Besta">
+        <a href="besta.html" class="villain-photo-link" aria-label="Abrir p&aacute;gina da Besta">
           <div class="villain-photo besta-photo"
             style="background-image: url('img-besta/besta.png')">
             <div class="villain-photo-frame besta-frame"></div>
             <div class="villain-photo-glow besta-glow"></div>
           </div>
         </a>
-        <div class="villain-visual-label">A Besta · Forma Humana</div>
+        <div class="villain-visual-label">A Besta  Forma Humana</div>
 
         <div class="villain-stats">
           <div class="vstat">
@@ -1446,11 +1446,11 @@ nav a:hover {
             <span class="vstat-label">Origem</span>
           </div>
           <div class="vstat">
-            <span class="vstat-val">Três Cabeças</span>
+            <span class="vstat-val">Trs Cabeas</span>
             <span class="vstat-label">Forma Bestial</span>
           </div>
           <div class="vstat">
-            <span class="vstat-val">Indomável</span>
+            <span class="vstat-val">Indomvel</span>
             <span class="vstat-label">Natureza</span>
           </div>
         </div>
@@ -1463,21 +1463,21 @@ nav a:hover {
         <div class="vtl-dot besta-dot"></div>
         <div class="vtl-content">
           <div class="vtl-label">Antes dos Homens</div>
-          <div class="vtl-text">Nasce como primeira fera mística. Desenvolve manipulação elemental e transdimensional milênios antes de qualquer humano.</div>
+          <div class="vtl-text">Nasce como primeira fera mstica. Desenvolve manipula&ccedil;&atilde;o elemental e transdimensional milnios antes de qualquer humano.</div>
         </div>
       </div>
       <div class="vtl-item">
         <div class="vtl-dot besta-dot"></div>
         <div class="vtl-content">
-          <div class="vtl-label">A Evolução</div>
-          <div class="vtl-text">Aprende a manipular sua forma física — constrói e desconstrói corpos, desenvolvendo a forma humana como alternativa à bestial.</div>
+          <div class="vtl-label">A Evoluo</div>
+          <div class="vtl-text">Aprende a manipular sua forma fsica  constri e desconstri corpos, desenvolvendo a forma humana como alternativa  bestial.</div>
         </div>
       </div>
       <div class="vtl-item">
         <div class="vtl-dot besta-dot"></div>
         <div class="vtl-content">
           <div class="vtl-label">O Confronto Final</div>
-          <div class="vtl-text">Enfrenta os seis no teste definitivo da saga. O preço da vitória foi a humanidade de cada um — e o início da deificação.</div>
+          <div class="vtl-text">Enfrenta os seis no teste definitivo da saga. O preo da vitria foi a humanidade de cada um  e o in&iacute;cio da deifica&ccedil;&atilde;o.</div>
         </div>
       </div>
     </div>
@@ -1485,9 +1485,9 @@ nav a:hover {
   </div>
 </section>
 
-<!-- ═══════════════════════════
-     VILÃO 3 — VALAR
-═══════════════════════════ -->
+<!-- ---------------------------
+     VILO 3  VALAR
+--------------------------- -->
 <section id="valar" class="villain-section" data-villain="valar">
 
   <div class="villain-bg" style="background-image: url('img-vallar/vallar.png')"></div>
@@ -1503,86 +1503,86 @@ nav a:hover {
     <div class="villain-header">
       <div class="villain-number">III</div>
       <div class="villain-header-text">
-        <p class="villain-era">Primeiro Mestre Deificado · Corrompido pelas Trevas</p>
+        <p class="villain-era">Primeiro Mestre Deificado  Corrompido pelas Trevas</p>
         <h2 class="villain-name valar-name">Valar</h2>
-        <p class="villain-aka">O Aprisionado no Abismo · O Corrompido</p>
+        <p class="villain-aka">O Aprisionado no Abismo  O Corrompido</p>
       </div>
     </div>
 
     <div class="villain-grid">
 
       <div class="villain-visual">
-        <a href="vallar.html" class="villain-photo-link" aria-label="Abrir página de Valar">
+        <a href="vallar.html" class="villain-photo-link" aria-label="Abrir p&aacute;gina de Valar">
           <div class="villain-photo valar-photo"
             style="background-image: url('img-vallar/valar.png')">
             <div class="villain-photo-frame valar-frame"></div>
             <div class="villain-photo-glow valar-glow"></div>
           </div>
         </a>
-        <div class="villain-visual-label">Valar · O Primeiro Deificado</div>
+        <div class="villain-visual-label">Valar  O Primeiro Deificado</div>
 
         <div class="villain-stats">
           <div class="vstat">
             <span class="vstat-val">Triplo</span>
-            <span class="vstat-label">Domínio</span>
+            <span class="vstat-label">Dom&iacute;nio</span>
           </div>
           <div class="vstat">
             <span class="vstat-val">Deificado</span>
-            <span class="vstat-label">Condição</span>
+            <span class="vstat-label">Condi&ccedil;&atilde;o</span>
           </div>
           <div class="vstat">
             <span class="vstat-val">Abismo</span>
-            <span class="vstat-label">Prisão</span>
+            <span class="vstat-label">Pris&atilde;o</span>
           </div>
         </div>
       </div>
 
       <div class="villain-text">
         <div class="villain-quote valar-quote">
-          "Ele foi o primeiro a alcançar o que os seis se tornaram. E foi exatamente isso que o destruiu."
+          "Ele foi o primeiro a alcan&ccedil;ar o que os seis se tornaram. E foi exatamente isso que o destruiu."
         </div>
 
         <div class="villain-lore">
-          <p>Em uma era anterior à divisão dos três pilares, existia Valar — o primeiro e único ser a alcançar a deificação carregando simultaneamente os domínios Elemental, Humano e Espiritual em um único corpo. Uma façanha que não devia ser possível, e que o universo nunca havia visto antes.</p>
+          <p>Em uma era anterior  divis&atilde;o dos trs pilares, existia Valar  o primeiro e &uacute;nico ser a alcan&ccedil;ar a deifica&ccedil;&atilde;o carregando simultaneamente os dom&iacute;nios Elemental, Humano e Espiritual em um &uacute;nico corpo. Uma faanha que n&atilde;o devia ser poss&iacute;vel, e que o universo nunca havia visto antes.</p>
 
-          <p>Mas algo o encontrou nesse ápice. As forças das trevas — de origem desconhecida, anterior a qualquer registro — corromperam o que deveria ter sido a maior conquista da existência. O Criador interviu: aprisionou Valar num <em>abismo profundo do outro lado</em>, onde sua influência seria inexistente e seu poder, inerte.</p>
+          <p>Mas algo o encontrou nesse &aacute;pice. As for&ccedil;as das trevas  de origem desconhecida, anterior a qualquer registro  corromperam o que deveria ter sido a maior conquista da exist&ecirc;ncia. O Criador interviu: aprisionou Valar num <em>abismo profundo do outro lado</em>, onde sua influ&ecirc;ncia seria inexistente e seu poder, inerte.</p>
 
-          <p>Aparentemente um homem de meia idade — cabelos longos e grisalhos, vitalidade física que envergonharia qualquer militar treinado. Frio. Estrategista excepcional. Poderoso de uma forma que vai além de qualquer técnica ou herança.</p>
+          <p>Aparentemente um homem de meia idade  cabelos longos e grisalhos, vitalidade fsica que envergonharia qualquer militar treinado. Frio. Estrategista excepcional. Poderoso de uma forma que vai al&eacute;m de qualquer tcnica ou heran&ccedil;a.</p>
 
-          <p>Valar representa o aviso que a saga carrega em silêncio: <strong>o poder sem o alicerce certo não é conquista. É condenação.</strong></p>
+          <p>Valar representa o aviso que a saga carrega em silncio: <strong>o poder sem o alicerce certo n&atilde;o  conquista.  condenao.</strong></p>
         </div>
 
-        <a href="vallar.html" class="villain-page-link">Abrir página de Valar</a>
+        <a href="vallar.html" class="villain-page-link">Abrir p&aacute;gina de Valar</a>
 
         <div class="villain-powers">
           <div class="villain-powers-title valar-accent">Arsenal</div>
           <div class="villain-power-list">
             <div class="vpower valar-vpower">
-              <span class="vpower-icon">👑</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
-                <div class="vpower-name">Domínio Triplo Unificado</div>
-                <div class="vpower-desc">Carrega os três pilares — Elemental, Humano e Espiritual — num único ser. Uma combinação que o universo só havia visto nele.</div>
+                <div class="vpower-name">Dom&iacute;nio Triplo Unificado</div>
+                <div class="vpower-desc">Carrega os trs pilares  Elemental, Humano e Espiritual  num &uacute;nico ser. Uma combinao que o universo s havia visto nele.</div>
               </div>
             </div>
             <div class="vpower valar-vpower">
-              <span class="vpower-icon">⚫</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
-                <div class="vpower-name">Corrupção das Trevas</div>
-                <div class="vpower-desc">Infectado por forças de origem desconhecida que distorceram seus poderes deificados em algo que o próprio Criador considerou ameaça existencial.</div>
+                <div class="vpower-name">Corrupo das Trevas</div>
+                <div class="vpower-desc">Infectado por for&ccedil;as de origem desconhecida que distorceram seus poderes deificados em algo que o prprio Criador considerou amea&ccedil;a existencial.</div>
               </div>
             </div>
             <div class="vpower valar-vpower">
-              <span class="vpower-icon">🧠</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
-                <div class="vpower-name">Estratégia Absoluta</div>
-                <div class="vpower-desc">Frio, calculista, com uma mente estratégica que opera décadas à frente de qualquer oponente. Nunca age sem ter planejado cada variável.</div>
+                <div class="vpower-name">Estratgia Absoluta</div>
+                <div class="vpower-desc">Frio, calculista, com uma mente estratgica que opera dcadas  frente de qualquer oponente. Nunca age sem ter planejado cada varivel.</div>
               </div>
             </div>
             <div class="vpower valar-vpower">
-              <span class="vpower-icon">♾️</span>
+              <span class="vpower-icon">&#10022;</span>
               <div>
                 <div class="vpower-name">Vitalidade Deificada</div>
-                <div class="vpower-desc">Sua vitalidade física desafia qualquer explicação natural — um corpo que opera além dos limites humanos em cada aspecto mensurável.</div>
+                <div class="vpower-desc">Sua vitalidade fsica desafia qualquer explicao natural  um corpo que opera al&eacute;m dos limites humanos em cada aspecto mensurvel.</div>
               </div>
             </div>
           </div>
@@ -1595,29 +1595,29 @@ nav a:hover {
       <div class="vtl-item">
         <div class="vtl-dot valar-dot"></div>
         <div class="vtl-content">
-          <div class="vtl-label">A Era dos Três Pilares</div>
-          <div class="vtl-text">Em uma era onde os três domínios coexistiam num único ser, Valar alcança a deificação completa — o primeiro e único.</div>
+          <div class="vtl-label">A Era dos Trs Pilares</div>
+          <div class="vtl-text">Em uma era onde os tr&ecirc;s dom&iacute;nios coexistiam num &uacute;nico ser, Valar alcana a deifica&ccedil;&atilde;o completa  o primeiro e &uacute;nico.</div>
         </div>
       </div>
       <div class="vtl-item">
         <div class="vtl-dot valar-dot"></div>
         <div class="vtl-content">
-          <div class="vtl-label">A Corrupção</div>
-          <div class="vtl-text">Forças das trevas de origem desconhecida o corrompem no ápice de seu poder. O Criador intervém.</div>
+          <div class="vtl-label">A Corrupo</div>
+          <div class="vtl-text">For&ccedil;as das trevas de origem desconhecida o corrompem no &aacute;pice de seu poder. O Criador interv&eacute;m.</div>
         </div>
       </div>
       <div class="vtl-item">
         <div class="vtl-dot valar-dot"></div>
         <div class="vtl-content">
           <div class="vtl-label">O Abismo</div>
-          <div class="vtl-text">Aprisionado pelo Criador num abismo profundo do outro lado — onde sua influência é inexistente e seu poder, inerte.</div>
+          <div class="vtl-text">Aprisionado pelo Criador num abismo profundo do outro lado  onde sua influ&ecirc;ncia  inexistente e seu poder, inerte.</div>
         </div>
       </div>
       <div class="vtl-item">
         <div class="vtl-dot valar-dot"></div>
         <div class="vtl-content">
-          <div class="vtl-label">A Ameaça Latente</div>
-          <div class="vtl-text">Permanece aprisionado — mas o abismo não é eterno. E Valar é paciente.</div>
+          <div class="vtl-label">A Ameaa Latente</div>
+          <div class="vtl-text">Permanece aprisionado  mas o abismo n&atilde;o  eterno. E Valar  paciente.</div>
         </div>
       </div>
     </div>
@@ -1629,25 +1629,25 @@ nav a:hover {
 <footer id="villain-footer">
   <div class="vf-content">
     <div class="vf-title">Os Antagonistas</div>
-    <div class="vf-sub">"Todo herói é forjado pela resistência ao que tentou destruí-lo."</div>
+    <div class="vf-sub">"Todo heri  forjado pela resistncia ao que tentou destru-lo."</div>
     <div class="vf-nav">
-      <a href="home.html">← Voltar ao Início</a>
-      <span>·</span>
-      <a href="knull.html">Ver os Heróis →</a>
+      <a href="home.html">? Voltar ao In&iacute;cio</a>
+      <span></span>
+      <a href="knull.html">Ver os Her&oacute;is ?</a>
     </div>
-    <div class="vf-copy">O Diário de um Deus · Todos os direitos reservados</div>
+    <div class="vf-copy">O Di&aacute;rio de um Deus  Todos os direitos reservados</div>
   </div>
 </footer>
 
 <script src="effects.js"></script>
 <script>
-  /* ════════════════════════════════════
-   VILÕES — JAVASCRIPT COMPLETO
-   Canvas · Scroll Cinema · Parallax
-   Glitch · Efeitos por Vilão
-════════════════════════════════════ */
+  /* ------------------------------------
+   VILES  JAVASCRIPT COMPLETO
+   Canvas  Scroll Cinema  Parallax
+   Glitch  Efeitos por Vilo
+------------------------------------ */
 
-/* ── CANVAS DO HERO ── */
+/* -- CANVAS DO HERO -- */
 (function () {
   const canvas = document.getElementById('villain-hero-canvas');
   const ctx    = canvas.getContext('2d');
@@ -1659,7 +1659,7 @@ nav a:hover {
   }
 
   function init() {
-    /* Partículas sombrias tricolores */
+    /* Partculas sombrias tricolores */
     particles = [];
     const colors = [
       'rgba(204,0,34,',
@@ -1728,7 +1728,7 @@ nav a:hover {
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    /* Névoa tricolor central */
+    /* Nvoa tricolor central */
     const colors = [
       { x: W * 0.3, y: H * 0.4, c: 'rgba(139,0,0,',      a: 0.08 },
       { x: W * 0.7, y: H * 0.6, c: 'rgba(42,10,58,',     a: 0.08 },
@@ -1745,7 +1745,7 @@ nav a:hover {
       ctx.fillRect(0, 0, W, H);
     });
 
-    /* Partículas */
+    /* Partculas */
     particles.forEach(p => {
       p.x      += p.speedX;
       p.y      += p.speedY;
@@ -1798,7 +1798,7 @@ nav a:hover {
       ctx.restore();
     });
 
-    /* Grade de tensão sutil */
+    /* Grade de tens&atilde;o sutil */
     ctx.save();
     ctx.globalAlpha = 0.015;
     ctx.strokeStyle = '#cc0022';
@@ -1828,7 +1828,7 @@ nav a:hover {
   draw();
 })();
 
-/* ── CANVAS DE FUNDO GLOBAL ── */
+/* -- CANVAS DE FUNDO GLOBAL -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   if (!canvas) return;
@@ -1856,12 +1856,12 @@ nav a:hover {
   draw();
 })();
 
-/* ── ENTRADA CINEMATOGRÁFICA POR SCROLL ── */
+/* -- ENTRADA CINEMATOGRFICA POR SCROLL -- */
 (function () {
   const sections = document.querySelectorAll('.villain-section');
   if (!sections.length) return;
 
-  /* Estado de cada seção */
+  /* Estado de cada seo */
   const state = new Map();
   sections.forEach(s => state.set(s, { active: false, progress: 0 }));
 
@@ -1888,7 +1888,7 @@ nav a:hover {
     /* Remove barras de cinema */
     section.classList.add('active');
 
-    /* Som de entrada (silêncio visual) */
+    /* Som de entrada (silncio visual) */
     const villain = section.getAttribute('data-villain');
 
     /* Aplica classe de tema */
@@ -1900,13 +1900,13 @@ nav a:hover {
       name.setAttribute('data-text', name.textContent);
       name.classList.add('glitch');
 
-      /* Remove glitch após 3s */
+      /* Remove glitch ap&oacute;s 3s */
       setTimeout(() => {
         name.classList.remove('glitch');
       }, 3000);
     }
 
-    /* Partículas de entrada específicas por vilão */
+    /* Partculas de entrada especficas por vilo */
     spawnVillainParticles(section, villain);
   }
 
@@ -1943,7 +1943,7 @@ nav a:hover {
   }
 })();
 
-/* ── PARALLAX DAS SEÇÕES ── */
+/* -- PARALLAX DAS SE&Ccedil;&Otilde;ES -- */
 (function () {
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   if (isMobile) return;
@@ -1965,9 +1965,9 @@ nav a:hover {
   onScroll();
 })();
 
-/* ── EFEITO DE GLITCH NAS SEÇÕES ATIVAS ── */
+/* -- EFEITO DE GLITCH NAS SE&Ccedil;&Otilde;ES ATIVAS -- */
 (function () {
-  /* Injeta keyframes do burst de partículas */
+  /* Injeta keyframes do burst de partculas */
   const style = document.createElement('style');
   style.textContent = `
     @keyframes particle-burst {
@@ -2007,7 +2007,7 @@ nav a:hover {
       100% { transform: translate(0); }
     }
 
-    /* Scan line nas seções ativas */
+    /* Scan line nas sees ativas */
     .villain-section.active::after {
       content: '';
       position: absolute;
@@ -2042,7 +2042,7 @@ nav a:hover {
   document.head.appendChild(style);
 })();
 
-/* ── CANVAS ESPECÍFICO POR VILÃO (sobreposição) ── */
+/* -- CANVAS ESPECFICO POR VILO (sobreposio) -- */
 (function () {
   const sections = document.querySelectorAll('.villain-section');
 
@@ -2135,7 +2135,7 @@ nav a:hover {
         ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
         ctx.fill();
 
-        /* Núcleo */
+        /* N&uacute;cleo */
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle =
@@ -2146,7 +2146,7 @@ nav a:hover {
       animFrame = requestAnimationFrame(draw);
     }
 
-    /* Ativa quando a seção fica visível */
+    /* Ativa quando a seo fica vis&iacute;vel */
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting && !active) {
@@ -2164,7 +2164,7 @@ nav a:hover {
   });
 })();
 
-/* ── SCROLL REVEAL GERAL ── */
+/* -- SCROLL REVEAL GERAL -- */
 (function () {
   const els = document.querySelectorAll('.reveal');
 
@@ -2180,7 +2180,7 @@ nav a:hover {
   els.forEach(el => io.observe(el));
 })();
 
-/* ── EFEITO DE DISTORÇÃO NO HOVER DOS PODERES ── */
+/* -- EFEITO DE DISTORO NO HOVER DOS PODERES -- */
 (function () {
   const powers = document.querySelectorAll('.vpower');
 
@@ -2208,7 +2208,7 @@ nav a:hover {
   });
 })();
 
-/* ── INDICADOR DE VILÃO ATIVO NA NAV ── */
+/* -- INDICADOR DE VILO ATIVO NA NAV -- */
 (function () {
   const sections  = document.querySelectorAll('.villain-section');
   const navLinks  = document.querySelectorAll('nav a:not(.nav-logo)');
@@ -2243,7 +2243,7 @@ nav a:hover {
   }
 })();
 
-/* ── EFEITO DE TREMOR AO ATIVAR VILÃO ── */
+/* -- EFEITO DE TREMOR AO ATIVAR VILO -- */
 (function () {
   const sections = document.querySelectorAll('.villain-section');
 
@@ -2279,13 +2279,12 @@ nav a:hover {
   `;
   document.head.appendChild(style);
 })();
-  /* === JAVASCRIPT VIRÁ NA PARTE 4 === */
 </script>
 
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — viloes.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  viloes.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -2299,3 +2298,7 @@ nav a:hover {
 
 </body>
 </html>
+
+
+
+

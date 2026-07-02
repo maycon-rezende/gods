@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nimsay — O Diário de um Deus</title>
+<title>Nimsay &mdash; O Di&aacute;rio de um Deus</title>
 <link rel="stylesheet" href="effects.css">
 <link rel="stylesheet" href="responsive-fixes.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-/* ── VARIÁVEIS E RESET ── */
+/* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --gold: #c9a84c;
   --gold-light: #f0d080;
@@ -53,7 +53,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -132,7 +132,7 @@ nav a:hover {
   text-shadow: 0 0 20px var(--char-accent-glow);
 }
 
-/* ── LINK VOLTAR ── */
+/* -- LINK VOLTAR -- */
 nav a:first-child {
   color: var(--char-accent);
   font-weight: 700;
@@ -153,7 +153,7 @@ nav a:first-child:hover {
   box-shadow: 0 8px 24px rgba(74,158,187,0.25);
 }
 
-/* ── BANNER ── */
+/* -- BANNER -- */
 #banner {
   position: relative;
   min-height: 100vh;
@@ -262,7 +262,7 @@ nav a:first-child:hover {
   animation: fade-up 1s 0.9s ease forwards;
 }
 
-/* ── STATS DO BANNER ── */
+/* -- STATS DO BANNER -- */
 .banner-stats {
   display: flex;
   align-items: center;
@@ -314,7 +314,7 @@ nav a:first-child:hover {
   animation: bounce 2s ease infinite;
 }
 
-/* ── ANIMAÇÕES ── */
+/* -- ANIMA&Ccedil;&Otilde;ES -- */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -325,7 +325,7 @@ nav a:first-child:hover {
   50%       { transform: translateY(8px); }
 }
 
-/* ── REVEAL ON SCROLL ── */
+/* -- REVEAL ON SCROLL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -336,7 +336,7 @@ nav a:first-child:hover {
   opacity: 1;
   transform: none;
 }
-/* ── SEÇÕES COMPARTILHADAS ── */
+/* -- SE&Ccedil;&Otilde;ES COMPARTILHADAS -- */
 section {
   position: relative;
   z-index: 1;
@@ -373,7 +373,7 @@ h2 {
   margin: 1.5rem auto 0;
 }
 
-/* ── SOBRE ── */
+/* -- SOBRE -- */
 #sobre {
   padding-bottom: 5rem;
 }
@@ -506,7 +506,7 @@ h2 {
   color: var(--divine-light);
 }
 
-/* ── PODERES ── */
+/* -- PODERES -- */
 #poderes {
   padding-bottom: 5rem;
   background: linear-gradient(to bottom,
@@ -611,7 +611,7 @@ h2 {
   background: linear-gradient(90deg, var(--divine), var(--divine-light));
 }
 
-/* ── HISTÓRIA ── */
+/* -- HISTRIA -- */
 #historia {
   padding-bottom: 5rem;
 }
@@ -673,7 +673,7 @@ h2 {
 
 .story-block p strong { color: var(--gold-light); }
 
-/* ── GALERIA ── */
+/* -- GALERIA -- */
 #galeria {
   padding: 0 2rem 5rem;
   max-width: 1400px;
@@ -849,7 +849,7 @@ h2 {
   font-style: normal;
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 footer {
   text-align: center;
   padding: 4rem 2rem;
@@ -905,7 +905,7 @@ footer {
   text-transform: uppercase;
 }
 
-/* ── RESPONSIVO ── */
+/* -- RESPONSIVO -- */
 /* Extra Small: Smartphones < 360px */
 @media (max-width: 360px) {
   body { font-size: 16px; }
@@ -991,7 +991,7 @@ footer {
   .powers-grid { grid-template-columns: repeat(4, 1fr); }
   body { font-size: 18px; }
 }
-/* ── SEÇÕES COMPARTILHADAS ── */
+/* -- SE&Ccedil;&Otilde;ES COMPARTILHADAS -- */
 section {
   position: relative;
   z-index: 1;
@@ -1028,7 +1028,7 @@ h2 {
   margin: 1.5rem auto 0;
 }
 
-/* ── SOBRE ── */
+/* -- SOBRE -- */
 #sobre {
   padding-bottom: 5rem;
 }
@@ -1161,7 +1161,7 @@ h2 {
   color: var(--divine-light);
 }
 
-/* ── PODERES ── */
+/* -- PODERES -- */
 #poderes {
   padding-bottom: 5rem;
   background: linear-gradient(to bottom,
@@ -1266,7 +1266,7 @@ h2 {
   background: linear-gradient(90deg, var(--divine), var(--divine-light));
 }
 
-/* ── HISTÓRIA ── */
+/* -- HISTRIA -- */
 #historia {
   padding-bottom: 5rem;
 }
@@ -1595,7 +1595,7 @@ nav {
 
 
 
-/* ── FX NIMSAY ── */
+/* -- FX NIMSAY -- */
 #banner-fx {
   position: absolute;
   inset: 0;
@@ -1673,7 +1673,7 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
 }
 
 .gallery-hint::before {
-  content: '✦ ';
+  content: '? ';
   color: var(--moon);
 }
 
@@ -1700,7 +1700,7 @@ body.fx-cursor-nimsay .cursor-aura-nimsay { opacity: 1; }
 
 
 
-/* ── SHOWCASE LUNAR EM PAINEL ÚNICO ── */
+/* -- SHOWCASE LUNAR EM PAINEL NICO -- */
 .gallery-showcase {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -1928,7 +1928,7 @@ section.section-lit .section-aura::before {
 
 
 /* ==========================================================
-   PATCH RESPONSIVO + GALERIA LOOP SUAVE — revisão ChatGPT
+   PATCH RESPONSIVO + GALERIA LOOP SUAVE  revis&atilde;o ChatGPT
    ========================================================== */
 html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 body { min-width: 0; }
@@ -2140,12 +2140,12 @@ nav a { white-space: nowrap; }
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="home.html">← Voltar ao Início</a>
+  <a href="home.html">? Voltar ao In&iacute;cio</a>
   <a href="#sobre">Sobre</a>
   <a href="#poderes">Poderes</a>
-  <a href="#historia">História</a>
+  <a href="#historia">Hist&oacute;ria</a>
   <a href="#galeria">Galeria</a>
-  <button id="menu-toggle" aria-label="Menu">☰</button>
+  <button id="menu-toggle" aria-label="Menu">&#10022;</button>
 </nav>
 
 <!-- BANNER HERO -->
@@ -2154,41 +2154,41 @@ nav a { white-space: nowrap; }
   <div class="banner-bg" style="background-image: url('img-nimsay/deusanim4.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
-    <p class="banner-eyebrow">Companheira de Knull · Feiticeira & Maga · Ascendida</p>
+    <p class="banner-eyebrow">Companheira de Knull  Feiticeira & Maga  Ascendida</p>
     <h1 class="banner-name">Nimsay</h1>
     <p class="banner-human">Antes conhecida como <em>Yasmin</em></p>
     <div class="banner-divider"></div>
-    <p class="banner-quote">"O mar não pede permissão para engolir o mundo. Eu tampouco."</p>
+    <p class="banner-quote">"O mar n&atilde;o pede permiss&atilde;o para engolir o mundo. Eu tampouco."</p>
     <div class="banner-stats">
       <div class="bstat">
         <span class="bstat-val">Mar & Lua</span>
-        <span class="bstat-label">Domínio</span>
+        <span class="bstat-label">Dom&iacute;nio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Poseidon · Afrodite</span>
+        <span class="bstat-val">Poseidon  Afrodite</span>
         <span class="bstat-label">Linhagem</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Deusa da Lua</span>
-        <span class="bstat-label">Descendência</span>
+        <span class="bstat-label">Descendncia</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Ascendida</span>
-        <span class="bstat-label">Condição</span>
+        <span class="bstat-label">Condi&ccedil;&atilde;o</span>
       </div>
     </div>
   </div>
-  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+  <div class="scroll-hint">? &nbsp; Role para baixo</div>
 </section>
 
 <!-- SOBRE -->
 <section id="sobre">
   <div class="section-header reveal reveal-nimsay">
     <span class="section-label">Identidade</span>
-    <h2>Quem é Nimsay</h2>
+    <h2>Quem  Nimsay</h2>
     <div class="section-rule"></div>
   </div>
 
@@ -2200,27 +2200,27 @@ nav a { white-space: nowrap; }
         <div class="photo-frame-corner bl"></div>
         <div class="photo-frame-corner br"></div>
       </div>
-      <div class="about-photo-label">Nimsay · Filha dos Mares e da Lua</div>
+      <div class="about-photo-label">Nimsay  Filha dos Mares e da Lua</div>
     </div>
     <div class="about-text">
       <p>
-        Yasmin nunca foi apenas humana — e ela sempre soube disso. Filha de <em>Poseidon</em>, deus dos mares, com <em>Afrodite</em>, deusa do amor e da beleza, sua herança divina se manifestava em cada gesto: a forma como a água respondia à sua presença, como o encanto parecia emanar naturalmente de sua voz.
+        Yasmin nunca foi apenas humana  e ela sempre soube disso. Filha de <em>Poseidon</em>, deus dos mares, com <em>Afrodite</em>, deusa do amor e da beleza, sua heran&ccedil;a divina se manifestava em cada gesto: a forma como a gua respondia  sua presena, como o encanto parecia emanar naturalmente de sua voz.
       </p>
       <p>
-        Mas havia algo mais profundo ainda. Em sua linhagem corria o sangue da <strong>deusa da lua</strong> — uma herança antiga que amplificava sua magia nos momentos em que a lua estava em seu ponto mais alto. Nas noites de lua cheia, Yasmin era, simplesmente, imbatível.
+        Mas havia algo mais profundo ainda. Em sua linhagem corria o sangue da <strong>deusa da lua</strong>  uma heran&ccedil;a antiga que amplificava sua magia nos momentos em que a lua estava em seu ponto mais alto. Nas noites de lua cheia, Yasmin era, simplesmente, imbatvel.
       </p>
       <p>
-        Companheira de Yuri desde antes de qualquer batalha, foi ao lado dele que enfrentou o Cavaleiro Negro, que evoluiu como feiticeira e maga, e que compreendeu que sua existência tinha um propósito muito maior do que qualquer destino comum poderia oferecer.
+        Companheira de Yuri desde antes de qualquer batalha, foi ao lado dele que enfrentou o Cavaleiro Negro, que evoluiu como feiticeira e maga, e que compreendeu que sua exist&ecirc;ncia tinha um propsito muito maior do que qualquer destino comum poderia oferecer.
       </p>
       <p>
-        Após o confronto com A Besta e a deificação dos seis, o nome Yasmin cedeu lugar a <strong>Nimsay</strong> — e com ele, a última barreira entre a mulher e a deusa desapareceu por completo.
+        Aps o confronto com A Besta e a deifica&ccedil;&atilde;o dos seis, o nome Yasmin cedeu lugar a <strong>Nimsay</strong>  e com ele, a &Uacute;ltima barreira entre a mulher e a deusa desapareceu por completo.
       </p>
       <div class="about-tags">
         <span class="tag">Companheira de Knull</span>
         <span class="tag blood-tag">Filha de Poseidon</span>
         <span class="tag blood-tag">Filha de Afrodite</span>
         <span class="tag divine-tag">Descendente da Lua</span>
-        <span class="tag cyan-tag">Feiticeira · Bruxa · Maga</span>
+        <span class="tag cyan-tag">Feiticeira  Bruxa  Maga</span>
         <span class="tag divine-tag">Ascendida</span>
       </div>
     </div>
@@ -2239,72 +2239,72 @@ nav a { white-space: nowrap; }
 
     <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
-        <div class="power-icon-big">🌊</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Herança de Poseidon</div>
-        <div class="power-title">Domínio dos Mares</div>
-        <div class="power-body">Como filha de Poseidon, Nimsay possui controle absoluto sobre a água em todas as suas formas — oceanos, rios, chuva, gelo e vapor. Pode invocar tsunamis com um gesto, criar redomas de água impenetráveis e mover-se pela água com velocidade sobrenatural. Em ambientes aquáticos, seu poder é amplificado exponencialmente.</div>
+        <div class="power-origin">Herana de Poseidon</div>
+        <div class="power-title">Dom&iacute;nio dos Mares</div>
+        <div class="power-body">Como filha de Poseidon, Nimsay possui controle absoluto sobre a gua em todas as suas formas  oceanos, rios, chuva, gelo e vapor. Pode invocar tsunamis com um gesto, criar redomas de gua impenetrveis e mover-se pela gua com velocidade sobrenatural. Em ambientes aquticos, seu poder  amplificado exponencialmente.</div>
         <div class="power-bar-wrap"><div class="power-bar sea" data-width="96"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
-        <div class="power-icon-big">🌙</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Descendência da Deusa da Lua</div>
+        <div class="power-origin">Descendncia da Deusa da Lua</div>
         <div class="power-title">Magia Lunar</div>
-        <div class="power-body">A herança lunar de Nimsay é sua fonte de poder mais antiga e misteriosa. Sob a luz da lua — especialmente na lua cheia — sua magia atinge o auge absoluto. Pode canalizar a luz lunar em feixes de energia pura, criar ilusões lunares perfeitas e acessar visões e profecias através da contemplação da lua.</div>
+        <div class="power-body">A heran&ccedil;a lunar de Nimsay  sua fonte de poder mais antiga e misteriosa. Sob a luz da lua  especialmente na lua cheia  sua magia atinge o auge absoluto. Pode canalizar a luz lunar em feixes de energia pura, criar iluses lunares perfeitas e acessar vises e profecias atravs da contemplao da lua.</div>
         <div class="power-bar-wrap"><div class="power-bar moon" data-width="98"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
-        <div class="power-icon-big">💫</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Herança de Afrodite</div>
+        <div class="power-origin">Herana de Afrodite</div>
         <div class="power-title">Encanto Divino & Aura de Amor</div>
-        <div class="power-body">De Afrodite herdou não apenas a beleza, mas o poder por trás dela. A aura de Nimsay pode enfraquecer a vontade de combate dos inimigos, criar laços de lealdade inabaláveis nos aliados e, nos momentos mais intensos, paralisar completamente qualquer ser que a olhe diretamente nos olhos.</div>
+        <div class="power-body">De Afrodite herdou n&atilde;o apenas a beleza, mas o poder por trs dela. A aura de Nimsay pode enfraquecer a vontade de combate dos inimigos, criar laos de lealdade inabalveis nos aliados e, nos momentos mais intensos, paralisar completamente qualquer ser que a olhe diretamente nos olhos.</div>
         <div class="power-bar-wrap"><div class="power-bar love" data-width="88"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
-        <div class="power-icon-big">🔮</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Aprendizado · Feiticeira & Bruxa</div>
-        <div class="power-title">Feitiçaria & Bruxaria</div>
-        <div class="power-body">Nimsay dedicou anos ao estudo das artes ocultas — feitiçaria e bruxaria se entrelaçam em seu estilo de combate de forma única. Domina rituais de proteção, maldições, poções e encantamentos. Sua feitiçaria é amplificada pela herança lunar, tornando cada ritual executado sob a lua devastadoramente mais poderoso.</div>
+        <div class="power-origin">Aprendizado  Feiticeira & Bruxa</div>
+        <div class="power-title">Feitiaria & Bruxaria</div>
+        <div class="power-body">Nimsay dedicou anos ao estudo das artes ocultas  feitiaria e bruxaria se entrelaam em seu estilo de combate de forma &uacute;nica. Domina rituais de prote&ccedil;&atilde;o, maldies, poes e encantamentos. Sua feitiaria  amplificada pela heran&ccedil;a lunar, tornando cada ritual executado sob a lua devastadoramente mais poderoso.</div>
         <div class="power-bar-wrap"><div class="power-bar divine" data-width="91"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
-        <div class="power-icon-big">⚗️</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Aprendizado · Maga</div>
+        <div class="power-origin">Aprendizado  Maga</div>
         <div class="power-title">Alta Magia</div>
-        <div class="power-body">Como aprendiz de maga, Nimsay acessa a camada mais elevada da magia — aquela que dobra as leis da realidade. Pode criar portais, manipular o tempo em pequena escala, conjurar entidades e lançar magias de área capazes de transformar o campo de batalha inteiro em seu favor.</div>
+        <div class="power-body">Como aprendiz de maga, Nimsay acessa a camada mais elevada da magia  aquela que dobra as leis da realidade. Pode criar portais, manipular o tempo em pequena escala, conjurar entidades e lanar magias de rea capazes de transformar o campo de batalha inteiro em seu favor.</div>
         <div class="power-bar-wrap"><div class="power-bar sea" data-width="93"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal reveal-nimsay">
       <div class="power-left">
-        <div class="power-icon-big">✨</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Condição Divina</div>
-        <div class="power-title">Ascensão · Nimsay</div>
-        <div class="power-body">Após a deificação, todos os poderes de Nimsay transcenderam seus limites anteriores. A magia lunar e o domínio dos mares se fundiram numa força única e indivisível. Como entidade ascendida, Nimsay não está mais sujeita às limitações mortais — sua magia não se esgota, sua presença ressoa no plano espiritual e sua vontade dobra a realidade.</div>
+        <div class="power-origin">Condi&ccedil;&atilde;o Divina</div>
+        <div class="power-title">Ascens&atilde;o  Nimsay</div>
+        <div class="power-body">Aps a deifica&ccedil;&atilde;o, todos os poderes de Nimsay transcenderam seus limites anteriores. A magia lunar e o dom&iacute;nio dos mares se fundiram numa for&ccedil;a &uacute;nica e indivis&iacute;vel. Como entidade ascendida, Nimsay n&atilde;o est mais sujeita s limitaes mortais  sua magia n&atilde;o se esgota, sua presena ressoa no plano espiritual e sua vontade dobra a realidade.</div>
         <div class="power-bar-wrap"><div class="power-bar moon" data-width="100"></div></div>
       </div>
     </div>
@@ -2312,37 +2312,37 @@ nav a { white-space: nowrap; }
   </div>
 </section>
 
-<!-- HISTÓRIA -->
+<!-- HISTRIA -->
 <section id="historia">
   <div class="section-header reveal reveal-nimsay">
-    <span class="section-label">Trajetória</span>
-    <h2>A História de Yasmin</h2>
+    <span class="section-label">Trajet&oacute;ria</span>
+    <h2>A Hist&oacute;ria de Yasmin</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="story-body">
     <div class="story-block reveal reveal-nimsay">
-      <div class="story-chapter">Capítulo I</div>
+      <div class="story-chapter">Cap&iacute;tulo I</div>
       <div class="story-title">A Filha dos Dois Mundos</div>
-      <p>Nascer filha de Poseidon e Afrodite é nascer entre dois mundos — a força bruta dos oceanos e a graça irresistível do amor. Yasmin cresceu aprendendo a equilibrar essas duas heranças, descobrindo cedo que a lua exercia sobre ela um fascínio que ia além do emocional: era uma conexão de sangue, antiga e poderosa.</p>
+      <p>Nascer filha de Poseidon e Afrodite  nascer entre dois mundos  a for&ccedil;a bruta dos oceanos e a graa irresistvel do amor. Yasmin cresceu aprendendo a equilibrar essas duas heran&ccedil;as, descobrindo cedo que a lua exercia sobre ela um fascnio que ia al&eacute;m do emocional: era uma conexo de sangue, antiga e poderosa.</p>
     </div>
 
     <div class="story-block reveal reveal-nimsay">
-      <div class="story-chapter">Capítulo II</div>
+      <div class="story-chapter">Cap&iacute;tulo II</div>
       <div class="story-title">O Encontro com Yuri</div>
-      <p>Conhecer Yuri — UchiHyuuga Yuri — foi o momento em que tudo se encaixou. Não era apenas atração: era reconhecimento. Dois seres com heranças impossíveis, destinados a caminhar juntos. Yasmin tornou-se sua companheira antes mesmo de compreender o que os aguardava. E permaneceu ao seu lado em cada batalha que se seguiu.</p>
+      <p>Conhecer Yuri  UchiHyuuga Yuri  foi o momento em que tudo se encaixou. N&atilde;o era apenas atrao: era reconhecimento. Dois seres com heran&ccedil;as impossveis, destinados a caminhar juntos. Yasmin tornou-se sua companheira antes mesmo de compreender o que os aguardava. E permaneceu ao seu lado em cada batalha que se seguiu.</p>
     </div>
 
     <div class="story-block reveal reveal-nimsay">
-      <div class="story-chapter">Capítulo III</div>
-      <div class="story-title">As Batalhas & A Evolução</div>
-      <p>O confronto com o Cavaleiro Negro foi o primeiro teste real de Yasmin como guerreira. Combinando feitiçaria lunar e domínio das águas, provou que não precisava de nenhum dos seis para se proteger — ela era uma força em si mesma. A cada batalha seguinte, seu domínio da magia aprofundou-se ainda mais.</p>
+      <div class="story-chapter">Cap&iacute;tulo III</div>
+      <div class="story-title">As Batalhas & A Evoluo</div>
+      <p>O confronto com o Cavaleiro Negro foi o primeiro teste real de Yasmin como guerreira. Combinando feitiaria lunar e dom&iacute;nio das guas, provou que n&atilde;o precisava de nenhum dos seis para se proteger  ela era uma for&ccedil;a em si mesma. A cada batalha seguinte, seu dom&iacute;nio da magia aprofundou-se ainda mais.</p>
     </div>
 
     <div class="story-block reveal reveal-nimsay">
-      <div class="story-chapter">Capítulo IV</div>
-      <div class="story-title">A Ascensão · Nimsay</div>
-      <p>Depois de A Besta — depois de tudo — o que restou de Yasmin era mais do que qualquer nome humano poderia conter. <strong>Nimsay</strong> emergiu da batalha como algo novo: uma entidade onde a filha de Poseidon, a descendente da lua e a maga se tornaram uma coisa só. Indivisível. Eterna.</p>
+      <div class="story-chapter">Cap&iacute;tulo IV</div>
+      <div class="story-title">A Ascens&atilde;o  Nimsay</div>
+      <p>Depois de A Besta  depois de tudo  o que restou de Yasmin era mais do que qualquer nome humano poderia conter. <strong>Nimsay</strong> emergiu da batalha como algo novo: uma entidade onde a filha de Poseidon, a descendente da lua e a maga se tornaram uma coisa s. Indivis&iacute;vel. Eterna.</p>
     </div>
   </div>
 </section>
@@ -2356,32 +2356,32 @@ nav a { white-space: nowrap; }
   </div>
 
   <div class="gallery-showcase reveal reveal-nimsay" id="galleryContainer">
-    <!-- O painel vivo será inserido aqui via JavaScript -->
+    <!-- O painel vivo ser inserido aqui via JavaScript -->
   </div>
 
   <div class="gallery-carousel-controls gallery-showcase-controls">
-    <button class="carousel-btn" id="prevBtn">← Fluxo anterior</button>
-    <span id="imageCounter" class="gallery-state-label">1 painel vivo · loop lunar</span>
-    <button class="carousel-btn" id="nextBtn">Próximo fluxo →</button>
+    <button class="carousel-btn" id="prevBtn">? Fluxo anterior</button>
+    <span id="imageCounter" class="gallery-state-label">1 painel vivo  loop lunar</span>
+    <button class="carousel-btn" id="nextBtn">Prximo fluxo ?</button>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-nav">
-    <a href="knull.html">← Knull</a>
-    <span class="footer-sep">·</span>
-    <a href="home.html">Início</a>
-    <span class="footer-sep">·</span>
-    <a href="onull.html">Onull →</a>
+    <a href="knull.html">? Knull</a>
+    <span class="footer-sep"></span>
+    <a href="home.html">In&iacute;cio</a>
+    <span class="footer-sep"></span>
+    <a href="onull.html">Onull ?</a>
   </div>
   <div class="footer-title">Nimsay</div>
-  <div class="footer-sub">"O mar e a lua nunca pedem permissão. Eu também não."</div>
-  <div class="footer-copy">O Diário de um Deus · Todos os direitos reservados</div>
+  <div class="footer-sub">"O mar e a lua nunca pedem permiss&atilde;o. Eu tamb&eacute;m n&atilde;o."</div>
+  <div class="footer-copy">O Di&aacute;rio de um Deus  Todos os direitos reservados</div>
 </footer>
 
 <script>
-/* ── COSMOS CANVAS ── */
+/* -- COSMOS CANVAS -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx = canvas.getContext('2d');
@@ -2405,7 +2405,7 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Névoas exclusivas da Nimsay: azul oceano e lilás lunar */
+    /* Nvoas exclusivas da Nimsay: azul oceano e lils lunar */
     nebulas = [];
     const colors = [
       'rgba(26,122,154,',
@@ -2424,7 +2424,7 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Partículas lunares flutuantes */
+    /* Partculas lunares flutuantes */
     moonParticles = [];
     for (let i = 0; i < 35; i++) {
       moonParticles.push({
@@ -2442,7 +2442,7 @@ nav a { white-space: nowrap; }
   function draw() {
     ctx.clearRect(0, 0, W, H);
 
-    /* Fundo: azul oceano profundo com toque lilás */
+    /* Fundo: azul oceano profundo com toque lils */
     const bg = ctx.createLinearGradient(0, 0, W, H);
     bg.addColorStop(0,   '#030510');
     bg.addColorStop(0.4, '#050812');
@@ -2451,7 +2451,7 @@ nav a { white-space: nowrap; }
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    /* Névoas */
+    /* Nvoas */
     nebulas.forEach(n => {
       const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
       grad.addColorStop(0, n.color + n.a + ')');
@@ -2462,7 +2462,7 @@ nav a { white-space: nowrap; }
       ctx.fill();
     });
 
-    /* Estrelas com cintilação em tom azulado */
+    /* Estrelas com cintilao em tom azulado */
     stars.forEach(s => {
       s.twinkle += s.speed * 0.04;
       const alpha = s.a * (0.5 + 0.5 * Math.sin(s.twinkle));
@@ -2472,7 +2472,7 @@ nav a { white-space: nowrap; }
       ctx.fill();
     });
 
-    /* Partículas lunares flutuantes */
+    /* Partculas lunares flutuantes */
     moonParticles.forEach(p => {
       p.x += p.speedX;
       p.y += p.speedY;
@@ -2518,7 +2518,7 @@ nav a { white-space: nowrap; }
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    /* Brilho azul sutil no rodapé */
+    /* Brilho azul sutil no rodap */
     const horizon = ctx.createLinearGradient(0, H * 0.75, 0, H);
     horizon.addColorStop(0, 'transparent');
     horizon.addColorStop(1, 'rgba(26,122,154,0.07)');
@@ -2534,7 +2534,7 @@ nav a { white-space: nowrap; }
   draw();
 })();
 
-/* ── PARALLAX DO BANNER ── */
+/* -- PARALLAX DO BANNER -- */
 (function () {
   const bg = document.querySelector('.banner-bg');
   if (!bg) return;
@@ -2553,7 +2553,7 @@ nav a { white-space: nowrap; }
   }, { passive: true });
 })();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function () {
   const els = document.querySelectorAll('.reveal');
 
@@ -2569,7 +2569,7 @@ nav a { white-space: nowrap; }
   els.forEach(el => io.observe(el));
 })();
 
-/* ── BARRAS DE PODER ── */
+/* -- BARRAS DE PODER -- */
 (function () {
   const bars = document.querySelectorAll('.power-bar');
 
@@ -2587,7 +2587,7 @@ nav a { white-space: nowrap; }
   bars.forEach(b => io.observe(b));
 })();
 
-/* ── LIGHTBOX DA GALERIA ── */
+/* -- LIGHTBOX DA GALERIA -- */
 (function () {
   const lb = document.createElement('div');
   lb.id = 'lightbox';
@@ -2728,7 +2728,7 @@ nav a { white-space: nowrap; }
   });
 })();
 
-/* ── MOBILE MENU TOGGLE ── */
+/* -- MOBILE MENU TOGGLE -- */
 (function () {
   const navbar = document.getElementById('navbar');
   const toggle = document.getElementById('menu-toggle');
@@ -2751,21 +2751,21 @@ nav a { white-space: nowrap; }
   }, { passive: true });
 })();
 
-/* ── SHOWCASE DE GALERIA DA NIMSAY ── */
+/* -- SHOWCASE DE GALERIA DA NIMSAY -- */
 (function() {
   const galleryImages = [
-    { src: 'img-nimsay/deusanim5.png', title: 'Forma Ascendida', desc: 'A presença divina mais pura de Nimsay, envolta por brilho celestial e força serena.' },
-    { src: 'img-nimsay/armadurabranca.png', title: 'Armadura Branca', desc: 'A versão régia e luminosa de Nimsay, moldada por elegância divina e proteção lunar.' },
-    { src: 'img-nimsay/armescura2.png', title: 'Armadura Sombria', desc: 'O lado místico e refinado da sua feitiçaria, guiado por luz, silêncio e precisão.' },
-    { src: 'img-nimsay/deusanim.png', title: 'Encarnação Divina', desc: 'A fusão entre magia, realeza e energia ancestral em uma presença quase eterna.' },
-    { src: 'img-nimsay/deusanim2.png', title: 'Aura Celestial', desc: 'Uma manifestação serena da ascensão, onde mar e lua se equilibram em poder.' },
-    { src: 'img-nimsay/deusanim3.png', title: 'Coroa Lunar', desc: 'A energia da lua tomando forma ao redor de Nimsay como um presságio antigo.' },
-    { src: 'img-nimsay/nim.png', title: 'Yasmin', desc: 'O rosto humano antes da ascensão, ainda carregando sinais da linhagem divina.' },
-    { src: 'img-nimsay/nim2.png', title: 'Herdeira dos Mares', desc: 'A força de Poseidon aparecendo em uma postura calma, profunda e inevitável.' },
-    { src: 'img-nimsay/nim3.png', title: 'Olhar de Feiticeira', desc: 'A presença de quem aprendeu a transformar encanto em magia e magia em destino.' },
-    { src: 'img-nimsay/nim4.png', title: 'Antes da Ascensão', desc: 'A transição entre Yasmin e Nimsay, ainda próxima do mundo humano.' },
-    { src: 'img-nimsay/nimsay1.png', title: 'Filha da Lua', desc: 'A herança lunar em destaque, fria, bela e poderosa.' },
-    { src: 'img-nimsay/Nimsay.png', title: 'Herança de Afrodite', desc: 'A delicadeza do encanto e do amor moldada em uma aura de deusa imortal.' }
+    { src: 'img-nimsay/deusanim5.png', title: 'Forma Ascendida', desc: 'A presena divina mais pura de Nimsay, envolta por brilho celestial e for&ccedil;a serena.' },
+    { src: 'img-nimsay/armadurabranca.png', title: 'Armadura Branca', desc: 'A vers&atilde;o rgia e luminosa de Nimsay, moldada por elegncia divina e prote&ccedil;&atilde;o lunar.' },
+    { src: 'img-nimsay/armescura2.png', title: 'Armadura Sombria', desc: 'O lado mstico e refinado da sua feitiaria, guiado por luz, silncio e precis&atilde;o.' },
+    { src: 'img-nimsay/deusanim.png', title: 'Encarnao Divina', desc: 'A fus&atilde;o entre magia, realeza e energia ancestral em uma presena quase eterna.' },
+    { src: 'img-nimsay/deusanim2.png', title: 'Aura Celestial', desc: 'Uma manifestao serena da ascens&atilde;o, onde mar e lua se equilibram em poder.' },
+    { src: 'img-nimsay/deusanim3.png', title: 'Coroa Lunar', desc: 'A energia da lua tomando forma ao redor de Nimsay como um pressgio antigo.' },
+    { src: 'img-nimsay/nim.png', title: 'Yasmin', desc: 'O rosto humano antes da ascens&atilde;o, ainda carregando sinais da linhagem divina.' },
+    { src: 'img-nimsay/nim2.png', title: 'Herdeira dos Mares', desc: 'A for&ccedil;a de Poseidon aparecendo em uma postura calma, profunda e inevitvel.' },
+    { src: 'img-nimsay/nim3.png', title: 'Olhar de Feiticeira', desc: 'A presena de quem aprendeu a transformar encanto em magia e magia em destino.' },
+    { src: 'img-nimsay/nim4.png', title: 'Antes da Ascens&atilde;o', desc: 'A transio entre Yasmin e Nimsay, ainda prxima do mundo humano.' },
+    { src: 'img-nimsay/nimsay1.png', title: 'Filha da Lua', desc: 'A heran&ccedil;a lunar em destaque, fria, bela e poderosa.' },
+    { src: 'img-nimsay/Nimsay.png', title: 'Herana de Afrodite', desc: 'A delicadeza do encanto e do amor moldada em uma aura de deusa imortal.' }
   ];
 
   const panels = [
@@ -2813,7 +2813,7 @@ nav a { white-space: nowrap; }
   function renderPanels() {
     container.innerHTML = '';
     panels.forEach((panel, idx) => container.appendChild(buildPanel(panel, idx)));
-    stateLabel.textContent = `${galleryImages.length} imagens únicas · loop em um painel`;
+    stateLabel.textContent = `${galleryImages.length} imagens &uacute;nicas  loop em um painel`;
     document.getElementById('galeria')?.setAttribute('data-loop-patched', 'true');
     applyTilt();
   }
@@ -2915,7 +2915,7 @@ nav a { white-space: nowrap; }
 })();
 
 
-/* ── CURSOR AURA DA NIMSAY ── */
+/* -- CURSOR AURA DA NIMSAY -- */
 (function () {
   if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -2945,7 +2945,7 @@ nav a { white-space: nowrap; }
   animate();
 })();
 
-/* ── PARTÍCULAS ETÉREAS DO BANNER ── */
+/* -- PARTCULAS ETREAS DO BANNER -- */
 (function () {
   const canvas = document.getElementById('banner-fx');
   const banner = document.getElementById('banner');
@@ -3005,7 +3005,7 @@ nav a { white-space: nowrap; }
   draw();
 })();
 
-/* ── PARALLAX ETÉREO DO BANNER ── */
+/* -- PARALLAX ETREO DO BANNER -- */
 (function () {
   const bg = document.querySelector('.banner-bg');
   const content = document.querySelector('.banner-content');
@@ -3026,7 +3026,7 @@ nav a { white-space: nowrap; }
   }, { passive: true });
 })();
 
-/* ── REALCE SUAVE EM CARDS IMPORTANTES ── */
+/* -- REALCE SUAVE EM CARDS IMPORTANTES -- */
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   document.querySelectorAll('.power-item, .story-block, .about-photo').forEach((el) => {
@@ -3040,7 +3040,7 @@ nav a { white-space: nowrap; }
   });
 })();
 
-/* ── SEÇÕES COM AURA SUAVE ── */
+/* -- SE&Ccedil;&Otilde;ES COM AURA SUAVE -- */
 (function () {
   document.querySelectorAll('main section, body > section').forEach((section) => {
     if (!section.querySelector('.section-aura')) {
@@ -3059,7 +3059,7 @@ nav a { white-space: nowrap; }
   document.querySelectorAll('body > section').forEach((section) => io.observe(section));
 })();
 
-/* ── PARTÍCULAS SUAVES NO CORPO DA PÁGINA ── */
+/* -- PARTCULAS SUAVES NO CORPO DA PGINA -- */
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const canvas = document.createElement('canvas');
@@ -3113,7 +3113,7 @@ nav a { white-space: nowrap; }
 
 <script>
 /* ==========================================================
-   Patch: transforma qualquer galeria da página em loop suave
+   Patch: transforma qualquer galeria da p&aacute;gina em loop suave
    ========================================================== */
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -3155,7 +3155,7 @@ nav a { white-space: nowrap; }
       <div class="smooth-loop-meta">
         <span class="smooth-loop-kicker">${label}</span>
         <strong class="smooth-loop-title">${first.title}</strong>
-        <span class="smooth-loop-desc">${first.desc || 'loop automático com transição suave'}</span>
+        <span class="smooth-loop-desc">${first.desc || 'loop autom&aacute;tico com transio suave'}</span>
       </div>
     `;
     return panel;
@@ -3176,7 +3176,7 @@ nav a { white-space: nowrap; }
     hidden.classList.add('is-visible');
     panel.dataset.current = String(current);
     panel.querySelector('.smooth-loop-title').textContent = data.title;
-    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop automático com transição suave';
+    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop autom&aacute;tico com transio suave';
   }
 
   function upgradeGallery() {
@@ -3202,9 +3202,9 @@ nav a { white-space: nowrap; }
     const controls = document.createElement('div');
     controls.className = 'smooth-loop-controls';
     controls.innerHTML = `
-      <button class="smooth-loop-btn" type="button" data-loop-prev>← Anterior</button>
-      <span class="smooth-loop-state">${images.length} imagens · looping suave</span>
-      <button class="smooth-loop-btn" type="button" data-loop-next>Próxima →</button>
+      <button class="smooth-loop-btn" type="button" data-loop-prev>? Anterior</button>
+      <span class="smooth-loop-state">${images.length} imagens  looping suave</span>
+      <button class="smooth-loop-btn" type="button" data-loop-next>Pr&oacute;xima ?</button>
     `;
     const oldControls = section.querySelector('.gallery-carousel-controls');
     if (oldControls) oldControls.replaceWith(controls);
@@ -3240,7 +3240,7 @@ nav a { white-space: nowrap; }
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — nimsay.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  nimsay.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -3254,3 +3254,7 @@ nav a { white-space: nowrap; }
 
 </body>
 </html>
+
+
+
+

@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Última Noite da Luz — O Diário de um Deus</title>
+    <title>A &Uacute;ltima Noite da Luz &mdash; O Di&aacute;rio de um Deus</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap"
         rel="stylesheet">
+<link rel="stylesheet" href="responsive-fixes.css">
     <style>
         :root {
             --void: #030308;
@@ -112,7 +113,7 @@
         .hero-bg {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, rgba(3, 3, 8, .1), rgba(3, 3, 8, .95)), radial-gradient(ellipse at 50% 30%, rgba(201, 168, 76, .22), transparent 55%), url('img-baile/baile-banner.jpg');
+            background: linear-gradient(to bottom, rgba(3, 3, 8, .1), rgba(3, 3, 8, .95)), radial-gradient(ellipse at 50% 30%, rgba(201, 168, 76, .22), transparent 55%), url('img-baile/baile.png');
             background-size: cover;
             background-position: center;
             transform: scale(1.08);
@@ -604,7 +605,7 @@
   color: var(--gold-dim);
 }
 
-/* Animações */
+/* Animaes */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); filter: blur(3px); }
   to   { opacity: 1; transform: translateY(0); filter: blur(0); }
@@ -617,7 +618,7 @@
 }
 .reveal.visible { opacity: 1; transform: none; }
 
-/* ── RESPONSIVO HERO ── */
+/* -- RESPONSIVO HERO -- */
 @media (max-width: 768px) {
   nav { gap: 1rem; flex-wrap: wrap; padding: 0.9rem 1rem; }
   nav a { font-size: 0.65rem; }
@@ -644,7 +645,7 @@
 </head>
 
   <audio autoplay loop hidden>
-    <source src="audio/themebaile5.mp3" type="audio/mpeg" />
+    <source src="audio/themebaile4.mp3" type="audio/mpeg" />
   </audio>
 
 
@@ -652,78 +653,78 @@
     <canvas id="cosmos"></canvas>
     <div class="noise"></div>
     <nav><a href="home.html" class="nav-logo"><img src="img-logo/olhos.jpg" alt="Logo"></a><a
-            href="home.html">Início</a><a href="#preparacao">Preparação</a><a href="#centro">Centro de Tudo</a><a
-            href="#baile">O Baile</a><a href="#escuridao">A Escuridão</a></nav>
+            href="home.html">In&iacute;cio</a><a href="#preparacao">Preparao</a><a href="#centro">Centro de Tudo</a><a
+            href="#baile">O Baile</a><a href="#escuridao">A Escurid&atilde;o</a></nav>
     <header class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
-            <p class="eyebrow">Registro Histórico · Era de Paz</p>
-            <h1 class="hero-title">A Última Noite da Luz</h1>
-            <p class="hero-subtitle">No auge da paz, deuses e guardiões se reuniram para celebrar. Naquela noite, o
-                universo dançou pela última vez antes da chegada dela.</p>
+            <p class="eyebrow">Registro Histrico  Era de Paz</p>
+            <h1 class="hero-title">A &Uacute;ltima Noite da Luz</h1>
+            <p class="hero-subtitle">No auge da paz, deuses e guardies se reuniram para celebrar. Naquela noite, o
+                universo dan&atilde;ou pela &Uacute;ltima vez antes da chegada dela.</p>
             <div class="hero-actions"><a href="#preparacao" class="btn">Iniciar o Registro</a><a href="#escuridao"
                     class="btn dark">Ir para a Ruptura</a></div>
         </div>
     </header>
     <section id="preparacao" class="chapter">
         <div class="chapter-card reveal">
-            <div class="chapter-label">Ato I · Antes da queda</div>
-            <h2 class="chapter-title">A Preparação</h2>
+            <div class="chapter-label">Ato I  Antes da queda</div>
+            <h2 class="chapter-title">A Preparao</h2>
             <div class="chapter-text">
-                <p>O grande dia chegou: deuses e guardiões se reuniriam para o baile de gala. Era uma noite de jantar,
-                    apresentações e da aguardada dança dos deuses.</p>
-                <p>Naquela era, poucos ainda sabiam quem eram os antigos heróis. Os nomes de Knull, Onull, Anull e suas
-                    companheiras já haviam se tornado mitos contados às novas gerações.</p>
-                <p>Entre roupas de gala, brincadeiras familiares e memórias antigas, a paz parecia finalmente real.</p>
+                <p>O grande dia chegou: deuses e guardies se reuniriam para o baile de gala. Era uma noite de jantar,
+                    apresentaes e da aguardada dana dos deuses.</p>
+                <p>Naquela era, poucos ainda sabiam quem eram os antigos her&oacute;is. Os nomes de Knull, Onull, Anull e suas
+                    companheiras j haviam se tornado mitos contados s novas geraes.</p>
+                <p>Entre roupas de gala, brincadeiras familiares e memrias antigas, a paz parecia finalmente real.</p>
             </div>
         </div>
         <div class="visual-panel reveal" style="background-image:url('img-baile/preparacao.png')">
-            <div class="visual-caption">Família · Memória · Última tranquilidade</div>
+            <div class="visual-caption">Famlia  Memria  &Uacute;ltima tranquilidade</div>
         </div>
     </section>
     <section id="centro" class="chapter reverse">
         <div class="visual-panel reveal" style="background-image:url('img-baile/planeta.png')">
-            <div class="visual-caption">O Centro de Tudo · Galáxia primordial</div>
+            <div class="visual-caption">O Centro de Tudo  Galxia primordial</div>
         </div>
         <div class="chapter-card reveal">
-            <div class="chapter-label">Ato II · O lugar impossível</div>
+            <div class="chapter-label">Ato II  O lugar imposs&iacute;vel</div>
             <h2 class="chapter-title">O Centro de Tudo</h2>
             <div class="chapter-text">
-                <p>O evento acontecia em um planeta primordial no coração do Centro de Tudo: uma galáxia conectada a
-                    infinitas galáxias, bela, viva e colorida.</p>
-                <p>Ali, palácios, jardins e salões monumentais guardavam memórias de eras passadas, batalhas vencidas e
+                <p>O evento acontecia em um planeta primordial no cora&ccedil;&atilde;o do Centro de Tudo: uma galxia conectada a
+                    infinitas galxias, bela, viva e colorida.</p>
+                <p>Ali, palcios, jardins e sales monumentais guardavam memrias de eras passadas, batalhas vencidas e
                     nomes que o tempo transformou em lenda.</p>
             </div>
         </div>
     </section>
     <section id="baile" class="chapter">
         <div class="chapter-card reveal">
-            <div class="chapter-label">Ato III · A dança dos deuses</div>
+            <div class="chapter-label">Ato III  A dana dos deuses</div>
             <h2 class="chapter-title">O Baile</h2>
             <div class="chapter-text">
-                <p>O anfitrião anunciou uma mudança: antes dos discursos e apresentações, todos começariam com a dança
+                <p>O anfitrio anunciou uma mudana: antes dos discursos e apresentaes, todos comeariam com a dana
                     de gala.</p>
-                <p>Em um piscar de olhos, o salão se transformou. Mesas desapareceram, pares se alinharam, a música
-                    começou e os deuses dançaram.</p>
+                <p>Em um piscar de olhos, o salo se transformou. Mesas desapareceram, pares se alinharam, a msica
+                    comeou e os deuses danaram.</p>
                 <p>Por alguns instantes, tudo parecia perfeito demais para terminar.</p>
             </div>
         </div>
         <div class="visual-panel reveal" style="background-image:url('img-baile/danca.png')">
-            <div class="visual-caption">A dança · O último brilho da era</div>
+            <div class="visual-caption">A dana  O &Uacute;ltimo brilho da era</div>
         </div>
     </section>
     <section id="interrupcao" class="chapter reverse">
         <div class="visual-panel reveal" style="background-image:url('img-baile/parou.png')">
-            <div class="visual-caption">O instante em que a música parou</div>
+            <div class="visual-caption">O instante em que a msica parou</div>
         </div>
         <div class="chapter-card reveal">
-            <div class="chapter-label">Ato IV · O silêncio</div>
-            <h2 class="chapter-title">Knull parou de dançar</h2>
+            <div class="chapter-label">Ato IV  O silncio</div>
+            <h2 class="chapter-title">Knull parou de danar</h2>
             <div class="chapter-text">
                 <p>No meio da coreografia, Knull interrompeu seus passos. Nimsay percebeu seu olhar, e logo os outros
-                    também sentiram.</p>
-                <p>Não houve tempo para aviso. Uma onda de escuridão invadiu o salão, destruindo tudo que tocava.</p>
-                <p>O palácio virou poeira. A música morreu. A paz terminou.</p>
+                    tamb&eacute;m sentiram.</p>
+                <p>N&atilde;o houve tempo para aviso. Uma onda de escurid&atilde;o invadiu o salo, destruindo tudo que tocava.</p>
+                <p>O palcio virou poeira. A msica morreu. A paz terminou.</p>
             </div>
         </div>
     </section>
@@ -732,45 +733,43 @@
         <div class="rift r2"></div>
         <div class="rift r3"></div>
         <div class="dark-content reveal">
-            <p class="dark-eyebrow">Ato V · A prisão se rompeu</p>
+            <p class="dark-eyebrow">Ato V  A pris&atilde;o se rompeu</p>
             <h2 class="dark-title">Ela chegou.</h2>
-            <p class="dark-sub">A onda passou. O palácio caiu. O escudo ainda protegia os sobreviventes, mas o universo
+            <p class="dark-sub">A onda passou. O palcio caiu. O escudo ainda protegia os sobreviventes, mas o universo
                 inteiro pareceu respirar com medo.</p>
-            <div class="final-line">A última noite da luz havia acabado.</div>
+            <div class="final-line">A &Uacute;ltima noite da luz havia acabado.</div>
         </div>
     </section>
     <section class="soldier-section">
         <div class="soldier-card reveal">
             <div class="dialogue">
-                <p>Dos destroços, um soldado cambaleou, ferido, os olhos presos em algo que ninguém ainda podia ver.</p>
-                <p><strong>— E-ela... ela chegou...</strong></p>
-                <p>— Ela quem...soldado?- Knull perguntou a ele e seus olhos ficaram <span class="black-eyes">completamente
+                <p>Dos destroos, um soldado cambaleou, ferido, os olhos presos em algo que ningum ainda podia ver.</p>
+                <p><strong> E-ela... ela chegou...</strong></p>
+                <p> Ela quem...soldado?- Knull perguntou a ele e seus olhos ficaram <span class="black-eyes">completamente
                         negros</span>.</p>
             </div>
-            <div class="last-word">A Escuridão.</div>
-            <div class="end-actions"><a href="home.html" class="btn">Voltar ao início</a>
+            <div class="last-word">A Escurid&atilde;o.</div>
+            <div class="end-actions"><a href="home.html" class="btn">Voltar ao in&iacute;cio</a></div>
         </div>
     </section>
     <script>
         (function () { const canvas = document.getElementById('cosmos'), ctx = canvas.getContext('2d'); let W, H, p = []; function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight } function init() { p = []; for (let i = 0; i < 180; i++)p.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.6 + .2, a: Math.random() * .7 + .1, sx: (Math.random() - .5) * .15, sy: Math.random() * .2 + .04, tw: Math.random() * Math.PI * 2, kind: Math.random() > .72 ? 'dark' : 'gold' }) } function draw() { ctx.clearRect(0, 0, W, H); p.forEach(o => { o.x += o.sx; o.y += o.sy; o.tw += .018; if (o.y > H + 10) { o.y = -10; o.x = Math.random() * W } const a = o.a * (.5 + .5 * Math.sin(o.tw)); const c = o.kind === 'dark' ? `rgba(80,0,110,${a * .55})` : `rgba(240,208,120,${a})`; const g = ctx.createRadialGradient(o.x, o.y, 0, o.x, o.y, o.r * 6); g.addColorStop(0, c); g.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(o.x, o.y, o.r * 6, 0, Math.PI * 2); ctx.fill() }); requestAnimationFrame(draw) } addEventListener('resize', () => { resize(); init() }); resize(); init(); draw() })();
         (function () { const els = document.querySelectorAll('.reveal'); const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) }, { threshold: .12 }); els.forEach(el => io.observe(el)) })();
     </script>
-</body>
-
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — baile.html
-  // A escuridão é libertada quando o usuário lê "A Escuridão"
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  baile.html
+  // A escurid&atilde;o  libertada quando o usurio l "A Escurid&atilde;o"
   (function() {
     const lastWordElement = document.querySelector('.last-word');
     
-    if (lastWordElement && lastWordElement.textContent.includes('Escuridão')) {
-      // Aguarda o usuário ler e depois liberta
+    if (lastWordElement && lastWordElement.textContent.includes('Escurid&atilde;o')) {
+      // Aguarda o usurio ler e depois liberta
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting && !window.darknessSystem.isLiberated()) {
-            // Elemento visível na tela
+            // Elemento vis&iacute;vel na tela
             setTimeout(() => {
               observer.disconnect();
             }, 1500);
@@ -781,7 +780,7 @@
       observer.observe(lastWordElement);
     }
 
-    // Ativa mensagens aleatórias nesta página
+    // Ativa mensagens aleatrias nesta p&aacute;gina
     window.addEventListener('load', () => {
       setTimeout(() => {
         if (!window.darknessSystem.isLiberated()) {
@@ -795,3 +794,8 @@
 </body>
 
 </html>
+
+
+
+
+

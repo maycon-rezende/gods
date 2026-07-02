@@ -343,3 +343,104 @@ nav a {
     padding-top: 4.5rem !important;
   }
 }
+
+/* Safety layer: keeps mixed page-level CSS from breaking the layout. */
+*, *::before, *::after {
+  min-width: 0;
+}
+
+nav {
+  display: flex !important;
+}
+
+.nav-logo,
+nav .nav-logo {
+  flex: 0 0 auto;
+}
+
+.hero-content,
+.banner-content,
+.section-header,
+.story-body,
+.synopsis-body,
+.timeline,
+.cards-grid,
+.powers-grid,
+.gallery-grid,
+.gallery-container,
+.gallery-showcase,
+.footer-inner {
+  width: min(100%, var(--content-max, 1200px));
+}
+
+.gallery-item,
+.gallery-card,
+.photo-item,
+.visual-panel,
+.about-photo,
+.portrait,
+.char-card,
+.villain-card,
+.region-card,
+.power-block,
+.story-block {
+  overflow: hidden;
+}
+
+.gallery-item,
+.gallery-card,
+.visual-panel,
+.about-photo,
+.portrait {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+  nav {
+    display: flex !important;
+    position: fixed;
+    left: 0;
+    right: 0;
+    max-height: 72px;
+  }
+
+  nav.mobile-open {
+    max-height: none;
+  }
+
+  #mobile-menu-btn,
+  #mobile-nav {
+    display: none !important;
+  }
+
+  body {
+    padding-top: 0;
+  }
+
+  .banner-stats,
+  .stats-grid,
+  .about-tags,
+  .char-tags,
+  .footer-nav,
+  .gallery-carousel-controls,
+  .smooth-loop-controls {
+    flex-wrap: wrap;
+  }
+
+  .timeline::before {
+    left: 1rem !important;
+  }
+
+  .tl-item,
+  .tl-item.left,
+  .tl-item.right {
+    grid-template-columns: 1.5rem minmax(0, 1fr) !important;
+  }
+
+  .tl-empty,
+  .bstat-sep {
+    display: none !important;
+  }
+}

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>O Diário de um Deus</title>
+  <title>O Di&aacute;rio de um Deus</title>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="responsive-fixes.css">
@@ -667,7 +667,7 @@
   
 
 /* ==========================================================
-   PATCH RESPONSIVO + GALERIA LOOP SUAVE — revisão ChatGPT
+   PATCH RESPONSIVO + GALERIA LOOP SUAVE  revis&atilde;o ChatGPT
    ========================================================== */
 html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 body { min-width: 0; }
@@ -892,7 +892,7 @@ nav a { white-space: nowrap; }
 
     <div id="title-wrap">
       <h1 id="title">
-        <span id="title-sub">O Diário de um</span>
+        <span id="title-sub">O Di&aacute;rio de um</span>
         Deus
       </h1>
 
@@ -904,7 +904,7 @@ nav a { white-space: nowrap; }
     <div id="divider"></div>
 
     <p id="phrase">
-      Eu não nasci como um deus.<br>
+      Eu n&atilde;o nasci como um deus.<br>
       Eu me tornei um.
     </p>
 
@@ -912,15 +912,15 @@ nav a { white-space: nowrap; }
 
     <div id="names">
       <span class="char-name gods">Knull</span>
-      <span class="name-sep">·</span>
+      <span class="name-sep"></span>
       <span class="char-name gods">Onull</span>
-      <span class="name-sep">·</span>
+      <span class="name-sep"></span>
       <span class="char-name gods">Anull</span>
-      <span class="name-sep long">—</span>
+      <span class="name-sep long"></span>
       <span class="char-name guardians">Nimsay</span>
-      <span class="name-sep">·</span>
+      <span class="name-sep"></span>
       <span class="char-name guardians">Kaelith</span>
-      <span class="name-sep">·</span>
+      <span class="name-sep"></span>
       <span class="char-name guardians">Lyra</span>
     </div>
 
@@ -1178,7 +1178,7 @@ nav a { white-space: nowrap; }
   </script>
 
   <script>
-    /* ── CONTROLE DE ÁUDIO ── */
+    /* -- CONTROLE DE UDIO -- */
     (function () {
       const audio = document.getElementById('bg-audio') || document.querySelector('audio');
       const hint = document.getElementById('audio-hint');
@@ -1210,7 +1210,7 @@ nav a { white-space: nowrap; }
         }
       }
 
-      // Tentativa automática: funciona em alguns navegadores, mas mobile costuma bloquear.
+      // Tentativa automtica: funciona em alguns navegadores, mas mobile costuma bloquear.
       const tryAutoPlay = () => window.setTimeout(playAudio, 120);
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', tryAutoPlay, { once: true });
@@ -1218,7 +1218,7 @@ nav a { white-space: nowrap; }
         tryAutoPlay();
       }
 
-      // No mobile o play precisa acontecer dentro do toque real do usuário.
+      // No mobile o play precisa acontecer dentro do toque real do usurio.
       const unlock = async (event) => {
         if (event && event.cancelable && event.currentTarget === hint) event.preventDefault();
         await playAudio();
@@ -1236,7 +1236,7 @@ nav a { white-space: nowrap; }
         });
       }
 
-      // Garantia extra: qualquer primeiro toque na tela também tenta destravar o áudio.
+      // Garantia extra: qualquer primeiro toque na tela tamb&eacute;m tenta destravar o udio.
       ['touchend', 'pointerup', 'click'].forEach((evt) => {
         document.addEventListener(evt, () => {
           if (audio.paused) playAudio();
@@ -1252,7 +1252,7 @@ nav a { white-space: nowrap; }
 
 <script>
 /* ==========================================================
-   Patch: transforma qualquer galeria da página em loop suave
+   Patch: transforma qualquer galeria da p&aacute;gina em loop suave
    ========================================================== */
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1294,7 +1294,7 @@ nav a { white-space: nowrap; }
       <div class="smooth-loop-meta">
         <span class="smooth-loop-kicker">${label}</span>
         <strong class="smooth-loop-title">${first.title}</strong>
-        <span class="smooth-loop-desc">${first.desc || 'loop automático com transição suave'}</span>
+        <span class="smooth-loop-desc">${first.desc || 'loop autom&aacute;tico com transio suave'}</span>
       </div>
     `;
     return panel;
@@ -1315,7 +1315,7 @@ nav a { white-space: nowrap; }
     hidden.classList.add('is-visible');
     panel.dataset.current = String(current);
     panel.querySelector('.smooth-loop-title').textContent = data.title;
-    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop automático com transição suave';
+    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop autom&aacute;tico com transio suave';
   }
 
   function upgradeGallery() {
@@ -1341,9 +1341,9 @@ nav a { white-space: nowrap; }
     const controls = document.createElement('div');
     controls.className = 'smooth-loop-controls';
     controls.innerHTML = `
-      <button class="smooth-loop-btn" type="button" data-loop-prev>← Anterior</button>
-      <span class="smooth-loop-state">${images.length} imagens · looping suave</span>
-      <button class="smooth-loop-btn" type="button" data-loop-next>Próxima →</button>
+      <button class="smooth-loop-btn" type="button" data-loop-prev>? Anterior</button>
+      <span class="smooth-loop-state">${images.length} imagens  looping suave</span>
+      <button class="smooth-loop-btn" type="button" data-loop-next>Pr&oacute;xima ?</button>
     `;
     const oldControls = section.querySelector('.gallery-carousel-controls');
     if (oldControls) oldControls.replaceWith(controls);
@@ -1378,21 +1378,21 @@ nav a { white-space: nowrap; }
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão no index
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o no index
   (function() {
-    // Mostra mensagem aleatória antes que o usuário entre
+    // Mostra mensagem aleatria antes que o usurio entre
     window.addEventListener('load', () => {
       setTimeout(() => {
         window.initRandomMessages(12000, 35000);
       }, 2000);
     });
 
-    // Quando clica em "Entrar", não liberamos a escuridão ainda.
-    // Isso mantém as mensagens sutis funcionando nas próximas páginas.
+    // Quando clica em "Entrar", n&atilde;o liberamos a escurid&atilde;o ainda.
+    // Isso mantm as mensagens sutis funcionando nas prximas p&aacute;ginas.
     const enterBtn = document.getElementById('enter-btn');
     if (enterBtn) {
       enterBtn.addEventListener('click', function() {
-        // O clique apenas avança a entrada, sem alterar o estado da escuridão.
+        // O clique apenas avana a entrada, sem alterar o estado da escurid&atilde;o.
       });
     }
   })();
@@ -1400,3 +1400,6 @@ nav a { white-space: nowrap; }
 
 </body>
 </html>
+
+
+

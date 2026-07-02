@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Institui&ccedil;&atilde;o como Mestres &mdash; O Di&aacute;rio de um Deus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="effects.css">
+<link rel="stylesheet" href="responsive-fixes.css">
+<style>
+:root{--gold:#c9a84c;--gold-light:#f0d080;--void:#030308;--deep:#080812;--surface:#12121f;--text:#e8dcc8;--muted:#a99d86;--accent:#6a4fcf;--accent2:#2af0e8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:'EB Garamond',Georgia,serif;font-size:18px;line-height:1.75;overflow-x:hidden}
+#cosmos-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:center;gap:clamp(.7rem,2vw,2rem);padding:.9rem 1rem;background:linear-gradient(to bottom,rgba(3,3,8,.96),rgba(3,3,8,.55),transparent);backdrop-filter:blur(6px);flex-wrap:wrap}
+nav a{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);text-decoration:none}
+.nav-logo img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid rgba(201,168,76,.4)}
+.hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;padding:7rem clamp(1.2rem,5vw,5rem) 5rem;background:linear-gradient(to top,var(--void),rgba(3,3,8,.35)),linear-gradient(to right,rgba(3,3,8,.84),rgba(3,3,8,.15)),url('img-nucleo/dominioyuri.png') center/cover no-repeat}
+.hero-content{position:relative;z-index:1;max-width:850px}
+.kicker{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--accent2);margin-bottom:1rem}
+h1{font-family:'Cinzel Decorative',serif;font-size:clamp(3.2rem,9vw,7rem);line-height:.95;color:var(--gold-light);text-shadow:0 0 34px rgba(106,79,207,.45)}
+.quote{max-width:620px;margin-top:1.5rem;color:var(--muted);font-style:italic;font-size:1.2rem}
+section{position:relative;z-index:1;padding:clamp(3.5rem,8vw,6rem) clamp(1.2rem,5vw,5rem)}
+.chapter{max-width:960px;margin:0 auto}
+.chapter-head{text-align:center;margin-bottom:3rem}
+.chapter-head span{font-family:'Cinzel',serif;letter-spacing:.28em;text-transform:uppercase;color:var(--accent2);font-size:.75rem}
+.chapter-head h2{font-family:'Cinzel Decorative',serif;font-size:clamp(2.2rem,5vw,4.4rem);color:var(--gold-light);margin-top:.6rem}
+.story-card{border:1px solid rgba(201,168,76,.18);background:linear-gradient(135deg,rgba(18,18,31,.88),rgba(3,3,8,.74));padding:clamp(1.4rem,4vw,2.4rem);margin:1.2rem 0;box-shadow:0 20px 70px rgba(0,0,0,.35)}
+.story-card h3{font-family:'Cinzel',serif;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;font-size:.9rem;margin-bottom:.8rem}
+.story-card p+p{margin-top:1rem}
+.masters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:2rem}
+.master{padding:1.2rem;border:1px solid rgba(42,240,232,.18);background:rgba(42,240,232,.06)}
+.master strong{display:block;font-family:'Cinzel',serif;color:var(--gold-light);font-size:.92rem;margin-bottom:.35rem}
+.chapter-nav{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;margin-top:3rem}
+.chapter-nav a{font-family:'Cinzel',serif;text-decoration:none;text-align:center;color:var(--gold-light);border:1px solid rgba(201,168,76,.35);padding:.9rem 1rem;background:rgba(201,168,76,.06)}
+.chapter-nav .mid{color:var(--muted);text-align:center;font-style:italic}
+footer{position:relative;z-index:1;text-align:center;color:var(--muted);padding:3rem 1rem 4rem}
+@media(max-width:760px){.masters,.chapter-nav{grid-template-columns:1fr}.hero{min-height:78vh}}
+</style>
+</head>
+<body>
+<audio autoplay loop hidden><source src="audio/themenucleo.mp3" type="audio/mpeg"></audio>
+<canvas id="cosmos-bg"></canvas>
+<nav>
+  <a href="home.html" class="nav-logo"><img src="img-logo/olhos.jpg" alt="Logo"></a>
+  <a href="jornada-cavaleiro.html">? Cap&iacute;tulo II</a>
+  <a href="#historia">Registro</a>
+  <a href="jornada-cavaleiro2.html">Prximo ?</a>
+</nav>
+<header class="hero">
+  <div class="hero-content">
+    <div class="kicker">Ascens&atilde;o  Depois da primeira batalha</div>
+    <h1>Institui&ccedil;&atilde;o<br>como Mestres</h1>
+    <p class="quote">"Depois da escola destruda e da cidade marcada, ningum podia fingir que ramos apenas adolescentes."</p>
+  </div>
+</header>
+<section id="historia">
+  <div class="chapter">
+    <div class="chapter-head">
+      <span>Cap&iacute;tulo III</span>
+      <h2>O Peso dos T&iacute;tulos</h2>
+    </div>
+    <article class="story-card reveal">
+      <h3>O Despertar</h3>
+      <p>A luta contra o Cavaleiro Negro deixou marcas no corpo e na alma. Quando acordei, eu j n&atilde;o sentia o mundo do mesmo jeito. A energia ao meu redor tinha textura, direo e inteno. Era como se a realidade tivesse parado de esconder suas engrenagens.</p>
+      <p>Lucas, Leonardo, Yasmin, Jssica e Anna tamb&eacute;m mudaram. N&atilde;o era apenas for&ccedil;a. Era responsabilidade. Sobrevivemos ao primeiro inimigo, mas aquela vitria nos colocou diante de algo maior: precisvamos entender quem ramos antes que outro inimigo nos obrigasse a descobrir na dor.</p>
+    </article>
+    <article class="story-card reveal">
+      <h3>A Institui&ccedil;&atilde;o</h3>
+      <p>Fomos chamados ao N&uacute;cleo da Forma, onde os dom&iacute;nios antigos reconhecem aquilo que j se tornou imposs&iacute;vel ignorar. Ali, diante de mestres, guardies e registros vivos, recebemos nomes de funo. N&atilde;o eram coroas. Eram pesos.</p>
+      <div class="masters">
+        <div class="master"><strong>Yuri</strong>Mestre Elemental, aquele que molda energia, matria e inteno.</div>
+        <div class="master"><strong>Lucas</strong>Mestre Humano, o vnculo entre coragem, magia e vontade.</div>
+        <div class="master"><strong>Leonardo</strong>Mestre Espiritual, o olhar que atravessa alma, memria e destino.</div>
+        <div class="master"><strong>Yasmin</strong>Guardi das iluses, prote&ccedil;&atilde;o e estratgia silenciosa.</div>
+        <div class="master"><strong>Jssica</strong>Feiticeira de vnculo, cura e resistncia emocional.</div>
+        <div class="master"><strong>Anna</strong>Guardio nascente da luz entre mundos inst&aacute;veis.</div>
+      </div>
+    </article>
+    <article class="story-card reveal">
+      <h3>A Promessa</h3>
+      <p>Naquela noite, antes de irmos embora, fizemos uma promessa simples: nenhum de ns carregaria tudo sozinho. Se o mundo nos chamasse de mestres, ento seramos mestres uns dos outros tamb&eacute;m.</p>
+      <p>Mas o universo tem um jeito cruel de testar promessas. E o Cavaleiro Negro ainda n&atilde;o tinha terminado conosco.</p>
+    </article>
+    <div class="chapter-nav reveal">
+      <a href="jornada-cavaleiro.html">? Cap&iacute;tulo II</a>
+      <div class="mid">A Jornada continua</div>
+      <a href="jornada-cavaleiro2.html">Cap&iacute;tulo IV ?</a>
+    </div>
+  </div>
+</section>
+<footer>O Di&aacute;rio de um Deus  Institui&ccedil;&atilde;o como Mestres</footer>
+<script src="effects.js"></script>
+<script src="darkness-system.js"></script>
+<script>
+(function(){window.addEventListener('load',()=>setTimeout(()=>{if(window.darknessSystem&&!window.darknessSystem.isLiberated())window.initRandomMessages(22000,60000)},2000));})();
+</script>
+</body>
+</html>
+
+
+
+

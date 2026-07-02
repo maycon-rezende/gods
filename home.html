@@ -1,15 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>O Diário de um Deus</title>
+<title>O Di&aacute;rio de um Deus</title>
+<meta name="description" content="O Di&aacute;rio de um Deus explora deuses, jornadas e a ascens&atilde;o de Kaelith, Onull e outros seres em um mundo de vingan&ccedil;a e justi&ccedil;a.">
+<meta property="og:title" content="O Di&aacute;rio de um Deus">
+<meta property="og:description" content="Descubra as deusas, her&oacute;is e vil&otilde;es de O Di&aacute;rio de um Deus em um site ambientado em um universo de justi&ccedil;a e reden&ccedil;&atilde;o.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img-logo/olhos.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="effects.css">
 <link rel="stylesheet" href="responsive-fixes.css">
 <style>
-  /* === CSS VIRÁ AQUI (Partes 2 e 3) === */
-  /* ── VARIÁVEIS E RESET ── */
+  /* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --gold: #c9a84c;
   --gold-light: #f0d080;
@@ -47,7 +52,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -126,7 +131,7 @@ nav a:hover {
   text-shadow: 0 0 20px rgba(201,168,76,0.6);
 }
 
-/* ── HERO ── */
+/* -- HERO -- */
 #hero {
   min-height: 100vh;
   display: flex;
@@ -230,7 +235,7 @@ h1.title span {
   animation: bounce 2s ease infinite;
 }
 
-/* ── ANIMAÇÕES BASE ── */
+/* -- ANIMA&Ccedil;&Otilde;ES BASE -- */
 @keyframes bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50%       { transform: translateX(-50%) translateY(8px); }
@@ -241,7 +246,7 @@ h1.title span {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ── REVEAL ON SCROLL ── */
+/* -- REVEAL ON SCROLL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -287,7 +292,7 @@ h2 {
   margin: 1.5rem auto 0;
 }
 
-/* ── SINOPSE ── */
+/* -- SINOPSE -- */
 #synopsis {
   padding: 2rem 0 5rem;
 }
@@ -325,7 +330,7 @@ h2 {
   font-size: 1.1rem;
 }
 
-/* ── TIMELINE ── */
+/* -- TIMELINE -- */
 #historia {
   padding-bottom: 5rem;
 }
@@ -416,7 +421,7 @@ h2 {
   line-height: 1.75;
 }
 
-/* ── PERSONAGENS ── */
+/* -- PERSONAGENS -- */
 #personagens {
   padding-bottom: 5rem;
 }
@@ -444,7 +449,7 @@ h2 {
 
 .char-group-label::before,
 .char-group-label::after {
-  content: '— ';
+  content: ' ';
 }
 
 .cards-grid {
@@ -457,8 +462,10 @@ h2 {
 }
 
 .char-card {
-  background: linear-gradient(135deg, var(--surface) 0%, var(--deep) 100%);
-  border: 1px solid rgba(201,168,76,0.12);
+  background:
+    linear-gradient(135deg, rgba(19, 19, 31, 0.96) 0%, rgba(7, 7, 15, 0.98) 100%),
+    radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08), transparent 68%);
+  border: 1px solid rgba(201,168,76,0.18);
   border-radius: 2px;
   padding: 2rem 1.6rem;
   position: relative;
@@ -521,7 +528,7 @@ h2 {
   font-family: 'Cinzel', serif;
   font-size: 1.05rem;
   font-weight: 900;
-  color: var(--gold-light);
+  color: #f0d080;
   margin-bottom: 0.2rem;
 }
 
@@ -529,7 +536,7 @@ h2 {
   font-family: 'Cinzel', serif;
   font-size: 0.72rem;
   letter-spacing: 0.2em;
-  color: var(--divine-light);
+  color: #a07af0;
   text-transform: uppercase;
   margin-bottom: 1rem;
   display: block;
@@ -539,7 +546,7 @@ h2 {
   font-size: 0.8rem;
   font-family: 'Cinzel', serif;
   letter-spacing: 0.15em;
-  color: var(--gold-dim);
+  color: #9d8438;
   text-transform: uppercase;
   margin-bottom: 0.8rem;
   padding-bottom: 0.8rem;
@@ -548,7 +555,7 @@ h2 {
 
 .char-desc {
   font-size: 0.92rem;
-  color: var(--text-dim);
+  color: #b8ab92;
   line-height: 1.75;
 }
 
@@ -585,7 +592,7 @@ h2 {
   color: var(--cyan);
 }
 
-/* ── LINKS DE PERSONAGENS ── */
+/* -- LINKS DE PERSONAGENS -- */
 .char-card-link {
   text-decoration: none;
   color: inherit;
@@ -605,7 +612,7 @@ h2 {
   border-color: rgba(160,122,240,0.5);
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 footer {
   text-align: center;
   padding: 4rem 2rem;
@@ -636,7 +643,7 @@ footer {
   text-transform: uppercase;
 }
 
-/* ── RESPONSIVO ── */
+/* -- RESPONSIVO -- */
 /* Extra Small: Smartphones < 360px */
 @media (max-width: 360px) {
   body { font-size: 16px; }
@@ -959,7 +966,7 @@ nav {
 .baile-event-bg {
   position: absolute;
   inset: 0;
-  background-image: url('img-baile/baile-banner.jpg');
+  background-image: url('img-baile/baile.png');
   background-size: cover;
   background-position: center;
   filter: brightness(0.55) saturate(1.05);
@@ -1053,7 +1060,7 @@ nav {
     0 0 80px rgba(0,0,0,1);
 }
 
-/* ── BOTÕES DA TIMELINE ── */
+/* -- BOTES DA TIMELINE -- */
 .tl-btn {
   display: inline-block;
   margin-top: 1rem;
@@ -1111,7 +1118,7 @@ nav {
   box-shadow: 0 0 12px rgba(80,208,224,0.15);
 }
 
-/* Dot clicável */
+/* Dot clicvel */
 .tl-dot-click {
   cursor: pointer;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -1143,14 +1150,14 @@ nav {
 <canvas id="cosmos-bg"></canvas>
 <!-- NAV -->
 <nav id="navbar">
-  <a href="#hero">Início</a>
-  <a href="#historia">História</a>
+  <a href="#hero">In&iacute;cio</a>
+  <a href="#historia">Hist&oacute;ria</a>
   <a href="regioes.html#journey-map">Mapa</a>
   <a href="#personagens">Personagens</a>
-  <a href="regioes.html">Regiões</a>
-  <a href="viloes.html">Vilões</a>
+  <a href="regioes.html">Regi&otilde;es</a>
+  <a href="viloes.html">Vil&otilde;es</a>
   <a href="baile.html">Baile</a>
-  <button id="menu-toggle" aria-label="Menu">☰</button>
+  <button id="menu-toggle" aria-label="Menu">&#10022;</button>
 </nav>
 
 <!-- HERO -->
@@ -1173,14 +1180,14 @@ nav {
 
   <p class="hero-eyebrow">A saga de Knull, Onull e Anull</p>
   <h1 class="title">
-    <span>O Diário de um</span>
+    <span>O Di&aacute;rio de um</span>
     Deus
   </h1>
   <div class="hero-divider"></div>
   <p class="hero-sub">
-    Éramos humanos. Depois, Mestres. Por fim, algo que o mundo ainda não tinha nome para descrever.
+    &Eacute;ramos humanos. Depois, Mestres. Por fim, algo que o mundo ainda n&atilde;o tinha nome para descrever.
   </p>
-  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+  <div class="scroll-hint">&darr; &nbsp; Role para baixo</div>
 </section>
 
 <!-- SINOPSE -->
@@ -1192,16 +1199,16 @@ nav {
   </div>
   <div class="synopsis-body">
     <p class="reveal">
-      Este é o relato de quem esteve lá — não como observador, mas como protagonista. A história começa com seis jovens cujos nomes ainda eram humanos: Yuri, Lucas, Leonardo, Yasmin, Jéssica e Anna. Unidos por laços que nem eles mesmos compreendiam completamente, foram arremessados contra forças que deveriam tê-los destruído.
+      Este &eacute; o relato de quem esteve l&aacute; &mdash; n&atilde;o como observador, mas como protagonista. A hist&oacute;ria come&ccedil;a com seis jovens cujos nomes ainda eram humanos: Yuri, Lucas, Leonardo, Yasmin, J&eacute;ssica e Anna. Unidos por la&ccedil;os que nem eles mesmos compreendiam completamente, foram arremessados contra for&ccedil;as que deveriam t&ecirc;-los destru&iacute;do.
     </p>
     <div class="highlight-box reveal">
-      "Nós não escolhemos o caminho dos deuses. O caminho nos escolheu — e nós decidimos não recuar."
+      "N&oacute;s n&atilde;o escolhemos o caminho dos deuses. O caminho nos escolheu &mdash; e n&oacute;s decidimos n&atilde;o recuar."
     </div>
     <p class="reveal">
-      Escrita na primeira pessoa por UchiHyuuga Yuri, a narrativa atravessa três grandes arcos: a ascensão à condição de Mestres após a derrota do Cavaleiro Negro, a segunda batalha e a evolução dos poderes, e por fim o confronto com A Besta — a primeira criatura forjada pelo Divino — que selou a transformação definitiva dos seis em entidades além da compreensão humana.
+      Escrita na primeira pessoa por UchiHyuuga Yuri, a narrativa atravessa tr&ecirc;s grandes arcos: a ascens&atilde;o &agrave; condi&ccedil;&atilde;o de Mestres ap&oacute;s a derrota do Cavaleiro Negro, a segunda batalha e a evolu&ccedil;&atilde;o dos poderes, e por fim o confronto com A Besta &mdash; a primeira criatura forjada pelo Divino &mdash; que selou a transforma&ccedil;&atilde;o definitiva dos seis em entidades al&eacute;m da compreens&atilde;o humana.
     </p>
     <p class="reveal">
-      O que você tem em mãos não é apenas um diário. É a memória viva de uma deificação.
+      O que voc&ecirc; tem em m&atilde;os n&atilde;o &eacute; apenas um di&aacute;rio. &Eacute; a mem&oacute;ria viva de uma deifica&ccedil;&atilde;o.
     </p>
   </div>
 </section>
@@ -1217,11 +1224,11 @@ nav {
 
     <div class="tl-item left reveal">
       <div class="tl-content">
-        <div class="tl-label">Arco I — Início</div>
+        <div class="tl-label">Arco I  In&iacute;cio</div>
         <div class="tl-title">O Encontro dos Seis</div>
-        <div class="tl-text">Yuri, Lucas, Leonardo, Yasmin, Jéssica e Anna. Seis indivíduos com origens e poderes distintos, reunidos pelo destino antes de compreenderem o peso daquele encontro.</div>
+        <div class="tl-text">Yuri, Lucas, Leonardo, Yasmin, J&eacute;ssica e Anna. Seis indiv&iacute;duos com origens e poderes distintos, reunidos pelo destino antes de compreenderem o peso daquele encontro.</div>
         <a href="jornada-encontro.html" class="tl-btn">
-          Ler este capítulo →
+          Ler este cap&iacute;tulo &rarr;
         </a>
       </div>
       <div class="tl-dot tl-dot-click" onclick="window.location='jornada-encontro.html'"></div>
@@ -1232,22 +1239,22 @@ nav {
       <div class="tl-empty"></div>
       <div class="tl-dot blood tl-dot-click" onclick="window.location='jornada-cavaleiro.html'"></div>
       <div class="tl-content">
-        <div class="tl-label">Arco I — Clímax</div>
+        <div class="tl-label">Arco I  Clmax</div>
         <div class="tl-title">Primeira Batalha: O Cavaleiro Negro</div>
-        <div class="tl-text">O primeiro grande antagonista surge. Numa luta que testou os limites de cada um dos seis, o Cavaleiro Negro foi derrotado — e o grupo provou ao mundo e a si mesmo do que era capaz.</div>
+        <div class="tl-text">O primeiro grande antagonista surge. Numa luta que testou os limites de cada um dos seis, o Cavaleiro Negro foi derrotado  e o grupo provou ao mundo e a si mesmo do que era capaz.</div>
         <a href="jornada-cavaleiro.html" class="tl-btn tl-btn-blood">
-          Ler este capítulo →
+          Ler este cap&iacute;tulo &rarr;
         </a>
       </div>
     </div>
 
     <div class="tl-item left reveal">
       <div class="tl-content">
-        <div class="tl-label">Ascensão</div>
-        <div class="tl-title">Instituição como Mestres</div>
-        <div class="tl-text">Yuri torna-se <em>Mestre Elemental</em>. Lucas, <em>Mestre Humano</em>. Leonardo, <em>Mestre Espiritual</em>. As meninas também evoluem, afirmando seus papéis como guardiãs e feiticeiras.</div>
+        <div class="tl-label">Ascens&atilde;o</div>
+        <div class="tl-title">Institui&ccedil;&atilde;o como Mestres</div>
+        <div class="tl-text">Yuri torna-se <em>Mestre Elemental</em>. Lucas, <em>Mestre Humano</em>. Leonardo, <em>Mestre Espiritual</em>. As meninas tamb&eacute;m evoluem, afirmando seus pap&eacute;is como guardi&atilde;s e feiticeiras.</div>
         <a href="jornada-mestres.html" class="tl-btn tl-btn-divine">
-          Ler este capítulo →
+          Ler este cap&iacute;tulo &rarr;
         </a>
       </div>
       <div class="tl-dot divine tl-dot-click" onclick="window.location='jornada-mestres.html'"></div>
@@ -1258,22 +1265,22 @@ nav {
       <div class="tl-empty"></div>
       <div class="tl-dot blood tl-dot-click" onclick="window.location='jornada-cavaleiro2.html'"></div>
       <div class="tl-content">
-        <div class="tl-label">Arco II — Retorno</div>
+        <div class="tl-label">Arco II  Retorno</div>
         <div class="tl-title">Segunda Batalha: O Cavaleiro Ressurge</div>
-        <div class="tl-text">O Cavaleiro Negro retorna mais poderoso. Desta vez, a vitória vem acompanhada de uma evolução extraordinária dos poderes — cada um dos seis ultrapassa os próprios limites anteriores.</div>
+        <div class="tl-text">O Cavaleiro Negro retorna mais poderoso. Desta vez, a vit&oacute;ria vem acompanhada de uma evolu&ccedil;&atilde;o extraordin&aacute;ria dos poderes &mdash; cada um dos seis ultrapassa os pr&oacute;prios limites anteriores.</div>
         <a href="jornada-cavaleiro2.html" class="tl-btn tl-btn-blood">
-          Ler este capítulo →
+          Ler este cap&iacute;tulo &rarr;
         </a>
       </div>
     </div>
 
     <div class="tl-item left reveal">
       <div class="tl-content">
-        <div class="tl-label">Arco III — O Fim de uma Era</div>
+        <div class="tl-label">Arco III  O Fim de uma Era</div>
         <div class="tl-title">A Besta: Primeira Criatura do Divino</div>
-        <div class="tl-text">O maior dos confrontos. A Besta, criatura primordial gerada pelo próprio Divino, exigiu tudo. O preço da vitória foi a humanidade de cada um — e o começo de algo inteiramente novo.</div>
+        <div class="tl-text">O maior dos confrontos. A Besta, criatura primordial gerada pelo pr&oacute;prio Divino, exigiu tudo. O pre&ccedil;o da vit&oacute;ria foi a humanidade de cada um &mdash; e o come&ccedil;o de algo inteiramente novo.</div>
         <a href="jornada-besta.html" class="tl-btn tl-btn-blood">
-          Ler este capítulo →
+          Ler este cap&iacute;tulo &rarr;
         </a>
       </div>
       <div class="tl-dot blood tl-dot-click" onclick="window.location='jornada-besta.html'"></div>
@@ -1284,11 +1291,11 @@ nav {
       <div class="tl-empty"></div>
       <div class="tl-dot cyan tl-dot-click" onclick="window.location='jornada-valar.html'"></div>
       <div class="tl-content">
-        <div class="tl-label">Transcendência</div>
-        <div class="tl-title">A Deificação — O Confronto com Valar</div>
-        <div class="tl-text">O último e maior antagonista. Valar — o primeiro ser a se deificar — foi o confronto que custou tudo. E foi nele que os seis deixaram de ser humanos para sempre. Os nomes antigos cederam lugar aos divinos.</div>
+        <div class="tl-label">Transcend&ecirc;ncia</div>
+        <div class="tl-title">A Deifica&ccedil;&atilde;o &mdash; O Confronto com Valar</div>
+        <div class="tl-text">O &uacute;ltimo e maior antagonista. Valar &mdash; o primeiro ser a se deificar &mdash; foi o confronto que custou tudo. E foi nele que os seis deixaram de ser humanos para sempre. Os nomes antigos cederam lugar aos divinos.</div>
         <a href="jornada-valar.html" class="tl-btn tl-btn-cyan">
-          Ler este capítulo →
+          Ler este cap&iacute;tulo &rarr;
         </a>
       </div>
     </div>
@@ -1304,26 +1311,26 @@ nav {
     <div class="section-rule"></div>
   </div>
   <p class="chars-intro reveal">
-    Antes, eram humanos com nomes comuns. Depois da deificação, os nomes antigos tornaram-se ecos — e os nomes divinos, eternidade.
+    Antes, eram humanos com nomes comuns. Depois da deifica&ccedil;&atilde;o, os nomes antigos tornaram-se ecos &mdash; e os nomes divinos, eternidade.
   </p>
 
-  <div class="char-group-label reveal">Os Três Mestres · Agora Deuses</div>
+  <div class="char-group-label reveal">Os Tr&ecirc;s Mestres &mdash; Agora Deuses</div>
   <div class="cards-grid">
 
     <a href="knull.html" class="char-card-link reveal">
       <div class="char-card">
         <div class="card-corner"></div>
-        <span class="char-sigil">⚡</span>
-        <div class="char-name">Yuri · Knull</div>
-        <span class="char-divine-name">→ Deus Knull</span>
-        <div class="char-role">Mestre Elemental · Narrador</div>
-        <div class="char-desc">UchiHyuuga — portador do sangue Uchiha e Hyuuga. Possui sangue Sayadin, armadura de ouro dos Cavaleiros do Zodíaco, habilidades de Shinigami e domina Chakra, Ki e Cosmos. A voz que registra o diário.</div>
+        <span class="char-sigil">&#10022;</span>
+        <div class="char-name">Yuri &mdash; Knull</div>
+        <span class="char-divine-name">Deus Knull</span>
+        <div class="char-role">Mestre Elemental &mdash; Narrador</div>
+        <div class="char-desc">UchiHyuuga, portador do sangue Uchiha e Hyuuga. Possui sangue Sayadin, armadura de ouro dos Cavaleiros do Zod&iacute;aco, habilidades de Shinigami e domina Chakra, Ki e Cosmos. A voz que registra o di&aacute;rio.</div>
         <div class="char-tags">
           <span class="tag">Uchiha</span>
           <span class="tag">Hyuuga</span>
           <span class="tag">Sayadin</span>
           <span class="tag divine-tag">Shinigami</span>
-          <span class="tag cyan-tag">Chakra · Ki · Cosmos</span>
+          <span class="tag cyan-tag">Chakra &middot; Ki &middot; Cosmos</span>
         </div>
       </div>
     </a>
@@ -1331,14 +1338,14 @@ nav {
     <a href="onull.html" class="char-card-link reveal">
       <div class="char-card">
         <div class="card-corner"></div>
-        <span class="char-sigil">🔱</span>
-        <div class="char-name">Lucas · Onull</div>
-        <span class="char-divine-name">→ Deus Onull</span>
+        <span class="char-sigil">&#10022;</span>
+        <div class="char-name">Lucas &mdash; Onull</div>
+        <span class="char-divine-name">Deus Onull</span>
         <div class="char-role">Mestre Humano</div>
-        <div class="char-desc">Representa a essência da humanidade em sua forma mais elevada, nascido na Cidadela das Sombras, Lucas possui sangue bruxo puro e possui uma habilidade incomum, fazer os ossos de seu corpo como arma— o que os mortais podem se tornar quando ultrapassam seus próprios limites. Após a deificação, transcende a própria definição de humano.</div>
+        <div class="char-desc">Representa a ess&ecirc;ncia da humanidade em sua forma mais elevada. Nascido na Cidadela das Sombras, Lucas possui sangue bruxo puro e uma habilidade incomum: transformar os ossos do corpo em armas. Ap&oacute;s a deifica&ccedil;&atilde;o, transcende a pr&oacute;pria defini&ccedil;&atilde;o de humano.</div>
         <div class="char-tags">
           <span class="tag">Mestre Humano</span>
-          <span class="tag divine-tag">Transcendência</span>
+          <span class="tag divine-tag">Transcend&ecirc;ncia</span>
         </div>
       </div>
     </a>
@@ -1346,11 +1353,11 @@ nav {
     <a href="anull.html" class="char-card-link reveal">
       <div class="char-card">
         <div class="card-corner"></div>
-        <span class="char-sigil">👁️</span>
-        <div class="char-name">Leonardo · Anull</div>
-        <span class="char-divine-name">→ Deus Anull</span>
+        <span class="char-sigil">&#10022;</span>
+        <div class="char-name">Leonardo &mdash; Anull</div>
+        <span class="char-divine-name">Deus Anull</span>
         <div class="char-role">Mestre Espiritual</div>
-        <div class="char-desc">O elo entre o mundo material e os planos espirituais. Anull é a vontade feita além-corpo, o espírito que não se dissolve mesmo quando tudo ao redor colapsa.</div>
+        <div class="char-desc">O elo entre o mundo material e os planos espirituais. Anull &eacute; a vontade feita al&eacute;m-corpo, o esp&iacute;rito que n&atilde;o se dissolve mesmo quando tudo ao redor colapsa.</div>
         <div class="char-tags">
           <span class="tag">Mestre Espiritual</span>
           <span class="tag divine-tag">Plano Espiritual</span>
@@ -1360,22 +1367,22 @@ nav {
 
   </div>
 
-  <div class="char-group-label reveal">As Três Guardiãs · Ascendidas</div>
+  <div class="char-group-label reveal">As Tr&ecirc;s Guardi&atilde;s &mdash; Ascendidas</div>
   <div class="cards-grid">
 
     <a href="nimsay.html" class="char-card-link divine-link reveal">
       <div class="char-card divine-card">
         <div class="card-corner divine-c"></div>
-        <span class="char-sigil">🌊</span>
-        <div class="char-name">Yasmin · Nimsay</div>
-        <span class="char-divine-name">→ Nimsay</span>
-        <div class="char-role">Companheira de Yuri · Feiticeira & Maga</div>
-        <div class="char-desc">Filha de Poseidon com Afrodite, descendente da deusa da lua. Aprendiz de feiticeira, bruxa e maga — carrega em si o poder dos mares e o encanto do amor divino.</div>
+        <span class="char-sigil">&#10022;</span>
+        <div class="char-name">Yasmin &mdash; Nimsay</div>
+        <span class="char-divine-name">Nimsay</span>
+        <div class="char-role">Companheira de Yuri &mdash; Feiticeira & Maga</div>
+        <div class="char-desc">Filha de Poseidon com Afrodite, descendente da deusa da lua. Aprendiz de feiticeira, bruxa e maga, carrega em si o poder dos mares e o encanto do amor divino.</div>
         <div class="char-tags">
           <span class="tag">Filha de Poseidon</span>
           <span class="tag blood-tag">Filha de Afrodite</span>
           <span class="tag divine-tag">Descendente da Lua</span>
-          <span class="tag cyan-tag">Feiticeira · Maga</span>
+          <span class="tag cyan-tag">Feiticeira &middot; Maga</span>
         </div>
       </div>
     </a>
@@ -1383,11 +1390,11 @@ nav {
     <a href="kaelith.html" class="char-card-link divine-link reveal">
       <div class="char-card divine-card">
         <div class="card-corner divine-c"></div>
-        <span class="char-sigil">🌿</span>
-        <div class="char-name">Jéssica · Kaelith</div>
-        <span class="char-divine-name">→ Kaelith</span>
-        <div class="char-role">Protetora da Natureza · Filha de Hera</div>
-        <div class="char-desc">Filha de Hera e descendente da deusa da lua. Guardiã da natureza em seu estado mais sagrado. Aprendiz de feiticeira, bruxa e maga — e deusa da própria lua.</div>
+        <span class="char-sigil">&#10022;</span>
+        <div class="char-name">J&eacute;ssica &mdash; Kaelith</div>
+        <span class="char-divine-name">Kaelith</span>
+        <div class="char-role">Protetora da Natureza &mdash; Filha de Hera</div>
+        <div class="char-desc">Filha de Hera e descendente da deusa da lua. Guardi&atilde; da natureza em seu estado mais sagrado. Aprendiz de feiticeira, bruxa e maga, e deusa da pr&oacute;pria lua.</div>
         <div class="char-tags">
           <span class="tag">Filha de Hera</span>
           <span class="tag divine-tag">Deusa da Lua</span>
@@ -1399,11 +1406,11 @@ nav {
     <a href="lyra.html" class="char-card-link divine-link reveal">
       <div class="char-card divine-card">
         <div class="card-corner divine-c"></div>
-        <span class="char-sigil">🦉</span>
-        <div class="char-name">Anna · Lyra</div>
-        <span class="char-divine-name">→ Lyra</span>
-        <div class="char-role">Filha de Athena · Descendente da Lua</div>
-        <div class="char-desc">Filha de Athena e descendente da deusa da lua. Alia a sabedoria estratégica da mãe à magia lunar ancestral. Sua ascensão para Aliban marca o despertar de um poder há muito adormecido.</div>
+        <span class="char-sigil">&#10022;</span>
+        <div class="char-name">Anna &mdash; Lyra</div>
+        <span class="char-divine-name">Lyra</span>
+        <div class="char-role">Filha de Athena &mdash; Descendente da Lua</div>
+        <div class="char-desc">Filha de Athena e descendente da deusa da lua. Alia a sabedoria estrat&eacute;gica da m&atilde;e &agrave; magia lunar ancestral. Sua ascens&atilde;o para Aliban marca o despertar de um poder h&aacute; muito adormecido.</div>
         <div class="char-tags">
           <span class="tag">Filha de Athena</span>
           <span class="tag divine-tag">Descendente da Lua</span>
@@ -1422,16 +1429,16 @@ nav {
   <div class="baile-event-overlay"></div>
 
   <div class="baile-event-content">
-    <span class="baile-event-tag">Registro Histórico</span>
+    <span class="baile-event-tag">Registro Hist&oacute;rico</span>
 
-    <h2>A Última Noite da Luz</h2>
+    <h2>A &Uacute;ltima Noite da Luz</h2>
 
     <p>
-      O Baile dos Deuses e Guardiões marcou o fim de uma era de paz...
+      O Baile dos Deuses e Guardi&otilde;es marcou o fim de uma era de paz...
     </p>
 
     <a href="prologo.html" class="baile-event-btn">
-      Reviver o Baile →
+      Reviver o Baile &rarr;
     </a>
     
   </div>
@@ -1444,15 +1451,14 @@ nav {
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-title">O Diário de um Deus</div>
-  <div class="footer-sub">"Antes éramos nomes. Agora somos eternidade."</div>
+  <div class="footer-title">O Di&aacute;rio de um Deus</div>
+  <div class="footer-sub">"Antes &eacute;ramos nomes. Agora somos eternidade."</div>
   <div class="hero-divider" style="opacity:0.3; margin: 1.5rem auto;"></div>
-  <div class="footer-copy">Site baseado no livro "O diario de um deus" · Todos os direitos reservados</div>
+  <div class="footer-copy">Site baseado no livro "O di&aacute;rio de um deus" &middot; Todos os direitos reservados</div>
 </footer>
 
 <script src="effects.js"></script>
 <script>
-  /* === JAVASCRIPT VIRÁ AQUI (Parte 4) === */
   (function() {
   const canvas = document.getElementById('cosmos-bg');
   const ctx = canvas.getContext('2d');
@@ -1562,7 +1568,7 @@ nav {
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    /* Névoas coloridas */
+    /* Nvoas coloridas */
     nebulas.forEach(n => {
       const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
       grad.addColorStop(0, n.color + n.a + ')');
@@ -1573,7 +1579,7 @@ nav {
       ctx.fill();
     });
 
-    /* Estrelas com cintilação */
+    /* Estrelas com cintilao */
     frame += 0.008;
     stars.forEach(s => {
       s.twinkle += s.speed * 0.04;
@@ -1584,10 +1590,10 @@ nav {
       ctx.fill();
     });
 
-    /* Partículas divinas ao redor do herói */
+    /* Partculas divinas ao redor do heri */
     drawMagic();
 
-    /* Brilho dourado sutil no rodapé */
+    /* Brilho dourado sutil no rodap */
     const horizon = ctx.createLinearGradient(0, H * 0.7, 0, H);
     horizon.addColorStop(0, 'transparent');
     horizon.addColorStop(1, 'rgba(201,168,76,0.04)');
@@ -1604,7 +1610,7 @@ nav {
   draw();
 })();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function() {
   const els = document.querySelectorAll('.reveal');
 
@@ -1620,7 +1626,7 @@ nav {
   els.forEach(el => io.observe(el));
 })();
 
-/* ── CONTROLE DE ÁUDIO ── */
+/* -- CONTROLE DE UDIO -- */
 (function() {
   const audio = document.querySelector('audio');
   if (!audio) return;
@@ -1630,7 +1636,7 @@ nav {
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => {
-        console.log('Autoplay bloqueado pelo navegador. Áudio aguarda interação.');
+        console.log('Autoplay bloqueado pelo navegador. udio aguarda interao.');
       });
     }
   }
@@ -1654,7 +1660,7 @@ nav {
   }, { once: true });
 })();
 
-/* ── MOBILE MENU TOGGLE ── */
+/* -- MOBILE MENU TOGGLE -- */
 (function () {
   const navbar = document.getElementById('navbar');
   const toggle = document.getElementById('menu-toggle');
@@ -1681,7 +1687,7 @@ nav {
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — home.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  home.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -1695,3 +1701,7 @@ nav {
 
 </body>
 </html>
+
+
+
+

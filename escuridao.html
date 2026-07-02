@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>— O Diário de um Deus</title>
-<!-- Título propositalmente vazio — não revela nada -->
+<title> O Di&aacute;rio de um Deus</title>
+<!-- T&iacute;tulo propositalmente vazio  n&atilde;o revela nada -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="responsive-fixes.css">
 <style>
-/* ── RESET E BASE ── */
+/* -- RESET E BASE -- */
 *, *::before, *::after {
   margin: 0; padding: 0;
   box-sizing: border-box;
@@ -28,7 +29,7 @@ body {
   cursor: default;
 }
 
-/* Canvas do vazio — fixo, estrelas desaparecendo */
+/* Canvas do vazio  fixo, estrelas desaparecendo */
 #void-canvas {
   position: fixed;
   inset: 0;
@@ -37,7 +38,7 @@ body {
   background: #000000;
 }
 
-/* ── TELA DE ENTRADA ── */
+/* -- TELA DE ENTRADA -- */
 #entry-screen {
   position: fixed;
   inset: 0;
@@ -111,7 +112,7 @@ body {
   color: rgba(180,160,120,0.7);
 }
 
-/* ── CONTEÚDO PRINCIPAL ── */
+/* -- CONTEDO PRINCIPAL -- */
 #main-content {
   position: relative;
   z-index: 1;
@@ -126,7 +127,7 @@ body {
   display: block;
 }
 
-/* ── ABERTURA CINEMATIC ── */
+/* -- ABERTURA CINEMATIC -- */
 .void-opening {
   position: fixed;
   inset: 0;
@@ -192,14 +193,14 @@ body {
   50%       { transform: translateY(8px); }
 }
 
-/* ── RESPONSIVO ENTRADA ── */
+/* -- RESPONSIVO ENTRADA -- */
 @media (max-width: 480px) {
   .entry-warning { font-size: 0.65rem; letter-spacing: 0.25em; }
   #entry-btn     { font-size: 1rem; }
   .opening-line  { font-size: 0.85rem; letter-spacing: 0.2em; }
   .opening-line.accent { font-size: 1.1rem; }
 }
-/* ── ARTIGO PRINCIPAL ── */
+/* -- ARTIGO PRINCIPAL -- */
 #story-article {
   max-width: 680px;
   margin: 0 auto;
@@ -208,7 +209,7 @@ body {
   z-index: 1;
 }
 
-/* Parágrafos — invisíveis por padrão, revelados ao scroll */
+/* Pargrafos  invisveis por padro, revelados ao scroll */
 .void-paragraph {
   margin-bottom: 4rem;
   opacity: 0;
@@ -232,7 +233,7 @@ body {
 
 .void-paragraph p:last-child { margin-bottom: 0; }
 
-/* Ênfase em itálico */
+/* nfase em itlico */
 .void-emphasis {
   font-style: italic !important;
   color: rgba(220,205,175,0.7) !important;
@@ -242,9 +243,9 @@ body {
   margin-top: 0.5rem;
 }
 
-/* ── ELEMENTOS DRAMÁTICOS ── */
+/* -- ELEMENTOS DRAMTICOS -- */
 
-/* Quebra dramática */
+/* Quebra dramtica */
 .void-break {
   text-align: center;
   margin: 5rem 0;
@@ -270,7 +271,7 @@ body {
   border-bottom: 1px solid rgba(180,160,120,0.1);
 }
 
-/* Silêncio */
+/* Silncio */
 .void-silence {
   text-align: center;
   margin: 6rem 0;
@@ -288,7 +289,7 @@ body {
   letter-spacing: 0.08em;
 }
 
-/* Valar — linha de destaque */
+/* Valar  linha de destaque */
 .void-valar {
   text-align: center;
   margin: 5rem 0;
@@ -307,7 +308,7 @@ body {
   letter-spacing: 0.05em;
 }
 
-/* Virada — o vazio percebe */
+/* Virada  o vazio percebe */
 .void-turn {
   text-align: center;
   margin: 6rem 0;
@@ -372,7 +373,7 @@ body {
   font-size: clamp(0.72rem, 1.8vw, 0.88rem);
 }
 
-/* Linha final — a mais aterrorizante */
+/* Linha final  a mais aterrorizante */
 .void-final {
   text-align: center;
   margin: 7rem 0 4rem;
@@ -409,7 +410,7 @@ body {
   50%       { opacity: 0.7; }
 }
 
-/* Saída */
+/* Sada */
 .void-exit {
   text-align: center;
   padding: 4rem 0 8rem;
@@ -433,13 +434,13 @@ body {
   color: rgba(180,160,120,0.6);
 }
 
-/* ══════════════════════════════════
+/* ----------------------------------
    ENTRADAS ESCONDIDAS
-   Cole esses estilos nas páginas
+   Cole esses estilos nas p&aacute;ginas
    onde os links secretos aparecem
-══════════════════════════════════ */
+---------------------------------- */
 
-/* 1. Link secreto no final do prólogo */
+/* 1. Link secreto no final do prlogo */
 .secret-prologo-link {
   display: block;
   text-align: center;
@@ -494,7 +495,7 @@ body {
   color: rgba(180,160,120,0.3);
 }
 
-/* ── RESPONSIVO ── */
+/* -- RESPONSIVO -- */
 @media (max-width: 768px) {
   #story-article { padding: 6rem 1.5rem 5rem; }
   .void-paragraph   { margin-bottom: 3rem; }
@@ -516,7 +517,7 @@ body {
   #story-article    { padding: 4.5rem 1rem 3.5rem; }
   .void-paragraph p { font-size: 0.97rem; }
 }
-/* ── A ESCURIDÃO EMERGINDO ── */
+/* -- A ESCURIDO EMERGINDO -- */
 .darkness-reveal {
   position: relative;
   margin-top: 6rem;
@@ -598,7 +599,7 @@ body {
   width: clamp(0.5rem, 2vw, 1.2rem);
 }
 
-/* Estado revelado — letra por letra */
+/* Estado revelado  letra por letra */
 .dn-letter.emerge {
   color: rgba(200,188,165,0.9);
   text-shadow:
@@ -629,7 +630,7 @@ body {
   }
 }
 
-/* Subtítulo */
+/* Subt&iacute;tulo */
 .darkness-sub {
   position: relative;
   z-index: 2;
@@ -698,7 +699,7 @@ body {
     inset 0 0 22px rgba(220,205,175,0.12);
 }
 
-/* Sombra subindo por trás das letras */
+/* Sombra subindo por trs das letras */
 .darkness-shadow-layer {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -736,23 +737,23 @@ body {
 </head>
 <body>
 
-<!-- Sem nav. Sem logo. Sem links visíveis. -->
-<!-- Só o vazio. -->
+<!-- Sem nav. Sem logo. Sem links visveis. -->
+<!-- S o vazio. -->
 
 <canvas id="void-canvas"></canvas>
 
 <!-- TELA DE ENTRADA -->
 <div id="entry-screen">
   <div id="entry-text">
-    <p class="entry-warning">você não deveria estar aqui</p>
+    <p class="entry-warning">voc&ecirc; n&atilde;o deveria estar aqui</p>
     <button id="entry-btn">continuar mesmo assim</button>
     <p class="entry-back">
-      <a href="javascript:history.back()">← voltar</a>
+      <a href="javascript:history.back()">? voltar</a>
     </p>
   </div>
 </div>
 
-<!-- CONTEÚDO PRINCIPAL — oculto até clicar -->
+<!-- CONTEDO PRINCIPAL  oculto at clicar -->
 <main id="main-content" class="hidden">
 
   <!-- ABERTURA -->
@@ -764,52 +765,52 @@ body {
       Antes do tempo.
     </div>
     <div class="opening-line" data-delay="2400">
-      Antes da matéria.
+      Antes da matria.
     </div>
     <div class="opening-line" data-delay="3600">
       Antes da vida.
     </div>
     <div class="opening-line accent" data-delay="5000">
-      Ela já existia.
+      Ela j existia.
     </div>
     <div class="opening-scroll" data-delay="6500">
-      <span>▼</span>
+      <span>&#10022;</span>
     </div>
   </div>
 
-  <!-- TEXTO PRINCIPAL — revelado parágrafo por parágrafo -->
+  <!-- TEXTO PRINCIPAL  revelado pargrafo por pargrafo -->
   <article id="story-article">
 
     <div class="void-paragraph" data-index="0">
-      <p>Antes da primeira estrela atravessar o vazio, antes do tempo possuir direção, antes da matéria aprender a existir e antes mesmo da ideia de vida surgir dentro da criação, havia apenas duas presenças na imensidão primordial. O Criador era a completude absoluta: consciência, luz, possibilidade, expansão e forma. Nele existia o potencial para tudo aquilo que um dia seria chamado de universo. Mas ao redor dessa completude existia também outra realidade, uma presença tão antiga quanto o próprio silêncio primordial.</p>
+      <p>Antes da primeira estrela atravessar o vazio, antes do tempo possuir direo, antes da matria aprender a existir e antes mesmo da ideia de vida surgir dentro da criao, havia apenas duas presenas na imensido primordial. O Criador era a completude absoluta: consci&ecirc;ncia, luz, possibilidade, expans&atilde;o e forma. Nele existia o potencial para tudo aquilo que um dia seria chamado de universo. Mas ao redor dessa completude existia tamb&eacute;m outra realidade, uma presena to antiga quanto o prprio silncio primordial.</p>
     </div>
 
     <div class="void-paragraph" data-index="1">
-      <p>Ela não possuía nome, pois nomes ainda não existiam. Não possuía forma, pois forma ainda não havia sido concebida. Não possuía desejos humanos, emoções compreensíveis ou identidade individual como os seres vivos compreenderiam eras depois. Ela era apenas o vazio absoluto, a quietude eterna, a ausência plena de existência. Não nasceu, não foi criada e não surgiu de qualquer evento anterior.</p>
-      <p class="void-emphasis">Ela simplesmente era, da mesma maneira que o silêncio existe antes da primeira palavra.</p>
+      <p>Ela n&atilde;o possua nome, pois nomes ainda n&atilde;o existiam. N&atilde;o possua forma, pois forma ainda n&atilde;o havia sido concebida. N&atilde;o possua desejos humanos, emoes compreensveis ou identidade individual como os seres vivos compreenderiam eras depois. Ela era apenas o vazio absoluto, a quietude eterna, a ausncia plena de exist&ecirc;ncia. N&atilde;o nasceu, n&atilde;o foi criada e n&atilde;o surgiu de qualquer evento anterior.</p>
+      <p class="void-emphasis">Ela simplesmente era, da mesma maneira que o silncio existe antes da primeira palavra.</p>
     </div>
 
     <div class="void-paragraph" data-index="2">
-      <p>Naquele estado primordial não havia conflito entre o Criador e o vazio, porque conflito exige separação, intenção e individualidade, coisas que ainda não existiam completamente. O vazio não odiava o Criador, assim como a noite não odeia o amanhecer. Ambos coexistiam numa realidade anterior ao próprio conceito de oposição.</p>
+      <p>Naquele estado primordial n&atilde;o havia conflito entre o Criador e o vazio, porque conflito exige separao, inteno e individualidade, coisas que ainda n&atilde;o existiam completamente. O vazio n&atilde;o odiava o Criador, assim como a noite n&atilde;o odeia o amanhecer. Ambos coexistiam numa realidade anterior ao prprio conceito de oposio.</p>
     </div>
 
     <div class="void-paragraph" data-index="3">
-      <p>Mas tudo mudou quando o Criador realizou o primeiro ato impossível: criar. Ao expandir a própria essência, ele rompeu o silêncio primordial e fez nascer aquilo que jamais existira antes — luz, matéria, tempo, alma, memória, identidade e vida. Pela primeira vez o vazio deixou de ser absoluto. Pela primeira vez existia algo ocupando aquilo que antes era apenas ausência eterna.</p>
+      <p>Mas tudo mudou quando o Criador realizou o primeiro ato imposs&iacute;vel: criar. Ao expandir a prpria ess&ecirc;ncia, ele rompeu o silncio primordial e fez nascer aquilo que jamais existira antes  luz, matria, tempo, alma, memria, identidade e vida. Pela primeira vez o vazio deixou de ser absoluto. Pela primeira vez existia algo ocupando aquilo que antes era apenas ausncia eterna.</p>
     </div>
 
-    <!-- QUEBRA DRAMÁTICA -->
+    <!-- QUEBRA DRAMTICA -->
     <div class="void-break" data-index="4">
-      <span>E foi nesse instante que nasceu a primeira ruptura da existência.</span>
+      <span>E foi nesse instante que nasceu a primeira ruptura da exist&ecirc;ncia.</span>
     </div>
 
     <div class="void-paragraph" data-index="5">
-      <p>Enquanto o Criador contemplava a beleza da multiplicidade, o vazio observava a criação como algo profundamente incompreensível. Para ele, a existência não parecia um presente, mas uma fragmentação. Viver significava separar-se do todo. Amar significava inevitavelmente perder. Possuir consciência significava carregar dor, medo, memória e sofrimento.</p>
-      <p>O Criador via significado na capacidade de existir apesar da dor; o vazio via apenas criaturas condenadas a sofrer para permanecerem sendo alguma coisa. Aquilo que os seres vivos chamariam eras depois de esperança, para ela parecia apenas resistência inútil diante do inevitável colapso de tudo que possui forma.</p>
+      <p>Enquanto o Criador contemplava a beleza da multiplicidade, o vazio observava a criao como algo profundamente incompreensvel. Para ele, a exist&ecirc;ncia n&atilde;o parecia um presente, mas uma fragmentao. Viver significava separar-se do todo. Amar significava inevitavelmente perder. Possuir consci&ecirc;ncia significava carregar dor, medo, memria e sofrimento.</p>
+      <p>O Criador via significado na capacidade de existir apesar da dor; o vazio via apenas criaturas condenadas a sofrer para permanecerem sendo alguma coisa. Aquilo que os seres vivos chamariam eras depois de esperana, para ela parecia apenas resistncia intil diante do inevitvel colap&oacute;so de tudo que possui forma.</p>
     </div>
 
     <div class="void-paragraph" data-index="6">
-      <p>O Criador então afastou a criação do vazio primordial. Não através de guerra, porque não havia como destruir algo que existia antes da própria ideia de destruição, mas através de separação. Os universos foram erguidos longe daquela presença antiga. O fluxo da existência, os pilares primordiais e todas as estruturas cósmicas tornaram-se barreiras naturais entre a criação e o silêncio absoluto que existia antes dela.</p>
-      <p>Durante eras incontáveis, o vazio permaneceu distante, observando sem interferir diretamente, enquanto civilizações surgiam e desapareciam dentro do grande tecido da criação.</p>
+      <p>O Criador ento afastou a criao do vazio primordial. N&atilde;o atravs de guerra, porque n&atilde;o havia como destruir algo que existia antes da prpria ideia de destruio, mas atravs de separao. Os universos foram erguidos longe daquela presena antiga. O fluxo da exist&ecirc;ncia, os pilares primordiais e todas as estruturas csmicas tornaram-se barreiras naturais entre a criao e o silncio absoluto que existia antes dela.</p>
+      <p>Durante eras incontveis, o vazio permaneceu distante, observando sem interferir diretamente, enquanto civilizaes surgiam e desapareciam dentro do grande tecido da criao.</p>
     </div>
 
     <!-- QUEBRA SILENCIOSA -->
@@ -818,52 +819,52 @@ body {
     </div>
 
     <div class="void-paragraph" data-index="8">
-      <p>Ele permaneceu além das fronteiras do fluxo, além das camadas mais profundas da realidade, aguardando silenciosamente enquanto os próprios seres vivos caminhavam lentamente em direção às mesmas perguntas que o Criador enfrentara no princípio: qual o verdadeiro preço da existência? Vale a pena continuar existindo mesmo sabendo que toda vida inevitavelmente conhecerá sofrimento, perda e morte?</p>
+      <p>Ele permaneceu al&eacute;m das fronteiras do fluxo, al&eacute;m das camadas mais profundas da realidade, aguardando silenciosamente enquanto os prprios seres vivos caminhavam lentamente em direo s mesmas perguntas que o Criador enfrentara no princpio: qual o verdadeiro preo da exist&ecirc;ncia? Vale a pena continuar existindo mesmo sabendo que toda vida inevitavelmente conhecer sofrimento, perda e morte?</p>
     </div>
 
     <!-- VALAR -->
     <div class="void-valar" data-index="9">
-      <span>Foi por isso que Valar tornou-se tão perigoso.</span>
+      <span>Foi por isso que Valar tornou-se to perigoso.</span>
     </div>
 
     <div class="void-paragraph" data-index="10">
-      <p>Séculos antes do nascimento dos mestres modernos, Valar tornou-se o único ser conhecido a reunir dentro de si todas as naturezas primordiais da criação. Espiritual, humana e elemental passaram a coexistir dentro dele até o ponto em que a própria estrutura da realidade começou a deformar-se ao redor da sua existência.</p>
-      <p>Inicialmente Valar acreditava estar transcendendo os limites impostos pelo Criador. Ele não desejava destruir a criação, mas corrigir suas imperfeições, eliminar desequilíbrios e elevar-se acima das limitações impostas aos demais seres. Contudo, ao ultrapassar as divisões fundamentais que sustentavam os pilares da existência, Valar aproximou-se perigosamente das regiões anteriores à própria criação. Sua ascensão abriu fissuras invisíveis nas barreiras erguidas pelo Criador eras atrás.</p>
+      <p>Sculos antes do nascimento dos mestres modernos, Valar tornou-se o &uacute;nico ser conhecido a reunir dentro de si todas as naturezas primordiais da criao. Espiritual, humana e elemental passaram a coexistir dentro dele at o ponto em que a prpria estrutura da realidade comeou a deformar-se ao redor da sua exist&ecirc;ncia.</p>
+      <p>Inicialmente Valar acreditava estar transcendendo os limites impostos pelo Criador. Ele n&atilde;o desejava destruir a criao, mas corrigir suas imperfeies, eliminar desequil&iacute;brios e elevar-se acima das limitaes impostas aos demais seres. Contudo, ao ultrapassar as divises fundamentais que sustentavam os pilares da exist&ecirc;ncia, Valar aproximou-se perigosamente das regies anteriores  prpria criao. Sua ascens&atilde;o abriu fissuras invisveis nas barreiras erguidas pelo Criador eras atrs.</p>
     </div>
 
     <!-- VIRADA -->
     <div class="void-turn" data-index="11">
-      <div class="turn-line">E pela primeira vez desde o princípio…</div>
-      <div class="turn-line accent-line">o vazio voltou a perceber a existência.</div>
+      <div class="turn-line">E pela primeira vez desde o princpio</div>
+      <div class="turn-line accent-line">o vazio voltou a perceber a exist&ecirc;ncia.</div>
     </div>
 
     <div class="void-paragraph" data-index="12">
-      <p>O Criador então aprisionou Valar numa prisão construída fora do fluxo comum da realidade, um lugar onde tempo, matéria e identidade permaneciam isolados das estruturas normais da criação. Mas mesmo selado, Valar tornou-se uma rachadura viva dentro da ordem cósmica. A simples existência dele enfraquecia lentamente as separações primordiais construídas no início de tudo.</p>
+      <p>O Criador ento aprisionou Valar numa pris&atilde;o construda fora do fluxo comum da realidade, um lugar onde tempo, matria e identidade permaneciam isolados das estruturas normais da criao. Mas mesmo selado, Valar tornou-se uma rachadura viva dentro da ordem csmica. A simples exist&ecirc;ncia dele enfraquecia lentamente as separaes primordiais construdas no in&iacute;cio de tudo.</p>
     </div>
 
     <!-- PAUSA DO VAZIO -->
     <div class="void-pause" data-index="13">
       <div class="pause-line">E o vazio aguardava.</div>
-      <div class="pause-line dim">Não com ódio.</div>
-      <div class="pause-line dim">Não com pressa.</div>
-      <div class="pause-line accent-pause">Mas com a paciência absoluta de algo que existia antes do próprio tempo.</div>
+      <div class="pause-line dim">N&atilde;o com dio.</div>
+      <div class="pause-line dim">N&atilde;o com pressa.</div>
+      <div class="pause-line accent-pause">Mas com a pacincia absoluta de algo que existia antes do prprio tempo.</div>
     </div>
 
     <div class="void-paragraph" data-index="14">
-      <p>Quando finalmente começasse a atravessar novamente as fronteiras da criação, sua chegada não seria marcada por guerras imediatas ou destruição comum. O universo começaria lentamente a esquecer de si mesmo. Estrelas desapareceriam silenciosamente do céu sem explosões. Nomes perderiam significado. Memórias começariam a desfazer-se dentro das almas. Regiões inteiras mergulhariam numa quietude impossível onde nem mesmo ecos espirituais sobreviveriam.</p>
+      <p>Quando finalmente comeasse a atravessar novamente as fronteiras da criao, sua chegada n&atilde;o seria marcada por guerras imediatas ou destruio comum. O universo comearia lentamente a esquecer de si mesmo. Estrelas desapareceriam silenciosamente do cu sem exploses. Nomes perderiam significado. Memrias comeariam a desfazer-se dentro das almas. Regi&otilde;es inteiras mergulhariam numa quietude imposs&iacute;vel onde nem mesmo ecos espirituais sobreviveriam.</p>
     </div>
 
     <!-- LINHA FINAL -->
 <div class="void-final" data-index="15">
-  <div class="final-text">E o mais aterrorizante era que ela não se via como monstruosa.</div>
-  <div class="final-text-2">Pelo contrário.</div>
+  <div class="final-text">E o mais aterrorizante era que ela n&atilde;o se via como monstruosa.</div>
+  <div class="final-text-2">Pelo contrrio.</div>
   
 
-  <!-- A ESCURIDÃO EMERGINDO -->
+  <!-- A ESCURIDO EMERGINDO -->
   <div class="darkness-reveal" id="darkness-reveal">
     <div class="darkness-shadow-layer" id="darkness-shadow-layer"></div>
     <canvas id="darkness-canvas"></canvas>
-    <a class="darkness-name" id="darkness-name" href="escuridao-imagem.html" aria-label="Ver a imagem da Escuridão">
+    <a class="darkness-name" id="darkness-name" href="escuridao-imagem.html" aria-label="Ver a imagem da Escurid&atilde;o">
       <span class="dn-letter" data-char="A">A</span>
       <span class="dn-space"> </span>
       <span class="dn-letter" data-char="E">E</span>
@@ -873,12 +874,12 @@ body {
       <span class="dn-letter" data-char="R">R</span>
       <span class="dn-letter" data-char="I">I</span>
       <span class="dn-letter" data-char="D">D</span>
-      <span class="dn-letter" data-char="Ã">Ã</span>
+      <span class="dn-letter" data-char=""></span>
       <span class="dn-letter" data-char="O">O</span>
     </a>
     <div class="darkness-sub" id="darkness-sub">
-      ela não precisa de nome.<br>
-      <em>mas agora você sabe o dela.</em>
+      ela n&atilde;o precisa de nome.<br>
+      <em>mas agora voc&ecirc; sabe o dela.</em>
     </div>
     <a class="darkness-portrait-link" href="escuridao-imagem.html">
       quer conhece-la?
@@ -886,10 +887,10 @@ body {
   </div>
 </div>
 
-    <!-- SAÍDA -->
+    <!-- SADA -->
     <div class="void-exit" data-index="16">
       <a href="javascript:history.back()" class="exit-link">
-        ← voltar para onde ainda existe luz
+        ? voltar para onde ainda existe luz
       </a>
     </div>
 
@@ -897,19 +898,19 @@ body {
 </main>
 
 <script>
-/* ════════════════════════════════════
-   A ESCURIDÃO — JAVASCRIPT
-   Vazio · Estrelas desaparecendo · Revelação
-════════════════════════════════════ */
+/* ------------------------------------
+   A ESCURIDO  JAVASCRIPT
+   Vazio  Estrelas desaparecendo  Revelao
+------------------------------------ */
 
-/* ── CANVAS DO VAZIO — ESTRELAS QUE SOMEM ── */
+/* -- CANVAS DO VAZIO  ESTRELAS QUE SOMEM -- */
 (function () {
   const canvas = document.getElementById('void-canvas');
   const ctx    = canvas.getContext('2d');
   let W, H, stars = [];
 
-  /* Controle global de extinção */
-  let extinctionProgress = 0; /* 0 = todas visíveis → 1 = todas apagadas */
+  /* Controle global de extino */
+  let extinctionProgress = 0; /* 0 = todas visveis ? 1 = todas apagadas */
 
   function resize() {
     W = canvas.width  = window.innerWidth;
@@ -926,7 +927,7 @@ body {
         baseA:    Math.random() * 0.6 + 0.15,
         twinkle:  Math.random() * Math.PI * 2,
         speed:    Math.random() * 0.02 + 0.005,
-        /* Cada estrela tem um threshold de extinção */
+        /* Cada estrela tem um threshold de extino */
         dieAt:    Math.random() /* 0-1: quando no scroll morre */
       });
     }
@@ -940,7 +941,7 @@ body {
     stars.forEach(s => {
       s.twinkle += s.speed;
 
-      /* Calcula alpha considerando extinção */
+      /* Calcula alpha considerando extino */
       const twinkleA = s.baseA * (0.5 + 0.5 * Math.sin(s.twinkle));
 
       /* Estrela morre quando extinctionProgress passa do threshold */
@@ -968,7 +969,7 @@ body {
     requestAnimationFrame(draw);
   }
 
-  /* Atualiza extinção baseado no scroll */
+  /* Atualiza extino baseado no scroll */
   window.addEventListener('scroll', () => {
     const scrollTop  = window.scrollY;
     const docHeight  = document.body.scrollHeight - window.innerHeight;
@@ -980,7 +981,7 @@ body {
   resize(); init(); draw();
 })();
 
-/* ── TELA DE ENTRADA ── */
+/* -- TELA DE ENTRADA -- */
 (function () {
   const entryScreen = document.getElementById('entry-screen');
   const mainContent = document.getElementById('main-content');
@@ -998,7 +999,7 @@ body {
       mainContent.classList.remove('hidden');
       mainContent.classList.add('visible');
 
-      /* Inicia a abertura cinematográfica */
+      /* Inicia a abertura cinematogrfica */
       startOpening();
     }, 1500);
   });
@@ -1013,7 +1014,7 @@ body {
       }, delay);
     });
 
-    /* Após a abertura, faz scroll suavemente */
+    /* Aps a abertura, faz scroll suavemente */
     setTimeout(() => {
       opening.classList.add('fade-out');
       setTimeout(() => {
@@ -1026,7 +1027,7 @@ body {
   }
 })();
 
-/* ── REVELAÇÃO DE PARÁGRAFOS AO SCROLL ── */
+/* -- REVELAO DE PARGRAFOS AO SCROLL -- */
 (function () {
   const elements = document.querySelectorAll(
     '.void-paragraph, .void-break, .void-silence, ' +
@@ -1057,7 +1058,7 @@ body {
   elements.forEach(el => io.observe(el));
 })();
 
-/* ── EFEITO DE DIGITAÇÃO LENTA NA LINHA FINAL ── */
+/* -- EFEITO DE DIGITAO LENTA NA LINHA FINAL -- */
 (function () {
   const finalText = document.querySelector('.final-text');
   if (!finalText) return;
@@ -1086,7 +1087,7 @@ body {
   io.observe(finalText);
 })();
 
-/* ── A ESCURIDÃO EMERGINDO ── */
+/* -- A ESCURIDO EMERGINDO -- */
 (function () {
   const reveal = document.getElementById('darkness-reveal');
   const canvas = document.getElementById('darkness-canvas');
@@ -1218,9 +1219,9 @@ body {
   });
 })();
 
-/* ── CURSOR PERSONALIZADO ── */
+/* -- CURSOR PERSONALIZADO -- */
 (function () {
-  /* Cursor minimalista — apenas um ponto */
+  /* Cursor minimalista  apenas um ponto */
   const style = document.createElement('style');
   style.textContent = `
     body { cursor: none !important; }
@@ -1262,15 +1263,15 @@ body {
   document.addEventListener('mouseenter', () => cursor.style.opacity = '1');
 })();
 
-/* ── SOM AMBIENTE (SILÊNCIO) ── */
-/* Sem áudio — o silêncio é intencional */
-/* A ausência de som é parte da experiência */
+/* -- SOM AMBIENTE (SILNCIO) -- */
+/* Sem udio  o silncio  intencional */
+/* A ausncia de som  parte da experincia */
 </script>
 
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de mensagens da escuridão — página dedicada
+  // Sistema de mensagens da escurid&atilde;o  p&aacute;gina dedicada
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -1284,3 +1285,8 @@ body {
 
 </body>
 </html>
+
+
+
+
+

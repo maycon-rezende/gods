@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Knull — O Diário de um Deus</title>
+<title>Knull &mdash; O Di&aacute;rio de um Deus</title>
 <link rel="stylesheet" href="effects.css">
 <link rel="stylesheet" href="responsive-fixes.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-/* ── VARIÁVEIS E RESET ── */
+/* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --gold: #c9a84c;
   --gold-light: #f0d080;
@@ -51,7 +51,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -61,6 +61,7 @@ nav {
   gap: clamp(0.5rem, 2vw, 2.5rem);
   padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1rem, 3vw, 2rem);
   background: linear-gradient(to bottom, rgba(3,3,8,0.95), transparent);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   border-bottom: 1px solid rgba(204,0,34,0.15);
   flex-wrap: wrap;
@@ -130,7 +131,7 @@ nav a:hover {
   text-shadow: 0 0 20px var(--char-accent-glow);
 }
 
-/* ── LINK VOLTAR ── */
+/* -- LINK VOLTAR -- */
 nav a:first-child {
   color: var(--char-accent);
   font-weight: 700;
@@ -151,7 +152,7 @@ nav a:first-child:hover {
   box-shadow: 0 8px 24px rgba(204,0,34,0.25);
 }
 
-/* ── BANNER HERO ── */
+/* -- BANNER HERO -- */
 #banner {
   position: relative;
   min-height: 100vh;
@@ -168,7 +169,7 @@ nav a:first-child:hover {
   background-repeat: no-repeat;
   transform: scale(1.05);
   transition: transform 12s ease-in-out, opacity 1.5s ease-in-out;
-  /* Fallback se não houver imagem */
+  /* Fallback se n&atilde;o houver imagem */
   background-color: #0d0008;
   background-image:
     radial-gradient(ellipse at 60% 30%, rgba(139,0,0,0.25) 0%, transparent 60%),
@@ -176,6 +177,10 @@ nav a:first-child:hover {
 }
 
 .banner-bg.loaded { transform: scale(1); }
+
+.banner-bg.knull-banner { background-image: url('img-knull/bannergala3.png'); }
+.about-photo.knull-photo { background-image: url('img-knull/yurik.png'); }
+.gallery-visual.knull-visual { background-image: url('img-knull/bannerindex1.png'); }
 
 .banner-overlay {
   position: absolute;
@@ -256,7 +261,7 @@ nav a:first-child:hover {
   animation: fade-up 1s 0.9s ease forwards;
 }
 
-/* ── STATS DO BANNER ── */
+/* -- STATS DO BANNER -- */
 .banner-stats {
   display: flex;
   align-items: center;
@@ -308,7 +313,7 @@ nav a:first-child:hover {
   animation: bounce 2s ease infinite;
 }
 
-/* ── ANIMAÇÕES ── */
+/* -- ANIMA&Ccedil;&Otilde;ES -- */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -319,7 +324,7 @@ nav a:first-child:hover {
   50%       { transform: translateY(8px); }
 }
 
-/* ── REVEAL ON SCROLL ── */
+/* -- REVEAL ON SCROLL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -330,7 +335,7 @@ nav a:first-child:hover {
   opacity: 1;
   transform: none;
 }
-/* ── SEÇÕES COMPARTILHADAS ── */
+/* -- SE&Ccedil;&Otilde;ES COMPARTILHADAS -- */
 section {
   position: relative;
   z-index: 1;
@@ -367,7 +372,7 @@ h2 {
   margin: 1.5rem auto 0;
 }
 
-/* ── SOBRE ── */
+/* -- SOBRE -- */
 #sobre {
   padding-bottom: 5rem;
 }
@@ -512,7 +517,7 @@ h2 {
   color: var(--cyan);
 }
 
-/* ── PODERES ── */
+/* -- PODERES -- */
 #poderes {
   padding-bottom: 5rem;
 }
@@ -586,7 +591,7 @@ h2 {
   background: linear-gradient(90deg, #1a8f8b, var(--cyan));
 }
 
-/* ── HISTÓRIA ── */
+/* -- HISTRIA -- */
 #historia {
   padding-bottom: 5rem;
 }
@@ -650,7 +655,7 @@ h2 {
   color: var(--gold-light);
 }
 
-/* ── GALERIA ── */
+/* -- GALERIA -- */
 #galeria {
   padding-bottom: 5rem;
 }
@@ -743,7 +748,7 @@ h2 {
   font-style: normal;
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 footer {
   text-align: center;
   padding: 4rem 2rem;
@@ -801,7 +806,7 @@ footer {
   text-transform: uppercase;
 }
 
-/* ── RESPONSIVO ── */
+/* -- RESPONSIVO -- */
 /* Mobile First: < 480px */
 @media (max-width: 479px) {
   body {
@@ -1110,7 +1115,7 @@ nav {
 
   #hero,
   #banner {
-    min-height: auto;
+    min-height: 0;
   }
 
   .banner-content,
@@ -1301,7 +1306,7 @@ nav {
 
 
 
-/* ── FX KNULL ── */
+/* -- FX KNULL -- */
 #banner-fx {
   position: absolute;
   inset: 0;
@@ -1610,7 +1615,7 @@ section.section-awake .section-header h2,
 
 
 /* ==========================================================
-   PATCH RESPONSIVO + GALERIA LOOP SUAVE — revisão ChatGPT
+   PATCH RESPONSIVO + GALERIA LOOP SUAVE  revis&atilde;o ChatGPT
    ========================================================== */
 html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 body { min-width: 0; }
@@ -1621,8 +1626,6 @@ nav {
   max-width: 100vw;
   overflow-x: auto;
   overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
 nav::-webkit-scrollbar { display: none; }
 nav a { white-space: nowrap; }
@@ -1824,33 +1827,33 @@ nav a { white-space: nowrap; }
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="home.html">← Voltar ao Início</a>
+  <a href="home.html">? Voltar ao In&iacute;cio</a>
   <a href="#sobre">Sobre</a>
   <a href="#poderes">Poderes</a>
-  <a href="#historia">História</a>
+  <a href="#historia">Hist&oacute;ria</a>
   <a href="#galeria">Galeria</a>
-  <button id="menu-toggle" aria-label="Menu">☰</button>
+  <button id="menu-toggle" aria-label="Menu">&#10022;</button>
 </nav>
 
 <!-- BANNER HERO -->
 <section id="banner">
   <div id="banner-fx-wrap"><canvas id="banner-fx"></canvas></div>
-  <div class="banner-bg" style="background-image: url('img-knull/bannergala3.png')"></div>
+  <div class="banner-bg knull-banner"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
-    <p class="banner-eyebrow">Mestre Elemental · Deus</p>
+    <p class="banner-eyebrow">Mestre Elemental  Deus</p>
     <h1 class="banner-name">Knull</h1>
     <p class="banner-human">Antes conhecido como <em>UchiHyuuga Yuri</em></p>
     <div class="banner-divider"></div>
-    <p class="banner-quote">"Eu não carrego o peso do mundo. Eu sou o peso do mundo."</p>
+    <p class="banner-quote">"Eu n&atilde;o carrego o peso do mundo. Eu sou o peso do mundo."</p>
     <div class="banner-stats">
       <div class="bstat">
         <span class="bstat-val">Elemental</span>
-        <span class="bstat-label">Domínio</span>
+        <span class="bstat-label">Dom&iacute;nio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Uchiha · Hyuuga</span>
+        <span class="bstat-val">Uchiha  Hyuuga</span>
         <span class="bstat-label">Linhagem</span>
       </div>
       <div class="bstat-sep"></div>
@@ -1861,43 +1864,43 @@ nav a { white-space: nowrap; }
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Deus</span>
-        <span class="bstat-label">Condição</span>
+        <span class="bstat-label">Condi&ccedil;&atilde;o</span>
       </div>
     </div>
   </div>
-  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+  <div class="scroll-hint">? &nbsp; Role para baixo</div>
 </section>
 
 <!-- SOBRE -->
 <section id="sobre">
   <div class="section-header reveal reveal-knull">
     <span class="section-label">Identidade</span>
-    <h2>Quem é Knull</h2>
+    <h2>Quem  Knull</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="about-grid reveal reveal-knull">
     <div class="about-photo-wrap">
-      <div class="about-photo" style="background-image: url('img-knull/yurik.png')">
+      <div class="about-photo knull-photo">
         <div class="photo-frame-corner tl"></div>
         <div class="photo-frame-corner tr"></div>
         <div class="photo-frame-corner bl"></div>
         <div class="photo-frame-corner br"></div>
       </div>
-      <div class="about-photo-label">Knull · Deus do Elemento</div>
+      <div class="about-photo-label">Knull  Deus do Elemento</div>
     </div>
     <div class="about-text">
       <p>
-        Antes de ser Knull, era Yuri — mais precisamente, <strong>UchiHyuuga Yuri</strong>, portador de um dos sangues mais raros e poderosos já vistos. Filho de duas das linhagens mais lendárias do mundo ninja: os <em>Uchiha</em>, mestres do fogo e da ilusão, e os <em>Hyuuga</em>, guardiões da visão absoluta.
+        Antes de ser Knull, era Yuri  mais precisamente, <strong>UchiHyuuga Yuri</strong>, portador de um dos sangues mais raros e poderosos j vistos. Filho de duas das linhagens mais lendrias do mundo ninja: os <em>Uchiha</em>, mestres do fogo e da ilus&atilde;o, e os <em>Hyuuga</em>, guardies da vis&atilde;o absoluta.
       </p>
       <p>
-        Mas a herança não parava aí. Em suas veias corria também o sangue <strong>Sayadin</strong> — um amplificador natural que elevava cada poder que tocava além dos limites conhecidos. Com ele, Chakra, Ki e Cosmos não eram apenas forças separadas, mas uma trindade unificada sob sua vontade.
+        Mas a heran&ccedil;a n&atilde;o parava a. Em suas veias corria tamb&eacute;m o sangue <strong>Sayadin</strong>  um amplificador natural que elevava cada poder que tocava al&eacute;m dos limites conhecidos. Com ele, Chakra, Ki e Cosmos n&atilde;o eram apenas for&ccedil;as separadas, mas uma trindade unificada sob sua vontade.
       </p>
       <p>
-        Foi Yuri quem narrou tudo. Sua voz é o próprio diário — cada batalha, cada ascensão, cada transformação registrada em primeira pessoa. Ele foi o primeiro dos seis a compreender que não eram apenas guerreiros. Eram a próxima etapa da existência.
+        Foi Yuri quem narrou tudo. Sua voz  o prprio di&aacute;rio  cada batalha, cada ascens&atilde;o, cada transformao registrada em primeira pessoa. Ele foi o primeiro dos seis a compreender que n&atilde;o eram apenas guerreiros. Eram a prxima etapa da exist&ecirc;ncia.
       </p>
       <p>
-        Após o confronto com A Besta, o nome humano cedeu. O que restou foi <strong>Knull</strong> — deus, narrador, e a prova viva de que os limites são apenas o começo.
+        Aps o confronto com A Besta, o nome humano cedeu. O que restou foi <strong>Knull</strong>  deus, narrador, e a prova viva de que os limites s&atilde;o apenas o comeo.
       </p>
       <div class="about-tags">
         <span class="tag">Narrador</span>
@@ -1905,7 +1908,7 @@ nav a { white-space: nowrap; }
         <span class="tag blood-tag">Uchiha</span>
         <span class="tag blood-tag">Hyuuga</span>
         <span class="tag divine-tag">Sayadin</span>
-        <span class="tag cyan-tag">Chakra · Ki · Cosmos</span>
+        <span class="tag cyan-tag">Chakra  Ki  Cosmos</span>
         <span class="tag divine-tag">Shinigami</span>
         <span class="tag">Cavaleiro de Ouro</span>
       </div>
@@ -1918,101 +1921,101 @@ nav a { white-space: nowrap; }
 <section id="poderes">
   <div class="section-header reveal">
     <span class="section-label">Arsenal de Knull</span>
-    <h2>Poderes & Herança</h2>
+    <h2>Poderes & Herana</h2>
     <div class="section-rule"></div>
   </div>
   <div class="powers-grid">
 
     <div class="power-block reveal">
-      <div class="power-icon">👁️</div>
-      <div class="power-name">Sangue Uchiha — Sharingan / Mangekyō</div>
-      <div class="power-desc">Olhos que veem além do véu — copiando técnicas, prevendo movimentos e acessando o Mangekyō para desencadear Amaterasu, Tsukuyomi e Susanoo.</div>
+      <div class="power-icon">&#10022;</div>
+      <div class="power-name">Sangue Uchiha  Sharingan / Mangekyo/Mangekyo Eterno</div>
+      <div class="power-desc">Olhos que veem al&eacute;m do vu  copiando tcnicas, prevendo movimentos e acessando o Mangekyo para desencadear Amaterasu, Tsukuyomi e Susanoo.</div>
       <div class="power-bar-wrap"><div class="power-bar blood" data-width="95"></div></div>
     </div>
 
     <div class="power-block reveal">
-      <div class="power-icon">🔮</div>
-      <div class="power-name">Sangue Hyuuga — Byakugan</div>
-      <div class="power-desc">Visão de 360° que penetra qualquer ilusão. Permite enxergar o sistema de chakra do oponente e destruí-lo ponto a ponto com o Jūken.</div>
+      <div class="power-icon">&#10022;</div>
+      <div class="power-name">Sangue Hyuuga  Byakugan</div>
+      <div class="power-desc">Vis&atilde;o de 360 que penetra qualquer ilus&atilde;o. Permite enxergar o sistema de chakra do oponente e destru-lo ponto a ponto com o Juken.</div>
       <div class="power-bar-wrap"><div class="power-bar" data-width="88"></div></div>
     </div>
 
     <div class="power-block reveal">
-      <div class="power-icon">⚔️</div>
-      <div class="power-name">Armadura de Ouro — Cavaleiros do Zodíaco</div>
-      <div class="power-desc">Uma das doze armaduras mais sagradas do cosmos. Forjada com metal divino, amplifica o Cosmos do portador e o protege de ataques de nível olímpico.</div>
+      <div class="power-icon">&#10022;</div>
+      <div class="power-name">Armadura de Ouro  </div>
+      <div class="power-desc">Uma das doze armaduras mais sagradas do cosmos. Forjada com metal divino, amplifica o Cosmos do portador e o protege de ataques de nvel olmpico.</div>
       <div class="power-bar-wrap"><div class="power-bar divine" data-width="92"></div></div>
     </div>
 
     <div class="power-block reveal">
-      <div class="power-icon">💀</div>
-      <div class="power-name">Habilidades de Shinigami — Bleach</div>
-      <div class="power-desc">Zanpakutō com Shikai e Bankai. Domínio do Kidō, Sonído e Hierro — poderes que cruzam a fronteira entre o mundo dos vivos e o além.</div>
+      <div class="power-icon">&#10022;</div>
+      <div class="power-name">Habilidades de Shinigami </div>
+      <div class="power-desc">Zanpakuto com Shikai e Bankai. Dom&iacute;nio do Kido, Sondo e Hierro  poderes que cruzam a fronteira entre o mundo dos vivos e o al&eacute;m.</div>
       <div class="power-bar-wrap"><div class="power-bar blood" data-width="90"></div></div>
     </div>
 
     <div class="power-block reveal">
-      <div class="power-icon">🌀</div>
-      <div class="power-name">Chakra — Naruto</div>
-      <div class="power-desc">Energia vital moldada pela mente e pelo corpo. Permite jutsu de todos os elementos, Modo Sábio e acesso ao chakra do mundo natural.</div>
+      <div class="power-icon">&#10022;</div>
+      <div class="power-name">Chakra </div>
+      <div class="power-desc">Energia vital moldada pela mente e pelo corpo. Permite jutsu de todos os elementos, Modo Sbio e acesso ao chakra do mundo natural.</div>
       <div class="power-bar-wrap"><div class="power-bar cyan" data-width="97"></div></div>
     </div>
 
     <div class="power-block reveal">
-      <div class="power-icon">🔥</div>
-      <div class="power-name">Ki — Dragon Ball</div>
-      <div class="power-desc">A força vital em sua forma mais pura e explosiva. Permite voo, escudos de energia e ondas que podem varrer montanhas da face da Terra.</div>
+      <div class="power-icon">&#10022;</div>
+      <div class="power-name">Ki</div>
+      <div class="power-desc">A for&ccedil;a vital em sua forma mais pura e explosiva. Permite voo, escudos de energia e ondas que podem varrer montanhas da face da Terra.</div>
       <div class="power-bar-wrap"><div class="power-bar" data-width="93"></div></div>
     </div>
 
     <div class="power-block reveal">
-      <div class="power-icon">✨</div>
-      <div class="power-name">Cosmos — Saint Seiya</div>
-      <div class="power-desc">A chama que arde no coração de todo cavaleiro. Quando levado ao limite absoluto, o Cosmos permite alcançar a velocidade da luz e tocar o divino.</div>
+      <div class="power-icon">&#10022;</div>
+      <div class="power-name">Cosmos</div>
+      <div class="power-desc">A chama que arde no cora&ccedil;&atilde;o de todo cavaleiro. Quando levado ao limite absoluto, o Cosmos permite alcan&ccedil;ar a velocidade da luz e tocar o divino.</div>
       <div class="power-bar-wrap"><div class="power-bar divine" data-width="89"></div></div>
     </div>
 
     <div class="power-block reveal">
-      <div class="power-icon">🧬</div>
+      <div class="power-icon">&#10022;</div>
       <div class="power-name">Sangue Sayadin</div>
-      <div class="power-desc">Uma herança rara que potencializa cada poder existente. O sangue Sayadin atua como multiplicador, elevando o limite máximo de cada habilidade além do possível.</div>
+      <div class="power-desc">Uma heran&ccedil;a rara que potencializa cada poder existente. O sangue Sayadin atua como multiplicador, elevando o limite m&aacute;ximo de cada habilidade al&eacute;m do poss&iacute;vel.</div>
       <div class="power-bar-wrap"><div class="power-bar blood" data-width="100"></div></div>
     </div>
 
   </div>
 </section>
 
-<!-- HISTÓRIA -->
+<!-- HISTRIA -->
 <section id="historia">
   <div class="section-header reveal reveal-knull">
-    <span class="section-label">Trajetória</span>
-    <h2>A História de Yuri</h2>
+    <span class="section-label">Trajet&oacute;ria</span>
+    <h2>A Hist&oacute;ria de Yuri</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="story-body">
     <div class="story-block reveal reveal-knull">
-      <div class="story-chapter">Capítulo I</div>
-      <div class="story-title">O Começo</div>
-      <p>Yuri nunca foi comum — mesmo antes de saber disso. Portador de um sangue duplo raríssimo, cresceu compreendendo que cada técnica que aprendia era absorvida de forma diferente por seu corpo. O Sharingan acordou cedo. O Byakugan veio logo depois. E o sangue Sayadin garantiu que nenhum dos dois tivesse limite.</p>
+      <div class="story-chapter">Cap&iacute;tulo I</div>
+      <div class="story-title">O Comeo</div>
+      <p>Yuri nunca foi comum  mesmo antes de saber disso. Portador de um sangue duplo rarssimo, cresceu compreendendo que cada tcnica que aprendia era absorvida de forma diferente por seu corpo. O Sharingan acordou cedo. O Byakugan veio logo depois. E o sangue Sayadin garantiu que nenhum dos dois tivesse limite.</p>
     </div>
 
     <div class="story-block reveal reveal-knull">
-      <div class="story-chapter">Capítulo II</div>
+      <div class="story-chapter">Cap&iacute;tulo II</div>
       <div class="story-title">O Encontro dos Seis</div>
-      <p>Foi quando os seis se reuniram que tudo mudou. Lucas, Leonardo, Yasmin, Jéssica e Anna — cada um com sua própria herança impossível. Yuri não escolheu liderar. Mas foi ele quem começou a registrar. Cada batalha, cada vitória, cada perda quase certa. O diário nasceu ali.</p>
+      <p>Foi quando os seis se reuniram que tudo mudou. Lucas, Leonardo, Yasmin, Jssica e Anna  cada um com sua prpria heran&ccedil;a imposs&iacute;vel. Yuri n&atilde;o escolheu liderar. Mas&oacute; foi ele quem comeou a registrar. Cada batalha, cada vitria, cada perda quase certa. O di&aacute;rio nasceu ali.</p>
     </div>
 
     <div class="story-block reveal reveal-knull">
-      <div class="story-chapter">Capítulo III</div>
-      <div class="story-title">O Cavaleiro Negro & A Ascensão</div>
-      <p>A primeira grande batalha contra o Cavaleiro Negro foi o batismo de fogo do grupo. Yuri levou a luta ao limite — combinando Susanoo, Bankai e Cosmos numa sequência que reescreveu o que se acreditava possível. A vitória custou caro. Mas o prêmio foi a ascensão: Yuri tornou-se <strong>Mestre Elemental</strong>.</p>
+      <div class="story-chapter">Cap&iacute;tulo III</div>
+      <div class="story-title">O Cavaleiro Negro & A Ascens&atilde;o</div>
+      <p>A primeira grande batalha contra o Cavaleiro Negro foi o batismo de fogo do grupo. Yuri levou a luta ao limite  combinando Susanoo, Bankai e Cosmos numa sequncia que reescreveu o que se acreditava poss&iacute;vel. A vitria custou caro. Mas o prmio foi a ascens&atilde;o: Yuri tornou-se <strong>Mestre Elemental</strong>.</p>
     </div>
 
     <div class="story-block reveal reveal-knull">
-      <div class="story-chapter">Capítulo IV</div>
-      <div class="story-title">A Besta & A Deificação</div>
-      <p>O confronto com A Besta foi diferente de tudo que veio antes. A criatura primordial do Divino não lutava — ela consumia. Cada golpe era uma tentativa de apagar a existência dos seis. Foi no momento em que Yuri abriu mão do nome humano que o poder verdadeiro emergiu. O que restou não era mais Yuri. Era <strong>Knull</strong> — e o mundo nunca mais seria o mesmo.</p>
+      <div class="story-chapter">Cap&iacute;tulo IV</div>
+      <div class="story-title">A Besta & A Deifica&ccedil;&atilde;o</div>
+      <p>O confronto com A Besta foi diferente de tudo que veio antes. A criatura primordial do Divino n&atilde;o lutava  ela consumia. Cada golpe era uma tentativa de apagar a exist&ecirc;ncia dos seis. Foi no momento em que Yuri abriu mo do nome humano que o poder verdadeiro emergiu. O que restou n&atilde;o era mais Yuri. Era <strong>Knull</strong>  e o mundo nunca mais seria o mesmo.</p>
     </div>
   </div>
 </section>
@@ -2027,14 +2030,14 @@ nav a { white-space: nowrap; }
 
   <div class="gallery-showcase reveal reveal-knull" id="gallery-showcase">
     <article class="gallery-panel is-active" data-lane="0">
-      <div class="gallery-visual" style="background-image: url('img-knull/bannerindex1.png')"></div>
+      <div class="gallery-visual knull-visual"></div>
       <div class="gallery-overlay">
         <div class="gallery-meta">
           <span class="gallery-index">Bloco I</span>
           <span class="gallery-track">Ciclo Carmesim</span>
         </div>
-        <span>Knull · Forma Divina</span>
-        <p class="gallery-panel-sub">A presença central. O aspecto mais absoluto de Knull abrindo a rotação da galeria.</p>
+        <span>Knull  Forma Divina</span>
+        <p class="gallery-panel-sub">A presena central. O aspecto mais absoluto de Knull abrindo a rotao da galeria.</p>
       </div>
     </article>
 
@@ -2044,19 +2047,19 @@ nav a { white-space: nowrap; }
 <!-- FOOTER -->
 <footer>
   <div class="footer-nav">
-    <a href="home.html">← Página Principal</a>
-    <span class="footer-sep">·</span>
-    <a href="onull.html"> ← Onull →</a>
-     <span class="footer-sep">·</span>
-    <a href="anull.html"> ← Anull →</a>
+    <a href="home.html">? P&aacute;gina Principal</a>
+    <span class="footer-sep"></span>
+    <a href="onull.html"> ? Onull ?</a>
+     <span class="footer-sep"></span>
+    <a href="anull.html"> ? Anull ?</a>
   </div>
   <div class="footer-title">Knull</div>
-  <div class="footer-sub">"Antes éramos nomes. Agora somos eternidade."</div>
-  <div class="footer-copy">O Diário de um Deus · UchiHyuuga Yuri · Todos os direitos reservados</div>
+  <div class="footer-sub">"Antes ramos nomes. Agora somos eternidade."</div>
+  <div class="footer-copy">O Di&aacute;rio de um Deus  UchiHyuuga Yuri  Todos os direitos reservados</div>
 </footer>
 
 <script>
-/* ── COSMOS CANVAS ── */
+/* -- COSMOS CANVAS -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx = canvas.getContext('2d');
@@ -2081,7 +2084,7 @@ nav a { white-space: nowrap; }
     }
 
     nebulas = [];
-    /* Knull: névoas em vermelho sangue e roxo divino */
+    /* Knull: nvoas em vermelho sangue e roxo divino */
     const colors = [
       'rgba(139,0,0,',
       'rgba(204,0,34,',
@@ -2110,7 +2113,7 @@ nav a { white-space: nowrap; }
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    /* Névoas */
+    /* Nvoas */
     nebulas.forEach(n => {
       const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
       grad.addColorStop(0, n.color + n.a + ')');
@@ -2121,7 +2124,7 @@ nav a { white-space: nowrap; }
       ctx.fill();
     });
 
-    /* Estrelas com cintilação */
+    /* Estrelas com cintilao */
     stars.forEach(s => {
       s.twinkle += s.speed * 0.04;
       const alpha = s.a * (0.6 + 0.4 * Math.sin(s.twinkle));
@@ -2131,7 +2134,7 @@ nav a { white-space: nowrap; }
       ctx.fill();
     });
 
-    /* Brilho vermelho sutil no rodapé */
+    /* Brilho vermelho sutil no rodap */
     const horizon = ctx.createLinearGradient(0, H * 0.75, 0, H);
     horizon.addColorStop(0, 'transparent');
     horizon.addColorStop(1, 'rgba(139,0,0,0.06)');
@@ -2147,7 +2150,7 @@ nav a { white-space: nowrap; }
   draw();
 })();
 
-/* ── PARALLAX DO BANNER ── */
+/* -- PARALLAX DO BANNER -- */
 (function () {
   const bg = document.querySelector('.banner-bg');
   if (!bg) return;
@@ -2167,7 +2170,7 @@ nav a { white-space: nowrap; }
   }, { passive: true });
 })();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function () {
   const els = document.querySelectorAll('.reveal');
 
@@ -2183,7 +2186,7 @@ nav a { white-space: nowrap; }
   els.forEach(el => io.observe(el));
 })();
 
-/* ── BARRAS DE PODER ── */
+/* -- BARRAS DE PODER -- */
 (function () {
   const bars = document.querySelectorAll('.power-bar');
 
@@ -2201,7 +2204,7 @@ nav a { white-space: nowrap; }
   bars.forEach(b => io.observe(b));
 })();
 
-/* ── LIGHTBOX DA GALERIA ── */
+/* -- LIGHTBOX DA GALERIA -- */
 (function () {
   const items = document.querySelectorAll('.gallery-item');
   if (!items.length) return;
@@ -2239,6 +2242,7 @@ nav a { white-space: nowrap; }
       position: absolute;
       inset: 0;
       background: rgba(3,3,8,0.95);
+      -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
     }
     #lb-box {
@@ -2329,7 +2333,7 @@ nav a { white-space: nowrap; }
   document.getElementById('lb-prev').addEventListener('click', prev);
   document.getElementById('lb-next').addEventListener('click', next);
 
-  /* Navegação pelo teclado */
+  /* Navegao pelo teclado */
   document.addEventListener('keydown', e => {
     if (!lb.classList.contains('active')) return;
     if (e.key === 'ArrowLeft')  prev();
@@ -2339,7 +2343,7 @@ nav a { white-space: nowrap; }
 })();
 
 
-/* ── CURSOR AURA DO KNULL ── */
+/* -- CURSOR AURA DO KNULL -- */
 (function () {
   if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -2372,7 +2376,7 @@ nav a { white-space: nowrap; }
   animate();
 })();
 
-/* ── BRASAS / PARTÍCULAS DO BANNER ── */
+/* -- BRASAS / PARTCULAS DO BANNER -- */
 (function () {
   const canvas = document.getElementById('banner-fx');
   const banner = document.getElementById('banner');
@@ -2429,7 +2433,7 @@ nav a { white-space: nowrap; }
   window.addEventListener('resize', () => { resize(); init(); }, { passive: true });
 })();
 
-/* ── EFEITO DE PRESENÇA NAS SEÇÕES ── */
+/* -- EFEITO DE PRESENA NAS SE&Ccedil;&Otilde;ES -- */
 (function () {
   const sections = Array.from(document.querySelectorAll('section'));
   if (!sections.length) return;
@@ -2443,7 +2447,7 @@ nav a { white-space: nowrap; }
   sections.forEach((section) => io.observe(section));
 })();
 
-/* ── INCLINAÇÃO SUTIL DOS BLOCOS ── */
+/* -- INCLINAO SUTIL DOS BLOCOS -- */
 (function () {
   if (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -2464,7 +2468,7 @@ nav a { white-space: nowrap; }
   });
 })();
 
-/* ── GALERIA KNULL EM 1 BLOCO E LOOP ── */
+/* -- GALERIA KNULL EM 1 BLOCO E LOOP -- */
 (function () {
   const panels = Array.from(document.querySelectorAll('.gallery-panel'));
   const showcase = document.getElementById('gallery-showcase');
@@ -2476,48 +2480,48 @@ nav a { white-space: nowrap; }
   const slides = [
     {
       bg: "url('img-knull/bannergala.png')",
-      title: 'Knull · Forma Divina',
-      sub: 'A presença central. O aspecto mais absoluto de Knull em sua manifestação máxima.'
+      title: 'Knull  Forma Divina',
+      sub: 'A presena central. O aspecto mais absoluto de Knull em sua manifestao mxima.'
     },
     {
       bg: "url('img-knull/bannergal0.png')",
       title: 'Sharingan Despertado',
-      sub: 'O olhar rubro ganha o foco e concentra a tensão visual do personagem.'
+      sub: 'O olhar rubro ganha o foco e concentra a tens&atilde;o visual do personagem.'
     },
     {
       bg: "url('img-knull/bannergala1.png')",
       title: 'Armadura de Ouro',
-      sub: 'A imponência divina e a aura de soberania entram em primeiro plano.'
+      sub: 'A imponncia divina e a aura de soberania entram em primeiro plano.'
     },
     {
       bg: "url('img-knull/bannergala2.png')",
-      title: 'Ascensão Elemental',
-      sub: 'Uma leitura mais heroica e monumental da presença de Yuri antes da ruptura final.'
+      title: 'Ascens&atilde;o Elemental',
+      sub: 'Uma leitura mais heroica e monumental da presena de Yuri antes da ruptura final.'
     },
     {
       bg: "url('img-knull/bannerpaisagem.png')",
       title: 'Sangue Sayadin',
-      sub: 'A herança amplificada aparece como força viva, densa e instável.'
+      sub: 'A heran&ccedil;a amplificada aparece como for&ccedil;a viva, densa e instvel.'
     },
     {
       bg: "url('img-knull/knullsay.png')",
-      title: 'Modo Sábio',
-      sub: 'A face mais ritualística do poder, com um peso mais místico e silencioso.'
+      title: 'Modo Sbio',
+      sub: 'A face mais ritualstica do poder, com um peso mais mstico e silencioso.'
     },
     {
       bg: "url('img-knull/yuri.png')",
       title: 'Cosmos ao Limite',
-      sub: 'O estágio em que o personagem parece maior que o próprio espaço ao redor.'
+      sub: 'O estgio em que o personagem parece maior que o prprio espao ao redor.'
     },
     {
       bg: "url('img-knull/bannercidade.png')",
       title: 'Knull Supremo',
-      sub: 'A forma mais aterradora e absoluta, onde o poder de Knull é sentido como uma presença esmagadora.'
+      sub: 'A forma mais aterradora e absoluta, onde o poder de Knull  sentido como uma presena esmagadora.'
     },
     {
       bg: "url('img-knull/bannerpaissagem0.png')",
       title: 'Batalha Final',
-      sub: 'A luta contra A Besta, onde Knull mostra a extensão total de seu poder em um confronto que redefine o que é possível.'
+      sub: 'A luta contra A Besta, onde Knull mostra a extens&atilde;o total de seu poder em um confronto que redefine o que  poss&iacute;vel.'
     },
     {
       bg  :"url('img-knull/bannerpaissagem1.png')",
@@ -2570,7 +2574,7 @@ nav a { white-space: nowrap; }
     if (visual) visual.style.backgroundImage = slide.bg;
     if (title) title.textContent = slide.title;
     if (sub) sub.textContent = slide.sub;
-    if (index) index.textContent = `Bloco ${['I','II'][panelIndex]} · ${String(absoluteIndex + 1).padStart(2, '0')}`;
+    if (index) index.textContent = `Bloco ${['I','II'][panelIndex]}  ${String(absoluteIndex + 1).padStart(2, '0')}`;
     if (track) track.textContent = laneNames[panelIndex];
     void panel.offsetWidth;
     panel.classList.add('is-transitioning');
@@ -2584,8 +2588,8 @@ nav a { white-space: nowrap; }
 
     if (status) {
       status.innerHTML = paused
-        ? '1 bloco <strong>pausado</strong> · interação do usuário ativa'
-        : '1 bloco <strong>em loop</strong> · rotação simples e swipe no mobile';
+        ? '1 bloco <strong>pausado</strong>  interao do usurio ativa'
+        : '1 bloco <strong>em loop</strong>  rotao simples e swipe no mobile';
     }
   }
 
@@ -2608,7 +2612,7 @@ nav a { white-space: nowrap; }
         if (!paused) {
           globalOffset = (globalOffset + 1) % slides.length;
           renderPanel(panels[laneIndex], laneIndex, true);
-          if (status) status.innerHTML = '1 bloco <strong>em loop</strong> · rotação simples e swipe no mobile';
+          if (status) status.innerHTML = '1 bloco <strong>em loop</strong>  rotao simples e swipe no mobile';
         }
       }, delay));
     });
@@ -2618,8 +2622,8 @@ nav a { white-space: nowrap; }
     paused = value;
     if (status) {
       status.innerHTML = paused
-        ? '1 bloco <strong>pausado</strong> · interação do usuário ativa'
-        : '1 bloco <strong>em loop</strong> · rotação simples e swipe no mobile';
+        ? '1 bloco <strong>pausado</strong>  interao do usurio ativa'
+        : '1 bloco <strong>em loop</strong>  rotao simples e swipe no mobile';
     }
   }
 
@@ -2657,7 +2661,7 @@ nav a { white-space: nowrap; }
   startLoop();
 })();
 
-/* ── MOBILE MENU TOGGLE ── */
+/* -- MOBILE MENU TOGGLE -- */
 (function () {
   const navbar = document.getElementById('navbar');
   const toggle = document.getElementById('menu-toggle');
@@ -2684,7 +2688,7 @@ nav a { white-space: nowrap; }
 
 <script>
 /* ==========================================================
-   Patch: transforma qualquer galeria da página em loop suave
+   Patch: transforma qualquer galeria da p&aacute;gina em loop suave
    ========================================================== */
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2726,7 +2730,7 @@ nav a { white-space: nowrap; }
       <div class="smooth-loop-meta">
         <span class="smooth-loop-kicker">${label}</span>
         <strong class="smooth-loop-title">${first.title}</strong>
-        <span class="smooth-loop-desc">${first.desc || 'loop automático com transição suave'}</span>
+        <span class="smooth-loop-desc">${first.desc || 'loop autom&aacute;tico com transio suave'}</span>
       </div>
     `;
     return panel;
@@ -2747,7 +2751,7 @@ nav a { white-space: nowrap; }
     hidden.classList.add('is-visible');
     panel.dataset.current = String(current);
     panel.querySelector('.smooth-loop-title').textContent = data.title;
-    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop automático com transição suave';
+    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop autom&aacute;tico com transio suave';
   }
 
   function upgradeGallery() {
@@ -2773,9 +2777,9 @@ nav a { white-space: nowrap; }
     const controls = document.createElement('div');
     controls.className = 'smooth-loop-controls';
     controls.innerHTML = `
-      <button class="smooth-loop-btn" type="button" data-loop-prev>← Anterior</button>
-      <span class="smooth-loop-state">${images.length} imagens · looping suave</span>
-      <button class="smooth-loop-btn" type="button" data-loop-next>Próxima →</button>
+      <button class="smooth-loop-btn" type="button" data-loop-prev>? Anterior</button>
+      <span class="smooth-loop-state">${images.length} imagens  looping suave</span>
+      <button class="smooth-loop-btn" type="button" data-loop-next>Pr&oacute;xima ?</button>
     `;
     const oldControls = section.querySelector('.gallery-carousel-controls');
     if (oldControls) oldControls.replaceWith(controls);
@@ -2811,7 +2815,7 @@ nav a { white-space: nowrap; }
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — knull.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  knull.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -2825,3 +2829,7 @@ nav a { white-space: nowrap; }
 
 </body>
 </html>
+
+
+
+

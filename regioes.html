@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Regiões — O Diário de um Deus</title>
+<title>Regi&otilde;es &mdash; O Di&aacute;rio de um Deus</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="effects.css">
 <link rel="stylesheet" href="responsive-fixes.css">
 <style>
-/* ── VARIÁVEIS E RESET ── */
+/* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --void: #030308;
   --deep: #07070f;
@@ -21,27 +21,27 @@
   --divine: #6a4fcf;
   --divine-light: #a07af0;
 
-  /* Cidadela — cinza/negro com roxo */
+  /* Cidadela  cinza/negro com roxo */
   --cidadela: #7a6a9a;
   --cidadela-bright: #b0a0d0;
   --cidadela-glow: rgba(176,160,208,0.4);
 
-  /* Limiar — azul etéreo */
+  /* Limiar  azul etreo */
   --limiar: #4a8ab0;
   --limiar-bright: #80c0e0;
   --limiar-glow: rgba(128,192,224,0.4);
 
-  /* Cidade — dourado urbano */
+  /* Cidade  dourado urbano */
   --cidade: #c08020;
   --cidade-bright: #e0b040;
   --cidade-glow: rgba(224,176,64,0.4);
 
-  /* Núcleo — verde primordial */
+  /* N&uacute;cleo  verde primordial */
   --nucleo: #3a8a4a;
   --nucleo-bright: #70c060;
   --nucleo-glow: rgba(112,192,96,0.4);
 
-  /* Templo — branco antigo */
+  /* Templo  branco antigo */
   --templo: #c8b890;
   --templo-bright: #e8d8b0;
   --templo-glow: rgba(232,216,176,0.4);
@@ -66,7 +66,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -114,7 +114,7 @@ nav a:hover {
     0 0 40px rgba(106,79,207,0.3);
 }
 
-/* ── HERO ── */
+/* -- HERO -- */
 #hero {
   position: relative;
   min-height: 100vh;
@@ -271,7 +271,7 @@ nav a:hover {
   color: var(--gold-dim);
 }
 
-/* ── SEÇÕES COMPARTILHADAS ── */
+/* -- SE&Ccedil;&Otilde;ES COMPARTILHADAS -- */
 section { position: relative; z-index: 1; }
 
 .section-header {
@@ -305,7 +305,7 @@ h2 {
   margin: 1.5rem auto 0;
 }
 
-/* ── MAPA ── */
+/* -- MAPA -- */
 #mapa { padding-bottom: 5rem; }
 
 .map-container {
@@ -468,13 +468,13 @@ h2 {
 .journey-node.void { right: 8%; bottom: 14%; border-color: rgba(138,32,192,0.32); }
 @media (max-width: 768px) { .journey-map-stage { width: calc(100% - 2rem); min-height: auto; display: grid; gap: 1rem; padding: 1.25rem; } .journey-path { display: none; } .journey-node { position: relative; inset: auto !important; width: 100%; } }
 
-/* ── ANIMAÇÕES BASE ── */
+/* -- ANIMA&Ccedil;&Otilde;ES BASE -- */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(20px); filter: blur(3px); }
   to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
 }
 
-/* ── REVEAL ── */
+/* -- REVEAL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -486,9 +486,9 @@ h2 {
   transform: none;
 }
 
-/* ════════════════════════════════════
-   RESPONSIVO — HERO E MAPA
-════════════════════════════════════ */
+/* ------------------------------------
+   RESPONSIVO  HERO E MAPA
+------------------------------------ */
 
 @media (max-width: 1024px) {
   nav { gap: 1.8rem; }
@@ -537,7 +537,7 @@ h2 {
   #hero { min-height: 100svh; }
   .hero-content { padding: 4rem 2rem 2rem; }
 }
-/* ── CARDS DAS REGIÕES ── */
+/* -- CARDS DAS REGIES -- */
 #regioes { padding-bottom: 5rem; }
 
 .regions-grid {
@@ -585,7 +585,7 @@ h2 {
   transform: scale(1.05);
 }
 
-/* Overlays por região */
+/* Overlays por regio */
 .rcard-overlay { position: absolute; inset: 0; }
 
 .cidadela-overlay {
@@ -626,7 +626,7 @@ h2 {
 .cidade-card:hover   { border-color: rgba(224,176,64,0.4); }
 .nucleo-card:hover   { border-color: rgba(112,192,96,0.4); }
 
-/* Conteúdo do card */
+/* Contedo do card */
 .rcard-content {
   position: relative;
   z-index: 2;
@@ -803,7 +803,7 @@ h2 {
 .cidade-link   { color: var(--cidade-bright); }
 .nucleo-link   { color: var(--nucleo-bright); }
 
-/* ── TEMPLO DOS PILARES ── */
+/* -- TEMPLO DOS PILARES -- */
 #templo { padding-bottom: 5rem; }
 
 .templo-feature {
@@ -1026,7 +1026,7 @@ h2 {
   text-align: right;
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 footer {
   position: relative;
   z-index: 1;
@@ -1090,9 +1090,9 @@ footer {
   text-transform: uppercase;
 }
 
-/* ════════════════════════════════════
+/* ------------------------------------
    RESPONSIVO COMPLETO
-════════════════════════════════════ */
+------------------------------------ */
 
 @media (max-width: 1024px) {
   .regions-grid    { padding: 0 1.5rem; gap: 1.2rem; }
@@ -1255,10 +1255,10 @@ footer {
   <a href="home.html" class="nav-logo">
     <img src="img-logo/olhos.jpg" alt="Logo">
   </a>
-  <a href="home.html">← Início</a>
+  <a href="home.html">? In&iacute;cio</a>
   <a href="#mapa">Mapa</a>
   <a href="#journey-map">Jornada</a>
-  <a href="#regioes">Regiões</a>
+  <a href="#regioes">Regi&otilde;es</a>
   <a href="#templo">Templo</a>
 </nav>
 
@@ -1267,20 +1267,20 @@ footer {
   <canvas id="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">O Universo de O Diário de um Deus</p>
+    <p class="hero-eyebrow">O Universo de O Di&aacute;rio de um Deus</p>
     <h1 class="hero-title">
-      <span>Os Domínios &</span>
-      Regiões
+      <span>Os Dom&iacute;nios &</span>
+      Regi&otilde;es
       <span>da Saga</span>
     </h1>
     <div class="hero-divider"></div>
     <p class="hero-sub">
-      Cada lugar carrega uma função, uma essência e uma história.
-      Não são apenas cenários — são extensões dos próprios deuses que os habitam.
+      Cada lugar carrega uma funo, uma ess&ecirc;ncia e uma hist&oacute;ria.
+      N&atilde;o s&atilde;o apenas cenrios  s&atilde;o extenses dos prprios deuses que os habitam.
     </p>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
-      <span>Explore os domínios</span>
+      <span>Explore os dom&iacute;nios</span>
     </div>
   </div>
 </section>
@@ -1288,8 +1288,8 @@ footer {
 <!-- MAPA INTERATIVO -->
 <section id="mapa">
   <div class="section-header reveal">
-    <span class="section-label">Visão geral</span>
-    <h2>O Mapa dos Domínios</h2>
+    <span class="section-label">Vis&atilde;o geral</span>
+    <h2>O Mapa dos Dom&iacute;nios</h2>
     <div class="section-rule"></div>
   </div>
 
@@ -1323,7 +1323,7 @@ footer {
         style="left: 35%; top: 55%">
         <div class="pin-dot nucleo-dot"></div>
         <div class="pin-pulse nucleo-pulse"></div>
-        <div class="pin-label">Núcleo da Forma</div>
+        <div class="pin-label">N&uacute;cleo da Forma</div>
       </div>
 
       <div class="map-pin" data-region="templo"
@@ -1338,7 +1338,7 @@ footer {
     <div id="map-tooltip" class="hidden">
       <div class="tooltip-name"></div>
       <div class="tooltip-type"></div>
-      <a class="tooltip-link" href="#">Explorar →</a>
+      <a class="tooltip-link" href="#">Explorar ?</a>
     </div>
   </div>
 </section>
@@ -1392,11 +1392,11 @@ footer {
     </a>
   </div>
 </section>
-<!-- CARDS DAS REGIÕES -->
+<!-- CARDS DAS REGIES -->
 <section id="regioes">
   <div class="section-header reveal">
-    <span class="section-label">Os Cinco Domínios</span>
-    <h2>Regiões da Saga</h2>
+    <span class="section-label">Os Cinco Dom&iacute;nios</span>
+    <h2>Regi&otilde;es da Saga</h2>
     <div class="section-rule"></div>
   </div>
 
@@ -1409,25 +1409,25 @@ footer {
       </div>
       <div class="rcard-overlay cidadela-overlay"></div>
       <div class="rcard-content">
-        <div class="rcard-icon">🏰</div>
+        <div class="rcard-icon">&#10022;</div>
         <div class="rcard-tag cidadela-tag">Ponto de Origem</div>
         <h3 class="rcard-name cidadela-name">
           Cidadela das Sombras
         </h3>
         <p class="rcard-location">
-          📍 Leste Europeu · Região dos Cárpatos
+          &#10022; Leste Europeu  Regi&atilde;o dos C&aacute;rpatos
         </p>
         <p class="rcard-desc">
-          Erguida em pedra escura que absorve luz. Não é invisível — é ignorável. Quem não sabe o que procura simplesmente não a percebe como relevante.
+          Erguida em pedra escura que absorve luz. N&atilde;o  invis&iacute;vel   ignorvel. Quem n&atilde;o sabe o que procura simplesmente n&atilde;o a percebe como relevante.
         </p>
         <div class="rcard-attrs">
-          <span class="rattr cidadela-attr">Formação</span>
-          <span class="rattr cidadela-attr">Contenção</span>
+          <span class="rattr cidadela-attr">Formao</span>
+          <span class="rattr cidadela-attr">Conteno</span>
           <span class="rattr cidadela-attr">Controle</span>
         </div>
         <div class="rcard-footer">
-          <span class="rcard-ruler">Domínio de Jéssica · Kaelith</span>
-          <span class="rcard-link cidadela-link">Explorar →</span>
+          <span class="rcard-ruler">Dom&iacute;nio de Jssica  Kaelith</span>
+          <span class="rcard-link cidadela-link">Explorar ?</span>
         </div>
       </div>
       <div class="rcard-number">01</div>
@@ -1442,24 +1442,24 @@ footer {
       <div class="rcard-overlay limiar-overlay"></div>
       <div class="rcard-content">
         
-        <div class="rcard-tag limiar-tag">Estado da Existência</div>
+        <div class="rcard-tag limiar-tag">Estado da Existncia</div>
         <h3 class="rcard-name limiar-name">
           Limiar da Continuidade
         </h3>
         <p class="rcard-location">
-          📍 Sem localização fixa · Campos de batalha e cemitérios
+          &#10022; Sem localiza&ccedil;&atilde;o fixa  Campos de batalha e cemit&eacute;rios
         </p>
         <p class="rcard-desc">
-          Não há céu. Não há chão definido. Fragmentos de memória flutuam como reflexos na água. No centro existe a Forja — não como fornalha, mas como processo.
+          N&atilde;o h cu. N&atilde;o h cho definido. Fragmentos de memria flutuam como reflexos na gua. No centro existe a Forja  n&atilde;o como fornalha, mas como processo.
         </p>
         <div class="rcard-attrs">
-          <span class="rattr limiar-attr">Transformação</span>
-          <span class="rattr limiar-attr">Purificação</span>
+          <span class="rattr limiar-attr">Transformao</span>
+          <span class="rattr limiar-attr">Purificao</span>
           <span class="rattr limiar-attr">Continuidade</span>
         </div>
         <div class="rcard-footer">
-          <span class="rcard-ruler">Domínio de Leonardo · Anull</span>
-          <span class="rcard-link limiar-link">Explorar →</span>
+          <span class="rcard-ruler">Dom&iacute;nio de Leonardo  Anull</span>
+          <span class="rcard-link limiar-link">Explorar ?</span>
         </div>
       </div>
       <div class="rcard-number">02</div>
@@ -1478,25 +1478,25 @@ footer {
           Cidade das Mil Escolhas
         </h3>
         <p class="rcard-location">
-          📍 Sobreposta a Istambul · Roma · Grandes centros
+          &#10022; Sobreposta a Istambul  Roma  Grandes centros
         </p>
         <p class="rcard-desc">
-          A cidade nunca é a mesma duas vezes. As ruas mudam. Bairros surgem. Algumas pessoas são ecos de decisões, possibilidades não escolhidas, versões de caminhos abandonados.
+          A cidade nunca  a mesma duas vezes. As ruas mudam. Bairros surgem. Algumas pessoas s&atilde;o ecos de decises, possibilidades n&atilde;o escolhidas, vers&otilde;es de caminhos abandonados.
         </p>
         <div class="rcard-attrs">
           <span class="rattr cidade-attr">Vontade</span>
-          <span class="rattr cidade-attr">Decisão</span>
-          <span class="rattr cidade-attr">Experiência</span>
+          <span class="rattr cidade-attr">Decis&atilde;o</span>
+          <span class="rattr cidade-attr">Experincia</span>
         </div>
         <div class="rcard-footer">
-          <span class="rcard-ruler">Domínio de Lucas · Onull</span>
-          <span class="rcard-link cidade-link">Explorar →</span>
+          <span class="rcard-ruler">Dom&iacute;nio de Lucas  Onull</span>
+          <span class="rcard-link cidade-link">Explorar ?</span>
         </div>
       </div>
       <div class="rcard-number">03</div>
     </div>
 
-    <!-- NÚCLEO DA FORMA -->
+    <!-- NCLEO DA FORMA -->
     <div class="region-card nucleo-card reveal"
       data-href="nucleo.html">
       <div class="rcard-bg"
@@ -1506,22 +1506,22 @@ footer {
       <div class="rcard-content">
         <div class="rcard-tag nucleo-tag">Plano Primordial</div>
         <h3 class="rcard-name nucleo-name">
-          Núcleo da Forma
+          N&uacute;cleo da Forma
         </h3>
         <p class="rcard-location">
-          📍 Andes · Himalaia · Desertos antigos · Florestas primordiais
+          &#10022; Andes  Himalaia  Desertos antigos  Florestas primordiais
         </p>
         <p class="rcard-desc">
-          Tudo ali está em movimento — mesmo quando parece estático. Os elementos não são ferramentas. São presenças. O fogo observa. A água responde. A terra sustenta. O ar conecta.
+          Tudo ali est em movimento  mesmo quando parece esttico. Os elementos n&atilde;o s&atilde;o ferramentas. S&atilde;o presenas. O fogo observa. A gua responde. A terra sustenta. O ar conecta.
         </p>
         <div class="rcard-attrs">
-          <span class="rattr nucleo-attr">Matéria</span>
+          <span class="rattr nucleo-attr">Matria</span>
           <span class="rattr nucleo-attr">Elementos</span>
-          <span class="rattr nucleo-attr">Coerência</span>
+          <span class="rattr nucleo-attr">Coerncia</span>
         </div>
         <div class="rcard-footer">
-          <span class="rcard-ruler">Domínio de Yuri · Knull</span>
-          <span class="rcard-link nucleo-link">Explorar →</span>
+          <span class="rcard-ruler">Dom&iacute;nio de Yuri  Knull</span>
+          <span class="rcard-link nucleo-link">Explorar ?</span>
         </div>
       </div>
       <div class="rcard-number">04</div>
@@ -1530,7 +1530,7 @@ footer {
   </div>
 </section>
 
-<!-- TEMPLO DOS PILARES — DESTAQUE ESPECIAL -->
+<!-- TEMPLO DOS PILARES  DESTAQUE ESPECIAL -->
 <section id="templo">
   <div class="section-header reveal">
     <span class="section-label">Local Sagrado</span>
@@ -1540,64 +1540,64 @@ footer {
 
   <div class="templo-feature reveal">
     <div class="templo-bg"
-      style="background-image: url('templo-bg.jpg')">
+      style="background-image: url('img-templo/templo.png')">
     </div>
     <div class="templo-overlay"></div>
     <canvas id="templo-canvas"></canvas>
 
     <div class="templo-content">
       <div class="templo-left">
-        <p class="templo-tag">Ponto de Transição · Terras Imortais</p>
+        <p class="templo-tag">Ponto de Transio  Terras Imortais</p>
         <h3 class="templo-name">Templo dos Pilares</h3>
         <div class="templo-divider"></div>
         <p class="templo-desc">
-          O templo parece pequeno à distância. Mas, ao se aproximar, sua escala muda. Ele não é construído — ele parece ter sido <em>revelado</em>.
+          O templo parece pequeno  distncia. Mas, ao se aproximar, sua escala muda. Ele n&atilde;o  constru&iacute;do  ele parece ter sido <em>revelado</em>.
         </p>
         <p class="templo-desc">
-          Três entradas. Três caminhos. Nenhum igual. As paredes não refletem luz — absorvem. E o silêncio ali não é ausência de som. É presença de significado.
+          Trs entradas. Trs caminhos. Nenhum igual. As paredes n&atilde;o refletem luz  absorvem. E o silncio ali n&atilde;o  ausncia de som.  presena de significado.
         </p>
         <div class="templo-pillars">
           <div class="tpillar">
-            <div class="tpillar-icon">🌍</div>
+            <div class="tpillar-icon">&#10022;</div>
             <div class="tpillar-name">Pilar Elemental</div>
-            <div class="tpillar-desc">O caminho da matéria e da forma</div>
+            <div class="tpillar-desc">O caminho da matria e da forma</div>
           </div>
           <div class="tpillar">
-            <div class="tpillar-icon">👤</div>
+            <div class="tpillar-icon">&#10022;</div>
             <div class="tpillar-name">Pilar Humano</div>
             <div class="tpillar-desc">O caminho da vontade e da escolha</div>
           </div>
           <div class="tpillar">
-            <div class="tpillar-icon">👁️</div>
+            <div class="tpillar-icon">&#10022;</div>
             <div class="tpillar-name">Pilar Espiritual</div>
-            <div class="tpillar-desc">O caminho da consciência e da continuidade</div>
+            <div class="tpillar-desc">O caminho da consci&ecirc;ncia e da continuidade</div>
           </div>
         </div>
         <a href="templo.html" class="templo-btn">
-          Explorar o Templo →
+          Explorar o Templo ?
         </a>
       </div>
 
       <div class="templo-right">
         <div class="templo-quote">
-          "Ninguém sai dali sendo o mesmo."
+          "Ningum sai dali sendo o mesmo."
         </div>
         <div class="templo-facts">
           <div class="tfact">
-            <span class="tfact-label">Função</span>
-            <span class="tfact-val">Testar essência</span>
+            <span class="tfact-label">Funo</span>
+            <span class="tfact-val">Testar ess&ecirc;ncia</span>
           </div>
           <div class="tfact">
             <span class="tfact-label">Acesso</span>
-            <span class="tfact-val">Regiões remotas</span>
+            <span class="tfact-val">Regi&otilde;es remotas</span>
           </div>
           <div class="tfact">
             <span class="tfact-label">Natureza</span>
-            <span class="tfact-val">Revelado, não construído</span>
+            <span class="tfact-val">Revelado, n&atilde;o constru&iacute;do</span>
           </div>
           <div class="tfact">
             <span class="tfact-label">Entradas</span>
-            <span class="tfact-val">Três — nenhuma igual</span>
+            <span class="tfact-val">Trs  nenhuma igual</span>
           </div>
         </div>
       </div>
@@ -1609,30 +1609,30 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-nav">
-      <a href="home.html">← Início</a>
-      <span>·</span>
-      <a href="viloes.html">Vilões</a>
-      <span>·</span>
+      <a href="home.html">? In&iacute;cio</a>
+      <span></span>
+      <a href="viloes.html">Vil&otilde;es</a>
+      <span></span>
       <a href="knull.html">Personagens</a>
     </div>
-    <div class="footer-title">Os Domínios</div>
+    <div class="footer-title">Os Dom&iacute;nios</div>
     <div class="footer-sub">
-      "Cada lugar é uma extensão de quem o habita."
+      "Cada lugar  uma extens&atilde;o de quem o habita."
     </div>
     <div class="footer-copy">
-      O Diário de um Deus · Todos os direitos reservados
+     &mdash; O Di&aacute;rio de um Deus  Todos os direitos reservados
     </div>
   </div>
 </footer>
 
 <script src="effects.js"></script>
-<script>/* ════════════════════════════════════
-   REGIÕES — JAVASCRIPT COMPLETO
-   Canvas Hero · Mapa Interativo
-   Canvas Templo · Scroll · Reveal
-════════════════════════════════════ */
+<script>/* ------------------------------------
+   REGIES  JAVASCRIPT COMPLETO
+   Canvas Hero  Mapa Interativo
+   Canvas Templo  Scroll  Reveal
+------------------------------------ */
 
-/* ── COSMOS CANVAS (fundo global) ── */
+/* -- COSMOS CANVAS (fundo global) -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx    = canvas.getContext('2d');
@@ -1713,7 +1713,7 @@ footer {
   resize(); init(); draw();
 })();
 
-/* ── CANVAS DO HERO ── */
+/* -- CANVAS DO HERO -- */
 (function () {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
@@ -1725,7 +1725,7 @@ footer {
     H = canvas.height = canvas.offsetHeight;
   }
 
-  /* Cinco orbs — um por região */
+  /* Cinco orbs  um por regio */
   const regionColors = [
     { r: 0.9, g: 0.6, b: 0.2 }, /* gold */
     { r: 0.7, g: 0.6, b: 0.9 }, /* cidadela */
@@ -1757,7 +1757,7 @@ footer {
   function draw() {
     ctx.clearRect(0, 0, W, H);
 
-    /* Conexões entre orbs */
+    /* Conexes entre orbs */
     connections.forEach(conn => {
       const a = orbs[conn.a];
       const b = orbs[conn.b];
@@ -1803,7 +1803,7 @@ footer {
       ctx.arc(o.x, o.y, pulseR * 4, 0, Math.PI * 2);
       ctx.fill();
 
-      /* Núcleo */
+      /* N&uacute;cleo */
       ctx.beginPath();
       ctx.arc(o.x, o.y, pulseR * 0.6, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${cr},${cg},${cb},${alpha * 3})`;
@@ -1817,14 +1817,14 @@ footer {
   resize(); init(); draw();
 })();
 
-/* ── MAPA INTERATIVO ── */
+/* -- MAPA INTERATIVO -- */
 (function () {
   const mapCanvas = document.getElementById('map-canvas');
   if (!mapCanvas) return;
   const ctx = mapCanvas.getContext('2d');
   let W, H;
 
-  /* Dados das regiões */
+  /* Dados das regies */
   const regions = {
     cidadela: {
       name: 'Cidadela das Sombras',
@@ -1835,7 +1835,7 @@ footer {
     },
     limiar: {
       name: 'Limiar da Continuidade',
-      type: 'Estado da Existência',
+      type: 'Estado da Existncia',
       href: 'limiar.html',
       color: [128, 192, 224],
       pin: { left: 0.42, top: 0.38 }
@@ -1848,7 +1848,7 @@ footer {
       pin: { left: 0.52, top: 0.42 }
     },
     nucleo: {
-      name: 'Núcleo da Forma',
+      name: 'N&uacute;cleo da Forma',
       type: 'Plano Primordial',
       href: 'nucleo.html',
       color: [112, 192, 96],
@@ -1856,7 +1856,7 @@ footer {
     },
     templo: {
       name: 'Templo dos Pilares',
-      type: 'Ponto de Transição',
+      type: 'Ponto de Transio',
       href: 'templo.html',
       color: [200, 184, 144],
       pin: { left: 0.65, top: 0.48 }
@@ -1893,7 +1893,7 @@ footer {
     }
     ctx.restore();
 
-    /* Linhas de conexão entre regiões */
+    /* Linhas de conexo entre regies */
     const pins = Object.values(regions).map(r => ({
       x: r.pin.left * W,
       y: r.pin.top  * H,
@@ -1932,7 +1932,7 @@ footer {
       }
     }
 
-    /* Névoas por região */
+    /* Nvoas por regio */
     Object.values(regions).forEach(r => {
       const x = r.pin.left * W;
       const y = r.pin.top  * H;
@@ -1965,7 +1965,7 @@ footer {
       tooltip.querySelector('.tooltip-type').textContent =
         region.type;
       const link = tooltip.querySelector('.tooltip-link');
-      link.textContent = 'Explorar →';
+      link.textContent = 'Explorar ?';
       link.href        = region.href;
       link.style.color = `rgb(${region.color.join(',')})`;
       tooltip.classList.remove('hidden');
@@ -1988,7 +1988,7 @@ footer {
       if (tooltip) tooltip.classList.add('hidden');
     });
 
-    /* Clique navega para a região */
+    /* Clique navega para a regio */
     pin.addEventListener('click', () => {
       if (region) window.location.href = region.href;
     });
@@ -2010,7 +2010,7 @@ footer {
   window.addEventListener('resize', resize, { passive: true });
 })();
 
-/* ── CANVAS DO TEMPLO ── */
+/* -- CANVAS DO TEMPLO -- */
 (function () {
   const canvas = document.getElementById('templo-canvas');
   if (!canvas) return;
@@ -2024,14 +2024,14 @@ footer {
   }
 
   function init() {
-    /* Três pilares de luz */
+    /* Trs pilares de luz */
     pillars = [
       { x: W * 0.25, color: [112,192,96],  label: 'Elemental' },
       { x: W * 0.50, color: [201,168,76],  label: 'Humano'    },
       { x: W * 0.75, color: [160,122,240], label: 'Espiritual'}
     ];
 
-    /* Partículas flutuando para cima */
+    /* Partculas flutuando para cima */
     particles = [];
     for (let i = 0; i < 50; i++) {
       particles.push({
@@ -2080,7 +2080,7 @@ footer {
       ctx.fill();
     });
 
-    /* Partículas */
+    /* Partculas */
     particles.forEach(p => {
       p.x    += p.speedX;
       p.y    += p.speedY;
@@ -2143,7 +2143,7 @@ footer {
   }, { passive: true });
 })();
 
-/* ── CARDS CLICÁVEIS ── */
+/* -- CARDS CLICVEIS -- */
 (function () {
   const cards = document.querySelectorAll('.region-card');
   cards.forEach(card => {
@@ -2156,7 +2156,7 @@ footer {
   });
 })();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function () {
   const els = document.querySelectorAll('.reveal');
   const io  = new IntersectionObserver(entries => {
@@ -2170,7 +2170,7 @@ footer {
   els.forEach(el => io.observe(el));
 })();
 
-/* ── EFEITO PARALLAX NOS CARDS ── */
+/* -- EFEITO PARALLAX NOS CARDS -- */
 (function () {
   const isMobile = window.matchMedia('(max-width: 768px)').matches;
   if (isMobile) return;
@@ -2197,7 +2197,7 @@ footer {
   });
 })();
 
-/* ── EFEITO NOS PINS AO SCROLL ── */
+/* -- EFEITO NOS PINS AO SCROLL -- */
 (function () {
   const pins = document.querySelectorAll('.map-pin');
 
@@ -2231,7 +2231,7 @@ footer {
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — regioes.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  regioes.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -2245,3 +2245,7 @@ footer {
 
 </body>
 </html>
+
+
+
+

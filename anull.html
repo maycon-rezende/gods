@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anull — O Diário de um Deus</title>
+<title>Anull &mdash; O Di&aacute;rio de um Deus</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="effects.css">
 <link rel="stylesheet" href="responsive-fixes.css">
 <style>
-  /* ── VARIÁVEIS E RESET ── */
+  /* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --gold: #c9a84c;
   --gold-light: #f0d080;
@@ -52,7 +52,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -100,7 +100,7 @@ nav a:hover {
     0 0 40px rgba(106,79,207,0.3);
 }
 
-/* ── BANNER ── */
+/* -- BANNER -- */
 #banner {
   position: relative;
   min-height: 100vh;
@@ -211,7 +211,7 @@ nav a:hover {
   animation: fade-up 1s 0.9s ease forwards;
 }
 
-/* ── STATS DO BANNER ── */
+/* -- STATS DO BANNER -- */
 .banner-stats {
   display: flex;
   align-items: center;
@@ -264,7 +264,7 @@ nav a:hover {
   animation: bounce 2s ease infinite;
 }
 
-/* ── ANIMAÇÕES ── */
+/* -- ANIMA&Ccedil;&Otilde;ES -- */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -283,7 +283,7 @@ nav a:hover {
   50%       { transform: translateY(8px); }
 }
 
-/* ── REVEAL ON SCROLL ── */
+/* -- REVEAL ON SCROLL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -295,9 +295,9 @@ nav a:hover {
   transform: none;
 }
 
-/* ════════════════════════════════════
-   RESPONSIVO — BANNER E NAV
-════════════════════════════════════ */
+/* ------------------------------------
+   RESPONSIVO  BANNER E NAV
+------------------------------------ */
 
 /* 1024px */
 @media (max-width: 1024px) {
@@ -396,7 +396,7 @@ nav a:hover {
   .banner-content { padding: 3.5rem 4vw 2.5rem; }
   .banner-stats   { margin-top: 1.2rem; }
 }
-/* ── SEÇÕES COMPARTILHADAS ── */
+/* -- SE&Ccedil;&Otilde;ES COMPARTILHADAS -- */
 section {
   position: relative;
   z-index: 1;
@@ -433,7 +433,7 @@ h2 {
   margin: 1.5rem auto 0;
 }
 
-/* ── SOBRE ── */
+/* -- SOBRE -- */
 #sobre { padding-bottom: 5rem; }
 
 .about-grid {
@@ -562,7 +562,7 @@ h2 {
   color: var(--void-light);
 }
 
-/* ── PODERES ── */
+/* -- PODERES -- */
 #poderes {
   padding-bottom: 5rem;
   background: linear-gradient(to bottom,
@@ -659,7 +659,7 @@ h2 {
     var(--void-color), var(--void-light));
 }
 
-/* ── HISTÓRIA ── */
+/* -- HISTRIA -- */
 #historia { padding-bottom: 5rem; }
 
 .story-body {
@@ -720,7 +720,7 @@ h2 {
 
 .story-block p strong { color: var(--gold-light); }
 
-/* ── GALERIA ── */
+/* -- GALERIA -- */
 #galeria { padding-bottom: 5rem; }
 
 .gallery-grid {
@@ -792,7 +792,7 @@ h2 {
   font-style: normal;
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 footer {
   text-align: center;
   padding: 4rem 2rem;
@@ -846,9 +846,9 @@ footer {
   text-transform: uppercase;
 }
 
-/* ════════════════════════════════════
-   RESPONSIVO — SEÇÕES
-════════════════════════════════════ */
+/* ------------------------------------
+   RESPONSIVO  SE&Ccedil;&Otilde;ES
+------------------------------------ */
 
 /* 1024px */
 @media (max-width: 1024px) {
@@ -892,7 +892,7 @@ footer {
   .power-title    { font-size: 1rem; }
   .power-body     { font-size: 0.9rem; }
 
-  /* História */
+  /* Hist&oacute;ria */
   .story-body  { padding: 0 1.5rem; }
   .story-title { font-size: 1.05rem; }
   .story-block p { font-size: 0.93rem; }
@@ -950,7 +950,7 @@ footer {
 
   .power-bar-wrap { height: 3px; }
 
-  /* História */
+  /* Hist&oacute;ria */
   .story-body  { padding: 0 1.2rem; }
 
   .story-block {
@@ -975,7 +975,7 @@ footer {
     gap: 0.5rem;
   }
 
-  /* Touch: overlay sempre visível */
+  /* Touch: overlay sempre vis&iacute;vel */
   .gallery-overlay { opacity: 1; }
 
   .gallery-overlay span {
@@ -1046,11 +1046,10 @@ footer {
   .section-header { padding: 2.5rem 1.5rem 1.5rem; }
   .story-block    { padding: 1.5rem 0 1.5rem 2rem; }
 }
-  /* === CSS VIRÁ NAS PARTES 2 E 3 === */
 
 
 /* ==========================================================
-   PATCH RESPONSIVO + GALERIA LOOP SUAVE — revisão ChatGPT
+   PATCH RESPONSIVO + GALERIA LOOP SUAVE  revis&atilde;o ChatGPT
    ========================================================== */
 html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 body { min-width: 0; }
@@ -1350,7 +1349,7 @@ nav a { white-space: nowrap; }
   </a>
   <a href="#sobre">Sobre</a>
   <a href="#poderes">Poderes</a>
-  <a href="#historia">História</a>
+  <a href="#historia">Hist&oacute;ria</a>
   <a href="#galeria">Galeria</a>
 </nav>
 
@@ -1359,41 +1358,41 @@ nav a { white-space: nowrap; }
   <div class="banner-bg" style="background-image: url('img-anull/anullbanner2.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
-    <p class="banner-eyebrow">Mestre Espiritual · Deus Anull · Transcendido</p>
+    <p class="banner-eyebrow">Mestre Espiritual  Deus Anull  Transcendido</p>
     <h1 class="banner-name">Anull</h1>
     <p class="banner-human">Antes conhecido como <em>Leonardo</em></p>
     <div class="banner-divider"></div>
-    <p class="banner-quote">"O corpo perece. O espírito não tem permissão para fazer o mesmo."</p>
+    <p class="banner-quote">"O corpo perece. O esp&iacute;rito n&atilde;o tem permiss&atilde;o para fazer o mesmo."</p>
     <div class="banner-stats">
       <div class="bstat">
         <span class="bstat-val">Espiritual</span>
-        <span class="bstat-label">Domínio</span>
+        <span class="bstat-label">Dom&iacute;nio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Plano Espiritual</span>
-        <span class="bstat-label">Território</span>
+        <span class="bstat-label">Territ&oacute;rio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Mestre Espiritual</span>
-        <span class="bstat-label">Título</span>
+        <span class="bstat-label">T&iacute;tulo</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Deus</span>
-        <span class="bstat-label">Ascensão</span>
+        <span class="bstat-label">Ascens&atilde;o</span>
       </div>
     </div>
   </div>
-  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+  <div class="scroll-hint">? &nbsp; Role para baixo</div>
 </section>
 
 <!-- SOBRE -->
 <section id="sobre">
   <div class="section-header reveal">
     <span class="section-label">Identidade</span>
-    <h2>Quem é Anull</h2>
+    <h2>Quem  Anull</h2>
     <div class="section-rule"></div>
   </div>
 
@@ -1405,28 +1404,28 @@ nav a { white-space: nowrap; }
         <div class="photo-frame-corner bl"></div>
         <div class="photo-frame-corner br"></div>
       </div>
-      <div class="about-photo-label">Anull · O Elo Entre os Mundos</div>
+      <div class="about-photo-label">Anull  O Elo Entre os Mundos</div>
     </div>
     <div class="about-text">
       <p>
-        Leonardo sempre enxergou o que os outros não conseguiam ver. Não era dom, não era treinamento — era uma percepção que parecia vir de outra camada da realidade. Enquanto Yuri lia o campo de batalha pelos olhos e Lucas pela mente, Leonardo o lia pela <em>alma</em>.
+        Leonardo sempre enxergou o que os outros n&atilde;o conseguiam ver. N&atilde;o era dom, n&atilde;o era treinamento  era uma percepo que parecia vir de outra camada da realidade. Enquanto Yuri lia o campo de batalha pelos olhos e Lucas pela mente, Leonardo o lia pela <em>alma</em>.
       </p>
       <p>
-        O título de <strong>Mestre Espiritual</strong> não foi uma surpresa para nenhum dos seis. Leonardo era o elo natural entre o mundo material e o plano espiritual — aquele que transitava entre as duas camadas da existência com uma facilidade que beirava o impossível. Seu corpo podia estar presente numa batalha enquanto sua consciência percorria dimensões inteiramente diferentes.
+        O t&iacute;tulo de <strong>Mestre Espiritual</strong> n&atilde;o foi uma surpresa para nenhum dos seis. Leonardo era o elo natural entre o mundo material e o plano espiritual  aquele que transitava entre as duas camadas da exist&ecirc;ncia com uma facilidade que beirava o imposs&iacute;vel. Seu corpo podia estar presente numa batalha enquanto sua consci&ecirc;ncia percorria dimenses inteiramente diferentes.
       </p>
       <p>
-        Mais do que um combatente, Leonardo era o <em>âncora</em> do grupo — aquele que mantinha os outros conectados ao propósito maior quando as batalhas ameaçavam consumir não apenas os corpos, mas as almas. Sua presença no plano espiritual era tão marcante quanto sua ausência seria devastadora.
+        Mais do que um combatente, Leonardo era o <em>&Acirc;ncora</em> do grupo  aquele que mantinha os outros conectados ao propsito maior quando as batalhas amea&ccedil;avam consumir n&atilde;o apenas os corpos, mas as almas. Sua presena no plano espiritual era to marcante quanto sua ausncia seria devastadora.
       </p>
       <p>
-        Após o confronto com A Besta e a deificação, o nome Leonardo cedeu lugar a <strong>Anull</strong> — o deus que existe simultaneamente em todos os planos, cuja vontade ressoa tanto no mundo dos vivos quanto nas camadas mais profundas do espiritual.
+        Aps o confronto com A Besta e a deifica&ccedil;&atilde;o, o nome Leonardo cedeu lugar a <strong>Anull</strong>  o deus que existe simultaneamente em todos os planos, cuja vontade ressoa tanto no mundo dos vivos quanto nas camadas mais profundas do espiritual.
       </p>
       <div class="about-tags">
         <span class="tag">Mestre Espiritual</span>
         <span class="tag spirit-tag">Plano Espiritual</span>
-        <span class="tag spirit-tag">Consciência Dual</span>
+        <span class="tag spirit-tag">Consci&ecirc;ncia Dual</span>
         <span class="tag divine-tag">Deus Anull</span>
-        <span class="tag">Âncora do Grupo</span>
-        <span class="tag void-tag">Transcendência</span>
+        <span class="tag">&Acirc;ncora do Grupo</span>
+        <span class="tag void-tag">Transcend&ecirc;ncia</span>
       </div>
     </div>
   </div>
@@ -1444,72 +1443,72 @@ nav a { white-space: nowrap; }
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">👁️</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Essência Espiritual</div>
-        <div class="power-title">Visão Espiritual</div>
-        <div class="power-body">Anull enxerga além do plano físico — percebe auras, intenções, laços espirituais e entidades que existem fora da percepção comum. Em batalha, essa visão permite antecipar ataques antes que sejam executados no plano material, lendo a intenção espiritual do oponente antes do movimento físico.</div>
+        <div class="power-origin">Ess&ecirc;ncia Espiritual</div>
+        <div class="power-title">Vis&atilde;o Espiritual</div>
+        <div class="power-body">Anull enxerga al&eacute;m do plano f&iacute;sico  percebe auras, intenes, laos espirituais e entidades que existem fora da percepo comum. Em batalha, essa vis&atilde;o permite antecipar ataques antes que sejam executados no plano material, lendo a inteno espiritual do oponente antes do movimento f&iacute;sico.</div>
         <div class="power-bar-wrap"><div class="power-bar spirit" data-width="97"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🌀</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Domínio Espiritual</div>
-        <div class="power-title">Projeção Astral & Consciência Dual</div>
-        <div class="power-body">Anull pode separar sua consciência do corpo físico e projetar-se no plano astral enquanto o corpo continua presente no mundo material. No plano astral, atravessa barreiras físicas, percorre grandes distâncias instantaneamente e acessa informações inacessíveis no plano comum. Sua consciência dual permite operar em ambos os planos simultaneamente.</div>
+        <div class="power-origin">Dom&iacute;nio Espiritual</div>
+        <div class="power-title">Proje&ccedil;&atilde;o Astral & Consci&ecirc;ncia Dual</div>
+        <div class="power-body">Anull pode separar sua consci&ecirc;ncia do corpo f&iacute;sico e projetar-se no plano astral enquanto o corpo continua presente no mundo material. No plano astral, atravessa barreiras fsicas, percorre grandes distncias instantaneamente e acessa informaes inacessveis no plano comum. Sua consci&ecirc;ncia dual permite operar em ambos os planos simultaneamente.</div>
         <div class="power-bar-wrap"><div class="power-bar spirit" data-width="95"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">⚡</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Manipulação Espiritual</div>
-        <div class="power-title">Energia Espiritual — Forma de Combate</div>
-        <div class="power-body">A energia espiritual de Anull não é apenas defensiva — é uma força ofensiva devastadora. Pode condensá-la em golpes que afetam tanto o corpo físico quanto a alma do oponente, criando dano que nenhuma cura convencional consegue reverter completamente. Ataques que tocam a alma deixam marcas permanentes.</div>
+        <div class="power-origin">Manipula&ccedil;&atilde;o Espiritual</div>
+        <div class="power-title">Energia Espiritual  Forma de Combate</div>
+        <div class="power-body">A energia espiritual de Anull n&atilde;o  apenas defensiva   uma for&ccedil;a ofensiva devastadora. Pode condens-la em golpes que afetam tanto o corpo f&iacute;sico quanto a alma do oponente, criando dano que nenhuma cura convencional consegue reverter completamente. Ataques que tocam a alma deixam marcas permanentes.</div>
         <div class="power-bar-wrap"><div class="power-bar void" data-width="93"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🛡️</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Proteção Espiritual</div>
+        <div class="power-origin">Prote&ccedil;&atilde;o Espiritual</div>
         <div class="power-title">Escudo de Alma</div>
-        <div class="power-body">Anull pode estender sua proteção espiritual aos aliados — criando um escudo que não bloqueia apenas danos físicos, mas também ataques mentais, maldições, genjutsu e qualquer forma de manipulação que atue sobre a consciência ou alma. Em batalhas prolongadas, esse escudo é a diferença entre os seis permanecerem íntegros ou serem consumidos.</div>
+        <div class="power-body">Anull pode estender sua prote&ccedil;&atilde;o espiritual aos aliados  criando um escudo que n&atilde;o bloqueia apenas danos f&iacute;sicos, mas tamb&eacute;m ataques mentais, maldies, genjutsu e qualquer forma de manipula&ccedil;&atilde;o que atue sobre a consci&ecirc;ncia ou alma. Em batalhas prolongadas, esse escudo  a diferena entre os seis permanecerem ntegros ou serem consumidos.</div>
         <div class="power-bar-wrap"><div class="power-bar spirit" data-width="98"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🔗</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
         <div class="power-origin">Elo Espiritual</div>
-        <div class="power-title">Conexão entre os Seis</div>
-        <div class="power-body">O poder mais único de Anull — e o mais invisível. Ele mantém um elo espiritual constante entre todos os seis, permitindo comunicação instantânea independente da distância, compartilhamento de percepções em batalha e, nos momentos mais críticos, transferência de energia entre os membros do grupo. É a razão pela qual os seis funcionam como um organismo único em combate.</div>
+        <div class="power-title">Conexo entre os Seis</div>
+        <div class="power-body">O poder mais &uacute;nico de Anull  e o mais invis&iacute;vel. Ele mantm um elo espiritual constante entre todos os seis, permitindo comunicao instantnea independente da distncia, compartilhamento de percepes em batalha e, nos momentos mais crticos, transferncia de energia entre os membros do grupo.  a razo pela qual os seis funcionam como um organismo &uacute;nico em combate.</div>
         <div class="power-bar-wrap"><div class="power-bar void" data-width="100"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">♾️</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Condição Divina</div>
-        <div class="power-title">Transcendência · Anull</div>
-        <div class="power-body">Como Anull, Leonardo transcendeu a barreira entre os planos — deixando de ser um ser que visita o espiritual para tornar-se uma entidade que existe em ambos simultaneamente e de forma permanente. Sua vontade ressoa em todas as camadas da realidade. Onde Knull dobra o mundo físico e Onull reescreve os limites humanos, Anull redefine o que é possível no plano da alma.</div>
+        <div class="power-origin">Condi&ccedil;&atilde;o Divina</div>
+        <div class="power-title">Transcend&ecirc;ncia  Anull</div>
+        <div class="power-body">Como Anull, Leonardo transcendeu a barreira entre os planos  deixando de ser um ser que visita o espiritual para tornar-se uma entidade que existe em ambos simultaneamente e de forma permanente. Sua vontade ressoa em todas as camadas da realidade. Onde Knull dobra o mundo f&iacute;sico e Onull reescreve os limites humanos, Anull redefine o que  poss&iacute;vel no plano da alma.</div>
         <div class="power-bar-wrap"><div class="power-bar spirit" data-width="100"></div></div>
       </div>
     </div>
@@ -1517,38 +1516,38 @@ nav a { white-space: nowrap; }
   </div>
 </section>
 
-<!-- HISTÓRIA -->
+<!-- HISTRIA -->
 <section id="historia">
   <div class="section-header reveal">
-    <span class="section-label">Trajetória</span>
-    <h2>A História de Leonardo</h2>
+    <span class="section-label">Trajet&oacute;ria</span>
+    <h2>A Hist&oacute;ria de Leonardo</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="story-body">
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo I</div>
-      <div class="story-title">O Que Via Além</div>
-      <p>Leonardo nunca precisou de treinamento para enxergar o espiritual — sempre foi assim. Desde antes de conhecer os outros cinco, percebia camadas da realidade que a maioria das pessoas nem sabia que existiam. Auras, intenções, presenças invisíveis. Para Leonardo, o mundo espiritual era tão real quanto o chão sob seus pés.</p>
+      <div class="story-chapter">Cap&iacute;tulo I</div>
+      <div class="story-title">O Que Via Al&eacute;m</div>
+      <p>Leonardo nunca precisou de treinamento para enxergar o espiritual  sempre foi assim. Desde antes de conhecer os outros cinco, percebia camadas da realidade que a maioria das pessoas nem sabia que existiam. Auras, intenes, presenas invisveis. Para Leonardo, o mundo espiritual era to real quanto o cho sob seus ps.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo II</div>
-      <div class="story-title">A Âncora dos Seis</div>
-      <p>Quando os seis se reuniram, Leonardo assumiu naturalmente o papel de âncora — não por decisão própria, mas porque era o único capaz de manter o grupo conectado num nível que ia além da comunicação comum. Seu elo espiritual entre os cinco era o sistema nervoso invisível que tornava o grupo mais do que a soma de suas partes.</p>
+      <div class="story-chapter">Cap&iacute;tulo II</div>
+      <div class="story-title">A &Acirc;ncora dos Seis</div>
+      <p>Quando os seis se reuniram, Leonardo assumiu naturalmente o papel de &Acirc;ncora  n&atilde;o por decis&atilde;o prpria, mas porque era o &uacute;nico capaz de manter o grupo conectado num nvel que ia al&eacute;m da comunicao comum. Seu elo espiritual entre os cinco era o sistema nervoso invis&iacute;vel que tornava o grupo mais do que a soma de suas partes.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo III</div>
+      <div class="story-chapter">Cap&iacute;tulo III</div>
       <div class="story-title">O Cavaleiro Negro & O Plano Espiritual</div>
-      <p>No confronto com o Cavaleiro Negro, Leonardo foi o primeiro a perceber que o inimigo operava em dois planos simultaneamente — e o único capaz de combatê-lo no plano espiritual enquanto os outros lutavam no físico. A vitória do grupo dependeu dessa percepção. Sem Anull, o Cavaleiro Negro teria vencido numa camada que os outros nem chegavam a enxergar.</p>
+      <p>No confronto com o Cavaleiro Negro, Leonardo foi o primeiro a perceber que o inimigo operava em dois planos simultaneamente  e o &uacute;nico capaz de combat-lo no plano espiritual enquanto os outros lutavam no f&iacute;sico. A vitria do grupo dependeu dessa percepo. Sem Anull, o Cavaleiro Negro teria vencido numa camada que os outros nem chegavam a enxergar.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo IV</div>
-      <div class="story-title">A Besta & A Deificação · Anull</div>
-      <p>O confronto com A Besta foi onde Leonardo chegou mais perto de se perder — não o corpo, mas a alma. A criatura primordial tentou consumir o elo espiritual que ele mantinha entre os seis, o que teria destruído o grupo por dentro. Foi ao recusar essa perda — ao segurar o elo com uma força que ultrapassou qualquer limite anterior — que Leonardo se tornou <strong>Anull</strong>: o deus cujo espírito não tem permissão para perecer.</p>
+      <div class="story-chapter">Cap&iacute;tulo IV</div>
+      <div class="story-title">A Besta & A Deifica&ccedil;&atilde;o  Anull</div>
+      <p>O confronto com A Besta foi onde Leonardo chegou mais perto de se perder  n&atilde;o o corpo, mas a alma. A criatura primordial tentou consumir o elo espiritual que ele mantinha entre os seis, o que teria destrudo o grupo por dentro. Foi ao recusar essa perda  ao segurar o elo com uma for&ccedil;a que ultrapassou qualquer limite anterior  que Leonardo se tornou <strong>Anull</strong>: o deus cujo esp&iacute;rito n&atilde;o tem permiss&atilde;o para perecer.</p>
     </div>
 
   </div>
@@ -1597,7 +1596,7 @@ nav a { white-space: nowrap; }
       <div class="gallery-overlay"><span>Leonardo e Lyra</span></div>
     </div>
     <div class="gallery-item" style="background-image: url('img-anull/ll.png')">
-      <div class="gallery-overlay"><span>Almas Entrelaçadas</span></div>
+      <div class="gallery-overlay"><span>Almas Entrelaadas</span></div>
     </div>
   </div>
 </section>
@@ -1605,19 +1604,19 @@ nav a { white-space: nowrap; }
 <!-- FOOTER -->
 <footer>
   <div class="footer-nav">
-    <a href="onull.html">← Onull</a>
-    <span class="footer-sep">·</span>
-    <a href="home.html">Início</a>
-    <span class="footer-sep">·</span>
-    <a href="nimsay.html">Nimsay →</a>
+    <a href="onull.html">? Onull</a>
+    <span class="footer-sep"></span>
+    <a href="home.html">In&iacute;cio</a>
+    <span class="footer-sep"></span>
+    <a href="nimsay.html">Nimsay ?</a>
   </div>
   <div class="footer-title">Anull</div>
-  <div class="footer-sub">"O espírito não tem permissão para perecer."</div>
-  <div class="footer-copy">O Diário de um Deus · Todos os direitos reservados</div>
+  <div class="footer-sub">"O esp&iacute;rito n&atilde;o tem permiss&atilde;o para perecer."</div>
+  <div class="footer-copy">O Di&aacute;rio de um Deus  Todos os direitos reservados</div>
 </footer>
 
 <script>
-  /* ── COSMOS CANVAS ── */
+  /* -- COSMOS CANVAS -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx    = canvas.getContext('2d');
@@ -1642,7 +1641,7 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Névoas espirituais: azul e roxo void */
+    /* Nvoas espirituais: azul e roxo void */
     nebulas = [];
     const colors = [
       'rgba(122,154,204,',
@@ -1661,7 +1660,7 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Partículas espirituais — sobem lentamente */
+    /* Partculas espirituais  sobem lentamente */
     spirits = [];
     for (let i = 0; i < 50; i++) {
       spirits.push({
@@ -1677,7 +1676,7 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Orbs espirituais — maiores, mais raros */
+    /* Orbs espirituais  maiores, mais raros */
     orbs = [];
     for (let i = 0; i < 8; i++) {
       orbs.push({
@@ -1706,7 +1705,7 @@ nav a { white-space: nowrap; }
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    /* Névoas */
+    /* Nvoas */
     nebulas.forEach(n => {
       const grad = ctx.createRadialGradient(
         n.x, n.y, 0, n.x, n.y, n.r
@@ -1729,7 +1728,7 @@ nav a { white-space: nowrap; }
       ctx.fill();
     });
 
-    /* Partículas espirituais */
+    /* Partculas espirituais */
     spirits.forEach(p => {
       p.x      += p.speedX;
       p.y      += p.speedY;
@@ -1759,7 +1758,7 @@ nav a { white-space: nowrap; }
       ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
       ctx.fill();
 
-      /* Núcleo branco azulado */
+      /* N&uacute;cleo branco azulado */
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(220,235,255,${alpha * 1.4})`;
@@ -1779,7 +1778,7 @@ nav a { white-space: nowrap; }
       const pulseR = o.r * (1 + 0.3 * Math.sin(o.pulse));
       const alpha  = o.a * (0.6 + 0.4 * Math.sin(o.pulse));
 
-      /* Orb com múltiplas camadas */
+      /* Orb com mltiplas camadas */
       const grad = ctx.createRadialGradient(
         o.x, o.y, 0,
         o.x, o.y, pulseR * 10
@@ -1793,7 +1792,7 @@ nav a { white-space: nowrap; }
       ctx.arc(o.x, o.y, pulseR * 10, 0, Math.PI * 2);
       ctx.fill();
 
-      /* Núcleo do orb */
+      /* N&uacute;cleo do orb */
       ctx.beginPath();
       ctx.arc(o.x, o.y, pulseR, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(220,240,255,${alpha * 1.5})`;
@@ -1807,7 +1806,7 @@ nav a { white-space: nowrap; }
       ctx.stroke();
     });
 
-    /* Véu espiritual no centro */
+    /* Vu espiritual no centro */
     const veil = ctx.createRadialGradient(
       W * 0.5, H * 0.4, 0,
       W * 0.5, H * 0.4, H * 0.7
@@ -1818,7 +1817,7 @@ nav a { white-space: nowrap; }
     ctx.fillStyle = veil;
     ctx.fillRect(0, 0, W, H);
 
-    /* Brilho azul no rodapé */
+    /* Brilho azul no rodap */
     const horizon = ctx.createLinearGradient(0, H * 0.75, 0, H);
     horizon.addColorStop(0, 'transparent');
     horizon.addColorStop(1, 'rgba(42,26,74,0.08)');
@@ -1834,7 +1833,7 @@ nav a { white-space: nowrap; }
   draw();
 })();
 
-/* ── PARALLAX DO BANNER ── */
+/* -- PARALLAX DO BANNER -- */
 (function () {
   const bg = document.querySelector('.banner-bg');
   if (!bg) return;
@@ -1845,7 +1844,7 @@ nav a { white-space: nowrap; }
     .replace(/url\(['"]?(.*?)['"]?\)/, '$1');
   if (url && url !== 'none') img.src = url;
 
-  /* Só ativa parallax em telas grandes */
+  /* S ativa parallax em telas grandes */
   const mq = window.matchMedia('(min-width: 769px)');
 
   function onScroll() {
@@ -1861,7 +1860,7 @@ nav a { white-space: nowrap; }
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function () {
   const els = document.querySelectorAll('.reveal');
 
@@ -1877,7 +1876,7 @@ nav a { white-space: nowrap; }
   els.forEach(el => io.observe(el));
 })();
 
-/* ── BARRAS DE PODER ── */
+/* -- BARRAS DE PODER -- */
 (function () {
   const bars = document.querySelectorAll('.power-bar');
 
@@ -1897,7 +1896,7 @@ nav a { white-space: nowrap; }
   bars.forEach(b => io.observe(b));
 })();
 
-/* ── LIGHTBOX DA GALERIA ── */
+/* -- LIGHTBOX DA GALERIA -- */
 (function () {
   const items = document.querySelectorAll('.gallery-item');
   if (!items.length) return;
@@ -2116,13 +2115,12 @@ nav a { white-space: nowrap; }
     }
   }, { passive: true });
 })();
-  /* === JAVASCRIPT VIRÁ NA PARTE 4 === */
 </script>
 
 
 <script>
 /* ==========================================================
-   Patch: transforma qualquer galeria da página em loop suave
+   Patch: transforma qualquer galeria da p&aacute;gina em loop suave
    ========================================================== */
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2174,7 +2172,7 @@ nav a { white-space: nowrap; }
       <div class="smooth-loop-meta">
         <span class="smooth-loop-kicker">${escapeHtml(label)}</span>
         <strong class="smooth-loop-title">${escapeHtml(first.title)}</strong>
-        <span class="smooth-loop-desc">${first.desc || 'loop automático com transição suave'}</span>
+        <span class="smooth-loop-desc">${first.desc || 'loop autom&aacute;tico com transio suave'}</span>
       </div>
     `;
     return panel;
@@ -2196,7 +2194,7 @@ nav a { white-space: nowrap; }
     panel.dataset.current = String(current);
     panel.dataset.galleryIndex = String(current);
     panel.querySelector('.smooth-loop-title').textContent = data.title;
-    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop automático com transição suave';
+    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop autom&aacute;tico com transio suave';
   }
 
   function setupLoopLightbox(images) {
@@ -2277,9 +2275,9 @@ nav a { white-space: nowrap; }
     const controls = document.createElement('div');
     controls.className = 'smooth-loop-controls';
     controls.innerHTML = `
-      <button class="smooth-loop-btn" type="button" data-loop-prev>← Anterior</button>
-      <span class="smooth-loop-state">${images.length} imagens · looping suave</span>
-      <button class="smooth-loop-btn" type="button" data-loop-next>Próxima →</button>
+      <button class="smooth-loop-btn" type="button" data-loop-prev>? Anterior</button>
+      <span class="smooth-loop-state">${images.length} imagens  looping suave</span>
+      <button class="smooth-loop-btn" type="button" data-loop-next>Pr&oacute;xima ?</button>
     `;
     const oldControls = section.querySelector('.gallery-carousel-controls');
     if (oldControls) oldControls.replaceWith(controls);
@@ -2315,7 +2313,7 @@ nav a { white-space: nowrap; }
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — anull.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  anull.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -2329,3 +2327,7 @@ nav a { white-space: nowrap; }
 
 </body>
 </html>
+
+
+
+

@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Black Knight — O Diário de um Deus</title>
+<title>The Black Knight &mdash; O Di&aacute;rio de um Deus</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="effects.css">
+<link rel="stylesheet" href="responsive-fixes.css">
 <style>
-  /* ── VARIÁVEIS E RESET ── */
+  /* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --void: #030308;
   --deep: #07070f;
@@ -18,7 +19,7 @@
   --gold-light: #f0d080;
   --gold-dim: #7a6228;
 
-  /* The Black Knight — vermelho sangue */
+  /* The Black Knight  vermelho sangue */
   --red: #8b0000;
   --red-bright: #cc0022;
   --red-mid: #aa0018;
@@ -39,7 +40,7 @@ body {
   cursor: default;
 }
 
-/* Ruído de fundo */
+/* Rudo de fundo */
 #noise-overlay {
   position: fixed;
   inset: 0;
@@ -59,7 +60,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -107,7 +108,7 @@ nav a:hover {
     0 0 40px rgba(139,0,0,0.4);
 }
 
-/* ── BANNER ── */
+/* -- BANNER -- */
 #banner {
   position: relative;
   min-height: 100vh;
@@ -170,7 +171,7 @@ nav a:hover {
   pointer-events: none;
 }
 
-/* Linhas de tensão */
+/* Linhas de tens&atilde;o */
 .tension-lines {
   position: absolute;
   inset: 0;
@@ -198,7 +199,7 @@ nav a:hover {
   50%       { opacity: 1; }
 }
 
-/* Conteúdo do banner */
+/* Contedo do banner */
 .banner-content {
   position: relative;
   z-index: 2;
@@ -383,7 +384,7 @@ nav a:hover {
   animation: bounce 2s ease infinite;
 }
 
-/* ── ANIMAÇÕES BASE ── */
+/* -- ANIMA&Ccedil;&Otilde;ES BASE -- */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); filter: blur(3px); }
   to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
@@ -394,7 +395,7 @@ nav a:hover {
   50%       { transform: translateY(8px); }
 }
 
-/* ── REVEAL ── */
+/* -- REVEAL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -406,9 +407,9 @@ nav a:hover {
   transform: none;
 }
 
-/* ════════════════════════════════════
-   RESPONSIVO — BANNER E NAV
-════════════════════════════════════ */
+/* ------------------------------------
+   RESPONSIVO  BANNER E NAV
+------------------------------------ */
 @media (max-width: 1024px) {
   nav { gap: 1.8rem; }
   .banner-content { padding: 4rem max(4vw, 4rem) 4rem; }
@@ -457,7 +458,7 @@ nav a:hover {
   .banner-content { padding: 3.5rem 4vw 2.5rem; }
   .banner-stats   { margin-top: 1.2rem; }
 }
-/* ── VARIÁVEIS E RESET ── */
+/* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --void: #030308;
   --deep: #07070f;
@@ -468,7 +469,7 @@ nav a:hover {
   --gold-light: #f0d080;
   --gold-dim: #7a6228;
 
-  /* The Black Knight — vermelho sangue */
+  /* The Black Knight  vermelho sangue */
   --red: #8b0000;
   --red-bright: #cc0022;
   --red-mid: #aa0018;
@@ -489,7 +490,7 @@ body {
   cursor: default;
 }
 
-/* Ruído de fundo */
+/* Rudo de fundo */
 #noise-overlay {
   position: fixed;
   inset: 0;
@@ -509,7 +510,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -557,7 +558,7 @@ nav a:hover {
     0 0 40px rgba(139,0,0,0.4);
 }
 
-/* ── BANNER ── */
+/* -- BANNER -- */
 #banner {
   position: relative;
   min-height: 100vh;
@@ -618,7 +619,7 @@ nav a:hover {
   pointer-events: none;
 }
 
-/* Linhas de tensão */
+/* Linhas de tens&atilde;o */
 .tension-lines {
   position: absolute;
   inset: 0;
@@ -646,7 +647,7 @@ nav a:hover {
   50%       { opacity: 1; }
 }
 
-/* Conteúdo do banner */
+/* Contedo do banner */
 .banner-content {
   position: relative;
   z-index: 2;
@@ -831,7 +832,7 @@ nav a:hover {
   animation: bounce 2s ease infinite;
 }
 
-/* ── ANIMAÇÕES BASE ── */
+/* -- ANIMA&Ccedil;&Otilde;ES BASE -- */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); filter: blur(3px); }
   to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
@@ -842,7 +843,7 @@ nav a:hover {
   50%       { transform: translateY(8px); }
 }
 
-/* ── REVEAL ── */
+/* -- REVEAL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -854,9 +855,9 @@ nav a:hover {
   transform: none;
 }
 
-/* ════════════════════════════════════
-   RESPONSIVO — BANNER E NAV
-════════════════════════════════════ */
+/* ------------------------------------
+   RESPONSIVO  BANNER E NAV
+------------------------------------ */
 @media (max-width: 1024px) {
   nav { gap: 1.8rem; }
   .banner-content { padding: 4rem max(4vw, 4rem) 4rem; }
@@ -906,11 +907,11 @@ nav a:hover {
   .banner-stats   { margin-top: 1.2rem; }
 }
 
-/* ════════════════════════════════════
-   CORREÇÕES — SEÇÕES, IMAGEM E RESPONSIVIDADE
+/* ------------------------------------
+   CORREES  SE&Ccedil;&Otilde;ES, IMAGEM E RESPONSIVIDADE
    Esta parte foi adicionada para impedir que os blocos abaixo do banner
-   fiquem sem estilo ou invisíveis, e para estabilizar a imagem do Cavaleiro.
-════════════════════════════════════ */
+   fiquem sem estilo ou invisveis, e para estabilizar a imagem do Cavaleiro.
+------------------------------------ */
 
 section {
   position: relative;
@@ -1197,7 +1198,7 @@ section {
   transition: width 1s ease;
 }
 
-/* HISTÓRIA */
+/* HISTRIA */
 .story-container {
   max-width: 980px;
   margin: 0 auto;
@@ -1521,7 +1522,7 @@ footer {
   </audio>
 <canvas id="cosmos-bg"></canvas>
 
-<!-- RUÍDO DE FUNDO -->
+<!-- RUDO DE FUNDO -->
 <div id="noise-overlay"></div>
 
 <!-- NAV -->
@@ -1529,20 +1530,20 @@ footer {
   <a href="home.html" class="nav-logo">
     <img src="img-logo/olhos.jpg" alt="Logo">
   </a>
-  <a href="viloes.html">← Vilões</a>
+  <a href="viloes.html">? Vil&otilde;es</a>
   <a href="#identidade">Identidade</a>
   <a href="#poderes">Poderes</a>
-  <a href="#historia">História</a>
+  <a href="#historia">Hist&oacute;ria</a>
   <a href="#galeria">Galeria</a>
 </nav>
 
-<!-- BANNER CINEMÁTICO -->
+<!-- BANNER CINEMTICO -->
 <section id="banner">
   <div class="banner-bg" style="background-image: url('img-cavaleiro/cavaleirobanner.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-vignette"></div>
 
-  <!-- Linhas de tensão -->
+  <!-- Linhas de tens&atilde;o -->
   <div class="tension-lines">
     <div class="tline tline-1"></div>
     <div class="tline tline-2"></div>
@@ -1552,7 +1553,7 @@ footer {
   <div class="banner-content">
     <div class="banner-tag">
       <span class="tag-line"></span>
-      <span class="tag-text">Antagonista · Arco I & II</span>
+      <span class="tag-text">Antagonista  Arco I & II</span>
       <span class="tag-line"></span>
     </div>
     <h1 class="banner-name">
@@ -1562,21 +1563,21 @@ footer {
     </h1>
     <div class="banner-divider">
       <span class="divider-line"></span>
-      <span class="divider-symbol">✦</span>
+      <span class="divider-symbol">&#10022;</span>
       <span class="divider-line"></span>
     </div>
     <p class="banner-quote">
-      "Séculos de prisão não o quebraram.<br>
-      Apenas afiaram o que já era cortante."
+      "Sculos de pris&atilde;o n&atilde;o o quebraram.<br>
+      Apenas afiaram o que j era cortante."
     </p>
     <div class="banner-stats">
       <div class="bstat">
         <span class="bstat-val">Espiritual</span>
-        <span class="bstat-label">Domínio</span>
+        <span class="bstat-label">Dom&iacute;nio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Nômade Primitivo</span>
+        <span class="bstat-val">Nmade Primitivo</span>
         <span class="bstat-label">Origem</span>
       </div>
       <div class="bstat-sep"></div>
@@ -1593,7 +1594,7 @@ footer {
   </div>
 
   <div class="banner-bottom-bar"></div>
-  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+  <div class="scroll-hint">? &nbsp; Role para baixo</div>
 </section>
 
 <!-- IDENTIDADE -->
@@ -1601,7 +1602,7 @@ footer {
   <div class="section-header reveal">
     <div class="section-tag">
       <div class="stag-line"></div>
-      <span class="stag-text">Quem ele é</span>
+      <span class="stag-text">Quem ele </span>
       <div class="stag-line"></div>
     </div>
     <h2 class="section-title">A Identidade do <span>Black Knight</span></h2>
@@ -1626,15 +1627,15 @@ footer {
       <div class="identity-card">
         <div class="icard-title">Registro</div>
         <div class="icard-row">
-          <span class="icard-key">Classificação</span>
+          <span class="icard-key">Classificao</span>
           <span class="icard-val">Antagonista</span>
         </div>
         <div class="icard-row">
           <span class="icard-key">Era</span>
-          <span class="icard-val">Geração Primitiva</span>
+          <span class="icard-val">Gerao Primitiva</span>
         </div>
         <div class="icard-row">
-          <span class="icard-key">Título</span>
+          <span class="icard-key">T&iacute;tulo</span>
           <span class="icard-val">Mestre Espiritual</span>
         </div>
         <div class="icard-row">
@@ -1642,31 +1643,31 @@ footer {
           <span class="icard-val danger">Derrotado</span>
         </div>
         <div class="icard-row">
-          <span class="icard-key">Ameaça</span>
-          <span class="icard-val danger">Nível Extremo</span>
+          <span class="icard-key">Ameaa</span>
+          <span class="icard-val danger">Nvel Extremo</span>
         </div>
       </div>
     </div>
 
     <!-- Texto -->
     <div class="identity-text">
-      <p>Em uma era de feiticeiros nômades, ele era um <em>prodígio</em>. Sua conexão com o outro lado era inexplicável para sua geração — profunda, instintiva, como se houvesse nascido com um pé já atravessando o véu entre os mundos. Não era treinamento. Era natureza.</p>
+      <p>Em uma era de feiticeiros n&ocirc;mades, ele era um <em>prodgio</em>. Sua conexo com o outro lado era inexplicvel para sua gerao  profunda, instintiva, como se houvesse nascido com um p j atravessando o vu entre os mundos. N&atilde;o era treinamento. Era natureza.</p>
 
-      <p>Como Mestre Espiritual, formava com outros dois o equilíbrio primordial entre três forças. Um filho de deidade da natureza como Mestre Elemental. Um bruxo como Mestre Humano. Três pilares que sustentavam algo maior do que qualquer um dos três individualmente.</p>
+      <p>Como Mestre Espiritual, formava com outros dois o equil&iacute;brio primordial entre trs for&ccedil;as. Um filho de deidade da natureza como Mestre Elemental. Um bruxo como Mestre Humano. Trs pilares que sustentavam algo maior do que qualquer um dos trs individualmente.</p>
 
-      <p>Mas The Black Knight descobriu que seus dons lhe permitiam ir <strong>além do lugar designado</strong>. Por ambição — não por necessidade, não por sobrevivência, mas por pura e calculada ambição — tomou para si os poderes dos outros dois. O equilíbrio se partiu. O universo respondeu.</p>
+      <p>Mas The Black Knight descobriu que seus dons lhe permitiam ir <strong>al&eacute;m do lugar designado</strong>. Por ambio  n&atilde;o por necessidade, n&atilde;o por sobrevivncia, mas por pura e calculada ambio  tomou para si os poderes dos outros dois. O equil&iacute;brio se partiu. O universo respondeu.</p>
 
-      <p>O aprisionamento durou séculos. Uma dimensão paralela, sozinho com sua ambição e o peso interminável do silêncio. Qualquer outro teria se fragmentado. The Black Knight usou o tempo para <strong>refinar</strong>.</p>
+      <p>O aprisionamento durou sculos. Uma dimens&atilde;o paralela, sozinho com sua ambio e o peso interminvel do silncio. Qualquer outro teria se fragmentado. The Black Knight usou o tempo para <strong>refinar</strong>.</p>
 
-      <p>Quando os portões enfraqueceram com o surgimento dos seis, ele encontrou a fissura que precisava. O que emergiu não era mais o prodígio impulsivo. Era algo que séculos de confinamento e ruminação tinham tornado infinitamente mais perigoso.</p>
+      <p>Quando os portes enfraqueceram com o surgimento dos seis, ele encontrou a fissura que precisava. O que emergiu n&atilde;o era mais o prodgio impulsivo. Era algo que sculos de confinamento e ruminao tinham tornado infinitamente mais perigoso.</p>
 
       <div class="identity-tags">
         <span class="itag">Feiticeiro Primordial</span>
         <span class="itag danger-tag">Mestre Corrompido</span>
-        <span class="itag">Domínio Triplo</span>
+        <span class="itag">Dom&iacute;nio Triplo</span>
         <span class="itag danger-tag">Aprisionado</span>
         <span class="itag">Estrategista</span>
-        <span class="itag danger-tag">Ancião</span>
+        <span class="itag danger-tag">Ancio</span>
       </div>
     </div>
 
@@ -1689,10 +1690,10 @@ footer {
     <div class="power-card">
       <div class="pcard-number">01</div>
       <div class="pcard-content">
-        <div class="pcard-icon">🌀</div>
-        <div class="pcard-origin">Herança Natural</div>
-        <div class="pcard-name">Feitiçaria Primordial</div>
-        <div class="pcard-desc">Magia de uma era anterior às regras e limitações impostas pelo refinamento. Mais instável, mais imprevisível, devastadoramente mais poderosa. Técnicas que os feiticeiros modernos sequer têm linguagem para descrever.</div>
+        <div class="pcard-icon">&#10022;</div>
+        <div class="pcard-origin">Herana Natural</div>
+        <div class="pcard-name">Feitiaria Primordial</div>
+        <div class="pcard-desc">Magia de uma era anterior s regras e limitaes impostas pelo refinamento. Mais instvel, mais imprevis&iacute;vel, devastadoramente mais poderosa. Tcnicas que os feiticeiros modernos sequer tm linguagem para descrever.</div>
         <div class="pcard-bar">
           <div class="pbar-fill" data-width="92"
             style="background: linear-gradient(90deg, #8b0000, #cc0022)">
@@ -1704,10 +1705,10 @@ footer {
     <div class="power-card">
       <div class="pcard-number">02</div>
       <div class="pcard-content">
-        <div class="pcard-icon">⚫</div>
-        <div class="pcard-origin">Absorção Forçada</div>
-        <div class="pcard-name">Domínio Elemental Roubado</div>
-        <div class="pcard-desc">O poder do Mestre Elemental, absorvido à força. Controle sobre os elementos primários — fogo, terra, água, vento — em sua forma mais bruta e descontrolada, sem os limites que o verdadeiro portador naturalmente impunha.</div>
+        <div class="pcard-icon">&#10022;</div>
+        <div class="pcard-origin">Absoro For&ccedil;ada</div>
+        <div class="pcard-name">Dom&iacute;nio Elemental Roubado</div>
+        <div class="pcard-desc">O poder do Mestre Elemental, absorvido  for&ccedil;a. Controle sobre os elementos primrios  fogo, terra, gua, vento  em sua forma mais bruta e descontrolada, sem os limites que o verdadeiro portador naturalmente impunha.</div>
         <div class="pcard-bar">
           <div class="pbar-fill" data-width="85"
             style="background: linear-gradient(90deg, #8b0000, #cc0022)">
@@ -1719,10 +1720,10 @@ footer {
     <div class="power-card">
       <div class="pcard-number">03</div>
       <div class="pcard-content">
-        <div class="pcard-icon">💀</div>
-        <div class="pcard-origin">Absorção Forçada</div>
+        <div class="pcard-icon">&#10022;</div>
+        <div class="pcard-origin">Absoro For&ccedil;ada</div>
         <div class="pcard-name">Potencial Humano Roubado</div>
-        <div class="pcard-desc">O poder do Mestre Humano, violentamente extraído. O potencial ilimitado da humanidade sob seu controle — sem a vontade moral que o Mestre Humano carregava, apenas a força bruta daquilo que os mortais podem se tornar.</div>
+        <div class="pcard-desc">O poder do Mestre Humano, violentamente extrado. O potencial ilimitado da humanidade sob seu controle  sem a vontade moral que o Mestre Humano carregava, apenas a for&ccedil;a bruta daquilo que os mortais podem se tornar.</div>
         <div class="pcard-bar">
           <div class="pbar-fill" data-width="80"
             style="background: linear-gradient(90deg, #8b0000, #cc0022)">
@@ -1734,10 +1735,10 @@ footer {
     <div class="power-card">
       <div class="pcard-number">04</div>
       <div class="pcard-content">
-        <div class="pcard-icon">👁️</div>
+        <div class="pcard-icon">&#10022;</div>
         <div class="pcard-origin">Dom Inato</div>
-        <div class="pcard-name">Vínculo Ancestral com o Outro Lado</div>
-        <div class="pcard-desc">Uma conexão com o plano espiritual que nenhum treinamento criou e nenhum aprisionamento conseguiu cortar. Séculos de confinamento numa dimensão paralela apenas aprofundaram esse vínculo — ele conhece o outro lado melhor do que qualquer ser vivo.</div>
+        <div class="pcard-name">Vnculo Ancestral com o Outro Lado</div>
+        <div class="pcard-desc">Uma conexo com o plano espiritual que nenhum treinamento criou e nenhum aprisionamento conseguiu cortar. Sculos de confinamento numa dimens&atilde;o paralela apenas aprofundaram esse vnculo  ele conhece o outro lado melhor do que qualquer ser vivo.</div>
         <div class="pcard-bar">
           <div class="pbar-fill" data-width="98"
             style="background: linear-gradient(90deg, #8b0000, #cc0022)">
@@ -1749,10 +1750,10 @@ footer {
     <div class="power-card">
       <div class="pcard-number">05</div>
       <div class="pcard-content">
-        <div class="pcard-icon">⚔️</div>
+        <div class="pcard-icon">&#10022;</div>
         <div class="pcard-origin">Treinamento Militar</div>
         <div class="pcard-name">Arte Marcial Ancestral</div>
-        <div class="pcard-desc">Um corpo treinado para a arte militar com uma mente que prevê além de meras estratégias. Sua postura carrega o peso de séculos — não de envelhecimento, mas de refinamento contínuo. Cada movimento é necessário. Nada é desperdício.</div>
+        <div class="pcard-desc">Um corpo treinado para a arte militar com uma mente que prev al&eacute;m de meras estratgias. Sua postura carrega o peso de sculos  n&atilde;o de envelhecimento, mas de refinamento contnuo. Cada movimento  necessrio. Nada  desperdcio.</div>
         <div class="pcard-bar">
           <div class="pbar-fill" data-width="88"
             style="background: linear-gradient(90deg, #8b0000, #cc0022)">
@@ -1764,10 +1765,10 @@ footer {
     <div class="power-card">
       <div class="pcard-number">06</div>
       <div class="pcard-content">
-        <div class="pcard-icon">🧠</div>
-        <div class="pcard-origin">Séculos de Refinamento</div>
-        <div class="pcard-name">Estratégia Além da Compreensão</div>
-        <div class="pcard-desc">Séculos numa dimensão paralela, sozinho com sua própria mente. The Black Knight usou cada segundo para planejar, refinar e antecipar. Sua estratégia não opera em batalhas — opera em eras. Cada ação é parte de um plano maior.</div>
+        <div class="pcard-icon">&#10022;</div>
+        <div class="pcard-origin">Sculos de Refinamento</div>
+        <div class="pcard-name">Estratgia Al&eacute;m da Compreens&atilde;o</div>
+        <div class="pcard-desc">Sculos numa dimens&atilde;o paralela, sozinho com sua prpria mente. The Black Knight usou cada segundo para planejar, refinar e antecipar. Sua estratgia n&atilde;o opera em batalhas  opera em eras. Cada ao  parte de um plano maior.</div>
         <div class="pcard-bar">
           <div class="pbar-fill" data-width="95"
             style="background: linear-gradient(90deg, #8b0000, #cc0022)">
@@ -1779,15 +1780,15 @@ footer {
   </div>
 </section>
 
-<!-- HISTÓRIA -->
+<!-- HISTRIA -->
 <section id="historia">
   <div class="section-header reveal">
     <div class="section-tag">
       <div class="stag-line"></div>
-      <span class="stag-text">Trajetória sombria</span>
+      <span class="stag-text">Trajet&oacute;ria sombria</span>
       <div class="stag-line"></div>
     </div>
-    <h2 class="section-title">A História do <span>Black Knight</span></h2>
+    <h2 class="section-title">A Hist&oacute;ria do <span>Black Knight</span></h2>
   </div>
 
   <div class="story-container">
@@ -1798,9 +1799,9 @@ footer {
         <div class="chapter-line"></div>
       </div>
       <div class="chapter-body">
-        <div class="chapter-label">O Prodígio</div>
-        <h3 class="chapter-title">Uma Era de Nômades</h3>
-        <p>Numa época em que os feiticeiros não tinham cidades, não tinham escolas, não tinham tradições codificadas — existia ele. Um jovem que o outro lado simplesmente reconhecia, como se o véu entre os mundos fosse mais fino exatamente onde ele estava. Os mais velhos de sua geração perceberam cedo o que ele era. Ninguém imaginou o que ele se tornaria.</p>
+        <div class="chapter-label">O Prodgio</div>
+        <h3 class="chapter-title">Uma Era de Nmades</h3>
+        <p>Numa poca em que os feiticeiros n&atilde;o tinham cidades, n&atilde;o tinham escolas, n&atilde;o tinham tradies codificadas  existia ele. Um jovem que o outro lado simplesmente reconhecia, como se o vu entre os mundos fosse mais fino exatamente onde ele estava. Os mais velhos de sua gerao perceberam cedo o que ele era. Ningum imaginou o que ele se tornaria.</p>
       </div>
     </div>
 
@@ -1810,9 +1811,9 @@ footer {
         <div class="chapter-line"></div>
       </div>
       <div class="chapter-body">
-        <div class="chapter-label">O Equilíbrio</div>
-        <h3 class="chapter-title">Os Três Mestres</h3>
-        <p>O universo exige equilíbrio entre forças primordiais. Três foram escolhidos: um filho de deidade da natureza como Mestre Elemental, um bruxo como Mestre Humano, e ele como Mestre Espiritual. Um sistema de contrapesos que funcionava porque cada um aceitava seu lugar. The Black Knight aceitou o seu — por um tempo.</p>
+        <div class="chapter-label">O Equilbrio</div>
+        <h3 class="chapter-title">Os Trs Mestres</h3>
+        <p>O universo exige equil&iacute;brio entre for&ccedil;as primordiais. Trs foram escolhidos: um filho de deidade da natureza como Mestre Elemental, um bruxo como Mestre Humano, e ele como Mestre Espiritual. Um sistema de contrapesos que funcionava porque cada um aceitava seu lugar. The Black Knight aceitou o seu  por um tempo.</p>
       </div>
     </div>
 
@@ -1822,9 +1823,9 @@ footer {
         <div class="chapter-line"></div>
       </div>
       <div class="chapter-body">
-        <div class="chapter-label">A Ambição</div>
+        <div class="chapter-label">A Ambio</div>
         <h3 class="chapter-title">O Momento da Queda</h3>
-        <p>Não foi loucura. Não foi dor. Foi cálculo. Ele descobriu que seus dons lhe permitiam absorver o que pertencia aos outros dois. Pesou os riscos. Considerou as consequências. E decidiu que o poder valia mais do que o equilíbrio. Tomou o Elemental primeiro. Depois o Humano. O universo sentiu cada absorção como um rasgão no tecido da realidade.</p>
+        <p>N&atilde;o foi loucura. N&atilde;o foi dor. Foi clculo. Ele descobriu que seus dons lhe permitiam absorver o que pertencia aos outros dois. Pesou os riscos. Considerou as consequncias. E decidiu que o poder valia mais do que o equil&iacute;brio. Tomou o Elemental primeiro. Depois o Humano. O universo sentiu cada absoro como um rasgo no tecido da realidade.</p>
       </div>
     </div>
 
@@ -1835,8 +1836,8 @@ footer {
       </div>
       <div class="chapter-body">
         <div class="chapter-label">O Aprisionamento</div>
-        <h3 class="chapter-title">Séculos de Silêncio</h3>
-        <p>A resposta do universo foi imediata e absoluta. Uma dimensão paralela — não como punição, mas como necessidade. Um ser com três domínios combinados era uma anomalia que o equilíbrio primordial não podia tolerar em liberdade. Ele ficou lá por séculos. Sozinho. Com sua ambição. Com seus planos. Com todo o tempo do mundo para se tornar mais perigoso.</p>
+        <h3 class="chapter-title">Sculos de Silncio</h3>
+        <p>A resposta do universo foi imediata e absoluta. Uma dimens&atilde;o paralela  n&atilde;o como punio, mas como necessidade. Um ser com tr&ecirc;s dom&iacute;nios combinados era uma anomalia que o equil&iacute;brio primordial n&atilde;o podia tolerar em liberdade. Ele ficou l por sculos. Sozinho. Com sua ambio. Com seus planos. Com todo o tempo do mundo para se tornar mais perigoso.</p>
       </div>
     </div>
 
@@ -1847,8 +1848,8 @@ footer {
       </div>
       <div class="chapter-body">
         <div class="chapter-label">O Retorno</div>
-        <h3 class="chapter-title">A Fissura nos Portões</h3>
-        <p>O surgimento dos seis protagonistas enfraqueceu os portões entre dimensões — um efeito colateral que ninguém havia previsto. The Black Knight percebeu a fissura antes que ela existisse completamente. Esperou o momento exato. E quando saiu, não havia pressa em seus movimentos. Havia apenas a certeza de quem havia planejado isso por séculos.</p>
+        <h3 class="chapter-title">A Fissura nos Portes</h3>
+        <p>O surgimento dos seis protagonistas enfraqueceu os portes entre dimenses  um efeito colateral que ningum havia previsto. The Black Knight percebeu a fissura antes que ela existisse completamente. Esperou o momento exato. E quando saiu, n&atilde;o havia pressa em seus movimentos. Havia apenas a certeza de quem havia planejado isso por sculos.</p>
       </div>
     </div>
 
@@ -1860,7 +1861,7 @@ footer {
       <div class="chapter-body">
         <div class="chapter-label">As Batalhas</div>
         <h3 class="chapter-title">Dois Confrontos, Duas Derrotas</h3>
-        <p>O primeiro confronto com os seis foi o teste. O segundo foi a guerra. Em ambos, The Black Knight demonstrou que séculos de refinamento tinham feito dele algo que ultrapassava qualquer definição anterior de ameaça. Sua derrota final não foi por subestimação — foi porque os seis se tornaram, naquelas batalhas, algo que nem seus planos haviam antecipado.</p>
+        <p>O primeiro confronto com os seis&oacute; foi o teste. O segundo foi a guerra. Em ambos, The Black Knight demonstrou que sculos de refinamento tinham feito dele algo que ultrapassava qualquer definio anterior de amea&ccedil;a. Sua derrota final n&atilde;o foi por subestimao  foi porque os seis se tornaram, naquelas batalhas, algo que nem seus planos haviam antecipado.</p>
       </div>
     </div>
 
@@ -1926,29 +1927,29 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-nav">
-      <a href="viloes.html">← Todos os Vilões</a>
-      <span>·</span>
-      <a href="besta.html">A Besta →</a>
+      <a href="viloes.html">? Todos os Vil&otilde;es</a>
+      <span></span>
+      <a href="besta.html">A Besta ?</a>
     </div>
     <div class="footer-name">The Black Knight</div>
     <div class="footer-quote">
-      "Não há prisão que dure para sempre.<br>
+      "N&atilde;o h pris&atilde;o que dure para sempre.<br>
       Apenas vontades que se esgotam antes dela."
     </div>
     <div class="footer-copy">
-      O Diário de um Deus · Todos os direitos reservados
+     &mdash; O Di&aacute;rio de um Deus  Todos os direitos reservados
     </div>
   </div>
 </footer>
 
 <script src="effects.js"></script>
 <script>
-  /* ════════════════════════════════════
-   CAVALEIRO NEGRO — JAVASCRIPT
-   Canvas · Parallax · Glitch · Lightbox
-════════════════════════════════════ */
+  /* ------------------------------------
+   CAVALEIRO NEGRO  JAVASCRIPT
+   Canvas  Parallax  Glitch  Lightbox
+------------------------------------ */
 
-/* ── COSMOS CANVAS ── */
+/* -- COSMOS CANVAS -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx    = canvas.getContext('2d');
@@ -1973,7 +1974,7 @@ footer {
       });
     }
 
-    /* Névoas sombrias */
+    /* Nvoas sombrias */
     nebulas = [];
     const colors = [
       'rgba(139,0,0,',
@@ -2048,7 +2049,7 @@ footer {
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    /* Névoas */
+    /* Nvoas */
     nebulas.forEach(n => {
       const grad = ctx.createRadialGradient(
         n.x, n.y, 0, n.x, n.y, n.r
@@ -2130,7 +2131,7 @@ footer {
       ctx.fill();
     });
 
-    /* Brilho vermelho no rodapé */
+    /* Brilho vermelho no rodap */
     const horizon = ctx.createLinearGradient(0, H * 0.78, 0, H);
     horizon.addColorStop(0, 'transparent');
     horizon.addColorStop(1, 'rgba(139,0,0,0.08)');
@@ -2146,7 +2147,7 @@ footer {
   draw();
 })();
 
-/* ── PARALLAX DO BANNER ── */
+/* -- PARALLAX DO BANNER -- */
 (function () {
   const bg = document.querySelector('.banner-bg');
   if (!bg) return;
@@ -2169,7 +2170,7 @@ footer {
   }, { passive: true });
 })();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function () {
   const els = document.querySelectorAll('.reveal');
   const io  = new IntersectionObserver(entries => {
@@ -2183,7 +2184,7 @@ footer {
   els.forEach(el => io.observe(el));
 })();
 
-/* ── BARRAS DE PODER ── */
+/* -- BARRAS DE PODER -- */
 (function () {
   const bars = document.querySelectorAll('.pbar-fill');
   const io   = new IntersectionObserver(entries => {
@@ -2201,19 +2202,19 @@ footer {
   bars.forEach(b => io.observe(b));
 })();
 
-/* ── EFEITO GLITCH NO NOME DO BANNER ── */
+/* -- EFEITO GLITCH NO NOME DO BANNER -- */
 (function () {
   const name = document.querySelector('.banner-name');
   if (!name) return;
 
-  /* Glitch aleatório a cada poucos segundos */
+  /* Glitch aleatrio a cada poucos segundos */
   function triggerGlitch() {
     name.style.animation = 'banner-glitch 0.12s infinite';
     setTimeout(() => {
       name.style.animation = '';
     }, 400);
 
-    /* Agenda próximo glitch */
+    /* Agenda prximo glitch */
     const next = Math.random() * 6000 + 3000;
     setTimeout(triggerGlitch, next);
   }
@@ -2236,15 +2237,15 @@ footer {
   setTimeout(triggerGlitch, 2000);
 })();
 
-/* ── EFEITO DE DISTORÇÃO NA FOTO removido para evitar piscada/desaparecimento da imagem ── */
+/* -- EFEITO DE DISTORO NA FOTO removido para evitar piscada/desaparecimento da imagem -- */
 
-/* ── EFEITO NOS CARDS DE PODER ── */
+/* -- EFEITO NOS CARDS DE PODER -- */
 (function () {
   const cards = document.querySelectorAll('.power-card');
 
   cards.forEach(card => {
     card.addEventListener('mouseenter', () => {
-      /* Cria brilho vermelho temporário */
+      /* Cria brilho vermelho temporrio */
       card.style.boxShadow =
         'inset 0 0 30px rgba(139,0,0,0.1), 0 0 20px rgba(139,0,0,0.1)';
     });
@@ -2255,7 +2256,7 @@ footer {
   });
 })();
 
-/* ── LIGHTBOX DA GALERIA ── */
+/* -- LIGHTBOX DA GALERIA -- */
 (function () {
   const items = document.querySelectorAll('.gallery-item');
   if (!items.length) return;
@@ -2433,7 +2434,7 @@ footer {
   }, { passive: true });
 })();
 
-/* ── EFEITO DE RESPIRAÇÃO NA BARRA DO BANNER ── */
+/* -- EFEITO DE RESPIRAO NA BARRA DO BANNER -- */
 (function () {
   const bar = document.querySelector('.banner-bottom-bar');
   if (!bar) return;
@@ -2452,7 +2453,7 @@ footer {
   pulse();
 })();
 
-/* ── PARTÍCULAS AO HOVER NOS CAPÍTULOS ── */
+/* -- PARTCULAS AO HOVER NOS CAPTULOS -- */
 (function () {
   const chapters = document.querySelectorAll('.story-chapter');
 
@@ -2499,13 +2500,12 @@ footer {
   `;
   document.head.appendChild(style);
 })();
-  /* === JAVASCRIPT VIRÁ NA PARTE 4 === */
 </script>
 
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — cavaleiro.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  cavaleiro.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -2519,3 +2519,8 @@ footer {
 
 </body>
 </html>
+
+
+
+
+

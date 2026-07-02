@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecos da Lua Branca</title>
+<meta name="description" content="Prot&oacute;tipo jog&aacute;vel de puzzle RPG do universo O Di&aacute;rio de um Deus.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=EB+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #050508;
+  --night: #0b1018;
+  --panel: rgba(14, 18, 26, 0.9);
+  --panel-strong: rgba(20, 25, 35, 0.96);
+  --line: rgba(231, 204, 128, 0.22);
+  --gold: #d8b65c;
+  --gold-soft: #f1d98a;
+  --text: #f2ead8;
+  --muted: #b9ad98;
+  --moon: #dbe7ff;
+  --sun: #f3b35a;
+  --nature: #67c987;
+  --arcane: #9b79ff;
+  --steel: #9eb5c9;
+  --danger: #d95d5d;
+  --heal: #7be2a4;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  color: var(--text);
+  font-family: "EB Garamond", Georgia, serif;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 8, 0.54), rgba(5, 5, 8, 0.93)),
+    image-set(url("img-lyra/lyrabanner.png") 1x, url("img-lyra/lyrabanner1.png") 2x),
+    var(--void);
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+button {
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.app-shell {
+  width: min(1480px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: minmax(260px, 330px) minmax(360px, 1fr) minmax(260px, 360px);
+  gap: 14px;
+}
+
+.topbar {
+  grid-column: 1 / -1;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  background: rgba(8, 10, 14, 0.76);
+  border: 1px solid var(--line);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.35);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.sigil {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(241, 217, 138, 0.45);
+  background: radial-gradient(circle, rgba(241, 217, 138, 0.28), rgba(155, 121, 255, 0.08) 56%, rgba(0, 0, 0, 0.4));
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  color: var(--gold-soft);
+  flex: 0 0 auto;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+h1 {
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.25rem, 2.3vw, 2.2rem);
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.top-stats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.stat {
+  min-width: 82px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+
+.stat span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-family: "Cinzel", serif;
+}
+
+.stat strong {
+  display: block;
+  margin-top: 2px;
+  font-size: 1.1rem;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.36);
+  min-width: 0;
+}
+
+.panel-title {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(231, 204, 128, 0.14);
+  font-family: "Cinzel", serif;
+  color: var(--gold-soft);
+}
+
+.team-list {
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.hero-card {
+  min-height: 96px;
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.hero-portrait {
+  width: 68px;
+  height: 80px;
+  overflow: hidden;
+  background: #151923;
+  border: 1px solid rgba(241, 217, 138, 0.22);
+}
+
+.hero-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-meta {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.hero-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 8px;
+}
+
+.hero-name {
+  font-family: "Cinzel", serif;
+  font-size: 0.94rem;
+  color: var(--text);
+}
+
+.hero-role {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.bars {
+  display: grid;
+  gap: 4px;
+}
+
+.bar {
+  height: 7px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.36);
+}
+
+.bar > i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--heal);
+}
+
+.bar.mana > i { background: var(--gold); }
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.skill-button {
+  min-height: 34px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  background: linear-gradient(180deg, rgba(216, 182, 92, 0.96), rgba(122, 89, 34, 0.96));
+  color: #171008;
+  font-family: "Cinzel", serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.skill-button:disabled {
+  cursor: default;
+  filter: grayscale(0.9);
+  opacity: 0.52;
+}
+
+.stage {
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 12px;
+  padding: 12px;
+}
+
+.enemy-arena {
+  position: relative;
+  min-height: 234px;
+  display: grid;
+  grid-template-columns: minmax(140px, 210px) 1fr;
+  align-items: stretch;
+  gap: 12px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0.18)),
+    url("img-knull/bannerpaisagem.png");
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.enemy-art {
+  min-height: 232px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.16));
+  display: grid;
+  place-items: end center;
+  overflow: hidden;
+}
+
+.enemy-art img {
+  width: min(100%, 205px);
+  max-height: 230px;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 22px rgba(0,0,0,0.55));
+}
+
+.enemy-info {
+  min-width: 0;
+  align-self: end;
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.enemy-name {
+  font-family: "Cinzel", serif;
+  font-size: clamp(1.25rem, 2.4vw, 2rem);
+  line-height: 1;
+}
+
+.enemy-text {
+  color: var(--muted);
+  max-width: 54ch;
+  line-height: 1.35;
+}
+
+.enemy-hp {
+  height: 16px;
+  background: rgba(0, 0, 0, 0.48);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.enemy-hp i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #953838, #e26767);
+}
+
+.battle-feed {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  color: var(--text);
+  background: rgba(8, 10, 14, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1.25;
+}
+
+.board-wrap {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+}
+
+.board {
+  --cell: min(10.8vw, 72px);
+  width: calc(var(--cell) * 7 + 12px);
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(7, var(--cell));
+  grid-auto-rows: var(--cell);
+  gap: 2px;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.48);
+  border: 1px solid rgba(241, 217, 138, 0.25);
+  touch-action: manipulation;
+}
+
+.gem {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.07);
+  transition: transform 150ms ease, filter 150ms ease, opacity 150ms ease;
+}
+
+.gem::before {
+  content: "";
+  width: 66%;
+  height: 66%;
+  border-radius: 50%;
+  box-shadow: inset 0 9px 18px rgba(255,255,255,0.22), inset 0 -14px 18px rgba(0,0,0,0.24), 0 0 16px var(--glow);
+  background: var(--gem);
+}
+
+.gem::after {
+  content: attr(data-mark);
+  position: absolute;
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+  font-size: clamp(0.8rem, 2vw, 1.08rem);
+  color: rgba(5, 5, 8, 0.76);
+}
+
+.gem.selected {
+  transform: scale(0.92);
+  outline: 2px solid var(--gold-soft);
+  outline-offset: -4px;
+  filter: brightness(1.25);
+}
+
+.gem.clearing {
+  transform: scale(0.24) rotate(18deg);
+  opacity: 0;
+}
+
+.moon { --gem: radial-gradient(circle at 35% 25%, #ffffff, var(--moon) 46%, #758fc0); --glow: rgba(219,231,255,0.55); }
+.sun { --gem: radial-gradient(circle at 35% 25%, #fff1b5, var(--sun) 47%, #b95e30); --glow: rgba(243,179,90,0.58); }
+.nature { --gem: radial-gradient(circle at 35% 25%, #d8ffe1, var(--nature) 48%, #24794d); --glow: rgba(103,201,135,0.54); }
+.arcane { --gem: radial-gradient(circle at 35% 25%, #efe7ff, var(--arcane) 48%, #4c2fa3); --glow: rgba(155,121,255,0.58); }
+.steel { --gem: radial-gradient(circle at 35% 25%, #f3f8ff, var(--steel) 48%, #4d667b); --glow: rgba(158,181,201,0.48); }
+.heart { --gem: radial-gradient(circle at 35% 25%, #fff2f5, #ef7892 46%, #9f334e); --glow: rgba(239,120,146,0.55); }
+
+.side {
+  display: grid;
+  gap: 14px;
+}
+
+.castle-panel,
+.campaign-panel,
+.codex-panel {
+  min-width: 0;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.campaign {
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.base-grid {
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.resource-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.resource {
+  min-height: 52px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.055);
+  text-align: center;
+}
+
+.resource span {
+  display: block;
+  color: var(--muted);
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+}
+
+.resource strong {
+  display: block;
+  margin-top: 3px;
+  font-size: 1.06rem;
+}
+
+.building {
+  display: grid;
+  grid-template-columns: 38px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 66px;
+  padding: 9px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+}
+
+#buildingList {
+  display: grid;
+  gap: 8px;
+}
+
+.building-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(216, 182, 92, 0.34);
+  color: var(--gold-soft);
+  background: rgba(216, 182, 92, 0.12);
+  font-family: "Cinzel", serif;
+  font-weight: 900;
+}
+
+.building strong {
+  display: block;
+  font-family: "Cinzel", serif;
+  font-size: 0.86rem;
+}
+
+.building span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.building button,
+.base-action {
+  min-width: 88px;
+  min-height: 34px;
+  background: rgba(216, 182, 92, 0.16);
+  border: 1px solid rgba(216, 182, 92, 0.36);
+  color: var(--gold-soft);
+  font-family: "Cinzel", serif;
+  font-size: 0.76rem;
+  font-weight: 900;
+}
+
+.building button:disabled,
+.base-action:disabled {
+  opacity: 0.45;
+  color: var(--muted);
+}
+
+.base-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.chapter {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 9px;
+  min-height: 52px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+}
+
+.chapter strong {
+  font-family: "Cinzel", serif;
+  font-size: 0.86rem;
+}
+
+.chapter span {
+  color: var(--muted);
+  display: block;
+  font-size: 0.9rem;
+}
+
+.chapter button {
+  min-width: 82px;
+  min-height: 34px;
+  background: rgba(216, 182, 92, 0.16);
+  border: 1px solid rgba(216, 182, 92, 0.36);
+  color: var(--gold-soft);
+  font-family: "Cinzel", serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.chapter button:disabled {
+  opacity: 0.45;
+  color: var(--muted);
+}
+
+.codex {
+  padding: 12px;
+  display: grid;
+  gap: 12px;
+}
+
+.codex-card {
+  padding: 11px;
+  min-height: 96px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+}
+
+.codex-card h3 {
+  font-family: "Cinzel", serif;
+  color: var(--gold-soft);
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+}
+
+.codex-card p {
+  color: var(--muted);
+  line-height: 1.32;
+}
+
+.element-pill {
+  min-width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,0.16);
+  font-family: "Cinzel", serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.flash {
+  animation: flash 280ms ease;
+}
+
+@keyframes flash {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.55); }
+  100% { filter: brightness(1); }
+}
+
+@media (max-width: 1120px) {
+  .app-shell {
+    grid-template-columns: minmax(260px, 320px) minmax(360px, 1fr);
+  }
+
+  .side {
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background-attachment: scroll;
+    overflow-x: hidden;
+  }
+
+  .app-shell {
+    width: 100%;
+    min-height: 100svh;
+    padding: 8px 8px 82px;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    align-items: stretch;
+    flex-direction: column;
+    min-height: auto;
+    padding: 8px;
+    gap: 8px;
+    border-color: rgba(231, 204, 128, 0.16);
+    background: rgba(5, 6, 10, 0.92);
+    backdrop-filter: blur(10px);
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .sigil {
+    width: 34px;
+    height: 34px;
+  }
+
+  h1 {
+    font-size: 1.05rem;
+  }
+
+  .subtitle {
+    display: none;
+  }
+
+  .top-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: stretch;
+    gap: 5px;
+  }
+
+  .stat {
+    min-width: 0;
+    padding: 5px 4px;
+  }
+
+  .stat span {
+    font-size: 0.62rem;
+  }
+
+  .stat strong {
+    font-size: 0.88rem;
+  }
+
+  .panel {
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.32);
+  }
+
+  .panel-title {
+    min-height: 40px;
+    padding: 9px 10px;
+    font-size: 0.9rem;
+  }
+
+  .stage {
+    order: 1;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .team-panel {
+    order: 2;
+  }
+
+  .side {
+    order: 3;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  body.mobile-tab-battle .team-panel,
+  body.mobile-tab-battle .side,
+  body.mobile-tab-heroes .stage,
+  body.mobile-tab-heroes .side,
+  body.mobile-tab-base .stage,
+  body.mobile-tab-base .team-panel,
+  body.mobile-tab-campaign .stage,
+  body.mobile-tab-campaign .team-panel {
+    display: none;
+  }
+
+  body.mobile-tab-base .side .campaign-panel,
+  body.mobile-tab-base .side .codex-panel,
+  body.mobile-tab-campaign .side .castle-panel,
+  body.mobile-tab-campaign .side .codex-panel {
+    display: none;
+  }
+
+  .enemy-arena {
+    grid-template-columns: 104px 1fr;
+    min-height: 148px;
+  }
+
+  .enemy-art,
+  .enemy-art img {
+    min-height: 146px;
+    max-height: 146px;
+  }
+
+  .enemy-text {
+    display: none;
+  }
+
+  .enemy-info {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .enemy-name {
+    font-size: 1.15rem;
+  }
+
+  .enemy-hp {
+    height: 13px;
+  }
+
+  .battle-feed {
+    min-height: 46px;
+    padding: 8px 10px;
+    font-size: 0.98rem;
+  }
+
+  .board {
+    --cell: calc((100vw - 32px) / 7);
+    width: 100%;
+    max-width: 430px;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-auto-rows: var(--cell);
+    padding: 4px;
+  }
+
+  .gem {
+    min-height: 42px;
+  }
+
+  .team-list,
+  .base-grid,
+  .campaign,
+  .codex {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .hero-card {
+    min-height: 86px;
+    grid-template-columns: 58px 1fr;
+    gap: 8px;
+  }
+
+  .hero-portrait {
+    width: 58px;
+    height: 72px;
+  }
+
+  .skill-button,
+  .building button,
+  .base-action,
+  .chapter button {
+    min-height: 42px;
+    font-size: 0.75rem;
+  }
+
+  .resource-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .resource {
+    min-height: 48px;
+    padding: 6px 4px;
+  }
+
+  .building {
+    min-height: 62px;
+  }
+
+  .mobile-nav {
+    position: fixed;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    z-index: 80;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 6px;
+    border: 1px solid rgba(231, 204, 128, 0.22);
+    background: rgba(5, 6, 10, 0.94);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 -14px 34px rgba(0, 0, 0, 0.38);
+  }
+
+  .mobile-nav button {
+    min-height: 48px;
+    display: grid;
+    place-items: center;
+    gap: 2px;
+    background: rgba(255,255,255,0.055);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--muted);
+    font-family: "Cinzel", serif;
+    font-size: 0.68rem;
+    font-weight: 900;
+  }
+
+  .mobile-nav button i {
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .mobile-nav button.active {
+    color: #171008;
+    background: linear-gradient(180deg, rgba(241, 217, 138, 0.98), rgba(177, 132, 53, 0.98));
+    border-color: rgba(241, 217, 138, 0.72);
+  }
+}
+
+@media (max-width: 420px) {
+  .hero-card {
+    grid-template-columns: 58px 1fr;
+  }
+
+  .hero-portrait {
+    width: 58px;
+    height: 74px;
+  }
+
+  .chapter {
+    grid-template-columns: 30px 1fr;
+  }
+
+  .building {
+    grid-template-columns: 34px 1fr;
+  }
+
+  .building button {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .resource-row {
+    grid-template-columns: 1fr;
+  }
+
+  .chapter button {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+<main class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="sigil">E</div>
+      <div>
+        <h1>Ecos da Lua Branca</h1>
+        <p class="subtitle">Puzzle RPG de fantasia, magia urbana e guerra ancestral.</p>
+      </div>
+    </div>
+    <div class="top-stats" aria-label="Status da campanha">
+      <div class="stat"><span>Fase</span><strong id="stageNumber">1</strong></div>
+      <div class="stat"><span>Turno</span><strong id="turnNumber">1</strong></div>
+      <div class="stat"><span>Moedas</span><strong id="coins">0</strong></div>
+      <div class="stat"><span>Poder</span><strong id="kingdomPower">0</strong></div>
+    </div>
+  </header>
+
+  <section class="panel team-panel" aria-label="Equipe">
+    <div class="panel-title">
+      <span>Equipe</span>
+      <span id="teamPower">Poder 0</span>
+    </div>
+    <div class="team-list" id="teamList"></div>
+  </section>
+
+  <section class="panel stage" aria-label="Combate">
+    <div class="enemy-arena" id="enemyArena">
+      <div class="enemy-art"><img id="enemyImage" src="img-cavaleiro/cavaleirobanner.png" alt=""></div>
+      <div class="enemy-info">
+        <h2 class="enemy-name" id="enemyName">Cavaleiro do Eclipse</h2>
+        <p class="enemy-text" id="enemyText">Uma sentinela antiga vigia o primeiro portal lunar.</p>
+        <div class="enemy-hp" aria-label="Vida do inimigo"><i id="enemyHp"></i></div>
+      </div>
+    </div>
+
+    <div class="battle-feed" id="battleFeed">A lua branca ergue o primeiro campo de batalha.</div>
+
+    <div class="board-wrap">
+      <div class="board" id="board" aria-label="Tabuleiro de puzzle"></div>
+    </div>
+  </section>
+
+  <aside class="side">
+    <section class="panel castle-panel">
+      <div class="panel-title">
+        <span>Castelo</span>
+        <span id="castleLevel">Nv. 1</span>
+      </div>
+      <div class="base-grid">
+        <div class="resource-row" aria-label="Recursos">
+          <div class="resource"><span>Comida</span><strong id="food">0</strong></div>
+          <div class="resource"><span>Madeira</span><strong id="wood">0</strong></div>
+          <div class="resource"><span>Cristais</span><strong id="crystals">0</strong></div>
+        </div>
+        <div id="buildingList"></div>
+        <div class="base-actions">
+          <button class="base-action" id="collectButton">Coletar</button>
+          <button class="base-action" id="trainButton">Treinar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel campaign-panel">
+      <div class="panel-title">
+        <span>Campanha</span>
+        <span id="chapterProgress">1/5</span>
+      </div>
+      <div class="campaign" id="campaignList"></div>
+    </section>
+
+    <section class="panel codex-panel">
+      <div class="panel-title">
+        <span>C&oacute;dice</span>
+        <span>Almas</span>
+      </div>
+      <div class="codex">
+        <article class="codex-card">
+          <h3>Noar Valeth</h3>
+          <p>Herdeiro de uma linhagem estelar, treinado em runas altas e selos de luz.</p>
+        </article>
+        <article class="codex-card">
+          <h3>Eira Lunafolha</h3>
+          <p>Guardi&atilde; da floresta lunar, capaz de transformar dano em prote&ccedil;&atilde;o.</p>
+        </article>
+        <article class="codex-card">
+          <h3>Fam&iacute;lia Connor</h3>
+          <p>Mercen&aacute;rios, m&eacute;dicos e estudantes marcados por magia moderna e pactos antigos.</p>
+        </article>
+      </div>
+    </section>
+  </aside>
+
+  <nav class="mobile-nav" aria-label="Navega&ccedil;&atilde;o do jogo">
+    <button class="active" data-tab="battle"><i>X</i><span>Batalha</span></button>
+    <button data-tab="base"><i>C</i><span>Castelo</span></button>
+    <button data-tab="heroes"><i>H</i><span>Her&oacute;is</span></button>
+    <button data-tab="campaign"><i>F</i><span>Fases</span></button>
+  </nav>
+</main>
+
+<script>
+const SIZE = 7;
+const marks = {
+  moon: "L",
+  sun: "S",
+  nature: "N",
+  arcane: "A",
+  steel: "F",
+  heart: "+"
+};
+
+const elements = Object.keys(marks);
+const boardEl = document.querySelector("#board");
+const feedEl = document.querySelector("#battleFeed");
+const enemyHpEl = document.querySelector("#enemyHp");
+const enemyNameEl = document.querySelector("#enemyName");
+const enemyTextEl = document.querySelector("#enemyText");
+const enemyImageEl = document.querySelector("#enemyImage");
+const stageNumberEl = document.querySelector("#stageNumber");
+const turnNumberEl = document.querySelector("#turnNumber");
+const coinsEl = document.querySelector("#coins");
+const kingdomPowerEl = document.querySelector("#kingdomPower");
+const teamPowerEl = document.querySelector("#teamPower");
+const teamListEl = document.querySelector("#teamList");
+const campaignListEl = document.querySelector("#campaignList");
+const chapterProgressEl = document.querySelector("#chapterProgress");
+const enemyArenaEl = document.querySelector("#enemyArena");
+const foodEl = document.querySelector("#food");
+const woodEl = document.querySelector("#wood");
+const crystalsEl = document.querySelector("#crystals");
+const castleLevelEl = document.querySelector("#castleLevel");
+const buildingListEl = document.querySelector("#buildingList");
+const collectButton = document.querySelector("#collectButton");
+const trainButton = document.querySelector("#trainButton");
+const mobileNavButtons = document.querySelectorAll("[data-tab]");
+
+const team = [
+  {
+    name: "Noar Valeth",
+    role: "Arcano lunar",
+    element: "arcane",
+    hp: 118,
+    maxHp: 118,
+    energy: 0,
+    maxEnergy: 5,
+    power: 24,
+    skill: "Selo Astral",
+    portrait: "img-kaelith/kaelith.png",
+    cast: () => damageEnemy(72, "Noar rompeu o selo astral.")
+  },
+  {
+    name: "Eira Lunafolha",
+    role: "Guardi&atilde; da floresta",
+    element: "nature",
+    hp: 132,
+    maxHp: 132,
+    energy: 0,
+    maxEnergy: 4,
+    power: 17,
+    skill: "Raiz Lunar",
+    portrait: "img-lyra/lyra.png",
+    cast: () => {
+      healTeam(42);
+      damageEnemy(22, "Eira cobriu a equipe com raiz lunar.");
+    }
+  },
+  {
+    name: "Jack Connor",
+    role: "Mago t&aacute;tico",
+    element: "moon",
+    hp: 126,
+    maxHp: 126,
+    energy: 0,
+    maxEnergy: 6,
+    power: 28,
+    skill: "Dobra do Imposs&iacute;vel",
+    portrait: "img-nimsay/nimfogo.png",
+    cast: () => {
+      damageEnemy(98, "Jack dobrou as leis do campo.");
+      shuffleBoard();
+    }
+  },
+  {
+    name: "Alice Connor",
+    role: "M&eacute;dica arcana",
+    element: "heart",
+    hp: 116,
+    maxHp: 116,
+    energy: 0,
+    maxEnergy: 4,
+    power: 15,
+    skill: "Pulso Vital",
+    portrait: "img-nimsay/aguanim.png",
+    cast: () => {
+      healTeam(68);
+      feed("Alice estabilizou a linha vital da equipe.");
+    }
+  },
+  {
+    name: "Mark Connor",
+    role: "Soldado de a&ccedil;o",
+    element: "steel",
+    hp: 148,
+    maxHp: 148,
+    energy: 0,
+    maxEnergy: 5,
+    power: 22,
+    skill: "Rajada Precisa",
+    portrait: "img-cavaleiro/cavaleiro.png",
+    cast: () => damageEnemy(84, "Mark abriu uma linha de tiro perfeita.")
+  }
+];
+
+const chapters = [
+  {
+    name: "Portal da Clareira",
+    place: "A lua branca desperta",
+    enemy: "Cavaleiro do Eclipse",
+    text: "Uma sentinela antiga vigia o primeiro portal lunar.",
+    hp: 260,
+    attack: 22,
+    image: "img-cavaleiro/cavaleirobanner.png",
+    bg: "img-knull/bannerpaisagem.png"
+  },
+  {
+    name: "Bosque Partido",
+    place: "Ra&iacute;zes sob cerco",
+    enemy: "Besta de Cinza",
+    text: "A fome da floresta corrompida fareja cada centelha de magia.",
+    hp: 340,
+    attack: 30,
+    image: "img-besta/besta.png",
+    bg: "img-besta/bestabanner.png"
+  },
+  {
+    name: "Cidade Sem Sol",
+    place: "Ru&iacute;nas modernas",
+    enemy: "Capit&atilde;o Nulo",
+    text: "Armas antigas e magia urbana se chocam nas avenidas vazias.",
+    hp: 440,
+    attack: 36,
+    image: "img-onull/onullarmadura.png",
+    bg: "img-cidade/onulldominio.png"
+  },
+  {
+    name: "Cidadela de Vidro",
+    place: "Julgamento arcano",
+    enemy: "Arauto do Pacto",
+    text: "Toda promessa quebrada volta ao mundo em forma de l&acirc;mina.",
+    hp: 560,
+    attack: 44,
+    image: "img-vallar/vallar.png",
+    bg: "img-cidadela/cidadela.png"
+  },
+  {
+    name: "Trono da Lua Branca",
+    place: "Primeiro chefe",
+    enemy: "O Rei do Eclipse",
+    text: "A sombra sentada no trono quer apagar todas as linhagens.",
+    hp: 760,
+    attack: 54,
+    image: "img-knull/knull.png",
+    bg: "img-knull/bannernull.png"
+  }
+];
+
+let board = [];
+let selected = null;
+let locked = false;
+let chapterIndex = 0;
+let enemy = {};
+let turn = 1;
+let coins = 0;
+let resources = {
+  food: 180,
+  wood: 160,
+  crystals: 35
+};
+let buildings = [
+  {
+    key: "castle",
+    icon: "C",
+    name: "Castelo Lunar",
+    level: 1,
+    bonus: "desbloqueia fases e aumenta recompensas",
+    cost: () => ({ wood: 120, crystals: 25 })
+  },
+  {
+    key: "barracks",
+    icon: "B",
+    name: "Quartel Connor",
+    level: 1,
+    bonus: "+dano dos herois de combate",
+    cost: () => ({ food: 90, wood: 70 })
+  },
+  {
+    key: "sanctum",
+    icon: "S",
+    name: "Santu&aacute;rio da Lua",
+    level: 1,
+    bonus: "+cura e energia arcana",
+    cost: () => ({ wood: 80, crystals: 18 })
+  },
+  {
+    key: "infirmary",
+    icon: "I",
+    name: "Enfermaria Arcana",
+    level: 1,
+    bonus: "+vida maxima da equipe",
+    cost: () => ({ food: 80, crystals: 12 })
+  }
+];
+let unlockedChapter = 0;
+
+function randomGem() {
+  return elements[Math.floor(Math.random() * elements.length)];
+}
+
+function createBoard() {
+  board = Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, () => randomGem()));
+  while (findMatches().length) {
+    board = Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, () => randomGem()));
+  }
+  renderBoard();
+}
+
+function renderBoard() {
+  boardEl.innerHTML = "";
+  for (let r = 0; r < SIZE; r++) {
+    for (let c = 0; c < SIZE; c++) {
+      const gem = document.createElement("button");
+      gem.className = `gem ${board[r][c]}`;
+      gem.dataset.row = r;
+      gem.dataset.col = c;
+      gem.dataset.mark = marks[board[r][c]];
+      gem.setAttribute("aria-label", board[r][c]);
+      if (selected && selected.r === r && selected.c === c) gem.classList.add("selected");
+      gem.addEventListener("click", () => selectGem(r, c));
+      boardEl.appendChild(gem);
+    }
+  }
+}
+
+function selectGem(r, c) {
+  if (locked) return;
+  if (!selected) {
+    selected = { r, c };
+    renderBoard();
+    return;
+  }
+  const distance = Math.abs(selected.r - r) + Math.abs(selected.c - c);
+  if (distance !== 1) {
+    selected = { r, c };
+    renderBoard();
+    return;
+  }
+  const first = selected;
+  selected = null;
+  swap(first, { r, c });
+  const matches = findMatches();
+  if (!matches.length) {
+    swap(first, { r, c });
+    renderBoard();
+    feed("As pe&ccedil;as recusaram o pacto.");
+    return;
+  }
+  resolveTurn(matches);
+}
+
+function swap(a, b) {
+  const temp = board[a.r][a.c];
+  board[a.r][a.c] = board[b.r][b.c];
+  board[b.r][b.c] = temp;
+}
+
+function findMatches() {
+  const matched = new Set();
+  for (let r = 0; r < SIZE; r++) {
+    let start = 0;
+    for (let c = 1; c <= SIZE; c++) {
+      if (c < SIZE && board[r][c] === board[r][start]) continue;
+      if (c - start >= 3) {
+        for (let x = start; x < c; x++) matched.add(`${r},${x}`);
+      }
+      start = c;
+    }
+  }
+  for (let c = 0; c < SIZE; c++) {
+    let start = 0;
+    for (let r = 1; r <= SIZE; r++) {
+      if (r < SIZE && board[r][c] === board[start][c]) continue;
+      if (r - start >= 3) {
+        for (let y = start; y < r; y++) matched.add(`${y},${c}`);
+      }
+      start = r;
+    }
+  }
+  return Array.from(matched).map(item => {
+    const [r, c] = item.split(",").map(Number);
+    return { r, c, type: board[r][c] };
+  });
+}
+
+async function resolveTurn(initialMatches) {
+  locked = true;
+  let matches = initialMatches;
+  let combo = 0;
+  const totals = {};
+
+  while (matches.length) {
+    combo++;
+    matches.forEach(cell => {
+      totals[cell.type] = (totals[cell.type] || 0) + 1;
+      const index = cell.r * SIZE + cell.c;
+      boardEl.children[index]?.classList.add("clearing");
+    });
+    await wait(180);
+    clearMatches(matches);
+    dropBoard();
+    renderBoard();
+    await wait(160);
+    matches = findMatches();
+  }
+
+  applyCombo(totals, combo);
+  enemyTurn();
+  turn++;
+  locked = false;
+  updateAll();
+}
+
+function clearMatches(matches) {
+  matches.forEach(({ r, c }) => board[r][c] = null);
+}
+
+function dropBoard() {
+  for (let c = 0; c < SIZE; c++) {
+    const stack = [];
+    for (let r = SIZE - 1; r >= 0; r--) {
+      if (board[r][c]) stack.push(board[r][c]);
+    }
+    for (let r = SIZE - 1; r >= 0; r--) {
+      board[r][c] = stack.shift() || randomGem();
+    }
+  }
+}
+
+function applyCombo(totals, combo) {
+  let totalDamage = 0;
+  let totalHeal = 0;
+  const barracksBonus = 1 + getBuilding("barracks").level * 0.07;
+  const sanctumBonus = 1 + getBuilding("sanctum").level * 0.06;
+  team.forEach(hero => {
+    const count = totals[hero.element] || 0;
+    if (count > 0) {
+      const damage = Math.round(count * hero.power * (1 + combo * 0.12) * barracksBonus);
+      totalDamage += damage;
+      hero.energy = Math.min(hero.maxEnergy, hero.energy + Math.ceil(count / 3));
+    }
+  });
+  if (totals.heart) totalHeal = Math.round(totals.heart * 9 * (1 + combo * 0.08) * sanctumBonus);
+  if (totalDamage) damageEnemy(totalDamage, `${combo} combo: a equipe causou ${totalDamage} de dano.`);
+  if (totalHeal) healTeam(totalHeal);
+  if (!totalDamage && totalHeal) feed(`A equipe recuperou ${totalHeal} de vida.`);
+}
+
+function enemyTurn() {
+  if (enemy.hp <= 0) return;
+  const living = team.filter(hero => hero.hp > 0);
+  if (!living.length) {
+    feed("A equipe caiu. A fase foi reiniciada.");
+    setTimeout(() => startChapter(chapterIndex), 700);
+    return;
+  }
+  const target = living[Math.floor(Math.random() * living.length)];
+  const damage = Math.max(8, enemy.attack + Math.floor(Math.random() * 9) - 4);
+  target.hp = Math.max(0, target.hp - damage);
+  feed(`${enemy.name} atingiu ${target.name} por ${damage}.`);
+  if (!team.some(hero => hero.hp > 0)) {
+    feed("A equipe caiu. A fase foi reiniciada.");
+    setTimeout(() => startChapter(chapterIndex), 900);
+  }
+}
+
+function damageEnemy(amount, message) {
+  enemy.hp = Math.max(0, enemy.hp - amount);
+  enemyArenaEl.classList.add("flash");
+  setTimeout(() => enemyArenaEl.classList.remove("flash"), 300);
+  feed(message);
+  if (enemy.hp <= 0) winChapter();
+  updateAll();
+}
+
+function healTeam(amount) {
+  team.forEach(hero => {
+    if (hero.hp > 0) hero.hp = Math.min(getHeroMaxHp(hero), hero.hp + amount);
+  });
+}
+
+function castSkill(index) {
+  if (locked) return;
+  const hero = team[index];
+  if (!hero || hero.energy < hero.maxEnergy || hero.hp <= 0) return;
+  hero.energy = 0;
+  hero.cast();
+  enemyTurn();
+  turn++;
+  updateAll();
+}
+
+function shuffleBoard() {
+  const flat = board.flat().sort(() => Math.random() - 0.5);
+  board = Array.from({ length: SIZE }, (_, r) => flat.slice(r * SIZE, r * SIZE + SIZE));
+  renderBoard();
+}
+
+function winChapter() {
+  const castleBonus = getBuilding("castle").level * 12;
+  const reward = 80 + chapterIndex * 35 + castleBonus;
+  coins += reward;
+  resources.food += 45 + chapterIndex * 12;
+  resources.wood += 40 + chapterIndex * 10;
+  resources.crystals += 8 + chapterIndex * 3;
+  unlockedChapter = Math.max(unlockedChapter, Math.min(chapters.length - 1, chapterIndex + 1));
+  feed(`${enemy.name} caiu. A equipe recebeu ${reward} moedas.`);
+  if (chapterIndex < chapters.length - 1) {
+    setTimeout(() => startChapter(chapterIndex + 1), 900);
+  }
+}
+
+function startChapter(index) {
+  chapterIndex = index;
+  const data = chapters[index];
+  enemy = {
+    name: data.enemy,
+    text: data.text,
+    maxHp: data.hp,
+    hp: data.hp,
+    attack: data.attack
+  };
+  turn = 1;
+  team.forEach(hero => {
+    hero.hp = getHeroMaxHp(hero);
+    hero.energy = Math.min(hero.energy, Math.floor(hero.maxEnergy / 2));
+  });
+  enemyNameEl.textContent = data.enemy;
+  enemyTextEl.innerHTML = data.text;
+  enemyImageEl.src = data.image;
+  enemyArenaEl.style.backgroundImage = `linear-gradient(90deg, rgba(0, 0, 0, 0.54), rgba(0, 0, 0, 0.18)), url("${data.bg}")`;
+  createBoard();
+  feed(data.place);
+  updateAll();
+}
+
+function renderTeam() {
+  teamListEl.innerHTML = "";
+  team.forEach((hero, index) => {
+    const maxHp = getHeroMaxHp(hero);
+    const card = document.createElement("article");
+    card.className = "hero-card";
+    card.innerHTML = `
+      <div class="hero-portrait"><img src="${hero.portrait}" alt=""></div>
+      <div class="hero-meta">
+        <div class="hero-name-row">
+          <div>
+            <div class="hero-name">${hero.name}</div>
+            <div class="hero-role">${hero.role}</div>
+          </div>
+          <div class="element-pill ${hero.element}">${marks[hero.element]}</div>
+        </div>
+        <div class="bars">
+          <div class="bar"><i style="width:${(hero.hp / maxHp) * 100}%"></i></div>
+          <div class="bar mana"><i style="width:${(hero.energy / hero.maxEnergy) * 100}%"></i></div>
+        </div>
+        <div class="hero-actions">
+          <button class="skill-button" ${hero.energy < hero.maxEnergy || hero.hp <= 0 ? "disabled" : ""} data-skill="${index}">${hero.skill}</button>
+        </div>
+      </div>
+    `;
+    teamListEl.appendChild(card);
+  });
+  teamListEl.querySelectorAll("[data-skill]").forEach(button => {
+    button.addEventListener("click", () => castSkill(Number(button.dataset.skill)));
+  });
+}
+
+function renderBase() {
+  foodEl.textContent = String(resources.food);
+  woodEl.textContent = String(resources.wood);
+  crystalsEl.textContent = String(resources.crystals);
+  castleLevelEl.textContent = `Nv. ${getBuilding("castle").level}`;
+  buildingListEl.innerHTML = "";
+
+  buildings.forEach(building => {
+    const cost = nextCost(building);
+    const canUpgrade = canPay(cost);
+    const item = document.createElement("article");
+    item.className = "building";
+    item.innerHTML = `
+      <div class="building-icon">${building.icon}</div>
+      <div>
+        <strong>${building.name} Nv. ${building.level}</strong>
+        <span>${building.bonus}</span>
+        <span>Custo: ${formatCost(cost)}</span>
+      </div>
+      <button ${canUpgrade ? "" : "disabled"} data-upgrade="${building.key}">Melhorar</button>
+    `;
+    buildingListEl.appendChild(item);
+  });
+
+  buildingListEl.querySelectorAll("[data-upgrade]").forEach(button => {
+    button.addEventListener("click", () => upgradeBuilding(button.dataset.upgrade));
+  });
+}
+
+function upgradeBuilding(key) {
+  const building = getBuilding(key);
+  const cost = nextCost(building);
+  if (!canPay(cost)) {
+    feed("Recursos insuficientes para essa melhoria.");
+    return;
+  }
+  pay(cost);
+  building.level++;
+  if (key === "infirmary") team.forEach(hero => hero.hp = getHeroMaxHp(hero));
+  if (key === "castle") unlockedChapter = Math.max(unlockedChapter, Math.min(chapters.length - 1, building.level));
+  feed(`${building.name} chegou ao n&iacute;vel ${building.level}.`);
+  updateAll();
+}
+
+function collectBase() {
+  const castle = getBuilding("castle").level;
+  resources.food += 35 + castle * 12;
+  resources.wood += 30 + castle * 10;
+  resources.crystals += 5 + castle * 2;
+  coins += 18 + castle * 6;
+  feed("A base produziu comida, madeira, cristais e moedas.");
+  updateAll();
+}
+
+function trainTeam() {
+  const cost = { food: 85, coins: 55 };
+  if (!canPay(cost)) {
+    feed("Falta comida ou moedas para treinar a equipe.");
+    return;
+  }
+  pay(cost);
+  team.forEach(hero => hero.power += 1);
+  feed("A equipe treinou no Quartel Connor. Poder +1 para todos.");
+  updateAll();
+}
+
+function getBuilding(key) {
+  return buildings.find(building => building.key === key);
+}
+
+function getHeroMaxHp(hero) {
+  return Math.round(hero.maxHp * (1 + getBuilding("infirmary").level * 0.06));
+}
+
+function nextCost(building) {
+  const base = building.cost();
+  return Object.fromEntries(Object.entries(base).map(([key, value]) => [key, Math.round(value * Math.pow(1.34, building.level - 1))]));
+}
+
+function canPay(cost) {
+  return Object.entries(cost).every(([key, value]) => key === "coins" ? coins >= value : resources[key] >= value);
+}
+
+function pay(cost) {
+  Object.entries(cost).forEach(([key, value]) => {
+    if (key === "coins") coins -= value;
+    else resources[key] -= value;
+  });
+}
+
+function formatCost(cost) {
+  const labels = {
+    food: "comida",
+    wood: "madeira",
+    crystals: "cristais",
+    coins: "moedas"
+  };
+  return Object.entries(cost).map(([key, value]) => `${value} ${labels[key]}`).join(", ");
+}
+
+function renderCampaign() {
+  campaignListEl.innerHTML = "";
+  chapters.forEach((chapter, index) => {
+    const item = document.createElement("article");
+    item.className = "chapter";
+    item.innerHTML = `
+      <div class="element-pill">${index + 1}</div>
+      <div>
+        <strong>${chapter.name}</strong>
+        <span>${chapter.enemy}</span>
+      </div>
+      <button ${index > unlockedChapter ? "disabled" : ""} data-chapter="${index}">${index === chapterIndex ? "Atual" : "Entrar"}</button>
+    `;
+    campaignListEl.appendChild(item);
+  });
+  campaignListEl.querySelectorAll("[data-chapter]").forEach(button => {
+    button.addEventListener("click", () => startChapter(Number(button.dataset.chapter)));
+  });
+}
+
+function updateAll() {
+  renderTeam();
+  renderBase();
+  renderCampaign();
+  stageNumberEl.textContent = String(chapterIndex + 1);
+  turnNumberEl.textContent = String(turn);
+  coinsEl.textContent = String(coins);
+  kingdomPowerEl.textContent = String(getKingdomPower());
+  chapterProgressEl.textContent = `${chapterIndex + 1}/${chapters.length}`;
+  teamPowerEl.textContent = `Poder ${team.reduce((sum, hero) => sum + hero.power, 0)}`;
+  enemyHpEl.style.width = `${Math.max(0, (enemy.hp / enemy.maxHp) * 100)}%`;
+}
+
+function getKingdomPower() {
+  const heroPower = team.reduce((sum, hero) => sum + hero.power * 12, 0);
+  const buildingPower = buildings.reduce((sum, building) => sum + building.level * 95, 0);
+  return heroPower + buildingPower;
+}
+
+function feed(message) {
+  feedEl.innerHTML = message;
+}
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function setMobileTab(tab) {
+  document.body.classList.remove("mobile-tab-battle", "mobile-tab-base", "mobile-tab-heroes", "mobile-tab-campaign");
+  document.body.classList.add(`mobile-tab-${tab}`);
+  mobileNavButtons.forEach(button => {
+    button.classList.toggle("active", button.dataset.tab === tab);
+  });
+}
+
+collectButton.addEventListener("click", collectBase);
+trainButton.addEventListener("click", trainTeam);
+mobileNavButtons.forEach(button => {
+  button.addEventListener("click", () => setMobileTab(button.dataset.tab));
+});
+setMobileTab("battle");
+startChapter(0);
+</script>
+</body>
+</html>

@@ -120,6 +120,27 @@
 
     document.body.appendChild(mobileNav);
 
+    const themeToggle = document.createElement('button');
+    themeToggle.id = 'theme-toggle';
+    themeToggle.type = 'button';
+    themeToggle.setAttribute('aria-label', 'Alternar tema claro e escuro');
+    themeToggle.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0V5a1 1 0 0 1 1-1Zm0 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm8-4a1 1 0 0 1 1 1 1 1 0 0 1-1 1h-1a1 1 0 0 1 0-2h1Zm-14 0a1 1 0 0 1 1 1 1 1 0 0 1-1 1H5a1 1 0 0 1 0-2h1Zm11.07-5.07a1 1 0 0 1 1.41 0l0.7 0.7a1 1 0 0 1-1.41 1.42l-0.7-0.7a1 1 0 0 1 0-1.42ZM6.22 17.78a1 1 0 0 1 1.41 0l0.7 0.7a1 1 0 0 1-1.41 1.42l-0.7-0.7a1 1 0 0 1 0-1.42ZM17.78 17.78a1 1 0 0 1 1.42 0l0.7 0.7a1 1 0 0 1-1.42 1.42l-0.7-0.7a1 1 0 0 1 0-1.42ZM6.22 6.22a1 1 0 0 1 1.42 0l0.7 0.7a1 1 0 0 1-1.42 1.42l-0.7-0.7a1 1 0 0 1 0-1.42Z"/></svg>`;
+    document.body.appendChild(themeToggle);
+
+    const galleryOverlay = document.createElement('div');
+    galleryOverlay.id = 'gallery-modal-overlay';
+    galleryOverlay.innerHTML = `
+      <div id="gallery-modal">
+        <button type="button" class="modal-close" aria-label="Fechar visualização">×</button>
+        <div class="modal-image" role="img" aria-label="Imagem ampliada"></div>
+        <div class="modal-content">
+          <h3 class="modal-title">Imagem</h3>
+          <p class="modal-desc">Clique em qualquer ponto fora da imagem ou pressione Esc para fechar.</p>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(galleryOverlay);
+
   }
 
   injectElements();
@@ -533,4 +554,80 @@
     });
   })();
 
+
+
+/* ── TEMA E MODAL GLOBAL */
+  (function () {
+    const themeToggle = document.getElementById('theme-toggle');
+    const modalOverlay = document.getElementById('gallery-modal-overlay');
+    const modalImage = document.querySelector('#gallery-modal .modal-image');
+    const modalTitle = document.querySelector('#gallery-modal .modal-title');
+    const modalDesc = document.querySelector('#gallery-modal .modal-desc');
+
+    function setTheme() {
+      document.body.classList.remove('theme-light');
+      localStorage.removeItem('site-theme');
+    }
+
+    function loadTheme() {
+      setTheme();
+    }
+
+    function getBackgroundImage(el) {
+      const style = el.getAttribute('style') || '';
+      const match = style.match(/background-image\s*:\s*url\(['"]?([^'")]+)['"]?\)/i);
+      if (match) return match[1];
+      const computed = window.getComputedStyle(el).backgroundImage || '';
+      const match2 = computed.match(/url\(['"]?([^'")]+)['"]?\)/);
+      return match2 ? match2[1] : '';
+    }
+
+    function openModal(src, title, desc) {
+      if (!modalOverlay || !modalImage) return;
+      modalImage.style.backgroundImage = `url("${src}")`;
+      modalImage.setAttribute('aria-label', title);
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc || 'Clique em qualquer ponto fora da imagem ou pressione Esc para fechar.';
+      modalOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      if (!modalOverlay) return;
+      modalOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    if (themeToggle) {
+      themeToggle.hidden = true;
+      themeToggle.addEventListener('click', () => {
+        setTheme();
+      });
+    }
+
+    if (modalOverlay) {
+      modalOverlay.addEventListener('click', event => {
+        if (event.target === modalOverlay || event.target.closest('.modal-close')) {
+          closeModal();
+        }
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && modalOverlay.classList.contains('open')) {
+          closeModal();
+        }
+      });
+    }
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const src = getBackgroundImage(item) || item.querySelector('img')?.src || '';
+        if (!src) return;
+        const title = item.querySelector('.gallery-overlay span')?.textContent.trim() || 'Imagem';
+        const desc = item.querySelector('.gallery-overlay p')?.textContent.trim() || 'Clique para ampliar.';
+        openModal(src, title, desc);
+      });
+    });
+
+    loadTheme();
+  })();
 })(); /* fim da IIFE global */

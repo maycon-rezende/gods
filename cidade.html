@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cidade das Mil Escolhas — O Diário de um Deus</title>
+<title>Cidade das Mil Escolhas &mdash; O Di&aacute;rio de um Deus</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="effects.css">
+<link rel="stylesheet" href="responsive-fixes.css">
 <style>
-/* ── VARIÁVEIS E RESET ── */
+/* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --void: #030308;
   --deep: #07070f;
@@ -18,7 +19,7 @@
   --gold-light: #f0d080;
   --gold-dim: #7a6228;
 
-  /* Cidade — dourado urbano com laranja */
+  /* Cidade  dourado urbano com laranja */
   --char-accent: #c08030;
   --char-accent-dim: #7a4a10;
   --char-accent-glow: rgba(192,128,48,0.4);
@@ -50,7 +51,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -98,7 +99,7 @@ nav a:hover {
     0 0 40px rgba(192,128,48,0.3);
 }
 
-/* ── BANNER ── */
+/* -- BANNER -- */
 #banner {
   position: relative;
   min-height: 100vh;
@@ -356,7 +357,7 @@ nav a:hover {
   transform: none;
 }
 
-/* ════════ RESPONSIVO BANNER ════════ */
+/* -------- RESPONSIVO BANNER -------- */
 
 @media (max-width: 1024px) {
   nav { gap: 1.5rem; }
@@ -400,7 +401,7 @@ nav a:hover {
   #banner { min-height: 100svh; }
   .banner-content { padding: 3.5rem 4vw 2.5rem; }
 }
-/* ── SEÇÕES COMPARTILHADAS ── */
+/* -- SE&Ccedil;&Otilde;ES COMPARTILHADAS -- */
 section { position: relative; z-index: 1; }
 
 .section-header {
@@ -449,7 +450,7 @@ section { position: relative; z-index: 1; }
   background-clip: text;
 }
 
-/* ── SOBRE ── */
+/* -- SOBRE -- */
 #sobre { padding-bottom: 5rem; }
 
 .about-grid {
@@ -621,7 +622,7 @@ section { position: relative; z-index: 1; }
   color: var(--urban);
 }
 
-/* ── NATUREZA ── */
+/* -- NATUREZA -- */
 #natureza {
   padding-bottom: 5rem;
   background: linear-gradient(to bottom,
@@ -693,7 +694,7 @@ section { position: relative; z-index: 1; }
   color: var(--char-accent);
 }
 
-/* ── FUNÇÃO ── */
+/* -- FUNO -- */
 #funcao { padding-bottom: 5rem; }
 
 .funcao-container {
@@ -848,7 +849,7 @@ section { position: relative; z-index: 1; }
   font-style: normal;
 }
 
-/* ── GALERIA ── */
+/* -- GALERIA -- */
 #galeria { padding-bottom: 5rem; }
 
 .gallery-container {
@@ -921,7 +922,7 @@ section { position: relative; z-index: 1; }
   font-style: normal;
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 footer {
   position: relative;
   z-index: 1;
@@ -984,7 +985,7 @@ footer {
   text-transform: uppercase;
 }
 
-/* ════════ RESPONSIVO ════════ */
+/* -------- RESPONSIVO -------- */
 
 @media (max-width: 1024px) {
   .about-grid      { grid-template-columns: 260px 1fr; gap: 3rem; padding: 0 1.5rem; }
@@ -1116,10 +1117,10 @@ footer {
   <a href="index.html" class="nav-logo">
     <img src="img-logo/olhos.jpg" alt="Logo">
   </a>
-  <a href="regioes.html">← Regiões</a>
+  <a href="regioes.html">? Regi&otilde;es</a>
   <a href="#sobre">Sobre</a>
   <a href="#natureza">Natureza</a>
-  <a href="#funcao">Função</a>
+  <a href="#funcao">Funo</a>
   <a href="#galeria">Galeria</a>
 </nav>
 
@@ -1136,7 +1137,7 @@ footer {
     <div class="banner-tag">
       <span class="tag-line"></span>
       <span class="tag-text">
-        Plano Urbano Vivo · Domínio de Onull
+        Plano Urbano Vivo  Dom&iacute;nio de Onull
       </span>
       <span class="tag-line"></span>
     </div>
@@ -1148,13 +1149,13 @@ footer {
 
     <div class="banner-divider">
       <span class="divider-line"></span>
-      <span class="divider-symbol">🏙️</span>
+      <span class="divider-symbol">&#10022;</span>
       <span class="divider-line"></span>
     </div>
 
     <p class="banner-quote">
-      "A cidade nunca é a mesma duas vezes.<br>
-      Aqui, nada é neutro."
+      "A cidade nunca  a mesma duas vezes.<br>
+      Aqui, nada  neutro."
     </p>
 
     <div class="banner-stats">
@@ -1164,24 +1165,24 @@ footer {
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Istambul · Roma</span>
-        <span class="bstat-label">Referência</span>
+        <span class="bstat-val">Istambul  Roma</span>
+        <span class="bstat-label">Referncia</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Onull</span>
-        <span class="bstat-label">Domínio</span>
+        <span class="bstat-label">Dom&iacute;nio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Vontade</span>
-        <span class="bstat-label">Função</span>
+        <span class="bstat-label">Funo</span>
       </div>
     </div>
   </div>
 
   <div class="banner-bottom-bar"></div>
-  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+  <div class="scroll-hint">? &nbsp; Role para baixo</div>
 </section>
 
 <!-- SOBRE -->
@@ -1210,26 +1211,26 @@ footer {
       </div>
       <div class="about-coord">
         <span class="coord-label">Sobreposta a</span>
-        <span class="coord-val">Istambul · Roma · Grandes Centros</span>
+        <span class="coord-val">Istambul  Roma  Grandes Centros</span>
       </div>
     </div>
 
     <div class="about-text">
       <div class="about-intro">
-        Um <em>plano urbano vivo</em>. Sobreposto a grandes centros urbanos, mas não sendo nenhum deles. A cidade existe em camadas sobre o mundo real — visível apenas para quem carrega o peso de uma decisão verdadeira.
+        Um <em>plano urbano vivo</em>. Sobreposto a grandes centros urbanos, mas n&atilde;o sendo nenhum deles. A cidade existe em camadas sobre o mundo real  vis&iacute;vel apenas para quem carrega o peso de uma decis&atilde;o verdadeira.
       </div>
 
-      <p>A cidade nunca é a mesma duas vezes. As ruas mudam levemente de posição. Bairros surgem onde antes não havia nada. Caminhos se reorganizam conforme <strong>decisões são tomadas</strong> — não apenas pelas pessoas dentro dela, mas por qualquer ser em qualquer plano que tome uma escolha de peso suficiente.</p>
+      <p>A cidade nunca  a mesma duas vezes. As ruas mudam levemente de posio. Bairros surgem onde antes n&atilde;o havia nada. Caminhos se reorganizam conforme <strong>decises s&atilde;o tomadas</strong>  n&atilde;o apenas pelas pessoas dentro dela, mas por qualquer ser em qualquer plano que tome uma escolha de peso suficiente.</p>
 
-      <p>Há pessoas por toda parte. Mas nem todas são "reais" no sentido comum. Algumas são <em>ecos de decisões</em> — possibilidades não escolhidas, versões de caminhos abandonados que continuam existindo aqui como sombras do que poderia ter sido.</p>
+      <p>H pessoas por toda parte. Mas nem todas s&atilde;o "reais" no sentido comum. Algumas s&atilde;o <em>ecos de decises</em>  possibilidades n&atilde;o escolhidas, vers&otilde;es de caminhos abandonados que continuam existindo aqui como sombras do que poderia ter sido.</p>
 
-      <p>O céu varia constantemente: claro em momentos de certeza coletiva, carregado em momentos de conflito, vermelho quando algo de peso foi decidido de forma irreversível. E o som da cidade nunca cessa — passos, vozes, discussões, <strong>escolhas sendo feitas</strong> em tempo real, camada sobre camada.</p>
+      <p>O cu varia constantemente: claro em momentos de certeza coletiva, carregado em momentos de conflito, vermelho quando algo de peso foi decidido de forma irreversvel. E o som da cidade nunca cessa  passos, vozes, discusses, <strong>escolhas sendo feitas</strong> em tempo real, camada sobre camada.</p>
 
       <div class="about-tags">
         <span class="atag accent-tag">Plano Vivo</span>
-        <span class="atag">Ruas Mutáveis</span>
-        <span class="atag accent-tag">Ecos de Decisões</span>
-        <span class="atag">Céu Variável</span>
+        <span class="atag">Ruas Mutveis</span>
+        <span class="atag accent-tag">Ecos de Decises</span>
+        <span class="atag">Cu Varivel</span>
         <span class="atag">Som Constante</span>
         <span class="atag accent-tag">Vontade</span>
       </div>
@@ -1254,46 +1255,46 @@ footer {
 
     <div class="nature-card">
       <div class="ncard-header">
-        <span class="ncard-icon">🏙️</span>
+        <span class="ncard-icon">&#10022;</span>
         <span class="ncard-title">As Ruas que Mudam</span>
       </div>
-      <p class="ncard-desc">Nenhuma rota funciona da mesma forma duas vezes. Os caminhos se reorganizam não aleatoriamente — mas em resposta às decisões tomadas. Quem tenta forçar um caminho já decidido frequentemente encontra becos onde havia avenidas.</p>
+      <p class="ncard-desc">Nenhuma rota funciona da mesma forma duas vezes. Os caminhos se reorganizam n&atilde;o aleatoriamente  mas em resposta s decises tomadas. Quem tenta for&ccedil;ar um caminho j decidido frequentemente encontra becos onde havia avenidas.</p>
       <div class="ncard-rule"></div>
       <div class="ncard-fact">
-        Reorganização: <strong>Contínua</strong>
+        Reorganizao: <strong>Contnua</strong>
       </div>
     </div>
 
     <div class="nature-card">
       <div class="ncard-header">
-        <span class="ncard-icon">👥</span>
+        <span class="ncard-icon">&#10022;</span>
         <span class="ncard-title">Os Habitantes</span>
       </div>
-      <p class="ncard-desc">Dois tipos coexistem: os reais — seres que habitam o plano com consciência plena — e os ecos — possibilidades não escolhidas que continuam existindo como sombras de caminhos abandonados. Os dois interagem, mas raramente se reconhecem como diferentes.</p>
+      <p class="ncard-desc">Dois tipos coexistem: os reais  seres que habitam o plano com consci&ecirc;ncia plena  e os ecos  possibilidades n&atilde;o escolhidas que continuam existindo como sombras de caminhos abandonados. Os dois interagem, mas raramente se reconhecem como diferentes.</p>
       <div class="ncard-rule"></div>
       <div class="ncard-fact">
-        Tipos: <strong>Reais · Ecos · Possibilidades</strong>
+        Tipos: <strong>Reais  Ecos  Possibilidades</strong>
       </div>
     </div>
 
     <div class="nature-card">
       <div class="ncard-header">
-        <span class="ncard-icon">🌤️</span>
-        <span class="ncard-title">O Céu Responsivo</span>
+        <span class="ncard-icon">&#10022;</span>
+        <span class="ncard-title">O Cu Responsivo</span>
       </div>
-      <p class="ncard-desc">O céu não é decoração — é leitura. Claro indica certeza predominante. Carregado indica conflito em curso. Vermelho indica decisão irreversível de peso existencial. É o único medidor visível do estado coletivo da vontade na cidade.</p>
+      <p class="ncard-desc">O cu n&atilde;o  decora&ccedil;&atilde;o   leitura. Claro indica certeza predominante. Carregado indica conflito em curso. Vermelho indica decis&atilde;o irreversvel de peso existencial.  o &uacute;nico medidor vis&iacute;vel do estado coletivo da vontade na cidade.</p>
       <div class="ncard-rule"></div>
       <div class="ncard-fact">
-        Estados: <strong>Claro · Carregado · Vermelho</strong>
+        Estados: <strong>Claro  Carregado  Vermelho</strong>
       </div>
     </div>
 
     <div class="nature-card">
       <div class="ncard-header">
-        <span class="ncard-icon">🔊</span>
+        <span class="ncard-icon">&#10022;</span>
         <span class="ncard-title">O Som Incessante</span>
       </div>
-      <p class="ncard-desc">Passos. Vozes. Discussões. Escolhas sendo feitas em tempo real. O som nunca cessa porque as decisões nunca cessam — em nenhum plano, em nenhum momento. A cidade é a manifestação sonora de tudo que é escolhido a cada instante.</p>
+      <p class="ncard-desc">Passos. Vozes. Discusses. Escolhas sendo feitas em tempo real. O som nunca cessa porque as decises nunca cessam  em nenhum plano, em nenhum momento. A cidade  a manifestao sonora de tudo que  escolhido a cada instante.</p>
       <div class="ncard-rule"></div>
       <div class="ncard-fact">
         Volume: <strong>Proporcional ao Peso das Escolhas</strong>
@@ -1303,16 +1304,16 @@ footer {
   </div>
 </section>
 
-<!-- FUNÇÃO -->
+<!-- FUNO -->
 <section id="funcao">
   <div class="section-header reveal">
     <div class="section-tag">
       <div class="stag-line"></div>
-      <span class="stag-text">Propósito</span>
+      <span class="stag-text">Propsito</span>
       <div class="stag-line"></div>
     </div>
     <h2 class="section-title">
-      A <span>Função</span> da Cidade
+      A <span>Funo</span> da Cidade
     </h2>
   </div>
 
@@ -1321,9 +1322,9 @@ footer {
 
     <div class="funcao-content">
       <div class="funcao-quote">
-        "Aqui, nada é neutro.<br>
-        Cada passo é uma posição.<br>
-        Cada silêncio é uma escolha."
+        "Aqui, nada  neutro.<br>
+        Cada passo  uma posio.<br>
+        Cada silncio  uma escolha."
       </div>
 
       <div class="funcao-blocks">
@@ -1331,36 +1332,36 @@ footer {
           <div class="fblock-num">I</div>
           <div class="fblock-body">
             <div class="fblock-title">Sustentar a Vontade</div>
-            <p class="fblock-desc">A Cidade das Mil Escolhas existe para dar forma e sustentação à vontade — o impulso de decidir que define o que algo é. Sem esse plano, as decisões de peso existiriam mas não teriam onde ancorar suas consequências.</p>
+            <p class="fblock-desc">A Cidade das Mil Escolhas existe para dar forma e sustentao  vontade  o impulso de decidir que define o que algo . Sem esse plano, as decises de peso existiriam mas n&atilde;o teriam onde ancorar suas consequncias.</p>
           </div>
         </div>
 
         <div class="fblock">
           <div class="fblock-num">II</div>
           <div class="fblock-body">
-            <div class="fblock-title">Manter o Peso das Decisões</div>
-            <p class="fblock-desc">Cada escolha de peso real deixa marca aqui. Não de forma dramática — mas como uma ligeira reorganização do espaço, um novo eco aparecendo, uma rua que muda de direção. A cidade é o registro vivo de tudo que foi decidido com consequência real.</p>
+            <div class="fblock-title">Manter o Peso das Decises</div>
+            <p class="fblock-desc">Cada escolha de peso real deixa marca aqui. N&atilde;o de forma dramtica  mas como uma ligeira reorganizao do espao, um novo eco aparecendo, uma rua que muda de direo. A cidade  o registro vivo de tudo que foi decidido com consequncia real.</p>
           </div>
         </div>
 
         <div class="fblock">
           <div class="fblock-num">III</div>
           <div class="fblock-body">
-            <div class="fblock-title">Impedir o Colapso da Experiência</div>
-            <p class="fblock-desc">Se a vontade não tivesse onde se manifestar, a experiência colapsaria — decisões sem peso, escolhas sem consequência. A Cidade garante que o que é decidido tenha realidade. É a âncora da experiência subjetiva no tecido do universo.</p>
+            <div class="fblock-title">Impedir o Colap&oacute;so da Experincia</div>
+            <p class="fblock-desc">Se a vontade n&atilde;o tivesse onde se manifestar, a experincia colap&oacute;saria  decises sem peso, escolhas sem consequncia. A Cidade garante que o que  decidido tenha realidade.  a &Acirc;ncora da experincia subjetiva no tecido do universo.</p>
           </div>
         </div>
       </div>
 
       <div class="funcao-ruler">
         <div class="ruler-left">
-          <div class="ruler-label">Domínio de</div>
+          <div class="ruler-label">Dom&iacute;nio de</div>
           <div class="ruler-name">Onull</div>
-          <div class="ruler-title">Deus da Transcendência Humana</div>
+          <div class="ruler-title">Deus da Transcend&ecirc;ncia Humana</div>
         </div>
         <div class="ruler-divider"></div>
         <div class="ruler-right">
-          <p>Onull — que nasceu humano e ascendeu pela força pura da vontade — sustenta este plano não como criador, mas como <em>expressão máxima do que ele representa</em>. A Cidade é, em essência, a externalização do poder que o tornou um deus.</p>
+          <p>Onull  que nasceu humano e ascendeu pela for&ccedil;a pura da vontade  sustenta este plano n&atilde;o como criador, mas como <em>express&atilde;o mxima do que ele representa</em>. A Cidade , em ess&ecirc;ncia, a externalizao do poder que o tornou um deus.</p>
         </div>
       </div>
     </div>
@@ -1382,37 +1383,37 @@ footer {
 
   <div class="gallery-container reveal">
     <div class="gallery-item tall"
-      style="background-image: url('cidade-01.jpg')">
+      style="background-image: url('img-cidade/mil.png')">
       <div class="gitem-overlay">
-        <span>A Cidade · Vista Geral</span>
+        <span>A Cidade  Vista Geral</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cidade-02.jpg')">
+      style="background-image: url('img-cidade/mil0.png')">
       <div class="gitem-overlay">
         <span>As Ruas que Mudam</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cidade-03.jpg')">
+      style="background-image: url('img-cidade/onulldominio.png')">
       <div class="gitem-overlay">
-        <span>Os Ecos de Decisões</span>
+        <span>Os Ecos de Decises</span>
       </div>
     </div>
     <div class="gallery-item wide"
-      style="background-image: url('cidade-04.jpg')">
+      style="background-image: url('img-cidade/mil.png')">
       <div class="gitem-overlay">
-        <span>O Céu Responsivo · Estado de Conflito</span>
+        <span>O Cu Responsivo  Estado de Conflito</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cidade-05.jpg')">
+      style="background-image: url('img-cidade/mil0.png')">
       <div class="gitem-overlay">
-        <span>Possibilidades Não Escolhidas</span>
+        <span>Possibilidades N&atilde;o Escolhidas</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cidade-06.jpg')">
+      style="background-image: url('img-cidade/onulldominio.png')">
       <div class="gitem-overlay">
         <span>O Peso da Escolha</span>
       </div>
@@ -1426,31 +1427,31 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-nav">
-      <a href="limiar.html">← Limiar da Continuidade</a>
-      <span>·</span>
-      <a href="regioes.html">Regiões</a>
-      <span>·</span>
-      <a href="nucleo.html">Núcleo da Forma →</a>
+      <a href="limiar.html">? Limiar da Continuidade</a>
+      <span></span>
+      <a href="regioes.html">Regi&otilde;es</a>
+      <span></span>
+      <a href="nucleo.html">N&uacute;cleo da Forma ?</a>
     </div>
     <div class="footer-name">Cidade das Mil Escolhas</div>
     <div class="footer-quote">
-      "Cada passo é uma posição.<br>
-      Cada silêncio, uma escolha."
+      "Cada passo  uma posio.<br>
+      Cada silncio, uma escolha."
     </div>
     <div class="footer-copy">
-      O Diário de um Deus · Todos os direitos reservados
+     &mdash; O Di&aacute;rio de um Deus  Todos os direitos reservados
     </div>
   </div>
 </footer>
 
 <script src="effects.js"></script>
 <script>
-  /* ════════════════════════════════════
-   CIDADE DAS MIL ESCOLHAS — JAVASCRIPT
-   Canvas · Ruas · Decisões · Lightbox
-════════════════════════════════════ */
+  /* ------------------------------------
+   CIDADE DAS MIL ESCOLHAS  JAVASCRIPT
+   Canvas  Ruas  Decises  Lightbox
+------------------------------------ */
 
-/* ── COSMOS CANVAS ── */
+/* -- COSMOS CANVAS -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx    = canvas.getContext('2d');
@@ -1538,7 +1539,7 @@ footer {
   resize(); init(); draw();
 })();
 
-/* ── CANVAS DO BANNER — RUAS QUE MUDAM ── */
+/* -- CANVAS DO BANNER  RUAS QUE MUDAM -- */
 (function () {
   const canvas = document.getElementById('banner-canvas');
   if (!canvas) return;
@@ -1582,7 +1583,7 @@ footer {
       }
     }
 
-    /* Partículas de decisão */
+    /* Partculas de decis&atilde;o */
     decisions = [];
     for (let i = 0; i < 30; i++) {
       decisions.push({
@@ -1618,7 +1619,7 @@ footer {
       ctx.restore();
     });
 
-    /* Partículas de decisão */
+    /* Partculas de decis&atilde;o */
     decisions.forEach((p, i) => {
       p.x    += p.speedX;
       p.y    += p.speedY;
@@ -1665,7 +1666,7 @@ footer {
   resize(); init(); draw();
 })();
 
-/* ── CANVAS DA FOTO ── */
+/* -- CANVAS DA FOTO -- */
 (function () {
   const canvas = document.getElementById('photo-canvas');
   if (!canvas) return;
@@ -1739,7 +1740,7 @@ footer {
   window.addEventListener('resize', resize, { passive: true });
 })();
 
-/* ── CANVAS DA FUNÇÃO — CÉU RESPONSIVO ── */
+/* -- CANVAS DA FUNO  CU RESPONSIVO -- */
 (function () {
   const canvas = document.getElementById('funcao-canvas');
   if (!canvas) return;
@@ -1776,7 +1777,7 @@ footer {
     { r: 180, g: 40,  b: 20  }  /* vermelho */
   ];
 
-  const skyLabels = ['Certeza', 'Conflito', 'Decisão Irreversível'];
+  const skyLabels = ['Certeza', 'Conflito', 'Decis&atilde;o Irreversvel'];
 
   function draw() {
     ctx.clearRect(0, 0, W, H);
@@ -1791,7 +1792,7 @@ footer {
     const sc = skyColors[skyState];
     const t  = (Math.sin(stateTimer * 2) + 1) / 2;
 
-    /* Céu */
+    /* Cu */
     const sky = ctx.createLinearGradient(0, 0, 0, H);
     sky.addColorStop(0, `rgba(${sc.r},${sc.g},${sc.b},0.15)`);
     sky.addColorStop(0.5, `rgba(${sc.r},${sc.g},${sc.b},0.08)`);
@@ -1827,7 +1828,7 @@ footer {
 
     ctx.restore();
 
-    /* Partículas — pessoas/decisões */
+    /* Partculas  pessoas/decises */
     particles.forEach(p => {
       p.x    += p.speedX;
       p.y    += p.speedY;
@@ -1857,7 +1858,7 @@ footer {
     ctx.textAlign  = 'center';
     ctx.letterSpacing = '0.2em';
     ctx.fillText(
-      `CÉU: ${skyLabels[skyState].toUpperCase()}`,
+      `CU: ${skyLabels[skyState].toUpperCase()}`,
       W / 2, 20
     );
     ctx.restore();
@@ -1880,7 +1881,7 @@ footer {
   }, { passive: true });
 })();
 
-/* ── PARALLAX DO BANNER ── */
+/* -- PARALLAX DO BANNER -- */
 (function () {
   const bg = document.querySelector('.banner-bg');
   if (!bg) return;
@@ -1897,7 +1898,7 @@ footer {
   }, { passive: true });
 })();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function () {
   const els = document.querySelectorAll('.reveal');
   const io  = new IntersectionObserver(entries => {
@@ -1911,7 +1912,7 @@ footer {
   els.forEach(el => io.observe(el));
 })();
 
-/* ── EFEITO NOS NATURE CARDS ── */
+/* -- EFEITO NOS NATURE CARDS -- */
 (function () {
   const cards = document.querySelectorAll('.nature-card');
   cards.forEach(card => {
@@ -1924,7 +1925,7 @@ footer {
   });
 })();
 
-/* ── LIGHTBOX DA GALERIA ── */
+/* -- LIGHTBOX DA GALERIA -- */
 (function () {
   const items = document.querySelectorAll('.gallery-item');
   if (!items.length) return;
@@ -2045,7 +2046,7 @@ footer {
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — cidade.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  cidade.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -2059,3 +2060,8 @@ footer {
 
 </body>
 </html>
+
+
+
+
+

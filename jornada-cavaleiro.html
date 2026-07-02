@@ -1,11 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Primeira Batalha — O Diário de um Deus</title>
+<title>Primeira Batalha &mdash; O Di&aacute;rio de um Deus</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="effects.css">
+<link rel="stylesheet" href="responsive-fixes.css">
 <style>
   :root {
   --void: #030308;
@@ -15,7 +16,7 @@
   --gold-light: #f0d080;
   --gold-dim: #7a6228;
 
-  /* Cavaleiro — vermelho sangue */
+  /* Cavaleiro  vermelho sangue */
   --char-accent: #cc0022;
   --char-accent-glow: rgba(204,0,34,0.45);
   --blood: #8b0000;
@@ -163,7 +164,7 @@ nav a:hover { color: #ff4444; text-shadow: 0 0 20px var(--char-accent-glow); }
 .reveal { opacity:0; transform:translateY(30px); transition:opacity 0.8s ease,transform 0.8s ease; }
 .reveal.visible { opacity:1; transform:none; }
 
-/* SEÇÃO HISTÓRIA */
+/* SEO HISTRIA */
 #historia { position: relative; z-index: 1; padding-bottom: 6rem; }
 
 .chapter-header { text-align: center; padding: 5rem 2rem 4rem; border-top: 1px solid rgba(204,0,34,0.08); }
@@ -249,7 +250,7 @@ nav a:hover { color: #ff4444; text-shadow: 0 0 20px var(--char-accent-glow); }
 }
 .story-block em { color: rgba(204,0,34,0.85); font-style: italic; }
 
-/* Diálogos */
+/* Dilogos */
 .dialogue-block {
   background: rgba(10,0,2,0.4); border-left: 2px solid rgba(204,0,34,0.2);
   padding: 1.2rem 1.5rem; margin: 1.5rem 0;
@@ -497,7 +498,7 @@ nav a:hover { color: #ff4444; text-shadow: 0 0 20px var(--char-accent-glow); }
   transform: rotate(-22deg) scale(1.18);
 }
 
-/* Navegação */
+/* Navegao */
 .chapter-nav { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; margin-top: 5rem; padding-top: 3rem; border-top: 1px solid rgba(204,0,34,0.1); }
 .cnav-btn { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dim); text-decoration: none; padding: 0.8rem 1.5rem; border: 1px solid rgba(204,0,34,0.2); background: rgba(10,0,2,0.5); transition: border-color 0.3s, color 0.3s, box-shadow 0.3s; white-space: nowrap; }
 .cnav-btn:hover { border-color: rgba(204,0,34,0.5); color: #ff4444; box-shadow: 0 0 15px rgba(204,0,34,0.1); }
@@ -562,14 +563,14 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
 
 <nav>
   <a href="home.html" class="nav-logo"><img src="img-logo/olhos.jpg" alt="Logo"></a>
-  <a href="jornada-encontro.html">← Capítulo I</a>
+  <a href="jornada-encontro.html">? Cap&iacute;tulo I</a>
   <a href="#historia">A Batalha</a>
-  <a href="jornada-mestres.html">Próximo →</a>
+  <a href="jornada-mestres.html">Prximo ?</a>
 </nav>
 
 <!-- HERO -->
 <section id="banner">
-  <div class="banner-bg" style="background-image: url('cavaleiro1-banner.jpg')"></div>
+  <div class="banner-bg" style="background-image: url('img-cavaleiro/cavaleirobanner.png')"></div>
   <div class="banner-overlay"></div>
   <div class="banner-vignette"></div>
   <canvas id="banner-canvas"></canvas>
@@ -584,18 +585,18 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   <div class="banner-content">
     <div class="banner-tag">
       <span class="tag-line"></span>
-      <span class="tag-text">Arco I · Clímax · Primeira Batalha</span>
+      <span class="tag-text">Arco I  Clmax  Primeira Batalha</span>
       <span class="tag-line"></span>
     </div>
 
     <h1 class="banner-name">
-      <span class="name-pre">Capítulo II</span>
+      <span class="name-pre">Cap&iacute;tulo II</span>
       <span class="name-main">O Cavaleiro<br>Negro</span>
     </h1>
 
     <div class="banner-divider">
       <span class="divider-line"></span>
-      <span class="divider-symbol">⚔️</span>
+      <span class="divider-symbol">&#10022;</span>
       <span class="divider-line"></span>
     </div>
 
@@ -607,7 +608,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
     <div class="banner-stats">
       <div class="bstat">
         <span class="bstat-val">A Escola</span>
-        <span class="bstat-label">Cenário</span>
+        <span class="bstat-label">Cenrio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
@@ -628,100 +629,100 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   </div>
 
   <div class="banner-bottom-bar"></div>
-  <div class="scroll-hint">↓ &nbsp; Role para ler</div>
+  <div class="scroll-hint">? &nbsp; Role para ler</div>
 </section>
 
-<!-- HISTÓRIA -->
+<!-- HISTRIA -->
 <section id="historia">
 
   <div class="chapter-header reveal">
     <div class="chapter-ornament">
       <span class="corn-line"></span>
-      <span class="corn-diamond">◆</span>
+      <span class="corn-diamond">&#10022;</span>
       <span class="corn-line"></span>
     </div>
-    <div class="chapter-label">Narrado por Yuri · Knull</div>
+    <div class="chapter-label">Narrado por Yuri  Knull</div>
     <h2 class="chapter-title">Primeira Batalha: O Cavaleiro Negro</h2>
     <p class="chapter-sub">
-      Uma manhã de quarta-feira. Uma aula de matemática. O céu azul que virou vermelho.
-      E o dia em que descobrimos que não éramos apenas adolescentes.
+      Uma manh de quarta-feira. Uma aula de matemtica. O cu azul que virou vermelho.
+      E o dia em que descobrimos que n&atilde;o ramos apenas adolescentes.
     </p>
   </div>
 
   <div class="story-body">
 
     <div class="story-block reveal">
-      <div class="block-label">A Escola · Quarta-feira de manhã</div>
-      <p>Era uma manhã de uma bela quarta-feira quando estávamos todos na escola e dentro da sala de aula, tendo uma aula fantástica de matemática... hehe... Estávamos sentados eu, Leo e Lucas, um perto do outro. A Yasmin estava com as amigas dela do outro lado da sala. Estávamos fazendo a atividade — muito fácil, por sinal — quando de repente a gente se deu conta que a sala estava silenciosa demais.</p>
-      <p>Os alunos que ali estavam tinham todos a cabeça encostada na carteira. Achamos isso muito estranho. Olhei para a janela e notei que o céu, que estava todo azul, estava agora <strong>todo vermelho</strong> — completamente vermelho, com vários raios passando de uma ponta à outra.</p>
+      <div class="block-label">A Escola  Quarta-feira de manh</div>
+      <p>Era uma manh de uma bela quarta-feira quando estvamos todos na escola e dentro da sala de aula, tendo uma aula fantstica de matemtica... hehe... Estvamos sentados eu, Leo e Lucas, um perto do outro. A Yasmin estava com as amigas dela do outro lado da sala. Estvamos fazendo a atividade  muito fcil, por sinal  quando de repente a gente se deu conta que a sala estava silenciosa demais.</p>
+      <p>Os alunos que ali estavam tinham todos a cabea encostada na carteira. Achamos isso muito estranho. Olhei para a janela e notei que o cu, que estava todo azul, estava agora <strong>todo vermelho</strong>  completamente vermelho, com vrios raios passando de uma ponta  outra.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="block-label">O Diálogo · A Percepção</div>
+      <div class="block-label">O Dilogo  A Percepo</div>
       <div class="dialogue-block">
-        <p class="dialogue">— Ei... olhem — aponto para fora — o céu... está todo vermelho.</p>
-        <p class="dialogue">— Cara... isso tá muito estranho — disse Lucas.</p>
-        <p class="dialogue">— Eu tô sentindo uma energia meio...</p>
-        <p class="dialogue">— Maligna? — eu completo a frase de Leo.</p>
+        <p class="dialogue"> Ei... olhem  aponto para fora  o cu... est todo vermelho.</p>
+        <p class="dialogue"> Cara... isso t muito estranho  disse Lucas.</p>
+        <p class="dialogue"> Eu t sentindo uma energia meio...</p>
+        <p class="dialogue"> Maligna?  eu completo a frase de Leo.</p>
       </div>
-      <p>De repente, as luzes da cidade toda se apagaram. Com o céu daquela cor, parecia que era noite — principalmente dentro da escola. Então escutei a voz da Ya me chamando.</p>
+      <p>De repente, as luzes da cidade toda se apagaram. Com o cu daquela cor, parecia que era noite  principalmente dentro da escola. Ento escutei a voz da Ya me chamando.</p>
       <div class="dialogue-block">
-        <p class="dialogue">— Yuuuri... — olho para a direção dela e vou até ela.</p>
-        <p class="dialogue">— O que houve? Você está bem?</p>
-        <p class="dialogue">— Sim, eu estou... mas elas não acordam — aponta para as suas amigas que estavam do seu lado.</p>
-      </div>
-    </div>
-
-    <div class="scene-break reveal"><span>✦</span><span>✦</span><span>✦</span></div>
-
-    <div class="story-block reveal">
-      <div class="block-label">O Byakugan · A Fuga</div>
-      <p>Estava olhando para as amigas dela quando uma delas levantou a cabeça. Senti uma energia diferente — não boa. Dei alguns passos para trás e topei com outro colega que estava em pé atrás de nós. Minha alma gelou de susto. Quando me deparei, <em>todos estavam de pé, parados, imóveis</em> — e olhando para nós.</p>
-      <p>Fechei os meus olhos e disse: <strong>"Byakugan."</strong> Assim que os abri, as veias ao redor saltaram e ficaram bem visíveis, especialmente nas têmporas. A íris ficou mais destacada em tom perolado e lavanda muito claro. Tudo ao meu redor ficou extremamente lento. Minha visão alcançou até 50 metros — atravessando paredes, vendo a energia que passa no corpo de uma pessoa. E vi que uma energia maligna estava em toda a escola.</p>
-      <p>No meio da lousa havia um ponto fraco. Eu sempre carrego a minha querida espada Gouki comigo — claro, ela não fica visível para todos, graças às habilidades de Yasmin.</p>
-      <div class="dialogue-block">
-        <p class="dialogue">— Ali — aponto o dedo para o centro da lousa — ali é o ponto mais fraco.</p>
-        <p class="dialogue">— Droga... a Jéssica...</p>
-        <p class="dialogue">— Calma, Lucas. Ela é esperta, vai saber se proteger até a gente chegar lá. Ela sabe que você vai buscá-la.</p>
-        <p class="dialogue">— Valeu, Ya.</p>
+        <p class="dialogue"> Yuuuri...  olho para a direo dela e vou at ela.</p>
+        <p class="dialogue"> O que houve? Voc est bem?</p>
+        <p class="dialogue"> Sim, eu estou... mas elas n&atilde;o acordam  aponta para as suas amigas que estavam do seu lado.</p>
       </div>
     </div>
 
+    <div class="scene-break reveal"><span>&#10022;</span><span>&#10022;</span><span>&#10022;</span></div>
+
     <div class="story-block reveal">
-      <div class="block-label">Os Zumbis · A Escola em Caos</div>
-      <p>Enquanto os garotos se preparavam para nos defender, criei uma esfera de energia densa na palma da mão e a lancei bem no centro da lousa — criando um belo buraco. Passamos rapidamente e logo que passamos, o buraco havia se fechado.</p>
-      <p>A sala ao lado não estava muito diferente da nossa — tão caótica quanto. Rapidamente mapeei e localizei outro ponto fraco bem no meio daquela sala. Em uma análise rápida, as pessoas estavam atacando umas às outras. Pareciam... <em>zumbis.</em></p>
+      <div class="block-label">O Byakugan  A Fuga</div>
+      <p>Estava olhando para as amigas dela quando uma delas levantou a cabea. Senti uma energia diferente  n&atilde;o boa. Dei alguns passos para trs e topei com outro colega que estava em p atrs de ns. Minha alma gelou de susto. Quando me deparei, <em>todos estavam de p, parados, imveis</em>  e olhando para ns.</p>
+      <p>Fechei os meus olhos e disse: <strong>"Byakugan."</strong> Assim que os abri, as veias ao redor saltaram e ficaram bem visveis, especialmente nas tmporas. A ris ficou mais destacada em tom perolado e lavanda muito claro. Tudo ao meu redor ficou extremamente lento. Minha vis&atilde;o alcan&atilde;ou at 50 metros  atravessando paredes, vendo a energia que passa no corpo de uma pessoa. E vi que uma energia maligna estava em toda a escola.</p>
+      <p>No meio da lousa havia um ponto fraco. Eu sempre carrego a minha querida espada Gouki comigo  claro, ela n&atilde;o fica vis&iacute;vel para todos, graas s habilidades de Yasmin.</p>
+      <div class="dialogue-block">
+        <p class="dialogue"> Ali  aponto o dedo para o centro da lousa  ali  o ponto mais fraco.</p>
+        <p class="dialogue"> Droga... a Jssica...</p>
+        <p class="dialogue"> Calma, Lucas. Ela  esperta, vai saber se proteger at a gente chegar l. Ela sabe que voc&ecirc; vai busc-la.</p>
+        <p class="dialogue"> Valeu, Ya.</p>
+      </div>
+    </div>
+
+    <div class="story-block reveal">
+      <div class="block-label">Os Zumbis  A Escola em Caos</div>
+      <p>Enquanto os garotos se preparavam para nos defender, criei uma esfera de energia densa na palma da mo e a lancei bem no centro da lousa  criando um belo buraco. Passamos rapidamente e logo que passamos, o buraco havia se fechado.</p>
+      <p>A sala ao lado n&atilde;o estava muito diferente da nossa  to catica quanto. Rapidamente mapeei e localizei outro ponto fraco bem no meio daquela sala. Em uma anlise rpida, as pessoas estavam atacando umas s outras. Pareciam... <em>zumbis.</em></p>
       <p>Fomos para a sala de baixo. Para nossa sorte, ela estava vazia. Consegui falar com eles:</p>
       <div class="dialogue-block">
-        <p class="dialogue">— Galera, parece meio loucura o que vou dizer aqui, mas... parecem que eles viraram zumbis e estão transformando os outros também.</p>
-        <p class="dialogue">— Mas a pergunta é: como viraram e por quê?</p>
-        <p class="dialogue">— Concordo com o Leo. Então se ainda há pessoas vivas que não se transformaram, temos que ajudá-las.</p>
-        <p class="dialogue">— Sim, Ya. E temos que ir até a Jéssica rápido e sairmos logo daqui — completou Lucas.</p>
+        <p class="dialogue"> Galera, parece meio loucura o que vou dizer aqui, mas... parecem que eles viraram zumbis e esto transformando os outros tamb&eacute;m.</p>
+        <p class="dialogue"> Mas a pergunta : como viraram e por qu?</p>
+        <p class="dialogue"> Concordo com o Leo. Ento se ainda h pessoas vivas que n&atilde;o se transformaram, temos que ajud-las.</p>
+        <p class="dialogue"> Sim, Ya. E temos que ir at a Jssica rpido e sairmos logo daqui  completou Lucas.</p>
       </div>
     </div>
 
-    <div class="scene-break reveal"><span>✦</span><span>✦</span><span>✦</span></div>
+    <div class="scene-break reveal"><span>&#10022;</span><span>&#10022;</span><span>&#10022;</span></div>
 
     <div class="story-block reveal">
-      <div class="block-label">A Biblioteca · O Resgate</div>
-      <p>Por algum motivo, aquela estranha energia não estava muito completa no porão da escola. Conseguimos abrir a porta daquela sala sem dificuldade alguma. Fomos até a biblioteca onde Jéssica se encontrava — no andar do meio da escola, com uma escada e um corredor longo para chegar até lá.</p>
-      <p>A escola estava escura. Pouca iluminação, algumas luzes piscando nos corredores. Foi o Lucas quem conjurou luz com sua varinha, iluminando o nosso caminho — o suficiente para não chamarmos a atenção daquelas coisas. Os gritos dos alunos ecoavam pelos corredores. Começamos a tentar salvar quantas pessoas podíamos — mas aquelas criaturas se multiplicavam muito rapidamente.</p>
+      <div class="block-label">A Biblioteca  O Resgate</div>
+      <p>Por algum motivo, aquela estranha energia n&atilde;o estava muito completa no poro da escola. Conseguimos abrir a porta daquela sala sem dificuldade alguma. Fomos at a biblioteca onde Jssica se encontrava  no andar do meio da escola, com uma escada e um corredor longo para chegar at l.</p>
+      <p>A escola estava escura. Pouca iluminao, algumas luzes piscando nos corredores. Foi o Lucas quem conjurou luz com sua varinha, iluminando o nosso caminho  o suficiente para n&atilde;o chamarmos a ateno daquelas coisas. Os gritos dos alunos ecoavam pelos corredores. Comeamos a tentar salvar quantas pessoas podamos  mas aquelas criaturas se multiplicavam muito rapidamente.</p>
       <div class="dialogue-block">
-        <p class="dialogue">— Lucas... — Jéssica se sente aliviada ao ver Lucas na sua frente.</p>
-        <p class="dialogue">— Tá tudo bem?</p>
-        <p class="dialogue">— Sim, sim. O que tá acontecendo?</p>
-        <p class="dialogue">— Não sabemos, mas temos que sair logo daqui.</p>
+        <p class="dialogue"> Lucas...  Jssica se sente aliviada ao ver Lucas na sua frente.</p>
+        <p class="dialogue"> T tudo bem?</p>
+        <p class="dialogue"> Sim, sim. O que t acontecendo?</p>
+        <p class="dialogue"> N&atilde;o sabemos, mas temos que sair logo daqui.</p>
       </div>
-      <p>Assim que ele diz isso, ouvimos um grande barulho vindo da porta principal — um rugido forte. Era um zumbi mutante destruindo tudo que tinha em seu caminho. Saímos da biblioteca rapidamente em direção à secretaria.</p>
+      <p>Assim que ele diz isso, ouvimos um grande barulho vindo da porta principal  um rugido forte. Era um zumbi mutante destruindo tudo que tinha em seu caminho. Samos da biblioteca rapidamente em direo  secretaria.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="block-label">A Anna · A Escola Vazia</div>
-      <p>Fomos pelo esgoto para sair da escola e subimos na primeira saída que vimos — paramos na praça mais movimentada da cidade. Depois de uma incrível caminhada e perseguições, conseguimos chegar até onde Anna estudava.</p>
-      <p>Mas infelizmente, <em>não tinha sobrado ninguém.</em> E isso me perseguiu por muito tempo. Pegamos a Anna e começamos a fugir da cidade.</p>
+      <div class="block-label">A Anna  A Escola Vazia</div>
+      <p>Fomos pelo esgoto para sair da escola e subimos na primeira sada que vimos  paramos na praa mais movimentada da cidade. Depois de uma incrvel caminhada e perseguies, conseguimos chegar at onde Anna estudava.</p>
+      <p>Mas infelizmente, <em>n&atilde;o tinha sobrado ningum.</em> E isso me perseguiu por muito tempo. Pegamos a Anna e comeamos a fugir da cidade.</p>
     </div>
 
-    <!-- BLOCO FINAL — APARIÇÃO DO CAVALEIRO -->
+    <!-- BLOCO FINAL  APARIO DO CAVALEIRO -->
     <div class="story-block-final reveal">
       <div class="final-label">O Primeiro Encontro</div>
       <div class="final-quote">
@@ -729,7 +730,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
         E um grito de liberdade ecoava em todos os cantos."
       </div>
       <p class="final-text">
-        Foi aí que ele surgiu. Um homem de cabelos longos e negros apareceu diante de nós. Seu olhar era penetrante. Essa foi a primeira vez que nós o vimos.
+        Foi a que ele surgiu. Um homem de cabelos longos e negros apareceu diante de ns. Seu olhar era penetrante. Essa foi a primeira vez que ns o vimos.
       </p>
       <p class="final-name">O Cavaleiro Negro.</p>
     </div>
@@ -741,21 +742,21 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
           <span class="battle-book-cover">
             <span class="book-kicker">Abrir registro proibido</span>
             <span class="book-title">A Luta Contra<br>o Cavaleiro Negro</span>
-            <span class="book-invite">Clique no livro e veja o confronto que começou quando a esfera negra rasgou o mundo.</span>
-            <span class="book-seal" aria-hidden="true">⚔</span>
+            <span class="book-invite">Clique no livro e veja o confronto que comeou quando a esfera negra rasgou o mundo.</span>
+            <span class="book-seal" aria-hidden="true">&#10022;</span>
           </span>
         </span>
       </a>
     </div>
 
-    <!-- NAVEGAÇÃO -->
+    <!-- NAVEGAO -->
     <div class="chapter-nav reveal">
-      <a href="jornada-encontro.html" class="cnav-btn cnav-back">← Capítulo I</a>
+      <a href="jornada-encontro.html" class="cnav-btn cnav-back">? Cap&iacute;tulo I</a>
       <div class="cnav-info">
-        <span class="cnav-label">Próximo capítulo</span>
-        <span class="cnav-title">Instituição como Mestres</span>
+        <span class="cnav-label">Prximo cap&iacute;tulo</span>
+        <span class="cnav-title">Institui&ccedil;&atilde;o como Mestres</span>
       </div>
-      <a href="jornada-mestres.html" class="cnav-btn cnav-next">Capítulo III →</a>
+      <a href="jornada-mestres.html" class="cnav-btn cnav-next">Cap&iacute;tulo III ?</a>
     </div>
 
   </div>
@@ -764,28 +765,28 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
 <footer>
   <div class="footer-inner">
     <div class="footer-nav">
-      <a href="jornada-encontro.html">← Capítulo I</a>
-      <span>·</span>
+      <a href="jornada-encontro.html">? Cap&iacute;tulo I</a>
+      <span></span>
       <a href="home.html">A Jornada</a>
-      <span>·</span>
-      <a href="jornada-mestres.html">Capítulo III →</a>
+      <span></span>
+      <a href="jornada-mestres.html">Cap&iacute;tulo III ?</a>
     </div>
     <div class="footer-name">Primeira Batalha: O Cavaleiro Negro</div>
     <div class="footer-quote">
-      "Não éramos pessoas normais.<br>
+      "N&atilde;o ramos pessoas normais.<br>
       E aquele dia foi a primeira vez que o mundo soube disso."
     </div>
-    <div class="footer-copy">O Diário de um Deus · Todos os direitos reservados</div>
+    <div class="footer-copy">O Di&aacute;rio de um Deus  Todos os direitos reservados</div>
   </div>
 </footer>
 
 <script src="effects.js"></script>
 <script>
-  /* ════════════════════════════════════
-   PRIMEIRA BATALHA — JAVASCRIPT
-════════════════════════════════════ */
+  /* ------------------------------------
+   PRIMEIRA BATALHA  JAVASCRIPT
+------------------------------------ */
 
-/* ── COSMOS CANVAS ── */
+/* -- COSMOS CANVAS -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx    = canvas.getContext('2d');
@@ -815,7 +816,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   window.addEventListener('resize',()=>{resize();init();}); resize();init();draw();
 })();
 
-/* ── CANVAS DO BANNER — ESCOLA EM CAOS ── */
+/* -- CANVAS DO BANNER  ESCOLA EM CAOS -- */
 (function () {
   const canvas = document.getElementById('banner-canvas');
   if (!canvas) return;
@@ -825,7 +826,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   function resize() { W=canvas.width=canvas.offsetWidth; H=canvas.height=canvas.offsetHeight; }
 
   function init() {
-    /* Destroços — carteiras, vidros */
+    /* Destroos  carteiras, vidros */
     debris = [];
     for (let i=0;i<20;i++) {
       debris.push({
@@ -840,7 +841,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
       });
     }
 
-    /* Flashes de energia — o cavaleiro chegando */
+    /* Flashes de energia  o cavaleiro chegando */
     flashes = [];
     for (let i=0;i<5;i++) {
       flashes.push({
@@ -865,7 +866,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
       ctx.fillStyle=g; ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,Math.PI*2); ctx.fill();
     });
 
-    /* Destroços */
+    /* Destroos */
     debris.forEach((d,i)=>{
       d.x+=d.speedX; d.y+=d.speedY; d.angle+=d.spin; d.life-=0.002;
       if (d.life<=0||d.y>H+20) {debris[i]={x:Math.random()*W,y:-10,w:Math.random()*15+5,h:Math.random()*10+3,angle:Math.random()*Math.PI*2,spin:(Math.random()-0.5)*0.04,speedX:(Math.random()-0.5)*0.8,speedY:Math.random()*0.5+0.1,a:Math.random()*0.15+0.03,life:1};return;}
@@ -876,7 +877,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
       ctx.restore();
     });
 
-    /* Névoa de escuridão na base */
+    /* Nvoa de escurid&atilde;o na base */
     const dark=ctx.createLinearGradient(0,H*.7,0,H);
     dark.addColorStop(0,'rgba(0,0,0,0)'); dark.addColorStop(1,`rgba(10,0,2,${0.15+0.05*Math.sin(frame)})`);
     ctx.fillStyle=dark; ctx.fillRect(0,H*.7,W,H*.3);
@@ -886,22 +887,22 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   window.addEventListener('resize',()=>{resize();init();}); resize();init();draw();
 })();
 
-/* ── PARALLAX ── */
+/* -- PARALLAX -- */
 (function(){const bg=document.querySelector('.banner-bg');if(!bg)return;const img=new Image();img.onload=()=>bg.classList.add('loaded');const url=bg.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/,'$1');if(url&&url!=='none')img.src=url;const mq=window.matchMedia('(min-width:769px)');window.addEventListener('scroll',()=>{if(!mq.matches)return;const s=window.scrollY;if(s<=window.innerHeight)bg.style.transform=`scale(1.05) translateY(${s*0.22}px)`;},{passive:true});})();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function(){const els=document.querySelectorAll('.reveal');const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});els.forEach(el=>io.observe(el));})();
 
-/* ── DESTAQUE DE PARÁGRAFOS ── */
+/* -- DESTAQUE DE PARGRAFOS -- */
 (function(){const ps=document.querySelectorAll('.story-block p, .dialogue');const io=new IntersectionObserver(entries=>{entries.forEach(e=>{e.target.style.transition='color 0.8s ease';e.target.style.color=e.isIntersecting?'var(--text)':'var(--text-dim)';});},{threshold:0.6});ps.forEach(p=>{p.style.color='var(--text-dim)';io.observe(p);});})();
 
-/* ── FLASH AO REVELAR O CAVALEIRO ── */
+/* -- FLASH AO REVELAR O CAVALEIRO -- */
 (function(){const finalName=document.querySelector('.final-name');if(!finalName)return;const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const flash=document.createElement('div');flash.style.cssText='position:fixed;inset:0;background:rgba(204,0,34,0.1);z-index:998;pointer-events:none;animation:knight-flash 1s ease forwards;';document.body.appendChild(flash);const style=document.createElement('style');style.textContent='@keyframes knight-flash{0%{opacity:0;}30%{opacity:1;}100%{opacity:0;}}';document.head.appendChild(style);setTimeout(()=>flash.remove(),1000);io.unobserve(e.target);}});},{threshold:0.9});io.observe(finalName);})();
 
-/* ── BARRA DE PROGRESSO ── */
+/* -- BARRA DE PROGRESSO -- */
 (function(){const bar=document.createElement('div');bar.style.cssText='position:fixed;top:0;left:0;z-index:999;height:2px;width:0;background:linear-gradient(90deg,#8b0000,#cc0022,#ff4444);transition:width 0.1s linear;pointer-events:none;';document.body.appendChild(bar);window.addEventListener('scroll',()=>{const p=Math.min(window.scrollY/(document.body.scrollHeight-window.innerHeight),1);bar.style.width=(p*100)+'%';},{passive:true});})();
 
-/* ── LIVRO ABRINDO ANTES DA VIRADA DE PÁGINA ── */
+/* -- LIVRO ABRINDO ANTES DA VIRADA DE PGINA -- */
 (function(){
   const bookLink = document.querySelector('.battle-book-link');
   const transition = document.getElementById('page-transition');
@@ -926,7 +927,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   }, true);
 })();
 
-/* ── PARALLAX NOS BLOCOS DE HISTÓRIA ── */
+/* -- PARALLAX NOS BLOCOS DE HISTRIA -- */
 (function(){
   const blocks=document.querySelectorAll('.story-block');
   window.addEventListener('scroll',()=>{
@@ -938,7 +939,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   },{passive:true});
 })();
 
-/* ── EFEITO DE BRILHO QUE SEGUE O MOUSE ── */
+/* -- EFEITO DE BRILHO QUE SEGUE O MOUSE -- */
 (function(){
   const stories=document.querySelectorAll('.story-block');
   const createGlowElement=()=>{
@@ -970,7 +971,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
   });
 })();
 
-/* ── PARTÍCULAS MÁGICAS FLUINDO ── */
+/* -- PARTCULAS MGICAS FLUINDO -- */
 (function(){
   const container=document.getElementById('historia')||document.body;
   const particleCount=15;
@@ -1004,7 +1005,7 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — jornada-cavaleiro.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  jornada-cavaleiro.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -1018,3 +1019,8 @@ footer { position: relative; z-index: 1; padding: 5rem 2rem; text-align: center;
 
 </body>
 </html>
+
+
+
+
+

@@ -6,9 +6,7 @@
 
 /* ── CURSOR PERSONALIZADO ── */
 @media (hover: hover) and (pointer: fine) {
-  @media (hover: hover) and (pointer: fine) {
   *, *::before, *::after { cursor: none !important; }
-}
 }
 
 #cursor-outer {
@@ -389,6 +387,144 @@ body.menu-open .hamburger-line:nth-child(3) {
   text-shadow: 0 0 30px rgba(201,168,76,0.5);
 }
 
+#theme-toggle {
+  position: fixed;
+  top: 0.9rem;
+  right: 5.4rem;
+  z-index: 210;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(201,168,76,0.22);
+  border-radius: 999px;
+  background: rgba(3,3,8,0.88);
+  color: var(--gold-light, #f0d080);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+}
+
+#theme-toggle[hidden] {
+  display: none !important;
+}
+
+#theme-toggle:hover,
+#theme-toggle:focus-visible {
+  transform: scale(1.05);
+  border-color: rgba(240,208,128,0.45);
+  outline: none;
+}
+
+#theme-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+#gallery-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+}
+
+#gallery-modal-overlay.open {
+  display: flex;
+}
+
+#gallery-modal {
+  width: min(92vw, 960px);
+  max-height: min(90vh, 900px);
+  background: rgba(10, 10, 20, 0.98);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+}
+
+#gallery-modal .modal-image {
+  min-height: 320px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+#gallery-modal .modal-content {
+  padding: 1.4rem 1.5rem 1.5rem;
+}
+
+#gallery-modal .modal-title {
+  margin: 0 0 0.6rem;
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+#gallery-modal .modal-desc {
+  margin: 0;
+  color: var(--text-dim, rgba(232,220,200,0.82));
+  line-height: 1.8;
+}
+
+#gallery-modal .modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(201,168,76,0.24);
+  border-radius: 50%;
+  background: rgba(3,3,8,0.8);
+  color: var(--gold-light);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+#gallery-modal .modal-close:hover,
+#gallery-modal .modal-close:focus-visible {
+  border-color: rgba(240,208,128,0.45);
+  transform: scale(1.05);
+}
+
+body.theme-light {
+  --void: #f6f2e8;
+  --surface: #ffffff;
+  --text: #161616;
+  --text-dim: #4c4c4c;
+  --gold: #ba9d43;
+  --gold-light: #f4dc97;
+  --gold-dim: #7a6228;
+  --deep: #cbc4b8;
+  --divine: #5f4ada;
+  --divine-light: #b8a9f5;
+  --cyan: #2aaebb;
+}
+
+body.theme-light nav,
+body.theme-light #mobile-menu-btn,
+body.theme-light #theme-toggle,
+body.theme-light #gallery-modal {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+body.theme-light #gallery-modal {
+  color: #1d1d1d;
+  border-color: rgba(122, 98, 40, 0.18);
+}
+
+body.theme-light #gallery-modal .modal-close {
+  background: rgba(255, 255, 255, 0.88);
+  color: #1d1d1d;
+}
+
 .secret-entry-link,
 .secret-prologo-link {
   text-align: center;
@@ -443,20 +579,23 @@ body.menu-open .hamburger-line:nth-child(3) {
 
 /* ── RESPONSIVO DOS EFEITOS ── */
 @media (max-width: 768px) {
-  #mobile-menu-btn { display: flex; }
-
-  /* Esconde nav desktop em mobile */
   nav {
-    display: none !important;
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 0.55rem !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  /* Exceto nav-logo */
-  .nav-logo {
-    position: fixed;
-    top: 0.9rem;
-    left: 1rem;
-    z-index: 200;
-    display: block !important;
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  #mobile-menu-btn,
+  #mobile-nav {
+    display: none !important;
   }
 
   #back-to-top {

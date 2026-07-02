@@ -1,14 +1,20 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kaelith — O Diário de um Deus</title>
+<title>Kaelith &mdash; O Di&aacute;rio de um Deus</title>
+<meta name="description" content="Kaelith, deusa da Vingan&ccedil;a e da Justi&ccedil;a, sua origem humana e sua transformao divina em Di&aacute;rio de um Deus.">
+<meta property="og:title" content="Kaelith &mdash; O Di&aacute;rio de um Deus">
+<meta property="og:description" content="Kaelith, deusa da Vingan&ccedil;a e da Justi&ccedil;a, sua origem humana e sua transformao divina.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img-kaelith/kaelithbanner.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="effects.css">
 <link rel="stylesheet" href="responsive-fixes.css">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-  /* ── VARIÁVEIS E RESET ── */
+  /* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --gold: #c9a84c;
   --gold-light: #f0d080;
@@ -55,7 +61,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -66,6 +72,7 @@ nav {
   gap: 2.5rem;
   padding: 1rem 2rem;
   background: linear-gradient(to bottom, rgba(3,3,8,0.95), transparent);
+  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   border-bottom: 1px solid rgba(192,132,42,0.15);
 }
@@ -103,7 +110,7 @@ nav a:hover {
     0 0 40px rgba(154,96,208,0.3);
 }
 
-/* ── BANNER ── */
+/* -- BANNER -- */
 #banner {
   position: relative;
   min-height: 100vh;
@@ -130,6 +137,15 @@ nav a:hover {
 }
 
 .banner-bg.loaded { transform: scale(1); }
+
+.banner-bg.kaelith-banner { background-image: url('img-kaelith/k3.png'); }
+.about-photo.kaelith-photo { background-image: url('img-kaelith/k4.png'); }
+.gallery-item.kaelith-g1 { background-image: url('img-kaelith/k.png'); }
+.gallery-item.kaelith-g2 { background-image: url('img-kaelith/k2.png'); }
+.gallery-item.kaelith-g3 { background-image: url('img-kaelith/k1.png'); }
+.gallery-item.kaelith-g4 { background-image: url('img-kaelith/k3.png'); }
+.gallery-item.kaelith-g5 { background-image: url('img-kaelith/k0.png'); }
+.gallery-item.kaelith-g6 { background-image: url('img-kaelith/k4.png'); }
 
 .banner-overlay {
   position: absolute;
@@ -215,7 +231,7 @@ nav a:hover {
   animation: fade-up 1s 0.9s ease forwards;
 }
 
-/* ── STATS DO BANNER ── */
+/* -- STATS DO BANNER -- */
 .banner-stats {
   display: flex;
   align-items: center;
@@ -268,7 +284,7 @@ nav a:hover {
   animation: bounce 2s ease infinite;
 }
 
-/* ── ANIMAÇÕES ── */
+/* -- ANIMA&Ccedil;&Otilde;ES -- */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -287,7 +303,7 @@ nav a:hover {
   50%       { transform: translateY(8px); }
 }
 
-/* ── REVEAL ON SCROLL ── */
+/* -- REVEAL ON SCROLL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -299,9 +315,9 @@ nav a:hover {
   transform: none;
 }
 
-/* ════════════════════════════════════
-   RESPONSIVO — BANNER E NAV
-════════════════════════════════════ */
+/* ------------------------------------
+   RESPONSIVO  BANNER E NAV
+------------------------------------ */
 
 @media (max-width: 1024px) {
   nav { gap: 1.8rem; }
@@ -390,7 +406,7 @@ nav a:hover {
   .banner-content { padding: 3.5rem 4vw 2.5rem; }
   .banner-stats   { margin-top: 1.2rem; }
 }
-/* ── SEÇÕES COMPARTILHADAS ── */
+/* -- SE&Ccedil;&Otilde;ES COMPARTILHADAS -- */
 section {
   position: relative;
   z-index: 1;
@@ -427,7 +443,7 @@ h2 {
   margin: 1.5rem auto 0;
 }
 
-/* ── SOBRE ── */
+/* -- SOBRE -- */
 #sobre { padding-bottom: 5rem; }
 
 .about-grid {
@@ -561,7 +577,7 @@ h2 {
   color: var(--divine-light);
 }
 
-/* ── DESCRIÇÃO ── */
+/* -- DESCRIO -- */
 #descricao { padding-bottom: 5rem; }
 
 .desc-grid {
@@ -621,7 +637,7 @@ h2 {
   line-height: 1.75;
 }
 
-/* ── PODERES ── */
+/* -- PODERES -- */
 #poderes {
   padding-bottom: 5rem;
   background: linear-gradient(to bottom,
@@ -728,7 +744,7 @@ h2 {
     var(--divine), var(--divine-light));
 }
 
-/* ── HISTÓRIA ── */
+/* -- HISTRIA -- */
 #historia { padding-bottom: 5rem; }
 
 .story-body {
@@ -789,7 +805,7 @@ h2 {
 
 .story-block p strong { color: var(--gold-light); }
 
-/* ── GALERIA ── */
+/* -- GALERIA -- */
 #galeria { padding-bottom: 5rem; }
 
 .gallery-grid {
@@ -861,7 +877,7 @@ h2 {
   font-style: normal;
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 footer {
   text-align: center;
   padding: 4rem 2rem;
@@ -915,9 +931,9 @@ footer {
   text-transform: uppercase;
 }
 
-/* ════════════════════════════════════
-   RESPONSIVO — SEÇÕES
-════════════════════════════════════ */
+/* ------------------------------------
+   RESPONSIVO  SE&Ccedil;&Otilde;ES
+------------------------------------ */
 
 @media (max-width: 1024px) {
   .about-grid   { grid-template-columns: 280px 1fr; gap: 3rem; padding: 0 1.5rem; }
@@ -1116,11 +1132,10 @@ footer {
   .desc-grid      { grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
   .desc-card      { padding: 1rem; }
 }
-  /* === CSS VIRÁ NAS PARTES 2 E 3 === */
 
 
 /* ==========================================================
-   PATCH RESPONSIVO + GALERIA LOOP SUAVE — revisão ChatGPT
+   PATCH RESPONSIVO + GALERIA LOOP SUAVE  revis&atilde;o ChatGPT
    ========================================================== */
 html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 body { min-width: 0; }
@@ -1131,8 +1146,6 @@ nav {
   max-width: 100vw;
   overflow-x: auto;
   overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
 nav::-webkit-scrollbar { display: none; }
 nav a { white-space: nowrap; }
@@ -1151,15 +1164,15 @@ nav a { white-space: nowrap; }
 #galeria .gallery-showcase.is-upgraded-loop {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: clamp(0.7rem, 1.4vw, 1rem) !important;
-  width: min(760px, calc(100% - 2rem));
+  gap: clamp(0.9rem, 1.8vw, 1.2rem) !important;
+  width: min(940px, calc(100% - 2rem));
   margin: 0 auto;
   padding: 0 !important;
 }
 
 .smooth-loop-panel {
   position: relative;
-  min-height: clamp(190px, 24vw, 300px);
+  min-height: clamp(280px, 30vw, 400px);
   border: 1px solid rgba(201,168,76,0.18);
   background: rgba(3,3,8,0.7);
   overflow: hidden;
@@ -1188,7 +1201,7 @@ nav a { white-space: nowrap; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   opacity: 0;
@@ -1306,9 +1319,9 @@ nav a { white-space: nowrap; }
   #galeria .gallery-grid.is-upgraded-loop,
   #galeria .gallery-showcase.is-upgraded-loop {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    width: min(100% - 1.5rem, 640px);
+    width: min(100% - 1.5rem, 760px);
   }
-  .smooth-loop-panel { min-height: clamp(180px, 44vw, 260px); }
+  .smooth-loop-panel { min-height: clamp(260px, 48vw, 380px); }
 }
 
 @media (max-width: 480px) {
@@ -1319,11 +1332,11 @@ nav a { white-space: nowrap; }
   #galeria .gallery-showcase.is-upgraded-loop {
     grid-template-columns: 1fr !important;
     grid-template-rows: none !important;
-    grid-auto-rows: minmax(280px, auto) !important;
-    width: min(100% - 1.1rem, 420px);
+    grid-auto-rows: minmax(320px, auto) !important;
+    width: min(100% - 1.1rem, 440px);
   }
-  .smooth-loop-panel { min-height: 260px; }
-  .smooth-loop-controls, .gallery-carousel-controls { width: min(100% - 1.1rem, 420px); }
+  .smooth-loop-panel { min-height: 380px; }
+  .smooth-loop-controls, .gallery-carousel-controls { width: min(100% - 1.1rem, 440px); }
   .smooth-loop-btn, .carousel-btn { width: 100%; }
 }
 
@@ -1335,11 +1348,11 @@ nav a { white-space: nowrap; }
   #galeria .gallery-grid {
     grid-template-columns: 1fr !important;
     grid-template-rows: none !important;
-    grid-auto-rows: minmax(300px, auto) !important;
+    grid-auto-rows: minmax(340px, auto) !important;
     width: min(100% - 1.25rem, 430px);
     max-width: none;
     padding: 0 !important;
-    gap: 0.9rem;
+    gap: 1rem;
   }
 
   #galeria .gallery-item,
@@ -1348,7 +1361,7 @@ nav a { white-space: nowrap; }
     grid-column: auto !important;
     grid-row: auto !important;
     height: auto !important;
-    min-height: 300px;
+    min-height: 340px;
     aspect-ratio: 3 / 4;
   }
 
@@ -1356,7 +1369,7 @@ nav a { white-space: nowrap; }
   #galeria .gallery-showcase.is-upgraded-loop {
     grid-template-columns: 1fr !important;
     grid-template-rows: none !important;
-    grid-auto-rows: minmax(280px, auto) !important;
+    grid-auto-rows: minmax(320px, auto) !important;
     width: min(100% - 1.25rem, 430px) !important;
     padding: 0 !important;
   }
@@ -1407,7 +1420,7 @@ nav a { white-space: nowrap; }
 /* Galeria da Kaelith: quadros responsivos sem corte de banner */
 #galeria .gallery-grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)) !important;
   grid-template-rows: none !important;
   grid-auto-rows: auto !important;
   align-items: start;
@@ -1415,7 +1428,7 @@ nav a { white-space: nowrap; }
   max-width: none;
   margin: 0 auto;
   padding: 0 !important;
-  gap: clamp(0.75rem, 1.8vw, 1.25rem);
+  gap: clamp(0.9rem, 2.2vw, 1.5rem);
 }
 
 #galeria .gallery-item,
@@ -1424,7 +1437,8 @@ nav a { white-space: nowrap; }
   grid-column: auto !important;
   grid-row: auto !important;
   height: auto !important;
-  min-height: clamp(240px, 44vw, 520px);
+  /* aumentar ligeiramente para preservar proporções das imagens */
+  min-height: clamp(300px, 50vw, 640px);
   aspect-ratio: 3 / 4;
   background-size: contain !important;
   background-position: center !important;
@@ -1463,7 +1477,7 @@ nav a { white-space: nowrap; }
   #galeria .gallery-item,
   #galeria .gallery-item.tall,
   #galeria .gallery-item.wide {
-    min-height: clamp(300px, 86vw, 520px);
+    min-height: clamp(320px, 90vw, 580px);
   }
 }
 
@@ -1483,24 +1497,24 @@ nav a { white-space: nowrap; }
   </a>
   <a href="#sobre">Sobre</a>
   <a href="#poderes">Poderes</a>
-  <a href="#historia">História</a>
+  <a href="#historia">Hist&oacute;ria</a>
   <a href="#galeria">Galeria</a>
 </nav>
 
 <!-- BANNER -->
 <section id="banner">
-  <div class="banner-bg" style="background-image: url('img-kaelith/k3.png')"></div>
+  <div class="banner-bg kaelith-banner"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
-    <p class="banner-eyebrow">Deusa da Vingança e da Justiça · Companheira de Onull</p>
+    <p class="banner-eyebrow">Deusa da Vingan&ccedil;a e da Justi&ccedil;a  Companheira de Onull</p>
     <h1 class="banner-name">Kaelith</h1>
-    <p class="banner-human">Antes conhecida como <em>Jéssica</em></p>
+    <p class="banner-human">Antes conhecida como <em>Jssica</em></p>
     <div class="banner-divider"></div>
-    <p class="banner-quote">"Ela não é equilíbrio. Ela é resposta."</p>
+    <p class="banner-quote">"Ela n&atilde;o  equil&iacute;brio. Ela  resposta."</p>
     <div class="banner-stats">
       <div class="bstat">
-        <span class="bstat-val">Vingança · Justiça</span>
-        <span class="bstat-label">Domínio</span>
+        <span class="bstat-val">Vingan&ccedil;a  Justi&ccedil;a</span>
+        <span class="bstat-label">Dom&iacute;nio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
@@ -1509,93 +1523,93 @@ nav a { white-space: nowrap; }
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Guerreira · Maga</span>
+        <span class="bstat-val">Guerreira  Maga</span>
         <span class="bstat-label">Estilo</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Deusa</span>
-        <span class="bstat-label">Condição</span>
+        <span class="bstat-label">Condi&ccedil;&atilde;o</span>
       </div>
     </div>
   </div>
-  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+  <div class="scroll-hint">? &nbsp; Role para baixo</div>
 </section>
 
 <!-- SOBRE -->
 <section id="sobre">
   <div class="section-header reveal">
     <span class="section-label">Identidade</span>
-    <h2>Quem é Kaelith</h2>
+    <h2>Quem  Kaelith</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="about-grid reveal">
     <div class="about-photo-wrap">
-      <div class="about-photo" style="background-image: url('img-kaelith/k4.png')">
+      <div class="about-photo kaelith-photo">
         <div class="photo-frame-corner tl"></div>
         <div class="photo-frame-corner tr"></div>
         <div class="photo-frame-corner bl"></div>
         <div class="photo-frame-corner br"></div>
       </div>
-      <div class="about-photo-label">Kaelith · A Resposta Inevitável</div>
+      <div class="about-photo-label">Kaelith  A Resposta Inevitvel</div>
     </div>
     <div class="about-text">
       <p>
-        Kaelith nasceu entre grupos errantes que sobreviveram durante décadas atravessando regiões parcialmente consumidas pela corrupção do fluxo. Diferente de Lyra, Kaelith jamais teve uma infância tranquila ou protegida. Cresceu cercada por fome, violência, traições e morte constante, aprendendo desde muito cedo que o mundo não oferecia misericórdia a ninguém. Seu povo sobrevivia deslocando-se continuamente entre ruínas esquecidas, regiões devastadas e pequenas fortalezas abandonadas, evitando criaturas deformadas e grupos humanos ainda mais perigosos do que muitas delas.
+        Kaelith nasceu entre grupos errantes que sobreviveram durante dcadas atravessando regies parcialmente consumidas pela corrup&ccedil;&atilde;o do fluxo. Diferente de Lyra, Kaelith jamais teve uma infncia tranquila ou protegida. Cresceu cercada por fome, violncia, traies e morte constante, aprendendo desde muito cedo que o mundo n&atilde;o oferecia misericrdia a ningum. Seu povo sobrevivia deslocando-se continuamente entre runas esquecidas, regies devastadas e pequenas fortalezas abandonadas, evitando criaturas deformadas e grupos humanos ainda mais perigosos do que muitas delas.
       </p>
       <p>
-        Seu corpo é elegante, mas carregado de tensão — como se cada movimento pudesse se transformar em ataque ou decisão. Sua postura nunca é relaxada. Ela está sempre pronta, sempre atenta, sempre consciente do que precisa ser feito. Seus olhos não apenas observam — <strong>eles julgam</strong>. Não há hesitação neles, não há dúvida, apenas certeza afiada.
+        Seu corpo  elegante, mas carregado de tens&atilde;o  como se cada movimento pudesse se transformar em ataque ou decis&atilde;o. Sua postura nunca  relaxada. Ela est sempre pronta, sempre atenta, sempre consciente do que precisa ser feito. Seus olhos n&atilde;o apenas observam  <strong>eles julgam</strong>. N&atilde;o h hesitao neles, n&atilde;o h dvida, apenas certeza afiada.
       </p>
       <p>
-        Ainda assim, toda aquela dureza nunca nasceu de crueldade verdadeira, mas de medo. Medo de perder novamente aqueles aos quais se permitisse amar ou confiar. Por trás da postura firme, da ironia seca e da resistência emocional quase brutal, Kaelith carrega uma exaustão silenciosa de alguém que passou a vida inteira sobrevivendo sem jamais realmente encontrar um lugar seguro.
+        Ainda assim, toda aquela dureza nunca nasceu de crueldade verdadeira, mas de medo. Medo de perder novamente aqueles aos quais se permitisse amar ou confiar. Por trs da postura firme, da ironia seca e da resistncia emocional quase brutal, Kaelith carrega uma exausto silenciosa de algum que passou a vida inteira sobrevivendo sem jamais realmente encontrar um lugar seguro.
       </p>
       <p>
-        Sua aura é instável — dourado misturado com roxo profundo, fragmentado, como se o espaço ao redor estivesse constantemente sendo pressionado, rachado, reorganizado. Pequenos estilhaços de energia surgem e desaparecem, como reflexos de decisões que ainda estão sendo tomadas.
+        Sua aura  instvel  dourado misturado com roxo profundo, fragmentado, como se o espao ao redor estivesse constantemente sendo pressionado, rachado, reorganizado. Pequenos estilhaos de energia surgem e desaparecem, como reflexos de decises que ainda esto sendo tomadas.
       </p>
       <p>
-        Ela não pede. Ela não espera. Ela não hesita. Kaelith representa o momento em que algo precisa ser corrigido — <strong>e é</strong>. Nascida humana, forjada em batalha desde o primeiro dia, ascendeu não por herança divina, mas pela recusa absoluta em aceitar a injustiça como desfecho.
+        Ela n&atilde;o pede. Ela n&atilde;o espera. Ela n&atilde;o hesita. Kaelith representa o momento em que algo precisa ser corrigido  <strong>e </strong>. Nascida humana, forjada em batalha desde o primeiro dia, ascendeu n&atilde;o por heran&ccedil;a divina, mas pela recusa absoluta em aceitar a injusti&ccedil;a como desfecho.
       </p>
       <div class="about-tags">
         <span class="tag">Companheira de Onull</span>
-        <span class="tag justice-tag">Deusa da Vingança</span>
-        <span class="tag justice-tag">Deusa da Justiça</span>
+        <span class="tag justice-tag">Deusa da Vingan&ccedil;a</span>
+        <span class="tag justice-tag">Deusa da Justi&ccedil;a</span>
         <span class="tag void-tag">Humana Ascendida</span>
         <span class="tag nature-tag">Protetora</span>
-        <span class="tag divine-tag">Guerreira · Maga</span>
+        <span class="tag divine-tag">Guerreira  Maga</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DESCRIÇÃO -->
+<!-- DESCRIO -->
 <section id="descricao">
   <div class="section-header reveal">
-    <span class="section-label">Presença</span>
+    <span class="section-label">Presena</span>
     <h2>A Aura de Kaelith</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="desc-grid reveal">
     <div class="desc-card">
-      <div class="desc-icon">⚡</div>
+      <div class="desc-icon">&#10022;</div>
       <div class="desc-title">Postura</div>
-      <div class="desc-text">Nunca relaxada. Sempre pronta. Cada gesto carrega o peso de uma decisão iminente — como uma arma que nunca é guardada completamente.</div>
+      <div class="desc-text">Nunca relaxada. Sempre pronta. Cada gesto carrega o peso de uma decis&atilde;o iminente  como uma arma que nunca  guardada completamente.</div>
     </div>
     <div class="desc-card">
-      <div class="desc-icon">👁️</div>
+      <div class="desc-icon">&#10022;</div>
       <div class="desc-title">O Olhar</div>
-      <div class="desc-text">Seus olhos não observam — julgam. Penetrantes, sem hesitação, sem dúvida. Quem é olhado por Kaelith sente que já foi avaliado antes de abrir a boca.</div>
+      <div class="desc-text">Seus olhos n&atilde;o observam  julgam. Penetrantes, sem hesitao, sem dvida. Quem  olhado por Kaelith sente que j foi avaliado antes de abrir a boca.</div>
     </div>
     <div class="desc-card">
-      <div class="desc-icon">🌀</div>
+      <div class="desc-icon">&#10022;</div>
       <div class="desc-title">A Aura</div>
-      <div class="desc-text">Dourado fragmentado com roxo profundo. O espaço ao redor dela parece constantemente pressionado — estilhaços de energia surgem e somem como decisões ainda sendo tomadas.</div>
+      <div class="desc-text">Dourado fragmentado com roxo profundo. O espao ao redor dela parece constantemente pressionado  estilhaos de energia surgem e somem como decises ainda sendo tomadas.</div>
     </div>
     <div class="desc-card">
-      <div class="desc-icon">⚖️</div>
-      <div class="desc-title">A Essência</div>
-      <div class="desc-text">Não é ideia de justiça. É a justiça em movimento. Quando algo precisa ser corrigido, Kaelith não delibera — ela age. A resposta já estava pronta antes da pergunta existir.</div>
+      <div class="desc-icon">&#10022;</div>
+      <div class="desc-title">A Ess&ecirc;ncia</div>
+      <div class="desc-text">N&atilde;o  ideia de justi&ccedil;a.  a justi&ccedil;a em movimento. Quando algo precisa ser corrigido, Kaelith n&atilde;o delibera  ela age. A resposta j estava pronta antes da pergunta existir.</div>
     </div>
   </div>
 </section>
@@ -1610,74 +1624,104 @@ nav a { white-space: nowrap; }
 
   <div class="powers-list">
 
+  </div>
+</section>
+
+<section id="curiosidades">
+  <div class="section-header reveal">
+    <span class="section-label">Sutilezas de Kaelith</span>
+    <h2>Curiosidades</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="desc-grid reveal">
+    <div class="desc-card">
+      <div class="desc-icon">&#10022;</div>
+      <h3 class="desc-title">Origem Humana</h3>
+      <p class="desc-text">Kaelith nasceu como Jssica, uma mulher comum que carregava tanta determinao que o prprio destino a reconheceu. Sua ascens&atilde;o n&atilde;o foi heran&ccedil;a: foi decis&atilde;o.</p>
+    </div>
+    <div class="desc-card">
+      <div class="desc-icon">&#10022;</div>
+      <h3 class="desc-title">Respostas Lentas</h3>
+      <p class="desc-text">Ela n&atilde;o se apressa. Kaelith observa, espera e s ento d a resposta exata. Essa pacincia  uma das maiores armas dela.</p>
+    </div>
+    <div class="desc-card">
+      <div class="desc-icon">&#10022;</div>
+      <h3 class="desc-title">Presena Quebra o Espao</h3>
+      <p class="desc-text">Quando Kaelith chega, o espao ao redor vibra como se lembrasse todas as injusti&ccedil;as do mundo  e isso intimida tanto aliados quanto inimigos.</p>
+    </div>
+  </div>
+</section>
+
+<section id="historia">
+
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">⚖️</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Domínio Divino</div>
-        <div class="power-title">Justiça Absoluta</div>
-        <div class="power-body">Kaelith percebe desequilíbrios em qualquer plano — físico, espiritual ou moral. Sua justiça não é subjetiva: ela enxerga a verdade por trás de cada ação e responde a ela com precisão absoluta. Ataques direcionados por sua Justiça Absoluta ignoram defesas construídas sobre mentiras ou injustiças.</div>
+        <div class="power-origin">Dom&iacute;nio Divino</div>
+        <div class="power-title">Justi&ccedil;a Absoluta</div>
+        <div class="power-body">Kaelith percebe desequil&iacute;brios em qualquer plano  f&iacute;sico, espiritual ou moral. Sua justi&ccedil;a n&atilde;o  subjetiva: ela enxerga a verdade por trs de cada ao e responde a ela com precis&atilde;o absoluta. Ataques direcionados por sua Justi&ccedil;a Absoluta ignoram defesas construdas sobre mentiras ou injusti&ccedil;as.</div>
         <div class="power-bar-wrap"><div class="power-bar justice" data-width="100"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🔥</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Domínio Divino</div>
-        <div class="power-title">Vingança · Chama da Retribuição</div>
-        <div class="power-body">A Chama da Retribuição de Kaelith não queima aleatoriamente — ela amplifica o dano causado a ela e aos seus aliados e o devolve ao responsável multiplicado. Quanto mais injusto o ataque recebido, mais devastadora a resposta. É um poder que cresce com a crueldade do inimigo.</div>
+        <div class="power-origin">Dom&iacute;nio Divino</div>
+        <div class="power-title">Vingan&ccedil;a  Chama da Retribuio</div>
+        <div class="power-body">A Chama da Retribuio de Kaelith n&atilde;o queima aleatoriamente  ela amplifica o dano causado a ela e aos seus aliados e o devolve ao responsvel multiplicado. Quanto mais injusto o ataque recebido, mais devastadora a resposta.  um poder que cresce com a crueldade do inimigo.</div>
         <div class="power-bar-wrap"><div class="power-bar void" data-width="97"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🌿</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
         <div class="power-origin">Protetora da Natureza</div>
-        <div class="power-title">Proteção & Controle Natural</div>
-        <div class="power-body">Desde antes da ascensão, Jéssica protegia quem estava ao seu redor com uma determinação que ia além do treinamento. Como Kaelith, esse instinto evoluiu para controle real sobre elementos naturais — terra, vento e vegetação respondem à sua vontade, criando barreiras, armadilhas e escudos em batalha.</div>
+        <div class="power-title">Prote&ccedil;&atilde;o & Controle Natural</div>
+        <div class="power-body">Desde antes da ascens&atilde;o, Jssica protegia quem estava ao seu redor com uma determinao que ia al&eacute;m do treinamento. Como Kaelith, esse instinto evoluiu para controle real sobre elementos naturais  terra, vento e vegetao respondem  sua vontade, criando barreiras, armadilhas e escudos em batalha.</div>
         <div class="power-bar-wrap"><div class="power-bar nature" data-width="91"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">🔮</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
         <div class="power-origin">Feiticeira & Maga</div>
-        <div class="power-title">Alta Feitiçaria</div>
-        <div class="power-body">Kaelith combina feitiçaria ofensiva com magia de campo — maldições que se ativam quando o alvo comete uma injustiça, barreiras que devolvem dano proporcional ao atacante, e encantamentos que enfraquecem qualquer ser que aja com crueldade na sua presença. Sua magia é reativa por natureza — sempre uma resposta, nunca um ataque gratuito.</div>
+        <div class="power-title">Alta Feitiaria</div>
+        <div class="power-body">Kaelith combina feitiaria ofensiva com magia de campo  maldies que se ativam quando o alvo comete uma injusti&ccedil;a, barreiras que devolvem dano proporcional ao atacante, e encantamentos que enfraquecem qualquer ser que aja com crueldade na sua presena. Sua magia  reativa por natureza  sempre uma resposta, nunca um ataque gratuito.</div>
         <div class="power-bar-wrap"><div class="power-bar divine" data-width="94"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">⚔️</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
         <div class="power-origin">Combate</div>
-        <div class="power-title">Guerreira · Estilo de Resposta</div>
-        <div class="power-body">Kaelith não ataca primeiro — mas quando responde, é devastadora. Seu estilo de combate é construído sobre leitura de intenção e contra-ataque preciso. Cada golpe é calculado, cada movimento é necessário. Não há desperdício, não há excesso — apenas a quantidade exata de força que a situação exige.</div>
+        <div class="power-title">Guerreira  Estilo de Resposta</div>
+        <div class="power-body">Kaelith n&atilde;o ataca primeiro  mas quando responde,  devastadora. Seu estilo de combate  constru&iacute;do sobre leitura de inteno e contra-ataque preciso. Cada golpe  calculado, cada movimento  necessrio. N&atilde;o h desperdcio, n&atilde;o h excesso  apenas a quantidade exata de for&ccedil;a que a situao exige.</div>
         <div class="power-bar-wrap"><div class="power-bar justice" data-width="95"></div></div>
       </div>
     </div>
 
     <div class="power-item reveal">
       <div class="power-left">
-        <div class="power-icon-big">👑</div>
+        <div class="power-icon-big">&#10022;</div>
       </div>
       <div class="power-right">
-        <div class="power-origin">Condição Divina</div>
-        <div class="power-title">Ascensão · Kaelith</div>
-        <div class="power-body">Nascida humana, sem sangue divino, sem herança sobrenatural — Kaelith ascendeu pela força pura da vontade e da convicção. Como deusa da Vingança e da Justiça, sua presença altera o ambiente ao redor: o espaço racha sutilmente, a energia se fragmenta e reorganiza, e qualquer ser injusto em sua presença sente o peso do que fez antes mesmo de ser confrontado.</div>
+        <div class="power-origin">Condi&ccedil;&atilde;o Divina</div>
+        <div class="power-title">Ascens&atilde;o  Kaelith</div>
+        <div class="power-body">Nascida humana, sem sangue divino, sem heran&ccedil;a sobrenatural  Kaelith ascendeu pela for&ccedil;a pura da vontade e da convico. Como deusa da Vingan&ccedil;a e da Justi&ccedil;a, sua presena altera o ambiente ao redor: o espao racha sutilmente, a energia se fragmenta e reorganiza, e qualquer ser injusto em sua presena sente o peso do que fez antes mesmo de ser confrontado.</div>
         <div class="power-bar-wrap"><div class="power-bar void" data-width="100"></div></div>
       </div>
     </div>
@@ -1685,57 +1729,57 @@ nav a { white-space: nowrap; }
   </div>
 </section>
 
-<!-- HISTÓRIA -->
+<!-- HISTRIA -->
 <section id="historia">
   <div class="section-header reveal">
-    <span class="section-label">Trajetória</span>
-    <h2>A História de Jéssica</h2>
+    <span class="section-label">Trajet&oacute;ria</span>
+    <h2>A Hist&oacute;ria de Jssica</h2>
     <div class="section-rule"></div>
   </div>
 
   <div class="story-body">
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo I</div>
-      <div class="story-title">O Dia em Que o Céu Ficou Vermelho</div>
-      <p>Era um dia comum na escola — até não ser mais. O céu virou vermelho de repente, raios vermelhos cortavam as nuvens e as pessoas ao redor começaram a mudar. Os vivos viravam mortos-vivos. Jéssica estava em outra sala quando o caos começou — separada de Lucas, separada de tudo que conhecia.</p>
+      <div class="story-chapter">Cap&iacute;tulo I</div>
+      <div class="story-title">O Dia em Que o Cu Ficou Vermelho</div>
+      <p>Era um dia comum na escola  at n&atilde;o ser mais. O cu virou vermelho de repente, raios vermelhos cortavam as nuvens e as pessoas ao redor come&ccedil;aram a mudar. Os vivos viravam mortos-vivos. Jssica estava em outra sala quando o caos comeou  separada de Lucas, separada de tudo que conhecia.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo II</div>
-      <div class="story-title">A Caminhada Até Ela</div>
-      <p>Yuri, Lucas, Leonardo e Yasmin lutaram para atravessar a escola tomada pelos mortos-vivos. Cada corredor era uma batalha. Cada porta, uma decisão. O objetivo era simples e urgente: chegar até Jéssica. Quando finalmente chegaram, ela não estava esperando ser salva — estava segurando sua posição, protegendo quem ainda estava vivo ao redor.</p>
+      <div class="story-chapter">Cap&iacute;tulo II</div>
+      <div class="story-title">A Caminhada At Ela</div>
+      <p>Yuri, Lucas, Leonardo e Yasmin lutaram para atravessar a escola tomada pelos mortos-vivos. Cada corredor era uma batalha. Cada porta, uma decis&atilde;o. O objetivo era simples e urgente: chegar at Jssica. Quando finalmente chegaram, ela n&atilde;o estava esperando ser salva  estava segurando sua posio, protegendo quem ainda estava vivo ao redor.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo III</div>
+      <div class="story-chapter">Cap&iacute;tulo III</div>
       <div class="story-title">Os Caminhos Corrompidos</div>
-      <p>Kaelith sobreviveu ocultando-se entre cadáveres congelados após um massacre quase completo de seu grupo em uma travessia montanhosa. Viu criaturas corrompidas alimentarem-se dos corpos espalhados na neve, e só foi encontrada dias depois por mercadores nômades. A partir daí, ela deixou a inocência para trás e aprendeu que a única certeza era a necessidade de continuar seguindo adiante.</p>
+      <p>Kaelith sobreviveu ocultando-se entre cad&aacute;veres congelados ap&oacute;s um massacre quase completo de seu grupo em uma travessia montanhosa. Viu criaturas corrompidas alimentarem-se dos corpos espalhados na neve, e s&oacute; foi encontrada dias depois por mercadores n&ocirc;mades. A partir da, ela deixou a inoc&ecirc;ncia para trs e aprendeu que a &uacute;nica certeza era a necessidade de continuar seguindo adiante.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo IV</div>
-      <div class="story-title">A União</div>
-      <p>Juntos, os cinco saíram da escola em direção à outra instituição — uma caminhada longa, perigosa, com mortos-vivos em cada esquina. Jéssica não ficou atrás. Lutou ao lado dos meninos, deu suporte, protegeu quem precisava. Desde aquele primeiro dia, ficou claro que ela não era apenas a namorada de Lucas — era uma guerreira por direito próprio.</p>
+      <div class="story-chapter">Cap&iacute;tulo IV</div>
+      <div class="story-title">A Unio</div>
+      <p>Juntos, os cinco saram da escola em direo  outra instituio  uma caminhada longa, perigosa, com mortos-vivos em cada esquina. Jssica n&atilde;o ficou atrs. Lutou ao lado dos meninos, deu suporte, protegeu quem precisava. Desde aquele primeiro dia, ficou claro que ela n&atilde;o era apenas a namorada de Lucas  era uma guerreira por direito prprio.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo V</div>
-      <div class="story-title">As Batalhas & A Evolução</div>
-      <p>Nas batalhas seguintes — contra o Cavaleiro Negro, na segunda guerra, e finalmente contra A Besta — Jéssica evoluiu continuamente. Sua proteção ficou mais abrangente, sua feitiçaria mais precisa, seu instinto de justiça mais afiado. Não havia herança divina no sangue dela — havia algo mais difícil de forjar: <strong>escolha</strong>.</p>
+      <div class="story-chapter">Cap&iacute;tulo V</div>
+      <div class="story-title">As Batalhas & A Evoluo</div>
+      <p>Nas batalhas seguintes  contra o Cavaleiro Negro, na segunda guerra, e finalmente contra A Besta  Jssica evoluiu continuamente. Sua prote&ccedil;&atilde;o ficou mais abrangente, sua feitiaria mais precisa, seu instinto de justi&ccedil;a mais afiado. N&atilde;o havia heran&ccedil;a divina no sangue dela  havia algo mais difcil de forjar: <strong>escolha</strong>.</p>
     </div>
 
     <div class="story-block reveal">
-      <div class="story-chapter">Capítulo VI</div>
-      <div class="story-title">A Ascensão · Kaelith</div>
-      <p>Depois de A Besta — depois de tudo — o nome Jéssica cedeu lugar a algo que sempre esteve lá, esperando. <strong>Kaelith</strong>: a deusa da Vingança e da Justiça. Não por herança. Não por destino escrito. Mas porque, desde o primeiro dia em que o céu ficou vermelho, ela decidiu que nenhuma injustiça passaria sem resposta. Quando encontrou Luca, não foi por romantização exagerada, mas por reconhecimento silencioso de dois seres igualmente destruídos que ainda continuavam caminhando. E essa decisão, repetida em cada batalha, forjou uma deusa.</p>
+      <div class="story-chapter">Cap&iacute;tulo VI</div>
+      <div class="story-title">A Ascens&atilde;o  Kaelith</div>
+      <p>Depois de A Besta  depois de tudo  o nome Jssica cedeu lugar a algo que sempre esteve l, esperando. <strong>Kaelith</strong>: a deusa da Vingan&ccedil;a e da Justi&ccedil;a. N&atilde;o por heran&ccedil;a. N&atilde;o por destino escrito. Mas porque, desde o primeiro dia em que o cu ficou vermelho, ela decidiu que nenhuma injusti&ccedil;a passaria sem resposta. Quando encontrou Luca, n&atilde;o foi por romantizao exagerada, mas por reconhecimento silencioso de dois seres igualmente destrudos que ainda continuavam caminhando. E essa decis&atilde;o, repetida em cada batalha, forjou uma deusa.</p>
     </div>
 
   </div>
 </section>
 
 <!-- GALERIA -->
-<section id="galeria" data-static-gallery="true">
+<section id="galeria">
   <div class="section-header reveal">
     <span class="section-label">Imagens</span>
     <h2>Galeria de Kaelith</h2>
@@ -1743,23 +1787,14 @@ nav a { white-space: nowrap; }
   </div>
 
   <div class="gallery-grid reveal">
-    <div class="gallery-item tall" style="background-image: url('img-kaelith/k.png')">
-      <div class="gallery-overlay"><span>Kaelith · Forma Divina</span></div>
+    <div class="gallery-item kaelith-g1">
+      <div class="gallery-overlay"><span>Kaelith  Forma Divina</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('img-kaelith/k2.png')">
-      <div class="gallery-overlay"><span>Chama da Retribuição</span></div>
+    <div class="gallery-item kaelith-g2">
+      <div class="gallery-overlay"><span>Chama da Retribuio</span></div>
     </div>
-    <div class="gallery-item" style="background-image: url('img-kaelith/k1.png')">
+    <div class="gallery-item kaelith-g3">
       <div class="gallery-overlay"><span>Justiça Absoluta</span></div>
-    </div>
-    <div class="gallery-item wide" style="background-image: url('img-kaelith/k3.png')">
-      <div class="gallery-overlay"><span>A Resposta Inevitável</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-kaelith/k0.png')">
-      <div class="gallery-overlay"><span>Alta Feitiçaria</span></div>
-    </div>
-    <div class="gallery-item" style="background-image: url('img-kaelith/k4.png')">
-      <div class="gallery-overlay"><span>Jéssica · Antes da Ascensão</span></div>
     </div>
   </div>
 </section>
@@ -1767,20 +1802,20 @@ nav a { white-space: nowrap; }
 <!-- FOOTER -->
 <footer>
   <div class="footer-nav">
-    <a href="onull.html">← Onull  →</a>
-    <span class="footer-sep">·</span>
-    <a href="home.html">Início</a>
-    <span class="footer-sep">·</span>
-    <a href="lyra.html"> ← Lyra →</a>
-    <a href="nimsay.html"> ← NImsay →</a>
+    <a href="onull.html">? Onull  ?</a>
+    <span class="footer-sep"></span>
+    <a href="home.html">In&iacute;cio</a>
+    <span class="footer-sep"></span>
+    <a href="lyra.html"> ? Lyra ?</a>
+    <a href="nimsay.html"> ? NImsay ?</a>
   </div>
   <div class="footer-title">Kaelith</div>
-  <div class="footer-sub">"Ela não pede. Ela não espera. Ela não hesita."</div>
-  <div class="footer-copy">O Diário de um Deus · Todos os direitos reservados</div>
+  <div class="footer-sub">"Ela n&atilde;o pede. Ela n&atilde;o espera. Ela n&atilde;o hesita."</div>
+  <div class="footer-copy">O Di&aacute;rio de um Deus  Todos os direitos reservados</div>
 </footer>
 
 <script>
-  /* ── COSMOS CANVAS ── */
+  /* -- COSMOS CANVAS -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx    = canvas.getContext('2d');
@@ -1792,7 +1827,7 @@ nav a { white-space: nowrap; }
   }
 
   function init() {
-    /* Estrelas em tom dourado-âmbar */
+    /* Estrelas em tom dourado-mbar */
     stars = [];
     for (let i = 0; i < 230; i++) {
       stars.push({
@@ -1805,7 +1840,7 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Névoas: dourado-âmbar e roxo void */
+    /* Nvoas: dourado-mbar e roxo void */
     nebulas = [];
     const colors = [
       'rgba(192,132,42,',
@@ -1824,13 +1859,13 @@ nav a { white-space: nowrap; }
       });
     }
 
-    /* Estilhaços de energia — exclusivos da Kaelith */
+    /* Estilhaos de energia  exclusivos da Kaelith */
     shards = [];
     for (let i = 0; i < 30; i++) {
       shards.push(newShard());
     }
 
-    /* Brasas subindo — justiça em movimento */
+    /* Brasas subindo  justi&ccedil;a em movimento */
     embers = [];
     for (let i = 0; i < 40; i++) {
       embers.push({
@@ -1875,7 +1910,7 @@ nav a { white-space: nowrap; }
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, W, H);
 
-    /* Névoas */
+    /* Nvoas */
     nebulas.forEach(n => {
       const grad = ctx.createRadialGradient(
         n.x, n.y, 0, n.x, n.y, n.r
@@ -1898,7 +1933,7 @@ nav a { white-space: nowrap; }
       ctx.fill();
     });
 
-    /* Estilhaços de energia */
+    /* Estilhaos de energia */
     shards.forEach((s, i) => {
       s.x     += s.vx;
       s.y     += s.vy;
@@ -1932,7 +1967,7 @@ nav a { white-space: nowrap; }
       ctx.lineTo(s.x + hx, s.y + hy);
       ctx.stroke();
 
-      /* Brilho no centro do estilhaço */
+      /* Brilho no centro do estilhao */
       ctx.beginPath();
       ctx.arc(s.x, s.y, 1.2, 0, Math.PI * 2);
       ctx.fillStyle = s.color === 'gold'
@@ -1977,7 +2012,7 @@ nav a { white-space: nowrap; }
       ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
       ctx.fill();
 
-      /* Núcleo da brasa */
+      /* N&uacute;cleo da brasa */
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fillStyle = p.color === 'gold'
@@ -1986,7 +2021,7 @@ nav a { white-space: nowrap; }
       ctx.fill();
     });
 
-    /* Tensão central — aura instável da Kaelith */
+    /* Tens&atilde;o central  aura instvel da Kaelith */
     const tension = ctx.createRadialGradient(
       W * 0.5, H * 0.45, 0,
       W * 0.5, H * 0.45, H * 0.65
@@ -1997,7 +2032,7 @@ nav a { white-space: nowrap; }
     ctx.fillStyle = tension;
     ctx.fillRect(0, 0, W, H);
 
-    /* Brilho âmbar no rodapé */
+    /* Brilho mbar no rodap */
     const horizon = ctx.createLinearGradient(0, H * 0.75, 0, H);
     horizon.addColorStop(0, 'transparent');
     horizon.addColorStop(1, 'rgba(192,132,42,0.07)');
@@ -2013,7 +2048,7 @@ nav a { white-space: nowrap; }
   draw();
 })();
 
-/* ── PARALLAX DO BANNER ── */
+/* -- PARALLAX DO BANNER -- */
 (function () {
   const bg = document.querySelector('.banner-bg');
   if (!bg) return;
@@ -2037,7 +2072,7 @@ nav a { white-space: nowrap; }
   }, { passive: true });
 })();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function () {
   const els = document.querySelectorAll('.reveal');
 
@@ -2053,7 +2088,7 @@ nav a { white-space: nowrap; }
   els.forEach(el => io.observe(el));
 })();
 
-/* ── BARRAS DE PODER ── */
+/* -- BARRAS DE PODER -- */
 (function () {
   const bars = document.querySelectorAll('.power-bar');
 
@@ -2073,7 +2108,7 @@ nav a { white-space: nowrap; }
   bars.forEach(b => io.observe(b));
 })();
 
-/* ── LIGHTBOX DA GALERIA ── */
+/* -- LIGHTBOX DA GALERIA -- */
 (function () {
   const items = document.querySelectorAll('.gallery-item');
   if (!items.length) return;
@@ -2110,6 +2145,7 @@ nav a { white-space: nowrap; }
       position: absolute;
       inset: 0;
       background: rgba(6,4,0,0.97);
+      -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
     }
 
@@ -2290,13 +2326,12 @@ nav a { white-space: nowrap; }
     }
   }, { passive: true });
 })();
-  /* === JAVASCRIPT VIRÁ NA PARTE 4 === */
 </script>
 
 
 <script>
 /* ==========================================================
-   Patch: transforma qualquer galeria da página em loop suave
+   Patch: transforma qualquer galeria da p&aacute;gina em loop suave
    ========================================================== */
 (function () {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -2337,14 +2372,19 @@ nav a { white-space: nowrap; }
     panel.className = 'smooth-loop-panel';
     panel.dataset.current = String(index % images.length);
     panel.innerHTML = `
-      <div class="loop-bg-a is-visible" role="img" aria-label="${first.title.replace(/"/g, '&quot;')}" style="background-image: ${cssUrl(first.src)}"></div>
-      <div class="loop-bg-b" role="img" aria-label="${second.title.replace(/"/g, '&quot;')}" style="background-image: ${cssUrl(second.src)}"></div>
+      <div class="loop-bg-a is-visible" role="img" aria-label="${first.title.replace(/"/g, '&quot;')}"></div>
+      <div class="loop-bg-b" role="img" aria-label="${second.title.replace(/"/g, '&quot;')}"></div>
       <div class="smooth-loop-meta">
         <span class="smooth-loop-kicker">${label}</span>
         <strong class="smooth-loop-title">${first.title}</strong>
         <span class="smooth-loop-desc">${first.desc || 'loop automático com transição suave'}</span>
       </div>
     `;
+    // Definir background-image via JavaScript para evitar problemas com escape
+    const bgA = panel.querySelector('.loop-bg-a');
+    const bgB = panel.querySelector('.loop-bg-b');
+    bgA.style.backgroundImage = `url("${first.src}")`;
+    bgB.style.backgroundImage = `url("${second.src}")`;
     return panel;
   }
 
@@ -2363,7 +2403,7 @@ nav a { white-space: nowrap; }
     hidden.classList.add('is-visible');
     panel.dataset.current = String(current);
     panel.querySelector('.smooth-loop-title').textContent = data.title;
-    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop automático com transição suave';
+    panel.querySelector('.smooth-loop-desc').textContent = data.desc || 'loop autom&aacute;tico com transio suave';
   }
 
   function upgradeGallery() {
@@ -2382,17 +2422,31 @@ nav a { white-space: nowrap; }
 
     const visiblePanels = Math.min(2, images.length);
     for (let i = 0; i < visiblePanels; i++) {
-      container.appendChild(buildPanel(images, i, `Painel ${String(i + 1).padStart(2, '0')}`));
+      const panel = buildPanel(images, i, `Galeria`);
+      container.appendChild(panel);
     }
 
     let direction = 1;
     const controls = document.createElement('div');
     controls.className = 'smooth-loop-controls';
-    controls.innerHTML = `
-      <button class="smooth-loop-btn" type="button" data-loop-prev>← Anterior</button>
-      <span class="smooth-loop-state">${images.length} imagens · looping suave</span>
-      <button class="smooth-loop-btn" type="button" data-loop-next>Próxima →</button>
-    `;
+    const prevBtn = document.createElement('button');
+    prevBtn.className = 'smooth-loop-btn';
+    prevBtn.type = 'button';
+    prevBtn.textContent = '‹ Anterior';
+    
+    const stateSpan = document.createElement('span');
+    stateSpan.className = 'smooth-loop-state';
+    stateSpan.textContent = `${images.length} imagens • looping suave e infinito`;
+    
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'smooth-loop-btn';
+    nextBtn.type = 'button';
+    nextBtn.textContent = 'Próxima ›';
+    
+    controls.appendChild(prevBtn);
+    controls.appendChild(stateSpan);
+    controls.appendChild(nextBtn);
+    
     const oldControls = section.querySelector('.gallery-carousel-controls');
     if (oldControls) oldControls.replaceWith(controls);
     else container.insertAdjacentElement('afterend', controls);
@@ -2404,14 +2458,36 @@ nav a { white-space: nowrap; }
       });
     };
 
-    controls.querySelector('[data-loop-prev]').addEventListener('click', () => advanceAll(-1));
-    controls.querySelector('[data-loop-next]').addEventListener('click', () => advanceAll(1));
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      advanceAll(-1);
+    });
+    
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      advanceAll(1);
+    });
 
     let timer = null;
+    const loopInterval = 5000;
+    
     if (!reduceMotion) {
-      timer = window.setInterval(() => advanceAll(direction), 4300);
-      section.addEventListener('mouseenter', () => timer && clearInterval(timer));
-      section.addEventListener('mouseleave', () => { timer = window.setInterval(() => advanceAll(direction), 4300); });
+      timer = window.setInterval(() => advanceAll(direction), loopInterval);
+      
+      section.addEventListener('mouseenter', () => {
+        if (timer) clearInterval(timer);
+      });
+      
+      section.addEventListener('mouseleave', () => {
+        timer = window.setInterval(() => advanceAll(direction), loopInterval);
+      });
+      
+      section.addEventListener('click', (e) => {
+        if (!e.target.closest('.smooth-loop-btn')) {
+          if (timer) clearInterval(timer);
+          timer = window.setInterval(() => advanceAll(direction), loopInterval);
+        }
+      });
     }
   }
 
@@ -2427,7 +2503,7 @@ nav a { white-space: nowrap; }
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — kaelith.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  kaelith.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -2441,3 +2517,7 @@ nav a { white-space: nowrap; }
 
 </body>
 </html>
+
+
+
+

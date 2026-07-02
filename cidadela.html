@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cidadela das Sombras — O Diário de um Deus</title>
+<title>Cidadela das Sombras &mdash; O Di&aacute;rio de um Deus</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="effects.css">
+<link rel="stylesheet" href="responsive-fixes.css">
 <style>
-/* ── VARIÁVEIS E RESET ── */
+/* -- VARI&Aacute;VEIS E RESET -- */
 :root {
   --void: #030308;
   --deep: #07070f;
@@ -18,7 +19,7 @@
   --gold-light: #f0d080;
   --gold-dim: #7a6228;
 
-  /* Cidadela — cinza/negro com roxo */
+  /* Cidadela  cinza/negro com roxo */
   --char-accent: #8a7aaa;
   --char-accent-dim: #4a3a6a;
   --char-accent-glow: rgba(138,122,170,0.4);
@@ -61,7 +62,7 @@ body {
   pointer-events: none;
 }
 
-/* ── NAV ── */
+/* -- NAV -- */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -109,7 +110,7 @@ nav a:hover {
     0 0 40px rgba(106,79,207,0.3);
 }
 
-/* ── BANNER ── */
+/* -- BANNER -- */
 #banner {
   position: relative;
   min-height: 100vh;
@@ -175,7 +176,7 @@ nav a:hover {
   opacity: 0.4;
 }
 
-/* Conteúdo */
+/* Contedo */
 .banner-content {
   position: relative;
   z-index: 2;
@@ -348,7 +349,7 @@ nav a:hover {
   animation: bounce 2s ease infinite;
 }
 
-/* ── ANIMAÇÕES BASE ── */
+/* -- ANIMA&Ccedil;&Otilde;ES BASE -- */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); filter: blur(3px); }
   to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
@@ -359,7 +360,7 @@ nav a:hover {
   50%       { transform: translateY(8px); }
 }
 
-/* ── REVEAL ── */
+/* -- REVEAL -- */
 .reveal {
   opacity: 0;
   transform: translateY(30px);
@@ -371,9 +372,9 @@ nav a:hover {
   transform: none;
 }
 
-/* ════════════════════════════════════
-   RESPONSIVO — BANNER E NAV
-════════════════════════════════════ */
+/* ------------------------------------
+   RESPONSIVO  BANNER E NAV
+------------------------------------ */
 
 @media (max-width: 1024px) {
   nav { gap: 1.5rem; }
@@ -422,7 +423,7 @@ nav a:hover {
   .banner-content { padding: 3.5rem 4vw 2.5rem; }
   .banner-stats   { margin-top: 1.2rem; }
 }
-/* ── SEÇÕES COMPARTILHADAS ── */
+/* -- SE&Ccedil;&Otilde;ES COMPARTILHADAS -- */
 section { position: relative; z-index: 1; }
 
 .section-header {
@@ -473,7 +474,7 @@ section { position: relative; z-index: 1; }
   background-clip: text;
 }
 
-/* ── SOBRE ── */
+/* -- SOBRE -- */
 #sobre { padding-bottom: 5rem; }
 
 .about-grid {
@@ -633,7 +634,7 @@ section { position: relative; z-index: 1; }
   color: var(--purple-soft);
 }
 
-/* ── ESTRUTURA ── */
+/* -- ESTRUTURA -- */
 #estrutura {
   padding-bottom: 5rem;
   background: linear-gradient(to bottom,
@@ -708,7 +709,7 @@ section { position: relative; z-index: 1; }
   line-height: 1.75;
 }
 
-/* ── FUNÇÃO ── */
+/* -- FUNO -- */
 #funcao { padding-bottom: 5rem; }
 
 .function-container {
@@ -837,7 +838,7 @@ section { position: relative; z-index: 1; }
   line-height: 1.75;
 }
 
-/* ── GALERIA ── */
+/* -- GALERIA -- */
 #galeria { padding-bottom: 5rem; }
 
 .gallery-container {
@@ -910,7 +911,7 @@ section { position: relative; z-index: 1; }
   font-style: normal;
 }
 
-/* ── FOOTER ── */
+/* -- FOOTER -- */
 footer {
   position: relative;
   z-index: 1;
@@ -973,9 +974,9 @@ footer {
   text-transform: uppercase;
 }
 
-/* ════════════════════════════════════
+/* ------------------------------------
    RESPONSIVO COMPLETO
-════════════════════════════════════ */
+------------------------------------ */
 
 @media (max-width: 1024px) {
   .about-grid       { grid-template-columns: 260px 1fr; gap: 3rem; padding: 0 1.5rem; }
@@ -1115,13 +1116,13 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <a href=".html" class="nav-logo">
-    <img src="home-logo/olhos.jpg" alt="Logo">
+  <a href="home.html" class="nav-logo">
+    <img src="img-logo/olhos.jpg" alt="Logo">
   </a>
-  <a href="regioes.html">← Regiões</a>
+  <a href="regioes.html">? Regi&otilde;es</a>
   <a href="#sobre">Sobre</a>
   <a href="#estrutura">Estrutura</a>
-  <a href="#funcao">Função</a>
+  <a href="#funcao">Funo</a>
   <a href="#galeria">Galeria</a>
 </nav>
 
@@ -1133,13 +1134,13 @@ footer {
   <div class="banner-overlay"></div>
   <div class="banner-vignette"></div>
 
-  <!-- Partículas de pedra -->
+  <!-- Partculas de pedra -->
   <canvas id="banner-canvas"></canvas>
 
   <div class="banner-content">
     <div class="banner-tag">
       <span class="tag-line"></span>
-      <span class="tag-text">Ponto de Origem · Leste Europeu</span>
+      <span class="tag-text">Ponto de Origem  Leste Europeu</span>
       <span class="tag-line"></span>
     </div>
 
@@ -1150,40 +1151,40 @@ footer {
 
     <div class="banner-divider">
       <span class="divider-line"></span>
-      <span class="divider-symbol">🏰</span>
+      <span class="divider-symbol">&#10022;</span>
       <span class="divider-line"></span>
     </div>
 
     <p class="banner-quote">
-      "Não é invisível — é ignorável.<br>
-      Quem não sabe o que procura simplesmente não a percebe."
+      "N&atilde;o  invis&iacute;vel   ignorvel.<br>
+      Quem n&atilde;o sabe o que procura simplesmente n&atilde;o a percebe."
     </p>
 
     <div class="banner-stats">
       <div class="bstat">
         <span class="bstat-val">Montanhosa</span>
-        <span class="bstat-label">Localização</span>
+        <span class="bstat-label">Localizao</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
-        <span class="bstat-val">Ignorável</span>
+        <span class="bstat-val">Ignorvel</span>
         <span class="bstat-label">Natureza</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Kaelith</span>
-        <span class="bstat-label">Domínio</span>
+        <span class="bstat-label">Dom&iacute;nio</span>
       </div>
       <div class="bstat-sep"></div>
       <div class="bstat">
         <span class="bstat-val">Controle</span>
-        <span class="bstat-label">Função</span>
+        <span class="bstat-label">Funo</span>
       </div>
     </div>
   </div>
 
   <div class="banner-bottom-bar"></div>
-  <div class="scroll-hint">↓ &nbsp; Role para baixo</div>
+  <div class="scroll-hint">? &nbsp; Role para baixo</div>
 </section>
 
 <!-- SOBRE -->
@@ -1211,28 +1212,28 @@ footer {
       </div>
       <div class="about-coord">
         <span class="coord-label">Coordenadas Aproximadas</span>
-        <span class="coord-val">48°N · 24°L · Plano Oculto</span>
+        <span class="coord-val">48N  24L  Plano Oculto</span>
       </div>
     </div>
 
     <div class="about-text">
       <div class="about-intro">
-        A Cidadela não é invisível — ela é <em>ignorável</em>. Quem não sabe o que procura simplesmente não a percebe como relevante. É uma qualidade rara e precisa: não um esconderijo, mas uma presença que o mundo decide não registrar.
+        A Cidadela n&atilde;o  invis&iacute;vel  ela  <em>ignorvel</em>. Quem n&atilde;o sabe o que procura simplesmente n&atilde;o a percebe como relevante.  uma qualidade rara e precisa: n&atilde;o um esconderijo, mas uma presena que o mundo decide n&atilde;o registrar.
       </div>
 
-      <p>Erguida em pedra escura que absorve luz, a fortaleza parece ter sido construída para resistir não apenas ao tempo, mas à própria <strong>memória</strong>. Suas torres são altas, porém não imponentes — são funcionais, como se cada bloco tivesse sido colocado com intenção precisa, sem excesso, sem ornamento desnecessário.</p>
+      <p>Erguida em pedra escura que absorve luz, a fortaleza parece ter sido construda para resistir n&atilde;o apenas ao tempo, mas  prpria <strong>memria</strong>. Suas torres s&atilde;o altas, porm n&atilde;o imponentes  s&atilde;o funcionais, como se cada bloco tivesse sido colocado com inteno precisa, sem excesso, sem ornamento desnecessrio.</p>
 
-      <p>Os corredores internos são estreitos, silenciosos, iluminados por fontes de luz que não têm origem aparente. Não há desperdício. Tudo ali é necessário — cada corredor leva a algum lugar, cada sala tem uma função, cada silêncio tem um propósito.</p>
+      <p>Os corredores internos s&atilde;o estreitos, silenciosos, iluminados por fontes de luz que n&atilde;o tm origem aparente. N&atilde;o h desperdcio. Tudo ali  necessrio  cada corredor leva a algum lugar, cada sala tem uma funo, cada silncio tem um propsito.</p>
 
-      <p>As <strong>bibliotecas profundas</strong> guardam registros que não são apenas textos, mas tentativas de compreender o que não deveria ser compreendido. Algumas páginas parecem mudar levemente quando revisitadas — não de forma dramática, mas suficiente para que o leitor questione sua própria memória.</p>
+      <p>As <strong>bibliotecas profundas</strong> guardam registros que n&atilde;o s&atilde;o apenas textos, mas tentativas de compreender o que n&atilde;o deveria ser compreendido. Algumas p&aacute;ginas parecem mudar levemente quando revisitadas  n&atilde;o de forma dramtica, mas suficiente para que o leitor questione sua prpria memria.</p>
 
       <div class="about-tags">
         <span class="atag">Pedra Escura</span>
         <span class="atag">Luz Sem Origem</span>
-        <span class="atag accent-tag">Ignorável</span>
+        <span class="atag accent-tag">Ignorvel</span>
         <span class="atag">Bibliotecas</span>
         <span class="atag accent-tag">Controle</span>
-        <span class="atag">Formação</span>
+        <span class="atag">Formao</span>
       </div>
     </div>
   </div>
@@ -1254,60 +1255,60 @@ footer {
   <div class="structure-grid reveal">
 
     <div class="struct-card">
-      <div class="scard-icon">🗼</div>
+      <div class="scard-icon">&#10022;</div>
       <div class="scard-num">01</div>
       <h3 class="scard-name">As Torres</h3>
-      <p class="scard-desc">Altas, mas não imponentes. Funcionais. Cada torre serve a um propósito específico — observação, contenção, estudo ou passagem. Nenhuma existe por estética.</p>
+      <p class="scard-desc">Altas, mas n&atilde;o imponentes. Funcionais. Cada torre serve a um propsito especfico  observao, conteno, estudo ou passagem. Nenhuma existe por esttica.</p>
     </div>
 
     <div class="struct-card">
-      <div class="scard-icon">🌑</div>
+      <div class="scard-icon">&#10022;</div>
       <div class="scard-num">02</div>
       <h3 class="scard-name">A Pedra Absorvente</h3>
-      <p class="scard-desc">O material de construção não reflete luz — a absorve. À noite, a Cidadela se torna praticamente invisível mesmo para quem sabe onde olhar. De dia, parece sempre mais escura do que deveria.</p>
+      <p class="scard-desc">O material de construo n&atilde;o reflete luz  a absorve.  noite, a Cidadela se torna praticamente invis&iacute;vel mesmo para quem sabe onde olhar. De dia, parece sempre mais escura do que deveria.</p>
     </div>
 
     <div class="struct-card">
-      <div class="scard-icon">📚</div>
+      <div class="scard-icon">&#10022;</div>
       <div class="scard-num">03</div>
       <h3 class="scard-name">As Bibliotecas</h3>
-      <p class="scard-desc">Profundas, organizadas por camadas de acesso. Os registros mais antigos ficam nos níveis mais baixos — onde a luz sem origem é mais fraca e o silêncio mais denso. Algumas seções exigem preparação específica para serem acessadas.</p>
+      <p class="scard-desc">Profundas, organizadas por camadas de acesso. Os registros mais antigos ficam nos nveis mais baixos  onde a luz sem origem  mais fraca e o silncio mais denso. Algumas sees exigem preparao especfica para serem acessadas.</p>
     </div>
 
     <div class="struct-card">
-      <div class="scard-icon">💡</div>
+      <div class="scard-icon">&#10022;</div>
       <div class="scard-num">04</div>
       <h3 class="scard-name">A Luz Sem Origem</h3>
-      <p class="scard-desc">Os corredores são iluminados por uma luz que não tem fonte identificável. Não é fogo, não é elétrica, não é mágica no sentido comum. Simplesmente existe — suficiente para ver, insuficiente para confortar.</p>
+      <p class="scard-desc">Os corredores s&atilde;o iluminados por uma luz que n&atilde;o tem fonte identificvel. N&atilde;o  fogo, n&atilde;o  eltrica, n&atilde;o  mgica no sentido comum. Simplesmente existe  suficiente para ver, insuficiente para confortar.</p>
     </div>
 
     <div class="struct-card">
-      <div class="scard-icon">🚪</div>
+      <div class="scard-icon">&#10022;</div>
       <div class="scard-num">05</div>
       <h3 class="scard-name">Os Corredores</h3>
-      <p class="scard-desc">Estreitos por design. Dois não passam lado a lado confortavelmente. O silêncio é absoluto — não de ausência de som, mas de som que não ecoa. Como se a pedra absorvesse também o ruído.</p>
+      <p class="scard-desc">Estreitos por design. Dois n&atilde;o passam lado a lado confortavelmente. O silncio  absoluto  n&atilde;o de ausncia de som, mas de som que n&atilde;o ecoa. Como se a pedra absorvesse tamb&eacute;m o rudo.</p>
     </div>
 
     <div class="struct-card">
-      <div class="scard-icon">⚗️</div>
+      <div class="scard-icon">&#10022;</div>
       <div class="scard-num">06</div>
-      <h3 class="scard-name">Câmaras de Contenção</h3>
-      <p class="scard-desc">Para conhecimentos que não devem circular livremente. Seladas não por magia aparente, mas por uma lógica de acesso que torna a abertura não-intencional praticamente impossível.</p>
+      <h3 class="scard-name">Cmaras de Conteno</h3>
+      <p class="scard-desc">Para conhecimentos que n&atilde;o devem circular livremente. Seladas n&atilde;o por magia aparente, mas por uma lgica de acesso que torna a abertura n&atilde;o-intencional praticamente imposs&iacute;vel.</p>
     </div>
 
   </div>
 </section>
 
-<!-- FUNÇÃO -->
+<!-- FUNO -->
 <section id="funcao">
   <div class="section-header reveal">
     <div class="section-tag">
       <div class="stag-line"></div>
-      <span class="stag-text">Propósito</span>
+      <span class="stag-text">Propsito</span>
       <div class="stag-line"></div>
     </div>
     <h2 class="section-title">
-      A <span>Função</span> da Cidadela
+      A <span>Funo</span> da Cidadela
     </h2>
   </div>
 
@@ -1315,55 +1316,55 @@ footer {
 
     <div class="func-main">
       <div class="func-quote">
-        "É um lugar de controle, não de poder bruto."
+        " um lugar de controle, n&atilde;o de poder bruto."
       </div>
 
       <div class="func-blocks">
         <div class="fblock">
           <div class="fblock-header">
-            <span class="fblock-icon">🎓</span>
-            <span class="fblock-title">Formação</span>
+            <span class="fblock-icon">&#10022;</span>
+            <span class="fblock-title">Formao</span>
           </div>
-          <p class="fblock-desc">A Cidadela forma feiticeiros e bruxos — não através de um currículo fixo, mas através de exposição controlada ao que existe além do compreensível. O aprendizado acontece por contato, não por instrução.</p>
+          <p class="fblock-desc">A Cidadela forma feiticeiros e bruxos  n&atilde;o atravs de um currculo fixo, mas atravs de exposio controlada ao que existe al&eacute;m do compreensvel. O aprendizado acontece por contato, n&atilde;o por instruo.</p>
         </div>
 
         <div class="fblock">
           <div class="fblock-header">
-            <span class="fblock-icon">🔬</span>
+            <span class="fblock-icon">&#10022;</span>
             <span class="fblock-title">Estudo</span>
           </div>
-          <p class="fblock-desc">As estruturas ocultas da realidade são estudadas aqui com uma metodologia que não tem nome em nenhuma língua comum. O objetivo não é compreender completamente — é mapeiar o que não deveria existir.</p>
+          <p class="fblock-desc">As estruturas ocultas da realidade s&atilde;o estudadas aqui com uma metodologia que n&atilde;o tem nome em nenhuma lngua comum. O objetivo n&atilde;o  compreender completamente   mapeiar o que n&atilde;o deveria existir.</p>
         </div>
 
         <div class="fblock">
           <div class="fblock-header">
-            <span class="fblock-icon">🔒</span>
-            <span class="fblock-title">Contenção</span>
+            <span class="fblock-icon">&#10022;</span>
+            <span class="fblock-title">Conteno</span>
           </div>
-          <p class="fblock-desc">Conhecimentos perigosos são guardados aqui — não destruídos, porque destruir algo que não deveria existir pode ter consequências piores. Apenas contidos, catalogados, estudados com extrema cautela.</p>
+          <p class="fblock-desc">Conhecimentos perigosos s&atilde;o guardados aqui  n&atilde;o destrudos, porque destruir algo que n&atilde;o deveria existir pode ter consequncias piores. Apenas contidos, catalogados, estudados com extrema cautela.</p>
         </div>
       </div>
     </div>
 
     <div class="func-sidebar">
       <div class="func-card">
-        <div class="fc-title">Localização</div>
+        <div class="fc-title">Localizao</div>
         <div class="fc-body">
-          Região montanhosa isolada do Leste Europeu. Entre áreas que lembram os Cárpatos, mas deslocada da percepção comum. Não aparece em mapas convencionais.
+          Regi&atilde;o montanhosa isolada do Leste Europeu. Entre reas que lembram os C&aacute;rpatos, mas deslocada da percepo comum. N&atilde;o aparece em mapas convencionais.
         </div>
       </div>
 
       <div class="func-card">
         <div class="fc-title">Quem a Habita</div>
         <div class="fc-body">
-          Feiticeiros, bruxos e estudiosos do oculto que foram encontrados — não os que foram procurar. A Cidadela não recruta. Ela reconhece.
+          Feiticeiros, bruxos e estudiosos do oculto que foram encontrados  n&atilde;o os que foram procurar. A Cidadela n&atilde;o recruta. Ela reconhece.
         </div>
       </div>
 
       <div class="func-card accent-card">
-        <div class="fc-title">Domínio</div>
+        <div class="fc-title">Dom&iacute;nio</div>
         <div class="fc-body">
-          Kaelith — a Deusa da Vingança e da Justiça — é a presença que sustenta a Cidadela. Não como governante, mas como força que mantém o equilíbrio entre o que é guardado e o que é permitido circular.
+          Kaelith  a Deusa da Vingan&ccedil;a e da Justi&ccedil;a   a presena que sustenta a Cidadela. N&atilde;o como governante, mas como for&ccedil;a que mantm o equil&iacute;brio entre o que  guardado e o que  permitido circular.
         </div>
       </div>
     </div>
@@ -1386,31 +1387,31 @@ footer {
 
   <div class="gallery-container reveal">
     <div class="gallery-item tall"
-      style="background-image: url('cidadela-01.jpg')">
+      style="background-image: url('img-cidadela/cidadela.png')">
       <div class="gitem-overlay">
-        <span>A Fortaleza · Vista Externa</span>
+        <span>A Fortaleza  Vista Externa</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cidadela-02.jpg')">
+      style="background-image: url('img-cidadela/cidadela0.png')">
       <div class="gitem-overlay">
         <span>As Torres Funcionais</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cidadela-03.jpg')">
+      style="background-image: url('img-cidadela/cidadela1.png')">
       <div class="gitem-overlay">
         <span>Os Corredores</span>
       </div>
     </div>
     <div class="gallery-item wide"
-      style="background-image: url('cidadela-04.jpg')">
+      style="background-image: url('img-cidadela/cidadela.png')">
       <div class="gitem-overlay">
         <span>As Bibliotecas Profundas</span>
       </div>
     </div>
     <div class="gallery-item"
-      style="background-image: url('cidadela-05.jpg')">
+      style="background-image: url('img-cidadela/cidadela0.png')">
       <div class="gitem-overlay">
         <span>A Luz Sem Origem</span>
       </div>
@@ -1418,7 +1419,7 @@ footer {
     <div class="gallery-item"
       style="background-image: url('img-cidadela/cidadela.png')">
       <div class="gitem-overlay">
-        <span>Câmaras de Contenção</span>
+        <span>Cmaras de Conteno</span>
       </div>
     </div>
   </div>
@@ -1428,29 +1429,29 @@ footer {
 <footer>
   <div class="footer-inner">
     <div class="footer-nav">
-      <a href="regioes.html">← Todas as Regiões</a>
-      <span>·</span>
-      <a href="limiar.html">Limiar da Continuidade →</a>
+      <a href="regioes.html">? Todas as Regi&otilde;es</a>
+      <span></span>
+      <a href="limiar.html">Limiar da Continuidade ?</a>
     </div>
     <div class="footer-name">Cidadela das Sombras</div>
     <div class="footer-quote">
-      "Não é um lugar de poder bruto.<br>
-      É um lugar onde o poder aprende a se controlar."
+      "N&atilde;o  um lugar de poder bruto.<br>
+       um lugar onde o poder aprende a se controlar."
     </div>
     <div class="footer-copy">
-      O Diário de um Deus · Todos os direitos reservados
+     &mdash; O Di&aacute;rio de um Deus  Todos os direitos reservados
     </div>
   </div>
 </footer>
 
 <script src="effects.js"></script>
 <script>
- /* ════════════════════════════════════
-   CIDADELA DAS SOMBRAS — JAVASCRIPT
-   Canvas · Pedras · Névoa · Lightbox
-════════════════════════════════════ */
+ /* ------------------------------------
+   CIDADELA DAS SOMBRAS  JAVASCRIPT
+   Canvas  Pedras  Nvoa  Lightbox
+------------------------------------ */
 
-/* ── COSMOS CANVAS ── */
+/* -- COSMOS CANVAS -- */
 (function () {
   const canvas = document.getElementById('cosmos-bg');
   const ctx    = canvas.getContext('2d');
@@ -1528,7 +1529,7 @@ footer {
       ctx.fill();
     });
 
-    /* Névoa roxa no rodapé */
+    /* Nvoa roxa no rodap */
     const horizon = ctx.createLinearGradient(0, H * 0.8, 0, H);
     horizon.addColorStop(0, 'transparent');
     horizon.addColorStop(1, 'rgba(26,21,37,0.09)');
@@ -1542,7 +1543,7 @@ footer {
   resize(); init(); draw();
 })();
 
-/* ── CANVAS DO BANNER ── */
+/* -- CANVAS DO BANNER -- */
 (function () {
   const canvas = document.getElementById('banner-canvas');
   if (!canvas) return;
@@ -1572,7 +1573,7 @@ footer {
       });
     }
 
-    /* Névoa de fundo */
+    /* Nvoa de fundo */
     mist = [];
     for (let i = 0; i < 8; i++) {
       mist.push({
@@ -1590,7 +1591,7 @@ footer {
   function draw() {
     ctx.clearRect(0, 0, W, H);
 
-    /* Névoa */
+    /* Nvoa */
     mist.forEach(m => {
       m.x     += m.speedX;
       m.pulse += m.pSpeed;
@@ -1641,7 +1642,7 @@ footer {
       ctx.restore();
     });
 
-    /* Linhas de arquitectura — grade sutil */
+    /* Linhas de arquitectura  grade sutil */
     ctx.save();
     ctx.globalAlpha = 0.04;
     ctx.strokeStyle = '#8a7aaa';
@@ -1667,7 +1668,7 @@ footer {
   resize(); init(); draw();
 })();
 
-/* ── PARALLAX DO BANNER ── */
+/* -- PARALLAX DO BANNER -- */
 (function () {
   const bg = document.querySelector('.banner-bg');
   if (!bg) return;
@@ -1690,7 +1691,7 @@ footer {
   }, { passive: true });
 })();
 
-/* ── SCROLL REVEAL ── */
+/* -- SCROLL REVEAL -- */
 (function () {
   const els = document.querySelectorAll('.reveal');
   const io  = new IntersectionObserver(entries => {
@@ -1704,9 +1705,9 @@ footer {
   els.forEach(el => io.observe(el));
 })();
 
-/* ── EFEITO "PÁGINAS QUE MUDAM" NAS BIBLIOTECAS ── */
+/* -- EFEITO "PGINAS QUE MUDAM" NAS BIBLIOTECAS -- */
 (function () {
-  /* Ao entrar na seção de estrutura,
+  /* Ao entrar na seo de estrutura,
      o card de bibliotecas pisca levemente */
   const cards = document.querySelectorAll('.struct-card');
   let libCard = null;
@@ -1723,7 +1724,7 @@ footer {
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        /* Sequência de flicker sutil */
+        /* Sequncia de flicker sutil */
         let count = 0;
         const flicker = setInterval(() => {
           count++;
@@ -1742,7 +1743,7 @@ footer {
   io.observe(libCard);
 })();
 
-/* ── EFEITO DE LUZ SEM ORIGEM NOS CORREDORES ── */
+/* -- EFEITO DE LUZ SEM ORIGEM NOS CORREDORES -- */
 (function () {
   const style = document.createElement('style');
   style.textContent = `
@@ -1788,7 +1789,7 @@ footer {
   document.head.appendChild(style);
 })();
 
-/* ── EFEITO NOS CARDS DE ESTRUTURA ── */
+/* -- EFEITO NOS CARDS DE ESTRUTURA -- */
 (function () {
   const cards = document.querySelectorAll('.struct-card');
 
@@ -1804,7 +1805,7 @@ footer {
   });
 })();
 
-/* ── EFEITO NOS BLOCOS DE FUNÇÃO ── */
+/* -- EFEITO NOS BLOCOS DE FUNO -- */
 (function () {
   const blocks = document.querySelectorAll('.fblock');
 
@@ -1834,7 +1835,7 @@ footer {
   });
 })();
 
-/* ── LIGHTBOX DA GALERIA ── */
+/* -- LIGHTBOX DA GALERIA -- */
 (function () {
   const items = document.querySelectorAll('.gallery-item');
   if (!items.length) return;
@@ -2011,7 +2012,7 @@ footer {
 <script src="darkness-system.js"></script>
 
 <script>
-  // Sistema de libertação da escuridão — cidadela.html
+  // Sistema de liberta&ccedil;&atilde;o da escurid&atilde;o  cidadela.html
   (function() {
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -2025,3 +2026,8 @@ footer {
 
 </body>
 </html>
+
+
+
+
+
